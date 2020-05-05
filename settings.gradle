@@ -61,3 +61,5 @@ settings.gradle.projectsLoaded {
 		}
 	}
 }
+include 'spring-fly4j'
+
