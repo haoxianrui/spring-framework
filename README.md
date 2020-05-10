@@ -5,9 +5,10 @@
 工欲善其事必先利其器。学习和深读Spring源码一个重要的前提：编译源码到我们的本地环境。这样方便我们在本地环境添加注释、断点追踪、查看类或接口的继承关系等等，更加高效的学习Spring源码。个人觉得深读Spring源码对我们的编码水平会有很大很大的提升，因为其牵涉的广度、深读、以及优秀编码规范都值得我们去品、细品、慢慢品。废话不多说，本篇就如何在我们的intelliJ IDEA编译Spring源码的步骤以及在编译的过程中遇到的问题做一个详细说明。
 
 ## 环境
-- 开发工具： IntelliJ IDEA 20193.3
+- 开发工具： IntelliJ IDEA 2019.3.3
 - 编译工具： gradle-6.4-rc-4
 - 操作系统： windows 10
+- Spring版本：Spring5.3.0
 
 ## 编译
 ### 一、下载Spring源码
@@ -72,9 +73,7 @@ gradlew :spring-oxm:compileTestJava
 
 扯回正题，不能让你们觉得我扯废话凑字数暴露没啥水平的真实情况。上面说到各个模块的单元测试我们可以测试编译项目是否有问题，但是后续学习在于模块之间的整合之上。所以我在此添加一个新的模块，这个模块模拟一个bean的创建和获取这么个过程。
 
-**1. 创建模块spring-fly4j**
-
-如果你们想问这名字有啥深意吗？抱歉哈..没有。想起spring-test起不了，你们懂spring有这个模块了，起名障碍啊，强行理解的话：“为了java飞吧”,忍住别笑
+**1. 创建模块spring-demo**
 
 依次右击项目->New->Module
 ![](https://i.loli.net/2020/05/03/54EZu1tkpCWVoB6.png)
@@ -83,26 +82,27 @@ gradlew :spring-oxm:compileTestJava
 **2. 添加测试模块代码**
 
 先预览下添加的代码结构吧，很简单是不？加上需要添加依赖的build.gradle共5个文件。
-![](https://i.loli.net/2020/05/03/viba7oR84y9tZQ2.png)
+
+![](https://i.loli.net/2020/05/07/fXTNOFSb1IVadYn.png)
 
 我这里贴出这5个文件的代码
 
 ![](https://i.loli.net/2020/05/03/v5ygoDnsf8rMuzJ.gif)
 
 
-```
+``` java
 @Configuration
 @ComponentScan("com.fly4j.spring.context.**")
 public class ContextConfig {
 }
 ```
 
-```
+``` java
 public interface IUserService {
 }
 ```
 
-```
+``` java
 @Service
 @Scope("singleton")
 public class UserServiceImpl implements IUserService {
@@ -112,7 +112,7 @@ public class UserServiceImpl implements IUserService {
 }
 ```
 
-```
+``` java
 public class ContextApplication {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
@@ -124,7 +124,7 @@ public class ContextApplication {
 }
 ```
 
-```
+``` 
 // build.gradle
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -147,7 +147,7 @@ dependencies {
 
 **1. 问题一**
 
-```
+``` 
 Error:(350, 51) java: 找不到符号
   符号:   变量 CoroutinesUtils
   位置: 类 org.springframework.core.ReactiveAdapterRegistry.CoroutinesRegistrar
