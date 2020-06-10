@@ -1,6 +1,6 @@
-package com.fly4j.spring.chapter01.service.impl;
+package com.fly4j.spring.ch01.service.impl;
 
-import com.fly4j.spring.chapter01.service.IUserService;
+import com.fly4j.spring.ch01.service.IUserService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 

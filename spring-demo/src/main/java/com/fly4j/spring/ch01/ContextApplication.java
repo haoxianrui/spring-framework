@@ -1,7 +1,7 @@
-package com.fly4j.spring.chapter01;
+package com.fly4j.spring.ch01;
 
-import com.fly4j.spring.chapter01.config.ContextConfig;
-import com.fly4j.spring.chapter01.service.IUserService;
+import com.fly4j.spring.ch01.config.ContextConfig;
+import com.fly4j.spring.ch01.service.IUserService;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

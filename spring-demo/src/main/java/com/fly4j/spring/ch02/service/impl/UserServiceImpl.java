@@ -1,6 +1,6 @@
-package com.fly4j.spring.chapter02.service.impl;
+package com.fly4j.spring.ch02.service.impl;
 
-import com.fly4j.spring.chapter02.service.IUserService;
+import com.fly4j.spring.ch02.service.IUserService;
 
 public class UserServiceImpl implements IUserService {
 

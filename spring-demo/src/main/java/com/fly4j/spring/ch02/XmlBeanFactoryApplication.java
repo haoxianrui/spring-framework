@@ -1,4 +1,4 @@
-package com.fly4j.spring.chapter02;
+package com.fly4j.spring.ch02;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -9,5 +9,7 @@ public class XmlBeanFactoryApplication {
 	public static void main(String[] args) {
 		ClassPathResource resource = new ClassPathResource("spring-config.xml");
 		XmlBeanFactory beanFactory = new XmlBeanFactory(resource);
+
+		beanFactory.getBean("userService");
 	}
 }

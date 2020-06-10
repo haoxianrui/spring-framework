@@ -1,10 +1,10 @@
-package com.fly4j.spring.chapter01.config;
+package com.fly4j.spring.ch01.config;
 
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan("com.fly4j.spring.chapter01.**")
+@ComponentScan("com.fly4j.spring.ch01.**")
 public class ContextConfig {
 }
