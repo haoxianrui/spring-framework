@@ -257,7 +257,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					logger.trace("Returning cached instance of singleton bean '" + beanName + "'");
 				}
 			}
-			// 高频率使用方法，得到bean实例后检测是否是FactoryBean类型的bean，如果是则调用getObject()作为返回值
+			// sharedInstance只是最原始的bean状态，并不一定是我们最终想要的bean
+			// 得到bean实例后检测如果是FactoryBean类型的bean，这里得到的其实是工厂bean的初始状态
+			// 真正需要的工厂bean中定义的factory-method方法中返回的bean，getObjectForBeanInstance方法就是完成这个工作的
 			bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
 		}
 
@@ -1818,7 +1820,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// Return bean instance from factory.
 			FactoryBean<?> factory = (FactoryBean<?>) beanInstance;
 			// Caches object obtained from FactoryBean if it is a singleton.
-			// containsBeanDefinition检测beanDefinitionMap中是否包含该beanName对应的BeanDefinition信息
+			// containsBeanDefinition检测beanDefinitionMap中是否包含该beanName对应的BeanDefinition定义
 			if (mbd == null && containsBeanDefinition(beanName)) {
 				// 合并父类的相关属性
 				mbd = getMergedLocalBeanDefinition(beanName);
