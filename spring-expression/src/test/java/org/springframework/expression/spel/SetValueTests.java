@@ -73,7 +73,7 @@ public class SetValueTests extends AbstractExpressionTests {
 		setValue("arrayContainer.floats[1]", 3.0f);
 		setValue("arrayContainer.booleans[1]", false);
 		setValue("arrayContainer.doubles[1]", 3.4d);
-		setValue("arrayContainer.shorts[1]", (short)3);
+		setValue("arrayContainer.shorts[1]", (short) 3);
 		setValue("arrayContainer.longs[1]", 3L);
 		setValue("arrayContainer.bytes[1]", (byte) 3);
 		setValue("arrayContainer.chars[1]", (char) 3);
@@ -162,7 +162,7 @@ public class SetValueTests extends AbstractExpressionTests {
 
 	@Test
 	public void testSetMapElements() {
-		setValue("testMap['montag']","lundi");
+		setValue("testMap['montag']", "lundi");
 	}
 
 	@Test
@@ -202,13 +202,13 @@ public class SetValueTests extends AbstractExpressionTests {
 
 		// All keys should be strings
 		Set<?> ks = parse("mapOfStringToBoolean.keySet()").getValue(eContext, Set.class);
-		for (Object o: ks) {
+		for (Object o : ks) {
 			assertThat(o.getClass()).isEqualTo(String.class);
 		}
 
 		// All values should be booleans
 		Collection<?> vs = parse("mapOfStringToBoolean.values()").getValue(eContext, Collection.class);
-		for (Object o: vs) {
+		for (Object o : vs) {
 			assertThat(o.getClass()).isEqualTo(Boolean.class);
 		}
 
@@ -246,9 +246,8 @@ public class SetValueTests extends AbstractExpressionTests {
 			StandardEvaluationContext lContext = TestScenarioCreator.getTestEvaluationContext();
 			assertThat(e.isWritable(lContext)).as("Expression is not writeable but should be").isTrue();
 			e.setValue(lContext, value);
-			assertThat(e.getValue(lContext,value.getClass())).as("Retrieved value was not equal to set value").isEqualTo(value);
-		}
-		catch (EvaluationException | ParseException ex) {
+			assertThat(e.getValue(lContext, value.getClass())).as("Retrieved value was not equal to set value").isEqualTo(value);
+		} catch (EvaluationException | ParseException ex) {
 			throw new AssertionError("Unexpected Exception: " + ex.getMessage(), ex);
 		}
 	}
@@ -270,8 +269,7 @@ public class SetValueTests extends AbstractExpressionTests {
 			Object a = expectedValue;
 			Object b = e.getValue(lContext);
 			assertThat(a).isEqualTo(b);
-		}
-		catch (EvaluationException | ParseException ex) {
+		} catch (EvaluationException | ParseException ex) {
 			throw new AssertionError("Unexpected Exception: " + ex.getMessage(), ex);
 		}
 	}

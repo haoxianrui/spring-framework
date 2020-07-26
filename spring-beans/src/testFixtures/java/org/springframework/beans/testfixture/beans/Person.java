@@ -17,7 +17,6 @@
 package org.springframework.beans.testfixture.beans;
 
 /**
- *
  * @author Rod Johnson
  */
 public interface Person {

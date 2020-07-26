@@ -59,13 +59,13 @@ public class ProtobufJsonFormatHttpMessageConverterTests {
 
 	@Test
 	public void extensionRegistryInitializerNull() {
-		ProtobufHttpMessageConverter converter = new ProtobufHttpMessageConverter((ExtensionRegistryInitializer)null);
+		ProtobufHttpMessageConverter converter = new ProtobufHttpMessageConverter((ExtensionRegistryInitializer) null);
 		assertThat(converter).isNotNull();
 	}
 
 	@Test
 	public void extensionRegistryInitializer() {
-		ProtobufHttpMessageConverter converter = new ProtobufHttpMessageConverter((ExtensionRegistry)null);
+		ProtobufHttpMessageConverter converter = new ProtobufHttpMessageConverter((ExtensionRegistry) null);
 		assertThat(converter).isNotNull();
 	}
 

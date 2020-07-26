@@ -30,7 +30,7 @@ import org.springframework.test.context.ContextConfiguration;
  */
 @ContextConfiguration(classes = EmptyDatabaseConfig.class)
 @DirtiesContext
-@SqlConfig(commentPrefixes = { "`", "%%" }, blockCommentStartDelimiter = "#$", blockCommentEndDelimiter = "$#", separator = "@@")
+@SqlConfig(commentPrefixes = {"`", "%%"}, blockCommentStartDelimiter = "#$", blockCommentEndDelimiter = "$#", separator = "@@")
 class GlobalCustomScriptSyntaxSqlScriptsTests extends AbstractTransactionalTests {
 
 	@Test

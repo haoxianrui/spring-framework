@@ -71,6 +71,7 @@ public class MultipartHttpMessageReader extends LoggingCodecSupport
 
 	/**
 	 * Return the configured parts reader.
+	 *
 	 * @since 5.1.11
 	 */
 	public HttpMessageReader<Part> getPartReader() {
@@ -100,7 +101,7 @@ public class MultipartHttpMessageReader extends LoggingCodecSupport
 
 	@Override
 	public Flux<MultiValueMap<String, Part>> read(ResolvableType elementType,
-			ReactiveHttpInputMessage message, Map<String, Object> hints) {
+												  ReactiveHttpInputMessage message, Map<String, Object> hints) {
 
 		return Flux.from(readMono(elementType, message, hints));
 	}
@@ -108,7 +109,7 @@ public class MultipartHttpMessageReader extends LoggingCodecSupport
 
 	@Override
 	public Mono<MultiValueMap<String, Part>> readMono(ResolvableType elementType,
-			ReactiveHttpInputMessage inputMessage, Map<String, Object> hints) {
+													  ReactiveHttpInputMessage inputMessage, Map<String, Object> hints) {
 
 
 		Map<String, Object> allHints = Hints.merge(hints, Hints.SUPPRESS_LOGGING_HINT, true);
@@ -116,10 +117,10 @@ public class MultipartHttpMessageReader extends LoggingCodecSupport
 		return this.partReader.read(elementType, inputMessage, allHints)
 				.collectMultimap(Part::name)
 				.doOnNext(map ->
-					LogFormatUtils.traceDebug(logger, traceOn -> Hints.getLogPrefix(hints) + "Parsed " +
-							(isEnableLoggingRequestDetails() ?
-									LogFormatUtils.formatValue(map, !traceOn) :
-									"parts " + map.keySet() + " (content masked)"))
+						LogFormatUtils.traceDebug(logger, traceOn -> Hints.getLogPrefix(hints) + "Parsed " +
+								(isEnableLoggingRequestDetails() ?
+										LogFormatUtils.formatValue(map, !traceOn) :
+										"parts " + map.keySet() + " (content masked)"))
 				)
 				.map(this::toMultiValueMap);
 	}

@@ -196,8 +196,7 @@ public class WebSocketMessageBrokerStats {
 		if (this.sockJsTaskScheduler instanceof ThreadPoolTaskScheduler) {
 			return getExecutorStatsInfo(((ThreadPoolTaskScheduler) this.sockJsTaskScheduler)
 					.getScheduledThreadPoolExecutor());
-		}
-		else {
+		} else {
 			return "unknown";
 		}
 	}

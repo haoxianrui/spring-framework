@@ -72,21 +72,21 @@ public class ViewResolutionIntegrationTests {
 	public void freemarkerInvalidConfig() throws Exception {
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
 				runTest(InvalidFreeMarkerWebConfig.class))
-			.withMessageContaining("In addition to a FreeMarker view resolver ");
+				.withMessageContaining("In addition to a FreeMarker view resolver ");
 	}
 
 	@Test
 	public void tilesInvalidConfig() throws Exception {
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
 				runTest(InvalidTilesWebConfig.class))
-			.withMessageContaining("In addition to a Tiles view resolver ");
+				.withMessageContaining("In addition to a Tiles view resolver ");
 	}
 
 	@Test
 	public void groovyMarkupInvalidConfig() throws Exception {
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
 				runTest(InvalidGroovyMarkupWebConfig.class))
-			.withMessageContaining("In addition to a Groovy markup view resolver ");
+				.withMessageContaining("In addition to a Groovy markup view resolver ");
 	}
 
 	// SPR-12013

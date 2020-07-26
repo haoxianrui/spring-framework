@@ -67,7 +67,8 @@ class TransactionalTestExecutionListenerTests {
 	}
 
 
-	@Test  // SPR-13895
+	@Test
+		// SPR-13895
 	void transactionalTestWithoutTransactionManager() throws Exception {
 		TransactionalTestExecutionListener listener = new TransactionalTestExecutionListener() {
 			@Override
@@ -77,7 +78,7 @@ class TransactionalTestExecutionListenerTests {
 		};
 
 		Class<? extends Invocable> clazz = TransactionalDeclaredOnClassLocallyTestCase.class;
-		BDDMockito.<Class<?>> given(testContext.getTestClass()).willReturn(clazz);
+		BDDMockito.<Class<?>>given(testContext.getTestClass()).willReturn(clazz);
 		Invocable instance = BeanUtils.instantiateClass(clazz);
 		given(testContext.getTestInstance()).willReturn(instance);
 		given(testContext.getTestMethod()).willReturn(clazz.getDeclaredMethod("transactionalTest"));
@@ -87,7 +88,7 @@ class TransactionalTestExecutionListenerTests {
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				listener.beforeTestMethod(testContext))
-			.withMessageStartingWith("Failed to retrieve PlatformTransactionManager for @Transactional test");
+				.withMessageStartingWith("Failed to retrieve PlatformTransactionManager for @Transactional test");
 	}
 
 	@Test
@@ -215,7 +216,7 @@ class TransactionalTestExecutionListenerTests {
 	private void assertBeforeTestMethodWithTransactionalTestMethod(Class<? extends Invocable> clazz, boolean invokedInTx)
 			throws Exception {
 
-		BDDMockito.<Class<?>> given(testContext.getTestClass()).willReturn(clazz);
+		BDDMockito.<Class<?>>given(testContext.getTestClass()).willReturn(clazz);
 		Invocable instance = BeanUtils.instantiateClass(clazz);
 		given(testContext.getTestInstance()).willReturn(instance);
 		given(testContext.getTestMethod()).willReturn(clazz.getDeclaredMethod("transactionalTest"));
@@ -227,7 +228,7 @@ class TransactionalTestExecutionListenerTests {
 	}
 
 	private void assertBeforeTestMethodWithNonTransactionalTestMethod(Class<? extends Invocable> clazz) throws Exception {
-		BDDMockito.<Class<?>> given(testContext.getTestClass()).willReturn(clazz);
+		BDDMockito.<Class<?>>given(testContext.getTestClass()).willReturn(clazz);
 		Invocable instance = BeanUtils.instantiateClass(clazz);
 		given(testContext.getTestInstance()).willReturn(instance);
 		given(testContext.getTestMethod()).willReturn(clazz.getDeclaredMethod("nonTransactionalTest"));
@@ -244,7 +245,7 @@ class TransactionalTestExecutionListenerTests {
 	}
 
 	private void assertAfterTestMethodWithTransactionalTestMethod(Class<? extends Invocable> clazz) throws Exception {
-		BDDMockito.<Class<?>> given(testContext.getTestClass()).willReturn(clazz);
+		BDDMockito.<Class<?>>given(testContext.getTestClass()).willReturn(clazz);
 		Invocable instance = BeanUtils.instantiateClass(clazz);
 		given(testContext.getTestInstance()).willReturn(instance);
 		given(testContext.getTestMethod()).willReturn(clazz.getDeclaredMethod("transactionalTest"));
@@ -259,7 +260,7 @@ class TransactionalTestExecutionListenerTests {
 	}
 
 	private void assertAfterTestMethodWithNonTransactionalTestMethod(Class<? extends Invocable> clazz) throws Exception {
-		BDDMockito.<Class<?>> given(testContext.getTestClass()).willReturn(clazz);
+		BDDMockito.<Class<?>>given(testContext.getTestClass()).willReturn(clazz);
 		Invocable instance = BeanUtils.instantiateClass(clazz);
 		given(testContext.getTestInstance()).willReturn(instance);
 		given(testContext.getTestMethod()).willReturn(clazz.getDeclaredMethod("nonTransactionalTest"));
@@ -272,7 +273,7 @@ class TransactionalTestExecutionListenerTests {
 	}
 
 	private void assertIsRollback(Class<?> clazz, boolean rollback) throws Exception {
-		BDDMockito.<Class<?>> given(testContext.getTestClass()).willReturn(clazz);
+		BDDMockito.<Class<?>>given(testContext.getTestClass()).willReturn(clazz);
 		given(testContext.getTestMethod()).willReturn(clazz.getDeclaredMethod("test"));
 		assertThat(listener.isRollback(testContext)).isEqualTo(rollback);
 	}

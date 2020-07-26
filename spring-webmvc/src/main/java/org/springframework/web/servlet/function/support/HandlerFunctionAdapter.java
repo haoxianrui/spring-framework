@@ -46,6 +46,7 @@ public class HandlerFunctionAdapter implements HandlerAdapter, Ordered {
 	/**
 	 * Specify the order value for this HandlerAdapter bean.
 	 * <p>The default value is {@code Ordered.LOWEST_PRECEDENCE}, meaning non-ordered.
+	 *
 	 * @see org.springframework.core.Ordered#getOrder()
 	 */
 	public void setOrder(int order) {
@@ -65,8 +66,8 @@ public class HandlerFunctionAdapter implements HandlerAdapter, Ordered {
 	@Nullable
 	@Override
 	public ModelAndView handle(HttpServletRequest servletRequest,
-			HttpServletResponse servletResponse,
-			Object handler) throws Exception {
+							   HttpServletResponse servletResponse,
+							   Object handler) throws Exception {
 
 
 		HandlerFunction<?> handlerFunction = (HandlerFunction<?>) handler;

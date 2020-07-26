@@ -89,7 +89,7 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 
 
 	public PayloadMethodArgumentResolver(List<? extends Decoder<?>> decoders, @Nullable Validator validator,
-			@Nullable ReactiveAdapterRegistry registry, boolean useDefaultResolution) {
+										 @Nullable ReactiveAdapterRegistry registry, boolean useDefaultResolution) {
 
 		Assert.isTrue(!CollectionUtils.isEmpty(decoders), "At least one Decoder is required");
 		this.decoders = Collections.unmodifiableList(new ArrayList<>(decoders));
@@ -147,9 +147,8 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 	 * failure results in an {@link MethodArgumentNotValidException}.
 	 *
 	 * @param parameter the target method argument that we are decoding to
-	 * @param message the message from which the content was extracted
+	 * @param message   the message from which the content was extracted
 	 * @return a Mono with the result of argument resolution
-	 *
 	 * @see #extractContent(MethodParameter, Message)
 	 * @see #getMimeType(Message)
 	 */
@@ -197,6 +196,7 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 	 * Return the mime type for the content. By default this method checks the
 	 * {@link MessageHeaders#CONTENT_TYPE} header expecting to find a
 	 * {@link MimeType} value or a String to parse to a {@link MimeType}.
+	 *
 	 * @param message the input message
 	 */
 	@Nullable
@@ -204,20 +204,17 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 		Object headerValue = message.getHeaders().get(MessageHeaders.CONTENT_TYPE);
 		if (headerValue == null) {
 			return null;
-		}
-		else if (headerValue instanceof String) {
+		} else if (headerValue instanceof String) {
 			return MimeTypeUtils.parseMimeType((String) headerValue);
-		}
-		else if (headerValue instanceof MimeType) {
+		} else if (headerValue instanceof MimeType) {
 			return (MimeType) headerValue;
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException("Unexpected MimeType value: " + headerValue);
 		}
 	}
 
 	private Mono<Object> decodeContent(MethodParameter parameter, Message<?> message,
-			boolean isContentRequired, Flux<DataBuffer> content, MimeType mimeType) {
+									   boolean isContentRequired, Flux<DataBuffer> content, MimeType mimeType) {
 
 		ResolvableType targetType = ResolvableType.forMethodParameter(parameter);
 		Class<?> resolvedType = targetType.resolve();
@@ -241,8 +238,7 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 						flux = flux.doOnNext(validator);
 					}
 					return Mono.just(adapter.fromPublisher(flux));
-				}
-				else {
+				} else {
 					// Single-value (with or without reactive type wrapper)
 					Mono<?> mono = content.next()
 							.map(buffer -> decoder.decode(buffer, elementType, mimeType, hints))
@@ -281,14 +277,13 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 			Validated validatedAnn = AnnotationUtils.getAnnotation(ann, Validated.class);
 			if (validatedAnn != null || ann.annotationType().getSimpleName().startsWith("Valid")) {
 				Object hints = (validatedAnn != null ? validatedAnn.value() : AnnotationUtils.getValue(ann));
-				Object[] validationHints = (hints instanceof Object[] ? (Object[]) hints : new Object[] {hints});
+				Object[] validationHints = (hints instanceof Object[] ? (Object[]) hints : new Object[]{hints});
 				String name = Conventions.getVariableNameForParameter(parameter);
 				return target -> {
 					BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(target, name);
 					if (!ObjectUtils.isEmpty(validationHints) && this.validator instanceof SmartValidator) {
 						((SmartValidator) this.validator).validate(target, bindingResult, validationHints);
-					}
-					else {
+					} else {
 						this.validator.validate(target, bindingResult);
 					}
 					if (bindingResult.hasErrors()) {

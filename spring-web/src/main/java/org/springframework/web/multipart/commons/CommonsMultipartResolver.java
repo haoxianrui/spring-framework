@@ -54,11 +54,11 @@ import org.springframework.web.util.WebUtils;
  *
  * @author Trevor D. Cook
  * @author Juergen Hoeller
- * @since 29.09.2003
  * @see #CommonsMultipartResolver(ServletContext)
  * @see #setResolveLazily
  * @see org.apache.commons.fileupload.servlet.ServletFileUpload
  * @see org.apache.commons.fileupload.disk.DiskFileItemFactory
+ * @since 29.09.2003
  */
 public class CommonsMultipartResolver extends CommonsFileUploadSupport
 		implements MultipartResolver, ServletContextAware {
@@ -70,6 +70,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 	 * Constructor for use as bean. Determines the servlet container's
 	 * temporary directory via the ServletContext passed in as through the
 	 * ServletContextAware interface (typically by a WebApplicationContext).
+	 *
 	 * @see #setServletContext
 	 * @see org.springframework.web.context.ServletContextAware
 	 * @see org.springframework.web.context.WebApplicationContext
@@ -81,6 +82,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 	/**
 	 * Constructor for standalone usage. Determines the servlet container's
 	 * temporary directory via the given ServletContext.
+	 *
 	 * @param servletContext the ServletContext to use
 	 */
 	public CommonsMultipartResolver(ServletContext servletContext) {
@@ -104,6 +106,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 	/**
 	 * Initialize the underlying {@code org.apache.commons.fileupload.servlet.ServletFileUpload}
 	 * instance. Can be overridden to use a custom subclass, e.g. for testing purposes.
+	 *
 	 * @param fileItemFactory the Commons FileItemFactory to use
 	 * @return the new ServletFileUpload instance
 	 */
@@ -138,8 +141,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 					setMultipartParameterContentTypes(parsingResult.getMultipartParameterContentTypes());
 				}
 			};
-		}
-		else {
+		} else {
 			MultipartParsingResult parsingResult = parseRequest(request);
 			return new DefaultMultipartHttpServletRequest(request, parsingResult.getMultipartFiles(),
 					parsingResult.getMultipartParameters(), parsingResult.getMultipartParameterContentTypes());
@@ -148,6 +150,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 
 	/**
 	 * Parse the given servlet request, resolving its multipart elements.
+	 *
 	 * @param request the request to parse
 	 * @return the parsing result
 	 * @throws MultipartException if multipart resolution failed.
@@ -158,14 +161,11 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 		try {
 			List<FileItem> fileItems = ((ServletFileUpload) fileUpload).parseRequest(request);
 			return parseFileItems(fileItems, encoding);
-		}
-		catch (FileUploadBase.SizeLimitExceededException ex) {
+		} catch (FileUploadBase.SizeLimitExceededException ex) {
 			throw new MaxUploadSizeExceededException(fileUpload.getSizeMax(), ex);
-		}
-		catch (FileUploadBase.FileSizeLimitExceededException ex) {
+		} catch (FileUploadBase.FileSizeLimitExceededException ex) {
 			throw new MaxUploadSizeExceededException(fileUpload.getFileSizeMax(), ex);
-		}
-		catch (FileUploadException ex) {
+		} catch (FileUploadException ex) {
 			throw new MultipartException("Failed to parse multipart servlet request", ex);
 		}
 	}
@@ -175,6 +175,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 	 * Can be overridden in subclasses.
 	 * <p>The default implementation checks the request encoding,
 	 * falling back to the default encoding specified for this resolver.
+	 *
 	 * @param request current HTTP request
 	 * @return the encoding for the request (never {@code null})
 	 * @see javax.servlet.ServletRequest#getCharacterEncoding
@@ -194,8 +195,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 				((AbstractMultipartHttpServletRequest) request).isResolved()) {
 			try {
 				cleanupFileItems(request.getMultiFileMap());
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				logger.warn("Failed to perform multipart cleanup for servlet request", ex);
 			}
 		}

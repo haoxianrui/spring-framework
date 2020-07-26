@@ -54,7 +54,7 @@ class KotlinInvocableHandlerMethodTests {
 	fun resolveArg() {
 		this.resolvers.add(stubResolver("foo"))
 		val method = CoroutinesController::singleArg.javaMethod!!
-		val result = invoke(CoroutinesController(), method,"foo")
+		val result = invoke(CoroutinesController(), method, "foo")
 		assertHandlerResultValue(result, "success:foo")
 	}
 

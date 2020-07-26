@@ -94,6 +94,7 @@ public interface ServerCodecConfigurer extends CodecConfigurer {
 		 * <p>Note that {@link #maxInMemorySize(int)} and/or
 		 * {@link #enableLoggingRequestDetails(boolean)}, if configured, will be
 		 * applied to the given reader, if applicable.
+		 *
 		 * @param reader the message reader to use for multipart requests.
 		 * @since 5.1.11
 		 */

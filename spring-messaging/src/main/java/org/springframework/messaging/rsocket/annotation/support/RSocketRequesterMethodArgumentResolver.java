@@ -58,11 +58,9 @@ public class RSocketRequesterMethodArgumentResolver implements HandlerMethodArgu
 		Class<?> type = parameter.getParameterType();
 		if (RSocketRequester.class.equals(type)) {
 			return Mono.just(requester);
-		}
-		else if (RSocket.class.isAssignableFrom(type)) {
+		} else if (RSocket.class.isAssignableFrom(type)) {
 			return Mono.just(requester.rsocket());
-		}
-		else {
+		} else {
 			return Mono.error(new IllegalArgumentException("Unexpected parameter type: " + parameter));
 		}
 	}

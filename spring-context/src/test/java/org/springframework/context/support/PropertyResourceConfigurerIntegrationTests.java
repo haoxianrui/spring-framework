@@ -56,9 +56,9 @@ public class PropertyResourceConfigurerIntegrationTests {
 		ac.registerSingleton("configurer", PropertyPlaceholderConfigurer.class, pvs);
 		String userDir = getUserDir();
 		assertThatExceptionOfType(BeanInitializationException.class)
-			.isThrownBy(ac::refresh)
-			.withCauseInstanceOf(FileNotFoundException.class)
-			.withMessageContaining(userDir);
+				.isThrownBy(ac::refresh)
+				.withCauseInstanceOf(FileNotFoundException.class)
+				.withMessageContaining(userDir);
 	}
 
 	@Test
@@ -72,10 +72,10 @@ public class PropertyResourceConfigurerIntegrationTests {
 		ac.registerSingleton("configurer", PropertyPlaceholderConfigurer.class, pvs);
 		String userDir = getUserDir();
 		assertThatExceptionOfType(BeanInitializationException.class)
-			.isThrownBy(ac::refresh)
-			.withCauseInstanceOf(FileNotFoundException.class)
-			.matches(ex -> ex.getMessage().contains(userDir + "/test/" + userDir) ||
-					ex.getMessage().contains(userDir + "/test//" + userDir));
+				.isThrownBy(ac::refresh)
+				.withCauseInstanceOf(FileNotFoundException.class)
+				.matches(ex -> ex.getMessage().contains(userDir + "/test/" + userDir) ||
+						ex.getMessage().contains(userDir + "/test//" + userDir));
 	}
 
 	private String getUserDir() {
@@ -97,8 +97,8 @@ public class PropertyResourceConfigurerIntegrationTests {
 		pvs.add("location", "${myprop}/test/${myprop}");
 		ac.registerSingleton("configurer", PropertyPlaceholderConfigurer.class, pvs);
 		assertThatExceptionOfType(BeanInitializationException.class)
-			.isThrownBy(ac::refresh)
-			.withMessageContaining("myprop");
+				.isThrownBy(ac::refresh)
+				.withMessageContaining("myprop");
 	}
 
 	@Test
@@ -159,8 +159,7 @@ public class PropertyResourceConfigurerIntegrationTests {
 
 			TestBean testBean = context.getBean("tb", TestBean.class);
 			assertThat(testBean.getTouchy()).isEqualTo("mytest");
-		}
-		finally {
+		} finally {
 			System.clearProperty(propertyName);
 		}
 	}

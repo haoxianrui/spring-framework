@@ -122,7 +122,7 @@ public abstract class AbstractAnnotationMetadataTests {
 	@Test
 	public void getMemberClassNamesWhenHasMemberClassesReturnsNames() {
 		assertThat(get(TestMemberClass.class).getMemberClassNames()).containsExactlyInAnyOrder(
-			TestMemberClassInnerClass.class.getName(), TestMemberClassInnerInterface.class.getName());
+				TestMemberClassInnerClass.class.getName(), TestMemberClassInnerInterface.class.getName());
 	}
 
 	@Test
@@ -133,9 +133,9 @@ public abstract class AbstractAnnotationMetadataTests {
 	@Test
 	public void getAnnotationsReturnsDirectAnnotations() {
 		assertThat(get(WithDirectAnnotations.class).getAnnotations().stream())
-			.filteredOn(MergedAnnotation::isDirectlyPresent)
-			.extracting(a -> a.getType().getName())
-			.containsExactlyInAnyOrder(DirectAnnotation1.class.getName(), DirectAnnotation2.class.getName());
+				.filteredOn(MergedAnnotation::isDirectlyPresent)
+				.extracting(a -> a.getType().getName())
+				.containsExactlyInAnyOrder(DirectAnnotation1.class.getName(), DirectAnnotation2.class.getName());
 	}
 
 	@Test
@@ -156,7 +156,7 @@ public abstract class AbstractAnnotationMetadataTests {
 	@Test
 	public void getAnnotationAttributesReturnsAttributes() {
 		assertThat(get(WithAnnotationAttributes.class).getAnnotationAttributes(AnnotationAttributes.class.getName()))
-			.containsOnly(entry("name", "test"), entry("size", 1));
+				.containsOnly(entry("name", "test"), entry("size", 1));
 	}
 
 	@Test
@@ -179,7 +179,7 @@ public abstract class AbstractAnnotationMetadataTests {
 	public void getMetaAnnotationTypesReturnsMetaAnnotations() {
 		AnnotationMetadata metadata = get(WithMetaAnnotations.class);
 		assertThat(metadata.getMetaAnnotationTypes(MetaAnnotationRoot.class.getName()))
-			.containsExactlyInAnyOrder(MetaAnnotation1.class.getName(), MetaAnnotation2.class.getName());
+				.containsExactlyInAnyOrder(MetaAnnotation1.class.getName(), MetaAnnotation2.class.getName());
 	}
 
 	@Test
@@ -233,8 +233,8 @@ public abstract class AbstractAnnotationMetadataTests {
 	@Test
 	public void getAnnotatedMethodsReturnsMatchingAnnotatedAndMetaAnnotatedMethods() {
 		assertThat(get(WithDirectAndMetaAnnotatedMethods.class).getAnnotatedMethods(MetaAnnotation2.class.getName()))
-			.extracting(MethodMetadata::getMethodName)
-			.containsExactlyInAnyOrder("direct", "meta");
+				.extracting(MethodMetadata::getMethodName)
+				.containsExactlyInAnyOrder("direct", "meta");
 	}
 
 	protected abstract AnnotationMetadata get(Class<?> source);

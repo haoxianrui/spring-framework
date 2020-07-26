@@ -104,8 +104,7 @@ public class JmsNamespaceHandlerTests {
 		for (DefaultMessageListenerContainer container : containers.values()) {
 			if (container.getConnectionFactory().equals(defaultConnectionFactory)) {
 				defaultConnectionFactoryCount++;
-			}
-			else if (container.getConnectionFactory().equals(explicitConnectionFactory)) {
+			} else if (container.getConnectionFactory().equals(explicitConnectionFactory)) {
 				explicitConnectionFactoryCount++;
 			}
 		}
@@ -340,7 +339,7 @@ public class JmsNamespaceHandlerTests {
 	private long getRecoveryInterval(String containerBeanName) {
 		BackOff backOff = getBackOff(containerBeanName);
 		assertThat(backOff.getClass()).isEqualTo(FixedBackOff.class);
-		return ((FixedBackOff)backOff).getInterval();
+		return ((FixedBackOff) backOff).getInterval();
 	}
 
 	private int getPhase(String containerBeanName) {
@@ -398,8 +397,7 @@ public class JmsNamespaceHandlerTests {
 							return true;
 						}
 					}
-				}
-				else {
+				} else {
 					if (cd.getName().equals(name)) {
 						return true;
 					}

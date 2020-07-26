@@ -286,7 +286,7 @@ class MethodInvokerTests {
 
 		@Override
 		public String getGreeting() {
-			return "welcome back " + name ;
+			return "welcome back " + name;
 		}
 	}
 

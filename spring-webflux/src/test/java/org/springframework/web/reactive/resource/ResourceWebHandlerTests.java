@@ -591,7 +591,7 @@ public class ResourceWebHandlerTests {
 
 		assertThat(exchange.getResponse().getStatusCode()).isEqualTo(HttpStatus.PARTIAL_CONTENT);
 		assertThat(exchange.getResponse().getHeaders().getContentType().toString()
-		.startsWith("multipart/byteranges;boundary=")).isTrue();
+				.startsWith("multipart/byteranges;boundary=")).isTrue();
 
 		String boundary = "--" + exchange.getResponse().getHeaders().getContentType().toString().substring(30);
 

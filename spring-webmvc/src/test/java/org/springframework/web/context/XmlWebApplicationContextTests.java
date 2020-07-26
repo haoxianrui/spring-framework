@@ -67,6 +67,7 @@ public class XmlWebApplicationContextTests extends AbstractApplicationContextTes
 						}
 						return bean;
 					}
+
 					@Override
 					public Object postProcessAfterInitialization(Object bean, String name) throws BeansException {
 						return bean;
@@ -96,11 +97,12 @@ public class XmlWebApplicationContextTests extends AbstractApplicationContextTes
 
 	/**
 	 * Overridden as we can't trust superclass method
+	 *
 	 * @see org.springframework.context.testfixture.AbstractApplicationContextTests#testEvents()
 	 */
 	@Override
 	protected void doTestEvents(TestApplicationListener listener, TestApplicationListener parentListener,
-			MyEvent event) {
+								MyEvent event) {
 		TestApplicationListener listenerBean = (TestApplicationListener) this.applicationContext.getBean("testListener");
 		TestApplicationListener parentListenerBean = (TestApplicationListener) this.applicationContext.getParent().getBean("parentListener");
 		super.doTestEvents(listenerBean, parentListenerBean, event);
@@ -109,7 +111,7 @@ public class XmlWebApplicationContextTests extends AbstractApplicationContextTes
 	@Test
 	@Override
 	public void count() {
-		assertThat(this.applicationContext.getBeanDefinitionCount() == 14).as("should have 14 beans, not "+ this.applicationContext.getBeanDefinitionCount()).isTrue();
+		assertThat(this.applicationContext.getBeanDefinitionCount() == 14).as("should have 14 beans, not " + this.applicationContext.getBeanDefinitionCount()).isTrue();
 	}
 
 	@Test
@@ -177,7 +179,9 @@ public class XmlWebApplicationContextTests extends AbstractApplicationContextTes
 			this.afterPropertiesSetInvoked = true;
 		}
 
-		/** Init method */
+		/**
+		 * Init method
+		 */
 		public void customInit() throws ServletException {
 			assertThat(this.afterPropertiesSetInvoked).isTrue();
 			this.initMethodInvoked = true;

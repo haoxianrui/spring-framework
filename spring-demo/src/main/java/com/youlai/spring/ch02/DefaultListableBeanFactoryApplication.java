@@ -1,4 +1,4 @@
-package com.fly4j.spring.ch02;
+package com.youlai.spring.ch02;
 
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -7,9 +7,9 @@ import org.springframework.core.io.ClassPathResource;
 
 public class DefaultListableBeanFactoryApplication {
 	public static void main(String[] args) {
-		ClassPathResource resource=new ClassPathResource("spring-config.xml");
-		DefaultListableBeanFactory beanFactory=new DefaultListableBeanFactory();
-		XmlBeanDefinitionReader beanDefinitionReader=new XmlBeanDefinitionReader(beanFactory);
+		ClassPathResource resource = new ClassPathResource("spring-config.xml");
+		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+		XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
 		beanDefinitionReader.loadBeanDefinitions(resource);
 	}
 }

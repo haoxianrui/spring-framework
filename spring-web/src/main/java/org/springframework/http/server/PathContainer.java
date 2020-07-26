@@ -46,6 +46,7 @@ public interface PathContainer {
 
 	/**
 	 * Extract a sub-path from the given offset into the elements list.
+	 *
 	 * @param index the start element index (inclusive)
 	 * @return the sub-path
 	 */
@@ -56,8 +57,9 @@ public interface PathContainer {
 	/**
 	 * Extract a sub-path from the given start offset into the element list
 	 * (inclusive) and to the end offset (exclusive).
+	 *
 	 * @param startIndex the start element index (inclusive)
-	 * @param endIndex the end element index (exclusive)
+	 * @param endIndex   the end element index (exclusive)
 	 * @return the sub-path
 	 */
 	default PathContainer subPath(int startIndex, int endIndex) {
@@ -68,6 +70,7 @@ public interface PathContainer {
 	/**
 	 * Parse the path value into a sequence of {@code "/"} {@link Separator Separator}
 	 * and {@link PathSegment PathSegment} elements.
+	 *
 	 * @param path the encoded, raw path value to parse
 	 * @return the parsed path
 	 */
@@ -78,7 +81,8 @@ public interface PathContainer {
 	/**
 	 * Parse the path value into a sequence of {@link Separator Separator} and
 	 * {@link PathSegment PathSegment} elements.
-	 * @param path the encoded, raw path value to parse
+	 *
+	 * @param path    the encoded, raw path value to parse
 	 * @param options to customize parsing
 	 * @return the parsed path
 	 * @since 5.2
@@ -131,6 +135,7 @@ public interface PathContainer {
 
 	/**
 	 * Options to customize parsing based on the type of input path.
+	 *
 	 * @since 5.2
 	 */
 	class Options {
@@ -167,11 +172,12 @@ public interface PathContainer {
 
 		/**
 		 * Create an {@link Options} instance with the given settings.
-		 * @param separator the separator for parsing the path into segments;
-		 * currently this must be slash or dot.
+		 *
+		 * @param separator              the separator for parsing the path into segments;
+		 *                               currently this must be slash or dot.
 		 * @param decodeAndParseSegments whether to URL decode path segment
-		 * values and parse path parameters. If set to false, only escape
-		 * sequences for the separator char are decoded.
+		 *                               values and parse path parameters. If set to false, only escape
+		 *                               sequences for the separator char are decoded.
 		 */
 		public static Options create(char separator, boolean decodeAndParseSegments) {
 			return new Options(separator, decodeAndParseSegments);

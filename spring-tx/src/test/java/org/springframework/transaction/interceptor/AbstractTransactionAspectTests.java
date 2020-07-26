@@ -181,7 +181,7 @@ public abstract class AbstractTransactionAspectTests {
 		given(ptm.getTransaction(txatt)).willReturn(status);
 
 		TestBean tb = new TestBean();
-		ITestBean itb = (ITestBean) advised(tb, ptm, new TransactionAttributeSource[] {tas1, tas2});
+		ITestBean itb = (ITestBean) advised(tb, ptm, new TransactionAttributeSource[]{tas1, tas2});
 
 		checkTransactionStatus(false);
 		itb.getName();
@@ -364,7 +364,8 @@ public abstract class AbstractTransactionAspectTests {
 	/**
 	 * Check that the given exception thrown by the target can produce the
 	 * desired behavior with the appropriate transaction attribute.
-	 * @param ex exception to be thrown by the target
+	 *
+	 * @param ex             exception to be thrown by the target
 	 * @param shouldRollback whether this should cause a transaction rollback
 	 */
 	@SuppressWarnings("serial")
@@ -393,8 +394,7 @@ public abstract class AbstractTransactionAspectTests {
 		if (rollbackException) {
 			if (shouldRollback) {
 				willThrow(tex).given(ptm).rollback(status);
-			}
-			else {
+			} else {
 				willThrow(tex).given(ptm).commit(status);
 			}
 		}
@@ -405,12 +405,10 @@ public abstract class AbstractTransactionAspectTests {
 		try {
 			itb.exceptional(ex);
 			fail("Should have thrown exception");
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			if (rollbackException) {
 				assertThat(t).as("Caught wrong exception").isEqualTo(tex);
-			}
-			else {
+			} else {
 				assertThat(t).as("Caught wrong exception").isEqualTo(ex);
 			}
 		}
@@ -418,8 +416,7 @@ public abstract class AbstractTransactionAspectTests {
 		if (!rollbackException) {
 			if (shouldRollback) {
 				verify(ptm).rollback(status);
-			}
-			else {
+			} else {
 				verify(ptm).commit(status);
 			}
 		}
@@ -488,8 +485,7 @@ public abstract class AbstractTransactionAspectTests {
 		try {
 			itb.getName();
 			fail("Shouldn't have invoked method");
-		}
-		catch (CannotCreateTransactionException thrown) {
+		} catch (CannotCreateTransactionException thrown) {
 			assertThat(thrown == ex).isTrue();
 		}
 	}
@@ -523,8 +519,7 @@ public abstract class AbstractTransactionAspectTests {
 		try {
 			itb.setName(name);
 			fail("Shouldn't have succeeded");
-		}
-		catch (UnexpectedRollbackException thrown) {
+		} catch (UnexpectedRollbackException thrown) {
 			assertThat(thrown == ex).isTrue();
 		}
 
@@ -538,8 +533,7 @@ public abstract class AbstractTransactionAspectTests {
 			if (!expected) {
 				fail("Should have thrown NoTransactionException");
 			}
-		}
-		catch (NoTransactionException ex) {
+		} catch (NoTransactionException ex) {
 			if (expected) {
 				fail("Should have current TransactionStatus");
 			}
@@ -559,8 +553,9 @@ public abstract class AbstractTransactionAspectTests {
 	 * have been created, as there's no distinction between target and proxy.
 	 * In the case of Spring's own AOP framework, a proxy must be created
 	 * using a suitably configured transaction interceptor
+	 *
 	 * @param target the target if there's a distinct target. If not (AspectJ),
-	 * return target.
+	 *               return target.
 	 * @return transactional advised object
 	 */
 	protected abstract Object advised(

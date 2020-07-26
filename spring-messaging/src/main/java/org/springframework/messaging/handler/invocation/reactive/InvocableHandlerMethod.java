@@ -119,7 +119,8 @@ public class InvocableHandlerMethod extends HandlerMethod {
 
 	/**
 	 * Invoke the method for the given exchange.
-	 * @param message the current message
+	 *
+	 * @param message      the current message
 	 * @param providedArgs optional list of argument values to match by type
 	 * @return a Mono with the result from the invocation
 	 */
@@ -135,20 +136,16 @@ public class InvocableHandlerMethod extends HandlerMethod {
 						&& CoroutinesUtils.isSuspendingFunction(method)) {
 					isSuspendingFunction = true;
 					value = CoroutinesUtils.invokeSuspendingFunction(method, getBean(), args);
-				}
-				else {
+				} else {
 					value = method.invoke(getBean(), args);
 				}
-			}
-			catch (IllegalArgumentException ex) {
+			} catch (IllegalArgumentException ex) {
 				assertTargetBean(getBridgedMethod(), getBean(), args);
 				String text = (ex.getMessage() != null ? ex.getMessage() : "Illegal argument");
 				return Mono.error(new IllegalStateException(formatInvokeError(text, args), ex));
-			}
-			catch (InvocationTargetException ex) {
+			} catch (InvocationTargetException ex) {
 				return Mono.error(ex.getTargetException());
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				// Unlikely to ever get here, but it must be handled...
 				return Mono.error(new IllegalStateException(formatInvokeError("Invocation failure", args), ex));
 			}
@@ -183,8 +180,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 				argMonos.add(this.resolvers.resolveArgument(parameter, message)
 						.defaultIfEmpty(NO_ARG_VALUE)
 						.doOnError(ex -> logArgumentErrorIfNecessary(parameter, ex)));
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				logArgumentErrorIfNecessary(parameter, ex);
 				argMonos.add(Mono.error(ex));
 			}

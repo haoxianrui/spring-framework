@@ -204,7 +204,7 @@ public class ScriptFactoryPostProcessorTests {
 		Messenger refreshedMessenger = (Messenger) ctx.getBean(MESSENGER_BEAN_NAME);
 		assertThatExceptionOfType(FatalBeanException.class).isThrownBy(() ->
 				refreshedMessenger.getMessage())
-			.matches(ex -> ex.contains(ScriptCompilationException.class));
+				.matches(ex -> ex.contains(ScriptCompilationException.class));
 	}
 
 	@Test
@@ -260,8 +260,7 @@ public class ScriptFactoryPostProcessorTests {
 	private static void pauseToLetRefreshDelayKickIn(int secondsToPause) {
 		try {
 			Thread.sleep(secondsToPause * 1000);
-		}
-		catch (InterruptedException ignored) {
+		} catch (InterruptedException ignored) {
 		}
 	}
 

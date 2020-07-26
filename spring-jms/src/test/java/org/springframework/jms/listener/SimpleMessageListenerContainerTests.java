@@ -82,16 +82,16 @@ public class SimpleMessageListenerContainerTests {
 	@Test
 	public void testSettingConcurrentConsumersToZeroIsNotAllowed() {
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-				this.container.setConcurrentConsumers(0);
-				this.container.afterPropertiesSet();
+			this.container.setConcurrentConsumers(0);
+			this.container.afterPropertiesSet();
 		});
 	}
 
 	@Test
 	public void testSettingConcurrentConsumersToANegativeValueIsNotAllowed() {
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-				this.container.setConcurrentConsumers(-198);
-				this.container.afterPropertiesSet();
+			this.container.setConcurrentConsumers(-198);
+			this.container.afterPropertiesSet();
 		});
 	}
 
@@ -188,8 +188,7 @@ public class SimpleMessageListenerContainerTests {
 				try {
 					// Check correct Session passed into SessionAwareMessageListener.
 					assertThat(session).isSameAs(sess);
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					failure.add("MessageListener execution failed: " + ex);
 				}
 			}

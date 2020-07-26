@@ -120,7 +120,7 @@ class CoroutinesIntegrationTests : AbstractRequestMappingIntegrationTests() {
 		}
 
 		@GetMapping("/flow")
-		fun flowEndpoint()= flow {
+		fun flowEndpoint() = flow {
 			emit("foo")
 			delay(1)
 			emit("bar")

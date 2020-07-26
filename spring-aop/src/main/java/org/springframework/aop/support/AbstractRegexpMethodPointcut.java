@@ -45,8 +45,8 @@ import org.springframework.util.StringUtils;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Rob Harrop
- * @since 1.1
  * @see JdkRegexpMethodPointcut
+ * @since 1.1
  */
 @SuppressWarnings("serial")
 public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPointcut
@@ -66,6 +66,7 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 	/**
 	 * Convenience method when we have only a single pattern.
 	 * Use either this method or {@link #setPatterns}, not both.
+	 *
 	 * @see #setPatterns
 	 */
 	public void setPattern(String pattern) {
@@ -75,6 +76,7 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 	/**
 	 * Set the regular expressions defining methods to match.
 	 * Matching will be the union of all these; if any match, the pointcut matches.
+	 *
 	 * @see #setPattern
 	 */
 	public void setPatterns(String... patterns) {
@@ -96,6 +98,7 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 	/**
 	 * Convenience method when we have only a single exclusion pattern.
 	 * Use either this method or {@link #setExcludedPatterns}, not both.
+	 *
 	 * @see #setExcludedPatterns
 	 */
 	public void setExcludedPattern(String excludedPattern) {
@@ -105,6 +108,7 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 	/**
 	 * Set the regular expressions defining methods to match for exclusion.
 	 * Matching will be the union of all these; if any match, the pointcut matches.
+	 *
 	 * @see #setExcludedPattern
 	 */
 	public void setExcludedPatterns(String... excludedPatterns) {
@@ -138,6 +142,7 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 
 	/**
 	 * Match the specified candidate against the configured patterns.
+	 *
 	 * @param signatureString "java.lang.Object.hashCode" style signature
 	 * @return whether the candidate matches at least one of the specified patterns
 	 */
@@ -163,6 +168,7 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 	 * Can be invoked multiple times.
 	 * <p>This method will be invoked from the {@link #setPatterns} method,
 	 * and also on deserialization.
+	 *
 	 * @param patterns the patterns to initialize
 	 * @throws IllegalArgumentException in case of an invalid pattern
 	 */
@@ -173,6 +179,7 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 	 * Can be invoked multiple times.
 	 * <p>This method will be invoked from the {@link #setExcludedPatterns} method,
 	 * and also on deserialization.
+	 *
 	 * @param patterns the patterns to initialize
 	 * @throws IllegalArgumentException in case of an invalid pattern
 	 */
@@ -180,7 +187,8 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 
 	/**
 	 * Does the pattern at the given index match the given String?
-	 * @param pattern the {@code String} pattern to match
+	 *
+	 * @param pattern      the {@code String} pattern to match
 	 * @param patternIndex index of pattern (starting from 0)
 	 * @return {@code true} if there is a match, {@code false} otherwise
 	 */
@@ -188,7 +196,8 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 
 	/**
 	 * Does the exclusion pattern at the given index match the given String?
-	 * @param pattern the {@code String} pattern to match
+	 *
+	 * @param pattern      the {@code String} pattern to match
 	 * @param patternIndex index of pattern (starting from 0)
 	 * @return {@code true} if there is a match, {@code false} otherwise
 	 */

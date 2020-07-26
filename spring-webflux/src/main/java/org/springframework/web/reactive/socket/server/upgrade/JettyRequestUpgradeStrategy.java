@@ -74,6 +74,7 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy, Life
 	/**
 	 * Configure a {@link WebSocketPolicy} to use to initialize
 	 * {@link WebSocketServerFactory}.
+	 *
 	 * @param webSocketPolicy the WebSocket settings
 	 */
 	public void setWebSocketPolicy(WebSocketPolicy webSocketPolicy) {
@@ -108,8 +109,7 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy, Life
 					});
 					this.factory.start();
 					this.running = true;
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					throw new IllegalStateException("Unable to start WebSocketServerFactory", ex);
 				}
 			}
@@ -124,8 +124,7 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy, Life
 					try {
 						this.factory.stop();
 						this.running = false;
-					}
-					catch (Throwable ex) {
+					} catch (Throwable ex) {
 						throw new IllegalStateException("Failed to stop WebSocketServerFactory", ex);
 					}
 				}
@@ -141,7 +140,7 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy, Life
 
 	@Override
 	public Mono<Void> upgrade(ServerWebExchange exchange, WebSocketHandler handler,
-			@Nullable String subProtocol, Supplier<HandshakeInfo> handshakeInfoFactory) {
+							  @Nullable String subProtocol, Supplier<HandshakeInfo> handshakeInfoFactory) {
 
 		ServerHttpRequest request = exchange.getRequest();
 		ServerHttpResponse response = exchange.getResponse();
@@ -167,8 +166,7 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy, Life
 					try {
 						adapterHolder.set(new WebSocketHandlerContainer(adapter, subProtocol));
 						this.factory.acceptWebSocket(servletRequest, servletResponse);
-					}
-					finally {
+					} finally {
 						adapterHolder.remove();
 					}
 					return null;
@@ -178,11 +176,9 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy, Life
 	private static HttpServletRequest getNativeRequest(ServerHttpRequest request) {
 		if (request instanceof AbstractServerHttpRequest) {
 			return ((AbstractServerHttpRequest) request).getNativeRequest();
-		}
-		else if (request instanceof ServerHttpRequestDecorator) {
+		} else if (request instanceof ServerHttpRequestDecorator) {
 			return getNativeRequest(((ServerHttpRequestDecorator) request).getDelegate());
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException(
 					"Couldn't find HttpServletRequest in " + request.getClass().getName());
 		}
@@ -191,11 +187,9 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy, Life
 	private static HttpServletResponse getNativeResponse(ServerHttpResponse response) {
 		if (response instanceof AbstractServerHttpResponse) {
 			return ((AbstractServerHttpResponse) response).getNativeResponse();
-		}
-		else if (response instanceof ServerHttpResponseDecorator) {
+		} else if (response instanceof ServerHttpResponseDecorator) {
 			return getNativeResponse(((ServerHttpResponseDecorator) response).getDelegate());
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException(
 					"Couldn't find HttpServletResponse in " + response.getClass().getName());
 		}

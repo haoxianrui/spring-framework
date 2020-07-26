@@ -117,8 +117,7 @@ public class LobSupportTests {
 			protected void streamData(ResultSet rs) throws SQLException, IOException {
 				if (ex) {
 					throw new IOException();
-				}
-				else {
+				} else {
 					rs.clearWarnings();
 				}
 			}

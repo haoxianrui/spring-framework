@@ -4,7 +4,7 @@
 <beans>
 
 	<bean id="dependingBean" class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$DependingBean"
-		depends-on="preparingBean1, preparingBean2"/>
+		  depends-on="preparingBean1, preparingBean2"/>
 
 	<bean id="preparingBean1" class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$PreparingBean1"/>
 

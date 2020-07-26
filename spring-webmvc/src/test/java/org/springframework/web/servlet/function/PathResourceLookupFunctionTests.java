@@ -102,8 +102,7 @@ public class PathResourceLookupFunctionTests {
 				lookupFunction.andThen((Optional<Resource> optionalResource) -> {
 					if (optionalResource.isPresent()) {
 						return optionalResource;
-					}
-					else {
+					} else {
 						return Optional.of(defaultResource);
 					}
 				});

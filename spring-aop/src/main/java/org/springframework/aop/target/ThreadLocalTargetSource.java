@@ -90,8 +90,7 @@ public class ThreadLocalTargetSource extends AbstractPrototypeBasedTargetSource
 			synchronized (this.targetSet) {
 				this.targetSet.add(target);
 			}
-		}
-		else {
+		} else {
 			++this.hitCount;
 		}
 		return target;
@@ -99,6 +98,7 @@ public class ThreadLocalTargetSource extends AbstractPrototypeBasedTargetSource
 
 	/**
 	 * Dispose of targets if necessary; clear ThreadLocal.
+	 *
 	 * @see #destroyPrototypeInstance
 	 */
 	@Override

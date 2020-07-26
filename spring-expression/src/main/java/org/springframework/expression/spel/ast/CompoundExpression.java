@@ -59,8 +59,7 @@ public class CompoundExpression extends SpelNodeImpl {
 					state.pushActiveContextObject(result);
 					nextNode = this.children[i];
 					result = nextNode.getValueInternal(state);
-				}
-				finally {
+				} finally {
 					state.popActiveContextObject();
 				}
 			}
@@ -68,12 +67,10 @@ public class CompoundExpression extends SpelNodeImpl {
 				state.pushActiveContextObject(result);
 				nextNode = this.children[cc - 1];
 				return nextNode.getValueRef(state);
-			}
-			finally {
+			} finally {
 				state.popActiveContextObject();
 			}
-		}
-		catch (SpelEvaluationException ex) {
+		} catch (SpelEvaluationException ex) {
 			// Correct the position for the error before re-throwing
 			ex.setPosition(nextNode.getStartPosition());
 			throw ex;
@@ -83,6 +80,7 @@ public class CompoundExpression extends SpelNodeImpl {
 	/**
 	 * Evaluates a compound expression. This involves evaluating each piece in turn and the
 	 * return value from each piece is the active context object for the subsequent piece.
+	 *
 	 * @param state the state in which the expression is being evaluated
 	 * @return the final value from the last piece of the compound expression
 	 */
@@ -115,7 +113,7 @@ public class CompoundExpression extends SpelNodeImpl {
 
 	@Override
 	public boolean isCompilable() {
-		for (SpelNodeImpl child: this.children) {
+		for (SpelNodeImpl child : this.children) {
 			if (!child.isCompilable()) {
 				return false;
 			}

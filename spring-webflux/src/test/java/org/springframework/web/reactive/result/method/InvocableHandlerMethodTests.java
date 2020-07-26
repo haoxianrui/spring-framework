@@ -97,7 +97,7 @@ public class InvocableHandlerMethodTests {
 		Mono<HandlerResult> mono = invoke(new TestController(), method);
 		assertThatIllegalStateException().isThrownBy(
 				mono::block)
-			.withMessage("Could not resolve parameter [0] in " + method.toGenericString() + ": No suitable resolver");
+				.withMessage("Could not resolve parameter [0] in " + method.toGenericString() + ": No suitable resolver");
 	}
 
 	@Test
@@ -125,7 +125,7 @@ public class InvocableHandlerMethodTests {
 
 		assertThatExceptionOfType(UnsupportedMediaTypeStatusException.class).isThrownBy(
 				mono::block)
-			.withMessage("415 UNSUPPORTED_MEDIA_TYPE \"boo\"");
+				.withMessage("415 UNSUPPORTED_MEDIA_TYPE \"boo\"");
 	}
 
 	@Test
@@ -135,11 +135,11 @@ public class InvocableHandlerMethodTests {
 		Mono<HandlerResult> mono = invoke(new TestController(), method);
 		assertThatIllegalStateException().isThrownBy(
 				mono::block)
-			.withCauseInstanceOf(IllegalArgumentException.class)
-			.withMessageContaining("Controller [")
-			.withMessageContaining("Method [")
-			.withMessageContaining("with argument values:")
-			.withMessageContaining("[0] [type=java.lang.Integer] [value=1]");
+				.withCauseInstanceOf(IllegalArgumentException.class)
+				.withMessageContaining("Controller [")
+				.withMessageContaining("Method [")
+				.withMessageContaining("with argument values:")
+				.withMessageContaining("[0] [type=java.lang.Integer] [value=1]");
 	}
 
 	@Test
@@ -149,7 +149,7 @@ public class InvocableHandlerMethodTests {
 
 		assertThatIllegalStateException().isThrownBy(
 				mono::block)
-			.withMessage("boo");
+				.withMessage("boo");
 	}
 
 	@Test

@@ -48,7 +48,7 @@ public class SpringJUnit4ClassRunnerTests {
 					@Override
 					public void prepareTestInstance(Object testInstance) {
 						throw new RuntimeException(
-							"This RuntimeException should be caught and wrapped in an Exception.");
+								"This RuntimeException should be caught and wrapped in an Exception.");
 					}
 				};
 			}
@@ -61,7 +61,7 @@ public class SpringJUnit4ClassRunnerTests {
 	public void getSpringTimeoutViaMetaAnnotation() throws Exception {
 		SpringJUnit4ClassRunner runner = new SpringJUnit4ClassRunner(getClass());
 		long timeout = runner.getSpringTimeout(new FrameworkMethod(getClass().getDeclaredMethod(
-			"springTimeoutWithMetaAnnotation")));
+				"springTimeoutWithMetaAnnotation")));
 		assertThat(timeout).isEqualTo(10);
 	}
 
@@ -69,7 +69,7 @@ public class SpringJUnit4ClassRunnerTests {
 	public void getSpringTimeoutViaMetaAnnotationWithOverride() throws Exception {
 		SpringJUnit4ClassRunner runner = new SpringJUnit4ClassRunner(getClass());
 		long timeout = runner.getSpringTimeout(new FrameworkMethod(getClass().getDeclaredMethod(
-			"springTimeoutWithMetaAnnotationAndOverride")));
+				"springTimeoutWithMetaAnnotationAndOverride")));
 		assertThat(timeout).isEqualTo(42);
 	}
 

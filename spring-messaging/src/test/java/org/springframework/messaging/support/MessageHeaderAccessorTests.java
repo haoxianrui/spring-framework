@@ -206,11 +206,11 @@ public class MessageHeaderAccessorTests {
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				accessor.setLeaveMutable(true))
-			.withMessageContaining("Already immutable");
+				.withMessageContaining("Already immutable");
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				accessor.setHeader("foo", "baz"))
-			.withMessageContaining("Already immutable");
+				.withMessageContaining("Already immutable");
 
 		assertThat(headers.get("foo")).isEqualTo("bar");
 		assertThat(MessageHeaderAccessor.getAccessor(message, MessageHeaderAccessor.class)).isSameAs(accessor);

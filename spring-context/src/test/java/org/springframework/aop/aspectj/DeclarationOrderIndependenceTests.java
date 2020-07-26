@@ -84,7 +84,9 @@ public class DeclarationOrderIndependenceTests {
 	}
 
 
-	/** public visibility is required */
+	/**
+	 * public visibility is required
+	 */
 	public static class BeanNameAwareMixin implements BeanNameAware {
 
 		@SuppressWarnings("unused")
@@ -97,7 +99,9 @@ public class DeclarationOrderIndependenceTests {
 
 	}
 
-	/** public visibility is required */
+	/**
+	 * public visibility is required
+	 */
 	@SuppressWarnings("serial")
 	public static class SerializableMixin implements Serializable {
 	}
@@ -109,7 +113,9 @@ class TopsyTurvyAspect {
 
 	interface Collaborator {
 		void beforeAdviceFired();
+
 		void afterReturningAdviceFired();
+
 		void aroundAdviceFired();
 	}
 

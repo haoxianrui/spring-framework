@@ -40,10 +40,10 @@ import org.springframework.util.Assert;
  *
  * @author Andy Wilkinson
  * @author Rossen Stoyanchev
- * @since 4.0
  * @see StompDecoder
+ * @since 4.0
  */
-public class StompEncoder  {
+public class StompEncoder {
 
 	private static final Byte LINE_FEED_BYTE = '\n';
 
@@ -64,8 +64,7 @@ public class StompEncoder  {
 					if (size() > HEADER_KEY_CACHE_LIMIT) {
 						headerKeyAccessCache.remove(eldest.getKey());
 						return true;
-					}
-					else {
+					} else {
 						return false;
 					}
 				}
@@ -74,6 +73,7 @@ public class StompEncoder  {
 
 	/**
 	 * Encodes the given STOMP {@code message} into a {@code byte[]}.
+	 *
 	 * @param message the message to encode
 	 * @return the encoded message
 	 */
@@ -83,6 +83,7 @@ public class StompEncoder  {
 
 	/**
 	 * Encodes the given payload and headers into a {@code byte[]}.
+	 *
 	 * @param headers the headers
 	 * @param payload the payload
 	 * @return the encoded message
@@ -115,7 +116,7 @@ public class StompEncoder  {
 			StompCommand command, Map<String, Object> headers, byte[] payload, Result result) {
 
 		@SuppressWarnings("unchecked")
-		Map<String,List<String>> nativeHeaders =
+		Map<String, List<String>> nativeHeaders =
 				(Map<String, List<String>>) headers.get(NativeMessageHeaderAccessor.NATIVE_HEADERS);
 
 		if (logger.isTraceEnabled()) {
@@ -189,20 +190,16 @@ public class StompEncoder  {
 			if (c == '\\') {
 				sb = getStringBuilder(sb, inString, i);
 				sb.append("\\\\");
-			}
-			else if (c == ':') {
+			} else if (c == ':') {
 				sb = getStringBuilder(sb, inString, i);
 				sb.append("\\c");
-			}
-			else if (c == '\n') {
+			} else if (c == '\n') {
 				sb = getStringBuilder(sb, inString, i);
 				sb.append("\\n");
-			}
-			else if (c == '\r') {
+			} else if (c == '\r') {
 				sb = getStringBuilder(sb, inString, i);
 				sb.append("\\r");
-			}
-			else if (sb != null){
+			} else if (sb != null) {
 				sb.append(c);
 			}
 		}
@@ -255,8 +252,7 @@ public class StompEncoder  {
 					byte[] src = (byte[]) o;
 					System.arraycopy(src, 0, result, position, src.length);
 					position += src.length;
-				}
-				else {
+				} else {
 					result[position++] = (Byte) o;
 				}
 			}

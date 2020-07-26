@@ -46,8 +46,7 @@ public class JavaUtilLoggingConfigurer implements TestExecutionListener {
 	public void testPlanExecutionStarted(TestPlan testPlan) {
 		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(JUL_TEST_PROPERTIES_FILE)) {
 			LogManager.getLogManager().readConfiguration(inputStream);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			System.err.println("WARNING: failed to configure Java Util Logging from classpath resource " +
 					JUL_TEST_PROPERTIES_FILE);
 			System.err.println(ex);

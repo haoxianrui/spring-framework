@@ -47,8 +47,9 @@ public abstract class AbstractTransactionSupportingCacheManagerTests<T extends C
 
 	/**
 	 * Returns the {@link CacheManager} to use.
+	 *
 	 * @param transactionAware if the requested cache manager should be aware
-	 * of the transaction
+	 *                         of the transaction
 	 * @return the cache manager to use
 	 * @see org.springframework.cache.transaction.AbstractTransactionSupportingCacheManager#setTransactionAware
 	 */
@@ -83,8 +84,7 @@ public abstract class AbstractTransactionSupportingCacheManagerTests<T extends C
 		try {
 			assertThat(cacheManager.getCache(this.cacheName)).isInstanceOf(getCacheType());
 			assertThat(cacheManager.getCacheNames().contains(this.cacheName)).isTrue();
-		}
-		finally {
+		} finally {
 			removeNativeCache(this.cacheName);
 		}
 	}
@@ -111,8 +111,7 @@ public abstract class AbstractTransactionSupportingCacheManagerTests<T extends C
 			assertThat(cacheManager.getCache(this.cacheName))
 					.isInstanceOf(TransactionAwareCacheDecorator.class);
 			assertThat(cacheManager.getCacheNames().contains(this.cacheName)).isTrue();
-		}
-		finally {
+		} finally {
 			removeNativeCache(this.cacheName);
 		}
 	}

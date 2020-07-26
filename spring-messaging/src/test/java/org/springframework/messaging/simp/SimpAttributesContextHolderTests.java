@@ -31,10 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 
-
-
-
-
 /**
  * Unit tests for
  * {@link org.springframework.messaging.simp.SimpAttributesContextHolder}.
@@ -110,7 +106,7 @@ public class SimpAttributesContextHolderTests {
 	public void setAttributesFromMessageWithMissingSessionId() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				SimpAttributesContextHolder.setAttributesFromMessage(new GenericMessage<Object>("")))
-			.withMessageStartingWith("No session id in");
+				.withMessageStartingWith("No session id in");
 	}
 
 	@Test
@@ -120,7 +116,7 @@ public class SimpAttributesContextHolderTests {
 		Message<?> message = MessageBuilder.createMessage("", headerAccessor.getMessageHeaders());
 		assertThatIllegalStateException().isThrownBy(() ->
 				SimpAttributesContextHolder.setAttributesFromMessage(message))
-			.withMessageStartingWith("No session attributes in");
+				.withMessageStartingWith("No session attributes in");
 	}
 
 	@Test
@@ -133,7 +129,7 @@ public class SimpAttributesContextHolderTests {
 	public void currentAttributesNone() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				SimpAttributesContextHolder.currentAttributes())
-			.withMessageStartingWith("No thread-bound SimpAttributes found");
+				.withMessageStartingWith("No thread-bound SimpAttributes found");
 	}
 
 }

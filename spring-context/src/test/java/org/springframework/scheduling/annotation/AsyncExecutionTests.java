@@ -82,23 +82,23 @@ public class AsyncExecutionTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomething(0).get())
-			.withCauseInstanceOf(IllegalArgumentException.class);
+				.withCauseInstanceOf(IllegalArgumentException.class);
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomething(-1).get())
-			.withCauseInstanceOf(IOException.class);
+				.withCauseInstanceOf(IOException.class);
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomethingListenable(0).get())
-			.withCauseInstanceOf(IllegalArgumentException.class);
+				.withCauseInstanceOf(IllegalArgumentException.class);
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomethingListenable(-1).get())
-			.withCauseInstanceOf(IOException.class);
+				.withCauseInstanceOf(IOException.class);
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomethingCompletable(0).get())
-			.withCauseInstanceOf(IllegalArgumentException.class);
+				.withCauseInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -179,15 +179,15 @@ public class AsyncExecutionTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomething(0).get())
-			.withCauseInstanceOf(IllegalArgumentException.class);
+				.withCauseInstanceOf(IllegalArgumentException.class);
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomethingListenable(0).get())
-			.withCauseInstanceOf(IllegalArgumentException.class);
+				.withCauseInstanceOf(IllegalArgumentException.class);
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() ->
 				asyncTest.returnSomethingCompletable(0).get())
-			.withCauseInstanceOf(IllegalArgumentException.class);
+				.withCauseInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -349,9 +349,9 @@ public class AsyncExecutionTests {
 		context.refresh();
 		// Assert
 		Awaitility.await()
-					.atMost(1, TimeUnit.SECONDS)
-					.pollInterval(10, TimeUnit.MILLISECONDS)
-					.until(() -> listenerCalled == 1);
+				.atMost(1, TimeUnit.SECONDS)
+				.pollInterval(10, TimeUnit.MILLISECONDS)
+				.until(() -> listenerCalled == 1);
 		context.close();
 	}
 
@@ -370,9 +370,9 @@ public class AsyncExecutionTests {
 		context.close();
 		// Assert
 		Awaitility.await()
-					.atMost(1, TimeUnit.SECONDS)
-					.pollInterval(10, TimeUnit.MILLISECONDS)
-					.until(() -> listenerCalled == 2);
+				.atMost(1, TimeUnit.SECONDS)
+				.pollInterval(10, TimeUnit.MILLISECONDS)
+				.until(() -> listenerCalled == 2);
 		assertThat(listenerConstructed).isEqualTo(1);
 	}
 
@@ -393,9 +393,9 @@ public class AsyncExecutionTests {
 		context.close();
 		// Assert
 		Awaitility.await()
-					.atMost(1, TimeUnit.SECONDS)
-					.pollInterval(10, TimeUnit.MILLISECONDS)
-					.until(() -> listenerCalled == 2);
+				.atMost(1, TimeUnit.SECONDS)
+				.pollInterval(10, TimeUnit.MILLISECONDS)
+				.until(() -> listenerCalled == 2);
 		assertThat(listenerConstructed).isEqualTo(2);
 	}
 
@@ -430,8 +430,7 @@ public class AsyncExecutionTests {
 			assertThat(condition).isTrue();
 			if (i == 0) {
 				throw new IllegalArgumentException();
-			}
-			else if (i < 0) {
+			} else if (i < 0) {
 				return AsyncResult.forExecutionException(new IOException());
 			}
 			return AsyncResult.forValue(Integer.toString(i));
@@ -443,8 +442,7 @@ public class AsyncExecutionTests {
 			assertThat(condition).isTrue();
 			if (i == 0) {
 				throw new IllegalArgumentException();
-			}
-			else if (i < 0) {
+			} else if (i < 0) {
 				return AsyncResult.forExecutionException(new IOException());
 			}
 			return new AsyncResult<>(Integer.toString(i));

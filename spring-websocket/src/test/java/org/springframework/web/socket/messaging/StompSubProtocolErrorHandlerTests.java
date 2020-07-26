@@ -29,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link StompSubProtocolErrorHandler}.
+ *
  * @author Rossen Stoyanchev
  */
 public class StompSubProtocolErrorHandlerTests {

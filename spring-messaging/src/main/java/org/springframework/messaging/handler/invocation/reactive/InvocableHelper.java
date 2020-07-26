@@ -82,6 +82,7 @@ class InvocableHelper {
 
 	/**
 	 * Return the configured resolvers.
+	 *
 	 * @since 5.2.2
 	 */
 	public HandlerMethodArgumentResolverComposite getArgumentResolvers() {
@@ -126,6 +127,7 @@ class InvocableHelper {
 
 	/**
 	 * Create {@link InvocableHandlerMethod} with the configured arg resolvers.
+	 *
 	 * @param handlerMethod the target handler method to invoke
 	 * @return the created instance
 	 */
@@ -142,8 +144,9 @@ class InvocableHelper {
 	 * the HandlerMethod first and if not found, it continues searching for
 	 * additional handling methods registered via
 	 * {@link #registerExceptionHandlerAdvice}.
+	 *
 	 * @param handlerMethod the method where the exception was raised
-	 * @param ex the exception raised or signaled
+	 * @param ex            the exception raised or signaled
 	 * @return a method to handle the exception, or {@code null}
 	 */
 	@Nullable
@@ -161,8 +164,7 @@ class InvocableHelper {
 		Method method = resolver.resolveMethod(ex);
 		if (method != null) {
 			exceptionHandlerMethod = new InvocableHandlerMethod(handlerMethod.getBean(), method);
-		}
-		else {
+		} else {
 			for (Map.Entry<MessagingAdviceBean, AbstractExceptionHandlerMethodResolver> entry : this.exceptionHandlerAdviceCache.entrySet()) {
 				MessagingAdviceBean advice = entry.getKey();
 				if (advice.isApplicableToBeanType(beanType)) {
@@ -178,8 +180,7 @@ class InvocableHelper {
 		if (exceptionHandlerMethod != null) {
 			logger.debug("Found exception handler " + exceptionHandlerMethod.getShortLogMessage());
 			exceptionHandlerMethod.setArgumentResolvers(this.argumentResolvers.getResolvers());
-		}
-		else {
+		} else {
 			logger.error("No exception handling method", ex);
 		}
 		return exceptionHandlerMethod;

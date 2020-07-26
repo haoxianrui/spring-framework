@@ -31,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link ServerWebExchangeContextFilter}.
+ *
  * @author Rossen Stoyanchev
  */
 public class ServerWebExchangeContextFilterTests {

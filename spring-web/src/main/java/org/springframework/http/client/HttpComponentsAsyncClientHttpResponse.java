@@ -35,8 +35,8 @@ import org.springframework.util.StreamUtils;
  *
  * @author Oleg Kalnichevski
  * @author Arjen Poutsma
- * @since 4.0
  * @see HttpComponentsAsyncClientHttpRequest#executeAsync()
+ * @since 4.0
  * @deprecated as of Spring 5.0, in favor of
  * {@link org.springframework.http.client.reactive.HttpComponentsClientHttpConnector}
  */
@@ -83,8 +83,8 @@ final class HttpComponentsAsyncClientHttpResponse extends AbstractClientHttpResp
 
 	@Override
 	public void close() {
-        // HTTP responses returned by async HTTP client are not bound to an
-        // active connection and do not have to deallocate any resources...
+		// HTTP responses returned by async HTTP client are not bound to an
+		// active connection and do not have to deallocate any resources...
 	}
 
 }

@@ -59,7 +59,7 @@ public class ResourceHttpMessageWriterTests {
 
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void getWritableMediaTypes() throws Exception {
 		assertThat((List) this.writer.getWritableMediaTypes())
 				.containsExactlyInAnyOrder(MimeTypeUtils.APPLICATION_OCTET_STREAM, MimeTypeUtils.ALL);
@@ -93,7 +93,7 @@ public class ResourceHttpMessageWriterTests {
 	@Test
 	public void writeMultipleRegions() throws Exception {
 
-		testWrite(get("/").range(of(0,5), of(7,15), of(17,20), of(22,38)).build());
+		testWrite(get("/").range(of(0, 5), of(7, 15), of(17, 20), of(22, 38)).build());
 
 		HttpHeaders headers = this.response.getHeaders();
 		String contentType = headers.getContentType().toString();
@@ -104,7 +104,7 @@ public class ResourceHttpMessageWriterTests {
 		StepVerifier.create(this.response.getBodyAsString())
 				.consumeNextWith(content -> {
 					String[] actualRanges = StringUtils.tokenizeToStringArray(content, "\r\n", false, true);
-					String[] expected = new String[] {
+					String[] expected = new String[]{
 							"--" + boundary,
 							"Content-Type: text/plain",
 							"Content-Range: bytes 0-5/39",

@@ -28,13 +28,13 @@ import org.springframework.util.Assert;
  * A builder for creating a {@link GenericMessage}
  * (or {@link ErrorMessage} if the payload is of type {@link Throwable}).
  *
+ * @param <T> the message payload type
  * @author Arjen Poutsma
  * @author Mark Fisher
  * @author Rossen Stoyanchev
- * @since 4.0
- * @param <T> the message payload type
  * @see GenericMessage
  * @see ErrorMessage
+ * @since 4.0
  */
 public final class MessageBuilder<T> {
 
@@ -64,6 +64,7 @@ public final class MessageBuilder<T> {
 
 	/**
 	 * Set the message headers to use by providing a {@code MessageHeaderAccessor}.
+	 *
 	 * @param accessor the headers to use
 	 */
 	public MessageBuilder<T> setHeaders(MessageHeaderAccessor accessor) {
@@ -161,8 +162,7 @@ public final class MessageBuilder<T> {
 				}
 			}
 			return (Message<T>) new ErrorMessage((Throwable) this.payload, headersToUse);
-		}
-		else {
+		} else {
 			return new GenericMessage<>(this.payload, headersToUse);
 		}
 	}
@@ -175,6 +175,7 @@ public final class MessageBuilder<T> {
 	 * <p>If the provided message is an {@link ErrorMessage}, the
 	 * {@link ErrorMessage#getOriginalMessage() originalMessage} it contains, will be
 	 * passed on to new instance.
+	 *
 	 * @param message the Message from which the payload and all headers will be copied
 	 */
 	public static <T> MessageBuilder<T> fromMessage(Message<T> message) {
@@ -183,6 +184,7 @@ public final class MessageBuilder<T> {
 
 	/**
 	 * Create a new builder for a message with the given payload.
+	 *
 	 * @param payload the payload
 	 */
 	public static <T> MessageBuilder<T> withPayload(T payload) {
@@ -194,7 +196,8 @@ public final class MessageBuilder<T> {
 	 * and {@code MessageHeaders}.
 	 * <p><strong>Note:</strong> the given {@code MessageHeaders} instance is used
 	 * directly in the new message, i.e. it is not copied.
-	 * @param payload the payload to use (never {@code null})
+	 *
+	 * @param payload        the payload to use (never {@code null})
 	 * @param messageHeaders the headers to use (never {@code null})
 	 * @return the created message
 	 * @since 4.1
@@ -205,8 +208,7 @@ public final class MessageBuilder<T> {
 		Assert.notNull(messageHeaders, "MessageHeaders must not be null");
 		if (payload instanceof Throwable) {
 			return (Message<T>) new ErrorMessage((Throwable) payload, messageHeaders);
-		}
-		else {
+		} else {
 			return new GenericMessage<>(payload, messageHeaders);
 		}
 	}

@@ -37,7 +37,7 @@ import static org.mockito.Mockito.verify;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Chris Beams
-*/
+ */
 public class LocalSlsbInvokerInterceptorTests {
 
 	/**
@@ -47,7 +47,7 @@ public class LocalSlsbInvokerInterceptorTests {
 	public void testPerformsLookup() throws Exception {
 		LocalInterfaceWithBusinessMethods ejb = mock(LocalInterfaceWithBusinessMethods.class);
 
-		String jndiName= "foobar";
+		String jndiName = "foobar";
 		Context mockContext = mockContext(jndiName, ejb);
 
 		configuredInterceptor(mockContext, jndiName);
@@ -58,7 +58,7 @@ public class LocalSlsbInvokerInterceptorTests {
 	@Test
 	public void testLookupFailure() throws Exception {
 		final NamingException nex = new NamingException();
-		final String jndiName= "foobar";
+		final String jndiName = "foobar";
 		JndiTemplate jt = new JndiTemplate() {
 			@Override
 			public Object lookup(String name) throws NamingException {
@@ -74,7 +74,7 @@ public class LocalSlsbInvokerInterceptorTests {
 		si.setJndiTemplate(jt);
 		assertThatExceptionOfType(NamingException.class).isThrownBy(
 				si::afterPropertiesSet)
-			.satisfies(ex -> assertThat(ex).isSameAs(nex));
+				.satisfies(ex -> assertThat(ex).isSameAs(nex));
 	}
 
 	@Test
@@ -83,12 +83,12 @@ public class LocalSlsbInvokerInterceptorTests {
 		LocalInterfaceWithBusinessMethods ejb = mock(LocalInterfaceWithBusinessMethods.class);
 		given(ejb.targetMethod()).willReturn(retVal);
 
-		String jndiName= "foobar";
+		String jndiName = "foobar";
 		Context mockContext = mockContext(jndiName, ejb);
 
 		LocalSlsbInvokerInterceptor si = configuredInterceptor(mockContext, jndiName);
 
-		ProxyFactory pf = new ProxyFactory(new Class<?>[] { BusinessMethods.class });
+		ProxyFactory pf = new ProxyFactory(new Class<?>[]{BusinessMethods.class});
 		pf.addAdvice(si);
 		BusinessMethods target = (BusinessMethods) pf.getProxy();
 
@@ -104,12 +104,12 @@ public class LocalSlsbInvokerInterceptorTests {
 		LocalInterface ejb = mock(LocalInterface.class);
 		given(ejb.targetMethod()).willReturn(retVal);
 
-		String jndiName= "foobar";
+		String jndiName = "foobar";
 		Context mockContext = mockContext(jndiName, ejb);
 
 		LocalSlsbInvokerInterceptor si = configuredInterceptor(mockContext, jndiName);
 
-		ProxyFactory pf = new ProxyFactory(new Class<?>[] { BusinessMethods.class });
+		ProxyFactory pf = new ProxyFactory(new Class<?>[]{BusinessMethods.class});
 		pf.addAdvice(si);
 		BusinessMethods target = (BusinessMethods) pf.getProxy();
 
@@ -123,18 +123,18 @@ public class LocalSlsbInvokerInterceptorTests {
 		LocalInterfaceWithBusinessMethods ejb = mock(LocalInterfaceWithBusinessMethods.class);
 		given(ejb.targetMethod()).willThrow(expected);
 
-		String jndiName= "foobar";
+		String jndiName = "foobar";
 		Context mockContext = mockContext(jndiName, ejb);
 
 		LocalSlsbInvokerInterceptor si = configuredInterceptor(mockContext, jndiName);
 
-		ProxyFactory pf = new ProxyFactory(new Class<?>[] { LocalInterfaceWithBusinessMethods.class });
+		ProxyFactory pf = new ProxyFactory(new Class<?>[]{LocalInterfaceWithBusinessMethods.class});
 		pf.addAdvice(si);
 		LocalInterfaceWithBusinessMethods target = (LocalInterfaceWithBusinessMethods) pf.getProxy();
 
 		assertThatExceptionOfType(Exception.class).isThrownBy(
 				target::targetMethod)
-			.satisfies(ex -> assertThat(ex).isSameAs(expected));
+				.satisfies(ex -> assertThat(ex).isSameAs(expected));
 
 		verify(mockContext).close();
 	}
@@ -147,7 +147,7 @@ public class LocalSlsbInvokerInterceptorTests {
 	protected Context mockContext(final String jndiName, final Object ejbInstance)
 			throws Exception {
 		SlsbHome mockHome = mock(SlsbHome.class);
-		given(mockHome.create()).willReturn((LocalInterface)ejbInstance);
+		given(mockHome.create()).willReturn((LocalInterface) ejbInstance);
 		Context mockCtx = mock(Context.class);
 		given(mockCtx.lookup("java:comp/env/" + jndiName)).willReturn(mockHome);
 		return mockCtx;

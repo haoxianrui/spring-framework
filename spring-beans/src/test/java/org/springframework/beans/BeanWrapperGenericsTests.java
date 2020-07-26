@@ -82,7 +82,7 @@ public class BeanWrapperGenericsTests {
 		input.add(new TestBean());
 		assertThatExceptionOfType(TypeMismatchException.class).isThrownBy(() ->
 				bw.setPropertyValue("integerSet", input))
-			.withMessageContaining("java.lang.Integer");
+				.withMessageContaining("java.lang.Integer");
 	}
 
 	@Test
@@ -222,7 +222,7 @@ public class BeanWrapperGenericsTests {
 	public void testGenericListOfArrays() throws MalformedURLException {
 		GenericBean<String> gb = new GenericBean<>();
 		ArrayList<String[]> list = new ArrayList<>();
-		list.add(new String[] {"str1", "str2"});
+		list.add(new String[]{"str1", "str2"});
 		gb.setListOfArrays(list);
 		BeanWrapper bw = new BeanWrapperImpl(gb);
 		bw.setPropertyValue("listOfArrays[0][1]", "str3 ");
@@ -234,7 +234,7 @@ public class BeanWrapperGenericsTests {
 	public void testGenericListOfArraysWithElementConversion() throws MalformedURLException {
 		GenericBean<String> gb = new GenericBean<>();
 		ArrayList<String[]> list = new ArrayList<>();
-		list.add(new String[] {"str1", "str2"});
+		list.add(new String[]{"str1", "str2"});
 		gb.setListOfArrays(list);
 		BeanWrapper bw = new BeanWrapperImpl(gb);
 		bw.registerCustomEditor(String.class, new StringTrimmerEditor(false));
@@ -332,7 +332,7 @@ public class BeanWrapperGenericsTests {
 	@Test
 	public void testGenericTypeNestingMapOfListOfInteger() throws Exception {
 		Map<String, List<String>> map = new HashMap<>();
-		List<String> list = Arrays.asList(new String[] {"1", "2", "3"});
+		List<String> list = Arrays.asList(new String[]{"1", "2", "3"});
 		map.put("testKey", list);
 
 		NestedGenericCollectionBean gb = new NestedGenericCollectionBean();
@@ -365,7 +365,7 @@ public class BeanWrapperGenericsTests {
 	@Test
 	public void testGenericTypeNestingMapOfListOfListOfInteger() throws Exception {
 		Map<String, List<List<String>>> map = new HashMap<>();
-		List<String> list = Arrays.asList(new String[] {"1", "2", "3"});
+		List<String> list = Arrays.asList(new String[]{"1", "2", "3"});
 		map.put("testKey", Collections.singletonList(list));
 
 		NestedGenericCollectionBean gb = new NestedGenericCollectionBean();
@@ -402,7 +402,7 @@ public class BeanWrapperGenericsTests {
 		inputKey.add("1");
 		Set<String> inputValue = new HashSet<>();
 		inputValue.add("10");
-			inputMap.put(inputKey, inputValue);
+		inputMap.put(inputKey, inputValue);
 
 		ComplexMapHolder holder = new ComplexMapHolder();
 		BeanWrapper bw = new BeanWrapperImpl(holder);
@@ -469,7 +469,7 @@ public class BeanWrapperGenericsTests {
 		GenericIntegerBean gb = new GenericIntegerBean();
 		BeanWrapper bw = new BeanWrapperImpl(gb);
 		bw.setPropertyValue("genericProperty", "10");
-		bw.setPropertyValue("genericListProperty", new String[] {"20", "30"});
+		bw.setPropertyValue("genericListProperty", new String[]{"20", "30"});
 		assertThat(gb.getGenericProperty()).isEqualTo(10);
 		assertThat(gb.getGenericListProperty().get(0)).isEqualTo(20);
 		assertThat(gb.getGenericListProperty().get(1)).isEqualTo(30);
@@ -480,7 +480,7 @@ public class BeanWrapperGenericsTests {
 		GenericSetOfIntegerBean gb = new GenericSetOfIntegerBean();
 		BeanWrapper bw = new BeanWrapperImpl(gb);
 		bw.setPropertyValue("genericProperty", "10");
-		bw.setPropertyValue("genericListProperty", new String[] {"20", "30"});
+		bw.setPropertyValue("genericListProperty", new String[]{"20", "30"});
 		assertThat(gb.getGenericProperty().iterator().next()).isEqualTo(10);
 		assertThat(gb.getGenericListProperty().get(0).iterator().next()).isEqualTo(20);
 		assertThat(gb.getGenericListProperty().get(1).iterator().next()).isEqualTo(30);
@@ -506,9 +506,11 @@ public class BeanWrapperGenericsTests {
 	public void testUntypedPropertyWithMapAtRuntime() {
 		class Holder<D> {
 			private final D data;
+
 			public Holder(D data) {
 				this.data = data;
 			}
+
 			@SuppressWarnings("unused")
 			public D getData() {
 				return this.data;

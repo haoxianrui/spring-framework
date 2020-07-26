@@ -4,12 +4,18 @@
 <beans>
 
 	<bean name="assemblerOne" class="org.springframework.context.support.Assembler">
-		<property name="service"><ref bean="service"/></property>
-		<property name="logic"><ref bean="logicOne"/></property>
+		<property name="service">
+			<ref bean="service"/>
+		</property>
+		<property name="logic">
+			<ref bean="logicOne"/>
+		</property>
 	</bean>
 
 	<bean name="inheritingAssemblerOne" parent="assemblerTwo">
-		<property name="logic"><ref bean="logicOne"/></property>
+		<property name="logic">
+			<ref bean="logicOne"/>
+		</property>
 	</bean>
 
 </beans>

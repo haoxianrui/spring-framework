@@ -56,23 +56,25 @@ public class ResponseEntityResultHandler extends AbstractMessageWriterResultHand
 
 	/**
 	 * Basic constructor with a default {@link ReactiveAdapterRegistry}.
-	 * @param writers the writers for serializing to the response body
+	 *
+	 * @param writers  the writers for serializing to the response body
 	 * @param resolver to determine the requested content type
 	 */
 	public ResponseEntityResultHandler(List<HttpMessageWriter<?>> writers,
-			RequestedContentTypeResolver resolver) {
+									   RequestedContentTypeResolver resolver) {
 
 		this(writers, resolver, ReactiveAdapterRegistry.getSharedInstance());
 	}
 
 	/**
 	 * Constructor with an {@link ReactiveAdapterRegistry} instance.
-	 * @param writers the writers for serializing to the response body
+	 *
+	 * @param writers  the writers for serializing to the response body
 	 * @param resolver to determine the requested content type
 	 * @param registry for adaptation to reactive types
 	 */
 	public ResponseEntityResultHandler(List<HttpMessageWriter<?>> writers,
-			RequestedContentTypeResolver resolver, ReactiveAdapterRegistry registry) {
+									   RequestedContentTypeResolver resolver, ReactiveAdapterRegistry registry) {
 
 		super(writers, resolver, registry);
 		setOrder(0);
@@ -119,8 +121,7 @@ public class ResponseEntityResultHandler extends AbstractMessageWriterResultHand
 			Assert.isTrue(!adapter.isMultiValue(), "Only a single ResponseEntity supported");
 			returnValueMono = Mono.from(adapter.toPublisher(result.getReturnValue()));
 			bodyParameter = actualParameter.nested().nested();
-		}
-		else {
+		} else {
 			returnValueMono = Mono.justOrEmpty(result.getReturnValue());
 			bodyParameter = actualParameter.nested();
 		}
@@ -129,11 +130,9 @@ public class ResponseEntityResultHandler extends AbstractMessageWriterResultHand
 			HttpEntity<?> httpEntity;
 			if (returnValue instanceof HttpEntity) {
 				httpEntity = (HttpEntity<?>) returnValue;
-			}
-			else if (returnValue instanceof HttpHeaders) {
+			} else if (returnValue instanceof HttpHeaders) {
 				httpEntity = new ResponseEntity<>((HttpHeaders) returnValue, HttpStatus.OK);
-			}
-			else {
+			} else {
 				throw new IllegalArgumentException(
 						"HttpEntity or HttpHeaders expected but got: " + returnValue.getClass());
 			}

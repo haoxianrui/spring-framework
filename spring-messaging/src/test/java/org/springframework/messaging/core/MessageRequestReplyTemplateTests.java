@@ -32,7 +32,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
  * Unit tests for request and reply operations in {@link AbstractMessagingTemplate}.
  *
  * @author Rossen Stoyanchev
- *
  * @see MessageReceivingTemplateTests
  */
 public class MessageRequestReplyTemplateTests {

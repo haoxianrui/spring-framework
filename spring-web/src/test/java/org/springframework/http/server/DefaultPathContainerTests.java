@@ -30,6 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link DefaultPathContainer}.
+ *
  * @author Rossen Stoyanchev
  */
 public class DefaultPathContainerTests {

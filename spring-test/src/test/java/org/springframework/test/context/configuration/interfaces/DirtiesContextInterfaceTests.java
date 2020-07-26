@@ -66,7 +66,7 @@ class DirtiesContextInterfaceTests {
 	void verifyDirtiesContextBehavior() throws Exception {
 		runTestClassAndAssertStats(ClassLevelDirtiesContextWithCleanMethodsAndDefaultModeTestCase.class, 1);
 		assertContextCacheStatistics("after class-level @DirtiesContext with clean test method and default class mode",
-			0, cacheHits.get(), cacheMisses.incrementAndGet());
+				0, cacheHits.get(), cacheMisses.incrementAndGet());
 	}
 
 	private void runTestClassAndAssertStats(Class<?> testClass, int expectedTestCount) throws Exception {
@@ -79,9 +79,9 @@ class DirtiesContextInterfaceTests {
 	// since it will access the ApplicationContext for each method in the
 	// TestExecutionListener API, thus distorting our cache hit/miss results.
 	@TestExecutionListeners({
-		DirtiesContextBeforeModesTestExecutionListener.class,
-		DependencyInjectionTestExecutionListener.class,
-		DirtiesContextTestExecutionListener.class
+			DirtiesContextBeforeModesTestExecutionListener.class,
+			DependencyInjectionTestExecutionListener.class,
+			DirtiesContextTestExecutionListener.class
 	})
 	public static class ClassLevelDirtiesContextWithCleanMethodsAndDefaultModeTestCase
 			implements DirtiesContextTestInterface {

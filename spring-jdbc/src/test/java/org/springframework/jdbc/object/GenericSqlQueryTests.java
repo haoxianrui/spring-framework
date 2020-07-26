@@ -105,9 +105,8 @@ public class GenericSqlQueryTests {
 			params.put("id", 1);
 			params.put("country", "UK");
 			queryResults = query.executeByNamedParam(params);
-		}
-		else {
-			Object[] params = new Object[] {1, "UK"};
+		} else {
+			Object[] params = new Object[]{1, "UK"};
 			queryResults = query.execute(params);
 		}
 		assertThat(queryResults.size() == 1).as("Customer was returned correctly").isTrue();

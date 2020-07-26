@@ -44,6 +44,7 @@ public class ResponseStatusException extends NestedRuntimeException {
 
 	/**
 	 * Constructor with a response status.
+	 *
 	 * @param status the HTTP status (required)
 	 */
 	public ResponseStatusException(HttpStatus status) {
@@ -53,6 +54,7 @@ public class ResponseStatusException extends NestedRuntimeException {
 	/**
 	 * Constructor with a response status and a reason to add to the exception
 	 * message as explanation.
+	 *
 	 * @param status the HTTP status (required)
 	 * @param reason the associated reason (optional)
 	 */
@@ -63,9 +65,10 @@ public class ResponseStatusException extends NestedRuntimeException {
 	/**
 	 * Constructor with a response status and a reason to add to the exception
 	 * message as explanation, as well as a nested exception.
+	 *
 	 * @param status the HTTP status (required)
 	 * @param reason the associated reason (optional)
-	 * @param cause a nested exception (optional)
+	 * @param cause  a nested exception (optional)
 	 */
 	public ResponseStatusException(HttpStatus status, @Nullable String reason, @Nullable Throwable cause) {
 		super(null, cause);
@@ -86,6 +89,7 @@ public class ResponseStatusException extends NestedRuntimeException {
 	 * Return headers associated with the exception that should be added to the
 	 * error response, e.g. "Allow", "Accept", etc.
 	 * <p>The default implementation in this class returns an empty map.
+	 *
 	 * @since 5.1.11
 	 * @deprecated as of 5.1.13 in favor of {@link #getResponseHeaders()}
 	 */
@@ -98,6 +102,7 @@ public class ResponseStatusException extends NestedRuntimeException {
 	 * Return headers associated with the exception that should be added to the
 	 * error response, e.g. "Allow", "Accept", etc.
 	 * <p>The default implementation in this class returns empty headers.
+	 *
 	 * @since 5.1.13
 	 */
 	public HttpHeaders getResponseHeaders() {

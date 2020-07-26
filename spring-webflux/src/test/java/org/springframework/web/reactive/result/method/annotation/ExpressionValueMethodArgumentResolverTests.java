@@ -75,7 +75,7 @@ public class ExpressionValueMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(this.paramNotSupported)).isFalse();
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.resolver.supportsParameter(this.paramAlsoNotSupported))
-			.withMessageStartingWith("ExpressionValueMethodArgumentResolver does not support reactive type wrapper");
+				.withMessageStartingWith("ExpressionValueMethodArgumentResolver does not support reactive type wrapper");
 	}
 
 	@Test
@@ -83,12 +83,11 @@ public class ExpressionValueMethodArgumentResolverTests {
 		System.setProperty("systemProperty", "22");
 		try {
 			Mono<Object> mono = this.resolver.resolveArgument(
-					this.paramSystemProperty,  new BindingContext(), this.exchange);
+					this.paramSystemProperty, new BindingContext(), this.exchange);
 
 			Object value = mono.block();
 			assertThat(value).isEqualTo(22);
-		}
-		finally {
+		} finally {
 			System.clearProperty("systemProperty");
 		}
 

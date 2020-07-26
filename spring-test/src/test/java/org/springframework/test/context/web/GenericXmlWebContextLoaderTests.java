@@ -35,11 +35,11 @@ class GenericXmlWebContextLoaderTests {
 	void configMustNotContainAnnotatedClasses() throws Exception {
 		GenericXmlWebContextLoader loader = new GenericXmlWebContextLoader();
 		WebMergedContextConfiguration mergedConfig = new WebMergedContextConfiguration(getClass(), EMPTY_STRING_ARRAY,
-				new Class<?>[] { getClass() }, null, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY,
+				new Class<?>[]{getClass()}, null, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY,
 				"resource/path", loader, null, null);
 		assertThatIllegalStateException()
-			.isThrownBy(() -> loader.loadContext(mergedConfig))
-			.withMessageContaining("does not support annotated classes");
+				.isThrownBy(() -> loader.loadContext(mergedConfig))
+				.withMessageContaining("does not support annotated classes");
 	}
 
 }

@@ -57,6 +57,7 @@ public class MappingJackson2CborHttpMessageConverter extends AbstractJackson2Htt
 	 * custom {@link ObjectMapper} (must be configured with a {@code CBORFactory}
 	 * instance).
 	 * <p>You can use {@link Jackson2ObjectMapperBuilder} to build it easily.
+	 *
 	 * @see Jackson2ObjectMapperBuilder#cbor()
 	 */
 	public MappingJackson2CborHttpMessageConverter(ObjectMapper objectMapper) {

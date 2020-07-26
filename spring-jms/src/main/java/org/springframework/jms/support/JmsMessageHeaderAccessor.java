@@ -45,6 +45,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#CORRELATION_ID correlationId}.
+	 *
 	 * @see JmsHeaders#CORRELATION_ID
 	 */
 	@Nullable
@@ -54,6 +55,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#DESTINATION destination}.
+	 *
 	 * @see JmsHeaders#DESTINATION
 	 */
 	@Nullable
@@ -63,6 +65,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#DELIVERY_MODE delivery mode}.
+	 *
 	 * @see JmsHeaders#DELIVERY_MODE
 	 */
 	@Nullable
@@ -72,6 +75,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the message {@link JmsHeaders#EXPIRATION expiration}.
+	 *
 	 * @see JmsHeaders#EXPIRATION
 	 */
 	@Nullable
@@ -81,6 +85,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#MESSAGE_ID message id}.
+	 *
 	 * @see JmsHeaders#MESSAGE_ID
 	 */
 	@Nullable
@@ -90,6 +95,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#PRIORITY priority}.
+	 *
 	 * @see JmsHeaders#PRIORITY
 	 */
 	@Nullable
@@ -99,6 +105,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#REPLY_TO reply to}.
+	 *
 	 * @see JmsHeaders#REPLY_TO
 	 */
 	@Nullable
@@ -108,6 +115,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#REDELIVERED redelivered} flag.
+	 *
 	 * @see JmsHeaders#REDELIVERED
 	 */
 	@Nullable
@@ -117,6 +125,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#TYPE type}.
+	 *
 	 * @see JmsHeaders#TYPE
 	 */
 	@Nullable
@@ -126,6 +135,7 @@ public class JmsMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 
 	/**
 	 * Return the {@link JmsHeaders#TIMESTAMP timestamp}.
+	 *
 	 * @see JmsHeaders#TIMESTAMP
 	 */
 	@Override

@@ -121,8 +121,8 @@ public class FormattingConversionService extends GenericConversionService
 					((DecoratingProxy) instance).getDecoratedClass(), genericInterface);
 		}
 		Assert.notNull(fieldType, () -> "Unable to extract the parameterized field type from " +
-					ClassUtils.getShortName(genericInterface) + " [" + instance.getClass().getName() +
-					"]; does the class parameterize the <T> generic type?");
+				ClassUtils.getShortName(genericInterface) + " [" + instance.getClass().getName() +
+				"]; does the class parameterize the <T> generic type?");
 		return fieldType;
 	}
 
@@ -215,11 +215,9 @@ public class FormattingConversionService extends GenericConversionService
 			Object result;
 			try {
 				result = this.parser.parse(text, LocaleContextHolder.getLocale());
-			}
-			catch (IllegalArgumentException ex) {
+			} catch (IllegalArgumentException ex) {
 				throw ex;
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				throw new IllegalArgumentException("Parse attempt failed for value [" + text + "]", ex);
 			}
 			TypeDescriptor resultType = TypeDescriptor.valueOf(result.getClass());
@@ -246,7 +244,7 @@ public class FormattingConversionService extends GenericConversionService
 		private final Class<?> fieldType;
 
 		public AnnotationPrinterConverter(Class<? extends Annotation> annotationType,
-				AnnotationFormatterFactory<?> annotationFormatterFactory, Class<?> fieldType) {
+										  AnnotationFormatterFactory<?> annotationFormatterFactory, Class<?> fieldType) {
 
 			this.annotationType = annotationType;
 			this.annotationFormatterFactory = annotationFormatterFactory;
@@ -301,7 +299,7 @@ public class FormattingConversionService extends GenericConversionService
 		private final Class<?> fieldType;
 
 		public AnnotationParserConverter(Class<? extends Annotation> annotationType,
-				AnnotationFormatterFactory<?> annotationFormatterFactory, Class<?> fieldType) {
+										 AnnotationFormatterFactory<?> annotationFormatterFactory, Class<?> fieldType) {
 
 			this.annotationType = annotationType;
 			this.annotationFormatterFactory = annotationFormatterFactory;

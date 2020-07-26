@@ -138,6 +138,7 @@ public class ContentRequestMatchers {
 
 	/**
 	 * Parse the body as form data and compare to the given {@code MultiValueMap}.
+	 *
 	 * @since 4.3
 	 */
 	public RequestMatcher formData(MultiValueMap<String, String> expectedContent) {
@@ -148,6 +149,7 @@ public class ContentRequestMatchers {
 					MockClientHttpRequest mockRequest = (MockClientHttpRequest) request;
 					return new ByteArrayInputStream(mockRequest.getBodyAsBytes());
 				}
+
 				@Override
 				public HttpHeaders getHeaders() {
 					return request.getHeaders();
@@ -164,6 +166,7 @@ public class ContentRequestMatchers {
 	 * regardless of order.
 	 * <p>Use of this matcher assumes the
 	 * <a href="http://xmlunit.sourceforge.net/">XMLUnit</a> library is available.
+	 *
 	 * @param expectedXmlContent the expected XML content
 	 */
 	public RequestMatcher xml(String expectedXmlContent) {
@@ -189,6 +192,7 @@ public class ContentRequestMatchers {
 
 	/**
 	 * Parse the request content as {@link DOMSource} and apply the given {@link Matcher}.
+	 *
 	 * @see <a href="https://code.google.com/p/xml-matchers/">https://code.google.com/p/xml-matchers/</a>
 	 */
 	public RequestMatcher source(Matcher<? super Source> matcher) {
@@ -207,6 +211,7 @@ public class ContentRequestMatchers {
 	 * ordering).
 	 * <p>Use of this matcher requires the <a
 	 * href="https://jsonassert.skyscreamer.org/">JSONassert</a> library.
+	 *
 	 * @param expectedJsonContent the expected JSON content
 	 * @since 5.0.5
 	 */
@@ -225,8 +230,9 @@ public class ContentRequestMatchers {
 	 * </ul>
 	 * <p>Use of this matcher requires the <a
 	 * href="https://jsonassert.skyscreamer.org/">JSONassert</a> library.
+	 *
 	 * @param expectedJsonContent the expected JSON content
-	 * @param strict enables strict checking
+	 * @param strict              enables strict checking
 	 * @since 5.0.5
 	 */
 	public RequestMatcher json(String expectedJsonContent, boolean strict) {
@@ -234,8 +240,7 @@ public class ContentRequestMatchers {
 			try {
 				MockClientHttpRequest mockRequest = (MockClientHttpRequest) request;
 				this.jsonHelper.assertJsonEqual(expectedJsonContent, mockRequest.getBodyAsString(), strict);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new AssertionError("Failed to parse expected or actual JSON request content", ex);
 			}
 		};
@@ -252,8 +257,7 @@ public class ContentRequestMatchers {
 			try {
 				MockClientHttpRequest mockRequest = (MockClientHttpRequest) request;
 				matchInternal(mockRequest);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new AssertionError("Failed to parse expected or actual XML request content", ex);
 			}
 		}

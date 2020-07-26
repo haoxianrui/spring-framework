@@ -29,8 +29,7 @@ public class RemoteInvocationUtilsTests {
 	public void fillInClientStackTraceIfPossibleSunnyDay() throws Exception {
 		try {
 			throw new IllegalStateException("Mmm");
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			int originalStackTraceLngth = ex.getStackTrace().length;
 			RemoteInvocationUtils.fillInClientStackTraceIfPossible(ex);
 			assertThat(ex.getStackTrace().length > originalStackTraceLngth).as("Stack trace not being filled in").isTrue();

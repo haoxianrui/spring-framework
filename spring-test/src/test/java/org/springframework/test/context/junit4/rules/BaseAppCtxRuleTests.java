@@ -36,9 +36,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * or {@link SpringMethodRule} to be redeclared on subclasses.
  *
  * @author Sam Brannen
- * @since 4.2
  * @see Subclass1AppCtxRuleTests
  * @see Subclass2AppCtxRuleTests
+ * @since 4.2
  */
 @ContextConfiguration
 public class BaseAppCtxRuleTests {

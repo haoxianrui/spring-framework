@@ -3,9 +3,9 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="userService" class="com.fly4j.spring.ch02.service.impl.UserServiceImpl"/>
+	<bean id="userService" class="com.youlai.spring.ch02.service.impl.UserServiceImpl"/>
 	<!-- ch5 -->
-	<bean id="car" class="com.fly4j.spring.ch05.factorybean.CarFactoryBean">
+	<bean id="car" class="com.youlai.spring.ch05.factorybean.CarFactoryBean">
 		<property name="carInfo" value="超级跑车,400,2000000"/>
 	</bean>
 </beans>

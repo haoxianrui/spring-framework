@@ -92,7 +92,7 @@ public class ImportResourceTests {
 	public void importWithPlaceholder() throws Exception {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		PropertySource<?> propertySource = new MapPropertySource("test",
-				Collections.<String, Object> singletonMap("test", "springframework"));
+				Collections.<String, Object>singletonMap("test", "springframework"));
 		ctx.getEnvironment().getPropertySources().addFirst(propertySource);
 		ctx.register(ImportXmlConfig.class);
 		ctx.refresh();
@@ -121,7 +121,9 @@ public class ImportResourceTests {
 	static class ImportXmlConfig {
 		@Value("${name}")
 		private String name;
-		public @Bean TestBean javaDeclaredBean() {
+
+		public @Bean
+		TestBean javaDeclaredBean() {
 			return new TestBean(this.name);
 		}
 	}
@@ -148,7 +150,8 @@ public class ImportResourceTests {
 	@Aspect
 	static class AnAspect {
 		@Before("execution(* org.springframework.beans.testfixture.beans.TestBean.*(..))")
-		public void advice() { }
+		public void advice() {
+		}
 	}
 
 	@Configuration
@@ -159,9 +162,11 @@ public class ImportResourceTests {
 	@Configuration
 	@ImportResource("classpath:org/springframework/context/annotation/configuration/ImportXmlConfig-context.xml")
 	static class ImportXmlAutowiredConfig {
-		@Autowired TestBean xmlDeclaredBean;
+		@Autowired
+		TestBean xmlDeclaredBean;
 
-		public @Bean String xmlBeanName() {
+		public @Bean
+		String xmlBeanName() {
 			return xmlDeclaredBean.getName();
 		}
 	}

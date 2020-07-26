@@ -75,8 +75,8 @@ public class MapAccessTests extends AbstractExpressionTests {
 	}
 
 	@Test
-	public void testGetValue(){
-		Map<String,String> props1 = new HashMap<>();
+	public void testGetValue() {
+		Map<String, String> props1 = new HashMap<>();
 		props1.put("key1", "value1");
 		props1.put("key2", "value2");
 		props1.put("key3", "value3");
@@ -166,11 +166,11 @@ public class MapAccessTests extends AbstractExpressionTests {
 			this.priority = priority;
 		}
 
-		public Map<String,String> getProperties() {
+		public Map<String, String> getProperties() {
 			return properties;
 		}
 
-		public void setProperties(Map<String,String> properties) {
+		public void setProperties(Map<String, String> properties) {
 			this.properties = properties;
 		}
 	}
@@ -185,7 +185,7 @@ public class MapAccessTests extends AbstractExpressionTests {
 
 		@Override
 		public TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {
-			return new TypedValue(((Map<? ,?>) target).get(name));
+			return new TypedValue(((Map<?, ?>) target).get(name));
 		}
 
 		@Override
@@ -196,12 +196,12 @@ public class MapAccessTests extends AbstractExpressionTests {
 		@Override
 		@SuppressWarnings("unchecked")
 		public void write(EvaluationContext context, Object target, String name, Object newValue) throws AccessException {
-			((Map<Object,Object>) target).put(name, newValue);
+			((Map<Object, Object>) target).put(name, newValue);
 		}
 
 		@Override
 		public Class<?>[] getSpecificTargetClasses() {
-			return new Class<?>[] {Map.class};
+			return new Class<?>[]{Map.class};
 		}
 	}
 

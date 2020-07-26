@@ -140,7 +140,7 @@ public class GsonFactoryBeanTests {
 		this.factory.afterPropertiesSet();
 		Gson gson = this.factory.getObject();
 		ByteArrayBean bean = new ByteArrayBean();
-		bean.setBytes(new byte[] {0x1, 0x2});
+		bean.setBytes(new byte[]{0x1, 0x2});
 		String result = gson.toJson(bean);
 		assertThat(result).isEqualTo("{\"bytes\":\"AQI\\u003d\"}");
 	}
@@ -152,7 +152,7 @@ public class GsonFactoryBeanTests {
 		this.factory.afterPropertiesSet();
 		Gson gson = this.factory.getObject();
 		ByteArrayBean bean = new ByteArrayBean();
-		bean.setBytes(new byte[] {0x1, 0x2});
+		bean.setBytes(new byte[]{0x1, 0x2});
 		String result = gson.toJson(bean);
 		assertThat(result).isEqualTo("{\"bytes\":\"AQI=\"}");
 	}
@@ -163,7 +163,7 @@ public class GsonFactoryBeanTests {
 		this.factory.afterPropertiesSet();
 		Gson gson = this.factory.getObject();
 		ByteArrayBean bean = new ByteArrayBean();
-		bean.setBytes(new byte[] {0x1, 0x2});
+		bean.setBytes(new byte[]{0x1, 0x2});
 		String result = gson.toJson(bean);
 		assertThat(result).isEqualTo("{\"bytes\":[1,2]}");
 	}

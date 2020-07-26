@@ -35,9 +35,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  * dealt with correctly.
  *
  * @author Phillip Webb
- * @since 5.2
  * @see AnnotationUtils
  * @see AnnotatedElementUtils
+ * @since 5.2
  */
 class AnnotationIntrospectionFailureTests {
 
@@ -52,7 +52,7 @@ class AnnotationIntrospectionFailureTests {
 		method.setAccessible(true);
 		assertThatExceptionOfType(TypeNotPresentException.class).isThrownBy(() ->
 				ReflectionUtils.invokeMethod(method, annotation))
-			.withCauseInstanceOf(ClassNotFoundException.class);
+				.withCauseInstanceOf(ClassNotFoundException.class);
 	}
 
 	@Test

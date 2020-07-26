@@ -99,7 +99,7 @@ class AnnotationConfigApplicationContextTests {
 		Class<?> targetType = Pattern.class;
 		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).isThrownBy(() ->
 				context.getBean(targetType))
-			.withMessageContaining(format("No qualifying bean of type '%s'", targetType.getName()));
+				.withMessageContaining(format("No qualifying bean of type '%s'", targetType.getName()));
 	}
 
 	@Test
@@ -107,13 +107,14 @@ class AnnotationConfigApplicationContextTests {
 		ApplicationContext context = new AnnotationConfigApplicationContext(TwoTestBeanConfig.class);
 		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).isThrownBy(() ->
 				context.getBean(TestBean.class))
-			.withMessageContaining("No qualifying bean of type '" + TestBean.class.getName() + "'")
-			.withMessageContaining("tb1")
-			.withMessageContaining("tb2");
+				.withMessageContaining("No qualifying bean of type '" + TestBean.class.getName() + "'")
+				.withMessageContaining("tb1")
+				.withMessageContaining("tb2");
 	}
 
 	/**
 	 * Tests that Configuration classes are registered according to convention
+	 *
 	 * @see org.springframework.beans.factory.support.DefaultBeanNameGenerator#generateBeanName
 	 */
 	@Test
@@ -160,6 +161,7 @@ class AnnotationConfigApplicationContextTests {
 				bean.getClass().getName();
 				return bean;
 			}
+
 			@Override
 			public Object postProcessAfterInitialization(Object bean, String beanName) {
 				bean.getClass().getName();
@@ -208,9 +210,9 @@ class AnnotationConfigApplicationContextTests {
 		assertThat(context.getBean(BeanB.class).applicationContext).isSameAs(context);
 
 		assertThat(context.getDefaultListableBeanFactory().getDependentBeans("annotationConfigApplicationContextTests.BeanB"))
-			.containsExactly("annotationConfigApplicationContextTests.BeanA");
+				.containsExactly("annotationConfigApplicationContextTests.BeanA");
 		assertThat(context.getDefaultListableBeanFactory().getDependentBeans("annotationConfigApplicationContextTests.BeanC"))
-			.containsExactly("annotationConfigApplicationContextTests.BeanA");
+				.containsExactly("annotationConfigApplicationContextTests.BeanA");
 	}
 
 	@Test
@@ -414,11 +416,13 @@ class AnnotationConfigApplicationContextTests {
 	@Configuration
 	static class TwoTestBeanConfig {
 
-		@Bean TestBean tb1() {
+		@Bean
+		TestBean tb1() {
 			return new TestBean();
 		}
 
-		@Bean TestBean tb2() {
+		@Bean
+		TestBean tb2() {
 			return new TestBean();
 		}
 	}
@@ -426,16 +430,21 @@ class AnnotationConfigApplicationContextTests {
 	@Configuration
 	static class NameConfig {
 
-		@Bean String name() { return "foo"; }
+		@Bean
+		String name() {
+			return "foo";
+		}
 	}
 
 	@Configuration
 	@Import(NameConfig.class)
 	static class AutowiredConfig {
 
-		@Autowired String autowiredName;
+		@Autowired
+		String autowiredName;
 
-		@Bean TestBean testBean() {
+		@Bean
+		TestBean testBean() {
 			TestBean testBean = new TestBean();
 			testBean.name = autowiredName;
 			return testBean;
@@ -457,13 +466,15 @@ class AnnotationConfigApplicationContextTests {
 
 	static class BeanB {
 
-		@Autowired ApplicationContext applicationContext;
+		@Autowired
+		ApplicationContext applicationContext;
 
 		public BeanB() {
 		}
 	}
 
-	static class BeanC {}
+	static class BeanC {
+	}
 
 	static class NonInstantiatedFactoryBean implements FactoryBean<String> {
 
@@ -548,8 +559,7 @@ class TestBean {
 		if (name == null) {
 			if (other.name != null)
 				return false;
-		}
-		else if (!name.equals(other.name))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

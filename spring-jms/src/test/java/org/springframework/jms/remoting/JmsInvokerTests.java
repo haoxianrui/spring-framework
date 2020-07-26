@@ -102,8 +102,8 @@ public class JmsInvokerTests {
 
 		assertThatExceptionOfType(RemoteTimeoutException.class).isThrownBy(() ->
 				proxy.getAge())
-			.withMessageContaining("1500 ms")
-			.withMessageContaining("getAge");
+				.withMessageContaining("1500 ms")
+				.withMessageContaining("getAge");
 	}
 
 	private void doTestJmsInvokerProxyFactoryBeanAndServiceExporter(boolean dynamicQueue) throws Throwable {
@@ -130,8 +130,7 @@ public class JmsInvokerTests {
 		pfb.setConnectionFactory(this.mockConnectionFactory);
 		if (dynamicQueue) {
 			pfb.setQueueName("myQueue");
-		}
-		else {
+		} else {
 			pfb.setQueue(this.mockQueue);
 		}
 		pfb.setMessageConverter(new MockSimpleMessageConverter());
@@ -143,10 +142,10 @@ public class JmsInvokerTests {
 		assertThat(proxy.getAge()).isEqualTo(99);
 		proxy.setAge(50);
 		assertThat(proxy.getAge()).isEqualTo(50);
-		proxy.setStringArray(new String[] {"str1", "str2"});
-		assertThat(Arrays.equals(new String[] {"str1", "str2"}, proxy.getStringArray())).isTrue();
+		proxy.setStringArray(new String[]{"str1", "str2"});
+		assertThat(Arrays.equals(new String[]{"str1", "str2"}, proxy.getStringArray())).isTrue();
 		assertThatIllegalStateException().isThrownBy(() ->
-			proxy.exceptional(new IllegalStateException()));
+				proxy.exceptional(new IllegalStateException()));
 		assertThatExceptionOfType(IllegalAccessException.class).isThrownBy(() ->
 				proxy.exceptional(new IllegalAccessException()));
 	}

@@ -70,7 +70,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	 *   them to be their boxed or unboxed variants) or compare object references. It does not
 	 *   compile expressions where numbers are of different types or when objects implement
 	 *   Comparable.
-     *
+	 *
 	 * Compiled nodes:
 	 *
 	 * TypeReference
@@ -213,13 +213,13 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertCanCompile(expression);
 		assertThat(expression.getValue(list)).isEqualTo(true);
 
-		List<String>[] arrayOfLists = new List[] {new ArrayList<String>()};
+		List<String>[] arrayOfLists = new List[]{new ArrayList<String>()};
 		expression = parse("#root instanceof T(java.util.List[])");
 		assertThat(expression.getValue(arrayOfLists)).isEqualTo(true);
 		assertCanCompile(expression);
 		assertThat(expression.getValue(arrayOfLists)).isEqualTo(true);
 
-		int[] intArray = new int[] {1,2,3};
+		int[] intArray = new int[]{1, 2, 3};
 		expression = parse("#root instanceof T(int[])");
 		assertThat(expression.getValue(intArray)).isEqualTo(true);
 		assertCanCompile(expression);
@@ -857,12 +857,12 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		// Nullsafe guard on expression element evaluating to primitive/null
 		expression = (SpelExpression) parser.parseExpression("#var?.shortValue()");
-		context.setVariable("var", (short)8);
+		context.setVariable("var", (short) 8);
 		assertThat(expression.getValue(context).toString()).isEqualTo("8");
 		context.setVariable("var", null);
 		assertThat(expression.getValue(context)).isNull();
 		assertCanCompile(expression);
-		context.setVariable("var", (short)8);
+		context.setVariable("var", (short) 8);
 		assertThat(expression.getValue(context).toString()).isEqualTo("8");
 		context.setVariable("var", null);
 		assertThat(expression.getValue(context)).isNull();
@@ -911,12 +911,12 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	}
 
 	public static String concat(String a, String b) {
-		return a+b;
+		return a + b;
 	}
 
-	public static String join(String...strings) {
+	public static String join(String... strings) {
 		StringBuilder buf = new StringBuilder();
-		for (String string: strings) {
+		for (String string : strings) {
 			buf.append(string);
 		}
 		return buf.toString();
@@ -939,7 +939,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(expression.getValue(String.class)).isEqualTo("hey there");
 
 		expression = parser.parseExpression("#doFormat([0], 'there')");
-		context = new StandardEvaluationContext(new Object[] {"hey %s"});
+		context = new StandardEvaluationContext(new Object[]{"hey %s"});
 		context.registerFunction("doFormat",
 				DelegatingStringFormat.class.getDeclaredMethod("format", String.class, Object[].class));
 		((SpelExpression) expression).setEvaluationContext(context);
@@ -950,7 +950,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(expression.getValue(String.class)).isEqualTo("hey there");
 
 		expression = parser.parseExpression("#doFormat([0], #arg)");
-		context = new StandardEvaluationContext(new Object[] {"hey %s"});
+		context = new StandardEvaluationContext(new Object[]{"hey %s"});
 		context.registerFunction("doFormat",
 				DelegatingStringFormat.class.getDeclaredMethod("format", String.class, Object[].class));
 		context.setVariable("arg", "there");
@@ -966,7 +966,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	public void functionReference() throws Exception {
 		EvaluationContext ctx = new StandardEvaluationContext();
 		Method m = getClass().getDeclaredMethod("concat", String.class, String.class);
-		ctx.setVariable("concat",m);
+		ctx.setVariable("concat", m);
 
 		expression = parser.parseExpression("#concat('a','b')");
 		assertThat(expression.getValue(ctx)).isEqualTo("ab");
@@ -988,7 +988,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(expression.getValue(ctx)).isEqualTo("fooboo");
 
 		m = Math.class.getDeclaredMethod("pow", Double.TYPE, Double.TYPE);
-		ctx.setVariable("kapow",m);
+		ctx.setVariable("kapow", m);
 		expression = parser.parseExpression("#kapow(2.0d,2.0d)");
 		assertThat(expression.getValue(ctx).toString()).isEqualTo("4.0");
 		assertCanCompile(expression);
@@ -998,7 +998,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	@Test
 	public void functionReferenceVisibility_SPR12359() throws Exception {
 		// Confirms visibility of what is being called.
-		StandardEvaluationContext context = new StandardEvaluationContext(new Object[] {"1"});
+		StandardEvaluationContext context = new StandardEvaluationContext(new Object[]{"1"});
 		context.registerFunction("doCompare", SomeCompareMethod.class.getDeclaredMethod(
 				"compare", Object.class, Object.class));
 		context.setVariable("arg", "2");
@@ -1008,7 +1008,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertCantCompile(expression);
 
 		// type not public but method is
-		context = new StandardEvaluationContext(new Object[] {"1"});
+		context = new StandardEvaluationContext(new Object[]{"1"});
 		context.registerFunction("doCompare", SomeCompareMethod.class.getDeclaredMethod(
 				"compare2", Object.class, Object.class));
 		context.setVariable("arg", "2");
@@ -1019,17 +1019,17 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	@Test
 	public void functionReferenceNonCompilableArguments_SPR12359() throws Exception {
-		StandardEvaluationContext context = new StandardEvaluationContext(new Object[] {"1"});
+		StandardEvaluationContext context = new StandardEvaluationContext(new Object[]{"1"});
 		context.registerFunction("negate", SomeCompareMethod2.class.getDeclaredMethod(
 				"negate", Integer.TYPE));
 		context.setVariable("arg", "2");
-		int[] ints = new int[] {1,2,3};
-		context.setVariable("ints",ints);
+		int[] ints = new int[]{1, 2, 3};
+		context.setVariable("ints", ints);
 
 		expression = parser.parseExpression("#negate(#ints.?[#this<2][0])");
 		assertThat(expression.getValue(context, Integer.class).toString()).isEqualTo("-1");
 		// Selection isn't compilable.
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isFalse();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isFalse();
 	}
 
 	@Test
@@ -1051,69 +1051,69 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 				SomeCompareMethod2.class.getDeclaredMethod("sumDouble", double[].class));
 		context.registerFunction("sumFloat",
 				SomeCompareMethod2.class.getDeclaredMethod("sumFloat", float[].class));
-		context.setVariable("stringArray", new String[] {"x","y","z"});
-		context.setVariable("intArray", new int[] {5,6,9});
-		context.setVariable("doubleArray", new double[] {5.0d,6.0d,9.0d});
-		context.setVariable("floatArray", new float[] {5.0f,6.0f,9.0f});
+		context.setVariable("stringArray", new String[]{"x", "y", "z"});
+		context.setVariable("intArray", new int[]{5, 6, 9});
+		context.setVariable("doubleArray", new double[]{5.0d, 6.0d, 9.0d});
+		context.setVariable("floatArray", new float[]{5.0f, 6.0f, 9.0f});
 
 		expression = parser.parseExpression("#append('a','b','c')");
 		assertThat(expression.getValue(context).toString()).isEqualTo("abc");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("abc");
 
 		expression = parser.parseExpression("#append('a')");
 		assertThat(expression.getValue(context).toString()).isEqualTo("a");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("a");
 
 		expression = parser.parseExpression("#append()");
 		assertThat(expression.getValue(context).toString()).isEqualTo("");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("");
 
 		expression = parser.parseExpression("#append(#stringArray)");
 		assertThat(expression.getValue(context).toString()).isEqualTo("xyz");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("xyz");
 
 		// This is a methodreference invocation, to compare with functionreference
 		expression = parser.parseExpression("append(#stringArray)");
 		assertThat(expression.getValue(context, new SomeCompareMethod2()).toString()).isEqualTo("xyz");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context, new SomeCompareMethod2()).toString()).isEqualTo("xyz");
 
 		expression = parser.parseExpression("#append2('a','b','c')");
 		assertThat(expression.getValue(context).toString()).isEqualTo("abc");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("abc");
 
 		expression = parser.parseExpression("append2('a','b')");
 		assertThat(expression.getValue(context, new SomeCompareMethod2()).toString()).isEqualTo("ab");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context, new SomeCompareMethod2()).toString()).isEqualTo("ab");
 
 		expression = parser.parseExpression("#append2('a','b')");
 		assertThat(expression.getValue(context).toString()).isEqualTo("ab");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("ab");
 
 		expression = parser.parseExpression("#append2()");
 		assertThat(expression.getValue(context).toString()).isEqualTo("");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("");
 
 		expression = parser.parseExpression("#append3(#stringArray)");
 		assertThat(expression.getValue(context, new SomeCompareMethod2()).toString()).isEqualTo("xyz");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context, new SomeCompareMethod2()).toString()).isEqualTo("xyz");
 
@@ -1126,105 +1126,105 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		expression = parser.parseExpression("#sum(1,2,3)");
 		assertThat(expression.getValue(context)).isEqualTo(6);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(6);
 
 		expression = parser.parseExpression("#sum(2)");
 		assertThat(expression.getValue(context)).isEqualTo(2);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(2);
 
 		expression = parser.parseExpression("#sum()");
 		assertThat(expression.getValue(context)).isEqualTo(0);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(0);
 
 		expression = parser.parseExpression("#sum(#intArray)");
 		assertThat(expression.getValue(context)).isEqualTo(20);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(20);
 
 		expression = parser.parseExpression("#sumDouble(1.0d,2.0d,3.0d)");
 		assertThat(expression.getValue(context)).isEqualTo(6);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(6);
 
 		expression = parser.parseExpression("#sumDouble(2.0d)");
 		assertThat(expression.getValue(context)).isEqualTo(2);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(2);
 
 		expression = parser.parseExpression("#sumDouble()");
 		assertThat(expression.getValue(context)).isEqualTo(0);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(0);
 
 		expression = parser.parseExpression("#sumDouble(#doubleArray)");
 		assertThat(expression.getValue(context)).isEqualTo(20);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(20);
 
 		expression = parser.parseExpression("#sumFloat(1.0f,2.0f,3.0f)");
 		assertThat(expression.getValue(context)).isEqualTo(6);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(6);
 
 		expression = parser.parseExpression("#sumFloat(2.0f)");
 		assertThat(expression.getValue(context)).isEqualTo(2);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(2);
 
 		expression = parser.parseExpression("#sumFloat()");
 		assertThat(expression.getValue(context)).isEqualTo(0);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(0);
 
 		expression = parser.parseExpression("#sumFloat(#floatArray)");
 		assertThat(expression.getValue(context)).isEqualTo(20);
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo(20);
 
 
 		expression = parser.parseExpression("#appendChar('abc'.charAt(0),'abc'.charAt(1))");
 		assertThat(expression.getValue(context)).isEqualTo("ab");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context)).isEqualTo("ab");
 
 
 		expression = parser.parseExpression("#append4('a','b','c')");
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::bc");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::bc");
 
 		expression = parser.parseExpression("#append4('a','b')");
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::b");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::b");
 
 		expression = parser.parseExpression("#append4('a')");
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::");
 
 		expression = parser.parseExpression("#append4('a',#stringArray)");
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::xyz");
-		assertThat(((SpelNodeImpl)((SpelExpression) expression).getAST()).isCompilable()).isTrue();
+		assertThat(((SpelNodeImpl) ((SpelExpression) expression).getAST()).isCompilable()).isTrue();
 		assertCanCompile(expression);
 		assertThat(expression.getValue(context).toString()).isEqualTo("a::xyz");
 	}
@@ -1253,7 +1253,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		ctx.setVariable("target", 42);
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expression.getValue(ctx))
-			.withCauseInstanceOf(ClassCastException.class);
+				.withCauseInstanceOf(ClassCastException.class);
 
 		ctx.setVariable("target", "abc");
 		expression = parser.parseExpression("#target.charAt(0)");
@@ -1265,7 +1265,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		ctx.setVariable("target", 42);
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expression.getValue(ctx))
-			.withCauseInstanceOf(ClassCastException.class);
+				.withCauseInstanceOf(ClassCastException.class);
 	}
 
 	@Test
@@ -1815,8 +1815,8 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		StandardEvaluationContext sec = new StandardEvaluationContext();
 		Apple aa = new Apple(1);
 		Apple bb = new Apple(2);
-		sec.setVariable("aa",aa);
-		sec.setVariable("bb",bb);
+		sec.setVariable("aa", aa);
+		sec.setVariable("bb", bb);
 		boolean b = expression.getValue(sec, Boolean.class);
 		// Verify what the expression caused aa to be compared to
 		assertThat(aa.gotComparedTo).isEqualTo(bb);
@@ -1831,8 +1831,8 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		// Similar test with compiled expression
 		aa = new Apple(99);
 		bb = new Apple(100);
-		sec.setVariable("aa",aa);
-		sec.setVariable("bb",bb);
+		sec.setVariable("aa", aa);
+		sec.setVariable("bb", bb);
 		b = expression.getValue(sec, Boolean.class);
 		assertThat(b).isFalse();
 		assertThat(aa.gotComparedTo).isEqualTo(bb);
@@ -1956,178 +1956,178 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		//	expression = parse("(T(java.lang.Double).parseDouble(payload.valueI.toString()))/60D");
 
 		// right is a double
-		checkCalc(p,"payload.valueSB/60D",2d);
-		checkCalc(p,"payload.valueBB/60D",2d);
-		checkCalc(p,"payload.valueFB/60D",2d);
-		checkCalc(p,"payload.valueDB/60D",2d);
-		checkCalc(p,"payload.valueJB/60D",2d);
-		checkCalc(p,"payload.valueIB/60D",2d);
+		checkCalc(p, "payload.valueSB/60D", 2d);
+		checkCalc(p, "payload.valueBB/60D", 2d);
+		checkCalc(p, "payload.valueFB/60D", 2d);
+		checkCalc(p, "payload.valueDB/60D", 2d);
+		checkCalc(p, "payload.valueJB/60D", 2d);
+		checkCalc(p, "payload.valueIB/60D", 2d);
 
-		checkCalc(p,"payload.valueS/60D",2d);
-		checkCalc(p,"payload.valueB/60D",2d);
-		checkCalc(p,"payload.valueF/60D",2d);
-		checkCalc(p,"payload.valueD/60D",2d);
-		checkCalc(p,"payload.valueJ/60D",2d);
-		checkCalc(p,"payload.valueI/60D",2d);
+		checkCalc(p, "payload.valueS/60D", 2d);
+		checkCalc(p, "payload.valueB/60D", 2d);
+		checkCalc(p, "payload.valueF/60D", 2d);
+		checkCalc(p, "payload.valueD/60D", 2d);
+		checkCalc(p, "payload.valueJ/60D", 2d);
+		checkCalc(p, "payload.valueI/60D", 2d);
 
-		checkCalc(p,"payload.valueSB/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueBB/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueFB/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueDB/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueJB/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueIB/payload.valueDB60",2d);
+		checkCalc(p, "payload.valueSB/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueBB/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueFB/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueDB/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueJB/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueIB/payload.valueDB60", 2d);
 
-		checkCalc(p,"payload.valueS/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueB/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueF/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueD/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueJ/payload.valueDB60",2d);
-		checkCalc(p,"payload.valueI/payload.valueDB60",2d);
+		checkCalc(p, "payload.valueS/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueB/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueF/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueD/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueJ/payload.valueDB60", 2d);
+		checkCalc(p, "payload.valueI/payload.valueDB60", 2d);
 
 		// right is a float
-		checkCalc(p,"payload.valueSB/60F",2F);
-		checkCalc(p,"payload.valueBB/60F",2F);
-		checkCalc(p,"payload.valueFB/60F",2f);
-		checkCalc(p,"payload.valueDB/60F",2d);
-		checkCalc(p,"payload.valueJB/60F",2F);
-		checkCalc(p,"payload.valueIB/60F",2F);
+		checkCalc(p, "payload.valueSB/60F", 2F);
+		checkCalc(p, "payload.valueBB/60F", 2F);
+		checkCalc(p, "payload.valueFB/60F", 2f);
+		checkCalc(p, "payload.valueDB/60F", 2d);
+		checkCalc(p, "payload.valueJB/60F", 2F);
+		checkCalc(p, "payload.valueIB/60F", 2F);
 
-		checkCalc(p,"payload.valueS/60F",2F);
-		checkCalc(p,"payload.valueB/60F",2F);
-		checkCalc(p,"payload.valueF/60F",2f);
-		checkCalc(p,"payload.valueD/60F",2d);
-		checkCalc(p,"payload.valueJ/60F",2F);
-		checkCalc(p,"payload.valueI/60F",2F);
+		checkCalc(p, "payload.valueS/60F", 2F);
+		checkCalc(p, "payload.valueB/60F", 2F);
+		checkCalc(p, "payload.valueF/60F", 2f);
+		checkCalc(p, "payload.valueD/60F", 2d);
+		checkCalc(p, "payload.valueJ/60F", 2F);
+		checkCalc(p, "payload.valueI/60F", 2F);
 
-		checkCalc(p,"payload.valueSB/payload.valueFB60",2F);
-		checkCalc(p,"payload.valueBB/payload.valueFB60",2F);
-		checkCalc(p,"payload.valueFB/payload.valueFB60",2f);
-		checkCalc(p,"payload.valueDB/payload.valueFB60",2d);
-		checkCalc(p,"payload.valueJB/payload.valueFB60",2F);
-		checkCalc(p,"payload.valueIB/payload.valueFB60",2F);
+		checkCalc(p, "payload.valueSB/payload.valueFB60", 2F);
+		checkCalc(p, "payload.valueBB/payload.valueFB60", 2F);
+		checkCalc(p, "payload.valueFB/payload.valueFB60", 2f);
+		checkCalc(p, "payload.valueDB/payload.valueFB60", 2d);
+		checkCalc(p, "payload.valueJB/payload.valueFB60", 2F);
+		checkCalc(p, "payload.valueIB/payload.valueFB60", 2F);
 
-		checkCalc(p,"payload.valueS/payload.valueFB60",2F);
-		checkCalc(p,"payload.valueB/payload.valueFB60",2F);
-		checkCalc(p,"payload.valueF/payload.valueFB60",2f);
-		checkCalc(p,"payload.valueD/payload.valueFB60",2d);
-		checkCalc(p,"payload.valueJ/payload.valueFB60",2F);
-		checkCalc(p,"payload.valueI/payload.valueFB60",2F);
+		checkCalc(p, "payload.valueS/payload.valueFB60", 2F);
+		checkCalc(p, "payload.valueB/payload.valueFB60", 2F);
+		checkCalc(p, "payload.valueF/payload.valueFB60", 2f);
+		checkCalc(p, "payload.valueD/payload.valueFB60", 2d);
+		checkCalc(p, "payload.valueJ/payload.valueFB60", 2F);
+		checkCalc(p, "payload.valueI/payload.valueFB60", 2F);
 
 		// right is a long
-		checkCalc(p,"payload.valueSB/60L",2L);
-		checkCalc(p,"payload.valueBB/60L",2L);
-		checkCalc(p,"payload.valueFB/60L",2f);
-		checkCalc(p,"payload.valueDB/60L",2d);
-		checkCalc(p,"payload.valueJB/60L",2L);
-		checkCalc(p,"payload.valueIB/60L",2L);
+		checkCalc(p, "payload.valueSB/60L", 2L);
+		checkCalc(p, "payload.valueBB/60L", 2L);
+		checkCalc(p, "payload.valueFB/60L", 2f);
+		checkCalc(p, "payload.valueDB/60L", 2d);
+		checkCalc(p, "payload.valueJB/60L", 2L);
+		checkCalc(p, "payload.valueIB/60L", 2L);
 
-		checkCalc(p,"payload.valueS/60L",2L);
-		checkCalc(p,"payload.valueB/60L",2L);
-		checkCalc(p,"payload.valueF/60L",2f);
-		checkCalc(p,"payload.valueD/60L",2d);
-		checkCalc(p,"payload.valueJ/60L",2L);
-		checkCalc(p,"payload.valueI/60L",2L);
+		checkCalc(p, "payload.valueS/60L", 2L);
+		checkCalc(p, "payload.valueB/60L", 2L);
+		checkCalc(p, "payload.valueF/60L", 2f);
+		checkCalc(p, "payload.valueD/60L", 2d);
+		checkCalc(p, "payload.valueJ/60L", 2L);
+		checkCalc(p, "payload.valueI/60L", 2L);
 
-		checkCalc(p,"payload.valueSB/payload.valueJB60",2L);
-		checkCalc(p,"payload.valueBB/payload.valueJB60",2L);
-		checkCalc(p,"payload.valueFB/payload.valueJB60",2f);
-		checkCalc(p,"payload.valueDB/payload.valueJB60",2d);
-		checkCalc(p,"payload.valueJB/payload.valueJB60",2L);
-		checkCalc(p,"payload.valueIB/payload.valueJB60",2L);
+		checkCalc(p, "payload.valueSB/payload.valueJB60", 2L);
+		checkCalc(p, "payload.valueBB/payload.valueJB60", 2L);
+		checkCalc(p, "payload.valueFB/payload.valueJB60", 2f);
+		checkCalc(p, "payload.valueDB/payload.valueJB60", 2d);
+		checkCalc(p, "payload.valueJB/payload.valueJB60", 2L);
+		checkCalc(p, "payload.valueIB/payload.valueJB60", 2L);
 
-		checkCalc(p,"payload.valueS/payload.valueJB60",2L);
-		checkCalc(p,"payload.valueB/payload.valueJB60",2L);
-		checkCalc(p,"payload.valueF/payload.valueJB60",2f);
-		checkCalc(p,"payload.valueD/payload.valueJB60",2d);
-		checkCalc(p,"payload.valueJ/payload.valueJB60",2L);
-		checkCalc(p,"payload.valueI/payload.valueJB60",2L);
+		checkCalc(p, "payload.valueS/payload.valueJB60", 2L);
+		checkCalc(p, "payload.valueB/payload.valueJB60", 2L);
+		checkCalc(p, "payload.valueF/payload.valueJB60", 2f);
+		checkCalc(p, "payload.valueD/payload.valueJB60", 2d);
+		checkCalc(p, "payload.valueJ/payload.valueJB60", 2L);
+		checkCalc(p, "payload.valueI/payload.valueJB60", 2L);
 
 		// right is an int
-		checkCalc(p,"payload.valueSB/60",2);
-		checkCalc(p,"payload.valueBB/60",2);
-		checkCalc(p,"payload.valueFB/60",2f);
-		checkCalc(p,"payload.valueDB/60",2d);
-		checkCalc(p,"payload.valueJB/60",2L);
-		checkCalc(p,"payload.valueIB/60",2);
+		checkCalc(p, "payload.valueSB/60", 2);
+		checkCalc(p, "payload.valueBB/60", 2);
+		checkCalc(p, "payload.valueFB/60", 2f);
+		checkCalc(p, "payload.valueDB/60", 2d);
+		checkCalc(p, "payload.valueJB/60", 2L);
+		checkCalc(p, "payload.valueIB/60", 2);
 
-		checkCalc(p,"payload.valueS/60",2);
-		checkCalc(p,"payload.valueB/60",2);
-		checkCalc(p,"payload.valueF/60",2f);
-		checkCalc(p,"payload.valueD/60",2d);
-		checkCalc(p,"payload.valueJ/60",2L);
-		checkCalc(p,"payload.valueI/60",2);
+		checkCalc(p, "payload.valueS/60", 2);
+		checkCalc(p, "payload.valueB/60", 2);
+		checkCalc(p, "payload.valueF/60", 2f);
+		checkCalc(p, "payload.valueD/60", 2d);
+		checkCalc(p, "payload.valueJ/60", 2L);
+		checkCalc(p, "payload.valueI/60", 2);
 
-		checkCalc(p,"payload.valueSB/payload.valueIB60",2);
-		checkCalc(p,"payload.valueBB/payload.valueIB60",2);
-		checkCalc(p,"payload.valueFB/payload.valueIB60",2f);
-		checkCalc(p,"payload.valueDB/payload.valueIB60",2d);
-		checkCalc(p,"payload.valueJB/payload.valueIB60",2L);
-		checkCalc(p,"payload.valueIB/payload.valueIB60",2);
+		checkCalc(p, "payload.valueSB/payload.valueIB60", 2);
+		checkCalc(p, "payload.valueBB/payload.valueIB60", 2);
+		checkCalc(p, "payload.valueFB/payload.valueIB60", 2f);
+		checkCalc(p, "payload.valueDB/payload.valueIB60", 2d);
+		checkCalc(p, "payload.valueJB/payload.valueIB60", 2L);
+		checkCalc(p, "payload.valueIB/payload.valueIB60", 2);
 
-		checkCalc(p,"payload.valueS/payload.valueIB60",2);
-		checkCalc(p,"payload.valueB/payload.valueIB60",2);
-		checkCalc(p,"payload.valueF/payload.valueIB60",2f);
-		checkCalc(p,"payload.valueD/payload.valueIB60",2d);
-		checkCalc(p,"payload.valueJ/payload.valueIB60",2L);
-		checkCalc(p,"payload.valueI/payload.valueIB60",2);
+		checkCalc(p, "payload.valueS/payload.valueIB60", 2);
+		checkCalc(p, "payload.valueB/payload.valueIB60", 2);
+		checkCalc(p, "payload.valueF/payload.valueIB60", 2f);
+		checkCalc(p, "payload.valueD/payload.valueIB60", 2d);
+		checkCalc(p, "payload.valueJ/payload.valueIB60", 2L);
+		checkCalc(p, "payload.valueI/payload.valueIB60", 2);
 
 		// right is a short
-		checkCalc(p,"payload.valueSB/payload.valueS",1);
-		checkCalc(p,"payload.valueBB/payload.valueS",1);
-		checkCalc(p,"payload.valueFB/payload.valueS",1f);
-		checkCalc(p,"payload.valueDB/payload.valueS",1d);
-		checkCalc(p,"payload.valueJB/payload.valueS",1L);
-		checkCalc(p,"payload.valueIB/payload.valueS",1);
+		checkCalc(p, "payload.valueSB/payload.valueS", 1);
+		checkCalc(p, "payload.valueBB/payload.valueS", 1);
+		checkCalc(p, "payload.valueFB/payload.valueS", 1f);
+		checkCalc(p, "payload.valueDB/payload.valueS", 1d);
+		checkCalc(p, "payload.valueJB/payload.valueS", 1L);
+		checkCalc(p, "payload.valueIB/payload.valueS", 1);
 
-		checkCalc(p,"payload.valueS/payload.valueS",1);
-		checkCalc(p,"payload.valueB/payload.valueS",1);
-		checkCalc(p,"payload.valueF/payload.valueS",1f);
-		checkCalc(p,"payload.valueD/payload.valueS",1d);
-		checkCalc(p,"payload.valueJ/payload.valueS",1L);
-		checkCalc(p,"payload.valueI/payload.valueS",1);
+		checkCalc(p, "payload.valueS/payload.valueS", 1);
+		checkCalc(p, "payload.valueB/payload.valueS", 1);
+		checkCalc(p, "payload.valueF/payload.valueS", 1f);
+		checkCalc(p, "payload.valueD/payload.valueS", 1d);
+		checkCalc(p, "payload.valueJ/payload.valueS", 1L);
+		checkCalc(p, "payload.valueI/payload.valueS", 1);
 
-		checkCalc(p,"payload.valueSB/payload.valueSB",1);
-		checkCalc(p,"payload.valueBB/payload.valueSB",1);
-		checkCalc(p,"payload.valueFB/payload.valueSB",1f);
-		checkCalc(p,"payload.valueDB/payload.valueSB",1d);
-		checkCalc(p,"payload.valueJB/payload.valueSB",1L);
-		checkCalc(p,"payload.valueIB/payload.valueSB",1);
+		checkCalc(p, "payload.valueSB/payload.valueSB", 1);
+		checkCalc(p, "payload.valueBB/payload.valueSB", 1);
+		checkCalc(p, "payload.valueFB/payload.valueSB", 1f);
+		checkCalc(p, "payload.valueDB/payload.valueSB", 1d);
+		checkCalc(p, "payload.valueJB/payload.valueSB", 1L);
+		checkCalc(p, "payload.valueIB/payload.valueSB", 1);
 
-		checkCalc(p,"payload.valueS/payload.valueSB",1);
-		checkCalc(p,"payload.valueB/payload.valueSB",1);
-		checkCalc(p,"payload.valueF/payload.valueSB",1f);
-		checkCalc(p,"payload.valueD/payload.valueSB",1d);
-		checkCalc(p,"payload.valueJ/payload.valueSB",1L);
-		checkCalc(p,"payload.valueI/payload.valueSB",1);
+		checkCalc(p, "payload.valueS/payload.valueSB", 1);
+		checkCalc(p, "payload.valueB/payload.valueSB", 1);
+		checkCalc(p, "payload.valueF/payload.valueSB", 1f);
+		checkCalc(p, "payload.valueD/payload.valueSB", 1d);
+		checkCalc(p, "payload.valueJ/payload.valueSB", 1L);
+		checkCalc(p, "payload.valueI/payload.valueSB", 1);
 
 		// right is a byte
-		checkCalc(p,"payload.valueSB/payload.valueB",1);
-		checkCalc(p,"payload.valueBB/payload.valueB",1);
-		checkCalc(p,"payload.valueFB/payload.valueB",1f);
-		checkCalc(p,"payload.valueDB/payload.valueB",1d);
-		checkCalc(p,"payload.valueJB/payload.valueB",1L);
-		checkCalc(p,"payload.valueIB/payload.valueB",1);
+		checkCalc(p, "payload.valueSB/payload.valueB", 1);
+		checkCalc(p, "payload.valueBB/payload.valueB", 1);
+		checkCalc(p, "payload.valueFB/payload.valueB", 1f);
+		checkCalc(p, "payload.valueDB/payload.valueB", 1d);
+		checkCalc(p, "payload.valueJB/payload.valueB", 1L);
+		checkCalc(p, "payload.valueIB/payload.valueB", 1);
 
-		checkCalc(p,"payload.valueS/payload.valueB",1);
-		checkCalc(p,"payload.valueB/payload.valueB",1);
-		checkCalc(p,"payload.valueF/payload.valueB",1f);
-		checkCalc(p,"payload.valueD/payload.valueB",1d);
-		checkCalc(p,"payload.valueJ/payload.valueB",1L);
-		checkCalc(p,"payload.valueI/payload.valueB",1);
+		checkCalc(p, "payload.valueS/payload.valueB", 1);
+		checkCalc(p, "payload.valueB/payload.valueB", 1);
+		checkCalc(p, "payload.valueF/payload.valueB", 1f);
+		checkCalc(p, "payload.valueD/payload.valueB", 1d);
+		checkCalc(p, "payload.valueJ/payload.valueB", 1L);
+		checkCalc(p, "payload.valueI/payload.valueB", 1);
 
-		checkCalc(p,"payload.valueSB/payload.valueBB",1);
-		checkCalc(p,"payload.valueBB/payload.valueBB",1);
-		checkCalc(p,"payload.valueFB/payload.valueBB",1f);
-		checkCalc(p,"payload.valueDB/payload.valueBB",1d);
-		checkCalc(p,"payload.valueJB/payload.valueBB",1L);
-		checkCalc(p,"payload.valueIB/payload.valueBB",1);
+		checkCalc(p, "payload.valueSB/payload.valueBB", 1);
+		checkCalc(p, "payload.valueBB/payload.valueBB", 1);
+		checkCalc(p, "payload.valueFB/payload.valueBB", 1f);
+		checkCalc(p, "payload.valueDB/payload.valueBB", 1d);
+		checkCalc(p, "payload.valueJB/payload.valueBB", 1L);
+		checkCalc(p, "payload.valueIB/payload.valueBB", 1);
 
-		checkCalc(p,"payload.valueS/payload.valueBB",1);
-		checkCalc(p,"payload.valueB/payload.valueBB",1);
-		checkCalc(p,"payload.valueF/payload.valueBB",1f);
-		checkCalc(p,"payload.valueD/payload.valueBB",1d);
-		checkCalc(p,"payload.valueJ/payload.valueBB",1L);
-		checkCalc(p,"payload.valueI/payload.valueBB",1);
+		checkCalc(p, "payload.valueS/payload.valueBB", 1);
+		checkCalc(p, "payload.valueB/payload.valueBB", 1);
+		checkCalc(p, "payload.valueF/payload.valueBB", 1f);
+		checkCalc(p, "payload.valueD/payload.valueBB", 1d);
+		checkCalc(p, "payload.valueJ/payload.valueBB", 1L);
+		checkCalc(p, "payload.valueI/payload.valueBB", 1);
 	}
 
 	@Test
@@ -2138,178 +2138,178 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		//	expression = parse("(T(java.lang.Double).parseDouble(payload.valueI.toString()))/60D");
 
 		// right is a double
-		checkCalc(p,"payload.valueSB+60D",180d);
-		checkCalc(p,"payload.valueBB+60D",180d);
-		checkCalc(p,"payload.valueFB+60D",180d);
-		checkCalc(p,"payload.valueDB+60D",180d);
-		checkCalc(p,"payload.valueJB+60D",180d);
-		checkCalc(p,"payload.valueIB+60D",180d);
+		checkCalc(p, "payload.valueSB+60D", 180d);
+		checkCalc(p, "payload.valueBB+60D", 180d);
+		checkCalc(p, "payload.valueFB+60D", 180d);
+		checkCalc(p, "payload.valueDB+60D", 180d);
+		checkCalc(p, "payload.valueJB+60D", 180d);
+		checkCalc(p, "payload.valueIB+60D", 180d);
 
-		checkCalc(p,"payload.valueS+60D",180d);
-		checkCalc(p,"payload.valueB+60D",180d);
-		checkCalc(p,"payload.valueF+60D",180d);
-		checkCalc(p,"payload.valueD+60D",180d);
-		checkCalc(p,"payload.valueJ+60D",180d);
-		checkCalc(p,"payload.valueI+60D",180d);
+		checkCalc(p, "payload.valueS+60D", 180d);
+		checkCalc(p, "payload.valueB+60D", 180d);
+		checkCalc(p, "payload.valueF+60D", 180d);
+		checkCalc(p, "payload.valueD+60D", 180d);
+		checkCalc(p, "payload.valueJ+60D", 180d);
+		checkCalc(p, "payload.valueI+60D", 180d);
 
-		checkCalc(p,"payload.valueSB+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueBB+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueFB+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueDB+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueJB+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueIB+payload.valueDB60",180d);
+		checkCalc(p, "payload.valueSB+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueBB+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueFB+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueDB+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueJB+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueIB+payload.valueDB60", 180d);
 
-		checkCalc(p,"payload.valueS+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueB+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueF+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueD+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueJ+payload.valueDB60",180d);
-		checkCalc(p,"payload.valueI+payload.valueDB60",180d);
+		checkCalc(p, "payload.valueS+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueB+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueF+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueD+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueJ+payload.valueDB60", 180d);
+		checkCalc(p, "payload.valueI+payload.valueDB60", 180d);
 
 		// right is a float
-		checkCalc(p,"payload.valueSB+60F",180F);
-		checkCalc(p,"payload.valueBB+60F",180F);
-		checkCalc(p,"payload.valueFB+60F",180f);
-		checkCalc(p,"payload.valueDB+60F",180d);
-		checkCalc(p,"payload.valueJB+60F",180F);
-		checkCalc(p,"payload.valueIB+60F",180F);
+		checkCalc(p, "payload.valueSB+60F", 180F);
+		checkCalc(p, "payload.valueBB+60F", 180F);
+		checkCalc(p, "payload.valueFB+60F", 180f);
+		checkCalc(p, "payload.valueDB+60F", 180d);
+		checkCalc(p, "payload.valueJB+60F", 180F);
+		checkCalc(p, "payload.valueIB+60F", 180F);
 
-		checkCalc(p,"payload.valueS+60F",180F);
-		checkCalc(p,"payload.valueB+60F",180F);
-		checkCalc(p,"payload.valueF+60F",180f);
-		checkCalc(p,"payload.valueD+60F",180d);
-		checkCalc(p,"payload.valueJ+60F",180F);
-		checkCalc(p,"payload.valueI+60F",180F);
+		checkCalc(p, "payload.valueS+60F", 180F);
+		checkCalc(p, "payload.valueB+60F", 180F);
+		checkCalc(p, "payload.valueF+60F", 180f);
+		checkCalc(p, "payload.valueD+60F", 180d);
+		checkCalc(p, "payload.valueJ+60F", 180F);
+		checkCalc(p, "payload.valueI+60F", 180F);
 
-		checkCalc(p,"payload.valueSB+payload.valueFB60",180F);
-		checkCalc(p,"payload.valueBB+payload.valueFB60",180F);
-		checkCalc(p,"payload.valueFB+payload.valueFB60",180f);
-		checkCalc(p,"payload.valueDB+payload.valueFB60",180d);
-		checkCalc(p,"payload.valueJB+payload.valueFB60",180F);
-		checkCalc(p,"payload.valueIB+payload.valueFB60",180F);
+		checkCalc(p, "payload.valueSB+payload.valueFB60", 180F);
+		checkCalc(p, "payload.valueBB+payload.valueFB60", 180F);
+		checkCalc(p, "payload.valueFB+payload.valueFB60", 180f);
+		checkCalc(p, "payload.valueDB+payload.valueFB60", 180d);
+		checkCalc(p, "payload.valueJB+payload.valueFB60", 180F);
+		checkCalc(p, "payload.valueIB+payload.valueFB60", 180F);
 
-		checkCalc(p,"payload.valueS+payload.valueFB60",180F);
-		checkCalc(p,"payload.valueB+payload.valueFB60",180F);
-		checkCalc(p,"payload.valueF+payload.valueFB60",180f);
-		checkCalc(p,"payload.valueD+payload.valueFB60",180d);
-		checkCalc(p,"payload.valueJ+payload.valueFB60",180F);
-		checkCalc(p,"payload.valueI+payload.valueFB60",180F);
+		checkCalc(p, "payload.valueS+payload.valueFB60", 180F);
+		checkCalc(p, "payload.valueB+payload.valueFB60", 180F);
+		checkCalc(p, "payload.valueF+payload.valueFB60", 180f);
+		checkCalc(p, "payload.valueD+payload.valueFB60", 180d);
+		checkCalc(p, "payload.valueJ+payload.valueFB60", 180F);
+		checkCalc(p, "payload.valueI+payload.valueFB60", 180F);
 
 		// right is a long
-		checkCalc(p,"payload.valueSB+60L",180L);
-		checkCalc(p,"payload.valueBB+60L",180L);
-		checkCalc(p,"payload.valueFB+60L",180f);
-		checkCalc(p,"payload.valueDB+60L",180d);
-		checkCalc(p,"payload.valueJB+60L",180L);
-		checkCalc(p,"payload.valueIB+60L",180L);
+		checkCalc(p, "payload.valueSB+60L", 180L);
+		checkCalc(p, "payload.valueBB+60L", 180L);
+		checkCalc(p, "payload.valueFB+60L", 180f);
+		checkCalc(p, "payload.valueDB+60L", 180d);
+		checkCalc(p, "payload.valueJB+60L", 180L);
+		checkCalc(p, "payload.valueIB+60L", 180L);
 
-		checkCalc(p,"payload.valueS+60L",180L);
-		checkCalc(p,"payload.valueB+60L",180L);
-		checkCalc(p,"payload.valueF+60L",180f);
-		checkCalc(p,"payload.valueD+60L",180d);
-		checkCalc(p,"payload.valueJ+60L",180L);
-		checkCalc(p,"payload.valueI+60L",180L);
+		checkCalc(p, "payload.valueS+60L", 180L);
+		checkCalc(p, "payload.valueB+60L", 180L);
+		checkCalc(p, "payload.valueF+60L", 180f);
+		checkCalc(p, "payload.valueD+60L", 180d);
+		checkCalc(p, "payload.valueJ+60L", 180L);
+		checkCalc(p, "payload.valueI+60L", 180L);
 
-		checkCalc(p,"payload.valueSB+payload.valueJB60",180L);
-		checkCalc(p,"payload.valueBB+payload.valueJB60",180L);
-		checkCalc(p,"payload.valueFB+payload.valueJB60",180f);
-		checkCalc(p,"payload.valueDB+payload.valueJB60",180d);
-		checkCalc(p,"payload.valueJB+payload.valueJB60",180L);
-		checkCalc(p,"payload.valueIB+payload.valueJB60",180L);
+		checkCalc(p, "payload.valueSB+payload.valueJB60", 180L);
+		checkCalc(p, "payload.valueBB+payload.valueJB60", 180L);
+		checkCalc(p, "payload.valueFB+payload.valueJB60", 180f);
+		checkCalc(p, "payload.valueDB+payload.valueJB60", 180d);
+		checkCalc(p, "payload.valueJB+payload.valueJB60", 180L);
+		checkCalc(p, "payload.valueIB+payload.valueJB60", 180L);
 
-		checkCalc(p,"payload.valueS+payload.valueJB60",180L);
-		checkCalc(p,"payload.valueB+payload.valueJB60",180L);
-		checkCalc(p,"payload.valueF+payload.valueJB60",180f);
-		checkCalc(p,"payload.valueD+payload.valueJB60",180d);
-		checkCalc(p,"payload.valueJ+payload.valueJB60",180L);
-		checkCalc(p,"payload.valueI+payload.valueJB60",180L);
+		checkCalc(p, "payload.valueS+payload.valueJB60", 180L);
+		checkCalc(p, "payload.valueB+payload.valueJB60", 180L);
+		checkCalc(p, "payload.valueF+payload.valueJB60", 180f);
+		checkCalc(p, "payload.valueD+payload.valueJB60", 180d);
+		checkCalc(p, "payload.valueJ+payload.valueJB60", 180L);
+		checkCalc(p, "payload.valueI+payload.valueJB60", 180L);
 
 		// right is an int
-		checkCalc(p,"payload.valueSB+60",180);
-		checkCalc(p,"payload.valueBB+60",180);
-		checkCalc(p,"payload.valueFB+60",180f);
-		checkCalc(p,"payload.valueDB+60",180d);
-		checkCalc(p,"payload.valueJB+60",180L);
-		checkCalc(p,"payload.valueIB+60",180);
+		checkCalc(p, "payload.valueSB+60", 180);
+		checkCalc(p, "payload.valueBB+60", 180);
+		checkCalc(p, "payload.valueFB+60", 180f);
+		checkCalc(p, "payload.valueDB+60", 180d);
+		checkCalc(p, "payload.valueJB+60", 180L);
+		checkCalc(p, "payload.valueIB+60", 180);
 
-		checkCalc(p,"payload.valueS+60",180);
-		checkCalc(p,"payload.valueB+60",180);
-		checkCalc(p,"payload.valueF+60",180f);
-		checkCalc(p,"payload.valueD+60",180d);
-		checkCalc(p,"payload.valueJ+60",180L);
-		checkCalc(p,"payload.valueI+60",180);
+		checkCalc(p, "payload.valueS+60", 180);
+		checkCalc(p, "payload.valueB+60", 180);
+		checkCalc(p, "payload.valueF+60", 180f);
+		checkCalc(p, "payload.valueD+60", 180d);
+		checkCalc(p, "payload.valueJ+60", 180L);
+		checkCalc(p, "payload.valueI+60", 180);
 
-		checkCalc(p,"payload.valueSB+payload.valueIB60",180);
-		checkCalc(p,"payload.valueBB+payload.valueIB60",180);
-		checkCalc(p,"payload.valueFB+payload.valueIB60",180f);
-		checkCalc(p,"payload.valueDB+payload.valueIB60",180d);
-		checkCalc(p,"payload.valueJB+payload.valueIB60",180L);
-		checkCalc(p,"payload.valueIB+payload.valueIB60",180);
+		checkCalc(p, "payload.valueSB+payload.valueIB60", 180);
+		checkCalc(p, "payload.valueBB+payload.valueIB60", 180);
+		checkCalc(p, "payload.valueFB+payload.valueIB60", 180f);
+		checkCalc(p, "payload.valueDB+payload.valueIB60", 180d);
+		checkCalc(p, "payload.valueJB+payload.valueIB60", 180L);
+		checkCalc(p, "payload.valueIB+payload.valueIB60", 180);
 
-		checkCalc(p,"payload.valueS+payload.valueIB60",180);
-		checkCalc(p,"payload.valueB+payload.valueIB60",180);
-		checkCalc(p,"payload.valueF+payload.valueIB60",180f);
-		checkCalc(p,"payload.valueD+payload.valueIB60",180d);
-		checkCalc(p,"payload.valueJ+payload.valueIB60",180L);
-		checkCalc(p,"payload.valueI+payload.valueIB60",180);
+		checkCalc(p, "payload.valueS+payload.valueIB60", 180);
+		checkCalc(p, "payload.valueB+payload.valueIB60", 180);
+		checkCalc(p, "payload.valueF+payload.valueIB60", 180f);
+		checkCalc(p, "payload.valueD+payload.valueIB60", 180d);
+		checkCalc(p, "payload.valueJ+payload.valueIB60", 180L);
+		checkCalc(p, "payload.valueI+payload.valueIB60", 180);
 
 		// right is a short
-		checkCalc(p,"payload.valueSB+payload.valueS",240);
-		checkCalc(p,"payload.valueBB+payload.valueS",240);
-		checkCalc(p,"payload.valueFB+payload.valueS",240f);
-		checkCalc(p,"payload.valueDB+payload.valueS",240d);
-		checkCalc(p,"payload.valueJB+payload.valueS",240L);
-		checkCalc(p,"payload.valueIB+payload.valueS",240);
+		checkCalc(p, "payload.valueSB+payload.valueS", 240);
+		checkCalc(p, "payload.valueBB+payload.valueS", 240);
+		checkCalc(p, "payload.valueFB+payload.valueS", 240f);
+		checkCalc(p, "payload.valueDB+payload.valueS", 240d);
+		checkCalc(p, "payload.valueJB+payload.valueS", 240L);
+		checkCalc(p, "payload.valueIB+payload.valueS", 240);
 
-		checkCalc(p,"payload.valueS+payload.valueS",240);
-		checkCalc(p,"payload.valueB+payload.valueS",240);
-		checkCalc(p,"payload.valueF+payload.valueS",240f);
-		checkCalc(p,"payload.valueD+payload.valueS",240d);
-		checkCalc(p,"payload.valueJ+payload.valueS",240L);
-		checkCalc(p,"payload.valueI+payload.valueS",240);
+		checkCalc(p, "payload.valueS+payload.valueS", 240);
+		checkCalc(p, "payload.valueB+payload.valueS", 240);
+		checkCalc(p, "payload.valueF+payload.valueS", 240f);
+		checkCalc(p, "payload.valueD+payload.valueS", 240d);
+		checkCalc(p, "payload.valueJ+payload.valueS", 240L);
+		checkCalc(p, "payload.valueI+payload.valueS", 240);
 
-		checkCalc(p,"payload.valueSB+payload.valueSB",240);
-		checkCalc(p,"payload.valueBB+payload.valueSB",240);
-		checkCalc(p,"payload.valueFB+payload.valueSB",240f);
-		checkCalc(p,"payload.valueDB+payload.valueSB",240d);
-		checkCalc(p,"payload.valueJB+payload.valueSB",240L);
-		checkCalc(p,"payload.valueIB+payload.valueSB",240);
+		checkCalc(p, "payload.valueSB+payload.valueSB", 240);
+		checkCalc(p, "payload.valueBB+payload.valueSB", 240);
+		checkCalc(p, "payload.valueFB+payload.valueSB", 240f);
+		checkCalc(p, "payload.valueDB+payload.valueSB", 240d);
+		checkCalc(p, "payload.valueJB+payload.valueSB", 240L);
+		checkCalc(p, "payload.valueIB+payload.valueSB", 240);
 
-		checkCalc(p,"payload.valueS+payload.valueSB",240);
-		checkCalc(p,"payload.valueB+payload.valueSB",240);
-		checkCalc(p,"payload.valueF+payload.valueSB",240f);
-		checkCalc(p,"payload.valueD+payload.valueSB",240d);
-		checkCalc(p,"payload.valueJ+payload.valueSB",240L);
-		checkCalc(p,"payload.valueI+payload.valueSB",240);
+		checkCalc(p, "payload.valueS+payload.valueSB", 240);
+		checkCalc(p, "payload.valueB+payload.valueSB", 240);
+		checkCalc(p, "payload.valueF+payload.valueSB", 240f);
+		checkCalc(p, "payload.valueD+payload.valueSB", 240d);
+		checkCalc(p, "payload.valueJ+payload.valueSB", 240L);
+		checkCalc(p, "payload.valueI+payload.valueSB", 240);
 
 		// right is a byte
-		checkCalc(p,"payload.valueSB+payload.valueB",240);
-		checkCalc(p,"payload.valueBB+payload.valueB",240);
-		checkCalc(p,"payload.valueFB+payload.valueB",240f);
-		checkCalc(p,"payload.valueDB+payload.valueB",240d);
-		checkCalc(p,"payload.valueJB+payload.valueB",240L);
-		checkCalc(p,"payload.valueIB+payload.valueB",240);
+		checkCalc(p, "payload.valueSB+payload.valueB", 240);
+		checkCalc(p, "payload.valueBB+payload.valueB", 240);
+		checkCalc(p, "payload.valueFB+payload.valueB", 240f);
+		checkCalc(p, "payload.valueDB+payload.valueB", 240d);
+		checkCalc(p, "payload.valueJB+payload.valueB", 240L);
+		checkCalc(p, "payload.valueIB+payload.valueB", 240);
 
-		checkCalc(p,"payload.valueS+payload.valueB",240);
-		checkCalc(p,"payload.valueB+payload.valueB",240);
-		checkCalc(p,"payload.valueF+payload.valueB",240f);
-		checkCalc(p,"payload.valueD+payload.valueB",240d);
-		checkCalc(p,"payload.valueJ+payload.valueB",240L);
-		checkCalc(p,"payload.valueI+payload.valueB",240);
+		checkCalc(p, "payload.valueS+payload.valueB", 240);
+		checkCalc(p, "payload.valueB+payload.valueB", 240);
+		checkCalc(p, "payload.valueF+payload.valueB", 240f);
+		checkCalc(p, "payload.valueD+payload.valueB", 240d);
+		checkCalc(p, "payload.valueJ+payload.valueB", 240L);
+		checkCalc(p, "payload.valueI+payload.valueB", 240);
 
-		checkCalc(p,"payload.valueSB+payload.valueBB",240);
-		checkCalc(p,"payload.valueBB+payload.valueBB",240);
-		checkCalc(p,"payload.valueFB+payload.valueBB",240f);
-		checkCalc(p,"payload.valueDB+payload.valueBB",240d);
-		checkCalc(p,"payload.valueJB+payload.valueBB",240L);
-		checkCalc(p,"payload.valueIB+payload.valueBB",240);
+		checkCalc(p, "payload.valueSB+payload.valueBB", 240);
+		checkCalc(p, "payload.valueBB+payload.valueBB", 240);
+		checkCalc(p, "payload.valueFB+payload.valueBB", 240f);
+		checkCalc(p, "payload.valueDB+payload.valueBB", 240d);
+		checkCalc(p, "payload.valueJB+payload.valueBB", 240L);
+		checkCalc(p, "payload.valueIB+payload.valueBB", 240);
 
-		checkCalc(p,"payload.valueS+payload.valueBB",240);
-		checkCalc(p,"payload.valueB+payload.valueBB",240);
-		checkCalc(p,"payload.valueF+payload.valueBB",240f);
-		checkCalc(p,"payload.valueD+payload.valueBB",240d);
-		checkCalc(p,"payload.valueJ+payload.valueBB",240L);
-		checkCalc(p,"payload.valueI+payload.valueBB",240);
+		checkCalc(p, "payload.valueS+payload.valueBB", 240);
+		checkCalc(p, "payload.valueB+payload.valueBB", 240);
+		checkCalc(p, "payload.valueF+payload.valueBB", 240f);
+		checkCalc(p, "payload.valueD+payload.valueBB", 240d);
+		checkCalc(p, "payload.valueJ+payload.valueBB", 240L);
+		checkCalc(p, "payload.valueI+payload.valueBB", 240);
 	}
 
 	private void checkCalc(PayloadX p, String expression, int expectedResult) {
@@ -2492,178 +2492,178 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		//	expression = parse("(T(java.lang.Double).parseDouble(payload.valueI.toString()))/60D");
 
 		// right is a double
-		checkCalc(p,"payload.valueSB-60D",60d);
-		checkCalc(p,"payload.valueBB-60D",60d);
-		checkCalc(p,"payload.valueFB-60D",60d);
-		checkCalc(p,"payload.valueDB-60D",60d);
-		checkCalc(p,"payload.valueJB-60D",60d);
-		checkCalc(p,"payload.valueIB-60D",60d);
+		checkCalc(p, "payload.valueSB-60D", 60d);
+		checkCalc(p, "payload.valueBB-60D", 60d);
+		checkCalc(p, "payload.valueFB-60D", 60d);
+		checkCalc(p, "payload.valueDB-60D", 60d);
+		checkCalc(p, "payload.valueJB-60D", 60d);
+		checkCalc(p, "payload.valueIB-60D", 60d);
 
-		checkCalc(p,"payload.valueS-60D",60d);
-		checkCalc(p,"payload.valueB-60D",60d);
-		checkCalc(p,"payload.valueF-60D",60d);
-		checkCalc(p,"payload.valueD-60D",60d);
-		checkCalc(p,"payload.valueJ-60D",60d);
-		checkCalc(p,"payload.valueI-60D",60d);
+		checkCalc(p, "payload.valueS-60D", 60d);
+		checkCalc(p, "payload.valueB-60D", 60d);
+		checkCalc(p, "payload.valueF-60D", 60d);
+		checkCalc(p, "payload.valueD-60D", 60d);
+		checkCalc(p, "payload.valueJ-60D", 60d);
+		checkCalc(p, "payload.valueI-60D", 60d);
 
-		checkCalc(p,"payload.valueSB-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueBB-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueFB-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueDB-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueJB-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueIB-payload.valueDB60",60d);
+		checkCalc(p, "payload.valueSB-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueBB-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueFB-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueDB-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueJB-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueIB-payload.valueDB60", 60d);
 
-		checkCalc(p,"payload.valueS-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueB-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueF-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueD-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueJ-payload.valueDB60",60d);
-		checkCalc(p,"payload.valueI-payload.valueDB60",60d);
+		checkCalc(p, "payload.valueS-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueB-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueF-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueD-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueJ-payload.valueDB60", 60d);
+		checkCalc(p, "payload.valueI-payload.valueDB60", 60d);
 
 		// right is a float
-		checkCalc(p,"payload.valueSB-60F",60F);
-		checkCalc(p,"payload.valueBB-60F",60F);
-		checkCalc(p,"payload.valueFB-60F",60f);
-		checkCalc(p,"payload.valueDB-60F",60d);
-		checkCalc(p,"payload.valueJB-60F",60F);
-		checkCalc(p,"payload.valueIB-60F",60F);
+		checkCalc(p, "payload.valueSB-60F", 60F);
+		checkCalc(p, "payload.valueBB-60F", 60F);
+		checkCalc(p, "payload.valueFB-60F", 60f);
+		checkCalc(p, "payload.valueDB-60F", 60d);
+		checkCalc(p, "payload.valueJB-60F", 60F);
+		checkCalc(p, "payload.valueIB-60F", 60F);
 
-		checkCalc(p,"payload.valueS-60F",60F);
-		checkCalc(p,"payload.valueB-60F",60F);
-		checkCalc(p,"payload.valueF-60F",60f);
-		checkCalc(p,"payload.valueD-60F",60d);
-		checkCalc(p,"payload.valueJ-60F",60F);
-		checkCalc(p,"payload.valueI-60F",60F);
+		checkCalc(p, "payload.valueS-60F", 60F);
+		checkCalc(p, "payload.valueB-60F", 60F);
+		checkCalc(p, "payload.valueF-60F", 60f);
+		checkCalc(p, "payload.valueD-60F", 60d);
+		checkCalc(p, "payload.valueJ-60F", 60F);
+		checkCalc(p, "payload.valueI-60F", 60F);
 
-		checkCalc(p,"payload.valueSB-payload.valueFB60",60F);
-		checkCalc(p,"payload.valueBB-payload.valueFB60",60F);
-		checkCalc(p,"payload.valueFB-payload.valueFB60",60f);
-		checkCalc(p,"payload.valueDB-payload.valueFB60",60d);
-		checkCalc(p,"payload.valueJB-payload.valueFB60",60F);
-		checkCalc(p,"payload.valueIB-payload.valueFB60",60F);
+		checkCalc(p, "payload.valueSB-payload.valueFB60", 60F);
+		checkCalc(p, "payload.valueBB-payload.valueFB60", 60F);
+		checkCalc(p, "payload.valueFB-payload.valueFB60", 60f);
+		checkCalc(p, "payload.valueDB-payload.valueFB60", 60d);
+		checkCalc(p, "payload.valueJB-payload.valueFB60", 60F);
+		checkCalc(p, "payload.valueIB-payload.valueFB60", 60F);
 
-		checkCalc(p,"payload.valueS-payload.valueFB60",60F);
-		checkCalc(p,"payload.valueB-payload.valueFB60",60F);
-		checkCalc(p,"payload.valueF-payload.valueFB60",60f);
-		checkCalc(p,"payload.valueD-payload.valueFB60",60d);
-		checkCalc(p,"payload.valueJ-payload.valueFB60",60F);
-		checkCalc(p,"payload.valueI-payload.valueFB60",60F);
+		checkCalc(p, "payload.valueS-payload.valueFB60", 60F);
+		checkCalc(p, "payload.valueB-payload.valueFB60", 60F);
+		checkCalc(p, "payload.valueF-payload.valueFB60", 60f);
+		checkCalc(p, "payload.valueD-payload.valueFB60", 60d);
+		checkCalc(p, "payload.valueJ-payload.valueFB60", 60F);
+		checkCalc(p, "payload.valueI-payload.valueFB60", 60F);
 
 		// right is a long
-		checkCalc(p,"payload.valueSB-60L",60L);
-		checkCalc(p,"payload.valueBB-60L",60L);
-		checkCalc(p,"payload.valueFB-60L",60f);
-		checkCalc(p,"payload.valueDB-60L",60d);
-		checkCalc(p,"payload.valueJB-60L",60L);
-		checkCalc(p,"payload.valueIB-60L",60L);
+		checkCalc(p, "payload.valueSB-60L", 60L);
+		checkCalc(p, "payload.valueBB-60L", 60L);
+		checkCalc(p, "payload.valueFB-60L", 60f);
+		checkCalc(p, "payload.valueDB-60L", 60d);
+		checkCalc(p, "payload.valueJB-60L", 60L);
+		checkCalc(p, "payload.valueIB-60L", 60L);
 
-		checkCalc(p,"payload.valueS-60L",60L);
-		checkCalc(p,"payload.valueB-60L",60L);
-		checkCalc(p,"payload.valueF-60L",60f);
-		checkCalc(p,"payload.valueD-60L",60d);
-		checkCalc(p,"payload.valueJ-60L",60L);
-		checkCalc(p,"payload.valueI-60L",60L);
+		checkCalc(p, "payload.valueS-60L", 60L);
+		checkCalc(p, "payload.valueB-60L", 60L);
+		checkCalc(p, "payload.valueF-60L", 60f);
+		checkCalc(p, "payload.valueD-60L", 60d);
+		checkCalc(p, "payload.valueJ-60L", 60L);
+		checkCalc(p, "payload.valueI-60L", 60L);
 
-		checkCalc(p,"payload.valueSB-payload.valueJB60",60L);
-		checkCalc(p,"payload.valueBB-payload.valueJB60",60L);
-		checkCalc(p,"payload.valueFB-payload.valueJB60",60f);
-		checkCalc(p,"payload.valueDB-payload.valueJB60",60d);
-		checkCalc(p,"payload.valueJB-payload.valueJB60",60L);
-		checkCalc(p,"payload.valueIB-payload.valueJB60",60L);
+		checkCalc(p, "payload.valueSB-payload.valueJB60", 60L);
+		checkCalc(p, "payload.valueBB-payload.valueJB60", 60L);
+		checkCalc(p, "payload.valueFB-payload.valueJB60", 60f);
+		checkCalc(p, "payload.valueDB-payload.valueJB60", 60d);
+		checkCalc(p, "payload.valueJB-payload.valueJB60", 60L);
+		checkCalc(p, "payload.valueIB-payload.valueJB60", 60L);
 
-		checkCalc(p,"payload.valueS-payload.valueJB60",60L);
-		checkCalc(p,"payload.valueB-payload.valueJB60",60L);
-		checkCalc(p,"payload.valueF-payload.valueJB60",60f);
-		checkCalc(p,"payload.valueD-payload.valueJB60",60d);
-		checkCalc(p,"payload.valueJ-payload.valueJB60",60L);
-		checkCalc(p,"payload.valueI-payload.valueJB60",60L);
+		checkCalc(p, "payload.valueS-payload.valueJB60", 60L);
+		checkCalc(p, "payload.valueB-payload.valueJB60", 60L);
+		checkCalc(p, "payload.valueF-payload.valueJB60", 60f);
+		checkCalc(p, "payload.valueD-payload.valueJB60", 60d);
+		checkCalc(p, "payload.valueJ-payload.valueJB60", 60L);
+		checkCalc(p, "payload.valueI-payload.valueJB60", 60L);
 
 		// right is an int
-		checkCalc(p,"payload.valueSB-60",60);
-		checkCalc(p,"payload.valueBB-60",60);
-		checkCalc(p,"payload.valueFB-60",60f);
-		checkCalc(p,"payload.valueDB-60",60d);
-		checkCalc(p,"payload.valueJB-60",60L);
-		checkCalc(p,"payload.valueIB-60",60);
+		checkCalc(p, "payload.valueSB-60", 60);
+		checkCalc(p, "payload.valueBB-60", 60);
+		checkCalc(p, "payload.valueFB-60", 60f);
+		checkCalc(p, "payload.valueDB-60", 60d);
+		checkCalc(p, "payload.valueJB-60", 60L);
+		checkCalc(p, "payload.valueIB-60", 60);
 
-		checkCalc(p,"payload.valueS-60",60);
-		checkCalc(p,"payload.valueB-60",60);
-		checkCalc(p,"payload.valueF-60",60f);
-		checkCalc(p,"payload.valueD-60",60d);
-		checkCalc(p,"payload.valueJ-60",60L);
-		checkCalc(p,"payload.valueI-60",60);
+		checkCalc(p, "payload.valueS-60", 60);
+		checkCalc(p, "payload.valueB-60", 60);
+		checkCalc(p, "payload.valueF-60", 60f);
+		checkCalc(p, "payload.valueD-60", 60d);
+		checkCalc(p, "payload.valueJ-60", 60L);
+		checkCalc(p, "payload.valueI-60", 60);
 
-		checkCalc(p,"payload.valueSB-payload.valueIB60",60);
-		checkCalc(p,"payload.valueBB-payload.valueIB60",60);
-		checkCalc(p,"payload.valueFB-payload.valueIB60",60f);
-		checkCalc(p,"payload.valueDB-payload.valueIB60",60d);
-		checkCalc(p,"payload.valueJB-payload.valueIB60",60L);
-		checkCalc(p,"payload.valueIB-payload.valueIB60",60);
+		checkCalc(p, "payload.valueSB-payload.valueIB60", 60);
+		checkCalc(p, "payload.valueBB-payload.valueIB60", 60);
+		checkCalc(p, "payload.valueFB-payload.valueIB60", 60f);
+		checkCalc(p, "payload.valueDB-payload.valueIB60", 60d);
+		checkCalc(p, "payload.valueJB-payload.valueIB60", 60L);
+		checkCalc(p, "payload.valueIB-payload.valueIB60", 60);
 
-		checkCalc(p,"payload.valueS-payload.valueIB60",60);
-		checkCalc(p,"payload.valueB-payload.valueIB60",60);
-		checkCalc(p,"payload.valueF-payload.valueIB60",60f);
-		checkCalc(p,"payload.valueD-payload.valueIB60",60d);
-		checkCalc(p,"payload.valueJ-payload.valueIB60",60L);
-		checkCalc(p,"payload.valueI-payload.valueIB60",60);
+		checkCalc(p, "payload.valueS-payload.valueIB60", 60);
+		checkCalc(p, "payload.valueB-payload.valueIB60", 60);
+		checkCalc(p, "payload.valueF-payload.valueIB60", 60f);
+		checkCalc(p, "payload.valueD-payload.valueIB60", 60d);
+		checkCalc(p, "payload.valueJ-payload.valueIB60", 60L);
+		checkCalc(p, "payload.valueI-payload.valueIB60", 60);
 
 		// right is a short
-		checkCalc(p,"payload.valueSB-payload.valueS20",100);
-		checkCalc(p,"payload.valueBB-payload.valueS20",100);
-		checkCalc(p,"payload.valueFB-payload.valueS20",100f);
-		checkCalc(p,"payload.valueDB-payload.valueS20",100d);
-		checkCalc(p,"payload.valueJB-payload.valueS20",100L);
-		checkCalc(p,"payload.valueIB-payload.valueS20",100);
+		checkCalc(p, "payload.valueSB-payload.valueS20", 100);
+		checkCalc(p, "payload.valueBB-payload.valueS20", 100);
+		checkCalc(p, "payload.valueFB-payload.valueS20", 100f);
+		checkCalc(p, "payload.valueDB-payload.valueS20", 100d);
+		checkCalc(p, "payload.valueJB-payload.valueS20", 100L);
+		checkCalc(p, "payload.valueIB-payload.valueS20", 100);
 
-		checkCalc(p,"payload.valueS-payload.valueS20",100);
-		checkCalc(p,"payload.valueB-payload.valueS20",100);
-		checkCalc(p,"payload.valueF-payload.valueS20",100f);
-		checkCalc(p,"payload.valueD-payload.valueS20",100d);
-		checkCalc(p,"payload.valueJ-payload.valueS20",100L);
-		checkCalc(p,"payload.valueI-payload.valueS20",100);
+		checkCalc(p, "payload.valueS-payload.valueS20", 100);
+		checkCalc(p, "payload.valueB-payload.valueS20", 100);
+		checkCalc(p, "payload.valueF-payload.valueS20", 100f);
+		checkCalc(p, "payload.valueD-payload.valueS20", 100d);
+		checkCalc(p, "payload.valueJ-payload.valueS20", 100L);
+		checkCalc(p, "payload.valueI-payload.valueS20", 100);
 
-		checkCalc(p,"payload.valueSB-payload.valueSB20",100);
-		checkCalc(p,"payload.valueBB-payload.valueSB20",100);
-		checkCalc(p,"payload.valueFB-payload.valueSB20",100f);
-		checkCalc(p,"payload.valueDB-payload.valueSB20",100d);
-		checkCalc(p,"payload.valueJB-payload.valueSB20",100L);
-		checkCalc(p,"payload.valueIB-payload.valueSB20",100);
+		checkCalc(p, "payload.valueSB-payload.valueSB20", 100);
+		checkCalc(p, "payload.valueBB-payload.valueSB20", 100);
+		checkCalc(p, "payload.valueFB-payload.valueSB20", 100f);
+		checkCalc(p, "payload.valueDB-payload.valueSB20", 100d);
+		checkCalc(p, "payload.valueJB-payload.valueSB20", 100L);
+		checkCalc(p, "payload.valueIB-payload.valueSB20", 100);
 
-		checkCalc(p,"payload.valueS-payload.valueSB20",100);
-		checkCalc(p,"payload.valueB-payload.valueSB20",100);
-		checkCalc(p,"payload.valueF-payload.valueSB20",100f);
-		checkCalc(p,"payload.valueD-payload.valueSB20",100d);
-		checkCalc(p,"payload.valueJ-payload.valueSB20",100L);
-		checkCalc(p,"payload.valueI-payload.valueSB20",100);
+		checkCalc(p, "payload.valueS-payload.valueSB20", 100);
+		checkCalc(p, "payload.valueB-payload.valueSB20", 100);
+		checkCalc(p, "payload.valueF-payload.valueSB20", 100f);
+		checkCalc(p, "payload.valueD-payload.valueSB20", 100d);
+		checkCalc(p, "payload.valueJ-payload.valueSB20", 100L);
+		checkCalc(p, "payload.valueI-payload.valueSB20", 100);
 
 		// right is a byte
-		checkCalc(p,"payload.valueSB-payload.valueB20",100);
-		checkCalc(p,"payload.valueBB-payload.valueB20",100);
-		checkCalc(p,"payload.valueFB-payload.valueB20",100f);
-		checkCalc(p,"payload.valueDB-payload.valueB20",100d);
-		checkCalc(p,"payload.valueJB-payload.valueB20",100L);
-		checkCalc(p,"payload.valueIB-payload.valueB20",100);
+		checkCalc(p, "payload.valueSB-payload.valueB20", 100);
+		checkCalc(p, "payload.valueBB-payload.valueB20", 100);
+		checkCalc(p, "payload.valueFB-payload.valueB20", 100f);
+		checkCalc(p, "payload.valueDB-payload.valueB20", 100d);
+		checkCalc(p, "payload.valueJB-payload.valueB20", 100L);
+		checkCalc(p, "payload.valueIB-payload.valueB20", 100);
 
-		checkCalc(p,"payload.valueS-payload.valueB20",100);
-		checkCalc(p,"payload.valueB-payload.valueB20",100);
-		checkCalc(p,"payload.valueF-payload.valueB20",100f);
-		checkCalc(p,"payload.valueD-payload.valueB20",100d);
-		checkCalc(p,"payload.valueJ-payload.valueB20",100L);
-		checkCalc(p,"payload.valueI-payload.valueB20",100);
+		checkCalc(p, "payload.valueS-payload.valueB20", 100);
+		checkCalc(p, "payload.valueB-payload.valueB20", 100);
+		checkCalc(p, "payload.valueF-payload.valueB20", 100f);
+		checkCalc(p, "payload.valueD-payload.valueB20", 100d);
+		checkCalc(p, "payload.valueJ-payload.valueB20", 100L);
+		checkCalc(p, "payload.valueI-payload.valueB20", 100);
 
-		checkCalc(p,"payload.valueSB-payload.valueBB20",100);
-		checkCalc(p,"payload.valueBB-payload.valueBB20",100);
-		checkCalc(p,"payload.valueFB-payload.valueBB20",100f);
-		checkCalc(p,"payload.valueDB-payload.valueBB20",100d);
-		checkCalc(p,"payload.valueJB-payload.valueBB20",100L);
-		checkCalc(p,"payload.valueIB-payload.valueBB20",100);
+		checkCalc(p, "payload.valueSB-payload.valueBB20", 100);
+		checkCalc(p, "payload.valueBB-payload.valueBB20", 100);
+		checkCalc(p, "payload.valueFB-payload.valueBB20", 100f);
+		checkCalc(p, "payload.valueDB-payload.valueBB20", 100d);
+		checkCalc(p, "payload.valueJB-payload.valueBB20", 100L);
+		checkCalc(p, "payload.valueIB-payload.valueBB20", 100);
 
-		checkCalc(p,"payload.valueS-payload.valueBB20",100);
-		checkCalc(p,"payload.valueB-payload.valueBB20",100);
-		checkCalc(p,"payload.valueF-payload.valueBB20",100f);
-		checkCalc(p,"payload.valueD-payload.valueBB20",100d);
-		checkCalc(p,"payload.valueJ-payload.valueBB20",100L);
-		checkCalc(p,"payload.valueI-payload.valueBB20",100);
+		checkCalc(p, "payload.valueS-payload.valueBB20", 100);
+		checkCalc(p, "payload.valueB-payload.valueBB20", 100);
+		checkCalc(p, "payload.valueF-payload.valueBB20", 100f);
+		checkCalc(p, "payload.valueD-payload.valueBB20", 100d);
+		checkCalc(p, "payload.valueJ-payload.valueBB20", 100L);
+		checkCalc(p, "payload.valueI-payload.valueBB20", 100);
 	}
 
 	@Test
@@ -2674,178 +2674,178 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		//	expression = parse("(T(java.lang.Double).parseDouble(payload.valueI.toString()))/60D");
 
 		// right is a double
-		checkCalc(p,"payload.valueSB*60D",7200d);
-		checkCalc(p,"payload.valueBB*60D",7200d);
-		checkCalc(p,"payload.valueFB*60D",7200d);
-		checkCalc(p,"payload.valueDB*60D",7200d);
-		checkCalc(p,"payload.valueJB*60D",7200d);
-		checkCalc(p,"payload.valueIB*60D",7200d);
+		checkCalc(p, "payload.valueSB*60D", 7200d);
+		checkCalc(p, "payload.valueBB*60D", 7200d);
+		checkCalc(p, "payload.valueFB*60D", 7200d);
+		checkCalc(p, "payload.valueDB*60D", 7200d);
+		checkCalc(p, "payload.valueJB*60D", 7200d);
+		checkCalc(p, "payload.valueIB*60D", 7200d);
 
-		checkCalc(p,"payload.valueS*60D",7200d);
-		checkCalc(p,"payload.valueB*60D",7200d);
-		checkCalc(p,"payload.valueF*60D",7200d);
-		checkCalc(p,"payload.valueD*60D",7200d);
-		checkCalc(p,"payload.valueJ*60D",7200d);
-		checkCalc(p,"payload.valueI*60D",7200d);
+		checkCalc(p, "payload.valueS*60D", 7200d);
+		checkCalc(p, "payload.valueB*60D", 7200d);
+		checkCalc(p, "payload.valueF*60D", 7200d);
+		checkCalc(p, "payload.valueD*60D", 7200d);
+		checkCalc(p, "payload.valueJ*60D", 7200d);
+		checkCalc(p, "payload.valueI*60D", 7200d);
 
-		checkCalc(p,"payload.valueSB*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueBB*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueFB*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueDB*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueJB*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueIB*payload.valueDB60",7200d);
+		checkCalc(p, "payload.valueSB*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueBB*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueFB*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueDB*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueJB*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueIB*payload.valueDB60", 7200d);
 
-		checkCalc(p,"payload.valueS*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueB*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueF*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueD*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueJ*payload.valueDB60",7200d);
-		checkCalc(p,"payload.valueI*payload.valueDB60",7200d);
+		checkCalc(p, "payload.valueS*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueB*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueF*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueD*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueJ*payload.valueDB60", 7200d);
+		checkCalc(p, "payload.valueI*payload.valueDB60", 7200d);
 
 		// right is a float
-		checkCalc(p,"payload.valueSB*60F",7200F);
-		checkCalc(p,"payload.valueBB*60F",7200F);
-		checkCalc(p,"payload.valueFB*60F",7200f);
-		checkCalc(p,"payload.valueDB*60F",7200d);
-		checkCalc(p,"payload.valueJB*60F",7200F);
-		checkCalc(p,"payload.valueIB*60F",7200F);
+		checkCalc(p, "payload.valueSB*60F", 7200F);
+		checkCalc(p, "payload.valueBB*60F", 7200F);
+		checkCalc(p, "payload.valueFB*60F", 7200f);
+		checkCalc(p, "payload.valueDB*60F", 7200d);
+		checkCalc(p, "payload.valueJB*60F", 7200F);
+		checkCalc(p, "payload.valueIB*60F", 7200F);
 
-		checkCalc(p,"payload.valueS*60F",7200F);
-		checkCalc(p,"payload.valueB*60F",7200F);
-		checkCalc(p,"payload.valueF*60F",7200f);
-		checkCalc(p,"payload.valueD*60F",7200d);
-		checkCalc(p,"payload.valueJ*60F",7200F);
-		checkCalc(p,"payload.valueI*60F",7200F);
+		checkCalc(p, "payload.valueS*60F", 7200F);
+		checkCalc(p, "payload.valueB*60F", 7200F);
+		checkCalc(p, "payload.valueF*60F", 7200f);
+		checkCalc(p, "payload.valueD*60F", 7200d);
+		checkCalc(p, "payload.valueJ*60F", 7200F);
+		checkCalc(p, "payload.valueI*60F", 7200F);
 
-		checkCalc(p,"payload.valueSB*payload.valueFB60",7200F);
-		checkCalc(p,"payload.valueBB*payload.valueFB60",7200F);
-		checkCalc(p,"payload.valueFB*payload.valueFB60",7200f);
-		checkCalc(p,"payload.valueDB*payload.valueFB60",7200d);
-		checkCalc(p,"payload.valueJB*payload.valueFB60",7200F);
-		checkCalc(p,"payload.valueIB*payload.valueFB60",7200F);
+		checkCalc(p, "payload.valueSB*payload.valueFB60", 7200F);
+		checkCalc(p, "payload.valueBB*payload.valueFB60", 7200F);
+		checkCalc(p, "payload.valueFB*payload.valueFB60", 7200f);
+		checkCalc(p, "payload.valueDB*payload.valueFB60", 7200d);
+		checkCalc(p, "payload.valueJB*payload.valueFB60", 7200F);
+		checkCalc(p, "payload.valueIB*payload.valueFB60", 7200F);
 
-		checkCalc(p,"payload.valueS*payload.valueFB60",7200F);
-		checkCalc(p,"payload.valueB*payload.valueFB60",7200F);
-		checkCalc(p,"payload.valueF*payload.valueFB60",7200f);
-		checkCalc(p,"payload.valueD*payload.valueFB60",7200d);
-		checkCalc(p,"payload.valueJ*payload.valueFB60",7200F);
-		checkCalc(p,"payload.valueI*payload.valueFB60",7200F);
+		checkCalc(p, "payload.valueS*payload.valueFB60", 7200F);
+		checkCalc(p, "payload.valueB*payload.valueFB60", 7200F);
+		checkCalc(p, "payload.valueF*payload.valueFB60", 7200f);
+		checkCalc(p, "payload.valueD*payload.valueFB60", 7200d);
+		checkCalc(p, "payload.valueJ*payload.valueFB60", 7200F);
+		checkCalc(p, "payload.valueI*payload.valueFB60", 7200F);
 
 		// right is a long
-		checkCalc(p,"payload.valueSB*60L",7200L);
-		checkCalc(p,"payload.valueBB*60L",7200L);
-		checkCalc(p,"payload.valueFB*60L",7200f);
-		checkCalc(p,"payload.valueDB*60L",7200d);
-		checkCalc(p,"payload.valueJB*60L",7200L);
-		checkCalc(p,"payload.valueIB*60L",7200L);
+		checkCalc(p, "payload.valueSB*60L", 7200L);
+		checkCalc(p, "payload.valueBB*60L", 7200L);
+		checkCalc(p, "payload.valueFB*60L", 7200f);
+		checkCalc(p, "payload.valueDB*60L", 7200d);
+		checkCalc(p, "payload.valueJB*60L", 7200L);
+		checkCalc(p, "payload.valueIB*60L", 7200L);
 
-		checkCalc(p,"payload.valueS*60L",7200L);
-		checkCalc(p,"payload.valueB*60L",7200L);
-		checkCalc(p,"payload.valueF*60L",7200f);
-		checkCalc(p,"payload.valueD*60L",7200d);
-		checkCalc(p,"payload.valueJ*60L",7200L);
-		checkCalc(p,"payload.valueI*60L",7200L);
+		checkCalc(p, "payload.valueS*60L", 7200L);
+		checkCalc(p, "payload.valueB*60L", 7200L);
+		checkCalc(p, "payload.valueF*60L", 7200f);
+		checkCalc(p, "payload.valueD*60L", 7200d);
+		checkCalc(p, "payload.valueJ*60L", 7200L);
+		checkCalc(p, "payload.valueI*60L", 7200L);
 
-		checkCalc(p,"payload.valueSB*payload.valueJB60",7200L);
-		checkCalc(p,"payload.valueBB*payload.valueJB60",7200L);
-		checkCalc(p,"payload.valueFB*payload.valueJB60",7200f);
-		checkCalc(p,"payload.valueDB*payload.valueJB60",7200d);
-		checkCalc(p,"payload.valueJB*payload.valueJB60",7200L);
-		checkCalc(p,"payload.valueIB*payload.valueJB60",7200L);
+		checkCalc(p, "payload.valueSB*payload.valueJB60", 7200L);
+		checkCalc(p, "payload.valueBB*payload.valueJB60", 7200L);
+		checkCalc(p, "payload.valueFB*payload.valueJB60", 7200f);
+		checkCalc(p, "payload.valueDB*payload.valueJB60", 7200d);
+		checkCalc(p, "payload.valueJB*payload.valueJB60", 7200L);
+		checkCalc(p, "payload.valueIB*payload.valueJB60", 7200L);
 
-		checkCalc(p,"payload.valueS*payload.valueJB60",7200L);
-		checkCalc(p,"payload.valueB*payload.valueJB60",7200L);
-		checkCalc(p,"payload.valueF*payload.valueJB60",7200f);
-		checkCalc(p,"payload.valueD*payload.valueJB60",7200d);
-		checkCalc(p,"payload.valueJ*payload.valueJB60",7200L);
-		checkCalc(p,"payload.valueI*payload.valueJB60",7200L);
+		checkCalc(p, "payload.valueS*payload.valueJB60", 7200L);
+		checkCalc(p, "payload.valueB*payload.valueJB60", 7200L);
+		checkCalc(p, "payload.valueF*payload.valueJB60", 7200f);
+		checkCalc(p, "payload.valueD*payload.valueJB60", 7200d);
+		checkCalc(p, "payload.valueJ*payload.valueJB60", 7200L);
+		checkCalc(p, "payload.valueI*payload.valueJB60", 7200L);
 
 		// right is an int
-		checkCalc(p,"payload.valueSB*60",7200);
-		checkCalc(p,"payload.valueBB*60",7200);
-		checkCalc(p,"payload.valueFB*60",7200f);
-		checkCalc(p,"payload.valueDB*60",7200d);
-		checkCalc(p,"payload.valueJB*60",7200L);
-		checkCalc(p,"payload.valueIB*60",7200);
+		checkCalc(p, "payload.valueSB*60", 7200);
+		checkCalc(p, "payload.valueBB*60", 7200);
+		checkCalc(p, "payload.valueFB*60", 7200f);
+		checkCalc(p, "payload.valueDB*60", 7200d);
+		checkCalc(p, "payload.valueJB*60", 7200L);
+		checkCalc(p, "payload.valueIB*60", 7200);
 
-		checkCalc(p,"payload.valueS*60",7200);
-		checkCalc(p,"payload.valueB*60",7200);
-		checkCalc(p,"payload.valueF*60",7200f);
-		checkCalc(p,"payload.valueD*60",7200d);
-		checkCalc(p,"payload.valueJ*60",7200L);
-		checkCalc(p,"payload.valueI*60",7200);
+		checkCalc(p, "payload.valueS*60", 7200);
+		checkCalc(p, "payload.valueB*60", 7200);
+		checkCalc(p, "payload.valueF*60", 7200f);
+		checkCalc(p, "payload.valueD*60", 7200d);
+		checkCalc(p, "payload.valueJ*60", 7200L);
+		checkCalc(p, "payload.valueI*60", 7200);
 
-		checkCalc(p,"payload.valueSB*payload.valueIB60",7200);
-		checkCalc(p,"payload.valueBB*payload.valueIB60",7200);
-		checkCalc(p,"payload.valueFB*payload.valueIB60",7200f);
-		checkCalc(p,"payload.valueDB*payload.valueIB60",7200d);
-		checkCalc(p,"payload.valueJB*payload.valueIB60",7200L);
-		checkCalc(p,"payload.valueIB*payload.valueIB60",7200);
+		checkCalc(p, "payload.valueSB*payload.valueIB60", 7200);
+		checkCalc(p, "payload.valueBB*payload.valueIB60", 7200);
+		checkCalc(p, "payload.valueFB*payload.valueIB60", 7200f);
+		checkCalc(p, "payload.valueDB*payload.valueIB60", 7200d);
+		checkCalc(p, "payload.valueJB*payload.valueIB60", 7200L);
+		checkCalc(p, "payload.valueIB*payload.valueIB60", 7200);
 
-		checkCalc(p,"payload.valueS*payload.valueIB60",7200);
-		checkCalc(p,"payload.valueB*payload.valueIB60",7200);
-		checkCalc(p,"payload.valueF*payload.valueIB60",7200f);
-		checkCalc(p,"payload.valueD*payload.valueIB60",7200d);
-		checkCalc(p,"payload.valueJ*payload.valueIB60",7200L);
-		checkCalc(p,"payload.valueI*payload.valueIB60",7200);
+		checkCalc(p, "payload.valueS*payload.valueIB60", 7200);
+		checkCalc(p, "payload.valueB*payload.valueIB60", 7200);
+		checkCalc(p, "payload.valueF*payload.valueIB60", 7200f);
+		checkCalc(p, "payload.valueD*payload.valueIB60", 7200d);
+		checkCalc(p, "payload.valueJ*payload.valueIB60", 7200L);
+		checkCalc(p, "payload.valueI*payload.valueIB60", 7200);
 
 		// right is a short
-		checkCalc(p,"payload.valueSB*payload.valueS20",2400);
-		checkCalc(p,"payload.valueBB*payload.valueS20",2400);
-		checkCalc(p,"payload.valueFB*payload.valueS20",2400f);
-		checkCalc(p,"payload.valueDB*payload.valueS20",2400d);
-		checkCalc(p,"payload.valueJB*payload.valueS20",2400L);
-		checkCalc(p,"payload.valueIB*payload.valueS20",2400);
+		checkCalc(p, "payload.valueSB*payload.valueS20", 2400);
+		checkCalc(p, "payload.valueBB*payload.valueS20", 2400);
+		checkCalc(p, "payload.valueFB*payload.valueS20", 2400f);
+		checkCalc(p, "payload.valueDB*payload.valueS20", 2400d);
+		checkCalc(p, "payload.valueJB*payload.valueS20", 2400L);
+		checkCalc(p, "payload.valueIB*payload.valueS20", 2400);
 
-		checkCalc(p,"payload.valueS*payload.valueS20",2400);
-		checkCalc(p,"payload.valueB*payload.valueS20",2400);
-		checkCalc(p,"payload.valueF*payload.valueS20",2400f);
-		checkCalc(p,"payload.valueD*payload.valueS20",2400d);
-		checkCalc(p,"payload.valueJ*payload.valueS20",2400L);
-		checkCalc(p,"payload.valueI*payload.valueS20",2400);
+		checkCalc(p, "payload.valueS*payload.valueS20", 2400);
+		checkCalc(p, "payload.valueB*payload.valueS20", 2400);
+		checkCalc(p, "payload.valueF*payload.valueS20", 2400f);
+		checkCalc(p, "payload.valueD*payload.valueS20", 2400d);
+		checkCalc(p, "payload.valueJ*payload.valueS20", 2400L);
+		checkCalc(p, "payload.valueI*payload.valueS20", 2400);
 
-		checkCalc(p,"payload.valueSB*payload.valueSB20",2400);
-		checkCalc(p,"payload.valueBB*payload.valueSB20",2400);
-		checkCalc(p,"payload.valueFB*payload.valueSB20",2400f);
-		checkCalc(p,"payload.valueDB*payload.valueSB20",2400d);
-		checkCalc(p,"payload.valueJB*payload.valueSB20",2400L);
-		checkCalc(p,"payload.valueIB*payload.valueSB20",2400);
+		checkCalc(p, "payload.valueSB*payload.valueSB20", 2400);
+		checkCalc(p, "payload.valueBB*payload.valueSB20", 2400);
+		checkCalc(p, "payload.valueFB*payload.valueSB20", 2400f);
+		checkCalc(p, "payload.valueDB*payload.valueSB20", 2400d);
+		checkCalc(p, "payload.valueJB*payload.valueSB20", 2400L);
+		checkCalc(p, "payload.valueIB*payload.valueSB20", 2400);
 
-		checkCalc(p,"payload.valueS*payload.valueSB20",2400);
-		checkCalc(p,"payload.valueB*payload.valueSB20",2400);
-		checkCalc(p,"payload.valueF*payload.valueSB20",2400f);
-		checkCalc(p,"payload.valueD*payload.valueSB20",2400d);
-		checkCalc(p,"payload.valueJ*payload.valueSB20",2400L);
-		checkCalc(p,"payload.valueI*payload.valueSB20",2400);
+		checkCalc(p, "payload.valueS*payload.valueSB20", 2400);
+		checkCalc(p, "payload.valueB*payload.valueSB20", 2400);
+		checkCalc(p, "payload.valueF*payload.valueSB20", 2400f);
+		checkCalc(p, "payload.valueD*payload.valueSB20", 2400d);
+		checkCalc(p, "payload.valueJ*payload.valueSB20", 2400L);
+		checkCalc(p, "payload.valueI*payload.valueSB20", 2400);
 
 		// right is a byte
-		checkCalc(p,"payload.valueSB*payload.valueB20",2400);
-		checkCalc(p,"payload.valueBB*payload.valueB20",2400);
-		checkCalc(p,"payload.valueFB*payload.valueB20",2400f);
-		checkCalc(p,"payload.valueDB*payload.valueB20",2400d);
-		checkCalc(p,"payload.valueJB*payload.valueB20",2400L);
-		checkCalc(p,"payload.valueIB*payload.valueB20",2400);
+		checkCalc(p, "payload.valueSB*payload.valueB20", 2400);
+		checkCalc(p, "payload.valueBB*payload.valueB20", 2400);
+		checkCalc(p, "payload.valueFB*payload.valueB20", 2400f);
+		checkCalc(p, "payload.valueDB*payload.valueB20", 2400d);
+		checkCalc(p, "payload.valueJB*payload.valueB20", 2400L);
+		checkCalc(p, "payload.valueIB*payload.valueB20", 2400);
 
-		checkCalc(p,"payload.valueS*payload.valueB20",2400);
-		checkCalc(p,"payload.valueB*payload.valueB20",2400);
-		checkCalc(p,"payload.valueF*payload.valueB20",2400f);
-		checkCalc(p,"payload.valueD*payload.valueB20",2400d);
-		checkCalc(p,"payload.valueJ*payload.valueB20",2400L);
-		checkCalc(p,"payload.valueI*payload.valueB20",2400);
+		checkCalc(p, "payload.valueS*payload.valueB20", 2400);
+		checkCalc(p, "payload.valueB*payload.valueB20", 2400);
+		checkCalc(p, "payload.valueF*payload.valueB20", 2400f);
+		checkCalc(p, "payload.valueD*payload.valueB20", 2400d);
+		checkCalc(p, "payload.valueJ*payload.valueB20", 2400L);
+		checkCalc(p, "payload.valueI*payload.valueB20", 2400);
 
-		checkCalc(p,"payload.valueSB*payload.valueBB20",2400);
-		checkCalc(p,"payload.valueBB*payload.valueBB20",2400);
-		checkCalc(p,"payload.valueFB*payload.valueBB20",2400f);
-		checkCalc(p,"payload.valueDB*payload.valueBB20",2400d);
-		checkCalc(p,"payload.valueJB*payload.valueBB20",2400L);
-		checkCalc(p,"payload.valueIB*payload.valueBB20",2400);
+		checkCalc(p, "payload.valueSB*payload.valueBB20", 2400);
+		checkCalc(p, "payload.valueBB*payload.valueBB20", 2400);
+		checkCalc(p, "payload.valueFB*payload.valueBB20", 2400f);
+		checkCalc(p, "payload.valueDB*payload.valueBB20", 2400d);
+		checkCalc(p, "payload.valueJB*payload.valueBB20", 2400L);
+		checkCalc(p, "payload.valueIB*payload.valueBB20", 2400);
 
-		checkCalc(p,"payload.valueS*payload.valueBB20",2400);
-		checkCalc(p,"payload.valueB*payload.valueBB20",2400);
-		checkCalc(p,"payload.valueF*payload.valueBB20",2400f);
-		checkCalc(p,"payload.valueD*payload.valueBB20",2400d);
-		checkCalc(p,"payload.valueJ*payload.valueBB20",2400L);
-		checkCalc(p,"payload.valueI*payload.valueBB20",2400);
+		checkCalc(p, "payload.valueS*payload.valueBB20", 2400);
+		checkCalc(p, "payload.valueB*payload.valueBB20", 2400);
+		checkCalc(p, "payload.valueF*payload.valueBB20", 2400f);
+		checkCalc(p, "payload.valueD*payload.valueBB20", 2400d);
+		checkCalc(p, "payload.valueJ*payload.valueBB20", 2400L);
+		checkCalc(p, "payload.valueI*payload.valueBB20", 2400);
 	}
 
 	@Test
@@ -2856,178 +2856,178 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		//	expression = parse("(T(java.lang.Double).parseDouble(payload.valueI.toString()))/60D");
 
 		// right is a double
-		checkCalc(p,"payload.valueSB%58D",4d);
-		checkCalc(p,"payload.valueBB%58D",4d);
-		checkCalc(p,"payload.valueFB%58D",4d);
-		checkCalc(p,"payload.valueDB%58D",4d);
-		checkCalc(p,"payload.valueJB%58D",4d);
-		checkCalc(p,"payload.valueIB%58D",4d);
+		checkCalc(p, "payload.valueSB%58D", 4d);
+		checkCalc(p, "payload.valueBB%58D", 4d);
+		checkCalc(p, "payload.valueFB%58D", 4d);
+		checkCalc(p, "payload.valueDB%58D", 4d);
+		checkCalc(p, "payload.valueJB%58D", 4d);
+		checkCalc(p, "payload.valueIB%58D", 4d);
 
-		checkCalc(p,"payload.valueS%58D",4d);
-		checkCalc(p,"payload.valueB%58D",4d);
-		checkCalc(p,"payload.valueF%58D",4d);
-		checkCalc(p,"payload.valueD%58D",4d);
-		checkCalc(p,"payload.valueJ%58D",4d);
-		checkCalc(p,"payload.valueI%58D",4d);
+		checkCalc(p, "payload.valueS%58D", 4d);
+		checkCalc(p, "payload.valueB%58D", 4d);
+		checkCalc(p, "payload.valueF%58D", 4d);
+		checkCalc(p, "payload.valueD%58D", 4d);
+		checkCalc(p, "payload.valueJ%58D", 4d);
+		checkCalc(p, "payload.valueI%58D", 4d);
 
-		checkCalc(p,"payload.valueSB%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueBB%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueFB%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueDB%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueJB%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueIB%payload.valueDB58",4d);
+		checkCalc(p, "payload.valueSB%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueBB%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueFB%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueDB%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueJB%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueIB%payload.valueDB58", 4d);
 
-		checkCalc(p,"payload.valueS%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueB%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueF%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueD%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueJ%payload.valueDB58",4d);
-		checkCalc(p,"payload.valueI%payload.valueDB58",4d);
+		checkCalc(p, "payload.valueS%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueB%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueF%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueD%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueJ%payload.valueDB58", 4d);
+		checkCalc(p, "payload.valueI%payload.valueDB58", 4d);
 
 		// right is a float
-		checkCalc(p,"payload.valueSB%58F",4F);
-		checkCalc(p,"payload.valueBB%58F",4F);
-		checkCalc(p,"payload.valueFB%58F",4f);
-		checkCalc(p,"payload.valueDB%58F",4d);
-		checkCalc(p,"payload.valueJB%58F",4F);
-		checkCalc(p,"payload.valueIB%58F",4F);
+		checkCalc(p, "payload.valueSB%58F", 4F);
+		checkCalc(p, "payload.valueBB%58F", 4F);
+		checkCalc(p, "payload.valueFB%58F", 4f);
+		checkCalc(p, "payload.valueDB%58F", 4d);
+		checkCalc(p, "payload.valueJB%58F", 4F);
+		checkCalc(p, "payload.valueIB%58F", 4F);
 
-		checkCalc(p,"payload.valueS%58F",4F);
-		checkCalc(p,"payload.valueB%58F",4F);
-		checkCalc(p,"payload.valueF%58F",4f);
-		checkCalc(p,"payload.valueD%58F",4d);
-		checkCalc(p,"payload.valueJ%58F",4F);
-		checkCalc(p,"payload.valueI%58F",4F);
+		checkCalc(p, "payload.valueS%58F", 4F);
+		checkCalc(p, "payload.valueB%58F", 4F);
+		checkCalc(p, "payload.valueF%58F", 4f);
+		checkCalc(p, "payload.valueD%58F", 4d);
+		checkCalc(p, "payload.valueJ%58F", 4F);
+		checkCalc(p, "payload.valueI%58F", 4F);
 
-		checkCalc(p,"payload.valueSB%payload.valueFB58",4F);
-		checkCalc(p,"payload.valueBB%payload.valueFB58",4F);
-		checkCalc(p,"payload.valueFB%payload.valueFB58",4f);
-		checkCalc(p,"payload.valueDB%payload.valueFB58",4d);
-		checkCalc(p,"payload.valueJB%payload.valueFB58",4F);
-		checkCalc(p,"payload.valueIB%payload.valueFB58",4F);
+		checkCalc(p, "payload.valueSB%payload.valueFB58", 4F);
+		checkCalc(p, "payload.valueBB%payload.valueFB58", 4F);
+		checkCalc(p, "payload.valueFB%payload.valueFB58", 4f);
+		checkCalc(p, "payload.valueDB%payload.valueFB58", 4d);
+		checkCalc(p, "payload.valueJB%payload.valueFB58", 4F);
+		checkCalc(p, "payload.valueIB%payload.valueFB58", 4F);
 
-		checkCalc(p,"payload.valueS%payload.valueFB58",4F);
-		checkCalc(p,"payload.valueB%payload.valueFB58",4F);
-		checkCalc(p,"payload.valueF%payload.valueFB58",4f);
-		checkCalc(p,"payload.valueD%payload.valueFB58",4d);
-		checkCalc(p,"payload.valueJ%payload.valueFB58",4F);
-		checkCalc(p,"payload.valueI%payload.valueFB58",4F);
+		checkCalc(p, "payload.valueS%payload.valueFB58", 4F);
+		checkCalc(p, "payload.valueB%payload.valueFB58", 4F);
+		checkCalc(p, "payload.valueF%payload.valueFB58", 4f);
+		checkCalc(p, "payload.valueD%payload.valueFB58", 4d);
+		checkCalc(p, "payload.valueJ%payload.valueFB58", 4F);
+		checkCalc(p, "payload.valueI%payload.valueFB58", 4F);
 
 		// right is a long
-		checkCalc(p,"payload.valueSB%58L",4L);
-		checkCalc(p,"payload.valueBB%58L",4L);
-		checkCalc(p,"payload.valueFB%58L",4f);
-		checkCalc(p,"payload.valueDB%58L",4d);
-		checkCalc(p,"payload.valueJB%58L",4L);
-		checkCalc(p,"payload.valueIB%58L",4L);
+		checkCalc(p, "payload.valueSB%58L", 4L);
+		checkCalc(p, "payload.valueBB%58L", 4L);
+		checkCalc(p, "payload.valueFB%58L", 4f);
+		checkCalc(p, "payload.valueDB%58L", 4d);
+		checkCalc(p, "payload.valueJB%58L", 4L);
+		checkCalc(p, "payload.valueIB%58L", 4L);
 
-		checkCalc(p,"payload.valueS%58L",4L);
-		checkCalc(p,"payload.valueB%58L",4L);
-		checkCalc(p,"payload.valueF%58L",4f);
-		checkCalc(p,"payload.valueD%58L",4d);
-		checkCalc(p,"payload.valueJ%58L",4L);
-		checkCalc(p,"payload.valueI%58L",4L);
+		checkCalc(p, "payload.valueS%58L", 4L);
+		checkCalc(p, "payload.valueB%58L", 4L);
+		checkCalc(p, "payload.valueF%58L", 4f);
+		checkCalc(p, "payload.valueD%58L", 4d);
+		checkCalc(p, "payload.valueJ%58L", 4L);
+		checkCalc(p, "payload.valueI%58L", 4L);
 
-		checkCalc(p,"payload.valueSB%payload.valueJB58",4L);
-		checkCalc(p,"payload.valueBB%payload.valueJB58",4L);
-		checkCalc(p,"payload.valueFB%payload.valueJB58",4f);
-		checkCalc(p,"payload.valueDB%payload.valueJB58",4d);
-		checkCalc(p,"payload.valueJB%payload.valueJB58",4L);
-		checkCalc(p,"payload.valueIB%payload.valueJB58",4L);
+		checkCalc(p, "payload.valueSB%payload.valueJB58", 4L);
+		checkCalc(p, "payload.valueBB%payload.valueJB58", 4L);
+		checkCalc(p, "payload.valueFB%payload.valueJB58", 4f);
+		checkCalc(p, "payload.valueDB%payload.valueJB58", 4d);
+		checkCalc(p, "payload.valueJB%payload.valueJB58", 4L);
+		checkCalc(p, "payload.valueIB%payload.valueJB58", 4L);
 
-		checkCalc(p,"payload.valueS%payload.valueJB58",4L);
-		checkCalc(p,"payload.valueB%payload.valueJB58",4L);
-		checkCalc(p,"payload.valueF%payload.valueJB58",4f);
-		checkCalc(p,"payload.valueD%payload.valueJB58",4d);
-		checkCalc(p,"payload.valueJ%payload.valueJB58",4L);
-		checkCalc(p,"payload.valueI%payload.valueJB58",4L);
+		checkCalc(p, "payload.valueS%payload.valueJB58", 4L);
+		checkCalc(p, "payload.valueB%payload.valueJB58", 4L);
+		checkCalc(p, "payload.valueF%payload.valueJB58", 4f);
+		checkCalc(p, "payload.valueD%payload.valueJB58", 4d);
+		checkCalc(p, "payload.valueJ%payload.valueJB58", 4L);
+		checkCalc(p, "payload.valueI%payload.valueJB58", 4L);
 
 		// right is an int
-		checkCalc(p,"payload.valueSB%58",4);
-		checkCalc(p,"payload.valueBB%58",4);
-		checkCalc(p,"payload.valueFB%58",4f);
-		checkCalc(p,"payload.valueDB%58",4d);
-		checkCalc(p,"payload.valueJB%58",4L);
-		checkCalc(p,"payload.valueIB%58",4);
+		checkCalc(p, "payload.valueSB%58", 4);
+		checkCalc(p, "payload.valueBB%58", 4);
+		checkCalc(p, "payload.valueFB%58", 4f);
+		checkCalc(p, "payload.valueDB%58", 4d);
+		checkCalc(p, "payload.valueJB%58", 4L);
+		checkCalc(p, "payload.valueIB%58", 4);
 
-		checkCalc(p,"payload.valueS%58",4);
-		checkCalc(p,"payload.valueB%58",4);
-		checkCalc(p,"payload.valueF%58",4f);
-		checkCalc(p,"payload.valueD%58",4d);
-		checkCalc(p,"payload.valueJ%58",4L);
-		checkCalc(p,"payload.valueI%58",4);
+		checkCalc(p, "payload.valueS%58", 4);
+		checkCalc(p, "payload.valueB%58", 4);
+		checkCalc(p, "payload.valueF%58", 4f);
+		checkCalc(p, "payload.valueD%58", 4d);
+		checkCalc(p, "payload.valueJ%58", 4L);
+		checkCalc(p, "payload.valueI%58", 4);
 
-		checkCalc(p,"payload.valueSB%payload.valueIB58",4);
-		checkCalc(p,"payload.valueBB%payload.valueIB58",4);
-		checkCalc(p,"payload.valueFB%payload.valueIB58",4f);
-		checkCalc(p,"payload.valueDB%payload.valueIB58",4d);
-		checkCalc(p,"payload.valueJB%payload.valueIB58",4L);
-		checkCalc(p,"payload.valueIB%payload.valueIB58",4);
+		checkCalc(p, "payload.valueSB%payload.valueIB58", 4);
+		checkCalc(p, "payload.valueBB%payload.valueIB58", 4);
+		checkCalc(p, "payload.valueFB%payload.valueIB58", 4f);
+		checkCalc(p, "payload.valueDB%payload.valueIB58", 4d);
+		checkCalc(p, "payload.valueJB%payload.valueIB58", 4L);
+		checkCalc(p, "payload.valueIB%payload.valueIB58", 4);
 
-		checkCalc(p,"payload.valueS%payload.valueIB58",4);
-		checkCalc(p,"payload.valueB%payload.valueIB58",4);
-		checkCalc(p,"payload.valueF%payload.valueIB58",4f);
-		checkCalc(p,"payload.valueD%payload.valueIB58",4d);
-		checkCalc(p,"payload.valueJ%payload.valueIB58",4L);
-		checkCalc(p,"payload.valueI%payload.valueIB58",4);
+		checkCalc(p, "payload.valueS%payload.valueIB58", 4);
+		checkCalc(p, "payload.valueB%payload.valueIB58", 4);
+		checkCalc(p, "payload.valueF%payload.valueIB58", 4f);
+		checkCalc(p, "payload.valueD%payload.valueIB58", 4d);
+		checkCalc(p, "payload.valueJ%payload.valueIB58", 4L);
+		checkCalc(p, "payload.valueI%payload.valueIB58", 4);
 
 		// right is a short
-		checkCalc(p,"payload.valueSB%payload.valueS18",12);
-		checkCalc(p,"payload.valueBB%payload.valueS18",12);
-		checkCalc(p,"payload.valueFB%payload.valueS18",12f);
-		checkCalc(p,"payload.valueDB%payload.valueS18",12d);
-		checkCalc(p,"payload.valueJB%payload.valueS18",12L);
-		checkCalc(p,"payload.valueIB%payload.valueS18",12);
+		checkCalc(p, "payload.valueSB%payload.valueS18", 12);
+		checkCalc(p, "payload.valueBB%payload.valueS18", 12);
+		checkCalc(p, "payload.valueFB%payload.valueS18", 12f);
+		checkCalc(p, "payload.valueDB%payload.valueS18", 12d);
+		checkCalc(p, "payload.valueJB%payload.valueS18", 12L);
+		checkCalc(p, "payload.valueIB%payload.valueS18", 12);
 
-		checkCalc(p,"payload.valueS%payload.valueS18",12);
-		checkCalc(p,"payload.valueB%payload.valueS18",12);
-		checkCalc(p,"payload.valueF%payload.valueS18",12f);
-		checkCalc(p,"payload.valueD%payload.valueS18",12d);
-		checkCalc(p,"payload.valueJ%payload.valueS18",12L);
-		checkCalc(p,"payload.valueI%payload.valueS18",12);
+		checkCalc(p, "payload.valueS%payload.valueS18", 12);
+		checkCalc(p, "payload.valueB%payload.valueS18", 12);
+		checkCalc(p, "payload.valueF%payload.valueS18", 12f);
+		checkCalc(p, "payload.valueD%payload.valueS18", 12d);
+		checkCalc(p, "payload.valueJ%payload.valueS18", 12L);
+		checkCalc(p, "payload.valueI%payload.valueS18", 12);
 
-		checkCalc(p,"payload.valueSB%payload.valueSB18",12);
-		checkCalc(p,"payload.valueBB%payload.valueSB18",12);
-		checkCalc(p,"payload.valueFB%payload.valueSB18",12f);
-		checkCalc(p,"payload.valueDB%payload.valueSB18",12d);
-		checkCalc(p,"payload.valueJB%payload.valueSB18",12L);
-		checkCalc(p,"payload.valueIB%payload.valueSB18",12);
+		checkCalc(p, "payload.valueSB%payload.valueSB18", 12);
+		checkCalc(p, "payload.valueBB%payload.valueSB18", 12);
+		checkCalc(p, "payload.valueFB%payload.valueSB18", 12f);
+		checkCalc(p, "payload.valueDB%payload.valueSB18", 12d);
+		checkCalc(p, "payload.valueJB%payload.valueSB18", 12L);
+		checkCalc(p, "payload.valueIB%payload.valueSB18", 12);
 
-		checkCalc(p,"payload.valueS%payload.valueSB18",12);
-		checkCalc(p,"payload.valueB%payload.valueSB18",12);
-		checkCalc(p,"payload.valueF%payload.valueSB18",12f);
-		checkCalc(p,"payload.valueD%payload.valueSB18",12d);
-		checkCalc(p,"payload.valueJ%payload.valueSB18",12L);
-		checkCalc(p,"payload.valueI%payload.valueSB18",12);
+		checkCalc(p, "payload.valueS%payload.valueSB18", 12);
+		checkCalc(p, "payload.valueB%payload.valueSB18", 12);
+		checkCalc(p, "payload.valueF%payload.valueSB18", 12f);
+		checkCalc(p, "payload.valueD%payload.valueSB18", 12d);
+		checkCalc(p, "payload.valueJ%payload.valueSB18", 12L);
+		checkCalc(p, "payload.valueI%payload.valueSB18", 12);
 
 		// right is a byte
-		checkCalc(p,"payload.valueSB%payload.valueB18",12);
-		checkCalc(p,"payload.valueBB%payload.valueB18",12);
-		checkCalc(p,"payload.valueFB%payload.valueB18",12f);
-		checkCalc(p,"payload.valueDB%payload.valueB18",12d);
-		checkCalc(p,"payload.valueJB%payload.valueB18",12L);
-		checkCalc(p,"payload.valueIB%payload.valueB18",12);
+		checkCalc(p, "payload.valueSB%payload.valueB18", 12);
+		checkCalc(p, "payload.valueBB%payload.valueB18", 12);
+		checkCalc(p, "payload.valueFB%payload.valueB18", 12f);
+		checkCalc(p, "payload.valueDB%payload.valueB18", 12d);
+		checkCalc(p, "payload.valueJB%payload.valueB18", 12L);
+		checkCalc(p, "payload.valueIB%payload.valueB18", 12);
 
-		checkCalc(p,"payload.valueS%payload.valueB18",12);
-		checkCalc(p,"payload.valueB%payload.valueB18",12);
-		checkCalc(p,"payload.valueF%payload.valueB18",12f);
-		checkCalc(p,"payload.valueD%payload.valueB18",12d);
-		checkCalc(p,"payload.valueJ%payload.valueB18",12L);
-		checkCalc(p,"payload.valueI%payload.valueB18",12);
+		checkCalc(p, "payload.valueS%payload.valueB18", 12);
+		checkCalc(p, "payload.valueB%payload.valueB18", 12);
+		checkCalc(p, "payload.valueF%payload.valueB18", 12f);
+		checkCalc(p, "payload.valueD%payload.valueB18", 12d);
+		checkCalc(p, "payload.valueJ%payload.valueB18", 12L);
+		checkCalc(p, "payload.valueI%payload.valueB18", 12);
 
-		checkCalc(p,"payload.valueSB%payload.valueBB18",12);
-		checkCalc(p,"payload.valueBB%payload.valueBB18",12);
-		checkCalc(p,"payload.valueFB%payload.valueBB18",12f);
-		checkCalc(p,"payload.valueDB%payload.valueBB18",12d);
-		checkCalc(p,"payload.valueJB%payload.valueBB18",12L);
-		checkCalc(p,"payload.valueIB%payload.valueBB18",12);
+		checkCalc(p, "payload.valueSB%payload.valueBB18", 12);
+		checkCalc(p, "payload.valueBB%payload.valueBB18", 12);
+		checkCalc(p, "payload.valueFB%payload.valueBB18", 12f);
+		checkCalc(p, "payload.valueDB%payload.valueBB18", 12d);
+		checkCalc(p, "payload.valueJB%payload.valueBB18", 12L);
+		checkCalc(p, "payload.valueIB%payload.valueBB18", 12);
 
-		checkCalc(p,"payload.valueS%payload.valueBB18",12);
-		checkCalc(p,"payload.valueB%payload.valueBB18",12);
-		checkCalc(p,"payload.valueF%payload.valueBB18",12f);
-		checkCalc(p,"payload.valueD%payload.valueBB18",12d);
-		checkCalc(p,"payload.valueJ%payload.valueBB18",12L);
-		checkCalc(p,"payload.valueI%payload.valueBB18",12);
+		checkCalc(p, "payload.valueS%payload.valueBB18", 12);
+		checkCalc(p, "payload.valueB%payload.valueBB18", 12);
+		checkCalc(p, "payload.valueF%payload.valueBB18", 12f);
+		checkCalc(p, "payload.valueD%payload.valueBB18", 12d);
+		checkCalc(p, "payload.valueJ%payload.valueBB18", 12L);
+		checkCalc(p, "payload.valueI%payload.valueBB18", 12);
 	}
 
 	@Test
@@ -3226,7 +3226,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		SpelExpressionParser parser = new SpelExpressionParser(
 				new SpelParserConfiguration(SpelCompilerMode.OFF, getClass().getClassLoader()));
 		SpelExpression expression = parser.parseRaw("#it?.equals(3)");
-		StandardEvaluationContext context = new StandardEvaluationContext(new Object[] {1});
+		StandardEvaluationContext context = new StandardEvaluationContext(new Object[]{1});
 		context.setVariable("it", 3);
 		expression.setEvaluationContext(context);
 		assertThat(expression.getValue(Boolean.class)).isTrue();
@@ -3247,7 +3247,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 				new SpelParserConfiguration(SpelCompilerMode.OFF, getClass().getClassLoader()));
 		Person3 person = new Person3("foo", 1);
 		SpelExpression expression = parser.parseRaw("#it?.age?.equals([0])");
-		StandardEvaluationContext context = new StandardEvaluationContext(new Object[] {1});
+		StandardEvaluationContext context = new StandardEvaluationContext(new Object[]{1});
 		context.setVariable("it", person);
 		expression.setEvaluationContext(context);
 		assertThat(expression.getValue(Boolean.class)).isTrue();
@@ -3416,9 +3416,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(expression.getValue(String.class)).isEqualTo("abc:5.0:");
 
 		expression = parser.parseExpression(prefix + "4(#root).output");
-		assertThat(expression.getValue(new int[] {1,2,3}, String.class)).isEqualTo("123");
+		assertThat(expression.getValue(new int[]{1, 2, 3}, String.class)).isEqualTo("123");
 		assertCanCompile(expression);
-		assertThat(expression.getValue(new int[] {1,2,3}, String.class)).isEqualTo("123");
+		assertThat(expression.getValue(new int[]{1, 2, 3}, String.class)).isEqualTo("123");
 	}
 
 	@Test
@@ -3431,7 +3431,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		expression = parser.parseExpression("#it?.age.equals([0])");
 		Person person = new Person(1);
-		StandardEvaluationContext context = new StandardEvaluationContext(new Object[] {person.getAge()});
+		StandardEvaluationContext context = new StandardEvaluationContext(new Object[]{person.getAge()});
 		context.setVariable("it", person);
 		assertThat(expression.getValue(context, Boolean.class)).isTrue();
 		assertCanCompile(expression);
@@ -3442,20 +3442,20 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 				new SpelParserConfiguration(SpelCompilerMode.IMMEDIATE, getClass().getClassLoader()));
 
 		SpelExpression ex = parser.parseRaw("#it?.age.equals([0])");
-		context = new StandardEvaluationContext(new Object[] {person.getAge()});
+		context = new StandardEvaluationContext(new Object[]{person.getAge()});
 		context.setVariable("it", person);
 		assertThat(ex.getValue(context, Boolean.class)).isTrue();
 		assertThat(ex.getValue(context, Boolean.class)).isTrue();
 
 		PersonInOtherPackage person2 = new PersonInOtherPackage(1);
 		ex = parser.parseRaw("#it?.age.equals([0])");
-		context = new StandardEvaluationContext(new Object[] {person2.getAge()});
+		context = new StandardEvaluationContext(new Object[]{person2.getAge()});
 		context.setVariable("it", person2);
 		assertThat(ex.getValue(context, Boolean.class)).isTrue();
 		assertThat(ex.getValue(context, Boolean.class)).isTrue();
 
 		ex = parser.parseRaw("#it?.age.equals([0])");
-		context = new StandardEvaluationContext(new Object[] {person2.getAge()});
+		context = new StandardEvaluationContext(new Object[]{person2.getAge()});
 		context.setVariable("it", person2);
 		assertThat((boolean) (Boolean) ex.getValue(context)).isTrue();
 		assertThat((boolean) (Boolean) ex.getValue(context)).isTrue();
@@ -3991,15 +3991,15 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		// changing target
 
 		// from primitive array to reference type array
-		int[] is = new int[] {1,2,3};
-		String[] strings = new String[] {"a","b","c"};
+		int[] is = new int[]{1, 2, 3};
+		String[] strings = new String[]{"a", "b", "c"};
 		expression = parser.parseExpression("[1]");
 		assertThat(expression.getValue(is)).isEqualTo(2);
 		assertCanCompile(expression);
 		assertThat(expression.getValue(is)).isEqualTo(2);
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expression.getValue(strings))
-			.withCauseInstanceOf(ClassCastException.class);
+				.withCauseInstanceOf(ClassCastException.class);
 		SpelCompiler.revertToInterpreted(expression);
 		assertThat(expression.getValue(strings)).isEqualTo("b");
 		assertCanCompile(expression);
@@ -4013,7 +4013,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(tc.s).isEqualTo("foo");
 		assertCanCompile(expression);
 		tc.reset();
-		tc.field="bar";
+		tc.field = "bar";
 		expression.getValue(tc);
 
 		// method with changing parameter types (change reference type)
@@ -4024,10 +4024,10 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(tc.s).isEqualTo("foo");
 		assertCanCompile(expression);
 		tc.reset();
-		tc.obj=42;
+		tc.obj = 42;
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expression.getValue(tc))
-			.withCauseInstanceOf(ClassCastException.class);
+				.withCauseInstanceOf(ClassCastException.class);
 
 
 		// method with changing target
@@ -4036,7 +4036,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertCanCompile(expression);
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expression.getValue(42))
-			.withCauseInstanceOf(ClassCastException.class);
+				.withCauseInstanceOf(ClassCastException.class);
 	}
 
 	@Test
@@ -4139,7 +4139,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	@Test
 	public void mixingItUp_indexerOpEqTernary() throws Exception {
 		Map<String, String> m = new HashMap<>();
-		m.put("andy","778");
+		m.put("andy", "778");
 
 		expression = parse("['andy']==null?1:2");
 		assertThat(expression.getValue(m)).isEqualTo(2);
@@ -4196,15 +4196,15 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void indexer() throws Exception {
-		String[] sss = new String[] {"a","b","c"};
-		Number[] ns = new Number[] {2,8,9};
-		int[] is = new int[] {8,9,10};
-		double[] ds = new double[] {3.0d,4.0d,5.0d};
-		long[] ls = new long[] {2L,3L,4L};
-		short[] ss = new short[] {(short)33,(short)44,(short)55};
-		float[] fs = new float[] {6.0f,7.0f,8.0f};
-		byte[] bs = new byte[] {(byte)2,(byte)3,(byte)4};
-		char[] cs = new char[] {'a','b','c'};
+		String[] sss = new String[]{"a", "b", "c"};
+		Number[] ns = new Number[]{2, 8, 9};
+		int[] is = new int[]{8, 9, 10};
+		double[] ds = new double[]{3.0d, 4.0d, 5.0d};
+		long[] ls = new long[]{2L, 3L, 4L};
+		short[] ss = new short[]{(short) 33, (short) 44, (short) 55};
+		float[] fs = new float[]{6.0f, 7.0f, 8.0f};
+		byte[] bs = new byte[]{(byte) 2, (byte) 3, (byte) 4};
+		char[] cs = new char[]{'a', 'b', 'c'};
 
 		// Access String (reference type) array
 		expression = parser.parseExpression("[0]");
@@ -4242,9 +4242,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		// Access short array
 		expression = parser.parseExpression("[2]");
-		assertThat(expression.getValue(ss)).isEqualTo((short)55);
+		assertThat(expression.getValue(ss)).isEqualTo((short) 55);
 		assertCanCompile(expression);
-		assertThat(expression.getValue(ss)).isEqualTo((short)55);
+		assertThat(expression.getValue(ss)).isEqualTo((short) 55);
 		assertThat(getAst().getExitDescriptor()).isEqualTo("S");
 
 		// Access float array
@@ -4256,9 +4256,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		// Access byte array
 		expression = parser.parseExpression("[2]");
-		assertThat(expression.getValue(bs)).isEqualTo((byte)4);
+		assertThat(expression.getValue(bs)).isEqualTo((byte) 4);
 		assertCanCompile(expression);
-		assertThat(expression.getValue(bs)).isEqualTo((byte)4);
+		assertThat(expression.getValue(bs)).isEqualTo((byte) 4);
 		assertThat(getAst().getExitDescriptor()).isEqualTo("B");
 
 		// Access char array
@@ -4324,8 +4324,8 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		// list of arrays
 
 		List<String[]> listOfStringArrays = new ArrayList<>();
-		listOfStringArrays.add(new String[] {"a","b","c"});
-		listOfStringArrays.add(new String[] {"d","e","f"});
+		listOfStringArrays.add(new String[]{"a", "b", "c"});
+		listOfStringArrays.add(new String[]{"d", "e", "f"});
 		expression = parser.parseExpression("[1]");
 		assertThat(stringify(expression.getValue(listOfStringArrays))).isEqualTo("d e f");
 		assertCanCompile(expression);
@@ -4339,8 +4339,8 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(getAst().getExitDescriptor()).isEqualTo("Ljava/lang/String");
 
 		List<Integer[]> listOfIntegerArrays = new ArrayList<>();
-		listOfIntegerArrays.add(new Integer[] {1,2,3});
-		listOfIntegerArrays.add(new Integer[] {4,5,6});
+		listOfIntegerArrays.add(new Integer[]{1, 2, 3});
+		listOfIntegerArrays.add(new Integer[]{4, 5, 6});
 		expression = parser.parseExpression("[0]");
 		assertThat(stringify(expression.getValue(listOfIntegerArrays))).isEqualTo("1 2 3");
 		assertCanCompile(expression);
@@ -4376,7 +4376,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(getAst().getExitDescriptor()).isEqualTo("Ljava/lang/Object");
 
 		// array of arrays
-		String[][] referenceTypeArrayOfArrays = new String[][] {new String[] {"a","b","c"},new String[] {"d","e","f"}};
+		String[][] referenceTypeArrayOfArrays = new String[][]{new String[]{"a", "b", "c"}, new String[]{"d", "e", "f"}};
 		expression = parser.parseExpression("[1]");
 		assertThat(stringify(expression.getValue(referenceTypeArrayOfArrays))).isEqualTo("d e f");
 		assertCanCompile(expression);
@@ -4390,7 +4390,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(stringify(expression.getValue(referenceTypeArrayOfArrays))).isEqualTo("f");
 		assertThat(getAst().getExitDescriptor()).isEqualTo("Ljava/lang/String");
 
-		int[][] primitiveTypeArrayOfArrays = new int[][] {new int[] {1,2,3},new int[] {4,5,6}};
+		int[][] primitiveTypeArrayOfArrays = new int[][]{new int[]{1, 2, 3}, new int[]{4, 5, 6}};
 		expression = parser.parseExpression("[1]");
 		assertThat(stringify(expression.getValue(primitiveTypeArrayOfArrays))).isEqualTo("4 5 6");
 		assertCanCompile(expression);
@@ -4430,7 +4430,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(getAst().getExitDescriptor()).isEqualTo("Ljava/lang/Object");
 
 		// Map of lists
-		Map<String,List<String>> mapToLists = new HashMap<>();
+		Map<String, List<String>> mapToLists = new HashMap<>();
 		list = new ArrayList<>();
 		list.add("a");
 		list.add("b");
@@ -4450,10 +4450,10 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(getAst().getExitDescriptor()).isEqualTo("Ljava/lang/Object");
 
 		// Map to array
-		Map<String,int[]> mapToIntArray = new HashMap<>();
+		Map<String, int[]> mapToIntArray = new HashMap<>();
 		StandardEvaluationContext ctx = new StandardEvaluationContext();
 		ctx.addPropertyAccessor(new CompilableMapAccessor());
-		mapToIntArray.put("foo",new int[] {1,2,3});
+		mapToIntArray.put("foo", new int[]{1, 2, 3});
 		expression = parser.parseExpression("['foo']");
 		assertThat(stringify(expression.getValue(mapToIntArray))).isEqualTo("1 2 3");
 		assertCanCompile(expression);
@@ -4550,7 +4550,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		StandardEvaluationContext ctx = new StandardEvaluationContext();
 		ctx.addPropertyAccessor(new MyAccessor());
 		expression = parser.parseExpression("payload2.var1");
-		Object v = expression.getValue(ctx,holder);
+		Object v = expression.getValue(ctx, holder);
 		assertThat(v).isEqualTo("abc");
 
 		//	// time it interpreted
@@ -4561,7 +4561,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		//	System.out.println((System.currentTimeMillis() - stime));
 
 		assertCanCompile(expression);
-		v = expression.getValue(ctx,holder);
+		v = expression.getValue(ctx, holder);
 		assertThat(v).isEqualTo("abc");
 
 		//	// time it compiled
@@ -4771,9 +4771,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	@Test
 	public void indexerMapAccessor_12045() throws Exception {
 		SpelParserConfiguration spc = new SpelParserConfiguration(
-				SpelCompilerMode.IMMEDIATE,getClass().getClassLoader());
+				SpelCompilerMode.IMMEDIATE, getClass().getClassLoader());
 		SpelExpressionParser sep = new SpelExpressionParser(spc);
-		expression=sep.parseExpression("headers[command]");
+		expression = sep.parseExpression("headers[command]");
 		MyMessage root = new MyMessage();
 		assertThat(expression.getValue(root)).isEqualTo("wibble");
 		// This next call was failing because the isCompilable check in Indexer
@@ -4784,11 +4784,11 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertCanCompile(expression);
 
 		// What about a map key that is an expression - ensure the getKey() is evaluated in the right scope
-		expression=sep.parseExpression("headers[getKey()]");
+		expression = sep.parseExpression("headers[getKey()]");
 		assertThat(expression.getValue(root)).isEqualTo("wobble");
 		assertThat(expression.getValue(root)).isEqualTo("wobble");
 
-		expression=sep.parseExpression("list[getKey2()]");
+		expression = sep.parseExpression("list[getKey2()]");
 		assertThat(expression.getValue(root)).isEqualTo("wobble");
 		assertThat(expression.getValue(root)).isEqualTo("wobble");
 
@@ -4859,14 +4859,14 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		// variable access returning primitive
 		exp = new SpelExpressionParser(configuration).parseExpression("#x?:'foo'");
-		context.setVariable("x",50);
+		context.setVariable("x", 50);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("50");
 		assertCanCompile(exp);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("50");
 		assertIsCompiled(exp);
 
 		exp = new SpelExpressionParser(configuration).parseExpression("#x?:'foo'");
-		context.setVariable("x",null);
+		context.setVariable("x", null);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("foo");
 		assertCanCompile(exp);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("foo");
@@ -4874,7 +4874,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		// variable access returning array
 		exp = new SpelExpressionParser(configuration).parseExpression("#x?:'foo'");
-		context.setVariable("x",new int[]{1,2,3});
+		context.setVariable("x", new int[]{1, 2, 3});
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("1,2,3");
 		assertCanCompile(exp);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("1,2,3");
@@ -4917,13 +4917,13 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		expression = sep.parseExpression("record.get('abc')==null?record.put('abc',expression.someLong?.longValue()):null");
 		rh = new RecordHolder();
-		rh.expression.someLong=6L;
+		rh.expression.someLong = 6L;
 		assertThat(expression.getValue(rh)).isNull();
 		assertThat(rh.get("abc")).isEqualTo(6L);
 		assertThat(expression.getValue(rh)).isNull();
 		assertCanCompile(expression);
 		rh = new RecordHolder();
-		rh.expression.someLong=6L;
+		rh.expression.someLong = 6L;
 		assertThat(expression.getValue(rh)).isNull();
 		assertThat(rh.get("abc")).isEqualTo(6L);
 		assertThat(expression.getValue(rh)).isNull();
@@ -4935,49 +4935,49 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		SpelExpressionParser parser = new SpelExpressionParser(configuration);
 		StandardEvaluationContext ctx = new StandardEvaluationContext();
 		ctx.setRootObject(new Reg(1));
-		verifyCompilationAndBehaviourWithNull("value>1", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("value<1", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("value>=1", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("value<=1", parser, ctx );
+		verifyCompilationAndBehaviourWithNull("value>1", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("value<1", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("value>=1", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("value<=1", parser, ctx);
 
-		verifyCompilationAndBehaviourWithNull2("value>value2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("value<value2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("value>=value2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("value<=value2", parser, ctx );
+		verifyCompilationAndBehaviourWithNull2("value>value2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("value<value2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("value>=value2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("value<=value2", parser, ctx);
 
-		verifyCompilationAndBehaviourWithNull("valueD>1.0d", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueD<1.0d", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueD>=1.0d", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueD<=1.0d", parser, ctx );
+		verifyCompilationAndBehaviourWithNull("valueD>1.0d", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueD<1.0d", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueD>=1.0d", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueD<=1.0d", parser, ctx);
 
-		verifyCompilationAndBehaviourWithNull2("valueD>valueD2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("valueD<valueD2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("valueD>=valueD2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("valueD<=valueD2", parser, ctx );
+		verifyCompilationAndBehaviourWithNull2("valueD>valueD2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("valueD<valueD2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("valueD>=valueD2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("valueD<=valueD2", parser, ctx);
 
-		verifyCompilationAndBehaviourWithNull("valueL>1L", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueL<1L", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueL>=1L", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueL<=1L", parser, ctx );
+		verifyCompilationAndBehaviourWithNull("valueL>1L", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueL<1L", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueL>=1L", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueL<=1L", parser, ctx);
 
-		verifyCompilationAndBehaviourWithNull2("valueL>valueL2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("valueL<valueL2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("valueL>=valueL2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull2("valueL<=valueL2", parser, ctx );
+		verifyCompilationAndBehaviourWithNull2("valueL>valueL2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("valueL<valueL2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("valueL>=valueL2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull2("valueL<=valueL2", parser, ctx);
 
-		verifyCompilationAndBehaviourWithNull("valueF>1.0f", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueF<1.0f", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueF>=1.0f", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueF<=1.0f", parser, ctx );
+		verifyCompilationAndBehaviourWithNull("valueF>1.0f", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueF<1.0f", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueF>=1.0f", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueF<=1.0f", parser, ctx);
 
-		verifyCompilationAndBehaviourWithNull("valueF>valueF2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueF<valueF2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueF>=valueF2", parser, ctx );
-		verifyCompilationAndBehaviourWithNull("valueF<=valueF2", parser, ctx );
+		verifyCompilationAndBehaviourWithNull("valueF>valueF2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueF<valueF2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueF>=valueF2", parser, ctx);
+		verifyCompilationAndBehaviourWithNull("valueF<=valueF2", parser, ctx);
 	}
 
 	private void verifyCompilationAndBehaviourWithNull(String expressionText, SpelExpressionParser parser, StandardEvaluationContext ctx) {
-		Reg r = (Reg)ctx.getRootObject().getValue();
+		Reg r = (Reg) ctx.getRootObject().getValue();
 		r.setValue2(1);  // having a value in value2 fields will enable compilation to succeed, then can switch it to null
 		SpelExpression fast = (SpelExpression) parser.parseExpression(expressionText);
 		SpelExpression slow = (SpelExpression) parser.parseExpression(expressionText);
@@ -4985,13 +4985,13 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertThat(fast.compileExpression()).isTrue();
 		r.setValue2(null);
 		// try the numbers 0,1,2,null
-		for (int i=0;i<4;i++) {
-			r.setValue(i<3?i:null);
-			boolean slowResult = (Boolean)slow.getValue(ctx);
-			boolean fastResult = (Boolean)fast.getValue(ctx);
+		for (int i = 0; i < 4; i++) {
+			r.setValue(i < 3 ? i : null);
+			boolean slowResult = (Boolean) slow.getValue(ctx);
+			boolean fastResult = (Boolean) fast.getValue(ctx);
 			// System.out.println("Trying "+expressionText+" with value="+r.getValue()+" result is "+slowResult);
-			assertThat(fastResult).as(" Differing results: expression="+expressionText+
-						" value="+r.getValue()+" slow="+slowResult+" fast="+fastResult).isEqualTo(slowResult);
+			assertThat(fastResult).as(" Differing results: expression=" + expressionText +
+					" value=" + r.getValue() + " slow=" + slowResult + " fast=" + fastResult).isEqualTo(slowResult);
 		}
 	}
 
@@ -5000,15 +5000,15 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		SpelExpression slow = (SpelExpression) parser.parseExpression(expressionText);
 		fast.getValue(ctx);
 		assertThat(fast.compileExpression()).isTrue();
-		Reg r = (Reg)ctx.getRootObject().getValue();
+		Reg r = (Reg) ctx.getRootObject().getValue();
 		// try the numbers 0,1,2,null
-		for (int i=0;i<4;i++) {
-			r.setValue(i<3?i:null);
-			boolean slowResult = (Boolean)slow.getValue(ctx);
-			boolean fastResult = (Boolean)fast.getValue(ctx);
+		for (int i = 0; i < 4; i++) {
+			r.setValue(i < 3 ? i : null);
+			boolean slowResult = (Boolean) slow.getValue(ctx);
+			boolean fastResult = (Boolean) fast.getValue(ctx);
 			// System.out.println("Trying "+expressionText+" with value="+r.getValue()+" result is "+slowResult);
-			assertThat(fastResult).as(" Differing results: expression="+expressionText+
-						" value="+r.getValue()+" slow="+slowResult+" fast="+fastResult).isEqualTo(slowResult);
+			assertThat(fastResult).as(" Differing results: expression=" + expressionText +
+					" value=" + r.getValue() + " slow=" + slowResult + " fast=" + fastResult).isEqualTo(slowResult);
 		}
 	}
 
@@ -5064,14 +5064,14 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		// variable access returning primitive
 		exp = new SpelExpressionParser(configuration).parseExpression("#x==#x?50:'foo'");
-		context.setVariable("x",50);
+		context.setVariable("x", 50);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("50");
 		assertCanCompile(exp);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("50");
 		assertIsCompiled(exp);
 
 		exp = new SpelExpressionParser(configuration).parseExpression("#x!=#x?50:'foo'");
-		context.setVariable("x",null);
+		context.setVariable("x", null);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("foo");
 		assertCanCompile(exp);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("foo");
@@ -5079,7 +5079,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		// variable access returning array
 		exp = new SpelExpressionParser(configuration).parseExpression("#x==#x?'1,2,3':'foo'");
-		context.setVariable("x",new int[]{1,2,3});
+		context.setVariable("x", new int[]{1, 2, 3});
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("1,2,3");
 		assertCanCompile(exp);
 		assertThat(exp.getValue(context, new Foo(), String.class)).isEqualTo("1,2,3");
@@ -5111,33 +5111,30 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 	private SpelNodeImpl getAst() {
 		SpelExpression spelExpression = (SpelExpression) expression;
 		SpelNode ast = spelExpression.getAST();
-		return (SpelNodeImpl)ast;
+		return (SpelNodeImpl) ast;
 	}
 
 	private String stringify(Object object) {
 		StringBuilder s = new StringBuilder();
 		if (object instanceof List) {
 			List<?> ls = (List<?>) object;
-			for (Object l: ls) {
+			for (Object l : ls) {
 				s.append(l);
 				s.append(" ");
 			}
-		}
-		else if (object instanceof Object[]) {
+		} else if (object instanceof Object[]) {
 			Object[] os = (Object[]) object;
-			for (Object o: os) {
+			for (Object o : os) {
 				s.append(o);
 				s.append(" ");
 			}
-		}
-		else if (object instanceof int[]) {
+		} else if (object instanceof int[]) {
 			int[] is = (int[]) object;
-			for (int i: is) {
+			for (int i : is) {
 				s.append(i);
 				s.append(" ");
 			}
-		}
-		else {
+		} else {
 			s.append(object.toString());
 		}
 		return s.toString().trim();
@@ -5165,8 +5162,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			field.setAccessible(true);
 			Object object = field.get(expression);
 			assertThat(object).isNotNull();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new AssertionError(ex.getMessage(), ex);
 		}
 	}
@@ -5196,7 +5192,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		}
 
 		@Override
-		public int[] getIa() { return new int[] {5,3}; }
+		public int[] getIa() {
+			return new int[]{5, 3};
+		}
 
 		@Override
 		@SuppressWarnings({"rawtypes", "unchecked"})
@@ -5257,7 +5255,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		@Override
 		public Class<?>[] getSpecificTargetClasses() {
-			return new Class<?>[] {Payload2.class};
+			return new Class<?>[]{Payload2.class};
 		}
 
 		@Override
@@ -5268,7 +5266,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		@Override
 		public TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {
-			Payload2 payload2 = (Payload2)target;
+			Payload2 payload2 = (Payload2) target;
 			return new TypedValue(payload2.getField(name));
 		}
 
@@ -5296,12 +5294,11 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			if (method == null) {
 				try {
 					method = Payload2.class.getDeclaredMethod("getField", String.class);
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 				}
 			}
 			String descriptor = cf.lastDescriptor();
-			String memberDeclaringClassSlashedDescriptor = method.getDeclaringClass().getName().replace('.','/');
+			String memberDeclaringClassSlashedDescriptor = method.getDeclaringClass().getName().replace('.', '/');
 			if (descriptor == null) {
 				cf.loadTarget(mv);
 			}
@@ -5319,13 +5316,13 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		@Override
 		public boolean canRead(EvaluationContext context, Object target, String name) throws AccessException {
-			Map<?,?> map = (Map<?,?>) target;
+			Map<?, ?> map = (Map<?, ?>) target;
 			return map.containsKey(name);
 		}
 
 		@Override
 		public TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {
-			Map<?,?> map = (Map<?,?>) target;
+			Map<?, ?> map = (Map<?, ?>) target;
 			Object value = map.get(name);
 			if (value == null && !map.containsKey(name)) {
 				throw new MapAccessException(name);
@@ -5347,7 +5344,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		@Override
 		public Class<?>[] getSpecificTargetClasses() {
-			return new Class<?>[] {Map.class};
+			return new Class<?>[]{Map.class};
 		}
 
 		@Override
@@ -5367,7 +5364,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 				cf.loadTarget(mv);
 			}
 			mv.visitLdcInsn(propertyName);
-			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get","(Ljava/lang/Object;)Ljava/lang/Object;",true);
+			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
 		}
 	}
 
@@ -5415,19 +5412,23 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class FooObject {
 
-		public Object getObject() { return "hello"; }
+		public Object getObject() {
+			return "hello";
+		}
 	}
 
 
 	public static class FooString {
 
-		public String getObject() { return "hello"; }
+		public String getObject() {
+			return "hello";
+		}
 	}
 
 
 	public static class Payload {
 
-		Two[] DR = new Two[] {new Two()};
+		Two[] DR = new Two[]{new Two()};
 
 		public Two holder = new Two();
 
@@ -5445,8 +5446,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public Object getField(String name) {
 			if (name.equals("var1")) {
 				return var1;
-			}
-			else if (name.equals("var2")) {
+			} else if (name.equals("var2")) {
 				return var2;
 			}
 			return null;
@@ -5503,6 +5503,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public Three getThree() {
 			return three;
 		}
+
 		@Override
 		public String toString() {
 			return "instanceof Two";
@@ -5538,20 +5539,20 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public Float valueFB = 120F;
 		public Float valueFB58 = 58F;
 		public Float valueFB60 = 60F;
-		public byte valueB = (byte)120;
-		public byte valueB18 = (byte)18;
-		public byte valueB20 = (byte)20;
-		public Byte valueBB = (byte)120;
-		public Byte valueBB18 = (byte)18;
-		public Byte valueBB20 = (byte)20;
-		public char valueC = (char)120;
-		public Character valueCB = (char)120;
-		public short valueS = (short)120;
-		public short valueS18 = (short)18;
-		public short valueS20 = (short)20;
-		public Short valueSB = (short)120;
-		public Short valueSB18 = (short)18;
-		public Short valueSB20 = (short)20;
+		public byte valueB = (byte) 120;
+		public byte valueB18 = (byte) 18;
+		public byte valueB20 = (byte) 20;
+		public Byte valueBB = (byte) 120;
+		public Byte valueBB18 = (byte) 18;
+		public Byte valueBB20 = (byte) 20;
+		public char valueC = (char) 120;
+		public Character valueCB = (char) 120;
+		public short valueS = (short) 120;
+		public short valueS18 = (short) 18;
+		public short valueS20 = (short) 20;
+		public Short valueSB = (short) 120;
+		public Short valueSB18 = (short) 18;
+		public Short valueSB20 = (short) 20;
 
 		public PayloadX payload;
 
@@ -5571,11 +5572,23 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class TestClass4 {
 
-		public boolean a,b;
-		public boolean gettrue() { return true; }
-		public boolean getfalse() { return false; }
-		public boolean getA() { return a; }
-		public boolean getB() { return b; }
+		public boolean a, b;
+
+		public boolean gettrue() {
+			return true;
+		}
+
+		public boolean getfalse() {
+			return false;
+		}
+
+		public boolean getA() {
+			return a;
+		}
+
+		public boolean getB() {
+			return b;
+		}
 	}
 
 
@@ -5588,14 +5601,13 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		}
 
 		public void concat(String arg) {
-			s = "::"+arg;
+			s = "::" + arg;
 		}
 
 		public void concat(String... vargs) {
 			if (vargs == null) {
 				s = "";
-			}
-			else {
+			} else {
 				s = "";
 				for (String varg : vargs) {
 					s += varg;
@@ -5604,14 +5616,13 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		}
 
 		public void concat2(Object arg) {
-			s = "::"+arg;
+			s = "::" + arg;
 		}
 
 		public void concat2(Object... vargs) {
 			if (vargs == null) {
 				s = "";
-			}
-			else {
+			} else {
 				s = "";
 				for (Object varg : vargs) {
 					s += varg;
@@ -5628,9 +5639,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public static int _i = 0;
 		public static String _s = null;
 
-		public static short s1 = (short)1;
-		public static short s2 = (short)2;
-		public static short s3 = (short)3;
+		public static short s1 = (short) 1;
+		public static short s2 = (short) 2;
+		public static short s3 = (short) 3;
 
 		public static long l1 = 1L;
 		public static long l2 = 2L;
@@ -5644,12 +5655,12 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public static char c2 = 'b';
 		public static char c3 = 'c';
 
-		public static byte b1 = (byte)65;
-		public static byte b2 = (byte)66;
-		public static byte b3 = (byte)67;
+		public static byte b1 = (byte) 65;
+		public static byte b2 = (byte) 66;
+		public static byte b3 = (byte) 67;
 
-		public static String[] stringArray = new String[] {"aaa","bbb","ccc"};
-		public static int[] intArray = new int[] {11,22,33};
+		public static String[] stringArray = new String[]{"aaa", "bbb", "ccc"};
+		public static int[] intArray = new int[]{11, 22, 33};
 
 		public Object obj = null;
 
@@ -5663,33 +5674,61 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			field = null;
 		}
 
-		public void one() { i = 1; }
+		public void one() {
+			i = 1;
+		}
 
-		public static void two() { _i = 1; }
+		public static void two() {
+			_i = 1;
+		}
 
-		public String three() { return "hello"; }
-		public long four() { return 3277700L; }
+		public String three() {
+			return "hello";
+		}
 
-		public static String five() { return "hello"; }
-		public static long six() { return 3277700L; }
+		public long four() {
+			return 3277700L;
+		}
 
-		public void seven(String toset) { s = toset; }
+		public static String five() {
+			return "hello";
+		}
+
+		public static long six() {
+			return 3277700L;
+		}
+
+		public void seven(String toset) {
+			s = toset;
+		}
 		// public void seven(Number n) { s = n.toString(); }
 
-		public void takeNumber(Number n) { s = n.toString(); }
-		public void takeString(String s) { this.s = s; }
-		public static void eight(String toset) { _s = toset; }
+		public void takeNumber(Number n) {
+			s = n.toString();
+		}
 
-		public void nine(int toset) { i = toset; }
-		public static void ten(int toset) { _i = toset; }
+		public void takeString(String s) {
+			this.s = s;
+		}
+
+		public static void eight(String toset) {
+			_s = toset;
+		}
+
+		public void nine(int toset) {
+			i = toset;
+		}
+
+		public static void ten(int toset) {
+			_i = toset;
+		}
 
 		public void eleven(String... vargs) {
 			if (vargs == null) {
 				s = "";
-			}
-			else {
+			} else {
 				s = "";
-				for (String varg: vargs) {
+				for (String varg : vargs) {
 					s += varg;
 				}
 			}
@@ -5698,10 +5737,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public void twelve(int... vargs) {
 			if (vargs == null) {
 				i = 0;
-			}
-			else {
+			} else {
 				i = 0;
-				for (int varg: vargs) {
+				for (int varg : vargs) {
 					i += varg;
 				}
 			}
@@ -5710,10 +5748,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public void thirteen(String a, String... vargs) {
 			if (vargs == null) {
 				s = a + "::";
-			}
-			else {
-				s = a+"::";
-				for (String varg: vargs) {
+			} else {
+				s = a + "::";
+				for (String varg : vargs) {
 					s += varg;
 				}
 			}
@@ -5723,7 +5760,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			s = "";
 			if (bs != null) {
 				s = "";
-				for (boolean b: bs) {
+				for (boolean b : bs) {
 					s += Boolean.toString(b);
 				}
 			}
@@ -5733,7 +5770,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			s = "";
 			if (ss != null) {
 				s = "";
-				for (short s: ss) {
+				for (short s : ss) {
 					this.s += Short.toString(s);
 				}
 			}
@@ -5743,7 +5780,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			s = "";
 			if (vargs != null) {
 				s = "";
-				for (double v: vargs) {
+				for (double v : vargs) {
 					this.s += Double.toString(v);
 				}
 			}
@@ -5753,7 +5790,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			s = "";
 			if (vargs != null) {
 				s = "";
-				for (float v: vargs) {
+				for (float v : vargs) {
 					this.s += Float.toString(v);
 				}
 			}
@@ -5763,7 +5800,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			s = "";
 			if (vargs != null) {
 				s = "";
-				for (long v: vargs) {
+				for (long v : vargs) {
 					this.s += Long.toString(v);
 				}
 			}
@@ -5773,7 +5810,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			s = "";
 			if (vargs != null) {
 				s = "";
-				for (Byte v: vargs) {
+				for (Byte v : vargs) {
 					this.s += Byte.toString(v);
 				}
 			}
@@ -5783,7 +5820,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			s = "";
 			if (vargs != null) {
 				s = "";
-				for (char v: vargs) {
+				for (char v : vargs) {
 					this.s += Character.toString(v);
 				}
 			}
@@ -5791,13 +5828,12 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		public void fourteen(String a, String[]... vargs) {
 			if (vargs == null) {
-				s = a+"::";
-			}
-			else {
-				s = a+"::";
-				for (String[] varg: vargs) {
+				s = a + "::";
+			} else {
+				s = a + "::";
+				for (String[] varg : vargs) {
 					s += "{";
-					for (String v: varg) {
+					for (String v : varg) {
 						s += v;
 					}
 					s += "}";
@@ -5807,13 +5843,12 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		public void fifteen(String a, int[]... vargs) {
 			if (vargs == null) {
-				s = a+"::";
-			}
-			else {
-				s = a+"::";
-				for (int[] varg: vargs) {
+				s = a + "::";
+			} else {
+				s = a + "::";
+				for (int[] varg : vargs) {
 					s += "{";
-					for (int v: varg) {
+					for (int v : varg) {
 						s += Integer.toString(v);
 					}
 					s += "}";
@@ -5824,10 +5859,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public void sixteen(Object... vargs) {
 			if (vargs == null) {
 				s = "";
-			}
-			else {
+			} else {
 				s = "";
-				for (Object varg: vargs) {
+				for (Object varg : vargs) {
 					s += varg;
 				}
 			}
@@ -5893,7 +5927,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		@SuppressWarnings("unused")
 		private TestClass8(String a, String b) {
-			this.s = a+b;
+			this.s = a + b;
 		}
 	}
 
@@ -5902,7 +5936,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		private final String param1;
 
-		public Obj(String param1){
+		public Obj(String param1) {
 			this.param1 = param1;
 		}
 	}
@@ -5912,9 +5946,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		public final String output;
 
-		public Obj2(String... params){
+		public Obj2(String... params) {
 			StringBuilder b = new StringBuilder();
-			for (String param: params) {
+			for (String param : params) {
 				b.append(param);
 			}
 			output = b.toString();
@@ -5928,7 +5962,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		public Obj3(int... params) {
 			StringBuilder b = new StringBuilder();
-			for (int param: params) {
+			for (int param : params) {
 				b.append(Integer.toString(param));
 			}
 			output = b.toString();
@@ -5940,7 +5974,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			b.append(":");
 			b.append(Float.toString(f));
 			b.append(":");
-			for (int param: ints) {
+			for (int param : ints) {
 				b.append(Integer.toString(param));
 			}
 			output = b.toString();
@@ -5954,7 +5988,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 		public Obj4(int[] params) {
 			StringBuilder b = new StringBuilder();
-			for (int param: params) {
+			for (int param : params) {
 				b.append(Integer.toString(param));
 			}
 			output = b.toString();
@@ -6104,6 +6138,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public static StaticsHelper methoda() {
 			return sh;
 		}
+
 		public static String methodb() {
 			return "mb";
 		}
@@ -6141,11 +6176,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 			this.gotComparedTo = that;
 			if (this.i < that.i) {
 				return -1;
-			}
-			else if (this.i > that.i) {
+			} else if (this.i > that.i) {
 				return +1;
-			}
-			else {
+			} else {
 				return 0;
 			}
 		}
@@ -6181,7 +6214,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class RecordHolder {
 
-		public Map<String,Long> record = new HashMap<>();
+		public Map<String, Long> record = new HashMap<>();
 
 		public LongHolder expression = new LongHolder();
 
@@ -6203,13 +6236,13 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public class Reg {
 
-		private Integer _value,_value2;
-		private Long _valueL,_valueL2;
-		private Double _valueD,_valueD2;
-		private Float _valueF,_valueF2;
+		private Integer _value, _value2;
+		private Long _valueL, _valueL2;
+		private Double _valueD, _valueD2;
+		private Float _valueF, _valueF2;
 
 		public Reg(int v) {
-			this._value  = v;
+			this._value = v;
 			this._valueL = new Long(v);
 			this._valueD = new Double(v);
 			this._valueF = new Float(v);
@@ -6248,17 +6281,17 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		}
 
 		public void setValue(Integer value) {
-			_value  = value;
-			_valueL = value==null?null:new Long(value);
-			_valueD = value==null?null:new Double(value);
-			_valueF = value==null?null:new Float(value);
+			_value = value;
+			_valueL = value == null ? null : new Long(value);
+			_valueD = value == null ? null : new Double(value);
+			_valueF = value == null ? null : new Float(value);
 		}
 
 		public void setValue2(Integer value) {
-			_value2  = value;
-			_valueL2 = value==null?null:new Long(value);
-			_valueD2 = value==null?null:new Double(value);
-			_valueF2 = value==null?null:new Float(value);
+			_value2 = value;
+			_valueL2 = value == null ? null : new Long(value);
+			_valueD2 = value == null ? null : new Double(value);
+			_valueF2 = value == null ? null : new Float(value);
 		}
 	}
 

@@ -47,12 +47,13 @@ public class XpathResultMatchers {
 	 * Protected constructor, not for direct instantiation. Use
 	 * {@link MockMvcResultMatchers#xpath(String, Object...)} or
 	 * {@link MockMvcResultMatchers#xpath(String, Map, Object...)}.
+	 *
 	 * @param expression the XPath expression
 	 * @param namespaces the XML namespaces referenced in the XPath expression, or {@code null}
-	 * @param args arguments to parameterize the XPath expression with using the
-	 * formatting specifiers defined in {@link String#format(String, Object...)}
+	 * @param args       arguments to parameterize the XPath expression with using the
+	 *                   formatting specifiers defined in {@link String#format(String, Object...)}
 	 */
-	protected XpathResultMatchers(String expression, @Nullable Map<String, String> namespaces, Object ... args)
+	protected XpathResultMatchers(String expression, @Nullable Map<String, String> namespaces, Object... args)
 			throws XPathExpressionException {
 
 		this.xpathHelper = new XpathExpectationsHelper(expression, namespaces, args);
@@ -73,6 +74,7 @@ public class XpathResultMatchers {
 	/**
 	 * Evaluate the XPath and assert the {@link NodeList} content found with the
 	 * given Hamcrest {@link Matcher}.
+	 *
 	 * @since 5.2.2
 	 */
 	public ResultMatcher nodeList(Matcher<? super NodeList> matcher) {

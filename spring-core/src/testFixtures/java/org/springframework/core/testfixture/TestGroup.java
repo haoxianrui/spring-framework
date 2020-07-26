@@ -28,10 +28,10 @@ import static java.lang.String.format;
 /**
  * A test group used to limit when certain tests are run.
  *
- * @see EnabledForTestGroups @EnabledForTestGroups
  * @author Phillip Webb
  * @author Chris Beams
  * @author Sam Brannen
+ * @see EnabledForTestGroups @EnabledForTestGroups
  */
 public enum TestGroup {
 
@@ -53,6 +53,7 @@ public enum TestGroup {
 
 	/**
 	 * Determine if this {@link TestGroup} is active.
+	 *
 	 * @since 5.2
 	 */
 	public boolean isActive() {
@@ -70,8 +71,7 @@ public enum TestGroup {
 	static Set<TestGroup> loadTestGroups() {
 		try {
 			return TestGroup.parse(System.getProperty(TEST_GROUPS_SYSTEM_PROPERTY));
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new IllegalStateException("Failed to parse '" + TEST_GROUPS_SYSTEM_PROPERTY +
 					"' system property: " + ex.getMessage(), ex);
 		}
@@ -79,10 +79,11 @@ public enum TestGroup {
 
 	/**
 	 * Parse the specified comma separated string of groups.
+	 *
 	 * @param value the comma separated string of groups
 	 * @return a set of groups
 	 * @throws IllegalArgumentException if any specified group name is not a
-	 * valid {@link TestGroup}
+	 *                                  valid {@link TestGroup}
 	 */
 	static Set<TestGroup> parse(String value) throws IllegalArgumentException {
 		if (!StringUtils.hasText(value)) {
@@ -106,11 +107,10 @@ public enum TestGroup {
 		for (String group : value.split(",")) {
 			try {
 				groups.add(valueOf(group.trim().toUpperCase()));
-			}
-			catch (IllegalArgumentException ex) {
+			} catch (IllegalArgumentException ex) {
 				throw new IllegalArgumentException(format(
 						"Unable to find test group '%s' when parsing testGroups value: '%s'. " +
-						"Available groups include: [%s]", group.trim(), originalValue,
+								"Available groups include: [%s]", group.trim(), originalValue,
 						StringUtils.arrayToCommaDelimitedString(TestGroup.values())));
 			}
 		}

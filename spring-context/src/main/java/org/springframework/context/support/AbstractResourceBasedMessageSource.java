@@ -31,9 +31,9 @@ import org.springframework.util.ObjectUtils;
  * configuration methods and corresponding semantic definitions.
  *
  * @author Juergen Hoeller
- * @since 4.3
  * @see ResourceBundleMessageSource
  * @see ReloadableResourceBundleMessageSource
+ * @since 4.3
  */
 public abstract class AbstractResourceBasedMessageSource extends AbstractMessageSource {
 
@@ -57,6 +57,7 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * <p>Regular and XMl properties files are supported: e.g. "messages" will find
 	 * a "messages.properties", "messages_en.properties" etc arrangement as well
 	 * as "messages.xml", "messages_en.xml" etc.
+	 *
 	 * @param basename the single basename
 	 * @see #setBasenames
 	 * @see org.springframework.core.io.ResourceEditor
@@ -78,6 +79,7 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * bundle will override ones in a later bundle, due to the sequential lookup.
 	 * <p>Note: In contrast to {@link #addBasenames}, this replaces existing entries
 	 * with the given names and can therefore also be used to reset the configuration.
+	 *
 	 * @param basenames an array of basenames
 	 * @see #setBasename
 	 * @see java.util.ResourceBundle
@@ -92,9 +94,10 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * <p>Note: If a given basename already exists, the position of its entry
 	 * will remain as in the original set. New entries will be added at the
 	 * end of the list, to be searched after existing basenames.
-	 * @since 4.3
+	 *
 	 * @see #setBasenames
 	 * @see java.util.ResourceBundle
+	 * @since 4.3
 	 */
 	public void addBasenames(String... basenames) {
 		if (!ObjectUtils.isEmpty(basenames)) {
@@ -109,8 +112,9 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * Return this {@code MessageSource}'s basename set, containing entries
 	 * in the order of registration.
 	 * <p>Calling code may introspect this set as well as add or remove entries.
-	 * @since 4.3
+	 *
 	 * @see #addBasenames
+	 * @since 4.3
 	 */
 	public Set<String> getBasenameSet() {
 		return this.basenameSet;
@@ -123,6 +127,7 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * default encoding: ISO-8859-1. A {@code null} value indicates
 	 * the platform default encoding.
 	 * <p>Only applies to classic properties files, not to XML files.
+	 *
 	 * @param defaultEncoding the default charset
 	 */
 	public void setDefaultEncoding(@Nullable String defaultEncoding) {
@@ -131,6 +136,7 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 
 	/**
 	 * Return the default charset to use for parsing properties files, if any.
+	 *
 	 * @since 4.3
 	 */
 	@Nullable
@@ -147,6 +153,7 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * {@code java.util.ResourceBundle}. However, this is often not desirable
 	 * in an application server environment, where the system Locale is not relevant
 	 * to the application at all: set this flag to "false" in such a scenario.
+	 *
 	 * @see #setDefaultLocale
 	 */
 	public void setFallbackToSystemLocale(boolean fallbackToSystemLocale) {
@@ -156,6 +163,7 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	/**
 	 * Return whether to fall back to the system Locale if no files for a specific
 	 * Locale have been found.
+	 *
 	 * @since 4.3
 	 * @deprecated as of 5.2.2, in favor of {@link #getDefaultLocale()}
 	 */
@@ -170,9 +178,10 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * <p>Default is to fall back to the system Locale. You may override this with
 	 * a locally specified default Locale here, or enforce no fallback locale at all
 	 * through disabling {@link #setFallbackToSystemLocale "fallbackToSystemLocale"}.
-	 * @since 5.2.2
+	 *
 	 * @see #setFallbackToSystemLocale
 	 * @see #getDefaultLocale()
+	 * @since 5.2.2
 	 */
 	public void setDefaultLocale(@Nullable Locale defaultLocale) {
 		this.defaultLocale = defaultLocale;
@@ -181,10 +190,11 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	/**
 	 * Determine a default Locale to fall back to: either a locally specified default
 	 * Locale or the system Locale, or {@code null} for no fallback locale at all.
-	 * @since 5.2.2
+	 *
 	 * @see #setDefaultLocale
 	 * @see #setFallbackToSystemLocale
 	 * @see Locale#getDefault()
+	 * @since 5.2.2
 	 */
 	@Nullable
 	protected Locale getDefaultLocale() {
@@ -236,8 +246,9 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 	 * <li>A value of "0" will check the last-modified timestamp of the file on
 	 * every message access. <b>Do not use this in a production environment!</b>
 	 * </ul>
-	 * @since 4.3
+	 *
 	 * @see #setCacheSeconds
+	 * @since 4.3
 	 */
 	public void setCacheMillis(long cacheMillis) {
 		this.cacheMillis = cacheMillis;
@@ -245,6 +256,7 @@ public abstract class AbstractResourceBasedMessageSource extends AbstractMessage
 
 	/**
 	 * Return the number of milliseconds to cache loaded properties files.
+	 *
 	 * @since 4.3
 	 */
 	protected long getCacheMillis() {

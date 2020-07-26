@@ -111,5 +111,5 @@ inline fun <reified T : Any> WebClient.ResponseSpec.bodyToFlow(): Flow<T> =
  * @author Sebastien Deleuze
  * @since 5.2
  */
-suspend inline fun <reified T : Any> WebClient.ResponseSpec.awaitBody() : T =
+suspend inline fun <reified T : Any> WebClient.ResponseSpec.awaitBody(): T =
 		bodyToMono<T>().awaitSingle()

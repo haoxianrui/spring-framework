@@ -424,8 +424,8 @@ class StringUtilsTests {
 
 	@Test
 	void concatenateStringArrays() {
-		String[] input1 = new String[] {"myString2"};
-		String[] input2 = new String[] {"myString1", "myString2"};
+		String[] input1 = new String[]{"myString2"};
+		String[] input2 = new String[]{"myString1", "myString2"};
 		String[] result = StringUtils.concatenateStringArrays(input1, input2);
 		assertThat(result.length).isEqualTo(3);
 		assertThat(result[0]).isEqualTo("myString2");
@@ -440,8 +440,8 @@ class StringUtilsTests {
 	@Test
 	@Deprecated
 	void mergeStringArrays() {
-		String[] input1 = new String[] {"myString2"};
-		String[] input2 = new String[] {"myString1", "myString2"};
+		String[] input1 = new String[]{"myString2"};
+		String[] input2 = new String[]{"myString1", "myString2"};
 		String[] result = StringUtils.mergeStringArrays(input1, input2);
 		assertThat(result.length).isEqualTo(2);
 		assertThat(result[0]).isEqualTo("myString2");
@@ -454,7 +454,7 @@ class StringUtilsTests {
 
 	@Test
 	void sortStringArray() {
-		String[] input = new String[] {"myString2"};
+		String[] input = new String[]{"myString2"};
 		input = StringUtils.addStringToArray(input, "myString1");
 		assertThat(input[0]).isEqualTo("myString2");
 		assertThat(input[1]).isEqualTo("myString1");
@@ -466,7 +466,7 @@ class StringUtilsTests {
 
 	@Test
 	void removeDuplicateStrings() {
-		String[] input = new String[] {"myString2", "myString1", "myString2"};
+		String[] input = new String[]{"myString2", "myString1", "myString2"};
 		input = StringUtils.removeDuplicateStrings(input);
 		assertThat(input[0]).isEqualTo("myString2");
 		assertThat(input[1]).isEqualTo("myString1");
@@ -474,7 +474,7 @@ class StringUtilsTests {
 
 	@Test
 	void splitArrayElementsIntoProperties() {
-		String[] input = new String[] {"key1=value1 ", "key2 =\"value2\""};
+		String[] input = new String[]{"key1=value1 ", "key2 =\"value2\""};
 		Properties result = StringUtils.splitArrayElementsIntoProperties(input, "=");
 		assertThat(result.getProperty("key1")).isEqualTo("value1");
 		assertThat(result.getProperty("key2")).isEqualTo("\"value2\"");
@@ -482,7 +482,7 @@ class StringUtilsTests {
 
 	@Test
 	void splitArrayElementsIntoPropertiesAndDeletedChars() {
-		String[] input = new String[] {"key1=value1 ", "key2 =\"value2\""};
+		String[] input = new String[]{"key1=value1 ", "key2 =\"value2\""};
 		Properties result = StringUtils.splitArrayElementsIntoProperties(input, "=", "\"");
 		assertThat(result.getProperty("key1")).isEqualTo("value1");
 		assertThat(result.getProperty("key2")).isEqualTo("value2");
@@ -558,16 +558,16 @@ class StringUtilsTests {
 	@Test
 	void commaDelimitedListToStringArrayMatchWords() {
 		// Could read these from files
-		String[] sa = new String[] {"foo", "bar", "big"};
+		String[] sa = new String[]{"foo", "bar", "big"};
 		doTestCommaDelimitedListToStringArrayLegalMatch(sa);
 		doTestStringArrayReverseTransformationMatches(sa);
 
-		sa = new String[] {"a", "b", "c"};
+		sa = new String[]{"a", "b", "c"};
 		doTestCommaDelimitedListToStringArrayLegalMatch(sa);
 		doTestStringArrayReverseTransformationMatches(sa);
 
 		// Test same words
-		sa = new String[] {"AA", "AA", "AA", "AA", "AA"};
+		sa = new String[]{"AA", "AA", "AA", "AA", "AA"};
 		doTestCommaDelimitedListToStringArrayLegalMatch(sa);
 		doTestStringArrayReverseTransformationMatches(sa);
 	}
@@ -590,7 +590,7 @@ class StringUtilsTests {
 	@Test
 	void commaDelimitedListToStringArrayWithOtherPunctuation() {
 		// Could read these from files
-		String[] sa = new String[] {"xcvwert4456346&*.", "///", ".!", ".", ";"};
+		String[] sa = new String[]{"xcvwert4456346&*.", "///", ".!", ".", ";"};
 		doTestCommaDelimitedListToStringArrayLegalMatch(sa);
 	}
 
@@ -604,7 +604,7 @@ class StringUtilsTests {
 		assertThat(sa.length).as("a,,b produces array length 3").isEqualTo(3);
 		assertThat(sa[0].equals("a") && sa[1].isEmpty() && sa[2].equals("b")).as("components are correct").isTrue();
 
-		sa = new String[] {"", "", "a", ""};
+		sa = new String[]{"", "", "a", ""};
 		doTestCommaDelimitedListToStringArrayLegalMatch(sa);
 	}
 
@@ -643,7 +643,8 @@ class StringUtilsTests {
 		assertThat(locale).as("When given an empty Locale string, must return null.").isNull();
 	}
 
-	@Test  // SPR-8637
+	@Test
+		// SPR-8637
 	void parseLocaleWithMultiSpecialCharactersInVariant() {
 		String variant = "proper-northern";
 		String localeString = "en_GB_" + variant;
@@ -651,7 +652,8 @@ class StringUtilsTests {
 		assertThat(locale.getVariant()).as("Multi-valued variant portion of the Locale not extracted correctly.").isEqualTo(variant);
 	}
 
-	@Test  // SPR-3671
+	@Test
+		// SPR-3671
 	void parseLocaleWithMultiValuedVariant() {
 		String variant = "proper_northern";
 		String localeString = "en_GB_" + variant;
@@ -659,7 +661,8 @@ class StringUtilsTests {
 		assertThat(locale.getVariant()).as("Multi-valued variant portion of the Locale not extracted correctly.").isEqualTo(variant);
 	}
 
-	@Test  // SPR-3671
+	@Test
+		// SPR-3671
 	void parseLocaleWithMultiValuedVariantUsingSpacesAsSeparators() {
 		String variant = "proper northern";
 		String localeString = "en GB " + variant;
@@ -667,7 +670,8 @@ class StringUtilsTests {
 		assertThat(locale.getVariant()).as("Multi-valued variant portion of the Locale not extracted correctly.").isEqualTo(variant);
 	}
 
-	@Test  // SPR-3671
+	@Test
+		// SPR-3671
 	void parseLocaleWithMultiValuedVariantUsingMixtureOfUnderscoresAndSpacesAsSeparators() {
 		String variant = "proper northern";
 		String localeString = "en_GB_" + variant;
@@ -675,7 +679,8 @@ class StringUtilsTests {
 		assertThat(locale.getVariant()).as("Multi-valued variant portion of the Locale not extracted correctly.").isEqualTo(variant);
 	}
 
-	@Test  // SPR-3671
+	@Test
+		// SPR-3671
 	void parseLocaleWithMultiValuedVariantUsingSpacesAsSeparatorsWithLotsOfLeadingWhitespace() {
 		String variant = "proper northern";
 		String localeString = "en GB            " + variant;  // lots of whitespace
@@ -683,7 +688,8 @@ class StringUtilsTests {
 		assertThat(locale.getVariant()).as("Multi-valued variant portion of the Locale not extracted correctly.").isEqualTo(variant);
 	}
 
-	@Test  // SPR-3671
+	@Test
+		// SPR-3671
 	void parseLocaleWithMultiValuedVariantUsingUnderscoresAsSeparatorsWithLotsOfLeadingWhitespace() {
 		String variant = "proper_northern";
 		String localeString = "en_GB_____" + variant;  // lots of underscores
@@ -691,19 +697,22 @@ class StringUtilsTests {
 		assertThat(locale.getVariant()).as("Multi-valued variant portion of the Locale not extracted correctly.").isEqualTo(variant);
 	}
 
-	@Test  // SPR-7779
+	@Test
+		// SPR-7779
 	void parseLocaleWithInvalidCharacters() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				StringUtils.parseLocaleString("%0D%0AContent-length:30%0D%0A%0D%0A%3Cscript%3Ealert%28123%29%3C/script%3E"));
 	}
 
-	@Test  // SPR-9420
+	@Test
+		// SPR-9420
 	void parseLocaleWithSameLowercaseTokenForLanguageAndCountry() {
 		assertThat(StringUtils.parseLocaleString("tr_tr").toString()).isEqualTo("tr_TR");
 		assertThat(StringUtils.parseLocaleString("bg_bg_vnt").toString()).isEqualTo("bg_BG_vnt");
 	}
 
-	@Test  // SPR-11806
+	@Test
+		// SPR-11806
 	void parseLocaleWithVariantContainingCountryCode() {
 		String variant = "GBtest";
 		String localeString = "en_GB_" + variant;
@@ -711,32 +720,33 @@ class StringUtilsTests {
 		assertThat(locale.getVariant()).as("Variant containing country code not extracted correctly").isEqualTo(variant);
 	}
 
-	@Test  // SPR-14718, SPR-7598
+	@Test
+		// SPR-14718, SPR-7598
 	void parseJava7Variant() {
 		assertThat(StringUtils.parseLocaleString("sr__#LATN").toString()).isEqualTo("sr__#LATN");
 	}
 
-	@Test  // SPR-16651
+	@Test
+		// SPR-16651
 	void availableLocalesWithLocaleString() {
 		for (Locale locale : Locale.getAvailableLocales()) {
 			Locale parsedLocale = StringUtils.parseLocaleString(locale.toString());
 			if (parsedLocale == null) {
 				assertThat(locale.getLanguage()).isEqualTo("");
-			}
-			else {
+			} else {
 				assertThat(locale.toString()).isEqualTo(parsedLocale.toString());
 			}
 		}
 	}
 
-	@Test  // SPR-16651
+	@Test
+		// SPR-16651
 	void availableLocalesWithLanguageTag() {
 		for (Locale locale : Locale.getAvailableLocales()) {
 			Locale parsedLocale = StringUtils.parseLocale(locale.toLanguageTag());
 			if (parsedLocale == null) {
 				assertThat(locale.getLanguage()).isEqualTo("");
-			}
-			else {
+			} else {
 				assertThat(locale.toLanguageTag()).isEqualTo(parsedLocale.toLanguageTag());
 			}
 		}

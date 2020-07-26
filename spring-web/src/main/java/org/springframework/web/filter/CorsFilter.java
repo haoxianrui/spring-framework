@@ -48,8 +48,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
  * to help with its initialization.
  *
  * @author Sebastien Deleuze
- * @since 4.2
  * @see <a href="https://www.w3.org/TR/cors/">CORS W3C recommendation</a>
+ * @since 4.2
  */
 public class CorsFilter extends OncePerRequestFilter {
 
@@ -61,6 +61,7 @@ public class CorsFilter extends OncePerRequestFilter {
 	/**
 	 * Constructor accepting a {@link CorsConfigurationSource} used by the filter
 	 * to find the {@link CorsConfiguration} to use for each incoming request.
+	 *
 	 * @see UrlBasedCorsConfigurationSource
 	 */
 	public CorsFilter(CorsConfigurationSource configSource) {
@@ -82,7 +83,7 @@ public class CorsFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain) throws ServletException, IOException {
+									FilterChain filterChain) throws ServletException, IOException {
 
 		CorsConfiguration corsConfiguration = this.configSource.getCorsConfiguration(request);
 		boolean isValid = this.processor.processRequest(corsConfiguration, request, response);

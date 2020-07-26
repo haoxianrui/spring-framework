@@ -41,9 +41,9 @@ class ComposedAnnotationSqlScriptsTests extends AbstractTransactionalTests {
 
 	@Test
 	@ComposedSql(
-		scripts = { "drop-schema.sql", "schema.sql" },
-		statements = "INSERT INTO user VALUES('Dilbert')",
-		executionPhase = BEFORE_TEST_METHOD
+			scripts = {"drop-schema.sql", "schema.sql"},
+			statements = "INSERT INTO user VALUES('Dilbert')",
+			executionPhase = BEFORE_TEST_METHOD
 	)
 	void composedSqlAnnotation() {
 		assertNumUsers(1);

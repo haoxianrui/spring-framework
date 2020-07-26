@@ -27,8 +27,8 @@ import org.springframework.transaction.TransactionStatus;
  * {@link TransactionCallback} without an actual transaction.
  *
  * @author Juergen Hoeller
- * @since 5.2
  * @see TransactionOperations#withoutTransaction()
+ * @since 5.2
  */
 final class WithoutTransactionOperations implements TransactionOperations {
 

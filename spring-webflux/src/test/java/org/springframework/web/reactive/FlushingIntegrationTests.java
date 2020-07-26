@@ -70,7 +70,8 @@ class FlushingIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 				.verify(Duration.ofSeconds(10L));
 	}
 
-	@ParameterizedHttpServerTest  // SPR-14991
+	@ParameterizedHttpServerTest
+		// SPR-14991
 	void writeAndAutoFlushOnComplete(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 
@@ -84,8 +85,7 @@ class FlushingIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 					.consumeNextWith(value -> assertThat(value.length()).isEqualTo((64 * 1024)))
 					.expectComplete()
 					.verify(Duration.ofSeconds(10L));
-		}
-		catch (AssertionError err) {
+		} catch (AssertionError err) {
 			String os = System.getProperty("os.name").toLowerCase();
 			if (os.contains("windows") && err.getMessage() != null &&
 					err.getMessage().startsWith("VerifySubscriber timed out")) {
@@ -97,7 +97,8 @@ class FlushingIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 		}
 	}
 
-	@ParameterizedHttpServerTest  // SPR-14992
+	@ParameterizedHttpServerTest
+		// SPR-14992
 	void writeAndAutoFlushBeforeComplete(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 

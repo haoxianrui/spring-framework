@@ -128,8 +128,10 @@ class ClassUtilsTests {
 
 	@Test
 	void isCacheSafe() {
-		ClassLoader childLoader1 = new ClassLoader(classLoader) {};
-		ClassLoader childLoader2 = new ClassLoader(classLoader) {};
+		ClassLoader childLoader1 = new ClassLoader(classLoader) {
+		};
+		ClassLoader childLoader2 = new ClassLoader(classLoader) {
+		};
 		ClassLoader childLoader3 = new ClassLoader(classLoader) {
 			@Override
 			public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -137,7 +139,7 @@ class ClassUtilsTests {
 			}
 		};
 		Class<?> composite = ClassUtils.createCompositeInterface(
-				new Class<?>[] {Serializable.class, Externalizable.class}, childLoader1);
+				new Class<?>[]{Serializable.class, Externalizable.class}, childLoader1);
 
 		assertThat(ClassUtils.isCacheSafe(String.class, null)).isTrue();
 		assertThat(ClassUtils.isCacheSafe(String.class, classLoader)).isTrue();
@@ -158,22 +160,22 @@ class ClassUtilsTests {
 
 	@ParameterizedTest
 	@CsvSource({
-		"boolean, boolean",
-		"byte, byte",
-		"char, char",
-		"short, short",
-		"int, int",
-		"long, long",
-		"float, float",
-		"double, double",
-		"[Z, boolean[]",
-		"[B, byte[]",
-		"[C, char[]",
-		"[S, short[]",
-		"[I, int[]",
-		"[J, long[]",
-		"[F, float[]",
-		"[D, double[]"
+			"boolean, boolean",
+			"byte, byte",
+			"char, char",
+			"short, short",
+			"int, int",
+			"long, long",
+			"float, float",
+			"double, double",
+			"[Z, boolean[]",
+			"[B, byte[]",
+			"[C, char[]",
+			"[S, short[]",
+			"[I, int[]",
+			"[J, long[]",
+			"[F, float[]",
+			"[D, double[]"
 	})
 	void resolvePrimitiveClassName(String input, Class<?> output) {
 		assertThat(ClassUtils.resolvePrimitiveClassName(input)).isEqualTo(output);
@@ -434,15 +436,15 @@ class ClassUtilsTests {
 
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
-	@ValueSource(classes = { Boolean.class, Character.class, Byte.class, Short.class,
-		Integer.class, Long.class, Float.class, Double.class, Void.class })
+	@ValueSource(classes = {Boolean.class, Character.class, Byte.class, Short.class,
+			Integer.class, Long.class, Float.class, Double.class, Void.class})
 	@interface WrapperTypes {
 	}
 
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
-	@ValueSource(classes = { boolean.class, char.class, byte.class, short.class,
-		int.class, long.class, float.class, double.class, void.class })
+	@ValueSource(classes = {boolean.class, char.class, byte.class, short.class,
+			int.class, long.class, float.class, double.class, void.class})
 	@interface PrimitiveTypes {
 	}
 

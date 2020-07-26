@@ -78,11 +78,11 @@ import org.springframework.util.ReflectionUtils;
  * {@code javax.validation} API being present but no explicit Validator having been configured.
  *
  * @author Juergen Hoeller
- * @since 3.0
  * @see javax.validation.ValidatorFactory
  * @see javax.validation.Validator
  * @see javax.validation.Validation#buildDefaultValidatorFactory()
  * @see javax.validation.ValidatorFactory#getValidator()
+ * @since 3.0
  */
 public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 		implements ValidatorFactory, ApplicationContextAware, InitializingBean, DisposableBean {
@@ -121,6 +121,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 	/**
 	 * Specify the desired provider class, if any.
 	 * <p>If not specified, JSR-303's default search mechanism will be used.
+	 *
 	 * @see javax.validation.Validation#byProvider(Class)
 	 * @see javax.validation.Validation#byDefaultProvider()
 	 */
@@ -132,6 +133,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 	/**
 	 * Specify a JSR-303 {@link ValidationProviderResolver} for bootstrapping the
 	 * provider of choice, as an alternative to {@code META-INF} driven resolution.
+	 *
 	 * @since 4.3
 	 */
 	public void setValidationProviderResolver(ValidationProviderResolver validationProviderResolver) {
@@ -163,6 +165,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 	 * In particular, the {@code MessageSource} instance specified here should not apply
 	 * {@link org.springframework.context.support.AbstractMessageSource#setUseCodeAsDefaultMessage
 	 * "useCodeAsDefaultMessage"} behavior. Please double-check your setup accordingly.
+	 *
 	 * @see ResourceBundleMessageInterpolator
 	 */
 	public void setValidationMessageSource(MessageSource messageSource) {
@@ -206,6 +209,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 	 * Specify bean validation properties to be passed to the validation provider.
 	 * <p>Can be populated with a String "value" (parsed via PropertiesEditor)
 	 * or a "props" element in XML bean definitions.
+	 *
 	 * @see javax.validation.Configuration#addProperty(String, String)
 	 */
 	public void setValidationProperties(Properties jpaProperties) {
@@ -215,6 +219,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 	/**
 	 * Specify bean validation properties to be passed to the validation provider as a Map.
 	 * <p>Can be populated with a "map" or "props" element in XML bean definitions.
+	 *
 	 * @see javax.validation.Configuration#addProperty(String, String)
 	 */
 	public void setValidationPropertyMap(@Nullable Map<String, String> validationProperties) {
@@ -248,8 +253,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 				bootstrap = bootstrap.providerResolver(this.validationProviderResolver);
 			}
 			configuration = bootstrap.configure();
-		}
-		else {
+		} else {
 			GenericBootstrap bootstrap = Validation.byDefaultProvider();
 			if (this.validationProviderResolver != null) {
 				bootstrap = bootstrap.providerResolver(this.validationProviderResolver);
@@ -262,8 +266,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 			try {
 				Method eclMethod = configuration.getClass().getMethod("externalClassLoader", ClassLoader.class);
 				ReflectionUtils.invokeMethod(eclMethod, configuration, this.applicationContext.getClassLoader());
-			}
-			catch (NoSuchMethodException ex) {
+			} catch (NoSuchMethodException ex) {
 				// Ignore - no Hibernate Validator 5.2+ or similar provider
 			}
 		}
@@ -295,8 +298,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 			for (Resource location : this.mappingLocations) {
 				try {
 					configuration.addMapping(location.getInputStream());
-				}
-				catch (IOException ex) {
+				} catch (IOException ex) {
 					throw new IllegalStateException("Cannot read mapping resource: " + location);
 				}
 			}
@@ -320,6 +322,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 				return (paramNames != null ? Arrays.asList(paramNames) :
 						defaultProvider.getParameterNames(constructor));
 			}
+
 			@Override
 			public List<String> getParameterNames(Method method) {
 				String[] paramNames = discoverer.getParameterNames(method);
@@ -333,8 +336,9 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 	 * Post-process the given Bean Validation configuration,
 	 * adding to or overriding any of its settings.
 	 * <p>Invoked right before building the {@link ValidatorFactory}.
+	 *
 	 * @param configuration the Configuration object, pre-populated with
-	 * settings driven by LocalValidatorFactoryBean's properties
+	 *                      settings driven by LocalValidatorFactoryBean's properties
 	 */
 	protected void postProcessConfiguration(Configuration<?> configuration) {
 	}
@@ -395,16 +399,14 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 		if (type == null || !ValidatorFactory.class.isAssignableFrom(type)) {
 			try {
 				return super.unwrap(type);
-			}
-			catch (ValidationException ex) {
+			} catch (ValidationException ex) {
 				// ignore - we'll try ValidatorFactory unwrapping next
 			}
 		}
 		if (this.validatorFactory != null) {
 			try {
 				return this.validatorFactory.unwrap(type);
-			}
-			catch (ValidationException ex) {
+			} catch (ValidationException ex) {
 				// ignore if just being asked for ValidatorFactory
 				if (ValidatorFactory.class == type) {
 					return (T) this.validatorFactory;

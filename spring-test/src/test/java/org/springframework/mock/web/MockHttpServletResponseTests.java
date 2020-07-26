@@ -98,7 +98,8 @@ class MockHttpServletResponseTests {
 		assertThat(response.getCharacterEncoding()).isEqualTo("UTF-8");
 	}
 
-	@Test  // SPR-12677
+	@Test
+		// SPR-12677
 	void contentTypeHeaderWithMoreComplexCharsetSyntax() {
 		String contentType = "test/plain;charset=\"utf-8\";foo=\"charset=bar\";foocharset=bar;foo=bar";
 		response.setHeader("Content-Type", contentType);
@@ -232,7 +233,8 @@ class MockHttpServletResponseTests {
 		assertThat(response.getContentAsByteArray().length).isEqualTo(1);
 	}
 
-	@Test // SPR-16683
+	@Test
+		// SPR-16683
 	void servletWriterCommittedOnWriterClose() throws IOException {
 		assertThat(response.isCommitted()).isFalse();
 		response.getWriter().write("X");
@@ -242,7 +244,8 @@ class MockHttpServletResponseTests {
 		assertThat(response.getContentAsByteArray().length).isEqualTo(1);
 	}
 
-	@Test  // gh-23219
+	@Test
+		// gh-23219
 	void contentAsUtf8() throws IOException {
 		String content = "Příliš žluťoučký kůň úpěl ďábelské ódy";
 		response.getOutputStream().write(content.getBytes(StandardCharsets.UTF_8));
@@ -314,13 +317,15 @@ class MockHttpServletResponseTests {
 				response.getDateHeader("Last-Modified"));
 	}
 
-	@Test  // SPR-16160
+	@Test
+		// SPR-16160
 	void getNonExistentDateHeader() {
 		assertThat(response.getHeader("Last-Modified")).isNull();
 		assertThat(response.getDateHeader("Last-Modified")).isEqualTo(-1);
 	}
 
-	@Test  // SPR-10414
+	@Test
+		// SPR-10414
 	void modifyStatusAfterSendError() throws IOException {
 		response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		response.setStatus(HttpServletResponse.SC_OK);
@@ -331,7 +336,7 @@ class MockHttpServletResponseTests {
 	@SuppressWarnings("deprecation")
 	void modifyStatusMessageAfterSendError() throws IOException {
 		response.sendError(HttpServletResponse.SC_NOT_FOUND);
-		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Server Error");
+		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Error");
 		assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_NOT_FOUND);
 	}
 

@@ -79,8 +79,7 @@ public class SpringWildcardServletTilesApplicationContext extends ServletApplica
 		Resource[] resources;
 		try {
 			resources = this.resolver.getResources(path);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			((ServletContext) getContext()).log("Resource retrieval failed for path: " + path, ex);
 			return Collections.emptyList();
 		}
@@ -94,8 +93,7 @@ public class SpringWildcardServletTilesApplicationContext extends ServletApplica
 			try {
 				URL url = resource.getURL();
 				resourceList.add(new URLApplicationResource(url.toExternalForm(), url));
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				// Shouldn't happen with the kind of resources we're using
 				throw new IllegalArgumentException("No URL for " + resource, ex);
 			}

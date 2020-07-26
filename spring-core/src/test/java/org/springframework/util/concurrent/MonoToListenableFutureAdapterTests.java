@@ -26,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link MonoToListenableFutureAdapter}.
+ *
  * @author Rossen Stoyanchev
  */
 class MonoToListenableFutureAdapterTests {

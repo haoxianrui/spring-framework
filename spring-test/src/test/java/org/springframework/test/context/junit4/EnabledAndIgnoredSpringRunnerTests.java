@@ -42,11 +42,11 @@ import static org.assertj.core.api.Assertions.fail;
  * listeners.
  *
  * @author Sam Brannen
- * @since 2.5
  * @see HardCodedProfileValueSourceSpringRunnerTests
+ * @since 2.5
  */
 @RunWith(SpringRunner.class)
-@TestExecutionListeners( {})
+@TestExecutionListeners({})
 public class EnabledAndIgnoredSpringRunnerTests {
 
 	protected static final String NAME = "EnabledAndIgnoredSpringRunnerTests.profile_value.name";
@@ -81,7 +81,7 @@ public class EnabledAndIgnoredSpringRunnerTests {
 	}
 
 	@Test
-	@IfProfileValue(name = NAME, values = { "foo", VALUE, "bar" })
+	@IfProfileValue(name = NAME, values = {"foo", VALUE, "bar"})
 	public void testIfProfileValueEnabledViaMultipleValues() {
 		numTestsExecuted++;
 	}

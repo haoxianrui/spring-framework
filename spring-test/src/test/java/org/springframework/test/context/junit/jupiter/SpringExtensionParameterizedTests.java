@@ -40,15 +40,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  * JUnit Platform, simply run {@link SpringJUnitJupiterTestSuite} as a JUnit 4 test.
  *
  * @author Sam Brannen
- * @since 5.0
  * @see SpringExtension
  * @see ParameterizedTest
+ * @since 5.0
  */
 @SpringJUnitConfig(TestConfig.class)
 class SpringExtensionParameterizedTests {
 
 	@ParameterizedTest
-	@ValueSource(strings = { "Dilbert", "Wally" })
+	@ValueSource(strings = {"Dilbert", "Wally"})
 	void people(String name, @Autowired List<Person> people) {
 		assertThat(people.stream().map(Person::getName).filter(name::equals)).hasSize(1);
 	}
@@ -60,7 +60,7 @@ class SpringExtensionParameterizedTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "garfield, Garfield", "catbert, Catbert" })
+	@CsvSource({"garfield, Garfield", "catbert, Catbert"})
 	void cats(String beanName, String catName, ApplicationContext context) {
 		assertThat(context.getBean(beanName, Cat.class)).extracting(Cat::getName).isEqualTo(catName);
 	}

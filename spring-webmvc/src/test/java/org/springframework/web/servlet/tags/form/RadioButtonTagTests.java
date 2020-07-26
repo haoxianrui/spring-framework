@@ -248,7 +248,7 @@ public class RadioButtonTagTests extends AbstractFormTagTests {
 	public void dynamicTypeAttribute() throws JspException {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.tag.setDynamicAttribute(null, "type", "email"))
-			.withMessage("Attribute type=\"email\" is not allowed");
+				.withMessage("Attribute type=\"email\" is not allowed");
 	}
 
 	private void assertTagOpened(String output) {

@@ -3,20 +3,21 @@
 
 <beans>
 
-	<bean id="rob" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype" autowire="constructor"/>
+	<bean id="rob" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype"
+		  autowire="constructor"/>
 
 	<bean id="sally" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype"/>
 
 	<bean id="props1" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-	  <property name="properties">
+		<property name="properties">
 			<value>name=props1</value>
-	  </property>
+		</property>
 	</bean>
 
 	<bean id="props2" class="org.springframework.beans.factory.config.PropertiesFactoryBean" autowire-candidate="false">
-	  <property name="properties">
+		<property name="properties">
 			<value>name=props2</value>
-	  </property>
+		</property>
 	</bean>
 
 </beans>

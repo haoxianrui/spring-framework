@@ -62,6 +62,7 @@ public class DefaultManagedAwareThreadFactory extends CustomizableThreadFactory 
 
 	/**
 	 * Set the JNDI template to use for JNDI lookups.
+	 *
 	 * @see org.springframework.jndi.JndiAccessor#setJndiTemplate
 	 */
 	public void setJndiTemplate(JndiTemplate jndiTemplate) {
@@ -70,6 +71,7 @@ public class DefaultManagedAwareThreadFactory extends CustomizableThreadFactory 
 
 	/**
 	 * Set the JNDI environment to use for JNDI lookups.
+	 *
 	 * @see org.springframework.jndi.JndiAccessor#setJndiEnvironment
 	 */
 	public void setJndiEnvironment(Properties jndiEnvironment) {
@@ -80,6 +82,7 @@ public class DefaultManagedAwareThreadFactory extends CustomizableThreadFactory 
 	 * Set whether the lookup occurs in a Java EE container, i.e. if the prefix
 	 * "java:comp/env/" needs to be added if the JNDI name doesn't already
 	 * contain it. PersistenceAnnotationBeanPostProcessor's default is "true".
+	 *
 	 * @see org.springframework.jndi.JndiLocatorSupport#setResourceRef
 	 */
 	public void setResourceRef(boolean resourceRef) {
@@ -91,6 +94,7 @@ public class DefaultManagedAwareThreadFactory extends CustomizableThreadFactory 
 	 * replacing the default JNDI name "java:comp/DefaultManagedThreadFactory".
 	 * <p>This can either be a fully qualified JNDI name, or the JNDI name relative
 	 * to the current environment naming context if "resourceRef" is set to "true".
+	 *
 	 * @see #setResourceRef
 	 */
 	public void setJndiName(String jndiName) {
@@ -102,8 +106,7 @@ public class DefaultManagedAwareThreadFactory extends CustomizableThreadFactory 
 		if (this.jndiName != null) {
 			try {
 				this.threadFactory = this.jndiLocator.lookup(this.jndiName, ThreadFactory.class);
-			}
-			catch (NamingException ex) {
+			} catch (NamingException ex) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("Failed to retrieve [" + this.jndiName + "] from JNDI", ex);
 				}
@@ -118,8 +121,7 @@ public class DefaultManagedAwareThreadFactory extends CustomizableThreadFactory 
 	public Thread newThread(Runnable runnable) {
 		if (this.threadFactory != null) {
 			return this.threadFactory.newThread(runnable);
-		}
-		else {
+		} else {
 			return super.newThread(runnable);
 		}
 	}

@@ -27,8 +27,8 @@ import org.springframework.lang.Nullable;
  * source object which is typically an {@link Annotation}, {@link Map}, or
  * {@link TypeMappedAnnotation}.
  *
- * @since 5.2.4
  * @author Sam Brannen
+ * @since 5.2.4
  */
 @FunctionalInterface
 interface ValueExtractor {

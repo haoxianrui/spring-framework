@@ -56,6 +56,7 @@ public class NotAcceptableStatusException extends ResponseStatusException {
 
 	/**
 	 * Return a Map with an "Accept" header.
+	 *
 	 * @since 5.1.11
 	 */
 	@SuppressWarnings("deprecation")
@@ -66,6 +67,7 @@ public class NotAcceptableStatusException extends ResponseStatusException {
 
 	/**
 	 * Return HttpHeaders with an "Accept" header, or an empty instance.
+	 *
 	 * @since 5.1.13
 	 */
 	@Override

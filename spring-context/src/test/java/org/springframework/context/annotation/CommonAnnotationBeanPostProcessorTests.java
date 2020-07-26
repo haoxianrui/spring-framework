@@ -409,8 +409,7 @@ public class CommonAnnotationBeanPostProcessorTests {
 
 		try {
 			bf.getBean("annotatedBean2");
-		}
-		catch (BeanCreationException ex) {
+		} catch (BeanCreationException ex) {
 			boolean condition = ex.getRootCause() instanceof NoSuchBeanDefinitionException;
 			assertThat(condition).isTrue();
 			NoSuchBeanDefinitionException innerEx = (NoSuchBeanDefinitionException) ex.getRootCause();
@@ -649,7 +648,7 @@ public class CommonAnnotationBeanPostProcessorTests {
 
 	static class NonPublicResourceInjectionBean<B> extends ResourceInjectionBean {
 
-		@Resource(name="testBean4", type=TestBean.class)
+		@Resource(name = "testBean4", type = TestBean.class)
 		protected ITestBean testBean3;
 
 		private B testBean4;
@@ -668,7 +667,7 @@ public class CommonAnnotationBeanPostProcessorTests {
 			super.setTestBean2(testBean2);
 		}
 
-		@Resource(name="${tb}", type=ITestBean.class)
+		@Resource(name = "${tb}", type = ITestBean.class)
 		private void setTestBean4(B testBean4) {
 			if (this.testBean4 != null) {
 				throw new IllegalStateException("Already called");
@@ -759,7 +758,7 @@ public class CommonAnnotationBeanPostProcessorTests {
 
 	public static class ExtendedEjbInjectionBean extends ResourceInjectionBean {
 
-		@EJB(name="testBean4", beanInterface=TestBean.class)
+		@EJB(name = "testBean4", beanInterface = TestBean.class)
 		protected ITestBean testBean3;
 
 		private ITestBean testBean4;
@@ -778,7 +777,7 @@ public class CommonAnnotationBeanPostProcessorTests {
 			super.setTestBean2(testBean2);
 		}
 
-		@EJB(beanName="testBean3", beanInterface=ITestBean.class)
+		@EJB(beanName = "testBean3", beanInterface = ITestBean.class)
 		private void setTestBean4(ITestBean testBean4) {
 			if (this.testBean4 != null) {
 				throw new IllegalStateException("Already called");
@@ -821,21 +820,22 @@ public class CommonAnnotationBeanPostProcessorTests {
 
 	private static class NamedResourceInjectionBean {
 
-		@Resource(name="testBean9")
+		@Resource(name = "testBean9")
 		private INestedTestBean testBean;
 	}
 
 
 	private static class ConvertedResourceInjectionBean {
 
-		@Resource(name="value")
+		@Resource(name = "value")
 		private int value;
 	}
 
 
 	private static class LazyResourceFieldInjectionBean {
 
-		@Resource @Lazy
+		@Resource
+		@Lazy
 		private ITestBean testBean;
 	}
 
@@ -844,7 +844,8 @@ public class CommonAnnotationBeanPostProcessorTests {
 
 		private ITestBean testBean;
 
-		@Resource @Lazy
+		@Resource
+		@Lazy
 		public void setTestBean(ITestBean testBean) {
 			this.testBean = testBean;
 		}
@@ -855,7 +856,8 @@ public class CommonAnnotationBeanPostProcessorTests {
 
 		private TestBean testBean;
 
-		@Resource @Lazy
+		@Resource
+		@Lazy
 		public void setTestBean(TestBean testBean) {
 			this.testBean = testBean;
 		}

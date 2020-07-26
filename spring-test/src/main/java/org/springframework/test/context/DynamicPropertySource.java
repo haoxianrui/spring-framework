@@ -72,11 +72,11 @@ import java.lang.annotation.Target;
  *
  * @author Phillip Webb
  * @author Sam Brannen
- * @since 5.2.5
  * @see DynamicPropertyRegistry
  * @see ContextConfiguration
  * @see TestPropertySource
  * @see org.springframework.core.env.PropertySource
+ * @since 5.2.5
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

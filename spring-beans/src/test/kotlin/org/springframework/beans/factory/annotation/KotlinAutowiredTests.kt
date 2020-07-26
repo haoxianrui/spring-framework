@@ -66,7 +66,7 @@ class KotlinAutowiredTests {
 		assertThat(kb.injectedFromMethod).isNull()
 		assertThat(kb.injectedField).isNull()
 	}
-	
+
 	@Test  // SPR-15847
 	fun `Autowiring by primary constructor with mandatory and optional parameters`() {
 		val bf = DefaultListableBeanFactory()
@@ -203,7 +203,7 @@ class KotlinAutowiredTests {
 
 
 	class KotlinBean(val injectedFromConstructor: TestBean?) {
-		
+
 		var injectedFromMethod: TestBean? = null
 
 		@Autowired
@@ -246,8 +246,9 @@ class KotlinAutowiredTests {
 			val optional: String = "foo",
 			val injectedFromConstructor: TestBean
 	) {
-		@Autowired constructor(injectedFromSecondaryConstructor: Colour, injectedFromConstructor: TestBean,
-							   optional: String = "bar") : this(optional, injectedFromConstructor) {
+		@Autowired
+		constructor(injectedFromSecondaryConstructor: Colour, injectedFromConstructor: TestBean,
+					optional: String = "bar") : this(optional, injectedFromConstructor) {
 			this.injectedFromSecondaryConstructor = injectedFromSecondaryConstructor
 		}
 

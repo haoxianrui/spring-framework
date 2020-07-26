@@ -291,7 +291,7 @@ class MissingMergedAnnotationTests {
 
 	@Test
 	void asMapWithFactoryReturnsNewMapFromFactory() {
-		Map<String, Object> map = this.missing.asMap(annotation->new ConcurrentReferenceHashMap<>());
+		Map<String, Object> map = this.missing.asMap(annotation -> new ConcurrentReferenceHashMap<>());
 		assertThat(map).isInstanceOf(ConcurrentReferenceHashMap.class);
 	}
 

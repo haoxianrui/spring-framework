@@ -212,7 +212,7 @@ class MockServletContextTests {
 	class MockServletContextWithFileSystemResourceLoaderTests {
 
 		private final MockServletContext servletContext =
-				new MockServletContext( "org/springframework/mock", new FileSystemResourceLoader());
+				new MockServletContext("org/springframework/mock", new FileSystemResourceLoader());
 
 		@Test
 		void getResourcePathsWithRelativePathToWindowsCDrive() {
@@ -238,8 +238,7 @@ class MockServletContextTests {
 
 			if (OS.WINDOWS.isCurrentOs()) {
 				assertThat(realPath).isNull();
-			}
-			else {
+			} else {
 				assertThat(realPath).isNotNull();
 			}
 		}

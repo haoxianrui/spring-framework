@@ -119,7 +119,8 @@ class MethodParameterTests {
 		assertThat(methodParameter.getParameterAnnotation(Param.class)).as("Failed to find @Param annotation").isNotNull();
 	}
 
-	@Test  // SPR-16652
+	@Test
+		// SPR-16652
 	void annotatedConstructorParameterInInnerClass() throws Exception {
 		Constructor<?> constructor = InnerClass.class.getConstructor(getClass(), String.class, Callable.class);
 
@@ -136,7 +137,8 @@ class MethodParameterTests {
 		assertThat(methodParameter.getParameterAnnotation(Param.class)).isNull();
 	}
 
-	@Test  // SPR-16734
+	@Test
+		// SPR-16734
 	void genericConstructorParameterInInnerClass() throws Exception {
 		Constructor<?> constructor = InnerClass.class.getConstructor(getClass(), String.class, Callable.class);
 

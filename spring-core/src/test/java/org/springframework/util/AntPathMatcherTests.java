@@ -403,7 +403,7 @@ class AntPathMatcherTests {
 	void extractUriTemplateVarsRegexCapturingGroups() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				pathMatcher.extractUriTemplateVariables("/web/{id:foo(bar)?}", "/web/foobar"))
-			.withMessageContaining("The number of capturing groups in the pattern");
+				.withMessageContaining("The number of capturing groups in the pattern");
 	}
 
 	@Test
@@ -599,7 +599,8 @@ class AntPathMatcherTests {
 		paths.clear();
 	}
 
-	@Test  // SPR-8687
+	@Test
+		// SPR-8687
 	void trimTokensOff() {
 		pathMatcher.setTrimTokens(false);
 
@@ -608,7 +609,8 @@ class AntPathMatcherTests {
 		assertThat(pathMatcher.match("/group/{groupName}/members", "/Group/  Sales/Members")).isFalse();
 	}
 
-	@Test  // SPR-13286
+	@Test
+		// SPR-13286
 	void caseInsensitive() {
 		pathMatcher.setCaseSensitive(false);
 
@@ -687,7 +689,8 @@ class AntPathMatcherTests {
 		assertThat(pathMatcher.combine("/*.html", "hotel.*")).as("Extension mapping should be disabled with \".\" as path separator").isEqualTo("/*.html.hotel.*");
 	}
 
-	@Test // gh-22959
+	@Test
+		// gh-22959
 	void isPattern() {
 		assertThat(pathMatcher.isPattern("/test/*")).isTrue();
 		assertThat(pathMatcher.isPattern("/test/**/name")).isTrue();
@@ -698,7 +701,8 @@ class AntPathMatcherTests {
 		assertThat(pathMatcher.isPattern("/test/foo{bar")).isFalse();
 	}
 
-	@Test // gh-23297
+	@Test
+		// gh-23297
 	void isPatternWithNullPath() {
 		assertThat(pathMatcher.isPattern(null)).isFalse();
 	}

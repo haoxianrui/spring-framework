@@ -176,7 +176,7 @@ public class ResourceUrlProviderTests {
 		@Bean
 		public SimpleUrlHandlerMapping simpleUrlHandlerMapping() {
 			return new SimpleUrlHandlerMapping(
-				Collections.singletonMap("/resources/**", new ResourceHttpRequestHandler()));
+					Collections.singletonMap("/resources/**", new ResourceHttpRequestHandler()));
 		}
 
 		@Bean

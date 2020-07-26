@@ -37,14 +37,16 @@ import org.springframework.util.StringUtils;
  *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
- * @since 4.2
  * @see <a href="https://tools.ietf.org/html/rfc7233">HTTP/1.1: Range Requests</a>
  * @see HttpHeaders#setRange(List)
  * @see HttpHeaders#getRange()
+ * @since 4.2
  */
 public abstract class HttpRange {
 
-	/** Maximum ranges per request. */
+	/**
+	 * Maximum ranges per request.
+	 */
 	private static final int MAX_RANGES = 100;
 
 	private static final String BYTE_RANGE_PREFIX = "bytes=";
@@ -53,6 +55,7 @@ public abstract class HttpRange {
 	/**
 	 * Turn a {@code Resource} into a {@link ResourceRegion} using the range
 	 * information contained in the current {@code HttpRange}.
+	 *
 	 * @param resource the {@code Resource} to select the region from
 	 * @return the selected region of the given {@code Resource}
 	 * @since 4.3
@@ -71,6 +74,7 @@ public abstract class HttpRange {
 
 	/**
 	 * Return the start of the range given the total length of a representation.
+	 *
 	 * @param length the length of the representation
 	 * @return the start of this range for the representation
 	 */
@@ -78,6 +82,7 @@ public abstract class HttpRange {
 
 	/**
 	 * Return the end of the range (inclusive) given the total length of a representation.
+	 *
 	 * @param length the length of the representation
 	 * @return the end of the range for the representation
 	 */
@@ -86,6 +91,7 @@ public abstract class HttpRange {
 
 	/**
 	 * Create an {@code HttpRange} from the given position to the end.
+	 *
 	 * @param firstBytePos the first byte position
 	 * @return a byte range that ranges from {@code firstPos} till the end
 	 * @see <a href="https://tools.ietf.org/html/rfc7233#section-2.1">Byte Ranges</a>
@@ -96,8 +102,9 @@ public abstract class HttpRange {
 
 	/**
 	 * Create a {@code HttpRange} from the given fist to last position.
+	 *
 	 * @param firstBytePos the first byte position
-	 * @param lastBytePos the last byte position
+	 * @param lastBytePos  the last byte position
 	 * @return a byte range that ranges from {@code firstPos} till {@code lastPos}
 	 * @see <a href="https://tools.ietf.org/html/rfc7233#section-2.1">Byte Ranges</a>
 	 */
@@ -107,6 +114,7 @@ public abstract class HttpRange {
 
 	/**
 	 * Create an {@code HttpRange} that ranges over the last given number of bytes.
+	 *
 	 * @param suffixLength the number of bytes for the range
 	 * @return a byte range that ranges over the last {@code suffixLength} number of bytes
 	 * @see <a href="https://tools.ietf.org/html/rfc7233#section-2.1">Byte Ranges</a>
@@ -118,10 +126,11 @@ public abstract class HttpRange {
 	/**
 	 * Parse the given, comma-separated string into a list of {@code HttpRange} objects.
 	 * <p>This method can be used to parse an {@code Range} header.
+	 *
 	 * @param ranges the string to parse
 	 * @return the list of ranges
 	 * @throws IllegalArgumentException if the string cannot be parsed
-	 * or if the number of ranges is greater than 100
+	 *                                  or if the number of ranges is greater than 100
 	 */
 	public static List<HttpRange> parseRanges(@Nullable String ranges) {
 		if (!StringUtils.hasLength(ranges)) {
@@ -151,16 +160,13 @@ public abstract class HttpRange {
 			if (dashIdx < range.length() - 1) {
 				Long lastPos = Long.parseLong(range.substring(dashIdx + 1));
 				return new ByteRange(firstPos, lastPos);
-			}
-			else {
+			} else {
 				return new ByteRange(firstPos, null);
 			}
-		}
-		else if (dashIdx == 0) {
+		} else if (dashIdx == 0) {
 			long suffixLength = Long.parseLong(range.substring(1));
 			return new SuffixByteRange(suffixLength);
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException("Range '" + range + "' does not contain \"-\"");
 		}
 	}
@@ -168,7 +174,8 @@ public abstract class HttpRange {
 	/**
 	 * Convert each {@code HttpRange} into a {@code ResourceRegion}, selecting the
 	 * appropriate segment of the given {@code Resource} using HTTP Range information.
-	 * @param ranges the list of ranges
+	 *
+	 * @param ranges   the list of ranges
 	 * @param resource the resource to select the regions from
 	 * @return the list of regions for the given resource
 	 * @throws IllegalArgumentException if the sum of all ranges exceeds the resource length
@@ -201,8 +208,7 @@ public abstract class HttpRange {
 			long contentLength = resource.contentLength();
 			Assert.isTrue(contentLength > 0, "Resource content length should be > 0");
 			return contentLength;
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new IllegalArgumentException("Failed to obtain Resource content length", ex);
 		}
 	}
@@ -210,6 +216,7 @@ public abstract class HttpRange {
 	/**
 	 * Return a string representation of the given list of {@code HttpRange} objects.
 	 * <p>This method can be used to for an {@code Range} header.
+	 *
 	 * @param ranges the ranges to create a string of
 	 * @return the string representation
 	 */
@@ -225,6 +232,7 @@ public abstract class HttpRange {
 
 	/**
 	 * Represents an HTTP/1.1 byte range, with a first and optional last position.
+	 *
 	 * @see <a href="https://tools.ietf.org/html/rfc7233#section-2.1">Byte Ranges</a>
 	 * @see HttpRange#createByteRange(long)
 	 * @see HttpRange#createByteRange(long, long)
@@ -261,8 +269,7 @@ public abstract class HttpRange {
 		public long getRangeEnd(long length) {
 			if (this.lastPos != null && this.lastPos < length) {
 				return this.lastPos;
-			}
-			else {
+			} else {
 				return length - 1;
 			}
 		}
@@ -301,6 +308,7 @@ public abstract class HttpRange {
 
 	/**
 	 * Represents an HTTP/1.1 suffix byte range, with a number of suffix bytes.
+	 *
 	 * @see <a href="https://tools.ietf.org/html/rfc7233#section-2.1">Byte Ranges</a>
 	 * @see HttpRange#createSuffixRange(long)
 	 */
@@ -319,8 +327,7 @@ public abstract class HttpRange {
 		public long getRangeStart(long length) {
 			if (this.suffixLength < length) {
 				return length - this.suffixLength;
-			}
-			else {
+			} else {
 				return 0;
 			}
 		}

@@ -42,10 +42,10 @@ import org.springframework.lang.Nullable;
  *
  * @author Thomas Risberg
  * @author Juergen Hoeller
- * @since 2.5.6
  * @see java.sql.SQLXML
  * @see java.sql.ResultSet#getSQLXML
  * @see java.sql.PreparedStatement#setSQLXML
+ * @since 2.5.6
  */
 public class Jdbc4SqlXmlHandler implements SqlXmlHandler {
 
@@ -188,8 +188,7 @@ public class Jdbc4SqlXmlHandler implements SqlXmlHandler {
 			this.xmlObject = ps.getConnection().createSQLXML();
 			try {
 				provideXml(this.xmlObject);
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				throw new DataAccessResourceFailureException("Failure encountered while providing XML", ex);
 			}
 			ps.setSQLXML(paramIndex, this.xmlObject);
@@ -200,8 +199,7 @@ public class Jdbc4SqlXmlHandler implements SqlXmlHandler {
 			if (this.xmlObject != null) {
 				try {
 					this.xmlObject.free();
-				}
-				catch (SQLException ex) {
+				} catch (SQLException ex) {
 					throw new DataAccessResourceFailureException("Could not free SQLXML object", ex);
 				}
 			}

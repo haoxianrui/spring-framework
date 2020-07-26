@@ -113,7 +113,8 @@ public class SynchronossPartHttpMessageReaderTests extends AbstractLeakCheckingT
 		assertThat(((FormFieldPart) part).value()).isEqualTo("sample-text");
 	}
 
-	@Test // SPR-16545
+	@Test
+		// SPR-16545
 	void transferTo() throws IOException {
 		ServerHttpRequest request = generateMultipartRequest();
 		MultiValueMap<String, Part> parts = this.reader.readMono(PARTS_ELEMENT_TYPE, request, emptyMap()).block();

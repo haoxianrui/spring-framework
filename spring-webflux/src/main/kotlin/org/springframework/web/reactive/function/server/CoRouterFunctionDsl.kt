@@ -63,7 +63,7 @@ fun coRouter(routes: (CoRouterFunctionDsl.() -> Unit)) =
  * @author Sebastien Deleuze
  * @since 5.2
  */
-class CoRouterFunctionDsl internal constructor (private val init: (CoRouterFunctionDsl.() -> Unit)) {
+class CoRouterFunctionDsl internal constructor(private val init: (CoRouterFunctionDsl.() -> Unit)) {
 
 	@PublishedApi
 	internal val builder = RouterFunctions.route()
@@ -488,7 +488,7 @@ class CoRouterFunctionDsl internal constructor (private val init: (CoRouterFunct
 	 * @see RouterFunctions.route
 	 */
 	operator fun String.invoke(f: suspend (ServerRequest) -> ServerResponse) {
-		builder.add(RouterFunctions.route(RequestPredicates.path(this),  asHandlerFunction(f)))
+		builder.add(RouterFunctions.route(RequestPredicates.path(this), asHandlerFunction(f)))
 	}
 
 	/**
@@ -581,7 +581,7 @@ class CoRouterFunctionDsl internal constructor (private val init: (CoRouterFunct
 	 * @since 5.2
 	 */
 	inline fun <reified E : Throwable> onError(noinline responseProvider: suspend (Throwable, ServerRequest) -> ServerResponse) {
-		builder.onError({it is E}) { throwable, request ->
+		builder.onError({ it is E }) { throwable, request ->
 			mono(Dispatchers.Unconfined) { responseProvider.invoke(throwable, request) }
 		}
 	}
@@ -672,5 +672,5 @@ class CoRouterFunctionDsl internal constructor (private val init: (CoRouterFunct
 /**
  * Equivalent to [RouterFunction.and].
  */
-operator fun <T: ServerResponse> RouterFunction<T>.plus(other: RouterFunction<T>) =
+operator fun <T : ServerResponse> RouterFunction<T>.plus(other: RouterFunction<T>) =
 		this.and(other)

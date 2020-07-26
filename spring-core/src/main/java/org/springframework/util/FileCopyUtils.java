@@ -39,9 +39,9 @@ import org.springframework.lang.Nullable;
  *
  * @author Juergen Hoeller
  * @author Hyunjin Choi
- * @since 06.10.2003
  * @see StreamUtils
  * @see FileSystemUtils
+ * @since 06.10.2003
  */
 public abstract class FileCopyUtils {
 
@@ -57,7 +57,8 @@ public abstract class FileCopyUtils {
 
 	/**
 	 * Copy the contents of the given input File to the given output File.
-	 * @param in the file to copy from
+	 *
+	 * @param in  the file to copy from
 	 * @param out the file to copy to
 	 * @return the number of bytes copied
 	 * @throws IOException in case of I/O errors
@@ -70,7 +71,8 @@ public abstract class FileCopyUtils {
 
 	/**
 	 * Copy the contents of the given byte array to the given output File.
-	 * @param in the byte array to copy from
+	 *
+	 * @param in  the byte array to copy from
 	 * @param out the file to copy to
 	 * @throws IOException in case of I/O errors
 	 */
@@ -82,6 +84,7 @@ public abstract class FileCopyUtils {
 
 	/**
 	 * Copy the contents of the given input File into a new byte array.
+	 *
 	 * @param in the file to copy from
 	 * @return the new byte array that has been copied to
 	 * @throws IOException in case of I/O errors
@@ -99,7 +102,8 @@ public abstract class FileCopyUtils {
 	/**
 	 * Copy the contents of the given InputStream to the given OutputStream.
 	 * Closes both streams when done.
-	 * @param in the stream to copy from
+	 *
+	 * @param in  the stream to copy from
 	 * @param out the stream to copy to
 	 * @return the number of bytes copied
 	 * @throws IOException in case of I/O errors
@@ -110,8 +114,7 @@ public abstract class FileCopyUtils {
 
 		try {
 			return StreamUtils.copy(in, out);
-		}
-		finally {
+		} finally {
 			close(in);
 			close(out);
 		}
@@ -120,7 +123,8 @@ public abstract class FileCopyUtils {
 	/**
 	 * Copy the contents of the given byte array to the given OutputStream.
 	 * Closes the stream when done.
-	 * @param in the byte array to copy from
+	 *
+	 * @param in  the byte array to copy from
 	 * @param out the OutputStream to copy to
 	 * @throws IOException in case of I/O errors
 	 */
@@ -130,8 +134,7 @@ public abstract class FileCopyUtils {
 
 		try {
 			out.write(in);
-		}
-		finally {
+		} finally {
 			close(out);
 		}
 	}
@@ -139,6 +142,7 @@ public abstract class FileCopyUtils {
 	/**
 	 * Copy the contents of the given InputStream into a new byte array.
 	 * Closes the stream when done.
+	 *
 	 * @param in the stream to copy from (may be {@code null} or empty)
 	 * @return the new byte array that has been copied to (possibly empty)
 	 * @throws IOException in case of I/O errors
@@ -161,7 +165,8 @@ public abstract class FileCopyUtils {
 	/**
 	 * Copy the contents of the given Reader to the given Writer.
 	 * Closes both when done.
-	 * @param in the Reader to copy from
+	 *
+	 * @param in  the Reader to copy from
 	 * @param out the Writer to copy to
 	 * @return the number of characters copied
 	 * @throws IOException in case of I/O errors
@@ -180,8 +185,7 @@ public abstract class FileCopyUtils {
 			}
 			out.flush();
 			return byteCount;
-		}
-		finally {
+		} finally {
 			close(in);
 			close(out);
 		}
@@ -190,7 +194,8 @@ public abstract class FileCopyUtils {
 	/**
 	 * Copy the contents of the given String to the given output Writer.
 	 * Closes the writer when done.
-	 * @param in the String to copy from
+	 *
+	 * @param in  the String to copy from
 	 * @param out the Writer to copy to
 	 * @throws IOException in case of I/O errors
 	 */
@@ -200,8 +205,7 @@ public abstract class FileCopyUtils {
 
 		try {
 			out.write(in);
-		}
-		finally {
+		} finally {
 			close(out);
 		}
 	}
@@ -209,6 +213,7 @@ public abstract class FileCopyUtils {
 	/**
 	 * Copy the contents of the given Reader into a String.
 	 * Closes the reader when done.
+	 *
 	 * @param in the reader to copy from (may be {@code null} or empty)
 	 * @return the String that has been copied to (possibly empty)
 	 * @throws IOException in case of I/O errors
@@ -226,13 +231,13 @@ public abstract class FileCopyUtils {
 	/**
 	 * Attempt to close the supplied {@link Closeable}, silently swallowing any
 	 * exceptions.
+	 *
 	 * @param closeable the {@code Closeable} to close
 	 */
 	private static void close(Closeable closeable) {
 		try {
 			closeable.close();
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			// ignore
 		}
 	}

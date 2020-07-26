@@ -39,11 +39,11 @@ import org.springframework.transaction.TransactionManager;
  * of the {@code TransactionManager} bean.
  *
  * @author Chris Beams
- * @since 3.1
  * @see EnableTransactionManagement
  * @see org.springframework.context.annotation.Primary
  * @see org.springframework.transaction.PlatformTransactionManager
  * @see org.springframework.transaction.ReactiveTransactionManager
+ * @since 3.1
  */
 public interface TransactionManagementConfigurer {
 
@@ -81,6 +81,7 @@ public interface TransactionManagementConfigurer {
 	 * of Spring lifecycle callbacks such as {@code InitializingBean} and
 	 * {@code BeanFactoryAware}. Note that the same guidelines apply to
 	 * {@code ReactiveTransactionManager} beans.
+	 *
 	 * @return a {@link org.springframework.transaction.PlatformTransactionManager} or
 	 * {@link org.springframework.transaction.ReactiveTransactionManager} implementation
 	 */

@@ -87,7 +87,7 @@ public class HiddenInputTagTests extends AbstractFormTagTests {
 	public void dynamicTypeAttribute() throws JspException {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.tag.setDynamicAttribute(null, "type", "email"))
-			.withMessage("Attribute type=\"email\" is not allowed");
+				.withMessage("Attribute type=\"email\" is not allowed");
 	}
 
 	@Test

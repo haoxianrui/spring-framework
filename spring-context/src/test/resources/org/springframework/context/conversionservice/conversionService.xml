@@ -6,7 +6,7 @@
 
 	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
 		<property name="converters">
-			<bean class="org.springframework.context.conversionservice.StringToBarConverter" />
+			<bean class="org.springframework.context.conversionservice.StringToBarConverter"/>
 		</property>
 	</bean>
 
@@ -37,11 +37,11 @@
 	</bean>
 
 	<bean class="org.springframework.context.conversionservice.Bar">
-		<constructor-arg value ="value1" />
+		<constructor-arg value="value1"/>
 	</bean>
 
 	<bean class="org.springframework.context.conversionservice.Bar">
-		<constructor-arg value ="value2" />
+		<constructor-arg value="value2"/>
 	</bean>
 
 	<bean id="numValue" class="java.lang.Integer">
@@ -52,6 +52,6 @@
 		<constructor-arg value="222"/>
 	</bean>
 
-	<context:annotation-config />
+	<context:annotation-config/>
 
 </beans>

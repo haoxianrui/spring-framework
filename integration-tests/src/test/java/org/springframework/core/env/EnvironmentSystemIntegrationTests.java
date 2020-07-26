@@ -207,7 +207,7 @@ public class EnvironmentSystemIntegrationTests {
 
 		// strange - FSXAC strips leading '/' unless prefixed with 'file:'
 		ConfigurableApplicationContext ctx =
-				new FileSystemXmlApplicationContext(new String[] {"file:" + tmpFile.getPath()}, false);
+				new FileSystemXmlApplicationContext(new String[]{"file:" + tmpFile.getPath()}, false);
 		ctx.setEnvironment(prodEnv);
 		ctx.refresh();
 		assertEnvironmentBeanRegistered(ctx);

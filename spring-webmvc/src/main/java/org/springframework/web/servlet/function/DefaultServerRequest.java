@@ -262,8 +262,7 @@ class DefaultServerRequest implements ServerRequest {
 				servletRequest().getAttribute(RouterFunctions.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		if (pathVariables != null) {
 			return pathVariables;
-		}
-		else {
+		} else {
 			return Collections.emptyMap();
 		}
 	}
@@ -293,8 +292,7 @@ class DefaultServerRequest implements ServerRequest {
 			return Optional.of(ServerResponse.status(response.status).
 					headers(headers -> headers.addAll(response.headers))
 					.build());
-		}
-		else {
+		} else {
 			return Optional.empty();
 		}
 	}
@@ -394,8 +392,7 @@ class DefaultServerRequest implements ServerRequest {
 			String[] parameterValues = this.servletRequest.getParameterValues(name);
 			if (!ObjectUtils.isEmpty(parameterValues)) {
 				return Arrays.asList(parameterValues);
-			}
-			else {
+			} else {
 				return Collections.emptyList();
 			}
 		}

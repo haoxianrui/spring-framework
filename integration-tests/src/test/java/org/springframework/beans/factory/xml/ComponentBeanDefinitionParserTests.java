@@ -41,7 +41,7 @@ class ComponentBeanDefinitionParserTests {
 	@BeforeAll
 	void setUp() throws Exception {
 		new XmlBeanDefinitionReader(bf).loadBeanDefinitions(
-			new ClassPathResource("component-config.xml", ComponentBeanDefinitionParserTests.class));
+				new ClassPathResource("component-config.xml", ComponentBeanDefinitionParserTests.class));
 	}
 
 	@AfterAll

@@ -3,19 +3,33 @@
 
 <beans>
 
-	<bean id="inheritedTestBean" class="org.springframework.beans.testfixture.beans.TestBean" abstract="true" scope="prototype">
-		<property name="name"><value>parent</value></property>
-		<property name="age"><value>1</value></property>
+	<bean id="inheritedTestBean" class="org.springframework.beans.testfixture.beans.TestBean" abstract="true"
+		  scope="prototype">
+		<property name="name">
+			<value>parent</value>
+		</property>
+		<property name="age">
+			<value>1</value>
+		</property>
 	</bean>
 
 	<bean id="inheritedTestBeanWithoutClass" abstract="true">
-		<property name="name"><value>parent</value></property>
-		<property name="age"><value>1</value></property>
+		<property name="name">
+			<value>parent</value>
+		</property>
+		<property name="age">
+			<value>1</value>
+		</property>
 	</bean>
 
-	<bean id="inheritedTestBeanPrototype" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype">
-		<property name="name"><value>parent</value></property>
-		<property name="age"><value>2</value></property>
+	<bean id="inheritedTestBeanPrototype" class="org.springframework.beans.testfixture.beans.TestBean"
+		  scope="prototype">
+		<property name="name">
+			<value>parent</value>
+		</property>
+		<property name="age">
+			<value>2</value>
+		</property>
 	</bean>
 
 	<bean id="inheritedTestBeanSingleton" class="org.springframework.beans.testfixture.beans.TestBean"/>

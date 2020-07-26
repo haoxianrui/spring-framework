@@ -64,7 +64,7 @@ import static org.springframework.core.testfixture.TestGroup.PERFORMANCE;
  * @author Juergen Hoeller
  * @since 04.07.2003
  */
-public class DataSourceTransactionManagerTests  {
+public class DataSourceTransactionManagerTests {
 
 	private DataSource ds;
 
@@ -153,13 +153,11 @@ public class DataSourceTransactionManagerTests  {
 				try {
 					if (createStatement) {
 						tCon.createStatement();
-					}
-					else {
+					} else {
 						tCon.getWarnings();
 						tCon.clearWarnings();
 					}
-				}
-				catch (SQLException ex) {
+				} catch (SQLException ex) {
 					throw new UncategorizedSQLException("", "", ex);
 				}
 			}
@@ -178,39 +176,38 @@ public class DataSourceTransactionManagerTests  {
 		}
 		if (createStatement) {
 			verify(con, times(2)).close();
-		}
-		else {
+		} else {
 			verify(con).close();
 		}
 	}
 
 	@Test
-	public void testTransactionRollbackWithAutoCommitTrue() throws Exception  {
+	public void testTransactionRollbackWithAutoCommitTrue() throws Exception {
 		doTestTransactionRollbackRestoringAutoCommit(true, false, false);
 	}
 
 	@Test
-	public void testTransactionRollbackWithAutoCommitFalse() throws Exception  {
+	public void testTransactionRollbackWithAutoCommitFalse() throws Exception {
 		doTestTransactionRollbackRestoringAutoCommit(false, false, false);
 	}
 
 	@Test
-	public void testTransactionRollbackWithAutoCommitTrueAndLazyConnection() throws Exception  {
+	public void testTransactionRollbackWithAutoCommitTrueAndLazyConnection() throws Exception {
 		doTestTransactionRollbackRestoringAutoCommit(true, true, false);
 	}
 
 	@Test
-	public void testTransactionRollbackWithAutoCommitFalseAndLazyConnection() throws Exception  {
+	public void testTransactionRollbackWithAutoCommitFalseAndLazyConnection() throws Exception {
 		doTestTransactionRollbackRestoringAutoCommit(false, true, false);
 	}
 
 	@Test
-	public void testTransactionRollbackWithAutoCommitTrueAndLazyConnectionAndCreateStatement() throws Exception  {
+	public void testTransactionRollbackWithAutoCommitTrueAndLazyConnectionAndCreateStatement() throws Exception {
 		doTestTransactionRollbackRestoringAutoCommit(true, true, true);
 	}
 
 	@Test
-	public void testTransactionRollbackWithAutoCommitFalseAndLazyConnectionAndCreateStatement() throws Exception  {
+	public void testTransactionRollbackWithAutoCommitFalseAndLazyConnectionAndCreateStatement() throws Exception {
 		doTestTransactionRollbackRestoringAutoCommit(false, true, true);
 	}
 
@@ -246,15 +243,14 @@ public class DataSourceTransactionManagerTests  {
 						if (createStatement) {
 							try {
 								con.createStatement();
-							}
-							catch (SQLException ex) {
+							} catch (SQLException ex) {
 								throw new UncategorizedSQLException("", "", ex);
 							}
 						}
 						throw ex;
 					}
 				}))
-			.isEqualTo(ex);
+				.isEqualTo(ex);
 
 		boolean condition1 = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition1).as("Hasn't thread connection").isTrue();
@@ -269,8 +265,7 @@ public class DataSourceTransactionManagerTests  {
 		}
 		if (createStatement) {
 			verify(con, times(2)).close();
-		}
-		else {
+		} else {
 			verify(con).close();
 		}
 	}
@@ -301,14 +296,12 @@ public class DataSourceTransactionManagerTests  {
 				}
 			});
 			fail("Should have thrown RuntimeException");
-		}
-		catch (RuntimeException ex2) {
+		} catch (RuntimeException ex2) {
 			// expected
 			boolean condition = !TransactionSynchronizationManager.isSynchronizationActive();
 			assertThat(condition).as("Synchronization not active").isTrue();
 			assertThat(ex2).as("Correct exception thrown").isEqualTo(ex);
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.unbindResource(ds);
 		}
 
@@ -372,16 +365,14 @@ public class DataSourceTransactionManagerTests  {
 			tm.commit(ts);
 
 			fail("Should have thrown UnexpectedRollbackException");
-		}
-		catch (UnexpectedRollbackException ex) {
+		} catch (UnexpectedRollbackException ex) {
 			// expected
 			if (!outerTransactionBoundaryReached) {
 				tm.rollback(ts);
 			}
 			if (failEarly) {
 				assertThat(outerTransactionBoundaryReached).isFalse();
-			}
-			else {
+			} else {
 				assertThat(outerTransactionBoundaryReached).isTrue();
 			}
 		}
@@ -406,24 +397,24 @@ public class DataSourceTransactionManagerTests  {
 		assertThat(condition1).as("Synchronization not active").isTrue();
 
 		assertThatExceptionOfType(IllegalTransactionStateException.class).isThrownBy(() -> {
-				final TransactionTemplate tt = new TransactionTemplate(tm);
-				final TransactionTemplate tt2 = new TransactionTemplate(tm);
-				tt2.setIsolationLevel(TransactionDefinition.ISOLATION_SERIALIZABLE);
+			final TransactionTemplate tt = new TransactionTemplate(tm);
+			final TransactionTemplate tt2 = new TransactionTemplate(tm);
+			tt2.setIsolationLevel(TransactionDefinition.ISOLATION_SERIALIZABLE);
 
-				tt.execute(new TransactionCallbackWithoutResult() {
-					@Override
-					protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-						assertThat(status.isRollbackOnly()).as("Is not rollback-only").isFalse();
-						tt2.execute(new TransactionCallbackWithoutResult() {
-							@Override
-							protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-								status.setRollbackOnly();
-							}
-						});
-						assertThat(status.isRollbackOnly()).as("Is rollback-only").isTrue();
-					}
-				});
+			tt.execute(new TransactionCallbackWithoutResult() {
+				@Override
+				protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+					assertThat(status.isRollbackOnly()).as("Is not rollback-only").isFalse();
+					tt2.execute(new TransactionCallbackWithoutResult() {
+						@Override
+						protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+							status.setRollbackOnly();
+						}
+					});
+					assertThat(status.isRollbackOnly()).as("Is rollback-only").isTrue();
+				}
 			});
+		});
 
 		boolean condition = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition).as("Hasn't thread connection").isTrue();
@@ -725,21 +716,21 @@ public class DataSourceTransactionManagerTests  {
 		assertThat(condition2).as("Synchronization not active").isTrue();
 
 		assertThatExceptionOfType(CannotCreateTransactionException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-					assertThat(status.isNewTransaction()).as("Is new transaction").isTrue();
-					assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
-					assertThat(TransactionSynchronizationManager.isCurrentTransactionReadOnly()).isFalse();
-					assertThat(TransactionSynchronizationManager.isActualTransactionActive()).isTrue();
-					tt2.execute(new TransactionCallbackWithoutResult() {
-						@Override
-						protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-							status.setRollbackOnly();
-						}
-					});
-				}
-			})).withCause(failure);
+				tt.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+						assertThat(status.isNewTransaction()).as("Is new transaction").isTrue();
+						assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
+						assertThat(TransactionSynchronizationManager.isCurrentTransactionReadOnly()).isFalse();
+						assertThat(TransactionSynchronizationManager.isActualTransactionActive()).isTrue();
+						tt2.execute(new TransactionCallbackWithoutResult() {
+							@Override
+							protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+								status.setRollbackOnly();
+							}
+						});
+					}
+				})).withCause(failure);
 
 		boolean condition1 = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition1).as("Hasn't thread connection").isTrue();
@@ -800,20 +791,20 @@ public class DataSourceTransactionManagerTests  {
 		assertThat(condition1).as("Synchronization not active").isTrue();
 
 		assertThatExceptionOfType(IllegalTransactionStateException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-					assertThat(status.isNewTransaction()).as("Is new transaction").isTrue();
-					tt.setPropagationBehavior(TransactionDefinition.PROPAGATION_NEVER);
-					tt.execute(new TransactionCallbackWithoutResult() {
-						@Override
-						protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-							fail("Should have thrown IllegalTransactionStateException");
-						}
-					});
-					fail("Should have thrown IllegalTransactionStateException");
-				}
-			}));
+				tt.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+						assertThat(status.isNewTransaction()).as("Is new transaction").isTrue();
+						tt.setPropagationBehavior(TransactionDefinition.PROPAGATION_NEVER);
+						tt.execute(new TransactionCallbackWithoutResult() {
+							@Override
+							protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+								fail("Should have thrown IllegalTransactionStateException");
+							}
+						});
+						fail("Should have thrown IllegalTransactionStateException");
+					}
+				}));
 
 		boolean condition = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition).as("Hasn't thread connection").isTrue();
@@ -861,8 +852,7 @@ public class DataSourceTransactionManagerTests  {
 		final Connection con2 = mock(Connection.class);
 		given(ds.getConnection()).willReturn(con1, con2);
 
-		final
-		TransactionTemplate tt = new TransactionTemplate(tm);
+		final TransactionTemplate tt = new TransactionTemplate(tm);
 		tt.setPropagationBehavior(TransactionDefinition.PROPAGATION_SUPPORTS);
 		boolean condition2 = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition2).as("Hasn't thread connection").isTrue();
@@ -993,15 +983,13 @@ public class DataSourceTransactionManagerTests  {
 				protected void doInTransactionWithoutResult(TransactionStatus status) {
 					try {
 						Thread.sleep(1500);
-					}
-					catch (InterruptedException ex) {
+					} catch (InterruptedException ex) {
 					}
 					try {
 						Connection con = DataSourceUtils.getConnection(ds);
 						PreparedStatement ps = con.prepareStatement("some SQL statement");
 						DataSourceUtils.applyTransactionTimeout(ps, ds);
-					}
-					catch (SQLException ex) {
+					} catch (SQLException ex) {
 						throw new DataAccessResourceFailureException("", ex);
 					}
 				}
@@ -1009,12 +997,10 @@ public class DataSourceTransactionManagerTests  {
 			if (timeout <= 1) {
 				fail("Should have thrown TransactionTimedOutException");
 			}
-		}
-		catch (TransactionTimedOutException ex) {
+		} catch (TransactionTimedOutException ex) {
 			if (timeout <= 1) {
 				// expected
-			}
-			else {
+			} else {
 				throw ex;
 			}
 		}
@@ -1024,8 +1010,7 @@ public class DataSourceTransactionManagerTests  {
 		if (timeout > 1) {
 			verify(ps).setQueryTimeout(timeout - 1);
 			verify(con).commit();
-		}
-		else {
+		} else {
 			verify(con).rollback();
 		}
 		InOrder ordered = inOrder(con);
@@ -1055,8 +1040,7 @@ public class DataSourceTransactionManagerTests  {
 					assertThat(((ConnectionProxy) dsProxy.getConnection()).getTargetConnection()).isEqualTo(con);
 					// should be ignored
 					dsProxy.getConnection().close();
-				}
-				catch (SQLException ex) {
+				} catch (SQLException ex) {
 					throw new UncategorizedSQLException("", "", ex);
 				}
 			}
@@ -1090,8 +1074,7 @@ public class DataSourceTransactionManagerTests  {
 					assertThat(((ConnectionProxy) dsProxy.getConnection()).getTargetConnection()).isEqualTo(con);
 					// should be ignored
 					dsProxy.getConnection().close();
-				}
-				catch (SQLException ex) {
+				} catch (SQLException ex) {
 					throw new UncategorizedSQLException("", "", ex);
 				}
 
@@ -1104,8 +1087,7 @@ public class DataSourceTransactionManagerTests  {
 							assertThat(((ConnectionProxy) dsProxy.getConnection()).getTargetConnection()).isEqualTo(con);
 							// should be ignored
 							dsProxy.getConnection().close();
-						}
-						catch (SQLException ex) {
+						} catch (SQLException ex) {
 							throw new UncategorizedSQLException("", "", ex);
 						}
 					}
@@ -1115,8 +1097,7 @@ public class DataSourceTransactionManagerTests  {
 					assertThat(((ConnectionProxy) dsProxy.getConnection()).getTargetConnection()).isEqualTo(con);
 					// should be ignored
 					dsProxy.getConnection().close();
-				}
-				catch (SQLException ex) {
+				} catch (SQLException ex) {
 					throw new UncategorizedSQLException("", "", ex);
 				}
 			}
@@ -1151,8 +1132,7 @@ public class DataSourceTransactionManagerTests  {
 					assertThat(((ConnectionProxy) dsProxy.getConnection()).getTargetConnection()).isEqualTo(con);
 					// should be ignored
 					dsProxy.getConnection().close();
-				}
-				catch (SQLException ex) {
+				} catch (SQLException ex) {
 					throw new UncategorizedSQLException("", "", ex);
 				}
 
@@ -1165,8 +1145,7 @@ public class DataSourceTransactionManagerTests  {
 							assertThat(((ConnectionProxy) dsProxy.getConnection()).getTargetConnection()).isEqualTo(con);
 							// should be ignored
 							dsProxy.getConnection().close();
-						}
-						catch (SQLException ex) {
+						} catch (SQLException ex) {
 							throw new UncategorizedSQLException("", "", ex);
 						}
 					}
@@ -1176,8 +1155,7 @@ public class DataSourceTransactionManagerTests  {
 					assertThat(((ConnectionProxy) dsProxy.getConnection()).getTargetConnection()).isEqualTo(con);
 					// should be ignored
 					dsProxy.getConnection().close();
-				}
-				catch (SQLException ex) {
+				} catch (SQLException ex) {
 					throw new UncategorizedSQLException("", "", ex);
 				}
 			}
@@ -1201,12 +1179,12 @@ public class DataSourceTransactionManagerTests  {
 
 		TransactionTemplate tt = new TransactionTemplate(tm);
 		assertThatExceptionOfType(CannotCreateTransactionException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(TransactionStatus status) {
-					// something transactional
-				}
-			}));
+				tt.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					protected void doInTransactionWithoutResult(TransactionStatus status) {
+						// something transactional
+					}
+				}));
 
 		boolean condition = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition).as("Hasn't thread connection").isTrue();
@@ -1219,12 +1197,12 @@ public class DataSourceTransactionManagerTests  {
 
 		TransactionTemplate tt = new TransactionTemplate(tm);
 		assertThatExceptionOfType(TransactionSystemException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(TransactionStatus status) {
-					// something transactional
-				}
-			}));
+				tt.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					protected void doInTransactionWithoutResult(TransactionStatus status) {
+						// something transactional
+					}
+				}));
 
 		boolean condition = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition).as("Hasn't thread connection").isTrue();
@@ -1238,12 +1216,12 @@ public class DataSourceTransactionManagerTests  {
 		tm.setRollbackOnCommitFailure(true);
 		TransactionTemplate tt = new TransactionTemplate(tm);
 		assertThatExceptionOfType(TransactionSystemException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(TransactionStatus status) {
-					// something transactional
-				}
-			}));
+				tt.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					protected void doInTransactionWithoutResult(TransactionStatus status) {
+						// something transactional
+					}
+				}));
 
 		boolean condition = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition).as("Hasn't thread connection").isTrue();
@@ -1258,12 +1236,12 @@ public class DataSourceTransactionManagerTests  {
 
 		TransactionTemplate tt = new TransactionTemplate(tm);
 		assertThatExceptionOfType(TransactionSystemException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-					status.setRollbackOnly();
-				}
-			}));
+				tt.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+						status.setRollbackOnly();
+					}
+				}));
 
 		boolean condition = !TransactionSynchronizationManager.hasResource(ds);
 		assertThat(condition).as("Hasn't thread connection").isTrue();
@@ -1467,29 +1445,29 @@ public class DataSourceTransactionManagerTests  {
 				boolean condition1 = !status.hasSavepoint();
 				assertThat(condition1).as("Isn't nested transaction").isTrue();
 				assertThatIllegalStateException().isThrownBy(() ->
-					tt.execute(new TransactionCallbackWithoutResult() {
-						@Override
-						protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-							assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
-							assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
-							boolean condition = !status.isNewTransaction();
-							assertThat(condition).as("Isn't new transaction").isTrue();
-							assertThat(status.hasSavepoint()).as("Is nested transaction").isTrue();
-							TransactionTemplate ntt = new TransactionTemplate(tm);
-							ntt.execute(new TransactionCallbackWithoutResult() {
-								@Override
-								protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-									assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
-									assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
-									boolean condition1 = !status.isNewTransaction();
-									assertThat(condition1).as("Isn't new transaction").isTrue();
-									boolean condition = !status.hasSavepoint();
-									assertThat(condition).as("Is regular transaction").isTrue();
-									throw new IllegalStateException();
-								}
-							});
-						}
-					}));
+						tt.execute(new TransactionCallbackWithoutResult() {
+							@Override
+							protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+								assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
+								assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
+								boolean condition = !status.isNewTransaction();
+								assertThat(condition).as("Isn't new transaction").isTrue();
+								assertThat(status.hasSavepoint()).as("Is nested transaction").isTrue();
+								TransactionTemplate ntt = new TransactionTemplate(tm);
+								ntt.execute(new TransactionCallbackWithoutResult() {
+									@Override
+									protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+										assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
+										assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
+										boolean condition1 = !status.isNewTransaction();
+										assertThat(condition1).as("Isn't new transaction").isTrue();
+										boolean condition = !status.hasSavepoint();
+										assertThat(condition).as("Is regular transaction").isTrue();
+										throw new IllegalStateException();
+									}
+								});
+							}
+						}));
 				assertThat(status.isNewTransaction()).as("Is new transaction").isTrue();
 				boolean condition = !status.hasSavepoint();
 				assertThat(condition).as("Isn't nested transaction").isTrue();
@@ -1527,29 +1505,29 @@ public class DataSourceTransactionManagerTests  {
 				boolean condition1 = !status.hasSavepoint();
 				assertThat(condition1).as("Isn't nested transaction").isTrue();
 				assertThatExceptionOfType(UnexpectedRollbackException.class).isThrownBy(() ->
-					tt.execute(new TransactionCallbackWithoutResult() {
-						@Override
-						protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-							assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
-							assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
-							boolean condition = !status.isNewTransaction();
-							assertThat(condition).as("Isn't new transaction").isTrue();
-							assertThat(status.hasSavepoint()).as("Is nested transaction").isTrue();
-							TransactionTemplate ntt = new TransactionTemplate(tm);
-							ntt.execute(new TransactionCallbackWithoutResult() {
-								@Override
-								protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
-									assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
-									assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
-									boolean condition1 = !status.isNewTransaction();
-									assertThat(condition1).as("Isn't new transaction").isTrue();
-									boolean condition = !status.hasSavepoint();
-									assertThat(condition).as("Is regular transaction").isTrue();
-									status.setRollbackOnly();
-								}
-							});
-						}
-					}));
+						tt.execute(new TransactionCallbackWithoutResult() {
+							@Override
+							protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+								assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
+								assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
+								boolean condition = !status.isNewTransaction();
+								assertThat(condition).as("Isn't new transaction").isTrue();
+								assertThat(status.hasSavepoint()).as("Is nested transaction").isTrue();
+								TransactionTemplate ntt = new TransactionTemplate(tm);
+								ntt.execute(new TransactionCallbackWithoutResult() {
+									@Override
+									protected void doInTransactionWithoutResult(TransactionStatus status) throws RuntimeException {
+										assertThat(TransactionSynchronizationManager.hasResource(ds)).as("Has thread connection").isTrue();
+										assertThat(TransactionSynchronizationManager.isSynchronizationActive()).as("Synchronization active").isTrue();
+										boolean condition1 = !status.isNewTransaction();
+										assertThat(condition1).as("Isn't new transaction").isTrue();
+										boolean condition = !status.hasSavepoint();
+										assertThat(condition).as("Is regular transaction").isTrue();
+										status.setRollbackOnly();
+									}
+								});
+							}
+						}));
 				assertThat(status.isNewTransaction()).as("Is new transaction").isTrue();
 				boolean condition = !status.hasSavepoint();
 				assertThat(condition).as("Isn't nested transaction").isTrue();
@@ -1738,8 +1716,7 @@ public class DataSourceTransactionManagerTests  {
 		public void afterCompletion(int status) {
 			try {
 				doAfterCompletion(status);
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				this.afterCompletionException = ex;
 			}
 		}

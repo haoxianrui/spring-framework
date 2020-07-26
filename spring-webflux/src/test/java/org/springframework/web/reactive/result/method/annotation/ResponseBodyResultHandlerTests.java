@@ -120,12 +120,13 @@ public class ResponseBodyResultHandlerTests {
 	}
 
 
-
 	@RestController
 	@SuppressWarnings("unused")
 	private static class TestRestController {
 
-		public Mono<Void> handleToMonoVoid() { return null;}
+		public Mono<Void> handleToMonoVoid() {
+			return null;
+		}
 
 		public String handleToString() {
 			return null;

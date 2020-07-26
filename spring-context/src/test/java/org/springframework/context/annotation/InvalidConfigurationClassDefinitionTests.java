@@ -36,7 +36,8 @@ public class InvalidConfigurationClassDefinitionTests {
 	@Test
 	public void configurationClassesMayNotBeFinal() {
 		@Configuration
-		final class Config { }
+		final class Config {
+		}
 
 		BeanDefinition configBeanDef = rootBeanDefinition(Config.class).getBeanDefinition();
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
@@ -45,7 +46,7 @@ public class InvalidConfigurationClassDefinitionTests {
 		ConfigurationClassPostProcessor pp = new ConfigurationClassPostProcessor();
 		assertThatExceptionOfType(BeanDefinitionParsingException.class).isThrownBy(() ->
 				pp.postProcessBeanFactory(beanFactory))
-			.withMessageContaining("Remove the final modifier");
+				.withMessageContaining("Remove the final modifier");
 	}
 
 }

@@ -27,9 +27,9 @@ import org.springframework.lang.Nullable;
  * implementations of {@link #equals(Object)}, {@link #hashCode()}, and
  * {@link #toString()}.
  *
+ * @param <T> the kind of condition that this condition can be combined with or compared to
  * @author Rossen Stoyanchev
  * @since 4.0
- * @param <T> the kind of condition that this condition can be combined with or compared to
  */
 public abstract class AbstractMessageCondition<T extends AbstractMessageCondition<T>> implements MessageCondition<T> {
 

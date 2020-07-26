@@ -33,7 +33,9 @@ import static org.springframework.core.testfixture.io.ResourceTestUtils.qualifie
  */
 public class ThreadLocalTargetSourceTests {
 
-	/** Initial count value set in bean factory XML */
+	/**
+	 * Initial count value set in bean factory XML
+	 */
 	private static final int INITIAL_COUNT = 10;
 
 	private DefaultListableBeanFactory beanFactory;
@@ -114,6 +116,7 @@ public class ThreadLocalTargetSourceTests {
 
 		class Runner implements Runnable {
 			public SideEffectBean mine;
+
 			@Override
 			public void run() {
 				this.mine = (SideEffectBean) beanFactory.getBean("apartment");
@@ -145,7 +148,7 @@ public class ThreadLocalTargetSourceTests {
 	 */
 	@Test
 	public void testReuseDestroyedTarget() {
-		ThreadLocalTargetSource source = (ThreadLocalTargetSource)this.beanFactory.getBean("threadLocalTs");
+		ThreadLocalTargetSource source = (ThreadLocalTargetSource) this.beanFactory.getBean("threadLocalTs");
 
 		// try first time
 		source.getTarget();

@@ -41,7 +41,9 @@ import org.springframework.util.MimeTypeUtils;
  */
 public class ResourceDecoder extends AbstractDataBufferDecoder<Resource> {
 
-	/** Name of hint with a filename for the resource(e.g. from "Content-Disposition" HTTP header). */
+	/**
+	 * Name of hint with a filename for the resource(e.g. from "Content-Disposition" HTTP header).
+	 */
 	public static String FILENAME_HINT = ResourceDecoder.class.getName() + ".filename";
 
 
@@ -58,14 +60,14 @@ public class ResourceDecoder extends AbstractDataBufferDecoder<Resource> {
 
 	@Override
 	public Flux<Resource> decode(Publisher<DataBuffer> inputStream, ResolvableType elementType,
-			@Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								 @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		return Flux.from(decodeToMono(inputStream, elementType, mimeType, hints));
 	}
 
 	@Override
 	public Resource decode(DataBuffer dataBuffer, ResolvableType elementType,
-			@Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+						   @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		byte[] bytes = new byte[dataBuffer.readableByteCount()];
 		dataBuffer.read(bytes);
@@ -83,21 +85,20 @@ public class ResourceDecoder extends AbstractDataBufferDecoder<Resource> {
 				public String getFilename() {
 					return filename;
 				}
+
 				@Override
 				public long contentLength() {
 					return bytes.length;
 				}
 			};
-		}
-		else if (Resource.class.isAssignableFrom(clazz)) {
+		} else if (Resource.class.isAssignableFrom(clazz)) {
 			return new ByteArrayResource(bytes) {
 				@Override
 				public String getFilename() {
 					return filename;
 				}
 			};
-		}
-		else {
+		} else {
 			throw new IllegalStateException("Unsupported resource class: " + clazz);
 		}
 	}

@@ -312,8 +312,7 @@ public class JavaMailSenderTests {
 		simpleMessage.setFrom("");
 		try {
 			sender.send(simpleMessage);
-		}
-		catch (MailParseException ex) {
+		} catch (MailParseException ex) {
 			// expected
 			boolean condition = ex.getCause() instanceof AddressException;
 			assertThat(condition).isTrue();
@@ -331,8 +330,7 @@ public class JavaMailSenderTests {
 		};
 		try {
 			sender.send(preparator);
-		}
-		catch (MailParseException ex) {
+		} catch (MailParseException ex) {
 			// expected
 			boolean condition = ex.getCause() instanceof AddressException;
 			assertThat(condition).isTrue();
@@ -405,7 +403,7 @@ public class JavaMailSenderTests {
 		SimpleMailMessage simpleMessage1 = new SimpleMailMessage();
 		assertThatExceptionOfType(MailSendException.class).isThrownBy(() ->
 				sender.send(simpleMessage1))
-			.satisfies(ex ->  assertThat(ex.getFailedMessages()).containsExactly(entry(simpleMessage1, (Exception) ex.getCause())));
+				.satisfies(ex -> assertThat(ex.getFailedMessages()).containsExactly(entry(simpleMessage1, (Exception) ex.getCause())));
 	}
 
 	@Test
@@ -417,7 +415,7 @@ public class JavaMailSenderTests {
 		SimpleMailMessage simpleMessage1 = new SimpleMailMessage();
 		assertThatExceptionOfType(MailSendException.class).isThrownBy(() ->
 				sender.send(simpleMessage1))
-			.satisfies(ex -> assertThat(ex.getFailedMessages()).isEmpty());
+				.satisfies(ex -> assertThat(ex.getFailedMessages()).isEmpty());
 	}
 
 	@Test
@@ -435,8 +433,7 @@ public class JavaMailSenderTests {
 
 		try {
 			sender.send(simpleMessage1, simpleMessage2);
-		}
-		catch (MailSendException ex) {
+		} catch (MailSendException ex) {
 			ex.printStackTrace();
 			assertThat(sender.transport.getConnectedHost()).isEqualTo("host");
 			assertThat(sender.transport.getConnectedUsername()).isEqualTo("username");
@@ -468,8 +465,7 @@ public class JavaMailSenderTests {
 
 		try {
 			sender.send(mimeMessage1, mimeMessage2);
-		}
-		catch (MailSendException ex) {
+		} catch (MailSendException ex) {
 			ex.printStackTrace();
 			assertThat(sender.transport.getConnectedHost()).isEqualTo("host");
 			assertThat(sender.transport.getConnectedUsername()).isEqualTo("username");

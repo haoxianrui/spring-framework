@@ -126,7 +126,7 @@ public class TomcatRequestUpgradeStrategy implements RequestUpgradeStrategy {
 
 	@Override
 	public Mono<Void> upgrade(ServerWebExchange exchange, WebSocketHandler handler,
-			@Nullable String subProtocol, Supplier<HandshakeInfo> handshakeInfoFactory){
+							  @Nullable String subProtocol, Supplier<HandshakeInfo> handshakeInfoFactory) {
 
 		ServerHttpRequest request = exchange.getRequest();
 		ServerHttpResponse response = exchange.getResponse();
@@ -157,11 +157,9 @@ public class TomcatRequestUpgradeStrategy implements RequestUpgradeStrategy {
 	private static HttpServletRequest getNativeRequest(ServerHttpRequest request) {
 		if (request instanceof AbstractServerHttpRequest) {
 			return ((AbstractServerHttpRequest) request).getNativeRequest();
-		}
-		else if (request instanceof ServerHttpRequestDecorator) {
+		} else if (request instanceof ServerHttpRequestDecorator) {
 			return getNativeRequest(((ServerHttpRequestDecorator) request).getDelegate());
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException(
 					"Couldn't find HttpServletRequest in " + request.getClass().getName());
 		}
@@ -170,11 +168,9 @@ public class TomcatRequestUpgradeStrategy implements RequestUpgradeStrategy {
 	private static HttpServletResponse getNativeResponse(ServerHttpResponse response) {
 		if (response instanceof AbstractServerHttpResponse) {
 			return ((AbstractServerHttpResponse) response).getNativeResponse();
-		}
-		else if (response instanceof ServerHttpResponseDecorator) {
+		} else if (response instanceof ServerHttpResponseDecorator) {
 			return getNativeResponse(((ServerHttpResponseDecorator) response).getDelegate());
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException(
 					"Couldn't find HttpServletResponse in " + response.getClass().getName());
 		}

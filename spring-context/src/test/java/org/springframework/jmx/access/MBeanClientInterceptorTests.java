@@ -195,8 +195,7 @@ class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 		// now start the connector
 		try {
 			connector.start();
-		}
-		catch (BindException ex) {
+		} catch (BindException ex) {
 			System.out.println("Skipping remainder of JMX LazyConnectionToRemote test because binding to local port ["
 					+ port + "] failed: " + ex.getMessage());
 			return;
@@ -206,8 +205,7 @@ class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 		try {
 			assertThat(bean.getName()).isEqualTo("Rob Harrop");
 			assertThat(bean.getAge()).isEqualTo(100);
-		}
-		finally {
+		} finally {
 			connector.stop();
 		}
 	}
@@ -273,12 +271,12 @@ class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 		protected void populateOperationDescriptor(Descriptor descriptor, Method method) {
 		}
 
-		@SuppressWarnings({ "unused", "rawtypes" })
+		@SuppressWarnings({"unused", "rawtypes"})
 		protected String getDescription(String beanKey, Class beanClass) {
 			return "";
 		}
 
-		@SuppressWarnings({ "unused", "rawtypes" })
+		@SuppressWarnings({"unused", "rawtypes"})
 		protected void populateMBeanDescriptor(Descriptor mbeanDescriptor, String beanKey, Class beanClass) {
 		}
 	}

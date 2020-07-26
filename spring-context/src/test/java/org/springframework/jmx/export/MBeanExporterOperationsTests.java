@@ -114,9 +114,9 @@ class MBeanExporterOperationsTests extends AbstractMBeanServerTests {
 		ObjectName reg1 = exporter.registerManagedResource(bean1);
 		assertIsRegistered("Bean 1 not registered with MBeanServer", reg1);
 
-		assertThatExceptionOfType(MBeanExportException.class).isThrownBy(()->
+		assertThatExceptionOfType(MBeanExportException.class).isThrownBy(() ->
 				exporter.registerManagedResource(bean2))
-			.withCauseExactlyInstanceOf(InstanceAlreadyExistsException.class);
+				.withCauseExactlyInstanceOf(InstanceAlreadyExistsException.class);
 	}
 
 	private void assertObjectNameMatchesTemplate(ObjectName objectNameTemplate, ObjectName registeredName) {

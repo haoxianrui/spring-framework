@@ -59,5 +59,6 @@ class Spr7538Tests {
 		}
 	}
 
-	static class Foo{}
+	static class Foo {
+	}
 }

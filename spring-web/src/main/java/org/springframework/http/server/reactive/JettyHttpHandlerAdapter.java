@@ -43,8 +43,8 @@ import org.springframework.util.Assert;
  *
  * @author Violeta Georgieva
  * @author Brian Clozel
- * @since 5.0
  * @see org.springframework.web.server.adapter.AbstractReactiveWebInitializer
+ * @since 5.0
  */
 public class JettyHttpHandlerAdapter extends ServletHttpHandlerAdapter {
 
@@ -63,7 +63,7 @@ public class JettyHttpHandlerAdapter extends ServletHttpHandlerAdapter {
 
 	@Override
 	protected ServletServerHttpResponse createResponse(HttpServletResponse response,
-			AsyncContext context, ServletServerHttpRequest request) throws IOException {
+													   AsyncContext context, ServletServerHttpRequest request) throws IOException {
 
 		return new JettyServerHttpResponse(
 				response, context, getDataBufferFactory(), getBufferSize(), request);
@@ -73,7 +73,7 @@ public class JettyHttpHandlerAdapter extends ServletHttpHandlerAdapter {
 	private static final class JettyServerHttpRequest extends ServletServerHttpRequest {
 
 		JettyServerHttpRequest(HttpServletRequest request, AsyncContext asyncContext,
-				String servletPath, DataBufferFactory bufferFactory, int bufferSize)
+							   String servletPath, DataBufferFactory bufferFactory, int bufferSize)
 				throws IOException, URISyntaxException {
 
 			super(createHeaders(request), request, asyncContext, servletPath, bufferFactory, bufferSize);
@@ -89,7 +89,7 @@ public class JettyHttpHandlerAdapter extends ServletHttpHandlerAdapter {
 	private static final class JettyServerHttpResponse extends ServletServerHttpResponse {
 
 		JettyServerHttpResponse(HttpServletResponse response, AsyncContext asyncContext,
-				DataBufferFactory bufferFactory, int bufferSize, ServletServerHttpRequest request)
+								DataBufferFactory bufferFactory, int bufferSize, ServletServerHttpRequest request)
 				throws IOException {
 
 			super(createHeaders(response), response, asyncContext, bufferFactory, bufferSize, request);
@@ -106,8 +106,7 @@ public class JettyHttpHandlerAdapter extends ServletHttpHandlerAdapter {
 			MediaType contentType = null;
 			try {
 				contentType = getHeaders().getContentType();
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				String rawContentType = getHeaders().getFirst(HttpHeaders.CONTENT_TYPE);
 				response.setContentType(rawContentType);
 			}

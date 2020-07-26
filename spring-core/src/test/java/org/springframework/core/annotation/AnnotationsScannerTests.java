@@ -123,7 +123,7 @@ class AnnotationsScannerTests {
 		Class<?> source = WithSingleSuperclassAndDoubleInherited.class;
 		assertThat(Arrays.stream(source.getAnnotations()).map(
 				Annotation::annotationType).map(Class::getName)).containsExactly(
-						TestInheritedAnnotation2.class.getName());
+				TestInheritedAnnotation2.class.getName());
 		assertThat(scan(source, SearchStrategy.INHERITED_ANNOTATIONS)).containsOnly("0:TestInheritedAnnotation2");
 	}
 
@@ -456,7 +456,7 @@ class AnnotationsScannerTests {
 					@Override
 					@Nullable
 					public String doWithAnnotations(Object context, int aggregateIndex,
-							Object source, Annotation[] annotations) {
+													Object source, Annotation[] annotations) {
 						throw new IllegalStateException("Should not call");
 					}
 
@@ -485,7 +485,7 @@ class AnnotationsScannerTests {
 					@Override
 					@Nullable
 					public String doWithAnnotations(Object context, int aggregateIndex,
-							Object source, Annotation[] annotations) {
+													Object source, Annotation[] annotations) {
 						return "K";
 					}
 

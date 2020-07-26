@@ -69,7 +69,7 @@ public class SpringFailOnTimeoutTests {
 		}).given(statement).evaluate();
 
 		assertThatExceptionOfType(TimeoutException.class).isThrownBy(() ->
-		new SpringFailOnTimeout(statement, 1).evaluate());
+				new SpringFailOnTimeout(statement, 1).evaluate());
 	}
 
 	@Test

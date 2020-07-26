@@ -128,12 +128,12 @@ public class PathPatternParserTests {
 		pathPattern = checkStructure("/{var:\\\\}");
 		PathElement next = pathPattern.getHeadSection().next;
 		assertThat(next.getClass().getName()).isEqualTo(CaptureVariablePathElement.class.getName());
-		assertMatches(pathPattern,"/\\");
+		assertMatches(pathPattern, "/\\");
 
 		pathPattern = checkStructure("/{var:\\/}");
 		next = pathPattern.getHeadSection().next;
 		assertThat(next.getClass().getName()).isEqualTo(CaptureVariablePathElement.class.getName());
-		assertNoMatch(pathPattern,"/aaa");
+		assertNoMatch(pathPattern, "/aaa");
 
 		pathPattern = checkStructure("/{var:a{1,2}}");
 		next = pathPattern.getHeadSection().next;
@@ -142,25 +142,25 @@ public class PathPatternParserTests {
 		pathPattern = checkStructure("/{var:[^\\/]*}");
 		next = pathPattern.getHeadSection().next;
 		assertThat(next.getClass().getName()).isEqualTo(CaptureVariablePathElement.class.getName());
-		PathPattern.PathMatchInfo result = matchAndExtract(pathPattern,"/foo");
+		PathPattern.PathMatchInfo result = matchAndExtract(pathPattern, "/foo");
 		assertThat(result.getUriVariables().get("var")).isEqualTo("foo");
 
 		pathPattern = checkStructure("/{var:\\[*}");
 		next = pathPattern.getHeadSection().next;
 		assertThat(next.getClass().getName()).isEqualTo(CaptureVariablePathElement.class.getName());
-		result = matchAndExtract(pathPattern,"/[[[");
+		result = matchAndExtract(pathPattern, "/[[[");
 		assertThat(result.getUriVariables().get("var")).isEqualTo("[[[");
 
 		pathPattern = checkStructure("/{var:[\\{]*}");
 		next = pathPattern.getHeadSection().next;
 		assertThat(next.getClass().getName()).isEqualTo(CaptureVariablePathElement.class.getName());
-		result = matchAndExtract(pathPattern,"/{{{");
+		result = matchAndExtract(pathPattern, "/{{{");
 		assertThat(result.getUriVariables().get("var")).isEqualTo("{{{");
 
 		pathPattern = checkStructure("/{var:[\\}]*}");
 		next = pathPattern.getHeadSection().next;
 		assertThat(next.getClass().getName()).isEqualTo(CaptureVariablePathElement.class.getName());
-		result = matchAndExtract(pathPattern,"/}}}");
+		result = matchAndExtract(pathPattern, "/}}}");
 		assertThat(result.getUriVariables().get("var")).isEqualTo("}}}");
 
 		pathPattern = checkStructure("*");
@@ -249,10 +249,10 @@ public class PathPatternParserTests {
 		PathPattern pp = parse("/{abc:foo(bar)}");
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				pp.matchAndExtract(toPSC("/foo")))
-			.withMessage("No capture groups allowed in the constraint regex: foo(bar)");
+				.withMessage("No capture groups allowed in the constraint regex: foo(bar)");
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				pp.matchAndExtract(toPSC("/foobar")))
-			.withMessage("No capture groups allowed in the constraint regex: foo(bar)");
+				.withMessage("No capture groups allowed in the constraint regex: foo(bar)");
 	}
 
 	@Test
@@ -448,6 +448,7 @@ public class PathPatternParserTests {
 	/**
 	 * Delegates to {@link #checkError(String, int, PatternMessage, String...)},
 	 * passing {@code -1} as the {@code expectedPos}.
+	 *
 	 * @since 5.2
 	 */
 	private void checkError(String pattern, PatternMessage expectedMessage, String... expectedInserts) {
@@ -458,19 +459,19 @@ public class PathPatternParserTests {
 	 * @param expectedPos the expected position, or {@code -1} if the position should not be checked
 	 */
 	private void checkError(String pattern, int expectedPos, PatternMessage expectedMessage,
-			String... expectedInserts) {
+							String... expectedInserts) {
 
 		assertThatExceptionOfType(PatternParseException.class)
-			.isThrownBy(() -> pathPattern = parse(pattern))
-			.satisfies(ex -> {
-				if (expectedPos >= 0) {
-					assertThat(ex.getPosition()).as(ex.toDetailedString()).isEqualTo(expectedPos);
-				}
-				assertThat(ex.getMessageType()).as(ex.toDetailedString()).isEqualTo(expectedMessage);
-				if (expectedInserts.length != 0) {
-					assertThat(ex.getInserts()).isEqualTo(expectedInserts);
-				}
-			});
+				.isThrownBy(() -> pathPattern = parse(pattern))
+				.satisfies(ex -> {
+					if (expectedPos >= 0) {
+						assertThat(ex.getPosition()).as(ex.toDetailedString()).isEqualTo(expectedPos);
+					}
+					assertThat(ex.getMessageType()).as(ex.toDetailedString()).isEqualTo(expectedMessage);
+					if (expectedInserts.length != 0) {
+						assertThat(ex.getInserts()).isEqualTo(expectedInserts);
+					}
+				});
 	}
 
 	@SafeVarargs

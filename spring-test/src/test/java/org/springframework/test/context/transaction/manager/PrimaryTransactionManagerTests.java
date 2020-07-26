@@ -46,8 +46,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * are supported.
  *
  * @author Sam Brannen
- * @since 4.3
  * @see org.springframework.test.context.jdbc.PrimaryDataSourceTests
+ * @since 4.3
  */
 @SpringJUnitConfig
 @DirtiesContext

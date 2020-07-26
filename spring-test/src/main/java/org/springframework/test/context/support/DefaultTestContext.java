@@ -67,25 +67,27 @@ public class DefaultTestContext implements TestContext {
 	 * <p><em>Immutable state</em> includes all arguments supplied to the
 	 * {@linkplain #DefaultTestContext(Class, MergedContextConfiguration,
 	 * CacheAwareContextLoaderDelegate) standard constructor}.
+	 *
 	 * @throws NullPointerException if the supplied {@code DefaultTestContext}
-	 * is {@code null}
+	 *                              is {@code null}
 	 */
 	public DefaultTestContext(DefaultTestContext testContext) {
 		this(testContext.testClass, testContext.mergedContextConfiguration,
-			testContext.cacheAwareContextLoaderDelegate);
+				testContext.cacheAwareContextLoaderDelegate);
 		this.attributes.putAll(testContext.attributes);
 	}
 
 	/**
 	 * Construct a new {@code DefaultTestContext} from the supplied arguments.
-	 * @param testClass the test class for this test context
-	 * @param mergedContextConfiguration the merged application context
-	 * configuration for this test context
+	 *
+	 * @param testClass                       the test class for this test context
+	 * @param mergedContextConfiguration      the merged application context
+	 *                                        configuration for this test context
 	 * @param cacheAwareContextLoaderDelegate the delegate to use for loading
-	 * and closing the application context for this test context
+	 *                                        and closing the application context for this test context
 	 */
 	public DefaultTestContext(Class<?> testClass, MergedContextConfiguration mergedContextConfiguration,
-			CacheAwareContextLoaderDelegate cacheAwareContextLoaderDelegate) {
+							  CacheAwareContextLoaderDelegate cacheAwareContextLoaderDelegate) {
 
 		Assert.notNull(testClass, "Test Class must not be null");
 		Assert.notNull(mergedContextConfiguration, "MergedContextConfiguration must not be null");
@@ -98,11 +100,12 @@ public class DefaultTestContext implements TestContext {
 	/**
 	 * Determine if the {@linkplain ApplicationContext application context} for
 	 * this test context is present in the context cache.
+	 *
 	 * @return {@code true} if the application context has already been loaded
 	 * and stored in the context cache
-	 * @since 5.2
 	 * @see #getApplicationContext()
 	 * @see CacheAwareContextLoaderDelegate#isContextLoaded
+	 * @since 5.2
 	 */
 	@Override
 	public boolean hasApplicationContext() {
@@ -114,8 +117,9 @@ public class DefaultTestContext implements TestContext {
 	 * test context.
 	 * <p>The default implementation delegates to the {@link CacheAwareContextLoaderDelegate}
 	 * that was supplied when this {@code TestContext} was constructed.
+	 *
 	 * @throws IllegalStateException if the context returned by the context
-	 * loader delegate is not <em>active</em> (i.e., has been closed)
+	 *                               loader delegate is not <em>active</em> (i.e., has been closed)
 	 * @see CacheAwareContextLoaderDelegate#loadContext
 	 */
 	@Override
@@ -126,11 +130,11 @@ public class DefaultTestContext implements TestContext {
 			ConfigurableApplicationContext cac = (ConfigurableApplicationContext) context;
 			Assert.state(cac.isActive(), () ->
 					"The ApplicationContext loaded for [" + this.mergedContextConfiguration +
-					"] is not active. This may be due to one of the following reasons: " +
-					"1) the context was closed programmatically by user code; " +
-					"2) the context was closed during parallel test execution either " +
-					"according to @DirtiesContext semantics or due to automatic eviction " +
-					"from the ContextCache due to a maximum cache size policy.");
+							"] is not active. This may be due to one of the following reasons: " +
+							"1) the context was closed programmatically by user code; " +
+							"2) the context was closed during parallel test execution either " +
+							"according to @DirtiesContext semantics or due to automatic eviction " +
+							"from the ContextCache due to a maximum cache size policy.");
 		}
 		return context;
 	}
@@ -141,6 +145,7 @@ public class DefaultTestContext implements TestContext {
 	 * context cache and closing it).
 	 * <p>The default implementation delegates to the {@link CacheAwareContextLoaderDelegate}
 	 * that was supplied when this {@code TestContext} was constructed.
+	 *
 	 * @see CacheAwareContextLoaderDelegate#closeContext
 	 */
 	@Override
@@ -186,8 +191,7 @@ public class DefaultTestContext implements TestContext {
 		synchronized (this.attributes) {
 			if (value != null) {
 				this.attributes.put(name, value);
-			}
-			else {
+			} else {
 				this.attributes.remove(name);
 			}
 		}

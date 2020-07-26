@@ -120,7 +120,8 @@ class ServerSentEventHttpMessageWriterTests extends AbstractDataBufferAllocating
 				.verify();
 	}
 
-	@ParameterizedDataBufferAllocatingTest // SPR-16516
+	@ParameterizedDataBufferAllocatingTest
+		// SPR-16516
 	void writeStringWithCustomCharset(String displayName, DataBufferFactory bufferFactory) {
 		super.bufferFactory = bufferFactory;
 
@@ -156,7 +157,8 @@ class ServerSentEventHttpMessageWriterTests extends AbstractDataBufferAllocating
 				.verify();
 	}
 
-	@ParameterizedDataBufferAllocatingTest  // SPR-14899
+	@ParameterizedDataBufferAllocatingTest
+		// SPR-14899
 	void writePojoWithPrettyPrint(String displayName, DataBufferFactory bufferFactory) {
 		super.bufferFactory = bufferFactory;
 
@@ -178,7 +180,8 @@ class ServerSentEventHttpMessageWriterTests extends AbstractDataBufferAllocating
 				.verify();
 	}
 
-	@ParameterizedDataBufferAllocatingTest // SPR-16516, SPR-16539
+	@ParameterizedDataBufferAllocatingTest
+		// SPR-16516, SPR-16539
 	void writePojoWithCustomEncoding(String displayName, DataBufferFactory bufferFactory) {
 		super.bufferFactory = bufferFactory;
 

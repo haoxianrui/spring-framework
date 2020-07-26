@@ -53,18 +53,18 @@ public class Jaxb2XmlEncoderTests extends AbstractEncoderTests<Jaxb2XmlEncoder> 
 	@Test
 	public void canEncode() {
 		assertThat(this.encoder.canEncode(ResolvableType.forClass(Pojo.class),
-		MediaType.APPLICATION_XML)).isTrue();
+				MediaType.APPLICATION_XML)).isTrue();
 		assertThat(this.encoder.canEncode(ResolvableType.forClass(Pojo.class),
-		MediaType.TEXT_XML)).isTrue();
+				MediaType.TEXT_XML)).isTrue();
 		assertThat(this.encoder.canEncode(ResolvableType.forClass(Pojo.class),
-		MediaType.APPLICATION_JSON)).isFalse();
+				MediaType.APPLICATION_JSON)).isFalse();
 
 		assertThat(this.encoder.canEncode(
-		ResolvableType.forClass(Jaxb2XmlDecoderTests.TypePojo.class),
-		MediaType.APPLICATION_XML)).isTrue();
+				ResolvableType.forClass(Jaxb2XmlDecoderTests.TypePojo.class),
+				MediaType.APPLICATION_XML)).isTrue();
 
 		assertThat(this.encoder.canEncode(ResolvableType.forClass(getClass()),
-		MediaType.APPLICATION_XML)).isFalse();
+				MediaType.APPLICATION_XML)).isFalse();
 
 		// SPR-15464
 		assertThat(this.encoder.canEncode(ResolvableType.NONE, null)).isFalse();
@@ -112,7 +112,8 @@ public class Jaxb2XmlEncoderTests extends AbstractEncoderTests<Jaxb2XmlEncoder> 
 		};
 	}
 
-	public static class Model {}
+	public static class Model {
+	}
 
 	public static class Foo extends Model {
 
@@ -152,8 +153,8 @@ public class Jaxb2XmlEncoderTests extends AbstractEncoderTests<Jaxb2XmlEncoder> 
 	public static class Container {
 
 		@XmlElements({
-				@XmlElement(name="foo", type=Foo.class),
-				@XmlElement(name="bar", type=Bar.class)
+				@XmlElement(name = "foo", type = Foo.class),
+				@XmlElement(name = "bar", type = Bar.class)
 		})
 		public List<Model> getElements() {
 			return Arrays.asList(new Foo("name1"), new Bar("title1"));

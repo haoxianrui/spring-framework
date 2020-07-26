@@ -127,7 +127,7 @@ public class CacheReproTests {
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				bean.getSimple(null))
-			.withMessageContaining(MyCacheResolver.class.getName());
+				.withMessageContaining(MyCacheResolver.class.getName());
 	}
 
 	@Test

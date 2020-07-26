@@ -32,37 +32,37 @@ class ListableBeanFactoryExtensionsTests {
 	@Test
 	fun `getBeanNamesForType with reified type parameters`() {
 		lbf.getBeanNamesForType<Foo>()
-		verify { lbf.getBeanNamesForType(Foo::class.java, true , true) }
+		verify { lbf.getBeanNamesForType(Foo::class.java, true, true) }
 	}
 
 	@Test
 	fun `getBeanNamesForType with reified type parameters and Boolean`() {
 		lbf.getBeanNamesForType<Foo>(false)
-		verify { lbf.getBeanNamesForType(Foo::class.java, false , true) }
+		verify { lbf.getBeanNamesForType(Foo::class.java, false, true) }
 	}
 
 	@Test
 	fun `getBeanNamesForType with reified type parameters, Boolean and Boolean`() {
 		lbf.getBeanNamesForType<Foo>(false, false)
-		verify { lbf.getBeanNamesForType(Foo::class.java, false , false) }
+		verify { lbf.getBeanNamesForType(Foo::class.java, false, false) }
 	}
 
 	@Test
 	fun `getBeansOfType with reified type parameters`() {
 		lbf.getBeansOfType<Foo>()
-		verify { lbf.getBeansOfType(Foo::class.java, true , true) }
+		verify { lbf.getBeansOfType(Foo::class.java, true, true) }
 	}
 
 	@Test
 	fun `getBeansOfType with reified type parameters and Boolean`() {
 		lbf.getBeansOfType<Foo>(false)
-		verify { lbf.getBeansOfType(Foo::class.java, false , true) }
+		verify { lbf.getBeansOfType(Foo::class.java, false, true) }
 	}
 
 	@Test
 	fun `getBeansOfType with reified type parameters, Boolean and Boolean`() {
 		lbf.getBeansOfType<Foo>(false, false)
-		verify { lbf.getBeansOfType(Foo::class.java, false , false) }
+		verify { lbf.getBeansOfType(Foo::class.java, false, false) }
 	}
 
 	@Test

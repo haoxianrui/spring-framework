@@ -39,7 +39,9 @@ import org.springframework.web.server.WebFilterChain;
  */
 public class ServerWebExchangeContextFilter implements WebFilter {
 
-	/** Attribute name under which the exchange is saved in the context. */
+	/**
+	 * Attribute name under which the exchange is saved in the context.
+	 */
 	public static final String EXCHANGE_CONTEXT_ATTRIBUTE =
 			ServerWebExchangeContextFilter.class.getName() + ".EXCHANGE_CONTEXT";
 
@@ -55,6 +57,7 @@ public class ServerWebExchangeContextFilter implements WebFilter {
 	 * Access the {@link ServerWebExchange} from the Reactor Context, if available,
 	 * which is if {@link ServerWebExchangeContextFilter} is configured for use
 	 * and the give context was obtained from a request processing chain.
+	 *
 	 * @param context the context in which to access the exchange
 	 * @return the exchange
 	 */

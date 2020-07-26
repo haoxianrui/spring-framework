@@ -587,7 +587,7 @@ public class DefaultLifecycleProcessorTests {
 			return new TestLifecycleBean(null, stoppedBeans);
 		}
 
-		private TestLifecycleBean(CopyOnWriteArrayList<Lifecycle> startedBeans,  CopyOnWriteArrayList<Lifecycle> stoppedBeans) {
+		private TestLifecycleBean(CopyOnWriteArrayList<Lifecycle> startedBeans, CopyOnWriteArrayList<Lifecycle> stoppedBeans) {
 			this.startedBeans = startedBeans;
 			this.stoppedBeans = stoppedBeans;
 		}
@@ -660,11 +660,9 @@ public class DefaultLifecycleProcessorTests {
 			new Thread(() -> {
 				try {
 					Thread.sleep(delay);
-				}
-				catch (InterruptedException e) {
+				} catch (InterruptedException e) {
 					// ignore
-				}
-				finally {
+				} finally {
 					callback.run();
 				}
 			}).start();

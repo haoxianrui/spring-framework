@@ -106,7 +106,7 @@ public class WebSocketHttpRequestHandlerTests {
 
 		@Override
 		public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
-				WebSocketHandler wsHandler, Map<String, Object> attributes) {
+									   WebSocketHandler wsHandler, Map<String, Object> attributes) {
 
 			response.getHeaders().add("headerName", "headerValue");
 			return this.allowHandshake;
@@ -114,7 +114,7 @@ public class WebSocketHttpRequestHandlerTests {
 
 		@Override
 		public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
-				WebSocketHandler wsHandler, Exception exception) {
+								   WebSocketHandler wsHandler, Exception exception) {
 
 			response.getHeaders().add("exceptionHeaderName", "exceptionHeaderValue");
 		}

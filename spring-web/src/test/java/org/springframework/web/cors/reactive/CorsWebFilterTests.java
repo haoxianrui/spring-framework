@@ -44,6 +44,7 @@ import static org.springframework.http.HttpHeaders.ORIGIN;
 
 /**
  * Unit tests for {@link CorsWebFilter}.
+ *
  * @author Sebastien Deleuze
  */
 public class CorsWebFilterTests {
@@ -70,8 +71,7 @@ public class CorsWebFilterTests {
 				HttpHeaders headers = filterExchange.getResponse().getHeaders();
 				assertThat(headers.getFirst(ACCESS_CONTROL_ALLOW_ORIGIN)).isNull();
 				assertThat(headers.getFirst(ACCESS_CONTROL_EXPOSE_HEADERS)).isNull();
-			}
-			catch (AssertionError ex) {
+			} catch (AssertionError ex) {
 				return Mono.error(ex);
 			}
 			return Mono.empty();
@@ -91,8 +91,7 @@ public class CorsWebFilterTests {
 				HttpHeaders headers = filterExchange.getResponse().getHeaders();
 				assertThat(headers.getFirst(ACCESS_CONTROL_ALLOW_ORIGIN)).isNull();
 				assertThat(headers.getFirst(ACCESS_CONTROL_EXPOSE_HEADERS)).isNull();
-			}
-			catch (AssertionError ex) {
+			} catch (AssertionError ex) {
 				return Mono.error(ex);
 			}
 			return Mono.empty();
@@ -112,8 +111,7 @@ public class CorsWebFilterTests {
 				HttpHeaders headers = filterExchange.getResponse().getHeaders();
 				assertThat(headers.getFirst(ACCESS_CONTROL_ALLOW_ORIGIN)).isEqualTo("https://domain2.com");
 				assertThat(headers.getFirst(ACCESS_CONTROL_EXPOSE_HEADERS)).isEqualTo("header3, header4");
-			}
-			catch (AssertionError ex) {
+			} catch (AssertionError ex) {
 				return Mono.error(ex);
 			}
 			return Mono.empty();

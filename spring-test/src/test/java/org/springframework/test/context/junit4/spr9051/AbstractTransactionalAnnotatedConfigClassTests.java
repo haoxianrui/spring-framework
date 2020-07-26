@@ -44,8 +44,8 @@ import static org.springframework.transaction.support.TransactionSynchronization
  * with regard to transactional tests.
  *
  * @author Sam Brannen
- * @since 3.2
  * @see org.springframework.test.context.testng.AnnotationConfigTransactionalTestNGSpringContextTests
+ * @since 3.2
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)

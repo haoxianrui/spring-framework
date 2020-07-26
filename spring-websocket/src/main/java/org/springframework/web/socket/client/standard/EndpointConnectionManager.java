@@ -45,8 +45,8 @@ import org.springframework.web.socket.handler.BeanCreatingHandlerProvider;
  * when the Spring ApplicationContext is refreshed.
  *
  * @author Rossen Stoyanchev
- * @since 4.0
  * @see AnnotatedEndpointConnectionManager
+ * @since 4.0
  */
 public class EndpointConnectionManager extends ConnectionManagerSupport implements BeanFactoryAware {
 
@@ -148,8 +148,7 @@ public class EndpointConnectionManager extends ConnectionManagerSupport implemen
 				ClientEndpointConfig endpointConfig = this.configBuilder.build();
 				this.session = getWebSocketContainer().connectToServer(endpointToUse, endpointConfig, getUri());
 				logger.info("Successfully connected to WebSocket");
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				logger.error("Failed to connect to WebSocket", ex);
 			}
 		});
@@ -162,8 +161,7 @@ public class EndpointConnectionManager extends ConnectionManagerSupport implemen
 			if (session != null && session.isOpen()) {
 				session.close();
 			}
-		}
-		finally {
+		} finally {
 			this.session = null;
 		}
 	}

@@ -40,26 +40,34 @@ import org.springframework.util.ObjectUtils;
  *
  * @author Juergen Hoeller
  * @author Rod Johnson
- * @since 1.1.4
  * @see org.springframework.beans.factory.BeanFactory#getBean
  * @see LazyInitTargetSource
  * @see PrototypeTargetSource
  * @see ThreadLocalTargetSource
  * @see CommonsPool2TargetSource
+ * @since 1.1.4
  */
 public abstract class AbstractBeanFactoryBasedTargetSource implements TargetSource, BeanFactoryAware, Serializable {
 
-	/** use serialVersionUID from Spring 1.2.7 for interoperability. */
+	/**
+	 * use serialVersionUID from Spring 1.2.7 for interoperability.
+	 */
 	private static final long serialVersionUID = -4721607536018568393L;
 
 
-	/** Logger available to subclasses. */
+	/**
+	 * Logger available to subclasses.
+	 */
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	/** Name of the target bean we will create on each invocation. */
+	/**
+	 * Name of the target bean we will create on each invocation.
+	 */
 	private String targetBeanName;
 
-	/** Class of the target. */
+	/**
+	 * Class of the target.
+	 */
 	private volatile Class<?> targetClass;
 
 	/**
@@ -74,8 +82,9 @@ public abstract class AbstractBeanFactoryBasedTargetSource implements TargetSour
 	 * <p>The target bean should not be a singleton, else the same instance will
 	 * always be obtained from the factory, resulting in the same behavior as
 	 * provided by {@link SingletonTargetSource}.
+	 *
 	 * @param targetBeanName name of the target bean in the BeanFactory
-	 * that owns this interceptor
+	 *                       that owns this interceptor
 	 * @see SingletonTargetSource
 	 */
 	public void setTargetBeanName(String targetBeanName) {
@@ -158,6 +167,7 @@ public abstract class AbstractBeanFactoryBasedTargetSource implements TargetSour
 	/**
 	 * Copy configuration from the other AbstractBeanFactoryBasedTargetSource object.
 	 * Subclasses should override this if they wish to expose it.
+	 *
 	 * @param other object to copy configuration from
 	 */
 	protected void copyFrom(AbstractBeanFactoryBasedTargetSource other) {

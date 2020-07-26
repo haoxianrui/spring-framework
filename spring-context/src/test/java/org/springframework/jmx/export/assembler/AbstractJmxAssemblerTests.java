@@ -125,10 +125,10 @@ public abstract class AbstractJmxAssemblerTests extends AbstractJmxTests {
 	}
 
 	@Test
-	public void testOperationInvocation() throws Exception{
+	public void testOperationInvocation() throws Exception {
 		ObjectName objectName = ObjectNameManager.getInstance(getObjectName());
 		Object result = getServer().invoke(objectName, "add",
-				new Object[] {new Integer(20), new Integer(30)}, new String[] {"int", "int"});
+				new Object[]{new Integer(20), new Integer(30)}, new String[]{"int", "int"});
 		assertThat(result).as("Incorrect result").isEqualTo(new Integer(50));
 	}
 

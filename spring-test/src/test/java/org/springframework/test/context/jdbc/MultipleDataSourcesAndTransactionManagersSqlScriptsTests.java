@@ -42,8 +42,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <p>Simultaneously tests for method-level overrides via {@code @SqlConfig}.
  *
  * @author Sam Brannen
- * @since 4.1
  * @see MultipleDataSourcesAndTransactionManagersTransactionalSqlScriptsTests
+ * @since 4.1
  */
 @SpringJUnitConfig
 @DirtiesContext
@@ -94,19 +94,19 @@ class MultipleDataSourcesAndTransactionManagersSqlScriptsTests {
 		@Bean
 		DataSource dataSource1() {
 			return new EmbeddedDatabaseBuilder()//
-			.setName("database1")//
-			.addScript("classpath:/org/springframework/test/context/jdbc/schema.sql")//
-			.addScript("classpath:/org/springframework/test/context/jdbc/data.sql")//
-			.build();
+					.setName("database1")//
+					.addScript("classpath:/org/springframework/test/context/jdbc/schema.sql")//
+					.addScript("classpath:/org/springframework/test/context/jdbc/data.sql")//
+					.build();
 		}
 
 		@Bean
 		DataSource dataSource2() {
 			return new EmbeddedDatabaseBuilder()//
-			.setName("database2")//
-			.addScript("classpath:/org/springframework/test/context/jdbc/schema.sql")//
-			.addScript("classpath:/org/springframework/test/context/jdbc/data.sql")//
-			.build();
+					.setName("database2")//
+					.addScript("classpath:/org/springframework/test/context/jdbc/schema.sql")//
+					.addScript("classpath:/org/springframework/test/context/jdbc/data.sql")//
+					.build();
 		}
 
 	}

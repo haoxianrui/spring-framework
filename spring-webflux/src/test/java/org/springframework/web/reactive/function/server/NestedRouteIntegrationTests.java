@@ -49,12 +49,12 @@ class NestedRouteIntegrationTests extends AbstractRouterFunctionIntegrationTests
 	protected RouterFunction<?> routerFunction() {
 		NestedHandler nestedHandler = new NestedHandler();
 		return nest(path("/foo/"),
-					route(GET("/bar"), nestedHandler::pattern)
-					.andRoute(GET("/baz"), nestedHandler::pattern))
+				route(GET("/bar"), nestedHandler::pattern)
+						.andRoute(GET("/baz"), nestedHandler::pattern))
 				.andNest(GET("{foo}"),
-					route(GET("/bar"), nestedHandler::variables).and(
-					nest(GET("/{bar}"),
-								route(GET("/{baz}"), nestedHandler::variables))))
+						route(GET("/bar"), nestedHandler::variables).and(
+								nest(GET("/{bar}"),
+										route(GET("/{baz}"), nestedHandler::variables))))
 				.andRoute(path("/{qux}/quux").and(method(HttpMethod.GET)), nestedHandler::variables)
 				.andRoute(all(), nestedHandler::variables);
 	}
@@ -146,15 +146,14 @@ class NestedRouteIntegrationTests extends AbstractRouterFunctionIntegrationTests
 			Map<String, String> attributePathVariables =
 					(Map<String, String>) request.attributes().get(RouterFunctions.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 			assertThat((pathVariables.equals(attributePathVariables))
-						|| (pathVariables.isEmpty() && (attributePathVariables == null))).isTrue();
+					|| (pathVariables.isEmpty() && (attributePathVariables == null))).isTrue();
 
 			PathPattern pathPattern = matchingPattern(request);
 			String pattern = pathPattern != null ? pathPattern.getPatternString() : "";
 			Flux<String> responseBody;
 			if (!pattern.isEmpty()) {
 				responseBody = Flux.just(pattern, "\n", pathVariables.toString());
-			}
-			else {
+			} else {
 				responseBody = Flux.just(pathVariables.toString());
 			}
 			return ServerResponse.ok().body(responseBody, String.class);

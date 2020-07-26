@@ -171,9 +171,9 @@ import java.lang.annotation.Target;
  * as the reference manual for details.
  *
  * @author Sam Brannen
- * @since 4.2
  * @see MergedAnnotations
  * @see SynthesizedAnnotation
+ * @since 4.2
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -191,6 +191,7 @@ public @interface AliasFor {
 
 	/**
 	 * The name of the attribute that <em>this</em> attribute is an alias for.
+	 *
 	 * @see #value
 	 */
 	@AliasFor("value")

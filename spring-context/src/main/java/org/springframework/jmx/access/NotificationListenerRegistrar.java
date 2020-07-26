@@ -42,15 +42,17 @@ import org.springframework.util.CollectionUtils;
  * (typically via a {@link javax.management.MBeanServerConnection}).
  *
  * @author Juergen Hoeller
- * @since 2.5.2
  * @see #setServer
  * @see #setMappedObjectNames
  * @see #setNotificationListener
+ * @since 2.5.2
  */
 public class NotificationListenerRegistrar extends NotificationListenerHolder
 		implements InitializingBean, DisposableBean {
 
-	/** Logger available to subclasses. */
+	/**
+	 * Logger available to subclasses.
+	 */
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	private final ConnectorDelegate connector = new ConnectorDelegate();
@@ -81,6 +83,7 @@ public class NotificationListenerRegistrar extends NotificationListenerHolder
 
 	/**
 	 * Specify the environment for the JMX connector.
+	 *
 	 * @see javax.management.remote.JMXConnectorFactory#connect(javax.management.remote.JMXServiceURL, java.util.Map)
 	 */
 	public void setEnvironment(@Nullable Map<String, ?> environment) {
@@ -111,6 +114,7 @@ public class NotificationListenerRegistrar extends NotificationListenerHolder
 	 * <p>Default is none. If specified, this will result in an
 	 * attempt being made to locate the attendant MBeanServer, unless
 	 * the {@link #setServiceUrl "serviceUrl"} property has been set.
+	 *
 	 * @see javax.management.MBeanServerFactory#findMBeanServer(String)
 	 * <p>Specifying the empty String indicates the platform MBeanServer.
 	 */
@@ -150,12 +154,10 @@ public class NotificationListenerRegistrar extends NotificationListenerHolder
 							actualObjectName, getNotificationListener(), getNotificationFilter(), getHandback());
 				}
 			}
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new MBeanServerNotFoundException(
 					"Could not connect to remote MBeanServer at URL [" + this.serviceUrl + "]", ex);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new JmxException("Unable to register NotificationListener", ex);
 		}
 	}
@@ -171,16 +173,14 @@ public class NotificationListenerRegistrar extends NotificationListenerHolder
 					try {
 						this.server.removeNotificationListener(
 								actualObjectName, getNotificationListener(), getNotificationFilter(), getHandback());
-					}
-					catch (Exception ex) {
+					} catch (Exception ex) {
 						if (logger.isDebugEnabled()) {
 							logger.debug("Unable to unregister NotificationListener", ex);
 						}
 					}
 				}
 			}
-		}
-		finally {
+		} finally {
 			this.connector.close();
 		}
 	}

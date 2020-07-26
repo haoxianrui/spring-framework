@@ -45,6 +45,7 @@ public class WebSocketToStandardExtensionAdapter implements Extension {
 				public String getName() {
 					return paramName;
 				}
+
 				@Override
 				public String getValue() {
 					return extension.getParameters().get(paramName);

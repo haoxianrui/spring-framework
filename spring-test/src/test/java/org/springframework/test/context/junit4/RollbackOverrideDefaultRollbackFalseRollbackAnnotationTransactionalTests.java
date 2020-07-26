@@ -35,8 +35,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * {@link Rollback @Rollback} annotation.
  *
  * @author Sam Brannen
- * @since 4.2
  * @see Rollback
+ * @since 4.2
  */
 public class RollbackOverrideDefaultRollbackFalseRollbackAnnotationTransactionalTests extends
 		DefaultRollbackFalseRollbackAnnotationTransactionalTests {

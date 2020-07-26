@@ -68,8 +68,7 @@ public class SharedEntityManagerFactoryTests {
 		TransactionSynchronizationManager.bindResource(mockEmf, new EntityManagerHolder(mockEm));
 		try {
 			assertThat(emProxy.getTargetEntityManager()).isSameAs(mockEm);
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.unbindResource(mockEmf);
 		}
 

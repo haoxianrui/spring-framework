@@ -41,8 +41,8 @@ import org.springframework.util.MimeTypeUtils;
  *
  * @author Sebastien Deleuze
  * @author Rossen Stoyanchev
- * @since 5.0
  * @see Jackson2JsonEncoder
+ * @since 5.0
  */
 public class Jackson2JsonDecoder extends AbstractJackson2Decoder {
 
@@ -61,7 +61,7 @@ public class Jackson2JsonDecoder extends AbstractJackson2Decoder {
 
 	@Override
 	protected Flux<DataBuffer> processInput(Publisher<DataBuffer> input, ResolvableType elementType,
-			@Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+											@Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		Flux<DataBuffer> flux = Flux.from(input);
 		if (mimeType == null) {

@@ -85,7 +85,7 @@ public class GroovyAspectTests {
 	}
 
 	private void testAdvice(Advisor advisor, LogUserAdvice logAdvice, TestService target, String message,
-			boolean proxyTargetClass) throws Exception {
+							boolean proxyTargetClass) throws Exception {
 
 		logAdvice.reset();
 
@@ -97,7 +97,7 @@ public class GroovyAspectTests {
 		assertThat(logAdvice.getCountThrows()).isEqualTo(0);
 		assertThatExceptionOfType(TestException.class).isThrownBy(
 				bean::sayHello)
-			.withMessage(message);
+				.withMessage(message);
 		assertThat(logAdvice.getCountThrows()).isEqualTo(1);
 	}
 

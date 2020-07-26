@@ -864,8 +864,8 @@ class CronTriggerTests {
 
 	static Stream<Arguments> parameters() {
 		return Stream.of(
-			arguments(LocalDateTime.now(), TimeZone.getTimeZone("PST")),
-			arguments(LocalDateTime.now(), TimeZone.getTimeZone("CET"))
+				arguments(LocalDateTime.now(), TimeZone.getTimeZone("PST")),
+				arguments(LocalDateTime.now(), TimeZone.getTimeZone("CET"))
 		);
 	}
 

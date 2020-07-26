@@ -71,10 +71,10 @@ public class PersistenceExceptionTranslationAdvisorTests {
 		target.setBehavior(persistenceException1);
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(
 				ri::noThrowsClause)
-			.isSameAs(persistenceException1);
+				.isSameAs(persistenceException1);
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(
 				ri::throwsPersistenceException)
-			.isSameAs(persistenceException1);
+				.isSameAs(persistenceException1);
 	}
 
 	@Test
@@ -88,10 +88,10 @@ public class PersistenceExceptionTranslationAdvisorTests {
 		target.setBehavior(doNotTranslate);
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(
 				ri::noThrowsClause)
-			.isSameAs(doNotTranslate);
+				.isSameAs(doNotTranslate);
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(
 				ri::throwsPersistenceException)
-			.isSameAs(doNotTranslate);
+				.isSameAs(doNotTranslate);
 	}
 
 	@Test
@@ -125,11 +125,11 @@ public class PersistenceExceptionTranslationAdvisorTests {
 		target.setBehavior(persistenceException1);
 		assertThatExceptionOfType(DataAccessException.class).isThrownBy(
 				ri::noThrowsClause)
-			.withCause(persistenceException1);
+				.withCause(persistenceException1);
 
 		assertThatExceptionOfType(PersistenceException.class).isThrownBy(
 				ri::throwsPersistenceException)
-			.isSameAs(persistenceException1);
+				.isSameAs(persistenceException1);
 	}
 
 

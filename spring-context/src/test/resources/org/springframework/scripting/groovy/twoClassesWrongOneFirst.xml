@@ -7,19 +7,19 @@
 	<bean id="messenger" class="org.springframework.scripting.groovy.GroovyScriptFactory">
 		<constructor-arg>
 			<value>inline:
-	package org.springframework.scripting.groovy;
+				package org.springframework.scripting.groovy;
 
-	import org.springframework.scripting.Messenger;
-			
-	class Bingo {
+				import org.springframework.scripting.Messenger;
 
-		@Property String message;
-	}
+				class Bingo {
 
-	class GroovyMessenger implements Messenger {
+				@Property String message;
+				}
 
-		@Property String message;
-	}
+				class GroovyMessenger implements Messenger {
+
+				@Property String message;
+				}
 			</value>
 		</constructor-arg>
 		<property name="message" value="Hello World!"/>

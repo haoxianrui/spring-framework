@@ -40,6 +40,7 @@ public class DataBufferWrapper implements DataBuffer {
 
 	/**
 	 * Create a new {@code DataBufferWrapper} that wraps the given buffer.
+	 *
 	 * @param delegate the buffer to wrap
 	 */
 	public DataBufferWrapper(DataBuffer delegate) {
@@ -161,7 +162,7 @@ public class DataBufferWrapper implements DataBuffer {
 
 	@Override
 	public DataBuffer write(CharSequence charSequence,
-			Charset charset) {
+							Charset charset) {
 		return this.delegate.write(charSequence, charset);
 	}
 

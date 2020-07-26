@@ -54,7 +54,7 @@ class MergedAnnotationCollectorsTests {
 				MergedAnnotationCollectors.toAnnotationArray());
 		assertThat(Arrays.stream(array).map(
 				annotation -> ((TestAnnotation) annotation).value())).containsExactly("a",
-						"b", "c");
+				"b", "c");
 		assertThat(array).allMatch(SynthesizedAnnotation.class::isInstance);
 	}
 
@@ -71,8 +71,8 @@ class MergedAnnotationCollectorsTests {
 	void toMultiValueMapCollectsMultiValueMap() {
 		MultiValueMap<String, Object> map = stream().map(
 				MergedAnnotation::filterDefaultValues).collect(
-						MergedAnnotationCollectors.toMultiValueMap(
-								Adapt.CLASS_TO_STRING));
+				MergedAnnotationCollectors.toMultiValueMap(
+						Adapt.CLASS_TO_STRING));
 		assertThat(map.get("value")).containsExactly("a", "b", "c");
 		assertThat(map.get("extra")).containsExactly("java.lang.String",
 				"java.lang.Integer");

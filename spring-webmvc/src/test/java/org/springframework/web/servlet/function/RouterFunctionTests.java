@@ -107,8 +107,7 @@ public class RouterFunctionTests {
 				.map(hf -> {
 					try {
 						return hf.handle(request);
-					}
-					catch (Exception ex) {
+					} catch (Exception ex) {
 						throw new AssertionError(ex.getMessage(), ex);
 					}
 				});

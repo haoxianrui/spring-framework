@@ -252,10 +252,13 @@ public class TigerAspectJExpressionPointcutTests {
 
 		public void setFriends(List<TestBean> friends) {
 		}
+
 		public void setEnemies(List<TestBean> enemies) {
 		}
+
 		public void setPartners(List<?> partners) {
 		}
+
 		public void setPhoneNumbers(List<String> numbers) {
 		}
 	}
@@ -276,6 +279,7 @@ public class TigerAspectJExpressionPointcutTests {
 
 		public void foo() {
 		}
+
 		public Object bar(String foo) {
 			throw new UnsupportedOperationException();
 		}

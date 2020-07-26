@@ -183,9 +183,9 @@ public class RmiSupportTests {
 		assertThat(condition1).isFalse();
 		assertThatExceptionOfType(RemoteProxyFailureException.class).isThrownBy(() ->
 				proxy.setOtherName("name"))
-			.withCauseInstanceOf(NoSuchMethodException.class)
-			.withMessageContaining("setOtherName")
-			.withMessageContaining("IWrongBusinessBean");
+				.withCauseInstanceOf(NoSuchMethodException.class)
+				.withMessageContaining("setOtherName")
+				.withMessageContaining("IWrongBusinessBean");
 		assertThat(factory.counter).isEqualTo(1);
 	}
 
@@ -298,7 +298,7 @@ public class RmiSupportTests {
 	}
 
 	@Test
-	public void rmiClientInterceptorRequiresUrl() throws Exception{
+	public void rmiClientInterceptorRequiresUrl() throws Exception {
 		RmiClientInterceptor client = new RmiClientInterceptor();
 		client.setServiceInterface(IRemoteBean.class);
 		assertThatIllegalArgumentException().isThrownBy(client::afterPropertiesSet);
@@ -316,18 +316,22 @@ public class RmiSupportTests {
 			public Method getMethod() {
 				return setNameMethod;
 			}
+
 			@Override
 			public Object[] getArguments() {
-				return new Object[] {"bla"};
+				return new Object[]{"bla"};
 			}
+
 			@Override
 			public Object proceed() throws Throwable {
 				throw new UnsupportedOperationException();
 			}
+
 			@Override
 			public Object getThis() {
 				return rb;
 			}
+
 			@Override
 			public AccessibleObject getStaticPart() {
 				return setNameMethod;
@@ -342,14 +346,14 @@ public class RmiSupportTests {
 
 		// this is a bit BS, but we need to test it
 		inv = new RemoteInvocation();
-		inv.setArguments(new Object[] { "bla" });
+		inv.setArguments(new Object[]{"bla"});
 		assertThat(inv.getArguments()[0]).isEqualTo("bla");
 		inv.setMethodName("setName");
 		assertThat(inv.getMethodName()).isEqualTo("setName");
-		inv.setParameterTypes(new Class<?>[] {String.class});
+		inv.setParameterTypes(new Class<?>[]{String.class});
 		assertThat(inv.getParameterTypes()[0]).isEqualTo(String.class);
 
-		inv = new RemoteInvocation("setName", new Class<?>[] {String.class}, new Object[] {"bla"});
+		inv = new RemoteInvocation("setName", new Class<?>[]{String.class}, new Object[]{"bla"});
 		assertThat(inv.getArguments()[0]).isEqualTo("bla");
 		assertThat(inv.getMethodName()).isEqualTo("setName");
 		assertThat(inv.getParameterTypes()[0]).isEqualTo(String.class);
@@ -366,6 +370,7 @@ public class RmiSupportTests {
 					public String getTargetInterfaceName() {
 						return null;
 					}
+
 					@Override
 					public Object invoke(RemoteInvocation invocation) throws RemoteException {
 						throw new RemoteException();
@@ -432,8 +437,7 @@ public class RmiSupportTests {
 					Class<?> exClass = Class.forName(nam);
 					Constructor<?> ctor = exClass.getConstructor(String.class);
 					rex = (RemoteException) ctor.newInstance("myMessage");
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					throw new RemoteException("Illegal exception class name: " + nam, ex);
 				}
 				throw rex;

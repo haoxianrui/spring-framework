@@ -27,6 +27,6 @@ import org.springframework.test.context.jdbc.SqlConfig;
  */
 @ContextConfiguration(classes = EmptyDatabaseConfig.class)
 @DirtiesContext
-@SqlConfig(commentPrefixes = { "`", "%%" }, blockCommentStartDelimiter = "#$", blockCommentEndDelimiter = "$#", separator = "@@")
+@SqlConfig(commentPrefixes = {"`", "%%"}, blockCommentStartDelimiter = "#$", blockCommentEndDelimiter = "$#", separator = "@@")
 interface SqlConfigTestInterface {
 }

@@ -38,12 +38,12 @@ import org.springframework.util.ReflectionUtils;
  * <em>synthesized</em> (i.e. wrapped in a dynamic proxy) with additional
  * functionality such as attribute alias handling.
  *
+ * @param <A> the annotation type
  * @author Sam Brannen
  * @author Phillip Webb
- * @since 5.2
- * @param <A> the annotation type
  * @see Annotation
  * @see AnnotationUtils#synthesizeAnnotation(Annotation, AnnotatedElement)
+ * @since 5.2
  */
 final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> implements InvocationHandler {
 
@@ -99,6 +99,7 @@ final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> i
 
 	/**
 	 * See {@link Annotation#equals(Object)} for a definition of the required algorithm.
+	 *
 	 * @param other the other object to compare against
 	 */
 	private boolean annotationEquals(Object other) {
@@ -230,6 +231,7 @@ final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> i
 
 	/**
 	 * Clone the provided array, ensuring that the original component type is retained.
+	 *
 	 * @param array the array to clone
 	 */
 	private Object cloneArray(Object array) {
@@ -267,7 +269,7 @@ final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> i
 		ClassLoader classLoader = type.getClassLoader();
 		InvocationHandler handler = new SynthesizedMergedAnnotationInvocationHandler<>(annotation, type);
 		Class<?>[] interfaces = isVisible(classLoader, SynthesizedAnnotation.class) ?
-				new Class<?>[] {type, SynthesizedAnnotation.class} : new Class<?>[] {type};
+				new Class<?>[]{type, SynthesizedAnnotation.class} : new Class<?>[]{type};
 		return (A) Proxy.newProxyInstance(classLoader, interfaces, handler);
 	}
 
@@ -278,8 +280,7 @@ final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> i
 		}
 		try {
 			return Class.forName(interfaceClass.getName(), false, classLoader) == interfaceClass;
-		}
-		catch (ClassNotFoundException ex) {
+		} catch (ClassNotFoundException ex) {
 			return false;
 		}
 	}

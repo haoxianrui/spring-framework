@@ -11,13 +11,17 @@
 	<bean id="eveTargetSource" class="org.springframework.aop.target.SingletonTargetSource">
 		<constructor-arg>
 			<bean class="org.springframework.beans.testfixture.beans.TestBean">
-				<property name="name"><value>Eve</value></property>
+				<property name="name">
+					<value>Eve</value>
+				</property>
 			</bean>
 		</constructor-arg>
 	</bean>
 
 	<bean id="adam" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>Adam</value></property>
+		<property name="name">
+			<value>Adam</value>
+		</property>
 	</bean>
 
 	<bean id="adamTargetSource" class="org.springframework.aop.target.SingletonTargetSource">
@@ -27,28 +31,40 @@
 	</bean>
 
 	<bean id="countingBeforeAdvice"
-		class="org.springframework.aop.testfixture.advice.CountingBeforeAdvice"
+		  class="org.springframework.aop.testfixture.advice.CountingBeforeAdvice"
 	/>
 
 	<bean id="doubleTarget"
-		class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces"><value>org.springframework.beans.testfixture.beans.ITestBean</value></property>
+		  class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.springframework.beans.testfixture.beans.ITestBean</value>
+		</property>
 		<!-- this is the one used and NOT the one set by targetSource -->
-		<property name="interceptorNames"><value>countingBeforeAdvice,adamTargetSource</value></property>
-	
-		<property name="targetSource"><ref bean="eveTargetSource"/></property>
+		<property name="interceptorNames">
+			<value>countingBeforeAdvice,adamTargetSource</value>
+		</property>
+
+		<property name="targetSource">
+			<ref bean="eveTargetSource"/>
+		</property>
 	</bean>
 
 	<!-- but this is also possible -->
 	<bean id="arbitraryTarget"
-		class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces"><value>org.springframework.beans.testfixture.beans.ITestBean</value></property>
+		  class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.springframework.beans.testfixture.beans.ITestBean</value>
+		</property>
 		<!-- this is the one used and NOT the one set by targetSource -->
-		<property name="interceptorNames"><value>adam</value></property>
-		<property name="targetSource"><ref bean="eveTargetSource"/></property>
+		<property name="interceptorNames">
+			<value>adam</value>
+		</property>
+		<property name="targetSource">
+			<ref bean="eveTargetSource"/>
+		</property>
 	</bean>
 
-	
+
 </beans>	
 
 

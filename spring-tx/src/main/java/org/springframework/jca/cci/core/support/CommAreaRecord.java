@@ -30,8 +30,8 @@ import org.springframework.util.FileCopyUtils;
  *
  * @author Thierry Templier
  * @author Juergen Hoeller
- * @since 1.2
  * @see org.springframework.jca.cci.object.MappingCommAreaOperation
+ * @since 1.2
  */
 @SuppressWarnings("serial")
 public class CommAreaRecord implements Record, Streamable {
@@ -45,6 +45,7 @@ public class CommAreaRecord implements Record, Streamable {
 
 	/**
 	 * Create a new CommAreaRecord.
+	 *
 	 * @see #read(java.io.InputStream)
 	 */
 	public CommAreaRecord() {
@@ -52,6 +53,7 @@ public class CommAreaRecord implements Record, Streamable {
 
 	/**
 	 * Create a new CommAreaRecord.
+	 *
 	 * @param bytes the bytes to fill the record with
 	 */
 	public CommAreaRecord(byte[] bytes) {

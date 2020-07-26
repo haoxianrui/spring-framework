@@ -72,9 +72,10 @@ public abstract class AbstractServerHttpRequest implements ServerHttpRequest {
 
 	/**
 	 * Constructor with the URI and headers for the request.
-	 * @param uri the URI for the request
+	 *
+	 * @param uri         the URI for the request
 	 * @param contextPath the context path for the request
-	 * @param headers the headers for the request
+	 * @param headers     the headers for the request
 	 */
 	public AbstractServerHttpRequest(URI uri, @Nullable String contextPath, HttpHeaders headers) {
 		this.uri = uri;
@@ -97,6 +98,7 @@ public abstract class AbstractServerHttpRequest implements ServerHttpRequest {
 	/**
 	 * Obtain the request id to use, or {@code null} in which case the Object
 	 * identity of this request instance is used.
+	 *
 	 * @since 5.1
 	 */
 	@Nullable
@@ -154,8 +156,7 @@ public abstract class AbstractServerHttpRequest implements ServerHttpRequest {
 	private String decodeQueryParam(String value) {
 		try {
 			return URLDecoder.decode(value, "UTF-8");
-		}
-		catch (UnsupportedEncodingException ex) {
+		} catch (UnsupportedEncodingException ex) {
 			if (logger.isWarnEnabled()) {
 				logger.warn(getLogPrefix() + "Could not decode query value [" + value + "] as 'UTF-8'. " +
 						"Falling back on default encoding: " + ex.getMessage());
@@ -194,6 +195,7 @@ public abstract class AbstractServerHttpRequest implements ServerHttpRequest {
 
 	/**
 	 * Obtain SSL session information from the underlying "native" request.
+	 *
 	 * @return the session information, or {@code null} if none available
 	 * @since 5.0.2
 	 */
@@ -209,6 +211,7 @@ public abstract class AbstractServerHttpRequest implements ServerHttpRequest {
 
 	/**
 	 * For internal use in logging at the HTTP adapter layer.
+	 *
 	 * @since 5.1
 	 */
 	String getLogPrefix() {

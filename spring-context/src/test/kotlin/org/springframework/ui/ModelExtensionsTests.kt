@@ -28,7 +28,7 @@ class ModelExtensionsTests {
 
 	@Test
 	fun setAttribute() {
-		val model:Model = ConcurrentModel()
+		val model: Model = ConcurrentModel()
 		model["foo"] = "bing"
 		assertThat(model.containsAttribute("foo")).isTrue()
 		assertThat(model.asMap()["foo"]).isEqualTo("bing")

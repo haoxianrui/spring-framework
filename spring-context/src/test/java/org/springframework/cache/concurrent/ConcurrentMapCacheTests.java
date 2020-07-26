@@ -99,8 +99,8 @@ public class ConcurrentMapCacheTests
 
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				serializeCache.put(createRandomKey(), this.cache))
-			.withMessageContaining("Failed to serialize")
-			.withMessageContaining(this.cache.getClass().getName());
+				.withMessageContaining("Failed to serialize")
+				.withMessageContaining(this.cache.getClass().getName());
 
 	}
 
@@ -112,8 +112,8 @@ public class ConcurrentMapCacheTests
 		this.nativeCache.put(key, "Some garbage");
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				serializeCache.get(key))
-			.withMessageContaining("Failed to deserialize")
-			.withMessageContaining("Some garbage");
+				.withMessageContaining("Failed to deserialize")
+				.withMessageContaining("Some garbage");
 	}
 
 

@@ -52,24 +52,24 @@ public class ControllerAdviceBeanTests {
 	@Test
 	public void constructorPreconditions() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new ControllerAdviceBean(null))
-			.withMessage("Bean must not be null");
+				.isThrownBy(() -> new ControllerAdviceBean(null))
+				.withMessage("Bean must not be null");
 
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new ControllerAdviceBean((String) null, null))
-			.withMessage("Bean name must contain text");
+				.isThrownBy(() -> new ControllerAdviceBean((String) null, null))
+				.withMessage("Bean name must contain text");
 
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new ControllerAdviceBean("", null))
-			.withMessage("Bean name must contain text");
+				.isThrownBy(() -> new ControllerAdviceBean("", null))
+				.withMessage("Bean name must contain text");
 
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new ControllerAdviceBean("\t", null))
-			.withMessage("Bean name must contain text");
+				.isThrownBy(() -> new ControllerAdviceBean("\t", null))
+				.withMessage("Bean name must contain text");
 
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new ControllerAdviceBean("myBean", null))
-			.withMessage("BeanFactory must not be null");
+				.isThrownBy(() -> new ControllerAdviceBean("myBean", null))
+				.withMessage("BeanFactory must not be null");
 	}
 
 	@Test
@@ -199,16 +199,16 @@ public class ControllerAdviceBeanTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void findAnnotatedBeansSortsBeans() {
 		Class[] expectedTypes = {
-			// Since ControllerAdviceBean currently treats PriorityOrdered the same as Ordered,
-			// OrderedControllerAdvice is sorted before PriorityOrderedControllerAdvice.
-			OrderedControllerAdvice.class,
-			PriorityOrderedControllerAdvice.class,
-			OrderAnnotationControllerAdvice.class,
-			PriorityAnnotationControllerAdvice.class,
-			SimpleControllerAdvice.class,
+				// Since ControllerAdviceBean currently treats PriorityOrdered the same as Ordered,
+				// OrderedControllerAdvice is sorted before PriorityOrderedControllerAdvice.
+				OrderedControllerAdvice.class,
+				PriorityOrderedControllerAdvice.class,
+				OrderAnnotationControllerAdvice.class,
+				PriorityAnnotationControllerAdvice.class,
+				SimpleControllerAdvice.class,
 		};
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
@@ -229,7 +229,7 @@ public class ControllerAdviceBeanTests {
 		assertThat(new ControllerAdviceBean(bean).getOrder()).isEqualTo(expectedOrder);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private void assertOrder(Class beanType, int expectedOrder) {
 		String beanName = "myBean";
 		BeanFactory beanFactory = mock(BeanFactory.class);
@@ -259,15 +259,18 @@ public class ControllerAdviceBeanTests {
 	// ControllerAdvice classes
 
 	@ControllerAdvice
-	static class SimpleControllerAdvice {}
+	static class SimpleControllerAdvice {
+	}
 
 	@ControllerAdvice
 	@Order(100)
-	static class OrderAnnotationControllerAdvice {}
+	static class OrderAnnotationControllerAdvice {
+	}
 
 	@ControllerAdvice
 	@Priority(200)
-	static class PriorityAnnotationControllerAdvice {}
+	static class PriorityAnnotationControllerAdvice {
+	}
 
 	@ControllerAdvice
 	// @Order and @Priority should be ignored due to implementation of Ordered.
@@ -294,45 +297,59 @@ public class ControllerAdviceBeanTests {
 	}
 
 	@ControllerAdvice(annotations = ControllerAnnotation.class)
-	static class AnnotationSupport {}
+	static class AnnotationSupport {
+	}
 
 	@ControllerAdvice(basePackageClasses = MarkerClass.class)
-	static class MarkerClassSupport {}
+	static class MarkerClassSupport {
+	}
 
 	@ControllerAdvice(assignableTypes = {ControllerInterface.class,
 			AbstractController.class})
-	static class AssignableTypesSupport {}
+	static class AssignableTypesSupport {
+	}
 
 	@ControllerAdvice(basePackages = "org.springframework.web.method")
-	static class BasePackageSupport {}
+	static class BasePackageSupport {
+	}
 
 	@ControllerAdvice("org.springframework.web.method")
-	static class BasePackageValueSupport {}
+	static class BasePackageValueSupport {
+	}
 
 	@ControllerAdvice(annotations = ControllerAnnotation.class, assignableTypes = ControllerInterface.class)
-	static class MultipleSelectorsSupport {}
+	static class MultipleSelectorsSupport {
+	}
 
 	@ControllerAdvice(basePackages = "java.util", annotations = {RestController.class})
-	static class ShouldNotMatch {}
+	static class ShouldNotMatch {
+	}
 
 
 	// Support classes
 
-	static class MarkerClass {}
+	static class MarkerClass {
+	}
 
 	@Retention(RetentionPolicy.RUNTIME)
-	static @interface ControllerAnnotation {}
+	static @interface ControllerAnnotation {
+	}
 
 	@ControllerAnnotation
-	public static class AnnotatedController {}
+	public static class AnnotatedController {
+	}
 
-	static interface ControllerInterface {}
+	static interface ControllerInterface {
+	}
 
-	static class ImplementationController implements ControllerInterface {}
+	static class ImplementationController implements ControllerInterface {
+	}
 
-	static abstract class AbstractController {}
+	static abstract class AbstractController {
+	}
 
-	static class InheritanceController extends AbstractController {}
+	static class InheritanceController extends AbstractController {
+	}
 
 	@Configuration(proxyBeanMethods = false)
 	static class Config {

@@ -27,14 +27,15 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
  * @author Rob Winch
  * @author Phillip Webb
  * @author Sam Brannen
- * @since 3.2
  * @see #notLogging(Log)
  * @see EnabledForTestGroups @EnabledForTestGroups
+ * @since 3.2
  */
 public abstract class Assume {
 
 	/**
 	 * Assume that the specified log is not set to Trace or Debug.
+	 *
 	 * @param log the log to test
 	 * @throws org.opentest4j.TestAbortedException if the assumption fails
 	 */

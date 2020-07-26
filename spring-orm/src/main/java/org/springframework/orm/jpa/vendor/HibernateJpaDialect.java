@@ -80,10 +80,10 @@ import org.springframework.util.ReflectionUtils;
  *
  * @author Juergen Hoeller
  * @author Costin Leau
- * @since 2.0
  * @see HibernateJpaVendorAdapter
  * @see org.hibernate.Session#setFlushMode
  * @see org.hibernate.Transaction#setTimeout
+ * @since 2.0
  */
 @SuppressWarnings("serial")
 public class HibernateJpaDialect extends DefaultJpaDialect {
@@ -94,13 +94,11 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 		try {
 			// Hibernate 5.2+ getHibernateFlushMode()
 			getFlushMode = Session.class.getMethod("getHibernateFlushMode");
-		}
-		catch (NoSuchMethodException ex) {
+		} catch (NoSuchMethodException ex) {
 			try {
 				// Classic Hibernate getFlushMode() with FlushMode return type
 				getFlushMode = Session.class.getMethod("getFlushMode");
-			}
-			catch (NoSuchMethodException ex2) {
+			} catch (NoSuchMethodException ex2) {
 				throw new IllegalStateException("No compatible Hibernate getFlushMode signature found", ex2);
 			}
 		}
@@ -131,9 +129,10 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 	 * that you're running into read-only enforcement now where previously write
 	 * access has accidentally been tolerated: Please revise your transaction
 	 * declarations accordingly, removing invalid read-only markers if necessary.
-	 * @since 4.1
+	 *
 	 * @see java.sql.Connection#setTransactionIsolation
 	 * @see java.sql.Connection#setReadOnly
+	 * @since 4.1
 	 */
 	public void setPrepareConnection(boolean prepareConnection) {
 		this.prepareConnection = prepareConnection;
@@ -144,11 +143,12 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 	 * <p>Applied to any detected {@link java.sql.SQLException} root cause of a Hibernate
 	 * {@link JDBCException}, overriding Hibernate's own {@code SQLException} translation
 	 * (which is based on a Hibernate Dialect for a specific target database).
-	 * @since 5.1
+	 *
 	 * @see java.sql.SQLException
 	 * @see org.hibernate.JDBCException
 	 * @see org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator
 	 * @see org.springframework.jdbc.support.SQLStateSQLExceptionTranslator
+	 * @since 5.1
 	 */
 	public void setJdbcExceptionTranslator(SQLExceptionTranslator jdbcExceptionTranslator) {
 		this.jdbcExceptionTranslator = jdbcExceptionTranslator;
@@ -173,8 +173,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 			if (this.prepareConnection) {
 				preparedCon = HibernateConnectionHandle.doGetConnection(session);
 				previousIsolationLevel = DataSourceUtils.prepareConnectionForTransaction(preparedCon, definition);
-			}
-			else if (isolationLevelNeeded) {
+			} else if (isolationLevelNeeded) {
 				throw new InvalidIsolationLevelException(getClass().getSimpleName() +
 						" does not support custom isolation levels since the 'prepareConnection' flag is off.");
 			}
@@ -218,8 +217,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 				session.setFlushMode(FlushMode.MANUAL);
 				return flushMode;
 			}
-		}
-		else {
+		} else {
 			// We need AUTO or COMMIT for a non-read-only transaction.
 			if (flushMode.lessThan(FlushMode.COMMIT)) {
 				session.setFlushMode(FlushMode.AUTO);
@@ -260,6 +258,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 	/**
 	 * Convert the given HibernateException to an appropriate exception
 	 * from the {@code org.springframework.dao} hierarchy.
+	 *
 	 * @param ex the HibernateException that occurred
 	 * @return the corresponding DataAccessException instance
 	 */
@@ -294,7 +293,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 		}
 		if (ex instanceof ConstraintViolationException) {
 			ConstraintViolationException jdbcEx = (ConstraintViolationException) ex;
-			return new DataIntegrityViolationException(ex.getMessage()  + "; SQL [" + jdbcEx.getSQL() +
+			return new DataIntegrityViolationException(ex.getMessage() + "; SQL [" + jdbcEx.getSQL() +
 					"]; constraint [" + jdbcEx.getConstraintName() + "]", ex);
 		}
 		if (ex instanceof DataException) {
@@ -374,7 +373,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 		private final boolean readOnly;
 
 		public SessionTransactionData(Session session, @Nullable FlushMode previousFlushMode,
-				@Nullable Connection preparedCon, @Nullable Integer previousIsolationLevel, boolean readOnly) {
+									  @Nullable Connection preparedCon, @Nullable Integer previousIsolationLevel, boolean readOnly) {
 
 			this.session = session;
 			this.previousFlushMode = previousFlushMode;
@@ -393,8 +392,8 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 				if (conToReset != this.preparedCon) {
 					LogFactory.getLog(HibernateJpaDialect.class).warn(
 							"JDBC Connection to reset not identical to originally prepared Connection - please " +
-							"make sure to use connection release mode ON_CLOSE (the default) and to run against " +
-							"Hibernate 4.2+ (or switch HibernateJpaDialect's prepareConnection flag to false");
+									"make sure to use connection release mode ON_CLOSE (the default) and to run against " +
+									"Hibernate 4.2+ (or switch HibernateJpaDialect's prepareConnection flag to false");
 				}
 				DataSourceUtils.resetConnectionAfterTransaction(
 						conToReset, this.previousIsolationLevel, this.readOnly);
@@ -430,8 +429,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 				Connection con = (Connection) ReflectionUtils.invokeMethod(methodToUse, session);
 				Assert.state(con != null, "No Connection from Session");
 				return con;
-			}
-			catch (NoSuchMethodException ex) {
+			} catch (NoSuchMethodException ex) {
 				throw new IllegalStateException("Cannot find connection() method on Hibernate Session", ex);
 			}
 		}

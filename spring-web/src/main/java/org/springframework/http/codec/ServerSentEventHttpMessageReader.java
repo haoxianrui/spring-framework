@@ -58,8 +58,6 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 	private final StringDecoder lineDecoder = StringDecoder.textPlainOnly();
 
 
-
-
 	/**
 	 * Constructor without a {@code Decoder}. In this mode only {@code String}
 	 * is supported as the data of an event.
@@ -92,6 +90,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 	 * also be customized accordingly to raise the limit if necessary in order
 	 * to be able to parse the data portion of the event.
 	 * <p>By default this is set to 256K.
+	 *
 	 * @param byteCount the max number of bytes to buffer, or -1 for unlimited
 	 * @since 5.1.13
 	 */
@@ -101,6 +100,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 
 	/**
 	 * Return the {@link #setMaxInMemorySize configured} byte count limit.
+	 *
 	 * @since 5.1.13
 	 */
 	public int getMaxInMemorySize() {
@@ -143,7 +143,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 
 	@Nullable
 	private Object buildEvent(List<String> lines, ResolvableType valueType, boolean shouldWrap,
-			Map<String, Object> hints) {
+							  Map<String, Object> hints) {
 
 		ServerSentEvent.Builder<Object> sseBuilder = shouldWrap ? ServerSentEvent.builder() : null;
 		StringBuilder data = null;
@@ -157,14 +157,11 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 			if (shouldWrap) {
 				if (line.startsWith("id:")) {
 					sseBuilder.id(line.substring(3).trim());
-				}
-				else if (line.startsWith("event:")) {
+				} else if (line.startsWith("event:")) {
 					sseBuilder.event(line.substring(6).trim());
-				}
-				else if (line.startsWith("retry:")) {
+				} else if (line.startsWith("retry:")) {
 					sseBuilder.retry(Duration.ofMillis(Long.parseLong(line.substring(6).trim())));
-				}
-				else if (line.startsWith(":")) {
+				} else if (line.startsWith(":")) {
 					comment = (comment != null ? comment : new StringBuilder());
 					comment.append(line.substring(1).trim()).append("\n");
 				}
@@ -181,8 +178,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 				sseBuilder.data(decodedData);
 			}
 			return sseBuilder.build();
-		}
-		else {
+		} else {
 			return (decodedData);
 		}
 	}
@@ -231,8 +227,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 			}
 			if (line.length() > Integer.MAX_VALUE - this.accumulated) {
 				raiseLimitException();
-			}
-			else {
+			} else {
 				this.accumulated += line.length();
 				if (this.accumulated > getMaxInMemorySize()) {
 					raiseLimitException();

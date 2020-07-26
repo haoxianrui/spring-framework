@@ -63,7 +63,7 @@ public class SpringCoreBlockHoundIntegrationTests {
 		testNonBlockingTask(() -> {
 			Method setName = TestObject.class.getMethod("setName", String.class);
 			String[] names = new LocalVariableTableParameterNameDiscoverer().getParameterNames(setName);
-			assertThat(names).isEqualTo(new String[] {"name"});
+			assertThat(names).isEqualTo(new String[]{"name"});
 		});
 	}
 
@@ -101,8 +101,7 @@ public class SpringCoreBlockHoundIntegrationTests {
 			try {
 				task.run();
 				future.complete(null);
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				future.completeExceptionally(ex);
 			}
 		});

@@ -96,11 +96,11 @@ public class ModelAndViewResolverMethodReturnValueHandlerTests {
 	public void handleSimpleType() throws Exception {
 		MethodParameter returnType = new MethodParameter(getClass().getDeclaredMethod("intReturnValue"), -1);
 		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() ->
-					handler.handleReturnValue(55, returnType, mavContainer, request));
+				handler.handleReturnValue(55, returnType, mavContainer, request));
 	}
 
 	@Test
-	public void handleNonSimpleType() throws Exception{
+	public void handleNonSimpleType() throws Exception {
 		MethodParameter returnType = new MethodParameter(getClass().getDeclaredMethod("testBeanReturnValue"), -1);
 		handler.handleReturnValue(new TestBean(), returnType, mavContainer, request);
 
@@ -129,12 +129,11 @@ public class ModelAndViewResolverMethodReturnValueHandlerTests {
 
 		@Override
 		public ModelAndView resolveModelAndView(Method method, Class<?> handlerType, Object returnValue,
-				ExtendedModelMap model, NativeWebRequest request) {
+												ExtendedModelMap model, NativeWebRequest request) {
 
 			if (returnValue != null && returnValue.getClass().equals(returnValueType)) {
 				return new ModelAndView("viewName", "modelAttrName", returnValue);
-			}
-			else {
+			} else {
 				return ModelAndViewResolver.UNRESOLVED;
 			}
 		}

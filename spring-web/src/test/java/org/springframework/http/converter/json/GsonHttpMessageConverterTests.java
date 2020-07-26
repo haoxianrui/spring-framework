@@ -80,9 +80,9 @@ public class GsonHttpMessageConverterTests {
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
 
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 	}
 
 	@Test
@@ -105,11 +105,11 @@ public class GsonHttpMessageConverterTests {
 		assertThat(result.get("array")).isEqualTo(array);
 		assertThat(result.get("bool")).isEqualTo(Boolean.TRUE);
 		byte[] bytes = new byte[2];
-		List<Number> resultBytes = (ArrayList<Number>)result.get("bytes");
+		List<Number> resultBytes = (ArrayList<Number>) result.get("bytes");
 		for (int i = 0; i < 2; i++) {
 			bytes[i] = resultBytes.get(i).byteValue();
 		}
-		assertThat(bytes).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(bytes).isEqualTo(new byte[]{0x1, 0x2});
 	}
 
 	@Test
@@ -119,9 +119,9 @@ public class GsonHttpMessageConverterTests {
 		body.setString("Foo");
 		body.setNumber(42);
 		body.setFraction(42F);
-		body.setArray(new String[] {"Foo", "Bar"});
+		body.setArray(new String[]{"Foo", "Bar"});
 		body.setBool(true);
-		body.setBytes(new byte[] {0x1, 0x2});
+		body.setBytes(new byte[]{0x1, 0x2});
 		this.converter.write(body, null, outputMessage);
 		Charset utf8 = StandardCharsets.UTF_8;
 		String result = outputMessage.getBodyAsString(utf8);
@@ -141,9 +141,9 @@ public class GsonHttpMessageConverterTests {
 		body.setString("Foo");
 		body.setNumber(42);
 		body.setFraction(42F);
-		body.setArray(new String[] {"Foo", "Bar"});
+		body.setArray(new String[]{"Foo", "Bar"});
 		body.setBool(true);
-		body.setBytes(new byte[] {0x1, 0x2});
+		body.setBytes(new byte[]{0x1, 0x2});
 		this.converter.write(body, MyBase.class, null, outputMessage);
 		Charset utf8 = StandardCharsets.UTF_8;
 		String result = outputMessage.getBodyAsString(utf8);
@@ -193,9 +193,9 @@ public class GsonHttpMessageConverterTests {
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
 
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 
 		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
 		converter.write(results, genericType, new MediaType("application", "json"), outputMessage);
@@ -220,9 +220,9 @@ public class GsonHttpMessageConverterTests {
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
 
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 
 		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
 		converter.write(results, beansList.getType(), new MediaType("application", "json"), outputMessage);
@@ -232,8 +232,10 @@ public class GsonHttpMessageConverterTests {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void writeParameterizedBaseType() throws Exception {
-		ParameterizedTypeReference<List<MyBean>> beansList = new ParameterizedTypeReference<List<MyBean>>() {};
-		ParameterizedTypeReference<List<MyBase>> baseList = new ParameterizedTypeReference<List<MyBase>>() {};
+		ParameterizedTypeReference<List<MyBean>> beansList = new ParameterizedTypeReference<List<MyBean>>() {
+		};
+		ParameterizedTypeReference<List<MyBase>> baseList = new ParameterizedTypeReference<List<MyBase>>() {
+		};
 
 		String body = "[{\"bytes\":[1,2],\"array\":[\"Foo\",\"Bar\"]," +
 				"\"number\":42,\"string\":\"Foo\",\"bool\":true,\"fraction\":42.0}]";
@@ -247,9 +249,9 @@ public class GsonHttpMessageConverterTests {
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
 
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 
 		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
 		converter.write(results, baseList.getType(), new MediaType("application", "json"), outputMessage);

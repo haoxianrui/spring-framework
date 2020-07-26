@@ -105,8 +105,7 @@ public class ClientHttpConnectorTests {
 					return this.bufferFactory.wrap(bytes);
 				});
 				return request.writeWith(body);
-			}
-			else {
+			} else {
 				return request.setComplete();
 			}
 		});
@@ -193,8 +192,7 @@ public class ClientHttpConnectorTests {
 	private void expectRequest(Consumer<RecordedRequest> consumer) {
 		try {
 			consumer.accept(this.server.takeRequest());
-		}
-		catch (InterruptedException ex) {
+		} catch (InterruptedException ex) {
 			throw new IllegalStateException(ex);
 		}
 	}

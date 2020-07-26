@@ -5,13 +5,15 @@
 
 
 	<bean id="default" class="org.springframework.beans.testfixture.beans.FactoryMethods"
-			factory-method="defaultInstance">
+		  factory-method="defaultInstance">
 		<!-- No constructor-arg elements -->
-		<property name="stringValue"><value>setterString</value></property>
+		<property name="stringValue">
+			<value>setterString</value>
+		</property>
 	</bean>
 
 	<bean id="defaultTestBean" factory-bean="default" factory-method="xgetTestBean"
-			init-method="haveBirthday" destroy-method="destroy"/>
-		
+		  init-method="haveBirthday" destroy-method="destroy"/>
+
 
 </beans>

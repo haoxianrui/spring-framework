@@ -60,6 +60,7 @@ public class ResourceHandlerFunctionTests {
 			public List<HttpMessageWriter<?>> messageWriters() {
 				return strategies.messageWriters();
 			}
+
 			@Override
 			public List<ViewResolver> viewResolvers() {
 				return strategies.viewResolvers();
@@ -82,10 +83,10 @@ public class ResourceHandlerFunctionTests {
 			boolean condition = response instanceof EntityResponse;
 			assertThat(condition).isTrue();
 			@SuppressWarnings("unchecked")
-					EntityResponse<Resource> entityResponse = (EntityResponse<Resource>) response;
+			EntityResponse<Resource> entityResponse = (EntityResponse<Resource>) response;
 			assertThat(entityResponse.entity()).isEqualTo(this.resource);
 			return response.writeTo(exchange, context);
-				});
+		});
 
 		StepVerifier.create(result)
 				.expectComplete()

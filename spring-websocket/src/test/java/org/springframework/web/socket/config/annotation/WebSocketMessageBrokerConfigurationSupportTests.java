@@ -158,7 +158,7 @@ public class WebSocketMessageBrokerConfigurationSupportTests {
 
 		SimpleBrokerMessageHandler handler = config.getBean(SimpleBrokerMessageHandler.class);
 		assertThat(handler.getTaskScheduler()).isNotNull();
-		assertThat(handler.getHeartbeatValue()).isEqualTo(new long[] {15000, 15000});
+		assertThat(handler.getHeartbeatValue()).isEqualTo(new long[]{15000, 15000});
 	}
 
 	@Test
@@ -242,7 +242,7 @@ public class WebSocketMessageBrokerConfigurationSupportTests {
 		public void configureMessageBroker(MessageBrokerRegistry registry) {
 			registry.enableSimpleBroker()
 					.setTaskScheduler(mock(TaskScheduler.class))
-					.setHeartbeatValue(new long[] {15000, 15000});
+					.setHeartbeatValue(new long[]{15000, 15000});
 		}
 	}
 

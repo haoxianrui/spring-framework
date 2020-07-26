@@ -241,7 +241,8 @@ class MethodJmsListenerEndpointTests {
 		MessagingMessageListenerAdapter listener = createDefaultInstance(String.class);
 		String body = "echo text";
 		String correlationId = "link-1234";
-		Destination replyDestination = new Destination() {};
+		Destination replyDestination = new Destination() {
+		};
 
 		TextMessage reply = mock(TextMessage.class);
 		QueueSender queueSender = mock(QueueSender.class);
@@ -335,16 +336,17 @@ class MethodJmsListenerEndpointTests {
 	}
 
 	private void processAndReplyWithSendTo(MessagingMessageListenerAdapter listener,
-			String replyDestinationName, boolean pubSubDomain) throws JMSException {
+										   String replyDestinationName, boolean pubSubDomain) throws JMSException {
 		processAndReplyWithSendTo(listener, replyDestinationName, pubSubDomain, null);
 	}
 
 	private void processAndReplyWithSendTo(MessagingMessageListenerAdapter listener,
-			String replyDestinationName, boolean pubSubDomain,
-			QosSettings replyQosSettings) throws JMSException {
+										   String replyDestinationName, boolean pubSubDomain,
+										   QosSettings replyQosSettings) throws JMSException {
 		String body = "echo text";
 		String correlationId = "link-1234";
-		Destination replyDestination = new Destination() {};
+		Destination replyDestination = new Destination() {
+		};
 
 		DestinationResolver destinationResolver = mock(DestinationResolver.class);
 		TextMessage reply = mock(TextMessage.class);
@@ -366,8 +368,7 @@ class MethodJmsListenerEndpointTests {
 		if (replyQosSettings != null) {
 			verify(queueSender).send(reply, replyQosSettings.getDeliveryMode(),
 					replyQosSettings.getPriority(), replyQosSettings.getTimeToLive());
-		}
-		else {
+		} else {
 			verify(queueSender).send(reply);
 		}
 		verify(queueSender).close();
@@ -383,15 +384,15 @@ class MethodJmsListenerEndpointTests {
 
 		assertThatExceptionOfType(ReplyFailureException.class).isThrownBy(() ->
 				listener.onMessage(createSimpleJmsTextMessage("content"), session))
-			.withCauseInstanceOf(InvalidDestinationException.class);
+				.withCauseInstanceOf(InvalidDestinationException.class);
 	}
 
 	@Test
 	void invalidSendTo() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				createDefaultInstance(String.class))
-			.withMessageContaining("firstDestination")
-			.withMessageContaining("secondDestination");
+				.withMessageContaining("firstDestination")
+				.withMessageContaining("secondDestination");
 	}
 
 	@Test
@@ -434,8 +435,8 @@ class MethodJmsListenerEndpointTests {
 		// test is not a valid integer
 		assertThatExceptionOfType(ListenerExecutionFailedException.class).isThrownBy(() ->
 				listener.onMessage(createSimpleJmsTextMessage("test"), session))
-			.withCauseInstanceOf(MessageConversionException.class)
-			.withMessageContaining(getDefaultListenerMethod(Integer.class).toGenericString()); // ref to method
+				.withCauseInstanceOf(MessageConversionException.class)
+				.withMessageContaining(getDefaultListenerMethod(Integer.class).toGenericString()); // ref to method
 	}
 
 	@Test
@@ -446,7 +447,7 @@ class MethodJmsListenerEndpointTests {
 		// Message<String> as Message<Integer>
 		assertThatExceptionOfType(ListenerExecutionFailedException.class).isThrownBy(() ->
 				listener.onMessage(createSimpleJmsTextMessage("test"), session))
-			.withCauseInstanceOf(MessageConversionException.class);
+				.withCauseInstanceOf(MessageConversionException.class);
 	}
 
 
@@ -501,6 +502,7 @@ class MethodJmsListenerEndpointTests {
 			public boolean supports(Class<?> clazz) {
 				return String.class.isAssignableFrom(clazz);
 			}
+
 			@Override
 			public void validate(@Nullable Object target, Errors errors) {
 				String value = (String) target;
@@ -516,7 +518,8 @@ class MethodJmsListenerEndpointTests {
 	}
 
 
-	@SendTo("defaultReply") @SuppressWarnings("unused")
+	@SendTo("defaultReply")
+	@SuppressWarnings("unused")
 	static class JmsEndpointSampleBean {
 
 		private final Map<String, Boolean> invocations = new HashMap<>();

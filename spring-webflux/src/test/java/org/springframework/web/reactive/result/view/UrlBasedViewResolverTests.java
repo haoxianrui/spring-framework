@@ -54,8 +54,8 @@ public class UrlBasedViewResolverTests {
 	@Test
 	public void urlBasedViewResolverOverridesCustomRequestContextAttributeWithNonNullValue() throws Exception {
 		assertThat(new TestView().getRequestContextAttribute())
-			.as("requestContextAttribute when instantiated directly")
-			.isEqualTo("testRequestContext");
+				.as("requestContextAttribute when instantiated directly")
+				.isEqualTo("testRequestContext");
 
 		this.resolver.setViewClass(TestView.class);
 		this.resolver.setRequestContextAttribute("viewResolverRequestContext");
@@ -65,8 +65,8 @@ public class UrlBasedViewResolverTests {
 				.consumeNextWith(view -> {
 					assertThat(view).isInstanceOf(TestView.class);
 					assertThat(((TestView) view).getRequestContextAttribute())
-						.as("requestContextAttribute when instantiated dynamically by UrlBasedViewResolver")
-						.isEqualTo("viewResolverRequestContext");
+							.as("requestContextAttribute when instantiated dynamically by UrlBasedViewResolver")
+							.isEqualTo("viewResolverRequestContext");
 				})
 				.expectComplete()
 				.verify(Duration.ZERO);
@@ -75,8 +75,8 @@ public class UrlBasedViewResolverTests {
 	@Test
 	public void urlBasedViewResolverDoesNotOverrideCustomRequestContextAttributeWithNull() throws Exception {
 		assertThat(new TestView().getRequestContextAttribute())
-			.as("requestContextAttribute when instantiated directly")
-			.isEqualTo("testRequestContext");
+				.as("requestContextAttribute when instantiated directly")
+				.isEqualTo("testRequestContext");
 
 		this.resolver.setViewClass(TestView.class);
 
@@ -85,8 +85,8 @@ public class UrlBasedViewResolverTests {
 				.consumeNextWith(view -> {
 					assertThat(view).isInstanceOf(TestView.class);
 					assertThat(((TestView) view).getRequestContextAttribute())
-						.as("requestContextAttribute when instantiated dynamically by UrlBasedViewResolver")
-						.isEqualTo("testRequestContext");
+							.as("requestContextAttribute when instantiated dynamically by UrlBasedViewResolver")
+							.isEqualTo("testRequestContext");
 				})
 				.expectComplete()
 				.verify(Duration.ZERO);
@@ -149,7 +149,7 @@ public class UrlBasedViewResolverTests {
 
 		@Override
 		protected Mono<Void> renderInternal(Map<String, Object> attributes, MediaType contentType,
-				ServerWebExchange exchange) {
+											ServerWebExchange exchange) {
 
 			return Mono.empty();
 		}

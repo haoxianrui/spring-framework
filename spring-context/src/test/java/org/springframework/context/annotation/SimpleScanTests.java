@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SimpleScanTests {
 
 	protected String[] getConfigLocations() {
-		return new String[] {"simpleScanTests.xml"};
+		return new String[]{"simpleScanTests.xml"};
 	}
 
 	@Test

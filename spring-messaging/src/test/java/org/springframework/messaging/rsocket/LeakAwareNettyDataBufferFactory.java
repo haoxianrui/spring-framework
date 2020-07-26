@@ -56,8 +56,7 @@ public class LeakAwareNettyDataBufferFactory extends NettyDataBufferFactory {
 					}
 				});
 				break;
-			}
-			catch (AssertionError ex) {
+			} catch (AssertionError ex) {
 				if (Instant.now().isAfter(start.plus(duration))) {
 					throw ex;
 				}

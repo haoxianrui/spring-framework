@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 4.1
  */
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "contextA.groovy", "contextB.xml" })
+@ContextConfiguration({"contextA.groovy", "contextB.xml"})
 class MixedXmlAndGroovySpringContextTests {
 
 	@Autowired

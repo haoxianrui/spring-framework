@@ -77,8 +77,8 @@ class MessagingRSocket extends AbstractRSocket {
 
 
 	MessagingRSocket(MimeType dataMimeType, MimeType metadataMimeType, MetadataExtractor metadataExtractor,
-			RSocketRequester requester, ReactiveMessageHandler messageHandler, RouteMatcher routeMatcher,
-			RSocketStrategies strategies) {
+					 RSocketRequester requester, ReactiveMessageHandler messageHandler, RouteMatcher routeMatcher,
+					 RSocketStrategies strategies) {
 
 		Assert.notNull(dataMimeType, "'dataMimeType' is required");
 		Assert.notNull(metadataMimeType, "'metadataMimeType' is required");
@@ -101,6 +101,7 @@ class MessagingRSocket extends AbstractRSocket {
 	/**
 	 * Wrap the {@link ConnectionSetupPayload} with a {@link Message} and
 	 * delegate to {@link #handle(Payload, FrameType)} for handling.
+	 *
 	 * @param payload the connection payload
 	 * @return completion handle for success or error
 	 */
@@ -187,7 +188,7 @@ class MessagingRSocket extends AbstractRSocket {
 	}
 
 	private MessageHeaders createHeaders(Payload payload, FrameType frameType,
-			@Nullable MonoProcessor<?> replyMono) {
+										 @Nullable MonoProcessor<?> replyMono) {
 
 		MessageHeaderAccessor headers = new MessageHeaderAccessor();
 		headers.setLeaveMutable(true);
@@ -199,8 +200,7 @@ class MessagingRSocket extends AbstractRSocket {
 			if (entry.getKey().equals(MetadataExtractor.ROUTE_KEY)) {
 				RouteMatcher.Route route = this.routeMatcher.parseRoute((String) entry.getValue());
 				headers.setHeader(DestinationPatternsMessageCondition.LOOKUP_DESTINATION_HEADER, route);
-			}
-			else {
+			} else {
 				headers.setHeader(entry.getKey(), entry.getValue());
 			}
 		}

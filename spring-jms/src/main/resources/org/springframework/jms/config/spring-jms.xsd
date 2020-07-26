@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xsd:schema xmlns="http://www.springframework.org/schema/jms"
-		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-		xmlns:tool="http://www.springframework.org/schema/tool"
-		targetNamespace="http://www.springframework.org/schema/jms"
-		elementFormDefault="qualified"
-		attributeFormDefault="unqualified">
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:tool="http://www.springframework.org/schema/tool"
+			targetNamespace="http://www.springframework.org/schema/jms"
+			elementFormDefault="qualified"
+			attributeFormDefault="unqualified">
 
-	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="https://www.springframework.org/schema/tool/spring-tool.xsd"/>
+	<xsd:import namespace="http://www.springframework.org/schema/tool"
+				schemaLocation="https://www.springframework.org/schema/tool/spring-tool.xsd"/>
 
 	<xsd:annotation>
 		<xsd:documentation><![CDATA[
@@ -72,7 +73,8 @@
 					]]></xsd:documentation>
 					<xsd:appinfo>
 						<tool:annotation kind="ref">
-							<tool:expected-type type="org.springframework.messaging.handler.annotation.support.MessageHandlerMethodFactory"/>
+							<tool:expected-type
+									type="org.springframework.messaging.handler.annotation.support.MessageHandlerMethodFactory"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>
@@ -138,7 +140,8 @@
 					<xsd:appinfo>
 						<tool:annotation>
 							<tool:expected-type type="java.lang.Class"/>
-							<tool:assignable-to type="org.springframework.jms.listener.AbstractMessageListenerContainer"/>
+							<tool:assignable-to
+									type="org.springframework.jms.listener.AbstractMessageListenerContainer"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>
@@ -425,7 +428,8 @@
 					]]></xsd:documentation>
 					<xsd:appinfo>
 						<tool:annotation kind="ref">
-							<tool:expected-type type="org.springframework.jms.listener.endpoint.JmsActivationSpecFactory"/>
+							<tool:expected-type
+									type="org.springframework.jms.listener.endpoint.JmsActivationSpecFactory"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>

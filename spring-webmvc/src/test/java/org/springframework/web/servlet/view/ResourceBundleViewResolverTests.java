@@ -44,7 +44,9 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  */
 public class ResourceBundleViewResolverTests {
 
-	/** Comes from this package */
+	/**
+	 * Comes from this package
+	 */
 	private static String PROPS_FILE = "org.springframework.web.servlet.view.testviews";
 
 	private final ResourceBundleViewResolver rb = new ResourceBundleViewResolver();
@@ -112,7 +114,7 @@ public class ResourceBundleViewResolverTests {
 		rb.setBasename(PROPS_FILE);
 		rb.setCache(getCache());
 		rb.setDefaultParentView("testParent");
-		rb.setLocalesToInitialize(new Locale[] {Locale.ENGLISH, Locale.FRENCH});
+		rb.setLocalesToInitialize(new Locale[]{Locale.ENGLISH, Locale.FRENCH});
 		rb.setApplicationContext(wac);
 
 		View v = rb.resolveViewName("debugView", Locale.FRENCH);
@@ -165,7 +167,7 @@ public class ResourceBundleViewResolverTests {
 
 		@Override
 		protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
-				HttpServletResponse response) {
+											   HttpServletResponse response) {
 		}
 
 		@Override

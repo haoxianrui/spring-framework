@@ -53,10 +53,9 @@ public class SimpleRequestExpectationManagerTests {
 	public void unexpectedRequest() throws Exception {
 		try {
 			this.manager.validateRequest(createRequest(GET, "/foo"));
-		}
-		catch (AssertionError error) {
+		} catch (AssertionError error) {
 			assertThat(error.getMessage()).isEqualTo(("No further requests expected: HTTP GET /foo\n" +
-						"0 request(s) executed.\n"));
+					"0 request(s) executed.\n"));
 		}
 	}
 
@@ -83,10 +82,10 @@ public class SimpleRequestExpectationManagerTests {
 		this.manager.validateRequest(createRequest(GET, "/bar"));
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				this.manager.validateRequest(createRequest(GET, "/baz")))
-			.withMessage("No further requests expected: HTTP GET /baz\n" +
-					"2 request(s) executed:\n" +
-					"GET /foo\n" +
-					"GET /bar\n");
+				.withMessage("No further requests expected: HTTP GET /baz\n" +
+						"2 request(s) executed:\n" +
+						"GET /foo\n" +
+						"GET /bar\n");
 	}
 
 	@Test
@@ -96,8 +95,8 @@ public class SimpleRequestExpectationManagerTests {
 		this.manager.validateRequest(createRequest(GET, "/foo"));
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				this.manager.verify())
-			.withMessage("Further request(s) expected leaving 1 unsatisfied expectation(s).\n" +
-				"1 request(s) executed:\nGET /foo\n");
+				.withMessage("Further request(s) expected leaving 1 unsatisfied expectation(s).\n" +
+						"1 request(s) executed:\nGET /foo\n");
 	}
 
 	@Test
@@ -124,12 +123,12 @@ public class SimpleRequestExpectationManagerTests {
 		this.manager.validateRequest(createRequest(GET, "/bar"));
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				this.manager.validateRequest(createRequest(GET, "/foo")))
-			.withMessage("No further requests expected: HTTP GET /foo\n" +
-					"4 request(s) executed:\n" +
-					"GET /foo\n" +
-					"GET /bar\n" +
-					"GET /foo\n" +
-					"GET /bar\n");
+				.withMessage("No further requests expected: HTTP GET /foo\n" +
+						"4 request(s) executed:\n" +
+						"GET /foo\n" +
+						"GET /bar\n" +
+						"GET /foo\n" +
+						"GET /bar\n");
 	}
 
 	@Test
@@ -141,10 +140,10 @@ public class SimpleRequestExpectationManagerTests {
 		this.manager.validateRequest(createRequest(GET, "/foo"));
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				this.manager.verify())
-			.withMessageContaining("3 request(s) executed:\n" +
-				"GET /foo\n" +
-				"GET /bar\n" +
-				"GET /foo\n");
+				.withMessageContaining("3 request(s) executed:\n" +
+						"GET /foo\n" +
+						"GET /bar\n" +
+						"GET /foo\n");
 	}
 
 	@Test
@@ -154,7 +153,7 @@ public class SimpleRequestExpectationManagerTests {
 		this.manager.expectRequest(twice(), requestTo("/baz")).andExpect(method(GET)).andRespond(withSuccess());
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				this.manager.validateRequest(createRequest(POST, "/foo")))
-			.withMessage("Unexpected HttpMethod expected:<GET> but was:<POST>");
+				.withMessage("Unexpected HttpMethod expected:<GET> but was:<POST>");
 	}
 
 	@Test  // SPR-15672
@@ -181,7 +180,9 @@ public class SimpleRequestExpectationManagerTests {
 	@Test  // SPR-16132
 	public void sequentialRequestsWithFirstFailing() throws Exception {
 		this.manager.expectRequest(once(), requestTo("/foo")).
-				andExpect(method(GET)).andRespond(request -> { throw new SocketException("pseudo network error"); });
+				andExpect(method(GET)).andRespond(request -> {
+			throw new SocketException("pseudo network error");
+		});
 		this.manager.expectRequest(once(), requestTo("/handle-error")).
 				andExpect(method(POST)).andRespond(withSuccess());
 		assertThatExceptionOfType(SocketException.class).isThrownBy(() ->
@@ -194,8 +195,7 @@ public class SimpleRequestExpectationManagerTests {
 	private ClientHttpRequest createRequest(HttpMethod method, String url) {
 		try {
 			return new MockClientHttpRequest(method, new URI(url));
-		}
-		catch (URISyntaxException ex) {
+		} catch (URISyntaxException ex) {
 			throw new IllegalStateException(ex);
 		}
 	}

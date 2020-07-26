@@ -103,7 +103,7 @@ public class AspectJExpressionPointcutTests {
 
 
 	@Test
-	public void testThis() throws SecurityException, NoSuchMethodException{
+	public void testThis() throws SecurityException, NoSuchMethodException {
 		testThisOrTarget("this");
 	}
 
@@ -114,6 +114,7 @@ public class AspectJExpressionPointcutTests {
 
 	/**
 	 * This and target are equivalent. Really instanceof pointcuts.
+	 *
 	 * @param which this or target
 	 */
 	private void testThisOrTarget(String which) throws SecurityException, NoSuchMethodException {
@@ -165,7 +166,7 @@ public class AspectJExpressionPointcutTests {
 		AspectJExpressionPointcut pc = new AspectJExpressionPointcut();
 		assertThatIllegalStateException().isThrownBy(() ->
 				pc.matches(ITestBean.class))
-			.withMessageContaining("expression");
+				.withMessageContaining("expression");
 	}
 
 	@Test
@@ -173,7 +174,7 @@ public class AspectJExpressionPointcutTests {
 		AspectJExpressionPointcut pc = new AspectJExpressionPointcut();
 		assertThatIllegalStateException().isThrownBy(() ->
 				pc.matches(getAge, ITestBean.class))
-			.withMessageContaining("expression");
+				.withMessageContaining("expression");
 	}
 
 	@Test
@@ -181,7 +182,7 @@ public class AspectJExpressionPointcutTests {
 		AspectJExpressionPointcut pc = new AspectJExpressionPointcut();
 		assertThatIllegalStateException().isThrownBy(() ->
 				pc.matches(getAge, ITestBean.class, (Object[]) null))
-			.withMessageContaining("expression");
+				.withMessageContaining("expression");
 	}
 
 
@@ -267,7 +268,7 @@ public class AspectJExpressionPointcutTests {
 		String expression = "call(int org.springframework.beans.testfixture.beans.TestBean.getAge())";
 		assertThatExceptionOfType(UnsupportedPointcutPrimitiveException.class).isThrownBy(() ->
 				getPointcut(expression).getClassFilter()) // call to getClassFilter forces resolution...
-			.satisfies(ex -> assertThat(ex.getUnsupportedPrimitive()).isEqualTo(PointcutPrimitive.CALL));
+				.satisfies(ex -> assertThat(ex.getUnsupportedPrimitive()).isEqualTo(PointcutPrimitive.CALL));
 	}
 
 	@Test

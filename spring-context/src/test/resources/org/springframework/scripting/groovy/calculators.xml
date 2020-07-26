@@ -9,16 +9,16 @@
 	<bean id="calculator" class="org.springframework.scripting.groovy.GroovyScriptFactory">
 		<constructor-arg value="classpath:org/springframework/scripting/groovy/Calculator.groovy"/>
 		<constructor-arg>
-			<bean class="org.springframework.scripting.groovy.GroovyScriptFactoryTests$TestCustomizer" />
+			<bean class="org.springframework.scripting.groovy.GroovyScriptFactoryTests$TestCustomizer"/>
 		</constructor-arg>
-	
+
 	</bean>
 
 	<bean id="delegatingCalculator" class="org.springframework.scripting.groovy.GroovyScriptFactory">
 		<constructor-arg value="classpath:org/springframework/scripting/groovy/DelegatingCalculator.groovy"/>
-	
+
 		<property name="delegate" ref="calculator"/>
-	
+
 	</bean>
 
 

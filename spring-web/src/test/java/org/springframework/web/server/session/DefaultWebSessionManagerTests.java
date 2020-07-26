@@ -44,6 +44,7 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for {@link DefaultWebSessionManager}.
+ *
  * @author Rossen Stoyanchev
  * @author Rob Winch
  */
@@ -83,7 +84,7 @@ class DefaultWebSessionManagerTests {
 		MockServerHttpRequest request = MockServerHttpRequest.get("/path").build();
 		MockServerHttpResponse response = new MockServerHttpResponse();
 		this.exchange = new DefaultServerWebExchange(request, response, this.sessionManager,
-			ServerCodecConfigurer.create(), new AcceptHeaderLocaleContextResolver());
+				ServerCodecConfigurer.create(), new AcceptHeaderLocaleContextResolver());
 	}
 
 	@Test

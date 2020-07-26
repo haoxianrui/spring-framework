@@ -51,6 +51,7 @@ class StaxEventHandler extends AbstractStaxHandler {
 	/**
 	 * Construct a new instance of the {@code StaxEventContentHandler} that writes to the
 	 * given {@code XMLEventWriter}. A default {@code XMLEventFactory} will be created.
+	 *
 	 * @param eventWriter the writer to write events to
 	 */
 	public StaxEventHandler(XMLEventWriter eventWriter) {
@@ -61,8 +62,9 @@ class StaxEventHandler extends AbstractStaxHandler {
 	/**
 	 * Construct a new instance of the {@code StaxEventContentHandler} that uses the given
 	 * event factory to create events and writes to the given {@code XMLEventConsumer}.
+	 *
 	 * @param eventWriter the writer to write events to
-	 * @param factory the factory used to create events
+	 * @param factory     the factory used to create events
 	 */
 	public StaxEventHandler(XMLEventWriter eventWriter, XMLEventFactory factory) {
 		this.eventFactory = factory;
@@ -89,7 +91,7 @@ class StaxEventHandler extends AbstractStaxHandler {
 
 	@Override
 	protected void startElementInternal(QName name, Attributes atts,
-			Map<String, String> namespaceMapping) throws XMLStreamException {
+										Map<String, String> namespaceMapping) throws XMLStreamException {
 
 		List<Attribute> attributes = getAttributes(atts);
 		List<Namespace> namespaces = getNamespaces(namespaceMapping);

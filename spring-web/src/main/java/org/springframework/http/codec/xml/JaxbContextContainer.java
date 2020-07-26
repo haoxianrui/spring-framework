@@ -52,8 +52,7 @@ final class JaxbContextContainer {
 		return this.jaxbContexts.computeIfAbsent(clazz, key -> {
 			try {
 				return JAXBContext.newInstance(clazz);
-			}
-			catch (JAXBException ex) {
+			} catch (JAXBException ex) {
 				throw new CodecException(
 						"Could not create JAXBContext for class [" + clazz + "]: " + ex.getMessage(), ex);
 			}

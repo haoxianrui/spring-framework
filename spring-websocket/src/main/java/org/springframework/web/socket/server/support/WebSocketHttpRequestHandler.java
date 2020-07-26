@@ -85,6 +85,7 @@ public class WebSocketHttpRequestHandler implements HttpRequestHandler, Lifecycl
 	 * Decorate the {@code WebSocketHandler} passed into the constructor.
 	 * <p>By default, {@link LoggingWebSocketHandlerDecorator} and
 	 * {@link ExceptionWebSocketHandlerDecorator} are added.
+	 *
 	 * @since 5.2.2
 	 */
 	protected WebSocketHandler decorate(WebSocketHandler handler) {
@@ -177,14 +178,11 @@ public class WebSocketHttpRequestHandler implements HttpRequestHandler, Lifecycl
 			}
 			this.handshakeHandler.doHandshake(request, response, this.wsHandler, attributes);
 			chain.applyAfterHandshake(request, response, null);
-		}
-		catch (HandshakeFailureException ex) {
+		} catch (HandshakeFailureException ex) {
 			failure = ex;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			failure = new HandshakeFailureException("Uncaught failure for request " + request.getURI(), ex);
-		}
-		finally {
+		} finally {
 			if (failure != null) {
 				chain.applyAfterHandshake(request, response, failure);
 				response.close();

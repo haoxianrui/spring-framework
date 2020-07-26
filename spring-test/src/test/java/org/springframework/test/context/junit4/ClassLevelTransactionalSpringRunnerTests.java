@@ -54,8 +54,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * at the <strong>class level</strong>.
  *
  * @author Sam Brannen
- * @since 2.5
  * @see MethodLevelTransactionalSpringRunnerTests
+ * @since 2.5
  */
 @Transactional
 public class ClassLevelTransactionalSpringRunnerTests extends AbstractTransactionalSpringRunnerTests {

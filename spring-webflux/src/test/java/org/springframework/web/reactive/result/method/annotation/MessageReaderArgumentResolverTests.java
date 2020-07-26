@@ -101,7 +101,8 @@ public class MessageReaderArgumentResolverTests {
 
 	// More extensive "empty body" tests in RequestBody- and HttpEntityArgumentResolverTests
 
-	@Test @SuppressWarnings("unchecked") // SPR-9942
+	@Test
+	@SuppressWarnings("unchecked") // SPR-9942
 	public void emptyBody() throws Exception {
 		MockServerHttpRequest request = post("/path").contentType(MediaType.APPLICATION_JSON).build();
 		ServerWebExchange exchange = MockServerWebExchange.from(request);
@@ -252,7 +253,7 @@ public class MessageReaderArgumentResolverTests {
 		MethodParameter param = this.testMethod.arg(TestBean[].class);
 		TestBean[] value = resolveValue(param, body);
 
-		assertThat(value).isEqualTo(new TestBean[] {new TestBean("f1", "b1"), new TestBean("f2", "b2")});
+		assertThat(value).isEqualTo(new TestBean[]{new TestBean("f1", "b1"), new TestBean("f2", "b2")});
 	}
 
 	@Test
@@ -311,6 +312,7 @@ public class MessageReaderArgumentResolverTests {
 			public boolean supportsParameter(MethodParameter parameter) {
 				return false;
 			}
+
 			@Override
 			public Mono<Object> resolveArgument(MethodParameter p, BindingContext bc, ServerWebExchange e) {
 				return null;
@@ -415,7 +417,8 @@ public class MessageReaderArgumentResolverTests {
 	private static abstract class AbstractParameterizedController<DTO extends Identifiable> {
 
 		@SuppressWarnings("unused")
-		public void handleDto(DTO dto) {}
+		public void handleDto(DTO dto) {
+		}
 	}
 
 

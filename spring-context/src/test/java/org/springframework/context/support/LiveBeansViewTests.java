@@ -55,7 +55,7 @@ class LiveBeansViewTests {
 	@Test
 	void registerUnregisterSingleContext(TestInfo testInfo) throws MalformedObjectNameException {
 		this.environment.setProperty(LiveBeansView.MBEAN_DOMAIN_PROPERTY_NAME,
-			testInfo.getTestMethod().get().getName());
+				testInfo.getTestMethod().get().getName());
 		ConfigurableApplicationContext context = createApplicationContext("app");
 		assertThat(searchLiveBeansViewMeans(testInfo).size()).isEqualTo(0);
 		LiveBeansView.registerApplicationContext(context);
@@ -67,7 +67,7 @@ class LiveBeansViewTests {
 	@Test
 	void registerUnregisterSeveralContexts(TestInfo testInfo) throws MalformedObjectNameException {
 		this.environment.setProperty(LiveBeansView.MBEAN_DOMAIN_PROPERTY_NAME,
-			testInfo.getTestMethod().get().getName());
+				testInfo.getTestMethod().get().getName());
 		ConfigurableApplicationContext context = createApplicationContext("app");
 		ConfigurableApplicationContext childContext = createApplicationContext("child");
 		assertThat(searchLiveBeansViewMeans(testInfo).size()).isEqualTo(0);
@@ -85,7 +85,7 @@ class LiveBeansViewTests {
 	@Test
 	void registerUnregisterSeveralContextsDifferentOrder(TestInfo testInfo) throws MalformedObjectNameException {
 		this.environment.setProperty(LiveBeansView.MBEAN_DOMAIN_PROPERTY_NAME,
-			testInfo.getTestMethod().get().getName());
+				testInfo.getTestMethod().get().getName());
 		ConfigurableApplicationContext context = createApplicationContext("app");
 		ConfigurableApplicationContext childContext = createApplicationContext("child");
 		assertThat(searchLiveBeansViewMeans(testInfo).size()).isEqualTo(0);
@@ -109,12 +109,12 @@ class LiveBeansViewTests {
 		Set<ObjectName> objectNames = searchLiveBeansViewMeans(testInfo);
 		assertThat(objectNames.size()).isEqualTo(1);
 		assertThat(objectNames.iterator().next().getCanonicalName()).as("Wrong MBean name").isEqualTo(
-			String.format("%s:application=%s", testInfo.getTestMethod().get().getName(), applicationName));
+				String.format("%s:application=%s", testInfo.getTestMethod().get().getName(), applicationName));
 	}
 
 	private Set<ObjectName> searchLiveBeansViewMeans(TestInfo testInfo) throws MalformedObjectNameException {
 		String objectName = String.format("%s:*,%s=*", testInfo.getTestMethod().get().getName(),
-			LiveBeansView.MBEAN_APPLICATION_KEY);
+				LiveBeansView.MBEAN_APPLICATION_KEY);
 		return ManagementFactory.getPlatformMBeanServer().queryNames(new ObjectName(objectName), null);
 	}
 

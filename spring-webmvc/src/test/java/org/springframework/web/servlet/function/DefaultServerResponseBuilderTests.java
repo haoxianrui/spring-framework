@@ -302,7 +302,8 @@ public class DefaultServerResponseBuilderTests {
 		List<String> body = new ArrayList<>();
 		body.add("foo");
 		body.add("bar");
-		ServerResponse response = ServerResponse.ok().body(body, new ParameterizedTypeReference<List<String>>() {});
+		ServerResponse response = ServerResponse.ok().body(body, new ParameterizedTypeReference<List<String>>() {
+		});
 
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest("GET", "https://example.com");
 		MockHttpServletResponse mockResponse = new MockHttpServletResponse();

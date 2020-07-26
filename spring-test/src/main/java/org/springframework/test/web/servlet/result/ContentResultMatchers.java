@@ -109,6 +109,7 @@ public class ContentResultMatchers {
 
 	/**
 	 * Assert the character encoding in the ServletResponse.
+	 *
 	 * @see HttpServletResponse#getCharacterEncoding()
 	 */
 	public ResultMatcher encoding(String characterEncoding) {
@@ -149,6 +150,7 @@ public class ContentResultMatchers {
 	 * regardless of order.
 	 * <p>Use of this matcher requires the <a
 	 * href="http://xmlunit.sourceforge.net/">XMLUnit</a> library.
+	 *
 	 * @param xmlContent the expected XML content
 	 * @see MockMvcResultMatchers#xpath(String, Object...)
 	 * @see MockMvcResultMatchers#xpath(String, Map, Object...)
@@ -174,6 +176,7 @@ public class ContentResultMatchers {
 	/**
 	 * Parse the response content as {@link DOMSource} and apply the given
 	 * Hamcrest {@link Matcher}.
+	 *
 	 * @see <a href="https://code.google.com/p/xml-matchers/">xml-matchers</a>
 	 */
 	public ResultMatcher source(Matcher<? super Source> matcher) {
@@ -188,6 +191,7 @@ public class ContentResultMatchers {
 	 * are "similar" - i.e. they contain the same attribute-value pairs
 	 * regardless of formatting with a lenient checking (extensible, and non-strict array
 	 * ordering).
+	 *
 	 * @param jsonContent the expected JSON content
 	 * @since 4.1
 	 */
@@ -205,8 +209,9 @@ public class ContentResultMatchers {
 	 * </ul>
 	 * <p>Use of this matcher requires the <a
 	 * href="https://jsonassert.skyscreamer.org/">JSONassert</a> library.
+	 *
 	 * @param jsonContent the expected JSON content
-	 * @param strict enables strict checking
+	 * @param strict      enables strict checking
 	 * @since 4.2
 	 */
 	public ResultMatcher json(String jsonContent, boolean strict) {

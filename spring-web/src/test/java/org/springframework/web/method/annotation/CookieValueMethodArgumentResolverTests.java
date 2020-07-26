@@ -89,7 +89,7 @@ public class CookieValueMethodArgumentResolverTests {
 	@Test
 	public void notFound() throws Exception {
 		assertThatExceptionOfType(ServletRequestBindingException.class).isThrownBy(() ->
-			resolver.resolveArgument(paramNamedCookie, null, webRequest, null));
+				resolver.resolveArgument(paramNamedCookie, null, webRequest, null));
 	}
 
 	private static class TestCookieValueMethodArgumentResolver extends AbstractCookieValueMethodArgumentResolver {
@@ -106,8 +106,8 @@ public class CookieValueMethodArgumentResolverTests {
 
 
 	public void params(@CookieValue("name") Cookie param1,
-			@CookieValue(name = "name", defaultValue = "bar") String param2,
-			String param3) {
+					   @CookieValue(name = "name", defaultValue = "bar") String param2,
+					   String param3) {
 	}
 
 }

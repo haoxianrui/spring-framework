@@ -26,9 +26,9 @@ import org.springframework.lang.Nullable;
 /**
  * The default {@link CacheKeyInvocationContext} implementation.
  *
+ * @param <A> the annotation type
  * @author Stephane Nicoll
  * @since 4.1
- * @param <A> the annotation type
  */
 class DefaultCacheKeyInvocationContext<A extends Annotation> extends DefaultCacheInvocationContext<A>
 		implements CacheKeyInvocationContext<A> {
@@ -44,8 +44,7 @@ class DefaultCacheKeyInvocationContext<A extends Annotation> extends DefaultCach
 		this.keyParameters = operation.getKeyParameters(args);
 		if (operation instanceof CachePutOperation) {
 			this.valueParameter = ((CachePutOperation) operation).getValueParameter(args);
-		}
-		else {
+		} else {
 			this.valueParameter = null;
 		}
 	}

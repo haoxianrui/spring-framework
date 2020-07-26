@@ -48,7 +48,7 @@ public class AnnotationDrivenTests {
 	@Test
 	public void withConfigurationClass() throws Exception {
 		ApplicationContext parent = new AnnotationConfigApplicationContext(TransactionManagerConfiguration.class);
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"annotationDrivenConfigurationClassTests.xml"}, getClass(), parent);
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"annotationDrivenConfigurationClassTests.xml"}, getClass(), parent);
 		doTestWithMultipleTransactionManagers(context);
 	}
 
@@ -58,7 +58,7 @@ public class AnnotationDrivenTests {
 		parent.registerBeanDefinition("transactionManager1", new RootBeanDefinition(SynchTransactionManager.class));
 		parent.registerBeanDefinition("transactionManager2", new RootBeanDefinition(NoSynchTransactionManager.class));
 		parent.refresh();
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"annotationDrivenConfigurationClassTests.xml"}, getClass(), parent);
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"annotationDrivenConfigurationClassTests.xml"}, getClass(), parent);
 		doTestWithMultipleTransactionManagers(context);
 	}
 
@@ -109,8 +109,7 @@ public class AnnotationDrivenTests {
 			if (methodInvocation.getMethod().getName().equals("setSomething")) {
 				assertThat(TransactionSynchronizationManager.isActualTransactionActive()).isTrue();
 				assertThat(TransactionSynchronizationManager.isSynchronizationActive()).isTrue();
-			}
-			else {
+			} else {
 				assertThat(TransactionSynchronizationManager.isActualTransactionActive()).isFalse();
 				assertThat(TransactionSynchronizationManager.isSynchronizationActive()).isFalse();
 			}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:aop="http://www.springframework.org/schema/aop"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 				http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="requestScopedObject" class="org.springframework.beans.testfixture.beans.TestBean" scope="request">
@@ -15,12 +15,14 @@
 		<property name="name" value="scoped"/>
 	</bean>
 
-	<bean id="requestScopedDisposableObject" class="org.springframework.beans.testfixture.beans.DerivedTestBean" scope="request">
+	<bean id="requestScopedDisposableObject" class="org.springframework.beans.testfixture.beans.DerivedTestBean"
+		  scope="request">
 		<aop:scoped-proxy/>
 		<property name="name" value="scoped"/>
 	</bean>
 
-	<bean id="requestScopedFactoryBean" class="org.springframework.beans.testfixture.beans.factory.DummyFactory" scope="request">
+	<bean id="requestScopedFactoryBean" class="org.springframework.beans.testfixture.beans.factory.DummyFactory"
+		  scope="request">
 		<aop:scoped-proxy/>
 	</bean>
 

@@ -69,7 +69,8 @@ class JacksonHintsIntegrationTests extends AbstractRequestMappingIntegrationTest
 		assertThat(performGet("/response/mono", MediaType.APPLICATION_JSON, String.class).getBody()).isEqualTo(expected);
 	}
 
-	@ParameterizedHttpServerTest  // SPR-16098
+	@ParameterizedHttpServerTest
+		// SPR-16098
 	void jsonViewWithMonoResponseEntity(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 
@@ -103,7 +104,8 @@ class JacksonHintsIntegrationTests extends AbstractRequestMappingIntegrationTest
 				new JacksonViewBean("with", "with", "without"), MediaType.APPLICATION_JSON, String.class).getBody()).isEqualTo(expected);
 	}
 
-	@ParameterizedHttpServerTest  // SPR-16098
+	@ParameterizedHttpServerTest
+		// SPR-16098
 	void jsonViewWithEntityMonoRequest(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 
@@ -113,7 +115,8 @@ class JacksonHintsIntegrationTests extends AbstractRequestMappingIntegrationTest
 				MediaType.APPLICATION_JSON, String.class).getBody()).isEqualTo(expected);
 	}
 
-	@ParameterizedHttpServerTest  // SPR-16098
+	@ParameterizedHttpServerTest
+		// SPR-16098
 	void jsonViewWithEntityFluxRequest(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 
@@ -204,9 +207,11 @@ class JacksonHintsIntegrationTests extends AbstractRequestMappingIntegrationTest
 
 	}
 
-	private interface MyJacksonView1 {}
+	private interface MyJacksonView1 {
+	}
 
-	private interface MyJacksonView2 {}
+	private interface MyJacksonView2 {
+	}
 
 
 	@SuppressWarnings("unused")

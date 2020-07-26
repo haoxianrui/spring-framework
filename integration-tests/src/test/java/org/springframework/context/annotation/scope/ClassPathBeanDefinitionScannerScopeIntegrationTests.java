@@ -311,10 +311,14 @@ class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		private String name = DEFAULT_NAME;
 
 		@Override
-		public String getName() { return this.name; }
+		public String getName() {
+			return this.name;
+		}
 
 		@Override
-		public void setName(String name) { this.name = name; }
+		public void setName(String name) {
+			this.name = name;
+		}
 	}
 
 

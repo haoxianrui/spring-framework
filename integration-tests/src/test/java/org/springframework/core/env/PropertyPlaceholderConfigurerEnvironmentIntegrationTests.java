@@ -30,8 +30,8 @@ class PropertyPlaceholderConfigurerEnvironmentIntegrationTests {
 		GenericApplicationContext ctx = new GenericApplicationContext();
 		ctx.registerBeanDefinition("ppc",
 				rootBeanDefinition(org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.class)
-				.addPropertyValue("searchSystemEnvironment", false)
-				.getBeanDefinition());
+						.addPropertyValue("searchSystemEnvironment", false)
+						.getBeanDefinition());
 		ctx.refresh();
 		ctx.getBean("ppc");
 		ctx.close();

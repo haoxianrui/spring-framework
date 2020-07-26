@@ -102,8 +102,7 @@ class PropertiesPersisterTests {
 		Properties props = new Properties();
 		if (useReader) {
 			persister.load(props, new StringReader(propString));
-		}
-		else {
+		} else {
 			persister.load(props, new ByteArrayInputStream(propString.getBytes()));
 		}
 		assertThat(props.getProperty("code1")).isEqualTo("message1");
@@ -118,8 +117,7 @@ class PropertiesPersisterTests {
 			StringWriter propWriter = new StringWriter();
 			persister.store(props, propWriter, header);
 			propCopy = propWriter.toString();
-		}
-		else {
+		} else {
 			ByteArrayOutputStream propOut = new ByteArrayOutputStream();
 			persister.store(props, propOut, header);
 			propCopy = new String(propOut.toByteArray());

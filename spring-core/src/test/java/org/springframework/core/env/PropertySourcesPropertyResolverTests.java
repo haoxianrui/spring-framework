@@ -105,14 +105,15 @@ class PropertySourcesPropertyResolverTests {
 	@Test
 	void getProperty_withStringArrayConversion() {
 		testProperties.put("foo", "bar,baz");
-		assertThat(propertyResolver.getProperty("foo", String[].class)).isEqualTo(new String[] { "bar", "baz" });
+		assertThat(propertyResolver.getProperty("foo", String[].class)).isEqualTo(new String[]{"bar", "baz"});
 	}
 
 	@Test
 	void getProperty_withNonConvertibleTargetType() {
 		testProperties.put("foo", "bar");
 
-		class TestType { }
+		class TestType {
+		}
 
 		assertThatExceptionOfType(ConverterNotFoundException.class).isThrownBy(() ->
 				propertyResolver.getProperty("foo", TestType.class));
@@ -176,7 +177,7 @@ class PropertySourcesPropertyResolverTests {
 	@Test
 	void getRequiredProperty_withStringArrayConversion() {
 		testProperties.put("exists", "abc,123");
-		assertThat(propertyResolver.getRequiredProperty("exists", String[].class)).isEqualTo(new String[] { "abc", "123" });
+		assertThat(propertyResolver.getRequiredProperty("exists", String[].class)).isEqualTo(new String[]{"abc", "123"});
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				propertyResolver.getRequiredProperty("bogus", String[].class));
@@ -257,15 +258,15 @@ class PropertySourcesPropertyResolverTests {
 		// neither foo nor bar properties are present -> validating should throw
 		assertThatExceptionOfType(MissingRequiredPropertiesException.class).isThrownBy(
 				propertyResolver::validateRequiredProperties)
-			.withMessage("The following properties were declared as required " +
-					"but could not be resolved: [foo, bar]");
+				.withMessage("The following properties were declared as required " +
+						"but could not be resolved: [foo, bar]");
 
 		// add foo property -> validation should fail only on missing 'bar' property
 		testProperties.put("foo", "fooValue");
 		assertThatExceptionOfType(MissingRequiredPropertiesException.class).isThrownBy(
 				propertyResolver::validateRequiredProperties)
-			.withMessage("The following properties were declared as required " +
-					"but could not be resolved: [bar]");
+				.withMessage("The following properties were declared as required " +
+						"but could not be resolved: [bar]");
 
 		// add bar property -> validation should pass, even with an empty string value
 		testProperties.put("bar", "");
@@ -276,14 +277,14 @@ class PropertySourcesPropertyResolverTests {
 	void resolveNestedPropertyPlaceholders() {
 		MutablePropertySources ps = new MutablePropertySources();
 		ps.addFirst(new MockPropertySource()
-			.withProperty("p1", "v1")
-			.withProperty("p2", "v2")
-			.withProperty("p3", "${p1}:${p2}")              // nested placeholders
-			.withProperty("p4", "${p3}")                    // deeply nested placeholders
-			.withProperty("p5", "${p1}:${p2}:${bogus}")     // unresolvable placeholder
-			.withProperty("p6", "${p1}:${p2}:${bogus:def}") // unresolvable w/ default
-			.withProperty("pL", "${pR}")                    // cyclic reference left
-			.withProperty("pR", "${pL}")                    // cyclic reference right
+				.withProperty("p1", "v1")
+				.withProperty("p2", "v2")
+				.withProperty("p3", "${p1}:${p2}")              // nested placeholders
+				.withProperty("p4", "${p3}")                    // deeply nested placeholders
+				.withProperty("p5", "${p1}:${p2}:${bogus}")     // unresolvable placeholder
+				.withProperty("p6", "${p1}:${p2}:${bogus:def}") // unresolvable w/ default
+				.withProperty("pL", "${pR}")                    // cyclic reference left
+				.withProperty("pR", "${pL}")                    // cyclic reference right
 		);
 		ConfigurablePropertyResolver pr = new PropertySourcesPropertyResolver(ps);
 		assertThat(pr.getProperty("p1")).isEqualTo("v1");
@@ -292,21 +293,21 @@ class PropertySourcesPropertyResolverTests {
 		assertThat(pr.getProperty("p4")).isEqualTo("v1:v2");
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				pr.getProperty("p5"))
-			.withMessageContaining("Could not resolve placeholder 'bogus' in value \"${p1}:${p2}:${bogus}\"");
+				.withMessageContaining("Could not resolve placeholder 'bogus' in value \"${p1}:${p2}:${bogus}\"");
 		assertThat(pr.getProperty("p6")).isEqualTo("v1:v2:def");
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				pr.getProperty("pL"))
-			.withMessageContaining("Circular");
+				.withMessageContaining("Circular");
 	}
 
 	@Test
 	void ignoreUnresolvableNestedPlaceholdersIsConfigurable() {
 		MutablePropertySources ps = new MutablePropertySources();
 		ps.addFirst(new MockPropertySource()
-			.withProperty("p1", "v1")
-			.withProperty("p2", "v2")
-			.withProperty("p3", "${p1}:${p2}:${bogus:def}") // unresolvable w/ default
-			.withProperty("p4", "${p1}:${p2}:${bogus}")     // unresolvable placeholder
+				.withProperty("p1", "v1")
+				.withProperty("p2", "v2")
+				.withProperty("p3", "${p1}:${p2}:${bogus:def}") // unresolvable w/ default
+				.withProperty("p4", "${p1}:${p2}:${bogus}")     // unresolvable placeholder
 		);
 		ConfigurablePropertyResolver pr = new PropertySourcesPropertyResolver(ps);
 		assertThat(pr.getProperty("p1")).isEqualTo("v1");
@@ -317,7 +318,7 @@ class PropertySourcesPropertyResolverTests {
 		// exception by default
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				pr.getProperty("p4"))
-			.withMessageContaining("Could not resolve placeholder 'bogus' in value \"${p1}:${p2}:${bogus}\"");
+				.withMessageContaining("Could not resolve placeholder 'bogus' in value \"${p1}:${p2}:${bogus}\"");
 
 		// relax the treatment of unresolvable nested placeholders
 		pr.setIgnoreUnresolvableNestedPlaceholders(true);
@@ -329,7 +330,7 @@ class PropertySourcesPropertyResolverTests {
 		assertThat(pr.resolvePlaceholders("${p1}:${p2}:${bogus}")).isEqualTo("v1:v2:${bogus}");
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				pr.resolveRequiredPlaceholders("${p1}:${p2}:${bogus}"))
-			.withMessageContaining("Could not resolve placeholder 'bogus' in value \"${p1}:${p2}:${bogus}\"");
+				.withMessageContaining("Could not resolve placeholder 'bogus' in value \"${p1}:${p2}:${bogus}\"");
 	}
 
 }

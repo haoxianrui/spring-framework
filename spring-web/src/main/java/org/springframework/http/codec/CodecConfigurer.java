@@ -58,6 +58,7 @@ public interface CodecConfigurer {
 	/**
 	 * Provides a way to customize or replace HTTP message readers and writers
 	 * registered by default.
+	 *
 	 * @see #registerDefaults(boolean)
 	 */
 	DefaultCodecs defaultCodecs();
@@ -94,6 +95,7 @@ public interface CodecConfigurer {
 	 * own lists of default and custom codecs and generally can be configured
 	 * independently. Keep in mind however that codec instances (if any are
 	 * configured) are themselves not cloned.
+	 *
 	 * @since 5.1.12
 	 */
 	CodecConfigurer clone();
@@ -111,6 +113,7 @@ public interface CodecConfigurer {
 		 * Override the default Jackson JSON {@code Decoder}.
 		 * <p>Note that {@link #maxInMemorySize(int)}, if configured, will be
 		 * applied to the given decoder.
+		 *
 		 * @param decoder the decoder instance to use
 		 * @see org.springframework.http.codec.json.Jackson2JsonDecoder
 		 */
@@ -118,6 +121,7 @@ public interface CodecConfigurer {
 
 		/**
 		 * Override the default Jackson JSON {@code Encoder}.
+		 *
 		 * @param encoder the encoder instance to use
 		 * @see org.springframework.http.codec.json.Jackson2JsonEncoder
 		 */
@@ -127,6 +131,7 @@ public interface CodecConfigurer {
 		 * Override the default Jackson Smile {@code Decoder}.
 		 * <p>Note that {@link #maxInMemorySize(int)}, if configured, will be
 		 * applied to the given decoder.
+		 *
 		 * @param decoder the decoder instance to use
 		 * @see org.springframework.http.codec.json.Jackson2SmileDecoder
 		 */
@@ -134,6 +139,7 @@ public interface CodecConfigurer {
 
 		/**
 		 * Override the default Jackson Smile {@code Encoder}.
+		 *
 		 * @param encoder the encoder instance to use
 		 * @see org.springframework.http.codec.json.Jackson2SmileEncoder
 		 */
@@ -143,18 +149,20 @@ public interface CodecConfigurer {
 		 * Override the default Protobuf {@code Decoder}.
 		 * <p>Note that {@link #maxInMemorySize(int)}, if configured, will be
 		 * applied to the given decoder.
+		 *
 		 * @param decoder the decoder instance to use
-		 * @since 5.1
 		 * @see org.springframework.http.codec.protobuf.ProtobufDecoder
+		 * @since 5.1
 		 */
 		void protobufDecoder(Decoder<?> decoder);
 
 		/**
 		 * Override the default Protobuf {@code Encoder}.
+		 *
 		 * @param encoder the encoder instance to use
-		 * @since 5.1
 		 * @see org.springframework.http.codec.protobuf.ProtobufEncoder
 		 * @see org.springframework.http.codec.protobuf.ProtobufHttpMessageWriter
+		 * @since 5.1
 		 */
 		void protobufEncoder(Encoder<?> encoder);
 
@@ -162,17 +170,19 @@ public interface CodecConfigurer {
 		 * Override the default JAXB2 {@code Decoder}.
 		 * <p>Note that {@link #maxInMemorySize(int)}, if configured, will be
 		 * applied to the given decoder.
+		 *
 		 * @param decoder the decoder instance to use
-		 * @since 5.1.3
 		 * @see org.springframework.http.codec.xml.Jaxb2XmlDecoder
+		 * @since 5.1.3
 		 */
 		void jaxb2Decoder(Decoder<?> decoder);
 
 		/**
 		 * Override the default JABX2 {@code Encoder}.
+		 *
 		 * @param encoder the encoder instance to use
-		 * @since 5.1.3
 		 * @see org.springframework.http.codec.xml.Jaxb2XmlEncoder
+		 * @since 5.1.3
 		 */
 		void jaxb2Encoder(Encoder<?> encoder);
 
@@ -186,6 +196,7 @@ public interface CodecConfigurer {
 		 * in which case the limit applies to data buffered between delimiters.
 		 * <p>By default this is not set, in which case individual codec defaults
 		 * apply. All codecs are limited to 256K by default.
+		 *
 		 * @param byteCount the max number of bytes to buffer, or -1 for unlimited
 		 * @since 5.1.11
 		 */
@@ -195,6 +206,7 @@ public interface CodecConfigurer {
 		 * Whether to log form data at DEBUG level, and headers at TRACE level.
 		 * Both may contain sensitive information.
 		 * <p>By default set to {@code false} so that request details are not shown.
+		 *
 		 * @param enable whether to enable or not
 		 * @since 5.1
 		 */
@@ -215,6 +227,7 @@ public interface CodecConfigurer {
 		 * <li>{@link Encoder} (wrapped internally with {@link EncoderHttpMessageWriter})
 		 * <li>{@link Decoder} (wrapped internally with {@link DecoderHttpMessageReader})
 		 * </ul>
+		 *
 		 * @param codec the codec to register
 		 * @since 5.1.13
 		 */
@@ -230,6 +243,7 @@ public interface CodecConfigurer {
 		 * <p>The properties are applied every time {@link #getReaders()} or
 		 * {@link #getWriters()} are used to obtain the list of configured
 		 * readers or writers.
+		 *
 		 * @param codec the codec to register and apply default config to
 		 * @since 5.1.13
 		 */
@@ -243,7 +257,8 @@ public interface CodecConfigurer {
 		 * <p>The consumer is called every time {@link #getReaders()} or
 		 * {@link #getWriters()} are used to obtain the list of configured
 		 * readers or writers.
-		 * @param codec the codec to register
+		 *
+		 * @param codec          the codec to register
 		 * @param configConsumer consumer of the default config
 		 * @since 5.1.13
 		 */
@@ -252,6 +267,7 @@ public interface CodecConfigurer {
 		/**
 		 * Add a custom {@code Decoder} internally wrapped with
 		 * {@link DecoderHttpMessageReader}).
+		 *
 		 * @param decoder the decoder to add
 		 * @deprecated as of 5.1.13, use {@link #register(Object)} or
 		 * {@link #registerWithDefaultConfig(Object)} instead.
@@ -262,6 +278,7 @@ public interface CodecConfigurer {
 		/**
 		 * Add a custom {@code Encoder}, internally wrapped with
 		 * {@link EncoderHttpMessageWriter}.
+		 *
 		 * @param encoder the encoder to add
 		 * @deprecated as of 5.1.13, use {@link #register(Object)} or
 		 * {@link #registerWithDefaultConfig(Object)} instead.
@@ -273,6 +290,7 @@ public interface CodecConfigurer {
 		 * Add a custom {@link HttpMessageReader}. For readers of type
 		 * {@link DecoderHttpMessageReader} consider using the shortcut
 		 * {@link #decoder(Decoder)} instead.
+		 *
 		 * @param reader the reader to add
 		 * @deprecated as of 5.1.13, use {@link #register(Object)} or
 		 * {@link #registerWithDefaultConfig(Object)} instead.
@@ -284,6 +302,7 @@ public interface CodecConfigurer {
 		 * Add a custom {@link HttpMessageWriter}. For writers of type
 		 * {@link EncoderHttpMessageWriter} consider using the shortcut
 		 * {@link #encoder(Encoder)} instead.
+		 *
 		 * @param writer the writer to add
 		 * @deprecated as of 5.1.13, use {@link #register(Object)} or
 		 * {@link #registerWithDefaultConfig(Object)} instead.
@@ -296,6 +315,7 @@ public interface CodecConfigurer {
 		 * applied to default codecs. This allows custom codecs to follow general
 		 * guidelines applied to default ones, such as logging details and limiting
 		 * the amount of buffered data.
+		 *
 		 * @param codecsConfigConsumer the default codecs configuration callback
 		 * @deprecated as of 5.1.13, use {@link #registerWithDefaultConfig(Object)}
 		 * or {@link #registerWithDefaultConfig(Object, Consumer)} instead.
@@ -310,8 +330,9 @@ public interface CodecConfigurer {
 	 * {@link #defaultCodecs()} that are applied to default codecs.
 	 * The main purpose of this interface is to provide access to them so they
 	 * can also be applied to custom codecs if needed.
-	 * @since 5.1.12
+	 *
 	 * @see CustomCodecs#registerWithDefaultConfig(Object, Consumer)
+	 * @since 5.1.12
 	 */
 	interface DefaultCodecConfig {
 

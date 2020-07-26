@@ -28,8 +28,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
  * Unit tests for {@link ResourceDatabasePopulator}.
  *
  * @author Sam Brannen
- * @since 4.1
  * @see AbstractDatabasePopulatorTests
+ * @since 4.1
  */
 public class ResourceDatabasePopulatorTests {
 

@@ -37,7 +37,7 @@ class CoRouterFunctionDslTests {
 	@Test
 	fun header() {
 		val mockRequest = get("https://example.com")
-				.header("bar","bar").build()
+				.header("bar", "bar").build()
 		val request = DefaultServerRequest(MockServerWebExchange.from(mockRequest), emptyList())
 		StepVerifier.create(sampleRouter().route(request))
 				.expectNextCount(1)
@@ -141,7 +141,7 @@ class CoRouterFunctionDslTests {
 		val mockRequest = get("https://example.com/rendering").build()
 		val request = DefaultServerRequest(MockServerWebExchange.from(mockRequest), emptyList())
 		StepVerifier.create(sampleRouter().route(request).flatMap { it.handle(request) })
-				.expectNextMatches { it is RenderingResponse}
+				.expectNextMatches { it is RenderingResponse }
 				.verifyComplete()
 	}
 
@@ -158,7 +158,7 @@ class CoRouterFunctionDslTests {
 		"/api".nest {
 			POST("/foo/", ::handleFromClass)
 			POST("/bar/", contentType(APPLICATION_JSON), ::handleFromClass)
-			PUT("/foo/", :: handleFromClass)
+			PUT("/foo/", ::handleFromClass)
 			PATCH("/foo/") {
 				ok().buildAndAwait()
 			}
@@ -178,8 +178,7 @@ class CoRouterFunctionDslTests {
 		resources {
 			if (it.path() == "/response.txt") {
 				ClassPathResource("/org/springframework/web/reactive/function/response.txt")
-			}
-			else {
+			} else {
 				null
 			}
 		}
@@ -201,7 +200,7 @@ class CoRouterFunctionDslTests {
 		after { _, response ->
 			response
 		}
-		onError({it is IllegalStateException}) { _, _ ->
+		onError({ it is IllegalStateException }) { _, _ ->
 			ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
 		}
 		onError<IllegalStateException> { _, _ ->

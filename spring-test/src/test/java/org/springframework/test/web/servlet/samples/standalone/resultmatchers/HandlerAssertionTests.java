@@ -56,9 +56,9 @@ public class HandlerAssertionTests {
 	public void methodCallOnNonMock() throws Exception {
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				this.mockMvc.perform(get("/")).andExpect(handler().methodCall("bogus")))
-			.withMessageContaining("The supplied object [bogus] is not an instance of")
-			.withMessageContaining(MvcUriComponentsBuilder.MethodInvocationInfo.class.getName())
-			.withMessageContaining("Ensure that you invoke the handler method via MvcUriComponentsBuilder.on()");
+				.withMessageContaining("The supplied object [bogus] is not an instance of")
+				.withMessageContaining(MvcUriComponentsBuilder.MethodInvocationInfo.class.getName())
+				.withMessageContaining("Ensure that you invoke the handler method via MvcUriComponentsBuilder.on()");
 	}
 
 	@Test

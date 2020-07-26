@@ -187,9 +187,9 @@ public class ResponseEntityExceptionHandlerTests {
 	@Test
 	public void noHandlerFoundException() {
 		ServletServerHttpRequest req = new ServletServerHttpRequest(
-				new MockHttpServletRequest("GET","/resource"));
+				new MockHttpServletRequest("GET", "/resource"));
 		Exception ex = new NoHandlerFoundException(req.getMethod().toString(),
-				req.getServletRequest().getRequestURI(),req.getHeaders());
+				req.getServletRequest().getRequestURI(), req.getHeaders());
 		testException(ex);
 	}
 
@@ -257,8 +257,7 @@ public class ResponseEntityExceptionHandlerTests {
 		servlet.init(new MockServletConfig());
 		try {
 			servlet.service(this.servletRequest, this.servletResponse);
-		}
-		catch (ServletException ex) {
+		} catch (ServletException ex) {
 			boolean condition1 = ex.getCause() instanceof IllegalStateException;
 			assertThat(condition1).isTrue();
 			boolean condition = ex.getCause().getCause() instanceof ServletRequestBindingException;
@@ -281,8 +280,7 @@ public class ResponseEntityExceptionHandlerTests {
 			assertThat(responseEntity.getStatusCode().value()).isEqualTo(this.servletResponse.getStatus());
 
 			return responseEntity;
-		}
-		catch (Exception ex2) {
+		} catch (Exception ex2) {
 			throw new IllegalStateException("handleException threw exception", ex2);
 		}
 	}

@@ -71,6 +71,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * Test fixture for {@link StompSubProtocolHandler} tests.
+ *
  * @author Rossen Stoyanchev
  */
 public class StompSubProtocolHandlerTests {
@@ -136,7 +137,7 @@ public class StompSubProtocolHandlerTests {
 
 		SimpMessageHeaderAccessor ackAccessor = SimpMessageHeaderAccessor.create(SimpMessageType.CONNECT_ACK);
 		ackAccessor.setHeader(SimpMessageHeaderAccessor.CONNECT_MESSAGE_HEADER, connectMessage);
-		ackAccessor.setHeader(SimpMessageHeaderAccessor.HEART_BEAT_HEADER, new long[] {15000, 15000});
+		ackAccessor.setHeader(SimpMessageHeaderAccessor.HEART_BEAT_HEADER, new long[]{15000, 15000});
 		Message<byte[]> ackMessage = MessageBuilder.createMessage(EMPTY_PAYLOAD, ackAccessor.getMessageHeaders());
 		this.protocolHandler.handleMessageToClient(this.session, ackMessage);
 
@@ -309,14 +310,14 @@ public class StompSubProtocolHandlerTests {
 		assertThat(SimpMessageHeaderAccessor.getUser(actual.getHeaders())).isNotNull();
 		assertThat(SimpMessageHeaderAccessor.getUser(actual.getHeaders()).getName()).isEqualTo("joe");
 		assertThat(SimpMessageHeaderAccessor.getHeartbeat(actual.getHeaders())).isNotNull();
-		assertThat(SimpMessageHeaderAccessor.getHeartbeat(actual.getHeaders())).isEqualTo(new long[] {10000, 10000});
+		assertThat(SimpMessageHeaderAccessor.getHeartbeat(actual.getHeaders())).isEqualTo(new long[]{10000, 10000});
 
 		StompHeaderAccessor stompAccessor = StompHeaderAccessor.wrap(actual);
 		assertThat(stompAccessor.getCommand()).isEqualTo(StompCommand.STOMP);
 		assertThat(stompAccessor.getLogin()).isEqualTo("guest");
 		assertThat(stompAccessor.getPasscode()).isEqualTo("guest");
-		assertThat(stompAccessor.getHeartbeat()).isEqualTo(new long[] {10000, 10000});
-		assertThat(stompAccessor.getAcceptVersion()).isEqualTo(new HashSet<>(Arrays.asList("1.1","1.0")));
+		assertThat(stompAccessor.getHeartbeat()).isEqualTo(new long[]{10000, 10000});
+		assertThat(stompAccessor.getAcceptVersion()).isEqualTo(new HashSet<>(Arrays.asList("1.1", "1.0")));
 		assertThat(this.session.getSentMessages().size()).isEqualTo(0);
 	}
 
@@ -498,6 +499,7 @@ public class StompSubProtocolHandlerTests {
 				assertThat(simpAttributes.getAttribute("name")).isEqualTo("value");
 				return true;
 			}
+
 			@Override
 			public boolean send(Message<?> message, long timeout) {
 				return false;

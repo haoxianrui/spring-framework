@@ -57,7 +57,7 @@ class CollectionUtilsTests {
 
 	@Test
 	void mergeArrayIntoCollection() {
-		Object[] arr = new Object[] {"value1", "value2"};
+		Object[] arr = new Object[]{"value1", "value2"};
 		List<Comparable<?>> list = new LinkedList<>();
 		list.add("value3");
 
@@ -69,7 +69,7 @@ class CollectionUtilsTests {
 
 	@Test
 	void mergePrimitiveArrayIntoCollection() {
-		int[] arr = new int[] {1, 2};
+		int[] arr = new int[]{1, 2};
 		List<Comparable<?>> list = new LinkedList<>();
 		list.add(Integer.valueOf(3));
 

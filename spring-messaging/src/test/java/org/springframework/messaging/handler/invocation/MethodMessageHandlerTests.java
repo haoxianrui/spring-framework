@@ -175,9 +175,11 @@ public class MethodMessageHandlerTests {
 	@SuppressWarnings("unused")
 	private static class DuplicateMappingsController {
 
-		public void handlerFoo() { }
+		public void handlerFoo() {
+		}
 
-		public void handlerFoo(String arg) { }
+		public void handlerFoo(String arg) {
+		}
 	}
 
 

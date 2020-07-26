@@ -80,10 +80,10 @@ public class AnnotationTransactionNamespaceHandlerTests {
 		// try with exceptional
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				testBean.exceptional(new IllegalArgumentException("foo")))
-			.satisfies(ex -> {
-				assertThat(ptm.begun).as("Should have another started transaction").isEqualTo(2);
-				assertThat(ptm.rollbacks).as("Should have 1 rolled back transaction").isEqualTo(1);
-			});
+				.satisfies(ex -> {
+					assertThat(ptm.begun).as("Should have another started transaction").isEqualTo(2);
+					assertThat(ptm.rollbacks).as("Should have 1 rolled back transaction").isEqualTo(1);
+				});
 	}
 
 	@Test

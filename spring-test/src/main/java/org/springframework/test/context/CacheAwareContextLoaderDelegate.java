@@ -49,12 +49,13 @@ public interface CacheAwareContextLoaderDelegate {
 	 * therefore highly encouraged to override this method with a more meaningful
 	 * implementation. Note that the standard {@code CacheAwareContextLoaderDelegate}
 	 * implementation in Spring overrides this method appropriately.
+	 *
 	 * @param mergedContextConfiguration the merged context configuration used
-	 * to load the application context; never {@code null}
+	 *                                   to load the application context; never {@code null}
 	 * @return {@code true} if the application context has been loaded
-	 * @since 5.2
 	 * @see #loadContext
 	 * @see #closeContext
+	 * @since 5.2
 	 */
 	default boolean isContextLoaded(MergedContextConfiguration mergedContextConfiguration) {
 		return false;
@@ -68,11 +69,12 @@ public interface CacheAwareContextLoaderDelegate {
 	 * be returned; otherwise, it will be loaded, stored in the cache, and returned.
 	 * <p>The cache statistics should be logged by invoking
 	 * {@link org.springframework.test.context.cache.ContextCache#logStatistics()}.
+	 *
 	 * @param mergedContextConfiguration the merged context configuration to use
-	 * to load the application context; never {@code null}
+	 *                                   to load the application context; never {@code null}
 	 * @return the application context (never {@code null})
 	 * @throws IllegalStateException if an error occurs while retrieving or loading
-	 * the application context
+	 *                               the application context
 	 * @see #isContextLoaded
 	 * @see #closeContext
 	 */
@@ -90,13 +92,14 @@ public interface CacheAwareContextLoaderDelegate {
 	 * a singleton bean has been changed (potentially affecting future interaction
 	 * with the context) or if the context needs to be prematurely removed from
 	 * the cache.
+	 *
 	 * @param mergedContextConfiguration the merged context configuration for the
-	 * application context to close; never {@code null}
-	 * @param hierarchyMode the hierarchy mode; may be {@code null} if the context
-	 * is not part of a hierarchy
-	 * @since 4.1
+	 *                                   application context to close; never {@code null}
+	 * @param hierarchyMode              the hierarchy mode; may be {@code null} if the context
+	 *                                   is not part of a hierarchy
 	 * @see #isContextLoaded
 	 * @see #loadContext
+	 * @since 4.1
 	 */
 	void closeContext(MergedContextConfiguration mergedContextConfiguration, @Nullable HierarchyMode hierarchyMode);
 

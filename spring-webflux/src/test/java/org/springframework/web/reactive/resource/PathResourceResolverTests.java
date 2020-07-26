@@ -32,6 +32,7 @@ import static org.assertj.core.api.Assertions.fail;
 
 /**
  * Unit tests for {@link PathResourceResolver}.
+ *
  * @author Rossen Stoyanchev
  */
 public class PathResourceResolverTests {
@@ -129,8 +130,8 @@ public class PathResourceResolverTests {
 
 	@Test // SPR-12624
 	public void checkRelativeLocation() throws Exception {
-		String locationUrl= new UrlResource(getClass().getResource("./test/")).getURL().toExternalForm();
-		Resource location = new UrlResource(locationUrl.replace("/springframework","/../org/springframework"));
+		String locationUrl = new UrlResource(getClass().getResource("./test/")).getURL().toExternalForm();
+		Resource location = new UrlResource(locationUrl.replace("/springframework", "/../org/springframework"));
 		List<Resource> locations = singletonList(location);
 		assertThat(this.resolver.resolveResource(null, "main.css", locations, null).block(TIMEOUT)).isNotNull();
 	}

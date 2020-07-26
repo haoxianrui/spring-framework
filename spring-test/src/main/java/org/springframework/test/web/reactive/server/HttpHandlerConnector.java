@@ -74,7 +74,7 @@ public class HttpHandlerConnector implements ClientHttpConnector {
 
 	@Override
 	public Mono<ClientHttpResponse> connect(HttpMethod httpMethod, URI uri,
-			Function<? super ClientHttpRequest, Mono<Void>> requestCallback) {
+											Function<? super ClientHttpRequest, Mono<Void>> requestCallback) {
 
 		return Mono.defer(() -> doConnect(httpMethod, uri, requestCallback))
 				.subscribeOn(Schedulers.parallel());
@@ -153,6 +153,7 @@ public class HttpHandlerConnector implements ClientHttpConnector {
 	 * commits the response and the error may or may not change the response.
 	 * Therefore in tests without a server the exception is wrapped and allowed
 	 * to propagate so the application is alerted.
+	 *
 	 * @since 5.2.2
 	 */
 	@SuppressWarnings("serial")

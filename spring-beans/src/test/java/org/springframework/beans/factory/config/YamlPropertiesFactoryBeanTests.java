@@ -55,8 +55,8 @@ public class YamlPropertiesFactoryBeanTests {
 		YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
 		factory.setResources(new ByteArrayResource("foo: bar\ncd\nspam:\n  foo: baz".getBytes()));
 		assertThatExceptionOfType(ScannerException.class)
-			.isThrownBy(factory::getObject)
-			.withMessageContaining("line 3, column 1");
+				.isThrownBy(factory::getObject)
+				.withMessageContaining("line 3, column 1");
 	}
 
 	@Test

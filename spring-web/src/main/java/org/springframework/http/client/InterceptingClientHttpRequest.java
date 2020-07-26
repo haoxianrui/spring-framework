@@ -47,7 +47,7 @@ class InterceptingClientHttpRequest extends AbstractBufferingClientHttpRequest {
 
 
 	protected InterceptingClientHttpRequest(ClientHttpRequestFactory requestFactory,
-			List<ClientHttpRequestInterceptor> interceptors, URI uri, HttpMethod method) {
+											List<ClientHttpRequestInterceptor> interceptors, URI uri, HttpMethod method) {
 
 		this.requestFactory = requestFactory;
 		this.interceptors = interceptors;
@@ -91,8 +91,7 @@ class InterceptingClientHttpRequest extends AbstractBufferingClientHttpRequest {
 			if (this.iterator.hasNext()) {
 				ClientHttpRequestInterceptor nextInterceptor = this.iterator.next();
 				return nextInterceptor.intercept(request, body, this);
-			}
-			else {
+			} else {
 				HttpMethod method = request.getMethod();
 				Assert.state(method != null, "No standard HTTP method");
 				ClientHttpRequest delegate = requestFactory.createRequest(request.getURI(), method);
@@ -101,8 +100,7 @@ class InterceptingClientHttpRequest extends AbstractBufferingClientHttpRequest {
 					if (delegate instanceof StreamingHttpOutputMessage) {
 						StreamingHttpOutputMessage streamingOutputMessage = (StreamingHttpOutputMessage) delegate;
 						streamingOutputMessage.setBody(outputStream -> StreamUtils.copy(body, outputStream));
-					}
-					else {
+					} else {
 						StreamUtils.copy(body, delegate.getBody());
 					}
 				}

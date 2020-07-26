@@ -64,11 +64,11 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
  * <p>Also supports discovering and invoking exception handling methods to process
  * exceptions raised during message handling.
  *
+ * @param <T> the type of the Object that contains information mapping a
+ *            {@link org.springframework.messaging.handler.HandlerMethod} to incoming messages
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
  * @since 4.0
- * @param <T> the type of the Object that contains information mapping a
- * {@link org.springframework.messaging.handler.HandlerMethod} to incoming messages
  */
 public abstract class AbstractMethodMessageHandler<T>
 		implements MessageHandler, ApplicationContextAware, InitializingBean {
@@ -255,8 +255,7 @@ public abstract class AbstractMethodMessageHandler<T>
 				Class<?> beanType = null;
 				try {
 					beanType = context.getType(beanName);
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					// An unresolvable bean type, probably from a lazy bean - let's ignore it.
 					if (logger.isDebugEnabled()) {
 						logger.debug("Could not resolve target class for bean with name '" + beanName + "'", ex);
@@ -294,6 +293,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	/**
 	 * Detect if the given handler has any methods that can handle messages and if
 	 * so register it with the extracted mapping information.
+	 *
 	 * @param handler the handler to check, either an instance of a Spring bean name
 	 */
 	protected final void detectHandlerMethods(final Object handler) {
@@ -302,8 +302,7 @@ public abstract class AbstractMethodMessageHandler<T>
 			ApplicationContext context = getApplicationContext();
 			Assert.state(context != null, "ApplicationContext is required for resolving handler bean names");
 			handlerType = context.getType((String) handler);
-		}
-		else {
+		} else {
 			handlerType = handler.getClass();
 		}
 
@@ -335,7 +334,8 @@ public abstract class AbstractMethodMessageHandler<T>
 
 	/**
 	 * Provide the mapping for a handler method.
-	 * @param method the method to provide a mapping for
+	 *
+	 * @param method      the method to provide a mapping for
 	 * @param handlerType the handler type, possibly a sub-type of the method's declaring class
 	 * @return the mapping, or {@code null} if the method is not mapped
 	 */
@@ -344,11 +344,12 @@ public abstract class AbstractMethodMessageHandler<T>
 
 	/**
 	 * Register a handler method and its unique mapping.
+	 *
 	 * @param handler the bean name of the handler or the handler instance
-	 * @param method the method to register
+	 * @param method  the method to register
 	 * @param mapping the mapping conditions associated with the handler method
 	 * @throws IllegalStateException if another method was already registered
-	 * under the same mapping
+	 *                               under the same mapping
 	 */
 	protected void registerHandlerMethod(Object handler, Method method, T mapping) {
 		Assert.notNull(mapping, "Mapping must not be null");
@@ -379,8 +380,7 @@ public abstract class AbstractMethodMessageHandler<T>
 			Assert.state(context != null, "ApplicationContext is required for resolving handler bean names");
 			String beanName = (String) handler;
 			handlerMethod = new HandlerMethod(beanName, context.getAutowireCapableBeanFactory(), method);
-		}
-		else {
+		} else {
 			handlerMethod = new HandlerMethod(handler, method);
 		}
 		return handlerMethod;
@@ -394,6 +394,7 @@ public abstract class AbstractMethodMessageHandler<T>
 
 	/**
 	 * Return a logger to set on {@link HandlerMethodReturnValueHandlerComposite}.
+	 *
 	 * @since 5.1
 	 */
 	@Nullable
@@ -403,6 +404,7 @@ public abstract class AbstractMethodMessageHandler<T>
 
 	/**
 	 * Return a logger to set on {@link InvocableHandlerMethod}.
+	 *
 	 * @since 5.1
 	 */
 	@Nullable
@@ -413,6 +415,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	/**
 	 * Subclasses can invoke this method to populate the MessagingAdviceBean cache
 	 * (e.g. to support "global" {@code @MessageExceptionHandler}).
+	 *
 	 * @since 4.2
 	 */
 	protected void registerExceptionHandlerAdvice(
@@ -532,6 +535,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	/**
 	 * Check if a mapping matches the current message and return a possibly
 	 * new mapping with conditions relevant to the current request.
+	 *
 	 * @param mapping the mapping to get a match for
 	 * @param message the message being handled
 	 * @return the match or {@code null} if there is no match
@@ -546,6 +550,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	/**
 	 * Return a comparator for sorting matching mappings.
 	 * The returned comparator should sort 'better' matches higher.
+	 *
 	 * @param message the current Message
 	 * @return the comparator, never {@code null}
 	 */
@@ -572,15 +577,12 @@ public abstract class AbstractMethodMessageHandler<T>
 				if (future != null) {
 					future.addCallback(new ReturnValueListenableFutureCallback(invocable, message));
 				}
-			}
-			else {
+			} else {
 				this.returnValueHandlers.handleReturnValue(returnValue, returnType, message);
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			processHandlerMethodException(handlerMethod, ex, message);
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			Exception handlingException =
 					new MessageHandlingException(message, "Unexpected handler method invocation error", ex);
 			processHandlerMethodException(handlerMethod, handlingException, message);
@@ -607,8 +609,7 @@ public abstract class AbstractMethodMessageHandler<T>
 				return;
 			}
 			this.returnValueHandlers.handleReturnValue(returnValue, returnType, message);
-		}
-		catch (Throwable ex2) {
+		} catch (Throwable ex2) {
 			logger.error("Error while processing handler method exception", ex2);
 		}
 	}
@@ -620,8 +621,9 @@ public abstract class AbstractMethodMessageHandler<T>
 	 * {@code @MessageExceptionHandler} methods among the configured
 	 * {@linkplain org.springframework.messaging.handler.MessagingAdviceBean
 	 * MessagingAdviceBean}, if any.
+	 *
 	 * @param handlerMethod the method where the exception was raised
-	 * @param exception the raised exception
+	 * @param exception     the raised exception
 	 * @return a method to handle the exception, or {@code null}
 	 * @since 4.2
 	 */
@@ -717,8 +719,7 @@ public abstract class AbstractMethodMessageHandler<T>
 			try {
 				MethodParameter returnType = this.handlerMethod.getAsyncReturnValueType(result);
 				returnValueHandlers.handleReturnValue(result, returnType, this.message);
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				handleFailure(ex);
 			}
 		}

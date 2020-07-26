@@ -132,22 +132,22 @@ public abstract class AbstractJCacheAnnotationTests {
 		long ref = service.exceptionInvocations();
 		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() ->
 				service.cacheWithException(this.keyItem, true))
-			.satisfies(first -> {
-				// Sanity check, this particular call has called the service
-				// First call should not have been cached
-				assertThat(service.exceptionInvocations()).isEqualTo(ref + 1);
+				.satisfies(first -> {
+					// Sanity check, this particular call has called the service
+					// First call should not have been cached
+					assertThat(service.exceptionInvocations()).isEqualTo(ref + 1);
 
-				UnsupportedOperationException second = methodInCallStack(this.keyItem);
-				// Sanity check, this particular call has *not* called the service
-				// Second call should have been cached
-				assertThat(service.exceptionInvocations()).isEqualTo(ref + 1);
+					UnsupportedOperationException second = methodInCallStack(this.keyItem);
+					// Sanity check, this particular call has *not* called the service
+					// Second call should have been cached
+					assertThat(service.exceptionInvocations()).isEqualTo(ref + 1);
 
-				assertThat(first).hasCause(second.getCause());
-				assertThat(first).hasMessage(second.getMessage());
-				// Original stack must not contain any reference to methodInCallStack
-				assertThat(contain(first, AbstractJCacheAnnotationTests.class.getName(), "methodInCallStack")).isFalse();
-				assertThat(contain(second, AbstractJCacheAnnotationTests.class.getName(), "methodInCallStack")).isTrue();
-			});
+					assertThat(first).hasCause(second.getCause());
+					assertThat(first).hasMessage(second.getMessage());
+					// Original stack must not contain any reference to methodInCallStack
+					assertThat(contain(first, AbstractJCacheAnnotationTests.class.getName(), "methodInCallStack")).isFalse();
+					assertThat(contain(second, AbstractJCacheAnnotationTests.class.getName(), "methodInCallStack")).isTrue();
+				});
 	}
 
 	@Test
@@ -456,8 +456,7 @@ public abstract class AbstractJCacheAnnotationTests {
 		try {
 			service.cacheWithException(keyItem, true);
 			throw new IllegalStateException("Should have thrown an exception");
-		}
-		catch (UnsupportedOperationException e) {
+		} catch (UnsupportedOperationException e) {
 			return e;
 		}
 	}

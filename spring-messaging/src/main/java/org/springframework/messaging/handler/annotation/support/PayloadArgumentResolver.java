@@ -38,6 +38,7 @@ public class PayloadArgumentResolver extends PayloadMethodArgumentResolver {
 	/**
 	 * Create a new {@code PayloadArgumentResolver} with the given
 	 * {@link MessageConverter}.
+	 *
 	 * @param messageConverter the MessageConverter to use (required)
 	 * @since 4.0.9
 	 */
@@ -48,8 +49,9 @@ public class PayloadArgumentResolver extends PayloadMethodArgumentResolver {
 	/**
 	 * Create a new {@code PayloadArgumentResolver} with the given
 	 * {@link MessageConverter} and {@link Validator}.
+	 *
 	 * @param messageConverter the MessageConverter to use (required)
-	 * @param validator the Validator to use (optional)
+	 * @param validator        the Validator to use (optional)
 	 */
 	public PayloadArgumentResolver(MessageConverter messageConverter, @Nullable Validator validator) {
 		this(messageConverter, validator, true);
@@ -58,14 +60,15 @@ public class PayloadArgumentResolver extends PayloadMethodArgumentResolver {
 	/**
 	 * Create a new {@code PayloadArgumentResolver} with the given
 	 * {@link MessageConverter} and {@link Validator}.
-	 * @param messageConverter the MessageConverter to use (required)
-	 * @param validator the Validator to use (optional)
+	 *
+	 * @param messageConverter     the MessageConverter to use (required)
+	 * @param validator            the Validator to use (optional)
 	 * @param useDefaultResolution if "true" (the default) this resolver supports
-	 * all parameters; if "false" then only arguments with the {@code @Payload}
-	 * annotation are supported.
+	 *                             all parameters; if "false" then only arguments with the {@code @Payload}
+	 *                             annotation are supported.
 	 */
 	public PayloadArgumentResolver(MessageConverter messageConverter, @Nullable Validator validator,
-			boolean useDefaultResolution) {
+								   boolean useDefaultResolution) {
 
 
 		super(messageConverter, validator, useDefaultResolution);

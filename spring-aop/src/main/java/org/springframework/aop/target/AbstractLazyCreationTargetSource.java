@@ -36,16 +36,20 @@ import org.springframework.lang.Nullable;
  *
  * @author Rob Harrop
  * @author Juergen Hoeller
- * @since 1.2.4
  * @see #isInitialized()
  * @see #createObject()
+ * @since 1.2.4
  */
 public abstract class AbstractLazyCreationTargetSource implements TargetSource {
 
-	/** Logger available to subclasses. */
+	/**
+	 * Logger available to subclasses.
+	 */
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	/** The lazily initialized target object. */
+	/**
+	 * The lazily initialized target object.
+	 */
 	private Object lazyTarget;
 
 
@@ -63,6 +67,7 @@ public abstract class AbstractLazyCreationTargetSource implements TargetSource {
 	 * or the target class if the target has already been initialized.
 	 * <p>Subclasses may wish to override this method in order to provide
 	 * a meaningful value when the target is still {@code null}.
+	 *
 	 * @see #isInitialized()
 	 */
 	@Override
@@ -79,6 +84,7 @@ public abstract class AbstractLazyCreationTargetSource implements TargetSource {
 	/**
 	 * Returns the lazy-initialized target object,
 	 * creating it on-the-fly if it doesn't exist already.
+	 *
 	 * @see #createObject()
 	 */
 	@Override
@@ -99,6 +105,7 @@ public abstract class AbstractLazyCreationTargetSource implements TargetSource {
 	/**
 	 * Subclasses should implement this method to return the lazy initialized object.
 	 * Called the first time the proxy is invoked.
+	 *
 	 * @return the created object
 	 * @throws Exception if creation failed
 	 */

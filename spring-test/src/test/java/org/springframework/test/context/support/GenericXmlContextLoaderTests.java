@@ -26,8 +26,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
  * Unit tests for {@link GenericXmlContextLoader}.
  *
  * @author Sam Brannen
- * @since 4.0.4
  * @see GenericXmlContextLoaderResourceLocationsTests
+ * @since 4.0.4
  */
 class GenericXmlContextLoaderTests {
 
@@ -38,10 +38,10 @@ class GenericXmlContextLoaderTests {
 	void configMustNotContainAnnotatedClasses() throws Exception {
 		GenericXmlContextLoader loader = new GenericXmlContextLoader();
 		MergedContextConfiguration mergedConfig = new MergedContextConfiguration(getClass(), EMPTY_STRING_ARRAY,
-			new Class<?>[] { getClass() }, EMPTY_STRING_ARRAY, loader);
+				new Class<?>[]{getClass()}, EMPTY_STRING_ARRAY, loader);
 		assertThatIllegalStateException()
-			.isThrownBy(() -> loader.loadContext(mergedConfig))
-			.withMessageContaining("does not support annotated classes");
+				.isThrownBy(() -> loader.loadContext(mergedConfig))
+				.withMessageContaining("does not support annotated classes");
 	}
 
 }

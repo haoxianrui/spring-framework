@@ -43,10 +43,10 @@ class AnnotationConfigContextLoaderTests {
 	@Test
 	void configMustNotContainLocations() throws Exception {
 		MergedContextConfiguration mergedConfig = new MergedContextConfiguration(getClass(),
-			new String[] { "config.xml" }, EMPTY_CLASS_ARRAY, EMPTY_STRING_ARRAY, contextLoader);
+				new String[]{"config.xml"}, EMPTY_CLASS_ARRAY, EMPTY_STRING_ARRAY, contextLoader);
 		assertThatIllegalStateException().isThrownBy(() ->
 				contextLoader.loadContext(mergedConfig))
-			.withMessageContaining("does not support resource locations");
+				.withMessageContaining("does not support resource locations");
 	}
 
 	@Test

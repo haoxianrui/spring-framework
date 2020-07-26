@@ -57,12 +57,12 @@ import org.springframework.util.ErrorHandler;
  *
  * @author Juergen Hoeller
  * @author Mark Fisher
- * @since 3.0
  * @see java.util.concurrent.ScheduledExecutorService
  * @see java.util.concurrent.ScheduledThreadPoolExecutor
  * @see java.util.concurrent.Executors
  * @see DefaultManagedTaskScheduler
  * @see ThreadPoolTaskScheduler
+ * @since 3.0
  */
 public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements TaskScheduler {
 
@@ -74,8 +74,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 			managedScheduledExecutorServiceClass = ClassUtils.forName(
 					"javax.enterprise.concurrent.ManagedScheduledExecutorService",
 					ConcurrentTaskScheduler.class.getClassLoader());
-		}
-		catch (ClassNotFoundException ex) {
+		} catch (ClassNotFoundException ex) {
 			// JSR-236 API not available...
 			managedScheduledExecutorServiceClass = null;
 		}
@@ -93,6 +92,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	/**
 	 * Create a new ConcurrentTaskScheduler,
 	 * using a single thread executor as default.
+	 *
 	 * @see java.util.concurrent.Executors#newSingleThreadScheduledExecutor()
 	 */
 	public ConcurrentTaskScheduler() {
@@ -106,9 +106,10 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	 * <p>Autodetects a JSR-236 {@link javax.enterprise.concurrent.ManagedScheduledExecutorService}
 	 * in order to use it for trigger-based scheduling if possible,
 	 * instead of Spring's local trigger management.
+	 *
 	 * @param scheduledExecutor the {@link java.util.concurrent.ScheduledExecutorService}
-	 * to delegate to for {@link org.springframework.scheduling.SchedulingTaskExecutor}
-	 * as well as {@link TaskScheduler} invocations
+	 *                          to delegate to for {@link org.springframework.scheduling.SchedulingTaskExecutor}
+	 *                          as well as {@link TaskScheduler} invocations
 	 */
 	public ConcurrentTaskScheduler(ScheduledExecutorService scheduledExecutor) {
 		super(scheduledExecutor);
@@ -121,10 +122,11 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	 * <p>Autodetects a JSR-236 {@link javax.enterprise.concurrent.ManagedScheduledExecutorService}
 	 * in order to use it for trigger-based scheduling if possible,
 	 * instead of Spring's local trigger management.
+	 *
 	 * @param concurrentExecutor the {@link java.util.concurrent.Executor} to delegate to
-	 * for {@link org.springframework.scheduling.SchedulingTaskExecutor} invocations
-	 * @param scheduledExecutor the {@link java.util.concurrent.ScheduledExecutorService}
-	 * to delegate to for {@link TaskScheduler} invocations
+	 *                           for {@link org.springframework.scheduling.SchedulingTaskExecutor} invocations
+	 * @param scheduledExecutor  the {@link java.util.concurrent.ScheduledExecutorService}
+	 *                           to delegate to for {@link TaskScheduler} invocations
 	 */
 	public ConcurrentTaskScheduler(Executor concurrentExecutor, ScheduledExecutorService scheduledExecutor) {
 		super(concurrentExecutor);
@@ -137,8 +139,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 			this.scheduledExecutor = scheduledExecutor;
 			this.enterpriseConcurrentScheduler = (managedScheduledExecutorServiceClass != null &&
 					managedScheduledExecutorServiceClass.isInstance(scheduledExecutor));
-		}
-		else {
+		} else {
 			this.scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
 			this.enterpriseConcurrentScheduler = false;
 		}
@@ -154,6 +155,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	 * If you want the given executor to apply to
 	 * {@link org.springframework.scheduling.SchedulingTaskExecutor} invocations
 	 * as well, pass the same executor reference to {@link #setConcurrentExecutor}.
+	 *
 	 * @see #setConcurrentExecutor
 	 */
 	public void setScheduledExecutor(@Nullable ScheduledExecutorService scheduledExecutor) {
@@ -175,14 +177,12 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 		try {
 			if (this.enterpriseConcurrentScheduler) {
 				return new EnterpriseConcurrentTriggerScheduler().schedule(decorateTask(task, true), trigger);
-			}
-			else {
+			} else {
 				ErrorHandler errorHandler =
 						(this.errorHandler != null ? this.errorHandler : TaskUtils.getDefaultErrorHandler(true));
 				return new ReschedulingRunnable(task, trigger, this.scheduledExecutor, errorHandler).schedule();
 			}
-		}
-		catch (RejectedExecutionException ex) {
+		} catch (RejectedExecutionException ex) {
 			throw new TaskRejectedException("Executor [" + this.scheduledExecutor + "] did not accept task: " + task, ex);
 		}
 	}
@@ -192,8 +192,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 		long initialDelay = startTime.getTime() - System.currentTimeMillis();
 		try {
 			return this.scheduledExecutor.schedule(decorateTask(task, false), initialDelay, TimeUnit.MILLISECONDS);
-		}
-		catch (RejectedExecutionException ex) {
+		} catch (RejectedExecutionException ex) {
 			throw new TaskRejectedException("Executor [" + this.scheduledExecutor + "] did not accept task: " + task, ex);
 		}
 	}
@@ -203,8 +202,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 		long initialDelay = startTime.getTime() - System.currentTimeMillis();
 		try {
 			return this.scheduledExecutor.scheduleAtFixedRate(decorateTask(task, true), initialDelay, period, TimeUnit.MILLISECONDS);
-		}
-		catch (RejectedExecutionException ex) {
+		} catch (RejectedExecutionException ex) {
 			throw new TaskRejectedException("Executor [" + this.scheduledExecutor + "] did not accept task: " + task, ex);
 		}
 	}
@@ -213,8 +211,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, long period) {
 		try {
 			return this.scheduledExecutor.scheduleAtFixedRate(decorateTask(task, true), 0, period, TimeUnit.MILLISECONDS);
-		}
-		catch (RejectedExecutionException ex) {
+		} catch (RejectedExecutionException ex) {
 			throw new TaskRejectedException("Executor [" + this.scheduledExecutor + "] did not accept task: " + task, ex);
 		}
 	}
@@ -224,8 +221,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 		long initialDelay = startTime.getTime() - System.currentTimeMillis();
 		try {
 			return this.scheduledExecutor.scheduleWithFixedDelay(decorateTask(task, true), initialDelay, delay, TimeUnit.MILLISECONDS);
-		}
-		catch (RejectedExecutionException ex) {
+		} catch (RejectedExecutionException ex) {
 			throw new TaskRejectedException("Executor [" + this.scheduledExecutor + "] did not accept task: " + task, ex);
 		}
 	}
@@ -234,8 +230,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	public ScheduledFuture<?> scheduleWithFixedDelay(Runnable task, long delay) {
 		try {
 			return this.scheduledExecutor.scheduleWithFixedDelay(decorateTask(task, true), 0, delay, TimeUnit.MILLISECONDS);
-		}
-		catch (RejectedExecutionException ex) {
+		} catch (RejectedExecutionException ex) {
 			throw new TaskRejectedException("Executor [" + this.scheduledExecutor + "] did not accept task: " + task, ex);
 		}
 	}
@@ -265,6 +260,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 							new SimpleTriggerContext(le.getScheduledStart(), le.getRunStart(), le.getRunEnd()) :
 							new SimpleTriggerContext()));
 				}
+
 				@Override
 				public boolean skipRun(LastExecution lastExecution, Date scheduledRunTime) {
 					return false;

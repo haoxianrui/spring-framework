@@ -17,10 +17,9 @@
 package org.springframework.beans.testfixture.beans;
 
 /**
- * @see org.springframework.beans.factory.config.FieldRetrievingFactoryBeanTests
- *
  * @author Rick Evans
  * @author Chris Beams
+ * @see org.springframework.beans.factory.config.FieldRetrievingFactoryBeanTests
  */
 class PackageLevelVisibleBean {
 

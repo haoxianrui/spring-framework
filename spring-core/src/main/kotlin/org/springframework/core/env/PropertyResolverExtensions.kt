@@ -29,7 +29,7 @@ package org.springframework.core.env
  * @author Sebastien Deleuze
  * @since 5.0
  */
-operator fun PropertyResolver.get(key: String) : String? = getProperty(key)
+operator fun PropertyResolver.get(key: String): String? = getProperty(key)
 
 
 /**
@@ -39,7 +39,7 @@ operator fun PropertyResolver.get(key: String) : String? = getProperty(key)
  * @author Sebastien Deleuze
  * @since 5.1
  */
-inline fun <reified T> PropertyResolver.getProperty(key: String) : T? =
+inline fun <reified T> PropertyResolver.getProperty(key: String): T? =
 		getProperty(key, T::class.java)
 
 /**
@@ -49,5 +49,5 @@ inline fun <reified T> PropertyResolver.getProperty(key: String) : T? =
  * @author Sebastien Deleuze
  * @since 5.1
  */
-inline fun <reified T: Any> PropertyResolver.getRequiredProperty(key: String) : T =
+inline fun <reified T : Any> PropertyResolver.getRequiredProperty(key: String): T =
 		getRequiredProperty(key, T::class.java)

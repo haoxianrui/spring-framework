@@ -39,10 +39,10 @@ import java.lang.annotation.Target;
  *
  * @author Sam Brannen
  * @author Dmitry Semukhin
- * @since 5.2
  * @see Sql
  * @see MergeMode#MERGE
  * @see MergeMode#OVERRIDE
+ * @since 5.2
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

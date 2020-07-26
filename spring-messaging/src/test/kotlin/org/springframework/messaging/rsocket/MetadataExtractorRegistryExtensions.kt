@@ -32,7 +32,7 @@ class MetadataExtractorRegistryExtensions {
 		val mimeType = MimeType.valueOf("application/json")
 		extractor.metadataToExtract<String>(mimeType, name)
 		verify {
-			extractor.metadataToExtract(mimeType, object: ParameterizedTypeReference<String>() {}, name)
+			extractor.metadataToExtract(mimeType, object : ParameterizedTypeReference<String>() {}, name)
 		}
 	}
 
@@ -44,7 +44,7 @@ class MetadataExtractorRegistryExtensions {
 			outputMap.putAll(jsonMap)
 		}
 		verify {
-			extractor.metadataToExtract(mimeType, object: ParameterizedTypeReference<Map<String, String>>() {}, any<BiConsumer<Map<String, String>, MutableMap<String, Any>>>())
+			extractor.metadataToExtract(mimeType, object : ParameterizedTypeReference<Map<String, String>>() {}, any<BiConsumer<Map<String, String>, MutableMap<String, Any>>>())
 		}
 	}
 }

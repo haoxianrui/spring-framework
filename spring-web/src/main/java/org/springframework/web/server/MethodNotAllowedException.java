@@ -60,6 +60,7 @@ public class MethodNotAllowedException extends ResponseStatusException {
 
 	/**
 	 * Return a Map with an "Allow" header.
+	 *
 	 * @since 5.1.11
 	 */
 	@SuppressWarnings("deprecation")
@@ -70,6 +71,7 @@ public class MethodNotAllowedException extends ResponseStatusException {
 
 	/**
 	 * Return HttpHeaders with an "Allow" header.
+	 *
 	 * @since 5.1.13
 	 */
 	@Override

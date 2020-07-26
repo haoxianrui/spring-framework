@@ -81,7 +81,7 @@ public class ScriptTemplateViewTests {
 	public void missingScriptTemplateConfig() throws Exception {
 		assertThatExceptionOfType(ApplicationContextException.class).isThrownBy(() ->
 				this.view.setApplicationContext(new StaticApplicationContext()))
-			.withMessageContaining("ScriptTemplateConfig");
+				.withMessageContaining("ScriptTemplateConfig");
 	}
 
 	@Test
@@ -173,7 +173,7 @@ public class ScriptTemplateViewTests {
 		this.view.setRenderFunction("render");
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.view.setApplicationContext(this.context))
-			.withMessageContaining("You should define either 'engine', 'engineSupplier' or 'engineName'.");
+				.withMessageContaining("You should define either 'engine', 'engineSupplier' or 'engineName'.");
 	}
 
 	@Test  // gh-23258
@@ -204,7 +204,7 @@ public class ScriptTemplateViewTests {
 		this.view.setSharedEngine(false);
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.view.setApplicationContext(this.context))
-			.withMessageContaining("sharedEngine");
+				.withMessageContaining("sharedEngine");
 	}
 
 	@Test  // gh-23258

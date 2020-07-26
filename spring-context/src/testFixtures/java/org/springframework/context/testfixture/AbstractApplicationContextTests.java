@@ -47,12 +47,16 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  */
 public abstract class AbstractApplicationContextTests extends AbstractListableBeanFactoryTests {
 
-	/** Must be supplied as XML */
+	/**
+	 * Must be supplied as XML
+	 */
 	public static final String TEST_NAMESPACE = "testNamespace";
 
 	protected ConfigurableApplicationContext applicationContext;
 
-	/** Subclass must register this */
+	/**
+	 * Subclass must register this
+	 */
 	protected TestApplicationListener listener = new TestApplicationListener();
 
 	protected TestApplicationListener parentListener = new TestApplicationListener();
@@ -170,7 +174,7 @@ public abstract class AbstractApplicationContextTests extends AbstractListableBe
 	}
 
 	protected void doTestEvents(TestApplicationListener listener, TestApplicationListener parentListener,
-			MyEvent event) {
+								MyEvent event) {
 		listener.zeroCounter();
 		parentListener.zeroCounter();
 		assertThat(listener.getEventCount() == 0).as("0 events before publication").isTrue();

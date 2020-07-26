@@ -60,7 +60,7 @@ public class JtaTransactionAspectsTests {
 		InterruptedException test = new InterruptedException();
 		assertThatExceptionOfType(InterruptedException.class).isThrownBy(() ->
 				new JtaAnnotationPublicAnnotatedMember().echo(test))
-			.isSameAs(test);
+				.isSameAs(test);
 		assertThat(this.txManager.rollbacks).isEqualTo(1);
 		assertThat(this.txManager.commits).isEqualTo(0);
 	}
@@ -71,7 +71,7 @@ public class JtaTransactionAspectsTests {
 		IOException test = new IOException();
 		assertThatIOException().isThrownBy(() ->
 				new JtaAnnotationPublicAnnotatedMember().echo(test))
-			.isSameAs(test);
+				.isSameAs(test);
 		assertThat(this.txManager.commits).isEqualTo(1);
 		assertThat(this.txManager.rollbacks).isEqualTo(0);
 	}

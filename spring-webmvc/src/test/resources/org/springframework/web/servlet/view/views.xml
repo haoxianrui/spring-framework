@@ -4,23 +4,33 @@
 <beans>
 
 	<bean id="example1" class="org.springframework.web.servlet.view.ViewResolverTests$TestView">
-		<property name="url"><value>/example1.jsp</value></property>
+		<property name="url">
+			<value>/example1.jsp</value>
+		</property>
 		<property name="attributesMap">
 			<map>
-				<entry key="test1"><value>testvalue1</value></entry>
-				<entry key="test2"><ref bean="testBean"/></entry>
+				<entry key="test1">
+					<value>testvalue1</value>
+				</entry>
+				<entry key="test2">
+					<ref bean="testBean"/>
+				</entry>
 			</map>
 		</property>
-		<property name="location"><value>test</value></property>
+		<property name="location">
+			<value>test</value>
+		</property>
 	</bean>
 
 	<bean id="example2" class="org.springframework.web.servlet.view.JstlView">
-		<property name="url"><value>/example2new.jsp</value></property>
+		<property name="url">
+			<value>/example2new.jsp</value>
+		</property>
 		<property name="attributes">
 			<value>
 				test1=testvalue1
 				test2=testvalue2
-      </value>
+			</value>
 		</property>
 	</bean>
 

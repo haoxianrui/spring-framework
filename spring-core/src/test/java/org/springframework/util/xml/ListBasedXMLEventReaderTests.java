@@ -90,7 +90,7 @@ class ListBasedXMLEventReaderTests {
 
 		assertThatExceptionOfType(XMLStreamException.class).isThrownBy(
 				reader::getElementText)
-			.withMessageStartingWith("Not at START_ELEMENT");
+				.withMessageStartingWith("Not at START_ELEMENT");
 	}
 
 	private List<XMLEvent> readEvents(String xml) throws XMLStreamException {

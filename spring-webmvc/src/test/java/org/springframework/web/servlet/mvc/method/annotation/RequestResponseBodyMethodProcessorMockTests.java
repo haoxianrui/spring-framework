@@ -173,12 +173,12 @@ public class RequestResponseBodyMethodProcessorMockTests {
 	public void resolveArgumentNotValid() throws Exception {
 		assertThatExceptionOfType(MethodArgumentNotValidException.class).isThrownBy(() ->
 				testResolveArgumentWithValidation(new SimpleBean(null)))
-			.satisfies(ex -> {
-				BindingResult bindingResult = ex.getBindingResult();
-				assertThat(bindingResult.getObjectName()).isEqualTo("simpleBean");
-				assertThat(bindingResult.getErrorCount()).isEqualTo(1);
-				assertThat(bindingResult.getFieldError("name")).isNotNull();
-			});
+				.satisfies(ex -> {
+					BindingResult bindingResult = ex.getBindingResult();
+					assertThat(bindingResult.getObjectName()).isEqualTo("simpleBean");
+					assertThat(bindingResult.getErrorCount()).isEqualTo(1);
+					assertThat(bindingResult.getFieldError("name")).isNotNull();
+				});
 	}
 
 	@Test
@@ -469,7 +469,7 @@ public class RequestResponseBodyMethodProcessorMockTests {
 
 		@Override
 		public WebDataBinder createBinder(NativeWebRequest webRequest, @Nullable Object target,
-				String objectName) throws Exception {
+										  String objectName) throws Exception {
 
 			LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
 			validator.afterPropertiesSet();

@@ -82,10 +82,9 @@ class SocketUtilsTests {
 			// will only look for the exact port
 			assertThatIllegalStateException().isThrownBy(() ->
 					SocketUtils.findAvailableTcpPort(port, port))
-				.withMessageStartingWith("Could not find an available TCP port")
-				.withMessageEndingWith("after 1 attempts");
-		}
-		finally {
+					.withMessageStartingWith("Could not find an available TCP port")
+					.withMessageEndingWith("after 1 attempts");
+		} finally {
 			socket.close();
 		}
 	}
@@ -159,10 +158,9 @@ class SocketUtilsTests {
 			// will only look for the exact port
 			assertThatIllegalStateException().isThrownBy(() ->
 					SocketUtils.findAvailableUdpPort(port, port))
-				.withMessageStartingWith("Could not find an available UDP port")
-				.withMessageEndingWith("after 1 attempts");
-		}
-		finally {
+					.withMessageStartingWith("Could not find an available UDP port")
+					.withMessageEndingWith("after 1 attempts");
+		} finally {
 			socket.close();
 		}
 	}
@@ -229,6 +227,7 @@ class SocketUtilsTests {
 		SortedSet<Integer> ports = SocketUtils.findAvailableUdpPorts(numRequested, minPort, maxPort);
 		assertAvailablePorts(ports, numRequested, minPort, maxPort);
 	}
+
 	private void assertPortInRange(int port, int minPort, int maxPort) {
 		assertThat(port >= minPort).as("port [" + port + "] >= " + minPort).isTrue();
 		assertThat(port <= maxPort).as("port [" + port + "] <= " + maxPort).isTrue();

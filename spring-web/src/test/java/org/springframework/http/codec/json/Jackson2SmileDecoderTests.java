@@ -83,8 +83,7 @@ public class Jackson2SmileDecoderTests extends AbstractDecoderTests<Jackson2Smil
 	private byte[] writeObject(Object o) {
 		try {
 			return this.mapper.writer().writeValueAsBytes(o);
-		}
-		catch (JsonProcessingException e) {
+		} catch (JsonProcessingException e) {
 			throw new AssertionError(e);
 		}
 

@@ -21,6 +21,7 @@
 
 	<bean id="testBean" class="org.springframework.scheduling.config.ScheduledTasksBeanDefinitionParserTests$TestBean"/>
 
-	<bean id="customTrigger" class="org.springframework.scheduling.config.ScheduledTasksBeanDefinitionParserTests$TestTrigger"/>
+	<bean id="customTrigger"
+		  class="org.springframework.scheduling.config.ScheduledTasksBeanDefinitionParserTests$TestTrigger"/>
 
 </beans>

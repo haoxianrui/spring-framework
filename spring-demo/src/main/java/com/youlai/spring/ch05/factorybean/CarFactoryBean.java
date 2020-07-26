@@ -1,4 +1,4 @@
-package com.fly4j.spring.ch05.factorybean;
+package com.youlai.spring.ch05.factorybean;
 
 import org.springframework.beans.factory.FactoryBean;
 
@@ -12,8 +12,8 @@ public class CarFactoryBean implements FactoryBean<Car> {
 
 	@Override
 	public Car getObject() throws Exception {
-		Car car=new Car();
-		String[] infos=carInfo.split(",");
+		Car car = new Car();
+		String[] infos = carInfo.split(",");
 		car.setBrand(infos[0]);
 		car.setMaxSpeed(Integer.valueOf(infos[1]));
 		car.setPrice(Double.valueOf(infos[2]));

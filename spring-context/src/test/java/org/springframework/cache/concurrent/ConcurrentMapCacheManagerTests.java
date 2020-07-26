@@ -128,7 +128,7 @@ public class ConcurrentMapCacheManagerTests {
 		Cache cache1 = cm.getCache("c1");
 		boolean condition1 = cache1 instanceof ConcurrentMapCache;
 		assertThat(condition1).isTrue();
-		assertThat(((ConcurrentMapCache)cache1).isStoreByValue()).isFalse();
+		assertThat(((ConcurrentMapCache) cache1).isStoreByValue()).isFalse();
 		cache1.put("key", "value");
 
 		cm.setStoreByValue(true);

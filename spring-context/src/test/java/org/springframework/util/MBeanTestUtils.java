@@ -38,8 +38,7 @@ public class MBeanTestUtils {
 		for (MBeanServer server : MBeanServerFactory.findMBeanServer(null)) {
 			try {
 				MBeanServerFactory.releaseMBeanServer(server);
-			}
-			catch (IllegalArgumentException ex) {
+			} catch (IllegalArgumentException ex) {
 				if (!ex.getMessage().contains("not in list")) {
 					throw ex;
 				}

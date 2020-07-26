@@ -53,8 +53,7 @@ public class InputStreamEditorTests {
 			assertThat(condition).isTrue();
 			stream = (InputStream) value;
 			assertThat(stream.available() > 0).isTrue();
-		}
-		finally {
+		} finally {
 			if (stream != null) {
 				stream.close();
 			}

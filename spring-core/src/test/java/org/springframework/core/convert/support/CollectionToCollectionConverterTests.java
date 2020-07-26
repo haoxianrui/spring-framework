@@ -69,8 +69,7 @@ class CollectionToCollectionConverterTests {
 		assertThat(conversionService.canConvert(sourceType, targetType)).isTrue();
 		try {
 			conversionService.convert(list, sourceType, targetType);
-		}
-		catch (ConversionFailedException ex) {
+		} catch (ConversionFailedException ex) {
 			boolean condition = ex.getCause() instanceof ConverterNotFoundException;
 			assertThat(condition).isTrue();
 		}

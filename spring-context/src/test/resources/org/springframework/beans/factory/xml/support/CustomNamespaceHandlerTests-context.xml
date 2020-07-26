@@ -6,7 +6,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.0.xsd
        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util-2.0.xsd
        http://www.springframework.org/schema/beans/test https://www.springframework.org/schema/beans/factory/xml/support/CustomNamespaceHandlerTests.xsd"
-	default-lazy-init="true">
+	   default-lazy-init="true">
 
 	<test:testBean id="testBean" name="Rob Harrop" age="23"/>
 
@@ -31,7 +31,8 @@
 		<property name="age" value="23"/>
 	</bean>
 
-	<bean id="decorateWithAttribute" class="org.springframework.beans.testfixture.beans.TestBean" test:object-name="foo"/>
+	<bean id="decorateWithAttribute" class="org.springframework.beans.testfixture.beans.TestBean"
+		  test:object-name="foo"/>
 
 	<util:list id="list.of.things">
 		<test:person name="Fiona Apple" age="20"/>

@@ -250,12 +250,10 @@ class CandidateComponentsIndexerTests {
 			try (FileInputStream fileInputStream = new FileInputStream(metadataFile)) {
 				CandidateComponentsMetadata metadata = PropertiesMarshaller.read(fileInputStream);
 				return metadata;
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				throw new IllegalStateException("Failed to read metadata from disk", ex);
 			}
-		}
-		else {
+		} else {
 			return new CandidateComponentsMetadata();
 		}
 	}

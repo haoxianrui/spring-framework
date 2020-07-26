@@ -57,8 +57,7 @@ public class JsonPathResultMatchersTests {
 			response.addHeader("Content-Type", "application/json");
 			response.getOutputStream().write(RESPONSE_CONTENT.getBytes(StandardCharsets.UTF_8));
 			stubMvcResult = new StubMvcResult(null, null, null, null, null, null, response);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
 	}
@@ -295,7 +294,7 @@ public class JsonPathResultMatchersTests {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		response.addHeader("Content-Type", "application/json");
 		response.getWriter().print(new String("test".getBytes("ISO-8859-1")));
-		StubMvcResult result =  new StubMvcResult(null, null, null, null, null, null, response);
+		StubMvcResult result = new StubMvcResult(null, null, null, null, null, null, response);
 
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				new JsonPathResultMatchers("$.str").prefix("prefix").value("foo").match(result));

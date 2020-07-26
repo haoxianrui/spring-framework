@@ -49,8 +49,8 @@ public class DataBufferEncoder extends AbstractEncoder<DataBuffer> {
 
 	@Override
 	public Flux<DataBuffer> encode(Publisher<? extends DataBuffer> inputStream,
-			DataBufferFactory bufferFactory, ResolvableType elementType, @Nullable MimeType mimeType,
-			@Nullable Map<String, Object> hints) {
+								   DataBufferFactory bufferFactory, ResolvableType elementType, @Nullable MimeType mimeType,
+								   @Nullable Map<String, Object> hints) {
 
 		Flux<DataBuffer> flux = Flux.from(inputStream);
 		if (logger.isDebugEnabled() && !Hints.isLoggingSuppressed(hints)) {
@@ -61,7 +61,7 @@ public class DataBufferEncoder extends AbstractEncoder<DataBuffer> {
 
 	@Override
 	public DataBuffer encodeValue(DataBuffer buffer, DataBufferFactory bufferFactory,
-			ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								  ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		if (logger.isDebugEnabled() && !Hints.isLoggingSuppressed(hints)) {
 			logValue(buffer, hints);

@@ -46,6 +46,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Unit tests for {@link SessionAttributeMethodArgumentResolver}.
+ *
  * @author Rossen Stoyanchev
  */
 public class SessionAttributeMethodArgumentResolverTests {
@@ -146,8 +147,8 @@ public class SessionAttributeMethodArgumentResolverTests {
 	private void handleWithSessionAttribute(
 			@SessionAttribute Foo foo,
 			@SessionAttribute("specialFoo") Foo namedFoo,
-			@SessionAttribute(name="foo", required = false) Foo notRequiredFoo,
-			@SessionAttribute(name="foo") Optional<Foo> optionalFoo,
+			@SessionAttribute(name = "foo", required = false) Foo notRequiredFoo,
+			@SessionAttribute(name = "foo") Optional<Foo> optionalFoo,
 			String notSupported) {
 	}
 

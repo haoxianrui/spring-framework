@@ -97,7 +97,7 @@ public class ServletUriComponentsBuilderTests {
 		request.addHeader("X-Forwarded-Port", "443");
 
 		HttpServletRequest requestToUse = adaptFromForwardedHeaders(request);
-		UriComponents result =  ServletUriComponentsBuilder.fromRequest(requestToUse).build();
+		UriComponents result = ServletUriComponentsBuilder.fromRequest(requestToUse).build();
 
 		assertThat(result.toString()).isEqualTo("https://84.198.58.199/mvc-showcase");
 	}
@@ -117,7 +117,7 @@ public class ServletUriComponentsBuilderTests {
 		this.request.setRequestURI("/mvc-showcase/bar");
 
 		HttpServletRequest requestToUse = adaptFromForwardedHeaders(this.request);
-		UriComponents result =  ServletUriComponentsBuilder.fromRequest(requestToUse).build();
+		UriComponents result = ServletUriComponentsBuilder.fromRequest(requestToUse).build();
 
 		assertThat(result.toUriString()).isEqualTo("http://localhost/prefix/bar");
 	}
@@ -129,7 +129,7 @@ public class ServletUriComponentsBuilderTests {
 		this.request.setRequestURI("/spring-mvc-showcase/bar");
 
 		HttpServletRequest requestToUse = adaptFromForwardedHeaders(this.request);
-		UriComponents result =  ServletUriComponentsBuilder.fromRequest(requestToUse).build();
+		UriComponents result = ServletUriComponentsBuilder.fromRequest(requestToUse).build();
 
 		assertThat(result.toUriString()).isEqualTo("http://localhost/foo/bar");
 	}
@@ -141,7 +141,7 @@ public class ServletUriComponentsBuilderTests {
 		this.request.setRequestURI("/mvc-showcase/bar");
 
 		HttpServletRequest requestToUse = adaptFromForwardedHeaders(this.request);
-		UriComponents result =  ServletUriComponentsBuilder.fromRequest(requestToUse).build();
+		UriComponents result = ServletUriComponentsBuilder.fromRequest(requestToUse).build();
 
 		assertThat(result.toUriString()).isEqualTo("http://localhost/bar");
 	}
@@ -196,8 +196,7 @@ public class ServletUriComponentsBuilderTests {
 		try {
 			String result = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
 			assertThat(result).isEqualTo("http://localhost/mvc-showcase/data/param?foo=123");
-		}
-		finally {
+		} finally {
 			RequestContextHolder.resetRequestAttributes();
 		}
 	}

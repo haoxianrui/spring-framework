@@ -78,7 +78,7 @@ public class MapTests extends AbstractExpressionTests {
 
 	@Test
 	public void testInlineMapWithFunkyKeys() {
-		evaluate("{#root.name:true}","{Nikola Tesla=true}",LinkedHashMap.class);
+		evaluate("{#root.name:true}", "{Nikola Tesla=true}", LinkedHashMap.class);
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class MapTests extends AbstractExpressionTests {
 		checkConstantMap("{a:#a,b:2,c:3}", false);
 		checkConstantMap("{a:1,b:2,c:Integer.valueOf(4)}", false);
 		checkConstantMap("{a:1,b:2,c:{#a}}", false);
-		checkConstantMap("{#root.name:true}",false);
+		checkConstantMap("{#root.name:true}", false);
 		checkConstantMap("{a:1,b:2,c:{d:true,e:false}}", true);
 		checkConstantMap("{a:1,b:2,c:{d:{1,2,3},e:{4,5,6},f:{'a','b','c'}}}", true);
 	}
@@ -128,8 +128,7 @@ public class MapTests extends AbstractExpressionTests {
 		InlineMap inlineMap = (InlineMap) node;
 		if (expectedToBeConstant) {
 			assertThat(inlineMap.isConstant()).isTrue();
-		}
-		else {
+		} else {
 			assertThat(inlineMap.isConstant()).isFalse();
 		}
 	}
@@ -171,20 +170,20 @@ public class MapTests extends AbstractExpressionTests {
 		o = expression.getValue(new MapHolder());
 		assertThat(o).isEqualTo("value");
 
-		expression = (SpelExpression)parser.parseExpression("foo[foo[NEW]]");
+		expression = (SpelExpression) parser.parseExpression("foo[foo[NEW]]");
 		o = expression.getValue(new MapHolder());
 		assertThat(o).isEqualTo("37");
 
-		expression = (SpelExpression)parser.parseExpression("foo[foo[new]]");
+		expression = (SpelExpression) parser.parseExpression("foo[foo[new]]");
 		o = expression.getValue(new MapHolder());
 		assertThat(o).isEqualTo("38");
 
-		expression = (SpelExpression)parser.parseExpression("foo[foo[foo[T]]]");
+		expression = (SpelExpression) parser.parseExpression("foo[foo[foo[T]]]");
 		o = expression.getValue(new MapHolder());
 		assertThat(o).isEqualTo("value");
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static class MapHolder {
 
 		public Map foo;
@@ -196,9 +195,9 @@ public class MapTests extends AbstractExpressionTests {
 			foo.put("T", "TV");
 			foo.put("t", "tv");
 			foo.put("abc.def", "value");
-			foo.put("VALUE","37");
-			foo.put("value","38");
-			foo.put("TV","new");
+			foo.put("VALUE", "37");
+			foo.put("value", "38");
+			foo.put("TV", "new");
 		}
 	}
 

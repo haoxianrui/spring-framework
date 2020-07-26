@@ -36,10 +36,10 @@ import org.springframework.util.Assert;
  *
  * @author Juergen Hoeller
  * @author Sam Brannen
- * @since 5.2.3
  * @see org.springframework.beans.factory.support.DefaultBeanNameGenerator
  * @see AnnotationBeanNameGenerator
  * @see ConfigurationClassPostProcessor#IMPORT_BEAN_NAME_GENERATOR
+ * @since 5.2.3
  */
 public class FullyQualifiedAnnotationBeanNameGenerator extends AnnotationBeanNameGenerator {
 

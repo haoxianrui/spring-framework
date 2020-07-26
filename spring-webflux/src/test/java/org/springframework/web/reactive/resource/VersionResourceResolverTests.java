@@ -42,6 +42,7 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for {@link VersionResourceResolver}.
+ *
  * @author Rossen Stoyanchev
  * @author Brian Clozel
  */

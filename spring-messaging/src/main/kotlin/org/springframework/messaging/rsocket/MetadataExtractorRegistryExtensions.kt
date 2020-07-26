@@ -29,7 +29,7 @@ import org.springframework.util.MimeType
  * @author Sebastien Deleuze
  * @since 5.2
  */
-inline fun <reified T : Any > MetadataExtractorRegistry.metadataToExtract(mimeType: MimeType, name: String? = null) =
+inline fun <reified T : Any> MetadataExtractorRegistry.metadataToExtract(mimeType: MimeType, name: String? = null) =
 		metadataToExtract(mimeType, object : org.springframework.core.ParameterizedTypeReference<T>() {}, name)
 
 /**
@@ -42,6 +42,6 @@ inline fun <reified T : Any > MetadataExtractorRegistry.metadataToExtract(mimeTy
  * @author Sebastien Deleuze
  * @since 5.2
  */
-inline fun <reified T : Any > MetadataExtractorRegistry.metadataToExtract(mimeType: MimeType, noinline mapper: (T, MutableMap<String, Any>) -> Unit) =
+inline fun <reified T : Any> MetadataExtractorRegistry.metadataToExtract(mimeType: MimeType, noinline mapper: (T, MutableMap<String, Any>) -> Unit) =
 		metadataToExtract(mimeType, object : org.springframework.core.ParameterizedTypeReference<T>() {}, mapper)
 

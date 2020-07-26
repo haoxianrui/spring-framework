@@ -42,6 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link JettyWebSocketClient}.
+ *
  * @author Rossen Stoyanchev
  */
 public class JettyWebSocketClientTests {

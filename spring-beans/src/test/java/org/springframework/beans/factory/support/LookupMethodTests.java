@@ -84,7 +84,7 @@ public class LookupMethodTests {
 		AbstractBean bean = (AbstractBean) beanFactory.getBean("abstractBean");
 		assertThat(bean).isNotNull();
 		assertThatExceptionOfType(AbstractMethodError.class).as("does not have a three arg constructor").isThrownBy(() ->
-			bean.getThreeArguments("name", 1, 2));
+				bean.getThreeArguments("name", 1, 2));
 	}
 
 	@Test

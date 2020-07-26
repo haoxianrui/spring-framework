@@ -74,22 +74,22 @@ class TypeMappedAnnotationTests {
 		AttributeMethods methods = AttributeMethods.forAnnotationType(ArrayTypes.class);
 		Map<String, Object> attributes = new HashMap<>();
 		for (int i = 0; i < methods.size(); i++) {
-			attributes.put(methods.get(i).getName(), new Object[] {});
+			attributes.put(methods.get(i).getName(), new Object[]{});
 		}
 		MergedAnnotation<ArrayTypes> annotation = TypeMappedAnnotation.of(null, null,
 				ArrayTypes.class, attributes);
-		assertThat(annotation.getValue("stringValue")).contains(new String[] {});
-		assertThat(annotation.getValue("byteValue")).contains(new byte[] {});
-		assertThat(annotation.getValue("shortValue")).contains(new short[] {});
-		assertThat(annotation.getValue("intValue")).contains(new int[] {});
-		assertThat(annotation.getValue("longValue")).contains(new long[] {});
-		assertThat(annotation.getValue("booleanValue")).contains(new boolean[] {});
-		assertThat(annotation.getValue("charValue")).contains(new char[] {});
-		assertThat(annotation.getValue("doubleValue")).contains(new double[] {});
-		assertThat(annotation.getValue("floatValue")).contains(new float[] {});
-		assertThat(annotation.getValue("classValue")).contains(new Class<?>[] {});
-		assertThat(annotation.getValue("annotationValue")).contains(new MergedAnnotation<?>[] {});
-		assertThat(annotation.getValue("enumValue")).contains(new ExampleEnum[] {});
+		assertThat(annotation.getValue("stringValue")).contains(new String[]{});
+		assertThat(annotation.getValue("byteValue")).contains(new byte[]{});
+		assertThat(annotation.getValue("shortValue")).contains(new short[]{});
+		assertThat(annotation.getValue("intValue")).contains(new int[]{});
+		assertThat(annotation.getValue("longValue")).contains(new long[]{});
+		assertThat(annotation.getValue("booleanValue")).contains(new boolean[]{});
+		assertThat(annotation.getValue("charValue")).contains(new char[]{});
+		assertThat(annotation.getValue("doubleValue")).contains(new double[]{});
+		assertThat(annotation.getValue("floatValue")).contains(new float[]{});
+		assertThat(annotation.getValue("classValue")).contains(new Class<?>[]{});
+		assertThat(annotation.getValue("annotationValue")).contains(new MergedAnnotation<?>[]{});
+		assertThat(annotation.getValue("enumValue")).contains(new ExampleEnum[]{});
 	}
 
 	@Test
@@ -112,7 +112,7 @@ class TypeMappedAnnotationTests {
 	@Test
 	void adaptFromStringArrayToClassArray() {
 		MergedAnnotation<?> annotation = TypeMappedAnnotation.of(null, null, ClassAttributes.class,
-				Collections.singletonMap("classArrayValue", new String[] { InputStream.class.getName() }));
+				Collections.singletonMap("classArrayValue", new String[]{InputStream.class.getName()}));
 		assertThat(annotation.getStringArray("classArrayValue")).containsExactly(InputStream.class.getName());
 		assertThat(annotation.getClassArray("classArrayValue")).containsExactly(InputStream.class);
 	}
@@ -131,7 +131,7 @@ class TypeMappedAnnotationTests {
 	}
 
 	private AnnotationTypeMapping getMapping(Annotation annotation,
-			Class<? extends Annotation> mappedAnnotationType) {
+											 Class<? extends Annotation> mappedAnnotationType) {
 		AnnotationTypeMappings mappings = AnnotationTypeMappings.forAnnotationType(
 				annotation.annotationType());
 		for (int i = 0; i < mappings.size(); i++) {
@@ -241,7 +241,7 @@ class TypeMappedAnnotationTests {
 
 	}
 
-	enum ExampleEnum {ONE,TWO,THREE}
+	enum ExampleEnum {ONE, TWO, THREE}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	static @interface NestedContainer {

@@ -149,7 +149,7 @@ abstract class AbstractDatabasePopulatorTests extends AbstractDatabaseInitializa
 	@Test
 	void constructorWithMultipleScriptResources() throws Exception {
 		final ResourceDatabasePopulator populator = new ResourceDatabasePopulator(usersSchema(),
-			resource("users-data-with-comments.sql"));
+				resource("users-data-with-comments.sql"));
 		DatabasePopulatorUtils.execute(populator, db);
 		assertUsersDatabaseCreated("Brannen", "Hoeller");
 	}

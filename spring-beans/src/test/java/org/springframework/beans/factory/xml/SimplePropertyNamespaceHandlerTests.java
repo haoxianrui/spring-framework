@@ -63,7 +63,7 @@ public class SimplePropertyNamespaceHandlerTests {
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() ->
 				new XmlBeanDefinitionReader(beanFactory).loadBeanDefinitions(
-							new ClassPathResource("simplePropertyNamespaceHandlerTestsWithErrors.xml", getClass())));
+						new ClassPathResource("simplePropertyNamespaceHandlerTestsWithErrors.xml", getClass())));
 	}
 
 	@Test

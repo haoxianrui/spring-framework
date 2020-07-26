@@ -1,4 +1,4 @@
-package com.fly4j.spring.ch05.factorybean;
+package com.youlai.spring.ch05.factorybean;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class Car {
 
 	private String brand;
 
-	private  double price;
+	private double price;
 
 
 	public int getMaxSpeed() {

@@ -56,6 +56,7 @@ public class MessageMethodArgumentResolver implements HandlerMethodArgumentResol
 
 	/**
 	 * Create a resolver instance with the given {@link MessageConverter}.
+	 *
 	 * @param converter the MessageConverter to use (may be {@code null})
 	 * @since 4.3
 	 */
@@ -102,8 +103,9 @@ public class MessageMethodArgumentResolver implements HandlerMethodArgumentResol
 	 * target type after also taking into account the "Content-Type", e.g.
 	 * return {@code String} if target type is {@code Object} and
 	 * {@code "Content-Type:text/**"}.
+	 *
 	 * @param parameter the target method parameter
-	 * @param message the message being processed
+	 * @param message   the message being processed
 	 * @return the target type to use
 	 * @since 5.2
 	 */
@@ -115,19 +117,17 @@ public class MessageMethodArgumentResolver implements HandlerMethodArgumentResol
 
 	/**
 	 * Check if the given {@code payload} is empty.
+	 *
 	 * @param payload the payload to check (can be {@code null})
 	 */
 	protected boolean isEmptyPayload(@Nullable Object payload) {
 		if (payload == null) {
 			return true;
-		}
-		else if (payload instanceof byte[]) {
+		} else if (payload instanceof byte[]) {
 			return ((byte[]) payload).length == 0;
-		}
-		else if (payload instanceof String) {
+		} else if (payload instanceof String) {
 			return !StringUtils.hasText((String) payload);
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -137,8 +137,7 @@ public class MessageMethodArgumentResolver implements HandlerMethodArgumentResol
 		if (this.converter instanceof SmartMessageConverter) {
 			SmartMessageConverter smartConverter = (SmartMessageConverter) this.converter;
 			result = smartConverter.fromMessage(message, targetPayloadType, parameter);
-		}
-		else if (this.converter != null) {
+		} else if (this.converter != null) {
 			result = this.converter.fromMessage(message, targetPayloadType);
 		}
 

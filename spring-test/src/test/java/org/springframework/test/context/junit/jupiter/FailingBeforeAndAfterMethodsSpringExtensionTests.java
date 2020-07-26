@@ -68,36 +68,36 @@ class FailingBeforeAndAfterMethodsSpringExtensionTests {
 
 	@ParameterizedTest
 	@ValueSource(classes = {
-		AlwaysFailingBeforeTestClassTestCase.class,
-		AlwaysFailingAfterTestClassTestCase.class,
-		AlwaysFailingPrepareTestInstanceTestCase.class,
-		AlwaysFailingBeforeTestMethodTestCase.class,
-		AlwaysFailingBeforeTestExecutionTestCase.class,
-		AlwaysFailingAfterTestExecutionTestCase.class,
-		AlwaysFailingAfterTestMethodTestCase.class,
-		FailingBeforeTransactionTestCase.class,
-		FailingAfterTransactionTestCase.class
+			AlwaysFailingBeforeTestClassTestCase.class,
+			AlwaysFailingAfterTestClassTestCase.class,
+			AlwaysFailingPrepareTestInstanceTestCase.class,
+			AlwaysFailingBeforeTestMethodTestCase.class,
+			AlwaysFailingBeforeTestExecutionTestCase.class,
+			AlwaysFailingAfterTestExecutionTestCase.class,
+			AlwaysFailingAfterTestMethodTestCase.class,
+			FailingBeforeTransactionTestCase.class,
+			FailingAfterTransactionTestCase.class
 	})
 	void failingBeforeAndAfterCallbacks(Class<?> testClass) {
 		Events events = EngineTestKit.engine("junit-jupiter")
-			.selectors(selectClass(testClass))
-			.execute()
-			.testEvents()
-			.assertStatistics(stats -> stats
-				.skipped(0)
-				.aborted(0)
-				.started(getExpectedStartedCount(testClass))
-				.succeeded(getExpectedSucceededCount(testClass))
-				.failed(getExpectedFailedCount(testClass)));
+				.selectors(selectClass(testClass))
+				.execute()
+				.testEvents()
+				.assertStatistics(stats -> stats
+						.skipped(0)
+						.aborted(0)
+						.started(getExpectedStartedCount(testClass))
+						.succeeded(getExpectedSucceededCount(testClass))
+						.failed(getExpectedFailedCount(testClass)));
 
 		// Ensure it was an AssertionError that failed the test and not
 		// something else like an error in the @Configuration class, etc.
 		if (getExpectedFailedCount(testClass) > 0) {
 			events.assertThatEvents().haveExactly(1,
-				event(test("testNothing"),
-					finishedWithFailure(
-						instanceOf(AssertionError.class),
-						message(msg -> msg.contains("always failing")))));
+					event(test("testNothing"),
+							finishedWithFailure(
+									instanceOf(AssertionError.class),
+									message(msg -> msg.contains("always failing")))));
 		}
 	}
 

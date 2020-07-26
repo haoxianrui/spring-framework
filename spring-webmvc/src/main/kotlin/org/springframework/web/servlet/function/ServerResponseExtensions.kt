@@ -25,5 +25,5 @@ import org.springframework.core.ParameterizedTypeReference
  * @author Sebastien Deleuze
  * @since 5.2
  */
-inline fun <reified T: Any> ServerResponse.BodyBuilder.bodyWithType(body: T) =
+inline fun <reified T : Any> ServerResponse.BodyBuilder.bodyWithType(body: T) =
 		body(body, object : ParameterizedTypeReference<T>() {})

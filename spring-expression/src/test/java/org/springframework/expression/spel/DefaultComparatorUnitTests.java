@@ -94,29 +94,29 @@ public class DefaultComparatorUnitTests {
 	@Test
 	public void testNulls() throws EvaluationException {
 		TypeComparator comparator = new StandardTypeComparator();
-		assertThat(comparator.compare(null,"abc")<0).isTrue();
-		assertThat(comparator.compare(null,null)==0).isTrue();
-		assertThat(comparator.compare("abc",null)>0).isTrue();
+		assertThat(comparator.compare(null, "abc") < 0).isTrue();
+		assertThat(comparator.compare(null, null) == 0).isTrue();
+		assertThat(comparator.compare("abc", null) > 0).isTrue();
 	}
 
 	@Test
 	public void testObjects() throws EvaluationException {
 		TypeComparator comparator = new StandardTypeComparator();
-		assertThat(comparator.compare("a","a")==0).isTrue();
-		assertThat(comparator.compare("a","b")<0).isTrue();
-		assertThat(comparator.compare("b","a")>0).isTrue();
+		assertThat(comparator.compare("a", "a") == 0).isTrue();
+		assertThat(comparator.compare("a", "b") < 0).isTrue();
+		assertThat(comparator.compare("b", "a") > 0).isTrue();
 	}
 
 	@Test
 	public void testCanCompare() throws EvaluationException {
 		TypeComparator comparator = new StandardTypeComparator();
-		assertThat(comparator.canCompare(null,1)).isTrue();
-		assertThat(comparator.canCompare(1,null)).isTrue();
+		assertThat(comparator.canCompare(null, 1)).isTrue();
+		assertThat(comparator.canCompare(1, null)).isTrue();
 
-		assertThat(comparator.canCompare(2,1)).isTrue();
-		assertThat(comparator.canCompare("abc","def")).isTrue();
-		assertThat(comparator.canCompare("abc",3)).isTrue();
-		assertThat(comparator.canCompare(String.class,3)).isFalse();
+		assertThat(comparator.canCompare(2, 1)).isTrue();
+		assertThat(comparator.canCompare("abc", "def")).isTrue();
+		assertThat(comparator.canCompare("abc", 3)).isTrue();
+		assertThat(comparator.canCompare(String.class, 3)).isFalse();
 	}
 
 }

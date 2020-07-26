@@ -59,7 +59,7 @@ public class FreeMarkerConfigurerTests {
 		freeMarkerConfigurer.afterPropertiesSet();
 		Configuration cfg = freeMarkerConfigurer.getConfiguration();
 		assertThat(cfg.getTemplateLoader()).isInstanceOf(MultiTemplateLoader.class);
-		MultiTemplateLoader multiTemplateLoader = (MultiTemplateLoader)cfg.getTemplateLoader();
+		MultiTemplateLoader multiTemplateLoader = (MultiTemplateLoader) cfg.getTemplateLoader();
 		assertThat(multiTemplateLoader.getTemplateLoader(0)).isInstanceOf(SpringTemplateLoader.class);
 		assertThat(multiTemplateLoader.getTemplateLoader(1)).isInstanceOf(ClassTemplateLoader.class);
 	}
@@ -79,6 +79,7 @@ public class FreeMarkerConfigurerTests {
 				}
 				return new ByteArrayResource("test".getBytes(), "test");
 			}
+
 			@Override
 			public ClassLoader getClassLoader() {
 				return getClass().getClassLoader();

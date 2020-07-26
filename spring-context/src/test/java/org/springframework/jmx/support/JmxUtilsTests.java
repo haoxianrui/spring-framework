@@ -131,8 +131,7 @@ class JmxUtilsTests {
 		MBeanServer server = null;
 		try {
 			server = JmxUtils.locateMBeanServer();
-		}
-		finally {
+		} finally {
 			if (server != null) {
 				MBeanServerFactory.releaseMBeanServer(server);
 			}

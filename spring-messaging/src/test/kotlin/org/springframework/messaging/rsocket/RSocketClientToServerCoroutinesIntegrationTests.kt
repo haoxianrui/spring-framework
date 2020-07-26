@@ -168,7 +168,7 @@ class RSocketClientToServerCoroutinesIntegrationTests {
 		fun echoStream(payload: String): Flow<String> {
 			var i = 0
 			return flow {
-				while(true) {
+				while (true) {
 					delay(10)
 					emit("$payload ${i++}")
 				}
@@ -180,7 +180,7 @@ class RSocketClientToServerCoroutinesIntegrationTests {
 			delay(10)
 			var i = 0
 			return flow {
-				while(true) {
+				while (true) {
 					delay(10)
 					emit("$payload ${i++}")
 				}
@@ -207,7 +207,7 @@ class RSocketClientToServerCoroutinesIntegrationTests {
 		@MessageExceptionHandler
 		suspend fun handleException(ex: IllegalArgumentException): String {
 			delay(10)
-			return  "${ex.message} handled"
+			return "${ex.message} handled"
 		}
 
 		@Suppress("UNUSED_PARAMETER")

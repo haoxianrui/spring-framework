@@ -50,6 +50,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 /**
  * Unit tests for {@link AbstractMethodMessageHandler}.
+ *
  * @author Rossen Stoyanchev
  */
 public class MethodMessageHandlerTests {
@@ -133,7 +134,8 @@ public class MethodMessageHandlerTests {
 
 
 	private TestMethodMessageHandler initMethodMessageHandler(Class<?>... handlerTypes) {
-		return initMethodMessageHandler(handler -> {}, handlerTypes);
+		return initMethodMessageHandler(handler -> {
+		}, handlerTypes);
 	}
 
 	private TestMethodMessageHandler initMethodMessageHandler(
@@ -189,9 +191,11 @@ public class MethodMessageHandlerTests {
 	@SuppressWarnings("unused")
 	private static class DuplicateMappingsController {
 
-		void handleMessageFoo() { }
+		void handleMessageFoo() {
+		}
 
-		void handleMessageFoo(String foo) { }
+		void handleMessageFoo(String foo) {
+		}
 	}
 
 
@@ -259,9 +263,9 @@ public class MethodMessageHandlerTests {
 			return (info1, info2) -> {
 				SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new AntPathMatcher());
 				DestinationPatternsMessageCondition cond1 =
-						new DestinationPatternsMessageCondition(new String[] { info1 }, routeMatcher);
+						new DestinationPatternsMessageCondition(new String[]{info1}, routeMatcher);
 				DestinationPatternsMessageCondition cond2 =
-						new DestinationPatternsMessageCondition(new String[] { info2 }, routeMatcher);
+						new DestinationPatternsMessageCondition(new String[]{info2}, routeMatcher);
 				return cond1.compareTo(cond2, message);
 			};
 		}

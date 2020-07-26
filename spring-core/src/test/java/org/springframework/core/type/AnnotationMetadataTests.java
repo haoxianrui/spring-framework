@@ -99,8 +99,7 @@ class AnnotationMetadataTests {
 			assertThat(metadata.isAnnotated(NamedComposedAnnotation.class.getName())).isFalse();
 			assertThat(metadata.hasAnnotation(NamedComposedAnnotation.class.getName())).isFalse();
 			assertThat(metadata.getAnnotationTypes()).isEmpty();
-		}
-		else {
+		} else {
 			assertThat(metadata.isAnnotated(NamedComposedAnnotation.class.getName())).isTrue();
 			assertThat(metadata.hasAnnotation(NamedComposedAnnotation.class.getName())).isTrue();
 			assertThat(metadata.getAnnotationTypes()).containsExactly(NamedComposedAnnotation.class.getName());
@@ -219,13 +218,15 @@ class AnnotationMetadataTests {
 		assertThat(attributes.getClassArray("basePackageClasses")).isEmpty();
 	}
 
-	@Test  // SPR-11649
+	@Test
+		// SPR-11649
 	void multipleAnnotationsWithIdenticalAttributeNamesUsingStandardAnnotationMetadata() {
 		AnnotationMetadata metadata = AnnotationMetadata.introspect(NamedAnnotationsClass.class);
 		assertMultipleAnnotationsWithIdenticalAttributeNames(metadata);
 	}
 
-	@Test  // SPR-11649
+	@Test
+		// SPR-11649
 	void multipleAnnotationsWithIdenticalAttributeNamesUsingAnnotationMetadataReadingVisitor() throws Exception {
 		MetadataReaderFactory metadataReaderFactory = new SimpleMetadataReaderFactory();
 		MetadataReader metadataReader = metadataReaderFactory.getMetadataReader(NamedAnnotationsClass.class.getName());
@@ -233,13 +234,15 @@ class AnnotationMetadataTests {
 		assertMultipleAnnotationsWithIdenticalAttributeNames(metadata);
 	}
 
-	@Test  // SPR-11649
+	@Test
+		// SPR-11649
 	void composedAnnotationWithMetaAnnotationsWithIdenticalAttributeNamesUsingStandardAnnotationMetadata() {
 		AnnotationMetadata metadata = AnnotationMetadata.introspect(NamedComposedAnnotationClass.class);
 		assertMultipleAnnotationsWithIdenticalAttributeNames(metadata);
 	}
 
-	@Test  // SPR-11649
+	@Test
+		// SPR-11649
 	void composedAnnotationWithMetaAnnotationsWithIdenticalAttributeNamesUsingAnnotationMetadataReadingVisitor() throws Exception {
 		MetadataReaderFactory metadataReaderFactory = new SimpleMetadataReaderFactory();
 		MetadataReader metadataReader = metadataReaderFactory.getMetadataReader(NamedComposedAnnotationClass.class.getName());
@@ -332,30 +335,30 @@ class AnnotationMetadataTests {
 			AnnotationAttributes nestedAnno = specialAttrs.getAnnotation("nestedAnno");
 			assertThat("na").isEqualTo(nestedAnno.getString("value"));
 			assertThat(nestedAnno.getEnum("anEnum").equals(SomeEnum.LABEL1)).isTrue();
-			assertThat((Class<?>[]) nestedAnno.get("classArray")).isEqualTo(new Class<?>[] {String.class});
+			assertThat((Class<?>[]) nestedAnno.get("classArray")).isEqualTo(new Class<?>[]{String.class});
 
 			AnnotationAttributes[] nestedAnnoArray = specialAttrs.getAnnotationArray("nestedAnnoArray");
 			assertThat(nestedAnnoArray.length).isEqualTo(2);
 			assertThat(nestedAnnoArray[0].getString("value")).isEqualTo("default");
 			assertThat(nestedAnnoArray[0].getEnum("anEnum").equals(SomeEnum.DEFAULT)).isTrue();
-			assertThat((Class<?>[]) nestedAnnoArray[0].get("classArray")).isEqualTo(new Class<?>[] {Void.class});
+			assertThat((Class<?>[]) nestedAnnoArray[0].get("classArray")).isEqualTo(new Class<?>[]{Void.class});
 			assertThat(nestedAnnoArray[1].getString("value")).isEqualTo("na1");
 			assertThat(nestedAnnoArray[1].getEnum("anEnum").equals(SomeEnum.LABEL2)).isTrue();
-			assertThat((Class<?>[]) nestedAnnoArray[1].get("classArray")).isEqualTo(new Class<?>[] {Number.class});
-			assertThat(nestedAnnoArray[1].getClassArray("classArray")).isEqualTo(new Class<?>[] {Number.class});
+			assertThat((Class<?>[]) nestedAnnoArray[1].get("classArray")).isEqualTo(new Class<?>[]{Number.class});
+			assertThat(nestedAnnoArray[1].getClassArray("classArray")).isEqualTo(new Class<?>[]{Number.class});
 
 			AnnotationAttributes optional = specialAttrs.getAnnotation("optional");
 			assertThat(optional.getString("value")).isEqualTo("optional");
 			assertThat(optional.getEnum("anEnum").equals(SomeEnum.DEFAULT)).isTrue();
-			assertThat((Class<?>[]) optional.get("classArray")).isEqualTo(new Class<?>[] {Void.class});
-			assertThat(optional.getClassArray("classArray")).isEqualTo(new Class<?>[] {Void.class});
+			assertThat((Class<?>[]) optional.get("classArray")).isEqualTo(new Class<?>[]{Void.class});
+			assertThat(optional.getClassArray("classArray")).isEqualTo(new Class<?>[]{Void.class});
 
 			AnnotationAttributes[] optionalArray = specialAttrs.getAnnotationArray("optionalArray");
 			assertThat(optionalArray.length).isEqualTo(1);
 			assertThat(optionalArray[0].getString("value")).isEqualTo("optional");
 			assertThat(optionalArray[0].getEnum("anEnum").equals(SomeEnum.DEFAULT)).isTrue();
-			assertThat((Class<?>[]) optionalArray[0].get("classArray")).isEqualTo(new Class<?>[] {Void.class});
-			assertThat(optionalArray[0].getClassArray("classArray")).isEqualTo(new Class<?>[] {Void.class});
+			assertThat((Class<?>[]) optionalArray[0].get("classArray")).isEqualTo(new Class<?>[]{Void.class});
+			assertThat(optionalArray[0].getClassArray("classArray")).isEqualTo(new Class<?>[]{Void.class});
 
 			assertThat(metadata.getAnnotationAttributes(DirectAnnotation.class.getName()).get("value")).isEqualTo("direct");
 			allMeta = metadata.getAllAnnotationAttributes(DirectAnnotation.class.getName()).get("value");
@@ -367,28 +370,28 @@ class AnnotationMetadataTests {
 		}
 		{ // perform tests with classValuesAsString = true
 			AnnotationAttributes specialAttrs = (AnnotationAttributes) metadata.getAnnotationAttributes(
-				SpecialAttr.class.getName(), true);
+					SpecialAttr.class.getName(), true);
 			assertThat(specialAttrs).hasSize(6);
 			assertThat(specialAttrs.get("clazz")).isEqualTo(String.class.getName());
 			assertThat(specialAttrs.getString("clazz")).isEqualTo(String.class.getName());
 
 			AnnotationAttributes nestedAnno = specialAttrs.getAnnotation("nestedAnno");
-			assertThat(nestedAnno.getStringArray("classArray")).isEqualTo(new String[] { String.class.getName() });
-			assertThat(nestedAnno.getStringArray("classArray")).isEqualTo(new String[] { String.class.getName() });
+			assertThat(nestedAnno.getStringArray("classArray")).isEqualTo(new String[]{String.class.getName()});
+			assertThat(nestedAnno.getStringArray("classArray")).isEqualTo(new String[]{String.class.getName()});
 
 			AnnotationAttributes[] nestedAnnoArray = specialAttrs.getAnnotationArray("nestedAnnoArray");
-			assertThat((String[]) nestedAnnoArray[0].get("classArray")).isEqualTo(new String[] { Void.class.getName() });
-			assertThat(nestedAnnoArray[0].getStringArray("classArray")).isEqualTo(new String[] { Void.class.getName() });
-			assertThat((String[]) nestedAnnoArray[1].get("classArray")).isEqualTo(new String[] { Number.class.getName() });
-			assertThat(nestedAnnoArray[1].getStringArray("classArray")).isEqualTo(new String[] { Number.class.getName() });
+			assertThat((String[]) nestedAnnoArray[0].get("classArray")).isEqualTo(new String[]{Void.class.getName()});
+			assertThat(nestedAnnoArray[0].getStringArray("classArray")).isEqualTo(new String[]{Void.class.getName()});
+			assertThat((String[]) nestedAnnoArray[1].get("classArray")).isEqualTo(new String[]{Number.class.getName()});
+			assertThat(nestedAnnoArray[1].getStringArray("classArray")).isEqualTo(new String[]{Number.class.getName()});
 
 			AnnotationAttributes optional = specialAttrs.getAnnotation("optional");
-			assertThat((String[]) optional.get("classArray")).isEqualTo(new String[] { Void.class.getName() });
-			assertThat(optional.getStringArray("classArray")).isEqualTo(new String[] { Void.class.getName() });
+			assertThat((String[]) optional.get("classArray")).isEqualTo(new String[]{Void.class.getName()});
+			assertThat(optional.getStringArray("classArray")).isEqualTo(new String[]{Void.class.getName()});
 
 			AnnotationAttributes[] optionalArray = specialAttrs.getAnnotationArray("optionalArray");
-			assertThat((String[]) optionalArray[0].get("classArray")).isEqualTo(new String[] { Void.class.getName() });
-			assertThat(optionalArray[0].getStringArray("classArray")).isEqualTo(new String[] { Void.class.getName() });
+			assertThat((String[]) optionalArray[0].get("classArray")).isEqualTo(new String[]{Void.class.getName()});
+			assertThat(optionalArray[0].getStringArray("classArray")).isEqualTo(new String[]{Void.class.getName()});
 
 			assertThat(metadata.getAnnotationAttributes(DirectAnnotation.class.getName()).get("value")).isEqualTo("direct");
 			allMeta = metadata.getAllAnnotationAttributes(DirectAnnotation.class.getName()).get("value");
@@ -436,7 +439,7 @@ class AnnotationMetadataTests {
 
 		NestedAnno optional() default @NestedAnno(value = "optional", anEnum = SomeEnum.DEFAULT, classArray = Void.class);
 
-		NestedAnno[] optionalArray() default { @NestedAnno(value = "optional", anEnum = SomeEnum.DEFAULT, classArray = Void.class) };
+		NestedAnno[] optionalArray() default {@NestedAnno(value = "optional", anEnum = SomeEnum.DEFAULT, classArray = Void.class)};
 	}
 
 	@Target({ElementType.TYPE, ElementType.METHOD})
@@ -484,10 +487,10 @@ class AnnotationMetadataTests {
 	// SPR-10914
 	public enum SubclassEnum {
 		FOO {
-		/* Do not delete! This subclassing is intentional. */
+			/* Do not delete! This subclassing is intentional. */
 		},
 		BAR {
-		/* Do not delete! This subclassing is intentional. */
+			/* Do not delete! This subclassing is intentional. */
 		}
 	}
 

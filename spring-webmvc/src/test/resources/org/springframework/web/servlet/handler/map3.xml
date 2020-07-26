@@ -4,7 +4,9 @@
 <beans>
 
 	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="urlDecode"><value>true</value></property>
+		<property name="urlDecode">
+			<value>true</value>
+		</property>
 		<property name="mappings">
 			<value>
 				welcome.html=mainController

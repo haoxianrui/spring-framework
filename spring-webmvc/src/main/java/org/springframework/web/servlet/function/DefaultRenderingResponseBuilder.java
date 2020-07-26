@@ -158,7 +158,7 @@ final class DefaultRenderingResponseBuilder implements RenderingResponse.Builder
 		private final Map<String, Object> model;
 
 		public DefaultRenderingResponse(int statusCode, HttpHeaders headers,
-				MultiValueMap<String, Cookie> cookies, String name, Map<String, Object> model) {
+										MultiValueMap<String, Cookie> cookies, String name, Map<String, Object> model) {
 
 			super(statusCode, headers, cookies);
 			this.name = name;
@@ -177,14 +177,13 @@ final class DefaultRenderingResponseBuilder implements RenderingResponse.Builder
 
 		@Override
 		protected ModelAndView writeToInternal(HttpServletRequest request,
-				HttpServletResponse response, Context context) {
+											   HttpServletResponse response, Context context) {
 
 			HttpStatus status = HttpStatus.resolve(this.statusCode);
 			ModelAndView mav;
 			if (status != null) {
 				mav = new ModelAndView(this.name, status);
-			}
-			else {
+			} else {
 				mav = new ModelAndView(this.name);
 			}
 			mav.addAllObjects(this.model);

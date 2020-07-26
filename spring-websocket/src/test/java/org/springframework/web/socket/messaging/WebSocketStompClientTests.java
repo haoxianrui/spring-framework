@@ -229,26 +229,26 @@ public class WebSocketStompClientTests {
 	@Test
 	public void heartbeatDefaultValue() throws Exception {
 		WebSocketStompClient stompClient = new WebSocketStompClient(mock(WebSocketClient.class));
-		assertThat(stompClient.getDefaultHeartbeat()).isEqualTo(new long[] {0, 0});
+		assertThat(stompClient.getDefaultHeartbeat()).isEqualTo(new long[]{0, 0});
 
 		StompHeaders connectHeaders = stompClient.processConnectHeaders(null);
-		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[] {0, 0});
+		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[]{0, 0});
 	}
 
 	@Test
 	public void heartbeatDefaultValueWithScheduler() throws Exception {
 		WebSocketStompClient stompClient = new WebSocketStompClient(mock(WebSocketClient.class));
 		stompClient.setTaskScheduler(mock(TaskScheduler.class));
-		assertThat(stompClient.getDefaultHeartbeat()).isEqualTo(new long[] {10000, 10000});
+		assertThat(stompClient.getDefaultHeartbeat()).isEqualTo(new long[]{10000, 10000});
 
 		StompHeaders connectHeaders = stompClient.processConnectHeaders(null);
-		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[] {10000, 10000});
+		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[]{10000, 10000});
 	}
 
 	@Test
 	public void heartbeatDefaultValueSetWithoutScheduler() throws Exception {
 		WebSocketStompClient stompClient = new WebSocketStompClient(mock(WebSocketClient.class));
-		stompClient.setDefaultHeartbeat(new long[] {5, 5});
+		stompClient.setDefaultHeartbeat(new long[]{5, 5});
 		assertThatIllegalStateException().isThrownBy(() ->
 				stompClient.processConnectHeaders(null));
 	}
@@ -332,7 +332,7 @@ public class WebSocketStompClientTests {
 			throws InterruptedException {
 
 		ArgumentCaptor<Runnable> inactivityTaskCaptor = ArgumentCaptor.forClass(Runnable.class);
-		verify(this.taskScheduler).scheduleWithFixedDelay(inactivityTaskCaptor.capture(), eq(delay/2));
+		verify(this.taskScheduler).scheduleWithFixedDelay(inactivityTaskCaptor.capture(), eq(delay / 2));
 		verifyNoMoreInteractions(this.taskScheduler);
 
 		if (sleepTime > 0) {
@@ -345,8 +345,7 @@ public class WebSocketStompClientTests {
 
 		if (sleepTime > 0) {
 			verify(runnable).run();
-		}
-		else {
+		} else {
 			verifyNoMoreInteractions(runnable);
 		}
 	}

@@ -88,11 +88,10 @@ public class RouterFunctionBuilderTests {
 	}
 
 	private static ServerResponse handle(HandlerFunction<ServerResponse> handlerFunction,
-			ServerRequest request) {
+										 ServerRequest request) {
 		try {
 			return handlerFunction.handle(request);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new AssertionError(ex.getMessage(), ex);
 		}
 	}

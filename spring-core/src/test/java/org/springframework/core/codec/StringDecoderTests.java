@@ -146,7 +146,8 @@ class StringDecoderTests extends AbstractDecoderTests<StringDecoder> {
 				step.expectNext("abc", "defg").verifyError(DataBufferLimitException.class));
 	}
 
-	@Test // gh-24312
+	@Test
+		// gh-24312
 	void maxInMemoryLimitReleaseUnprocessedLinesFromCurrentBuffer() {
 		Flux<DataBuffer> input = Flux.just(
 				stringBuffer("TOO MUCH DATA\nanother line\n\nand another\n"));
@@ -155,7 +156,8 @@ class StringDecoderTests extends AbstractDecoderTests<StringDecoder> {
 		testDecode(input, String.class, step -> step.verifyError(DataBufferLimitException.class));
 	}
 
-	@Test // gh-24339
+	@Test
+		// gh-24339
 	void maxInMemoryLimitReleaseUnprocessedLinesWhenUnlimited() {
 		Flux<DataBuffer> input = Flux.just(stringBuffer("Line 1\nLine 2\nLine 3\n"));
 

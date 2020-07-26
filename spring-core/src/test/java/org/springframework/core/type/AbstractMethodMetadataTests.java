@@ -101,9 +101,9 @@ public abstract class AbstractMethodMetadataTests {
 		MethodMetadata metadata = getTagged(WithDirectAnnotation.class);
 		assertThat(metadata.getAnnotations().stream().filter(
 				MergedAnnotation::isDirectlyPresent).map(
-						a -> a.getType().getName())).containsExactlyInAnyOrder(
-								Tag.class.getName(),
-								DirectAnnotation.class.getName());
+				a -> a.getType().getName())).containsExactlyInAnyOrder(
+				Tag.class.getName(),
+				DirectAnnotation.class.getName());
 	}
 
 	@Test
@@ -128,14 +128,14 @@ public abstract class AbstractMethodMetadataTests {
 	public void getAnnotationAttributesReturnsAttributes() {
 		assertThat(getTagged(WithAnnotationAttributes.class).getAnnotationAttributes(
 				AnnotationAttributes.class.getName())).containsOnly(entry("name", "test"),
-						entry("size", 1));
+				entry("size", 1));
 	}
 
 	@Test
 	public void getAllAnnotationAttributesReturnsAllAttributes() {
 		MultiValueMap<String, Object> attributes = getTagged(
 				WithMetaAnnotationAttributes.class).getAllAnnotationAttributes(
-						AnnotationAttributes.class.getName());
+				AnnotationAttributes.class.getName());
 		assertThat(attributes).containsOnlyKeys("name", "size");
 		assertThat(attributes.get("name")).containsExactlyInAnyOrder("m1", "m2");
 		assertThat(attributes.get("size")).containsExactlyInAnyOrder(1, 2);

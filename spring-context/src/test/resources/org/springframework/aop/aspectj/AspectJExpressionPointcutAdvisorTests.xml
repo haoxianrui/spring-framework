@@ -9,7 +9,7 @@
 
 	<bean id="advisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
 		<property name="expression"
-				value="execution(org.springframework.beans.testfixture.beans.ITestBean[] org.springframework.beans.testfixture.beans.ITestBean.*(..))"/>
+				  value="execution(org.springframework.beans.testfixture.beans.ITestBean[] org.springframework.beans.testfixture.beans.ITestBean.*(..))"/>
 		<property name="advice" ref="interceptor"/>
 	</bean>
 

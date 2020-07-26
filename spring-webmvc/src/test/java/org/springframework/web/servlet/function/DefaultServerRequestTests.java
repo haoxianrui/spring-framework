@@ -285,7 +285,8 @@ public class DefaultServerRequestTests {
 		DefaultServerRequest request = new DefaultServerRequest(servletRequest,
 				Collections.singletonList(new MappingJackson2HttpMessageConverter()));
 
-		List<String> result = request.body(new ParameterizedTypeReference<List<String>>() {});
+		List<String> result = request.body(new ParameterizedTypeReference<List<String>>() {
+		});
 		assertThat(result.size()).isEqualTo(2);
 		assertThat(result.get(0)).isEqualTo("foo");
 		assertThat(result.get(1)).isEqualTo("bar");
@@ -484,7 +485,7 @@ public class DefaultServerRequestTests {
 		MockServerWebExchange exchange = MockServerWebExchange.from(get("/")
 				.ifNoneMatch(eTag)
 				.ifModifiedSince(oneMinuteAgo.toEpochMilli())
-				);
+		);
 
 		DefaultServerRequest request = new DefaultServerRequest(servletRequest, this.messageConverters);
 
@@ -517,7 +518,7 @@ public class DefaultServerRequestTests {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.METHOD)
 	@ParameterizedTest(name = "[{index}] {0}")
-	@ValueSource(strings = { "GET", "HEAD" })
+	@ValueSource(strings = {"GET", "HEAD"})
 	@interface ParameterizedHttpMethodTest {
 	}
 

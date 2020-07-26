@@ -69,7 +69,8 @@ public class DefaultEntityResponseBuilderTests {
 	public void fromObjectTypeReference() {
 		String body = "foo";
 		EntityResponse<String> response = EntityResponse.fromObject(body,
-				new ParameterizedTypeReference<String>() {})
+				new ParameterizedTypeReference<String>() {
+				})
 				.build();
 
 		assertThat(response.entity()).isSameAs(body);

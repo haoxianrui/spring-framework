@@ -168,7 +168,7 @@ public class RequestMappingInfoHandlerMappingTests {
 
 		assertError(mono, UnsupportedMediaTypeStatusException.class,
 				ex -> assertThat(ex.getMessage()).isEqualTo(("415 UNSUPPORTED_MEDIA_TYPE " +
-										"\"Invalid mime type \"bogus\": does not contain '/'\"")));
+						"\"Invalid mime type \"bogus\": does not contain '/'\"")));
 	}
 
 	@Test  // SPR-8462
@@ -430,7 +430,8 @@ public class RequestMappingInfoHandlerMappingTests {
 			return headers;
 		}
 
-		public void dummy() { }
+		public void dummy() {
+		}
 	}
 
 
@@ -469,8 +470,7 @@ public class RequestMappingInfoHandlerMappingTests {
 						.params(annot.params()).headers(annot.headers())
 						.consumes(annot.consumes()).produces(annot.produces())
 						.options(options).build();
-			}
-			else {
+			} else {
 				return null;
 			}
 		}

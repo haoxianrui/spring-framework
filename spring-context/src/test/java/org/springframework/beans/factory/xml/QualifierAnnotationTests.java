@@ -48,7 +48,7 @@ public class QualifierAnnotationTests {
 
 	private static final String CLASSNAME = QualifierAnnotationTests.class.getName();
 	private static final String CONFIG_LOCATION =
-		format("classpath:%s-context.xml", convertClassNameToResourcePath(CLASSNAME));
+			format("classpath:%s-context.xml", convertClassNameToResourcePath(CLASSNAME));
 
 
 	@Test
@@ -59,7 +59,7 @@ public class QualifierAnnotationTests {
 		context.registerSingleton("testBean", NonQualifiedTestBean.class);
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				context::refresh)
-			.withMessageContaining("found 6");
+				.withMessageContaining("found 6");
 	}
 
 	@Test
@@ -192,7 +192,7 @@ public class QualifierAnnotationTests {
 		context.registerSingleton("testBean", QualifiedByAttributesTestBean.class);
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				context::refresh)
-			.withMessageContaining("found 6");
+				.withMessageContaining("found 6");
 	}
 
 	@Test
@@ -234,7 +234,8 @@ public class QualifierAnnotationTests {
 
 	private static class QualifiedByValueTestBean {
 
-		@Autowired @Qualifier("larry")
+		@Autowired
+		@Qualifier("larry")
 		private Person larry;
 
 		public Person getLarry() {
@@ -245,7 +246,8 @@ public class QualifierAnnotationTests {
 
 	private static class QualifiedByParentValueTestBean {
 
-		@Autowired @Qualifier("parentLarry")
+		@Autowired
+		@Qualifier("parentLarry")
 		private Person larry;
 
 		public Person getLarry() {
@@ -256,10 +258,12 @@ public class QualifierAnnotationTests {
 
 	private static class QualifiedByBeanNameTestBean {
 
-		@Autowired @Qualifier("larryBean")
+		@Autowired
+		@Qualifier("larryBean")
 		private Person larry;
 
-		@Autowired @Qualifier("testProperties")
+		@Autowired
+		@Qualifier("testProperties")
 		public Properties myProps;
 
 		public Person getLarry() {
@@ -296,7 +300,8 @@ public class QualifierAnnotationTests {
 
 	private static class QualifiedByAliasTestBean {
 
-		@Autowired @Qualifier("stooge")
+		@Autowired
+		@Qualifier("stooge")
 		private Person stooge;
 
 		public Person getStooge() {
@@ -307,7 +312,8 @@ public class QualifierAnnotationTests {
 
 	private static class QualifiedByAnnotationTestBean {
 
-		@Autowired @Qualifier("special")
+		@Autowired
+		@Qualifier("special")
 		private Person larry;
 
 		public Person getLarry() {
@@ -318,7 +324,8 @@ public class QualifierAnnotationTests {
 
 	private static class QualifiedByCustomValueTestBean {
 
-		@Autowired @SimpleValueQualifier("curly")
+		@Autowired
+		@SimpleValueQualifier("curly")
 		private Person curly;
 
 		public Person getCurly() {
@@ -329,7 +336,8 @@ public class QualifierAnnotationTests {
 
 	private static class QualifiedByAnnotationValueTestBean {
 
-		@Autowired @SimpleValueQualifier("special")
+		@Autowired
+		@SimpleValueQualifier("special")
 		private Person larry;
 
 		public Person getLarry() {
@@ -341,10 +349,12 @@ public class QualifierAnnotationTests {
 	@SuppressWarnings("unused")
 	private static class QualifiedByAttributesTestBean {
 
-		@Autowired @MultipleAttributeQualifier(name="moe", age=42)
+		@Autowired
+		@MultipleAttributeQualifier(name = "moe", age = 42)
 		private Person moeSenior;
 
-		@Autowired @MultipleAttributeQualifier(name="moe", age=15)
+		@Autowired
+		@MultipleAttributeQualifier(name = "moe", age = 15)
 		private Person moeJunior;
 
 		public Person getMoeSenior() {
@@ -404,10 +414,12 @@ public class QualifierAnnotationTests {
 
 	public static class MultiQualifierClient {
 
-		@Autowired @Qualifier(FACTORY_QUALIFIER)
+		@Autowired
+		@Qualifier(FACTORY_QUALIFIER)
 		public Theta factoryTheta;
 
-		@Autowired @Qualifier(IMPL_QUALIFIER)
+		@Autowired
+		@Qualifier(IMPL_QUALIFIER)
 		public Theta implTheta;
 	}
 
@@ -426,7 +438,8 @@ public class QualifierAnnotationTests {
 
 		@Override
 		public Theta getObject() {
-			return new Theta() {};
+			return new Theta() {
+			};
 		}
 
 		@Override

@@ -13,14 +13,14 @@
 
 	<bean id="nopInterceptor" class="org.springframework.aop.testfixture.interceptor.NopInterceptor"/>
 
-	<bean id="countingBeforeAdvice" class="org.springframework.aop.testfixture.advice.CountingBeforeAdvice" />
+	<bean id="countingBeforeAdvice" class="org.springframework.aop.testfixture.advice.CountingBeforeAdvice"/>
 
 	<bean id="throwsAdvice" class="org.springframework.aop.testfixture.advice.MyThrowsHandler"/>
 
 	<bean id="throwsAdvised" class="org.springframework.aop.framework.ProxyFactoryBean">
-			<property name="interceptorNames">
-				<value>countingBeforeAdvice,nopInterceptor,throwsAdvice,target</value>
-			</property>
+		<property name="interceptorNames">
+			<value>countingBeforeAdvice,nopInterceptor,throwsAdvice,target</value>
+		</property>
 	</bean>
 
 </beans>

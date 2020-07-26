@@ -44,8 +44,6 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 
-
-
 /**
  * Test for {@link org.springframework.web.socket.adapter.standard.ConvertingEncoderDecoderSupport}.
  *
@@ -91,7 +89,7 @@ public class ConvertingEncoderDecoderSupportTests {
 		setup(NoConvertersConfig.class);
 		assertThatExceptionOfType(EncodeException.class).isThrownBy(() ->
 				new MyTextEncoder().encode(myType))
-			.withCauseInstanceOf(ConverterNotFoundException.class);
+				.withCauseInstanceOf(ConverterNotFoundException.class);
 	}
 
 	@Test
@@ -105,7 +103,7 @@ public class ConvertingEncoderDecoderSupportTests {
 		setup(NoConvertersConfig.class);
 		assertThatExceptionOfType(EncodeException.class).isThrownBy(() ->
 				new MyBinaryEncoder().encode(myType))
-			.withCauseInstanceOf(ConverterNotFoundException.class);
+				.withCauseInstanceOf(ConverterNotFoundException.class);
 	}
 
 	@Test
@@ -122,7 +120,7 @@ public class ConvertingEncoderDecoderSupportTests {
 		assertThat(decoder.willDecode(CONVERTED_TEXT)).isFalse();
 		assertThatExceptionOfType(DecodeException.class).isThrownBy(() ->
 				decoder.decode(CONVERTED_TEXT))
-			.withCauseInstanceOf(ConverterNotFoundException.class);
+				.withCauseInstanceOf(ConverterNotFoundException.class);
 	}
 
 	@Test
@@ -139,7 +137,7 @@ public class ConvertingEncoderDecoderSupportTests {
 		assertThat(decoder.willDecode(CONVERTED_BYTES)).isFalse();
 		assertThatExceptionOfType(DecodeException.class).isThrownBy(() ->
 				decoder.decode(CONVERTED_BYTES))
-			.withCauseInstanceOf(ConverterNotFoundException.class);
+				.withCauseInstanceOf(ConverterNotFoundException.class);
 	}
 
 	@Test
@@ -170,7 +168,7 @@ public class ConvertingEncoderDecoderSupportTests {
 		encoder.init(null);
 		assertThatIllegalStateException().isThrownBy(() ->
 				encoder.encode(myType))
-			.withMessageContaining("Unable to locate the Spring ApplicationContext");
+				.withMessageContaining("Unable to locate the Spring ApplicationContext");
 	}
 
 	@Test
@@ -180,7 +178,7 @@ public class ConvertingEncoderDecoderSupportTests {
 		encoder.init(null);
 		assertThatIllegalStateException().isThrownBy(() ->
 				encoder.encode(myType))
-			.withMessageContaining("Unable to find ConversionService");
+				.withMessageContaining("Unable to find ConversionService");
 	}
 
 	@Configuration
@@ -235,7 +233,7 @@ public class ConvertingEncoderDecoderSupportTests {
 		@Override
 		public boolean equals(Object obj) {
 			if (obj instanceof MyType) {
-				return ((MyType)obj).value.equals(value);
+				return ((MyType) obj).value.equals(value);
 			}
 			return false;
 		}

@@ -32,9 +32,9 @@ import org.springframework.core.type.AnnotationMetadata;
  * {@code proxyTargetClass} attributes set to the correct values.
  *
  * @author Chris Beams
- * @since 3.1
  * @see org.springframework.cache.annotation.EnableCaching
  * @see org.springframework.transaction.annotation.EnableTransactionManagement
+ * @since 3.1
  */
 public class AutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 

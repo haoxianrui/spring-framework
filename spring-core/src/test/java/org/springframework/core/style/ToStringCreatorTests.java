@@ -83,7 +83,7 @@ class ToStringCreatorTests {
 
 	@Test
 	void defaultStyleArray() {
-		SomeObject[] array = new SomeObject[] {s1, s2, s3};
+		SomeObject[] array = new SomeObject[]{s1, s2, s3};
 		String str = new ToStringCreator(array).toString();
 		assertThat(str).isEqualTo(("[@" + ObjectUtils.getIdentityHexString(array) +
 				" array<ToStringCreatorTests.SomeObject>[A, B, C]]"));
@@ -91,7 +91,7 @@ class ToStringCreatorTests {
 
 	@Test
 	void primitiveArrays() {
-		int[] integers = new int[] {0, 1, 2, 3, 4};
+		int[] integers = new int[]{0, 1, 2, 3, 4};
 		String str = new ToStringCreator(integers).toString();
 		assertThat(str).isEqualTo(("[@" + ObjectUtils.getIdentityHexString(integers) + " array<Integer>[0, 1, 2, 3, 4]]"));
 	}

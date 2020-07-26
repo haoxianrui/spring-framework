@@ -247,7 +247,9 @@ public class SpelReproTests extends AbstractExpressionTests {
 		assertThat(name).isEqualTo("abc");
 	}
 
-	/** Should be accessing Goo.getKey because 'bar' field evaluates to "key" */
+	/**
+	 * Should be accessing Goo.getKey because 'bar' field evaluates to "key"
+	 */
 	@Test
 	public void indexingAsAPropertyAccess_SPR6968_1() {
 		StandardEvaluationContext context = new StandardEvaluationContext(new Goo());
@@ -260,7 +262,9 @@ public class SpelReproTests extends AbstractExpressionTests {
 		assertThat(name).isEqualTo("hello");
 	}
 
-	/** Should be accessing Goo.getKey because 'bar' variable evaluates to "key" */
+	/**
+	 * Should be accessing Goo.getKey because 'bar' variable evaluates to "key"
+	 */
 	@Test
 	public void indexingAsAPropertyAccess_SPR6968_2() {
 		StandardEvaluationContext context = new StandardEvaluationContext(new Goo());
@@ -274,7 +278,9 @@ public class SpelReproTests extends AbstractExpressionTests {
 		assertThat(name).isEqualTo("hello");
 	}
 
-	/** $ related identifiers */
+	/**
+	 * $ related identifiers
+	 */
 	@Test
 	public void dollarPrefixedIdentifier_SPR7100() {
 		Holder h = new Holder();
@@ -314,7 +320,9 @@ public class SpelReproTests extends AbstractExpressionTests {
 		assertThat(name).isEqualTo("tribble");
 	}
 
-	/** Should be accessing Goo.wibble field because 'bar' variable evaluates to "wibble" */
+	/**
+	 * Should be accessing Goo.wibble field because 'bar' variable evaluates to "wibble"
+	 */
 	@Test
 	public void indexingAsAPropertyAccess_SPR6968_3() {
 		StandardEvaluationContext context = new StandardEvaluationContext(new Goo());
@@ -347,7 +355,9 @@ public class SpelReproTests extends AbstractExpressionTests {
 		assertThat(g.wibble).isEqualTo("world");
 	}
 
-	/** Should be accessing Goo.setKey field because 'bar' variable evaluates to "key" */
+	/**
+	 * Should be accessing Goo.setKey field because 'bar' variable evaluates to "key"
+	 */
 	@Test
 	public void indexingAsAPropertyAccess_SPR6968_5() {
 		Goo g = Goo.instance;
@@ -396,13 +406,13 @@ public class SpelReproTests extends AbstractExpressionTests {
 		SpelExpressionParser parser = new SpelExpressionParser();
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				parser.parseExpression(expression, context))
-			.satisfies(ex -> {
-			String message = ex.getMessage();
-			if (ex instanceof ExpressionException) {
-				message = ((ExpressionException) ex).getSimpleMessage();
-			}
-			assertThat(message).isEqualTo(expectedMessage);
-		});
+				.satisfies(ex -> {
+					String message = ex.getMessage();
+					if (ex instanceof ExpressionException) {
+						message = ((ExpressionException) ex).getSimpleMessage();
+					}
+					assertThat(message).isEqualTo(expectedMessage);
+				});
 	}
 
 
@@ -411,10 +421,12 @@ public class SpelReproTests extends AbstractExpressionTests {
 		public String getExpressionPrefix() {
 			return "$[";
 		}
+
 		@Override
 		public String getExpressionSuffix() {
 			return "]";
 		}
+
 		@Override
 		public boolean isTemplate() {
 			return true;
@@ -430,8 +442,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 		try {
 			expr = new SpelExpressionParser().parseRaw("@foo");
 			assertThat(expr.getValue(context, String.class)).isEqualTo("custard");
-		}
-		catch (SpelEvaluationException see) {
+		} catch (SpelEvaluationException see) {
 			assertThat(see.getMessageCode()).isEqualTo(SpelMessage.NO_BEAN_RESOLVER_REGISTERED);
 			assertThat(see.getInserts()[0]).isEqualTo("foo");
 		}
@@ -450,8 +461,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 		expr = new SpelExpressionParser().parseRaw("@goo");
 		try {
 			assertThat(expr.getValue(context, String.class)).isEqualTo(null);
-		}
-		catch (SpelEvaluationException see) {
+		} catch (SpelEvaluationException see) {
 			assertThat(see.getMessageCode()).isEqualTo(SpelMessage.EXCEPTION_DURING_BEAN_RESOLUTION);
 			assertThat(see.getInserts()[0]).isEqualTo("goo");
 			assertThat(see.getCause() instanceof AccessException).isTrue();
@@ -466,8 +476,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 		try {
 			expr = new SpelExpressionParser().parseRaw("@378");
 			assertThat(expr.getValue(context, String.class)).isEqualTo("trouble");
-		}
-		catch (SpelParseException spe) {
+		} catch (SpelParseException spe) {
 			assertThat(spe.getMessageCode()).isEqualTo(SpelMessage.INVALID_BEAN_REFERENCE);
 		}
 	}
@@ -488,14 +497,14 @@ public class SpelReproTests extends AbstractExpressionTests {
 		// Different parts of ternary expression are null
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				new SpelExpressionParser().parseRaw("(?'abc':'default')").getValue(context))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.TYPE_CONVERSION_ERROR));
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.TYPE_CONVERSION_ERROR));
 		expr = new SpelExpressionParser().parseRaw("(false?'abc':null)");
 		assertThat(expr.getValue()).isEqualTo(null);
 
 		// Assignment
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				new SpelExpressionParser().parseRaw("(='default')").getValue(context))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.SETVALUE_NOT_SUPPORTED));
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.SETVALUE_NOT_SUPPORTED));
 	}
 
 	@Test
@@ -613,6 +622,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 			public int getX(Number i) {
 				return 20;
 			}
+
 			public int getX(int i) {
 				return 10;
 			}
@@ -623,6 +633,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 			public int getX(int i) {
 				return 10;
 			}
+
 			public int getX(Number i) {
 				return 20;
 			}
@@ -689,7 +700,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 
 		VarargsReceiver receiver = new VarargsReceiver();
 		VarargsInterface proxy = (VarargsInterface) Proxy.newProxyInstance(
-				getClass().getClassLoader(), new Class<?>[] {VarargsInterface.class},
+				getClass().getClassLoader(), new Class<?>[]{VarargsInterface.class},
 				(proxy1, method, args) -> method.invoke(receiver, args));
 
 		assertThat(expr.getValue(new StandardEvaluationContext(receiver))).isEqualTo("OK");
@@ -704,7 +715,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 
 		VarargsReceiver receiver = new VarargsReceiver();
 		VarargsInterface proxy = (VarargsInterface) Proxy.newProxyInstance(
-				getClass().getClassLoader(), new Class<?>[] {VarargsInterface.class},
+				getClass().getClassLoader(), new Class<?>[]{VarargsInterface.class},
 				(proxy1, method, args) -> method.invoke(receiver, args));
 
 		StandardEvaluationContext evaluationContext = new StandardEvaluationContext();
@@ -772,6 +783,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 			public Reserver getReserver() {
 				return this;
 			}
+
 			public String NE = "abc";
 			public String ne = "def";
 
@@ -858,9 +870,8 @@ public class SpelReproTests extends AbstractExpressionTests {
 			@Override
 			protected Method[] getMethods(Class<?> type) {
 				try {
-					return new Method[] {Integer.class.getDeclaredMethod("parseInt", String.class, Integer.TYPE)};
-				}
-				catch (NoSuchMethodException ex) {
+					return new Method[]{Integer.class.getDeclaredMethod("parseInt", String.class, Integer.TYPE)};
+				} catch (NoSuchMethodException ex) {
 					return new Method[0];
 				}
 			}
@@ -1252,7 +1263,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 	private void doTestSpr10146(String expression, String expectedMessage) {
 		assertThatExceptionOfType(SpelParseException.class).isThrownBy(() ->
 				new SpelExpressionParser().parseExpression(expression))
-			.withMessageContaining(expectedMessage);
+				.withMessageContaining(expectedMessage);
 	}
 
 	@Test
@@ -1278,7 +1289,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 	public void SPR10328() {
 		assertThatExceptionOfType(SpelParseException.class).isThrownBy(() ->
 				parser.parseExpression("$[]"))
-			.withMessageContaining("EL1071E: A required selection expression has not been specified");
+				.withMessageContaining("EL1071E: A required selection expression has not been specified");
 	}
 
 	@Test
@@ -1325,14 +1336,13 @@ public class SpelReproTests extends AbstractExpressionTests {
 		context.addMethodResolver(new MethodResolver() {
 			@Override
 			public MethodExecutor resolve(EvaluationContext context, Object targetObject, String name,
-					List<TypeDescriptor> argumentTypes) throws AccessException {
+										  List<TypeDescriptor> argumentTypes) throws AccessException {
 				return (context1, target, arguments) -> {
 					try {
 						Method method = XYZ.class.getMethod("values");
 						Object value = method.invoke(target, arguments);
 						return new TypedValue(value, new TypeDescriptor(new MethodParameter(method, -1)).narrow(value));
-					}
-					catch (Exception ex) {
+					} catch (Exception ex) {
 						throw new AccessException(ex.getMessage(), ex);
 					}
 				};
@@ -1366,7 +1376,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 		Expression expression = parser.parseExpression("something");
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expression.getValue(context, rootObject))
-			.withMessageContaining("'something' cannot be found");
+				.withMessageContaining("'something' cannot be found");
 	}
 
 	@Test
@@ -1538,17 +1548,17 @@ public class SpelReproTests extends AbstractExpressionTests {
 
 		assertThatExceptionOfType(SpelParseException.class).isThrownBy(() ->
 				new SpelExpressionParser().parseRaw("&@foo"))
-			.satisfies(ex -> {
-				assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.INVALID_BEAN_REFERENCE);
-				assertThat(ex.getPosition()).isEqualTo(0);
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.INVALID_BEAN_REFERENCE);
+					assertThat(ex.getPosition()).isEqualTo(0);
+				});
 
 		assertThatExceptionOfType(SpelParseException.class).isThrownBy(() ->
 				new SpelExpressionParser().parseRaw("@&foo"))
-		.satisfies(ex -> {
-			assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.INVALID_BEAN_REFERENCE);
-			assertThat(ex.getPosition()).isEqualTo(0);
-		});
+				.satisfies(ex -> {
+					assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.INVALID_BEAN_REFERENCE);
+					assertThat(ex.getPosition()).isEqualTo(0);
+				});
 	}
 
 	@Test
@@ -1578,7 +1588,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void SPR10417() {
 		List list1 = new ArrayList();
 		list1.add("a");
@@ -1619,7 +1629,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void SPR10417_maps() {
 		Map map1 = new HashMap();
 		map1.put("A", 65);
@@ -1659,7 +1669,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 
 		Expression ex = parser.parseExpression("#str?.split('\0')");
 		Object result = ex.getValue(context);
-		assertThat(ObjectUtils.nullSafeEquals(result, new String[] {"a", "b"})).isTrue();
+		assertThat(ObjectUtils.nullSafeEquals(result, new String[]{"a", "b"})).isTrue();
 	}
 
 
@@ -1702,8 +1712,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 			for (String string : strings) {
 				if (string == null) {
 					sb.append("null");
-				}
-				else {
+				} else {
 					sb.append(string);
 				}
 			}
@@ -1736,7 +1745,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 
 		@Override
 		public Class<?>[] getSpecificTargetClasses() {
-			return new Class<?>[] {Map.class};
+			return new Class<?>[]{Map.class};
 		}
 
 		@Override
@@ -1800,14 +1809,11 @@ public class SpelReproTests extends AbstractExpressionTests {
 		public Object resolve(EvaluationContext context, String beanName) throws AccessException {
 			if (beanName.equals("foo")) {
 				return "custard";
-			}
-			else if (beanName.equals("foo.bar")) {
+			} else if (beanName.equals("foo.bar")) {
 				return "trouble";
-			}
-			else if (beanName.equals("&foo")) {
+			} else if (beanName.equals("&foo")) {
 				return "foo factory";
-			}
-			else if (beanName.equals("goo")) {
+			} else if (beanName.equals("goo")) {
 				throw new AccessException("DONT ASK ME ABOUT GOO");
 			}
 			return null;
@@ -1836,7 +1842,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 			ls = new ArrayList<>();
 			ls.add("abc");
 			ls.add("def");
-			as = new String[] { "abc", "def" };
+			as = new String[]{"abc", "def"};
 			ms = new HashMap<>();
 			ms.put("abc", "xyz");
 			ms.put("def", "pqr");
@@ -2038,8 +2044,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 			try {
 				Field f = target.getClass().getDeclaredField(mapName);
 				return (Map<String, String>) f.get(target);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 			}
 			return null;
 		}
@@ -2056,7 +2061,7 @@ public class SpelReproTests extends AbstractExpressionTests {
 
 		@Override
 		public Class<?>[] getSpecificTargetClasses() {
-			return new Class<?>[] {ContextObject.class};
+			return new Class<?>[]{ContextObject.class};
 		}
 
 		@Override
@@ -2143,9 +2148,9 @@ public class SpelReproTests extends AbstractExpressionTests {
 	}
 
 
-	private enum ABC { A, B, C }
+	private enum ABC {A, B, C}
 
-	private enum XYZ { X, Y, Z }
+	private enum XYZ {X, Y, Z}
 
 
 	public static class BooleanHolder {

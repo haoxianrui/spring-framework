@@ -41,6 +41,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 /**
  * Unit tests for {@link HttpMessageWriterView}.
+ *
  * @author Rossen Stoyanchev
  */
 public class HttpMessageWriterViewTests {
@@ -105,7 +106,7 @@ public class HttpMessageWriterViewTests {
 
 		assertThatIllegalStateException().isThrownBy(
 				this::doRender)
-			.withMessageContaining("Map rendering is not supported");
+				.withMessageContaining("Map rendering is not supported");
 	}
 
 	@Test
@@ -128,7 +129,6 @@ public class HttpMessageWriterViewTests {
 		this.view.render(this.model, MediaType.APPLICATION_JSON, this.exchange).block(Duration.ZERO);
 		return this.exchange.getResponse().getBodyAsString().block(Duration.ZERO);
 	}
-
 
 
 	@SuppressWarnings("unused")

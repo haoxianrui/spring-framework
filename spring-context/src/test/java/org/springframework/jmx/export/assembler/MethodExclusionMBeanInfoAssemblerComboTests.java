@@ -78,7 +78,7 @@ public class MethodExclusionMBeanInfoAssemblerComboTests extends AbstractJmxAsse
 		Properties props = new Properties();
 		props.setProperty(OBJECT_NAME, "setAge,isSuperman,setSuperman,dontExposeMe");
 		assembler.setIgnoredMethodMappings(props);
-		assembler.setIgnoredMethods(new String[] {"someMethod"});
+		assembler.setIgnoredMethods(new String[]{"someMethod"});
 		return assembler;
 	}
 

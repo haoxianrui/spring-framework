@@ -89,7 +89,7 @@ class DefaultServerRequest implements ServerRequest {
 	}
 
 	static Mono<ServerResponse> checkNotModified(ServerWebExchange exchange, @Nullable Instant lastModified,
-			@Nullable String etag) {
+												 @Nullable String etag) {
 
 		if (lastModified == null) {
 			lastModified = Instant.MIN;
@@ -100,8 +100,7 @@ class DefaultServerRequest implements ServerRequest {
 			return ServerResponse.status(statusCode != null ? statusCode : 200)
 					.headers(headers -> headers.addAll(exchange.getResponse().getHeaders()))
 					.build();
-		}
-		else {
+		} else {
 			return Mono.empty();
 		}
 	}
@@ -169,10 +168,12 @@ class DefaultServerRequest implements ServerRequest {
 					public List<HttpMessageReader<?>> messageReaders() {
 						return messageReaders;
 					}
+
 					@Override
 					public Optional<ServerHttpResponse> serverResponse() {
 						return Optional.of(exchange().getResponse());
 					}
+
 					@Override
 					public Map<String, Object> hints() {
 						return hints;

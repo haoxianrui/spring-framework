@@ -149,9 +149,9 @@ import org.springframework.util.StringUtils;
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
  * @author Sam Brannen
- * @since 3.0
  * @see org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter
  * @see org.springframework.util.MultiValueMap
+ * @since 3.0
  */
 public class FormHttpMessageConverter implements HttpMessageConverter<MultiValueMap<String, ?>> {
 
@@ -189,6 +189,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 	/**
 	 * Set the list of {@link MediaType} objects supported by this converter.
+	 *
 	 * @see #addSupportedMediaTypes(MediaType...)
 	 * @see #getSupportedMediaTypes()
 	 */
@@ -202,9 +203,10 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	 * Add {@link MediaType} objects to be supported by this converter.
 	 * <p>The supplied {@code MediaType} objects will be appended to the list
 	 * of {@linkplain #getSupportedMediaTypes() supported MediaType objects}.
+	 *
 	 * @param supportedMediaTypes a var-args list of {@code MediaType} objects to add
-	 * @since 5.2
 	 * @see #setSupportedMediaTypes(List)
+	 * @since 5.2
 	 */
 	public void addSupportedMediaTypes(MediaType... supportedMediaTypes) {
 		Assert.notNull(supportedMediaTypes, "'supportedMediaTypes' must not be null");
@@ -214,6 +216,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 	/**
 	 * {@inheritDoc}
+	 *
 	 * @see #setSupportedMediaTypes(List)
 	 * @see #addSupportedMediaTypes(MediaType...)
 	 */
@@ -282,8 +285,9 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	 * <p>As of 5.0 by default part headers, including {@code Content-Disposition}
 	 * (and its filename parameter) will be encoded based on the setting of
 	 * {@link #setCharset(Charset)} or {@code UTF-8} by default.
-	 * @since 4.1.1
+	 *
 	 * @see <a href="https://en.wikipedia.org/wiki/MIME#Encoded-Word">Encoded-Word</a>
+	 * @since 4.1.1
 	 */
 	public void setMultipartCharset(Charset charset) {
 		this.multipartCharset = charset;
@@ -328,7 +332,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 	@Override
 	public MultiValueMap<String, String> read(@Nullable Class<? extends MultiValueMap<String, ?>> clazz,
-			HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+											  HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
 
 		MediaType contentType = inputMessage.getHeaders().getContentType();
 		Charset charset = (contentType != null && contentType.getCharset() != null ?
@@ -341,8 +345,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 			int idx = pair.indexOf('=');
 			if (idx == -1) {
 				result.add(URLDecoder.decode(pair, charset.name()), null);
-			}
-			else {
+			} else {
 				String name = URLDecoder.decode(pair.substring(0, idx), charset.name());
 				String value = URLDecoder.decode(pair.substring(idx + 1), charset.name());
 				result.add(name, value);
@@ -358,8 +361,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 		if (isMultipart(map, contentType)) {
 			writeMultipart((MultiValueMap<String, Object>) map, contentType, outputMessage);
-		}
-		else {
+		} else {
 			writeForm((MultiValueMap<String, Object>) map, contentType, outputMessage);
 		}
 	}
@@ -380,7 +382,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	}
 
 	private void writeForm(MultiValueMap<String, Object> formData, @Nullable MediaType contentType,
-			HttpOutputMessage outputMessage) throws IOException {
+						   HttpOutputMessage outputMessage) throws IOException {
 
 		contentType = getFormContentType(contentType);
 		outputMessage.getHeaders().setContentType(contentType);
@@ -394,8 +396,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 		if (outputMessage instanceof StreamingHttpOutputMessage) {
 			StreamingHttpOutputMessage streamingOutputMessage = (StreamingHttpOutputMessage) outputMessage;
 			streamingOutputMessage.setBody(outputStream -> StreamUtils.copy(bytes, outputStream));
-		}
-		else {
+		} else {
 			StreamUtils.copy(bytes, outputMessage.getBody());
 		}
 	}
@@ -407,6 +408,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	 * If {@code contentType} is {@code null},
 	 * {@code application/x-www-form-urlencoded; charset=UTF-8} is returned.
 	 * <p>Subclasses can override this method to change this behavior.
+	 *
 	 * @param contentType the preferred content type (can be {@code null})
 	 * @return the content type to be used
 	 * @since 5.2.2
@@ -414,11 +416,9 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	protected MediaType getFormContentType(@Nullable MediaType contentType) {
 		if (contentType == null) {
 			return DEFAULT_FORM_DATA_MEDIA_TYPE;
-		}
-		else if (contentType.getCharset() == null) {
+		} else if (contentType.getCharset() == null) {
 			return new MediaType(contentType, this.charset);
-		}
-		else {
+		} else {
 			return contentType;
 		}
 	}
@@ -426,25 +426,24 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	protected String serializeForm(MultiValueMap<String, Object> formData, Charset charset) {
 		StringBuilder builder = new StringBuilder();
 		formData.forEach((name, values) -> {
-				if (name == null) {
-					Assert.isTrue(CollectionUtils.isEmpty(values), "Null name in form data: " + formData);
-					return;
+			if (name == null) {
+				Assert.isTrue(CollectionUtils.isEmpty(values), "Null name in form data: " + formData);
+				return;
+			}
+			values.forEach(value -> {
+				try {
+					if (builder.length() != 0) {
+						builder.append('&');
+					}
+					builder.append(URLEncoder.encode(name, charset.name()));
+					if (value != null) {
+						builder.append('=');
+						builder.append(URLEncoder.encode(String.valueOf(value), charset.name()));
+					}
+				} catch (UnsupportedEncodingException ex) {
+					throw new IllegalStateException(ex);
 				}
-				values.forEach(value -> {
-					try {
-						if (builder.length() != 0) {
-							builder.append('&');
-						}
-						builder.append(URLEncoder.encode(name, charset.name()));
-						if (value != null) {
-							builder.append('=');
-							builder.append(URLEncoder.encode(String.valueOf(value), charset.name()));
-						}
-					}
-					catch (UnsupportedEncodingException ex) {
-						throw new IllegalStateException(ex);
-					}
-				});
+			});
 		});
 
 		return builder.toString();
@@ -478,8 +477,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 				writeParts(outputStream, parts, boundary);
 				writeEnd(outputStream, boundary);
 			});
-		}
-		else {
+		} else {
 			writeParts(outputMessage.getBody(), parts, boundary);
 			writeEnd(outputMessage.getBody(), boundary);
 		}
@@ -543,6 +541,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 	/**
 	 * Return an {@link HttpEntity} for the given part Object.
+	 *
 	 * @param part the part to return an {@link HttpEntity} for
 	 * @return the part Object itself it is an {@link HttpEntity},
 	 * or a newly built {@link HttpEntity} wrapper for that part
@@ -556,6 +555,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	 * {@code Content-Disposition} header.
 	 * <p>The default implementation returns {@link Resource#getFilename()} if the part is a
 	 * {@code Resource}, and {@code null} in other cases. Can be overridden in subclasses.
+	 *
 	 * @param part the part to determine the file name for
 	 * @return the filename, or {@code null} if not known
 	 */
@@ -568,8 +568,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 				filename = MimeDelegate.encode(filename, this.multipartCharset.name());
 			}
 			return filename;
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
@@ -659,8 +658,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 		public static String encode(String value, String charset) {
 			try {
 				return MimeUtility.encodeText(value, charset, null);
-			}
-			catch (UnsupportedEncodingException ex) {
+			} catch (UnsupportedEncodingException ex) {
 				throw new IllegalStateException(ex);
 			}
 		}

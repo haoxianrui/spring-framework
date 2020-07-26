@@ -64,7 +64,8 @@ abstract class AbstractStaxXMLReaderTests {
 
 
 	@BeforeEach
-	@SuppressWarnings("deprecation")  // on JDK 9
+	@SuppressWarnings("deprecation")
+		// on JDK 9
 	void setUp() throws Exception {
 		inputFactory = XMLInputFactory.newInstance();
 		standardReader = org.xml.sax.helpers.XMLReaderFactory.createXMLReader();
@@ -217,7 +218,7 @@ abstract class AbstractStaxXMLReaderTests {
 		public Object[] adaptArguments(Object[] arguments) {
 			if (arguments.length == 3 && arguments[0] instanceof char[]
 					&& arguments[1] instanceof Integer && arguments[2] instanceof Integer) {
-				return new Object[] {new String((char[]) arguments[0], (Integer) arguments[1], (Integer) arguments[2])};
+				return new Object[]{new String((char[]) arguments[0], (Integer) arguments[1], (Integer) arguments[2])};
 			}
 			return arguments;
 		}

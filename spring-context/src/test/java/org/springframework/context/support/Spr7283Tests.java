@@ -41,11 +41,13 @@ public class Spr7283Tests {
 
 
 	public static class A {
-		public A() {}
+		public A() {
+		}
 	}
 
 	public static class B {
-		public B() {}
+		public B() {
+		}
 	}
 
 }

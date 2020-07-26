@@ -37,6 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link DefaultControllerSpec}.
+ *
  * @author Rossen Stoyanchev
  */
 public class DefaultControllerSpecTests {

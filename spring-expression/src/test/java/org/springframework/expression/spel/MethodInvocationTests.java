@@ -121,7 +121,7 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 		// Now cause it to throw an exception:
 		eContext.setVariable("bar", 1);
 		assertThatExceptionOfType(Exception.class).isThrownBy(() -> expr.getValue(eContext))
-			.isNotInstanceOf(SpelEvaluationException.class);
+				.isNotInstanceOf(SpelEvaluationException.class);
 
 		// If counter is 4 then the method got called twice!
 		assertThat(parser.parseExpression("counter").getValue(eContext)).isEqualTo(3);
@@ -149,7 +149,7 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 
 		context.setVariable("bar", 2);
 		assertThatExceptionOfType(Exception.class).isThrownBy(() -> expr.getValue(context))
-			.satisfies(ex -> assertThat(ex).isNotInstanceOf(SpelEvaluationException.class));
+				.satisfies(ex -> assertThat(ex).isNotInstanceOf(SpelEvaluationException.class));
 	}
 
 	@Test
@@ -165,8 +165,8 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 
 		context.setVariable("bar", 4);
 		assertThatExceptionOfType(ExpressionInvocationTargetException.class).isThrownBy(() -> expr.getValue(context))
-			.satisfies(ex -> assertThat(ex.getCause().getClass().getName()).isEqualTo(
-					"org.springframework.expression.spel.testresources.Inventor$TestException"));
+				.satisfies(ex -> assertThat(ex.getCause().getClass().getName()).isEqualTo(
+						"org.springframework.expression.spel.testresources.Inventor$TestException"));
 	}
 
 	@Test
@@ -175,7 +175,7 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 		StandardEvaluationContext context = new StandardEvaluationContext();
 		context.setRootObject(new TestObject());
 		LocalFilter filter = new LocalFilter();
-		context.registerMethodFilter(TestObject.class,filter);
+		context.registerMethodFilter(TestObject.class, filter);
 
 		// Filter will be called but not do anything, so first doit() will be invoked
 		SpelExpression expr = (SpelExpression) parser.parseExpression("doit(1)");
@@ -201,7 +201,7 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 
 		// check de-registration works
 		filter.filterCalled = false;
-		context.registerMethodFilter(TestObject.class,null);//clear filter
+		context.registerMethodFilter(TestObject.class, null);//clear filter
 		context.setRootObject(new TestObject());
 		expr = (SpelExpression) parser.parseExpression("doit(1)");
 		result = expr.getValue(context, String.class);
@@ -256,7 +256,7 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 
 	@Test
 	public void testInvocationOnNullContextObject() {
-		evaluateAndCheckError("null.toString()",SpelMessage.METHOD_CALL_ON_NULL_OBJECT_NOT_ALLOWED);
+		evaluateAndCheckError("null.toString()", SpelMessage.METHOD_CALL_ON_NULL_OBJECT_NOT_ALLOWED);
 	}
 
 	@Test
@@ -303,12 +303,12 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 		public List<Method> filter(List<Method> methods) {
 			filterCalled = true;
 			List<Method> forRemoval = new ArrayList<>();
-			for (Method method: methods) {
+			for (Method method : methods) {
 				if (removeIfNotAnnotated && !isAnnotated(method)) {
 					forRemoval.add(method);
 				}
 			}
-			for (Method method: forRemoval) {
+			for (Method method : forRemoval) {
 				methods.remove(method);
 			}
 			return methods;
@@ -329,7 +329,7 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 
 		@Anno
 		public String doit(double d) {
-			return "double "+d;
+			return "double " + d;
 		}
 	}
 
@@ -338,7 +338,7 @@ public class MethodInvocationTests extends AbstractExpressionTests {
 
 		@Override
 		public MethodExecutor resolve(EvaluationContext context, Object targetObject, String name,
-				List<TypeDescriptor> argumentTypes) throws AccessException {
+									  List<TypeDescriptor> argumentTypes) throws AccessException {
 			throw new UnsupportedOperationException();
 		}
 	}

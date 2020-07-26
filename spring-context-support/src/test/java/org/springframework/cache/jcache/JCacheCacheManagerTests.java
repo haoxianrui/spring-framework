@@ -60,8 +60,7 @@ public class JCacheCacheManagerTests extends AbstractTransactionSupportingCacheM
 	protected JCacheCacheManager getCacheManager(boolean transactionAware) {
 		if (transactionAware) {
 			return transactionalCacheManager;
-		}
-		else {
+		} else {
 			return cacheManager;
 		}
 	}
@@ -98,7 +97,7 @@ public class JCacheCacheManagerTests extends AbstractTransactionSupportingCacheM
 			return cacheManager;
 		}
 
-		@SuppressWarnings({ "unchecked", "rawtypes" })
+		@SuppressWarnings({"unchecked", "rawtypes"})
 		public void addCache(String name) {
 			cacheNames.add(name);
 			Cache cache = mock(Cache.class);

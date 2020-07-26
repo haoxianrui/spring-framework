@@ -36,7 +36,7 @@ import java.util.concurrent.CompletableFuture
  */
 class RSocketRequesterExtensionsTests {
 
-	private val stringTypeRefMatcher: (ParameterizedTypeReference<*>) -> Boolean  = { it.type == String::class.java }
+	private val stringTypeRefMatcher: (ParameterizedTypeReference<*>) -> Boolean = { it.type == String::class.java }
 
 	@Test
 	fun connectAndAwait() {

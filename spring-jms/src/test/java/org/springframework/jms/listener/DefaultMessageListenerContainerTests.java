@@ -115,7 +115,8 @@ public class DefaultMessageListenerContainerTests {
 	}
 
 	private DefaultMessageListenerContainer createContainer(ConnectionFactory connectionFactory) {
-		Destination destination = new Destination() {};
+		Destination destination = new Destination() {
+		};
 
 		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
@@ -131,8 +132,7 @@ public class DefaultMessageListenerContainerTests {
 				throw new JMSException("Test exception");
 			});
 			return connectionFactory;
-		}
-		catch (JMSException ex) {
+		} catch (JMSException ex) {
 			throw new IllegalStateException(ex);  // never happen
 		}
 	}
@@ -142,20 +142,19 @@ public class DefaultMessageListenerContainerTests {
 			ConnectionFactory connectionFactory = mock(ConnectionFactory.class);
 			given(connectionFactory.createConnection()).will(new Answer<Object>() {
 				int currentAttempts = 0;
+
 				@Override
 				public Object answer(InvocationOnMock invocation) throws Throwable {
 					currentAttempts++;
 					if (currentAttempts <= failingAttempts) {
 						throw new JMSException("Test exception (attempt " + currentAttempts + ")");
-					}
-					else {
+					} else {
 						return mock(Connection.class);
 					}
 				}
 			});
 			return connectionFactory;
-		}
-		catch (JMSException ex) {
+		} catch (JMSException ex) {
 			throw new IllegalStateException(ex);  // never happen
 		}
 	}
@@ -165,8 +164,7 @@ public class DefaultMessageListenerContainerTests {
 			ConnectionFactory connectionFactory = mock(ConnectionFactory.class);
 			given(connectionFactory.createConnection()).willReturn(mock(Connection.class));
 			return connectionFactory;
-		}
-		catch (JMSException ex) {
+		} catch (JMSException ex) {
 			throw new IllegalStateException(ex);  // never happen
 		}
 	}

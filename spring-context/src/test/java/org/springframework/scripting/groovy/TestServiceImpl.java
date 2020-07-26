@@ -17,7 +17,7 @@
 package org.springframework.scripting.groovy;
 
 @Log
-public class TestServiceImpl implements TestService{
+public class TestServiceImpl implements TestService {
 
 	@Override
 	public String sayHello() {

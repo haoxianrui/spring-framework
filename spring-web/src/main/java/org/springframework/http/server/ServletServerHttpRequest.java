@@ -76,6 +76,7 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 	/**
 	 * Construct a new instance of the ServletServerHttpRequest based on the
 	 * given {@link HttpServletRequest}.
+	 *
 	 * @param servletRequest the servlet request
 	 */
 	public ServletServerHttpRequest(HttpServletRequest servletRequest) {
@@ -116,8 +117,7 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 				}
 				urlString = url.toString();
 				this.uri = new URI(urlString);
-			}
-			catch (URISyntaxException ex) {
+			} catch (URISyntaxException ex) {
 				if (!hasQuery) {
 					throw new IllegalStateException(
 							"Could not resolve HttpServletRequest as URI: " + urlString, ex);
@@ -126,8 +126,7 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 				try {
 					urlString = this.servletRequest.getRequestURL().toString();
 					this.uri = new URI(urlString);
-				}
-				catch (URISyntaxException ex2) {
+				} catch (URISyntaxException ex2) {
 					throw new IllegalStateException(
 							"Could not resolve HttpServletRequest as URI: " + urlString, ex2);
 				}
@@ -141,10 +140,10 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 		if (this.headers == null) {
 			this.headers = new HttpHeaders();
 
-			for (Enumeration<?> names = this.servletRequest.getHeaderNames(); names.hasMoreElements();) {
+			for (Enumeration<?> names = this.servletRequest.getHeaderNames(); names.hasMoreElements(); ) {
 				String headerName = (String) names.nextElement();
 				for (Enumeration<?> headerValues = this.servletRequest.getHeaders(headerName);
-						headerValues.hasMoreElements();) {
+					 headerValues.hasMoreElements(); ) {
 					String headerValue = (String) headerValues.nextElement();
 					this.headers.add(headerName, headerValue);
 				}
@@ -172,8 +171,7 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 						this.headers.setContentType(mediaType);
 					}
 				}
-			}
-			catch (InvalidMediaTypeException ex) {
+			} catch (InvalidMediaTypeException ex) {
 				// Ignore: simply not exposing an invalid content type in HttpHeaders...
 			}
 
@@ -207,8 +205,7 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 	public InputStream getBody() throws IOException {
 		if (isFormPost(this.servletRequest)) {
 			return getBodyFromServletRequestParameters(this.servletRequest);
-		}
-		else {
+		} else {
 			return this.servletRequest.getInputStream();
 		}
 	}
@@ -244,10 +241,10 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 		Writer writer = new OutputStreamWriter(bos, FORM_CHARSET);
 
 		Map<String, String[]> form = request.getParameterMap();
-		for (Iterator<String> nameIterator = form.keySet().iterator(); nameIterator.hasNext();) {
+		for (Iterator<String> nameIterator = form.keySet().iterator(); nameIterator.hasNext(); ) {
 			String name = nameIterator.next();
 			List<String> values = Arrays.asList(form.get(name));
-			for (Iterator<String> valueIterator = values.iterator(); valueIterator.hasNext();) {
+			for (Iterator<String> valueIterator = values.iterator(); valueIterator.hasNext(); ) {
 				String value = valueIterator.next();
 				writer.write(URLEncoder.encode(name, FORM_CHARSET.name()));
 				if (value != null) {

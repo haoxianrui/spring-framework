@@ -154,7 +154,7 @@ public class EvalTagTests extends AbstractTagTests {
 		Map<String, Object> map = new HashMap<>();
 		map.put("key.foo", "value.foo");
 		GenericApplicationContext wac = (GenericApplicationContext)
-		context.getRequest().getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+				context.getRequest().getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 		wac.getEnvironment().getPropertySources().addFirst(new MapPropertySource("mapSource", map));
 		wac.getDefaultListableBeanFactory().registerSingleton("bean2", context.getRequest().getAttribute("bean"));
 		tag.setExpression("@environment['key.foo']");
@@ -176,14 +176,13 @@ public class EvalTagTests extends AbstractTagTests {
 	}
 
 
-
 	public static class Bean {
 
 		public String method() {
 			return "foo";
 		}
 
-		@NumberFormat(style=Style.PERCENT)
+		@NumberFormat(style = Style.PERCENT)
 		public BigDecimal getFormattable() {
 			return new BigDecimal(".25");
 		}

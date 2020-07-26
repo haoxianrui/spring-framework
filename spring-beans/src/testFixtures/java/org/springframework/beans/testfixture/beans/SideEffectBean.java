@@ -19,6 +19,7 @@ package org.springframework.beans.testfixture.beans;
 /**
  * Bean that changes state on a business invocation, so that
  * we can check whether it's been invoked
+ *
  * @author Rod Johnson
  */
 public class SideEffectBean {

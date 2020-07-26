@@ -31,8 +31,8 @@ import org.springframework.lang.Nullable;
  * and {@link javax.money.format.MonetaryAmountFormat#parse}.
  *
  * @author Juergen Hoeller
- * @since 4.2
  * @see #getMonetaryAmountFormat
+ * @since 4.2
  */
 public class MonetaryAmountFormatter implements Formatter<MonetaryAmount> {
 
@@ -48,8 +48,9 @@ public class MonetaryAmountFormatter implements Formatter<MonetaryAmount> {
 
 	/**
 	 * Create a new MonetaryAmountFormatter for the given format name.
+	 *
 	 * @param formatName the format name, to be resolved by the JSR-354
-	 * provider at runtime
+	 *                   provider at runtime
 	 */
 	public MonetaryAmountFormatter(String formatName) {
 		this.formatName = formatName;
@@ -83,6 +84,7 @@ public class MonetaryAmountFormatter implements Formatter<MonetaryAmount> {
 	 * <p>The default implementation simply calls
 	 * {@link javax.money.format.MonetaryFormats#getAmountFormat}
 	 * with either the configured format name or the given locale.
+	 *
 	 * @param locale the current locale
 	 * @return the MonetaryAmountFormat (never {@code null})
 	 * @see #setFormatName
@@ -90,8 +92,7 @@ public class MonetaryAmountFormatter implements Formatter<MonetaryAmount> {
 	protected MonetaryAmountFormat getMonetaryAmountFormat(Locale locale) {
 		if (this.formatName != null) {
 			return MonetaryFormats.getAmountFormat(this.formatName);
-		}
-		else {
+		} else {
 			return MonetaryFormats.getAmountFormat(locale);
 		}
 	}

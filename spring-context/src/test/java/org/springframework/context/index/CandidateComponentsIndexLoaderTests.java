@@ -98,9 +98,9 @@ public class CandidateComponentsIndexLoaderTests {
 	public void loadIndexWithException() {
 		final IOException cause = new IOException("test exception");
 		assertThatIllegalStateException().isThrownBy(() -> {
-				CandidateComponentsTestClassLoader classLoader = new CandidateComponentsTestClassLoader(getClass().getClassLoader(), cause);
-				CandidateComponentsIndexLoader.loadIndex(classLoader);
-			}).withMessageContaining("Unable to load indexes").withCause(cause);
+			CandidateComponentsTestClassLoader classLoader = new CandidateComponentsTestClassLoader(getClass().getClassLoader(), cause);
+			CandidateComponentsIndexLoader.loadIndex(classLoader);
+		}).withMessageContaining("Unable to load indexes").withCause(cause);
 	}
 
 }

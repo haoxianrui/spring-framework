@@ -144,8 +144,7 @@ public class JpaTransactionManagerTests {
 				}
 			});
 			assertThat(result).isSameAs(l);
-		}
-		catch (TransactionSystemException tse) {
+		} catch (TransactionSystemException tse) {
 			// expected
 			boolean condition = tse.getCause() instanceof RollbackException;
 			assertThat(condition).isTrue();
@@ -174,14 +173,14 @@ public class JpaTransactionManagerTests {
 		assertThat(condition2).isTrue();
 
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallback() {
-				@Override
-				public Object doInTransaction(TransactionStatus status) {
-					assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
-					EntityManagerFactoryUtils.getTransactionalEntityManager(factory);
-					throw new RuntimeException("some exception");
-				}
-			})).withMessage("some exception");
+				tt.execute(new TransactionCallback() {
+					@Override
+					public Object doInTransaction(TransactionStatus status) {
+						assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
+						EntityManagerFactoryUtils.getTransactionalEntityManager(factory);
+						throw new RuntimeException("some exception");
+					}
+				})).withMessage("some exception");
 
 		boolean condition1 = !TransactionSynchronizationManager.hasResource(factory);
 		assertThat(condition1).isTrue();
@@ -205,14 +204,14 @@ public class JpaTransactionManagerTests {
 		assertThat(condition2).isTrue();
 
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallback() {
-				@Override
-				public Object doInTransaction(TransactionStatus status) {
-					assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
-					EntityManagerFactoryUtils.getTransactionalEntityManager(factory);
-					throw new RuntimeException("some exception");
-				}
-			}));
+				tt.execute(new TransactionCallback() {
+					@Override
+					public Object doInTransaction(TransactionStatus status) {
+						assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
+						EntityManagerFactoryUtils.getTransactionalEntityManager(factory);
+						throw new RuntimeException("some exception");
+					}
+				}));
 
 		boolean condition1 = !TransactionSynchronizationManager.hasResource(factory);
 		assertThat(condition1).isTrue();
@@ -308,19 +307,19 @@ public class JpaTransactionManagerTests {
 		assertThat(condition2).isTrue();
 
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallback() {
-				@Override
-				public Object doInTransaction(TransactionStatus status) {
-					assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
-					return tt.execute(new TransactionCallback() {
-						@Override
-						public Object doInTransaction(TransactionStatus status) {
-							EntityManagerFactoryUtils.getTransactionalEntityManager(factory);
-							throw new RuntimeException("some exception");
-						}
-					});
-				}
-			}));
+				tt.execute(new TransactionCallback() {
+					@Override
+					public Object doInTransaction(TransactionStatus status) {
+						assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
+						return tt.execute(new TransactionCallback() {
+							@Override
+							public Object doInTransaction(TransactionStatus status) {
+								EntityManagerFactoryUtils.getTransactionalEntityManager(factory);
+								throw new RuntimeException("some exception");
+							}
+						});
+					}
+				}));
 
 		boolean condition1 = !TransactionSynchronizationManager.hasResource(factory);
 		assertThat(condition1).isTrue();
@@ -363,7 +362,7 @@ public class JpaTransactionManagerTests {
 						});
 					}
 				}))
-			.withCauseInstanceOf(RollbackException.class);
+				.withCauseInstanceOf(RollbackException.class);
 
 		boolean condition1 = !TransactionSynchronizationManager.hasResource(factory);
 		assertThat(condition1).isTrue();
@@ -449,8 +448,7 @@ public class JpaTransactionManagerTests {
 				}
 			});
 			assertThat(result).isSameAs(l);
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.unbindResource(factory);
 		}
 
@@ -701,8 +699,7 @@ public class JpaTransactionManagerTests {
 			assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
 			boolean condition = !TransactionSynchronizationManager.isSynchronizationActive();
 			assertThat(condition).isTrue();
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.unbindResource(factory);
 		}
 
@@ -736,8 +733,7 @@ public class JpaTransactionManagerTests {
 			assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
 			boolean condition = !TransactionSynchronizationManager.isSynchronizationActive();
 			assertThat(condition).isTrue();
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.unbindResource(factory);
 		}
 
@@ -776,8 +772,7 @@ public class JpaTransactionManagerTests {
 			assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
 			boolean condition = !TransactionSynchronizationManager.isSynchronizationActive();
 			assertThat(condition).isTrue();
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.unbindResource(factory);
 		}
 
@@ -811,8 +806,7 @@ public class JpaTransactionManagerTests {
 			assertThat(TransactionSynchronizationManager.hasResource(factory)).isTrue();
 			boolean condition = !TransactionSynchronizationManager.isSynchronizationActive();
 			assertThat(condition).isTrue();
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.unbindResource(factory);
 		}
 
@@ -827,11 +821,11 @@ public class JpaTransactionManagerTests {
 		given(manager.isOpen()).willReturn(true);
 
 		assertThatExceptionOfType(InvalidIsolationLevelException.class).isThrownBy(() ->
-			tt.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(TransactionStatus status) {
-				}
-			}));
+				tt.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					protected void doInTransactionWithoutResult(TransactionStatus status) {
+					}
+				}));
 
 		verify(manager).close();
 	}

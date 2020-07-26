@@ -28,8 +28,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-
-
 /**
  * @author Phillip Webb
  */
@@ -122,7 +120,7 @@ public class Spr10744Tests {
 	static class MyTestConfiguration extends MyConfiguration {
 
 		@Bean
-		@Scope(value = "myTestScope",  proxyMode = ScopedProxyMode.TARGET_CLASS)
+		@Scope(value = "myTestScope", proxyMode = ScopedProxyMode.TARGET_CLASS)
 		@Override
 		public Foo foo() {
 			return new Foo();

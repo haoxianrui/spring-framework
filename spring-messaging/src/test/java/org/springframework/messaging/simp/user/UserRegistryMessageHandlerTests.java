@@ -48,6 +48,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * User tests for {@link UserRegistryMessageHandler}.
+ *
  * @author Rossen Stoyanchev
  */
 @ExtendWith(MockitoExtension.class)
@@ -90,7 +91,7 @@ public class UserRegistryMessageHandlerTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void brokerUnavailableEvent() throws Exception {
 
 		ScheduledFuture future = mock(ScheduledFuture.class);

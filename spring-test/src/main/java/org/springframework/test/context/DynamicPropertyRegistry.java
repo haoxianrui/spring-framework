@@ -25,14 +25,15 @@ import java.util.function.Supplier;
  *
  * @author Phillip Webb
  * @author Sam Brannen
- * @since 5.2.5
  * @see DynamicPropertySource
+ * @since 5.2.5
  */
 public interface DynamicPropertyRegistry {
 
 	/**
 	 * Add a {@link Supplier} for the given property name to this registry.
-	 * @param name the name of the property for which the supplier should be added
+	 *
+	 * @param name          the name of the property for which the supplier should be added
 	 * @param valueSupplier a supplier that will provide the property value on demand
 	 */
 	void add(String name, Supplier<Object> valueSupplier);

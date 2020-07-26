@@ -8,12 +8,12 @@
 		<constructor-arg>
 			<!-- 'inline:' prefix is preceded by whitespace... -->
 			<value>
-    inline:
-			
-	class Bingo {
+				inline:
 
-		@Property String message;
-	}
+				class Bingo {
+
+				@Property String message;
+				}
 			</value>
 		</constructor-arg>
 		<property name="message" value="Hello World!"/>

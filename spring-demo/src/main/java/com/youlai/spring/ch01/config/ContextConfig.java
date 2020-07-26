@@ -1,4 +1,4 @@
-package com.fly4j.spring.ch01.config;
+package com.youlai.spring.ch01.config;
 
 
 import org.springframework.context.annotation.ComponentScan;

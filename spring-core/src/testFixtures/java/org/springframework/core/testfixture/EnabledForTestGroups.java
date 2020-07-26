@@ -32,7 +32,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * @author Sam Brannen
  * @since 5.2
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited

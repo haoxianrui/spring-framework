@@ -44,7 +44,7 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  */
 @SpringJUnitConfig
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@Sql({ "schema.sql", "data.sql" })
+@Sql({"schema.sql", "data.sql"})
 @DirtiesContext
 class DataSourceOnlySqlScriptsTests {
 
@@ -64,7 +64,7 @@ class DataSourceOnlySqlScriptsTests {
 	}
 
 	@Test
-	@Sql({ "drop-schema.sql", "schema.sql", "data.sql", "data-add-dogbert.sql" })
+	@Sql({"drop-schema.sql", "schema.sql", "data.sql", "data-add-dogbert.sql"})
 	@Order(2)
 	void methodLevelScripts() {
 		assertThatTransaction().isNotActive();
@@ -73,7 +73,7 @@ class DataSourceOnlySqlScriptsTests {
 
 	protected void assertNumUsers(int expected) {
 		assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "user")).as(
-			"Number of rows in the 'user' table.").isEqualTo(expected);
+				"Number of rows in the 'user' table.").isEqualTo(expected);
 	}
 
 

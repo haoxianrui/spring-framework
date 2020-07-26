@@ -274,8 +274,7 @@ public class StompDecoderTests {
 		List<Message<byte[]>> messages = this.decoder.decode(buffer);
 		if (messages.isEmpty()) {
 			return null;
-		}
-		else {
+		} else {
 			return messages.get(0);
 		}
 	}

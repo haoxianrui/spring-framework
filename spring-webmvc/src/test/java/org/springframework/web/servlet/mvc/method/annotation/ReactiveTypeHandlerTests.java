@@ -60,6 +60,7 @@ import static org.springframework.web.testfixture.method.ResolvableMethod.on;
 
 /**
  * Unit tests for {@link ReactiveTypeHandler}.
+ *
  * @author Rossen Stoyanchev
  */
 public class ReactiveTypeHandlerTests {
@@ -309,7 +310,7 @@ public class ReactiveTypeHandlerTests {
 
 
 	private void testDeferredResultSubscriber(Object returnValue, Class<?> asyncType,
-			ResolvableType elementType, Runnable produceTask, Object expected) throws Exception {
+											  ResolvableType elementType, Runnable produceTask, Object expected) throws Exception {
 
 		ResponseBodyEmitter emitter = handleValue(returnValue, asyncType, elementType);
 		assertThat(emitter).isNull();
@@ -326,7 +327,7 @@ public class ReactiveTypeHandlerTests {
 	}
 
 	private ResponseBodyEmitter handleValue(Object returnValue, Class<?> asyncType,
-			ResolvableType genericType) throws Exception {
+											ResolvableType genericType) throws Exception {
 
 		ModelAndViewContainer mavContainer = new ModelAndViewContainer();
 		MethodParameter returnType = on(TestController.class).resolveReturnType(asyncType, genericType);
@@ -337,19 +338,33 @@ public class ReactiveTypeHandlerTests {
 	@SuppressWarnings("unused")
 	static class TestController {
 
-		String handleString() { return null; }
+		String handleString() {
+			return null;
+		}
 
-		Mono<String> handleMono() { return null; }
+		Mono<String> handleMono() {
+			return null;
+		}
 
-		Single<String> handleSingle() { return null; }
+		Single<String> handleSingle() {
+			return null;
+		}
 
-		io.reactivex.Single<String> handleSingleRxJava2() { return null; }
+		io.reactivex.Single<String> handleSingleRxJava2() {
+			return null;
+		}
 
-		Flux<Bar> handleFlux() { return null; }
+		Flux<Bar> handleFlux() {
+			return null;
+		}
 
-		Flux<String> handleFluxString() { return null; }
+		Flux<String> handleFluxString() {
+			return null;
+		}
 
-		Flux<ServerSentEvent<String>> handleFluxSseEventBuilder() { return null; }
+		Flux<ServerSentEvent<String>> handleFluxSseEventBuilder() {
+			return null;
+		}
 	}
 
 

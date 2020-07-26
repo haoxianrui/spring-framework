@@ -3,22 +3,22 @@
 <suite name="EJB-TX-Separate" verbose="1">
 	<test name="RollbackForRequiredEjbTxDaoTestNGTests">
 		<classes>
-			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiredEjbTxDaoTestNGTests" />
+			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiredEjbTxDaoTestNGTests"/>
 		</classes>
 	</test>
 	<test name="CommitForRequiredEjbTxDaoTestNGTests">
 		<classes>
-			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiredEjbTxDaoTestNGTests" />
+			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiredEjbTxDaoTestNGTests"/>
 		</classes>
 	</test>
 	<test name="CommitForRequiresNewEjbTxDaoTestNGTests">
 		<classes>
-			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiresNewEjbTxDaoTestNGTests" />
+			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiresNewEjbTxDaoTestNGTests"/>
 		</classes>
 	</test>
 	<test name="RollbackForRequiresNewEjbTxDaoTestNGTests">
 		<classes>
-			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiresNewEjbTxDaoTestNGTests" />
+			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiresNewEjbTxDaoTestNGTests"/>
 		</classes>
 	</test>
 </suite>

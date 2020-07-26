@@ -55,7 +55,7 @@ class ZeroCopyIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 	@ParameterizedHttpServerTest
 	void zeroCopy(HttpServer httpServer) throws Exception {
 		assumeTrue(httpServer instanceof ReactorHttpServer || httpServer instanceof UndertowHttpServer,
-			"Zero-copy does not support Servlet");
+				"Zero-copy does not support Servlet");
 
 		startServer(httpServer);
 
@@ -80,8 +80,7 @@ class ZeroCopyIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 				zeroCopyResponse.getHeaders().setContentType(MediaType.IMAGE_PNG);
 				zeroCopyResponse.getHeaders().setContentLength(logoFile.length());
 				return zeroCopyResponse.writeWith(logoFile, 0, logoFile.length());
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				return Mono.error(ex);
 			}
 		}

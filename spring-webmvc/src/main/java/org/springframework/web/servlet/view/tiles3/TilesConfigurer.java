@@ -100,7 +100,7 @@ import org.springframework.web.context.ServletContextAware;
  *   &lt;/property>
  * &lt;/bean>
  * </pre>
- *
+ * <p>
  * The values in the list are the actual Tiles XML files containing the definitions.
  * If the list is not specified, the default is {@code "/WEB-INF/tiles.xml"}.
  *
@@ -121,9 +121,9 @@ import org.springframework.web.context.ServletContextAware;
  * @author mick semb wever
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
- * @since 3.2
  * @see TilesView
  * @see TilesViewResolver
+ * @since 3.2
  */
 public class TilesConfigurer implements ServletContextAware, InitializingBean, DisposableBean {
 
@@ -174,6 +174,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 	 * <p><b>NOTE: Specifying the complete-autoload mode effectively disables all other bean
 	 * properties on this configurer.</b> The entire initialization procedure is then left
 	 * to {@link org.apache.tiles.extras.complete.CompleteAutoloadTilesInitializer}.
+	 *
 	 * @see org.apache.tiles.extras.complete.CompleteAutoloadTilesContainerFactory
 	 * @see org.apache.tiles.extras.complete.CompleteAutoloadTilesInitializer
 	 */
@@ -181,12 +182,10 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 		if (completeAutoload) {
 			try {
 				this.tilesInitializer = new SpringCompleteAutoloadTilesInitializer();
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				throw new IllegalStateException("Tiles-Extras 3.0 not available", ex);
 			}
-		}
-		else {
+		} else {
 			this.tilesInitializer = null;
 		}
 	}
@@ -243,6 +242,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 	 * will be in the control of the Spring application context in this case,
 	 * allowing for the use of scoped beans etc. Note that you need to define one
 	 * Spring bean definition per preparer name (as used in your Tiles definitions).
+	 *
 	 * @see SimpleSpringPreparerFactory
 	 * @see SpringBeanPreparerFactory
 	 */
@@ -253,6 +253,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 	/**
 	 * Set whether to use a MutableTilesContainer (typically the CachingTilesContainer
 	 * implementation) for this application. Default is "false".
+	 *
 	 * @see org.apache.tiles.mgmt.MutableTilesContainer
 	 * @see org.apache.tiles.impl.mgmt.CachingTilesContainer
 	 */
@@ -268,6 +269,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 	/**
 	 * Creates and exposes a TilesContainer for this web application,
 	 * delegating to the TilesInitializer.
+	 *
 	 * @throws TilesException in case of setup failure
 	 */
 	@Override
@@ -282,6 +284,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 
 	/**
 	 * Removes the TilesContainer from this web application.
+	 *
 	 * @throws TilesException in case of cleanup failure
 	 */
 	@Override
@@ -319,15 +322,14 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 					}
 				}
 				return result;
-			}
-			else {
+			} else {
 				return super.getSources(applicationContext);
 			}
 		}
 
 		@Override
 		protected BaseLocaleUrlDefinitionDAO instantiateLocaleDefinitionDao(ApplicationContext applicationContext,
-				LocaleResolver resolver) {
+																			LocaleResolver resolver) {
 			BaseLocaleUrlDefinitionDAO dao = super.instantiateLocaleDefinitionDao(applicationContext, resolver);
 			if (checkRefresh && dao instanceof CachingLocaleUrlDefinitionDAO) {
 				((CachingLocaleUrlDefinitionDAO) dao).setCheckRefresh(true);
@@ -344,7 +346,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 
 		@Override
 		protected DefinitionsFactory createDefinitionsFactory(ApplicationContext applicationContext,
-				LocaleResolver resolver) {
+															  LocaleResolver resolver) {
 
 			if (definitionsFactoryClass != null) {
 				DefinitionsFactory factory = BeanUtils.instantiateClass(definitionsFactoryClass);
@@ -359,8 +361,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 					bw.setPropertyValue("definitionDAO", createLocaleDefinitionDao(applicationContext, resolver));
 				}
 				return factory;
-			}
-			else {
+			} else {
 				return super.createDefinitionsFactory(applicationContext, resolver);
 			}
 		}
@@ -369,8 +370,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 		protected PreparerFactory createPreparerFactory(ApplicationContext context) {
 			if (preparerFactoryClass != null) {
 				return BeanUtils.instantiateClass(preparerFactoryClass);
-			}
-			else {
+			} else {
 				return super.createPreparerFactory(context);
 			}
 		}
@@ -382,12 +382,11 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 
 		@Override
 		protected AttributeEvaluatorFactory createAttributeEvaluatorFactory(ApplicationContext context,
-				LocaleResolver resolver) {
+																			LocaleResolver resolver) {
 			AttributeEvaluator evaluator;
 			if (tilesElPresent && JspFactory.getDefaultFactory() != null) {
 				evaluator = new TilesElActivator().createEvaluator();
-			}
-			else {
+			} else {
 				evaluator = new DirectAttributeEvaluator();
 			}
 			return new BasicAttributeEvaluatorFactory(evaluator);

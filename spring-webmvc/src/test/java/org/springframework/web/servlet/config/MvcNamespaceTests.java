@@ -635,7 +635,9 @@ public class MvcNamespaceTests {
 		assertThat(response.getStatus()).isEqualTo(404);
 	}
 
-	/** WebSphere gives trailing servlet path slashes by default!! */
+	/**
+	 * WebSphere gives trailing servlet path slashes by default!!
+	 */
 	@Test
 	public void testViewControllersOnWebSphere() throws Exception {
 		loadBeanDefinitions("mvc-config-view-controllers.xml");
@@ -768,7 +770,7 @@ public class MvcNamespaceTests {
 		accessor = new DirectFieldAccessor(resolver);
 		assertThat(accessor.getPropertyValue("prefix")).isEqualTo("freemarker-");
 		assertThat(accessor.getPropertyValue("suffix")).isEqualTo(".freemarker");
-		assertThat((String[]) accessor.getPropertyValue("viewNames")).isEqualTo(new String[] {"my*", "*Report"});
+		assertThat((String[]) accessor.getPropertyValue("viewNames")).isEqualTo(new String[]{"my*", "*Report"});
 		assertThat(accessor.getPropertyValue("cacheLimit")).isEqualTo(1024);
 
 		resolver = resolvers.get(4);
@@ -803,7 +805,7 @@ public class MvcNamespaceTests {
 		FreeMarkerConfigurer freeMarkerConfigurer = appContext.getBean(FreeMarkerConfigurer.class);
 		assertThat(freeMarkerConfigurer).isNotNull();
 		accessor = new DirectFieldAccessor(freeMarkerConfigurer);
-		assertThat((String[]) accessor.getPropertyValue("templateLoaderPaths")).isEqualTo(new String[] {"/", "/test"});
+		assertThat((String[]) accessor.getPropertyValue("templateLoaderPaths")).isEqualTo(new String[]{"/", "/test"});
 
 		GroovyMarkupConfigurer groovyMarkupConfigurer = appContext.getBean(GroovyMarkupConfigurer.class);
 		assertThat(groovyMarkupConfigurer).isNotNull();
@@ -818,7 +820,7 @@ public class MvcNamespaceTests {
 		assertThat(scriptTemplateConfigurer.getCharset()).isEqualTo(StandardCharsets.ISO_8859_1);
 		assertThat(scriptTemplateConfigurer.getResourceLoaderPath()).isEqualTo("classpath:");
 		assertThat(scriptTemplateConfigurer.isSharedEngine()).isFalse();
-		String[] scripts = { "org/springframework/web/servlet/view/script/nashorn/render.js" };
+		String[] scripts = {"org/springframework/web/servlet/view/script/nashorn/render.js"};
 		accessor = new DirectFieldAccessor(scriptTemplateConfigurer);
 		assertThat((String[]) accessor.getPropertyValue("scripts")).isEqualTo(scripts);
 	}
@@ -885,7 +887,7 @@ public class MvcNamespaceTests {
 		String[] beanNames = appContext.getBeanNamesForType(AbstractHandlerMapping.class);
 		assertThat(beanNames.length).isEqualTo(2);
 		for (String beanName : beanNames) {
-			AbstractHandlerMapping handlerMapping = (AbstractHandlerMapping)appContext.getBean(beanName);
+			AbstractHandlerMapping handlerMapping = (AbstractHandlerMapping) appContext.getBean(beanName);
 			assertThat(handlerMapping).isNotNull();
 			DirectFieldAccessor accessor = new DirectFieldAccessor(handlerMapping);
 			Map<String, CorsConfiguration> configs = ((UrlBasedCorsConfigurationSource) accessor
@@ -910,7 +912,7 @@ public class MvcNamespaceTests {
 		String[] beanNames = appContext.getBeanNamesForType(AbstractHandlerMapping.class);
 		assertThat(beanNames.length).isEqualTo(2);
 		for (String beanName : beanNames) {
-			AbstractHandlerMapping handlerMapping = (AbstractHandlerMapping)appContext.getBean(beanName);
+			AbstractHandlerMapping handlerMapping = (AbstractHandlerMapping) appContext.getBean(beanName);
 			assertThat(handlerMapping).isNotNull();
 			DirectFieldAccessor accessor = new DirectFieldAccessor(handlerMapping);
 			Map<String, CorsConfiguration> configs = ((UrlBasedCorsConfigurationSource) accessor
@@ -974,8 +976,8 @@ public class MvcNamespaceTests {
 
 		@RequestMapping
 		public void testBind(@RequestParam @IsoDate Date date,
-				@RequestParam(required = false) @PercentNumber Double percent,
-				@MyValid TestBean bean, BindingResult result) {
+							 @RequestParam(required = false) @PercentNumber Double percent,
+							 @MyValid TestBean bean, BindingResult result) {
 
 			this.date = date;
 			this.percent = percent;
@@ -1028,8 +1030,7 @@ public class MvcNamespaceTests {
 		public RequestDispatcher getNamedDispatcher(String path) {
 			if (path.equals("default") || path.equals("custom")) {
 				return new MockRequestDispatcher("/");
-			}
-			else {
+			} else {
 				return null;
 			}
 		}

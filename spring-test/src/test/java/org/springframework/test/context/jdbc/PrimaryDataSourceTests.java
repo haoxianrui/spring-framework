@@ -38,8 +38,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * supported.
  *
  * @author Sam Brannen
- * @since 4.3
  * @see org.springframework.test.context.transaction.PrimaryTransactionManagerTests
+ * @since 4.3
  */
 @SpringJUnitConfig
 @DirtiesContext

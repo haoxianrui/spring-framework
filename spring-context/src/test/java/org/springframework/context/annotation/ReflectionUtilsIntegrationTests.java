@@ -29,8 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * by ConfigurationClassEnhancer.
  *
  * @author Chris Beams
- * @since 3.1
  * @see org.springframework.util.ReflectionUtilsTests
+ * @since 3.1
  */
 public class ReflectionUtilsIntegrationTests {
 

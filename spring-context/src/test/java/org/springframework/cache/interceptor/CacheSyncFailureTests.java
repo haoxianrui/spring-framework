@@ -65,35 +65,35 @@ public class CacheSyncFailureTests {
 	public void unlessSync() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.simpleService.unlessSync("key"))
-			.withMessageContaining("@Cacheable(sync=true) does not support unless attribute");
+				.withMessageContaining("@Cacheable(sync=true) does not support unless attribute");
 	}
 
 	@Test
 	public void severalCachesSync() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.simpleService.severalCachesSync("key"))
-			.withMessageContaining("@Cacheable(sync=true) only allows a single cache");
+				.withMessageContaining("@Cacheable(sync=true) only allows a single cache");
 	}
 
 	@Test
 	public void severalCachesWithResolvedSync() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.simpleService.severalCachesWithResolvedSync("key"))
-			.withMessageContaining("@Cacheable(sync=true) only allows a single cache");
+				.withMessageContaining("@Cacheable(sync=true) only allows a single cache");
 	}
 
 	@Test
 	public void syncWithAnotherOperation() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.simpleService.syncWithAnotherOperation("key"))
-			.withMessageContaining("@Cacheable(sync=true) cannot be combined with other cache operations");
+				.withMessageContaining("@Cacheable(sync=true) cannot be combined with other cache operations");
 	}
 
 	@Test
 	public void syncWithTwoGetOperations() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.simpleService.syncWithTwoGetOperations("key"))
-			.withMessageContaining("Only one @Cacheable(sync=true) entry is allowed");
+				.withMessageContaining("Only one @Cacheable(sync=true) entry is allowed");
 	}
 
 

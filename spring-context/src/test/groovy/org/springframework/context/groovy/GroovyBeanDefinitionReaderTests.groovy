@@ -90,11 +90,11 @@ class GroovyBeanDefinitionReaderTests {
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 
 		reader.beans {
-			myB(Bean1){
+			myB(Bean1) {
 				person = "wombat"
 			}
 
-			myAbstractA(Bean2){ bean ->
+			myAbstractA(Bean2) { bean ->
 				bean.'abstract' = true
 				age = 10
 				bean1 = myB
@@ -117,9 +117,9 @@ class GroovyBeanDefinitionReaderTests {
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 
 		reader.beans {
-			xmlns context:"http://www.springframework.org/schema/context"
+			xmlns context: "http://www.springframework.org/schema/context"
 
-			context.'component-scan'( 'base-package' :" org.springframework.context.groovy" )
+			context.'component-scan'('base-package': " org.springframework.context.groovy")
 		}
 
 		appCtx.refresh()
@@ -134,7 +134,7 @@ class GroovyBeanDefinitionReaderTests {
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 
 		reader.beans {
-			xmlns aop:"http://www.springframework.org/schema/aop"
+			xmlns aop: "http://www.springframework.org/schema/aop"
 
 			fred(AdvisedPerson) {
 				name = "Fred"
@@ -143,9 +143,9 @@ class GroovyBeanDefinitionReaderTests {
 			birthdayCardSenderAspect(BirthdayCardSender)
 
 			aop {
-				config("proxy-target-class":true) {
-					aspect( id:"sendBirthdayCard",ref:"birthdayCardSenderAspect" ) {
-						after method:"onBirthday", pointcut: "execution(void org.springframework.context.groovy.AdvisedPerson.birthday()) and this(person)"
+				config("proxy-target-class": true) {
+					aspect(id: "sendBirthdayCard", ref: "birthdayCardSenderAspect") {
+						after method: "onBirthday", pointcut: "execution(void org.springframework.context.groovy.AdvisedPerson.birthday()) and this(person)"
 					}
 				}
 			}
@@ -154,7 +154,7 @@ class GroovyBeanDefinitionReaderTests {
 		appCtx.refresh()
 
 		def fred = appCtx.getBean("fred")
-		assertTrue (fred instanceof SpringProxy)
+		assertTrue(fred instanceof SpringProxy)
 		fred.birthday()
 
 		BirthdayCardSender birthDaySender = appCtx.getBean("birthdayCardSenderAspect")
@@ -171,8 +171,8 @@ class GroovyBeanDefinitionReaderTests {
 		appCtx.getBeanFactory().registerScope("test", scope)
 
 		reader.beans {
-			xmlns aop:"http://www.springframework.org/schema/aop"
-			xmlns util:"http://www.springframework.org/schema/util"
+			xmlns aop: "http://www.springframework.org/schema/aop"
+			xmlns util: "http://www.springframework.org/schema/util"
 			scopedList(ArrayList) { bean ->
 				bean.scope = "test"
 				aop.'scoped-proxy'()
@@ -198,8 +198,8 @@ class GroovyBeanDefinitionReaderTests {
 		appCtx.getBeanFactory().registerScope("test", scope)
 
 		reader.beans {
-			xmlns aop:"http://www.springframework.org/schema/aop",
-				  util:"http://www.springframework.org/schema/util"
+			xmlns aop: "http://www.springframework.org/schema/aop",
+					util: "http://www.springframework.org/schema/util"
 			scopedList(ArrayList) { bean ->
 				bean.scope = "test"
 				aop.'scoped-proxy'()
@@ -227,7 +227,7 @@ class GroovyBeanDefinitionReaderTests {
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 
 		reader.beans {
-			xmlns aop:"http://www.springframework.org/schema/aop"
+			xmlns aop: "http://www.springframework.org/schema/aop"
 
 			fred(AdvisedPerson) {
 				name = "Fred"
@@ -235,9 +235,9 @@ class GroovyBeanDefinitionReaderTests {
 			}
 			birthdayCardSenderAspect(BirthdayCardSender)
 
-			aop.config("proxy-target-class":true) {
-				aspect( id:"sendBirthdayCard",ref:"birthdayCardSenderAspect" ) {
-					after method:"onBirthday", pointcut: "execution(void org.springframework.context.groovy.AdvisedPerson.birthday()) and this(person)"
+			aop.config("proxy-target-class": true) {
+				aspect(id: "sendBirthdayCard", ref: "birthdayCardSenderAspect") {
+					after method: "onBirthday", pointcut: "execution(void org.springframework.context.groovy.AdvisedPerson.birthday()) and this(person)"
 				}
 			}
 		}
@@ -245,7 +245,7 @@ class GroovyBeanDefinitionReaderTests {
 		appCtx.refresh()
 
 		def fred = appCtx.getBean("fred")
-		assertTrue (fred instanceof SpringProxy)
+		assertTrue(fred instanceof SpringProxy)
 		fred.birthday()
 
 		BirthdayCardSender birthDaySender = appCtx.getBean("birthdayCardSenderAspect")
@@ -262,7 +262,7 @@ class GroovyBeanDefinitionReaderTests {
 		TestScope scope = new TestScope()
 		appCtx.getBeanFactory().registerScope("test", scope)
 		reader.beans {
-			xmlns aop:"http://www.springframework.org/schema/aop"
+			xmlns aop: "http://www.springframework.org/schema/aop"
 			scopedList(ArrayList) { bean ->
 				bean.scope = "test"
 				aop.'scoped-proxy'()
@@ -300,7 +300,7 @@ class GroovyBeanDefinitionReaderTests {
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 		reader.beans {
 			holyGrail(HolyGrailQuest)
-			knights(KnightOfTheRoundTable, "Camelot", leader:"lancelot", quest: holyGrail)
+			knights(KnightOfTheRoundTable, "Camelot", leader: "lancelot", quest: holyGrail)
 		}
 		appCtx.refresh()
 
@@ -389,7 +389,7 @@ class GroovyBeanDefinitionReaderTests {
 			bean1(Bean1) {
 				person = "homer"
 				age = 45
-				props = [overweight:true, height:"1.8m"]
+				props = [overweight: true, height: "1.8m"]
 				children = ["bart", "lisa"]
 			}
 		}
@@ -414,7 +414,7 @@ class GroovyBeanDefinitionReaderTests {
 			homer(Bean1) {
 				person = "homer"
 				age = 45
-				props = [overweight:true, height:"1.8m"]
+				props = [overweight: true, height: "1.8m"]
 				children = ["bart", "lisa"]
 			}
 		}
@@ -432,7 +432,7 @@ class GroovyBeanDefinitionReaderTests {
 
 		assert appCtx.containsBean("bart")
 		def bart = appCtx.getBean("bart")
-		assertEquals "homer",bart.parent?.person
+		assertEquals "homer", bart.parent?.person
 	}
 
 	@Test
@@ -450,11 +450,12 @@ class GroovyBeanDefinitionReaderTests {
 			}
 			marge(Bean2) {
 				person = "marge"
-				bean1 =  { Bean1 b ->
-							 person = "homer"
-							age = 45
-							props = [overweight:true, height:"1.8m"]
-							children = ["bart", "lisa"] }
+				bean1 = { Bean1 b ->
+					person = "homer"
+					age = 45
+					props = [overweight: true, height: "1.8m"]
+					children = ["bart", "lisa"]
+				}
 				children = [bart, lisa]
 			}
 		}
@@ -480,10 +481,11 @@ class GroovyBeanDefinitionReaderTests {
 			}
 			marge(Bean2) {
 				person = "marge"
-				bean1 =  { bean ->
-							bean.factoryBean = "homer"
-							bean.factoryMethod = "newInstance"
-							person = "homer" }
+				bean1 = { bean ->
+					bean.factoryBean = "homer"
+					bean.factoryMethod = "newInstance"
+					person = "homer"
+				}
 				children = [bart, lisa]
 			}
 		}
@@ -501,7 +503,7 @@ class GroovyBeanDefinitionReaderTests {
 			homer(Bean1) {
 				person = "homer"
 				age = 45
-				props = [overweight:true, height:"1.8m"]
+				props = [overweight: true, height: "1.8m"]
 				children = ["bart", "lisa"]
 			}
 			bart(Bean1) {
@@ -599,19 +601,19 @@ class GroovyBeanDefinitionReaderTests {
 		def appCtx = new GenericApplicationContext()
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 		reader.beans {
-			beanFactory(Bean1FactoryWithArgs){}
+			beanFactory(Bean1FactoryWithArgs) {}
 
-			homer(beanFactory:"newInstance", "homer") {
+			homer(beanFactory: "newInstance", "homer") {
 				age = 45
 			}
 			//Test with no closure body
-			marge(beanFactory:"newInstance", "marge")
+			marge(beanFactory: "newInstance", "marge")
 
 			//Test more verbose method
-			mcBain("mcBain"){
+			mcBain("mcBain") {
 				bean ->
-				bean.factoryBean="beanFactory"
-				bean.factoryMethod="newInstance"
+					bean.factoryBean = "beanFactory"
+					bean.factoryMethod = "newInstance"
 
 			}
 		}
@@ -676,7 +678,7 @@ class GroovyBeanDefinitionReaderTests {
 		reader.beans {
 			myFactory(Bean1Factory)
 
-			homer(myFactory:"newInstance") { bean ->
+			homer(myFactory: "newInstance") { bean ->
 				person = "homer"
 				age = 45
 			}
@@ -712,11 +714,11 @@ class GroovyBeanDefinitionReaderTests {
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 
 		reader.beans {
-		quest(HolyGrailQuest)
+			quest(HolyGrailQuest)
 
-		knight(KnightOfTheRoundTable, "Bedivere") {
-		quest = ref("quest")
-		}
+			knight(KnightOfTheRoundTable, "Bedivere") {
+				quest = ref("quest")
+			}
 		}
 
 		appCtx.refresh()
@@ -741,7 +743,7 @@ class GroovyBeanDefinitionReaderTests {
 			}
 
 			abstractPerson(Bean1) { bean ->
-				bean.'abstract'=true
+				bean.'abstract' = true
 				age = 45
 			}
 			homerBean { bean ->
@@ -786,9 +788,9 @@ return appCtx
 		def reader = new GroovyBeanDefinitionReader(appCtx)
 
 		reader.beans {
-		   personA(AdvisedPerson) {
-			   name = "Bob"
-		   }
+			personA(AdvisedPerson) {
+				name = "Bob"
+			}
 		}
 
 		appCtx.refresh()
@@ -815,7 +817,7 @@ return appCtx
 			someotherbean(SomeOtherClass, new File('somefile.txt'))
 			someotherbean2(SomeOtherClass, new File('somefile.txt'))
 
-			somebean(SomeClass,  [someotherbean, someotherbean2])
+			somebean(SomeClass, [someotherbean, someotherbean2])
 		}
 
 		assert appCtx.containsBean('someotherbean')
@@ -840,7 +842,7 @@ return appCtx
 			beanWithList(Bean5, [bart, lisa])
 
 			// test runtime references both as ref() and as plain name
-			beanWithMap(Bean6, [bart:bart, lisa:ref('lisa')])
+			beanWithMap(Bean6, [bart: bart, lisa: ref('lisa')])
 		}
 		appCtx.refresh()
 
@@ -868,10 +870,10 @@ return appCtx
 			}
 			marge(Bean2) {
 				person = "marge"
-				bean1 =  bean(Bean1) {
+				bean1 = bean(Bean1) {
 					person = "homer"
 					age = 45
-					props = [overweight:true, height:"1.8m"]
+					props = [overweight: true, height: "1.8m"]
 					children = ["bart", "lisa"]
 				}
 				children = [bart, lisa]
@@ -898,7 +900,7 @@ return appCtx
 			}
 			marge(Bean2) {
 				person = "marge"
-				bean3 =  bean(Bean3, "homer", lisa) {
+				bean3 = bean(Bean3, "homer", lisa) {
 					person = "homer"
 					age = 45
 				}
@@ -924,7 +926,7 @@ class KnightOfTheRoundTable {
 	String leader
 
 	KnightOfTheRoundTable(String n) {
-  		this.name = n
+		this.name = n
 	}
 
 	HolyGrailQuest quest
@@ -967,6 +969,7 @@ class Bean3 {
 // bean with factory method
 class Bean4 {
 	private Bean4() {}
+
 	static Bean4 getInstance() {
 		return new Bean4()
 	}
@@ -1005,7 +1008,7 @@ class TestScope implements Scope {
 
 	@Override
 	public Object remove(String name) {
-		 // do nothing
+		// do nothing
 	}
 
 	@Override
@@ -1033,7 +1036,7 @@ class BirthdayCardSender {
 	List peopleSentCards = []
 
 	public void onBirthday(AdvisedPerson person) {
- 		peopleSentCards << person
+		peopleSentCards << person
 	}
 }
 
@@ -1058,6 +1061,6 @@ class SomeOtherClass {
 // a factory bean that takes arguments
 class Bean1FactoryWithArgs {
 	Bean1 newInstance(String name) {
-		new Bean1(person:name)
+		new Bean1(person: name)
 	}
 }

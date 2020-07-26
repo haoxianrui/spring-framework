@@ -121,8 +121,7 @@ class ConstantsTests {
 			assertThat(values.size()).isEqualTo(2);
 			assertThat(values.contains(Integer.valueOf(1))).isTrue();
 			assertThat(values.contains(Integer.valueOf(2))).isTrue();
-		}
-		finally {
+		} finally {
 			Locale.setDefault(oldLocale);
 		}
 	}
@@ -247,7 +246,9 @@ class ConstantsTests {
 		public static final int NO_PROPERTY = 3;
 		public static final int YES_PROPERTY = 4;
 
-		/** ignore these */
+		/**
+		 * ignore these
+		 */
 		protected static final int P = -1;
 		protected boolean f;
 		static final Object o = new Object();

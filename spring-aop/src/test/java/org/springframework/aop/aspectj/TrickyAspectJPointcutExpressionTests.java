@@ -102,7 +102,7 @@ public class TrickyAspectJPointcutExpressionTests {
 	}
 
 	private void testAdvice(Advisor advisor, LogUserAdvice logAdvice, TestService target, String message,
-			boolean proxyTargetClass) throws Exception {
+							boolean proxyTargetClass) throws Exception {
 
 		logAdvice.reset();
 
@@ -122,6 +122,7 @@ public class TrickyAspectJPointcutExpressionTests {
 
 		/**
 		 * Create a new SimpleThrowawayClassLoader for the given class loader.
+		 *
 		 * @param parent the ClassLoader to build a throwaway ClassLoader for
 		 */
 		public SimpleThrowawayClassLoader(ClassLoader parent) {
@@ -140,7 +141,7 @@ public class TrickyAspectJPointcutExpressionTests {
 	}
 
 
-	@Target({ ElementType.METHOD, ElementType.TYPE })
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
 	@Inherited

@@ -26,8 +26,8 @@ import org.springframework.core.io.buffer.DataBufferFactory;
  * throwing an {@link AssertionError} if not.
  *
  * @author Arjen Poutsma
- * @since 5.1.3
  * @see LeakAwareDataBufferFactory
+ * @since 5.1.3
  */
 public abstract class AbstractLeakCheckingTests {
 

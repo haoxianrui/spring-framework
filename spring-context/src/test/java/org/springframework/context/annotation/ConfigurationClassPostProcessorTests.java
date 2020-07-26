@@ -370,9 +370,9 @@ public class ConfigurationClassPostProcessorTests {
 		ConfigurationClassPostProcessor pp = new ConfigurationClassPostProcessor();
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() ->
 				pp.postProcessBeanFactory(beanFactory))
-			.withMessageContaining("bar")
-			.withMessageContaining("SingletonBeanConfig")
-			.withMessageContaining(TestBean.class.getName());
+				.withMessageContaining("bar")
+				.withMessageContaining("SingletonBeanConfig")
+				.withMessageContaining(TestBean.class.getName());
 	}
 
 	@Test
@@ -414,10 +414,10 @@ public class ConfigurationClassPostProcessorTests {
 
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				beanFactory.getBean(Bar.class))
-			.withMessageContaining("OverridingSingletonBeanConfig.foo")
-			.withMessageContaining(ExtendedFoo.class.getName())
-			.withMessageContaining(Foo.class.getName())
-			.withMessageContaining("InvalidOverridingSingletonBeanConfig");
+				.withMessageContaining("OverridingSingletonBeanConfig.foo")
+				.withMessageContaining(ExtendedFoo.class.getName())
+				.withMessageContaining(Foo.class.getName())
+				.withMessageContaining("InvalidOverridingSingletonBeanConfig");
 	}
 
 	@Test  // SPR-15384
@@ -970,14 +970,14 @@ public class ConfigurationClassPostProcessorTests {
 		new ConfigurationClassPostProcessor().postProcessBeanFactory(beanFactory);
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				beanFactory::preInstantiateSingletons)
-			.withMessageContaining("Circular reference");
+				.withMessageContaining("Circular reference");
 	}
 
 	@Test
 	public void testCircularDependencyWithApplicationContext() {
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				new AnnotationConfigApplicationContext(A.class, AStrich.class))
-			.withMessageContaining("Circular reference");
+				.withMessageContaining("Circular reference");
 	}
 
 	@Test
@@ -1084,8 +1084,8 @@ public class ConfigurationClassPostProcessorTests {
 	@Test
 	public void testNameClashBetweenConfigurationClassAndBean() {
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() -> {
-				ApplicationContext ctx = new AnnotationConfigApplicationContext(MyTestBean.class);
-				ctx.getBean("myTestBean", TestBean.class);
+			ApplicationContext ctx = new AnnotationConfigApplicationContext(MyTestBean.class);
+			ctx.getBean("myTestBean", TestBean.class);
 		});
 	}
 
@@ -1103,11 +1103,13 @@ public class ConfigurationClassPostProcessorTests {
 	@Order(1)
 	static class SingletonBeanConfig {
 
-		public @Bean Foo foo() {
+		public @Bean
+		Foo foo() {
 			return new Foo();
 		}
 
-		public @Bean Bar bar() {
+		public @Bean
+		Bar bar() {
 			return new Bar(foo());
 		}
 	}
@@ -1115,11 +1117,13 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration(proxyBeanMethods = false)
 	static class NonEnhancedSingletonBeanConfig {
 
-		public @Bean Foo foo() {
+		public @Bean
+		Foo foo() {
 			return new Foo();
 		}
 
-		public @Bean Bar bar() {
+		public @Bean
+		Bar bar() {
 			return new Bar(foo());
 		}
 	}
@@ -1127,11 +1131,13 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration
 	static class StaticSingletonBeanConfig {
 
-		public static @Bean Foo foo() {
+		public static @Bean
+		Foo foo() {
 			return new Foo();
 		}
 
-		public static @Bean Bar bar() {
+		public static @Bean
+		Bar bar() {
 			return new Bar(foo());
 		}
 	}
@@ -1140,11 +1146,13 @@ public class ConfigurationClassPostProcessorTests {
 	@Order(2)
 	static class OverridingSingletonBeanConfig {
 
-		public @Bean ExtendedFoo foo() {
+		public @Bean
+		ExtendedFoo foo() {
 			return new ExtendedFoo();
 		}
 
-		public @Bean Bar bar() {
+		public @Bean
+		Bar bar() {
 			return new Bar(foo());
 		}
 	}
@@ -1152,7 +1160,8 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration
 	static class OverridingAgainSingletonBeanConfig {
 
-		public @Bean ExtendedAgainFoo foo() {
+		public @Bean
+		ExtendedAgainFoo foo() {
 			return new ExtendedAgainFoo();
 		}
 	}
@@ -1160,7 +1169,8 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration
 	static class InvalidOverridingSingletonBeanConfig {
 
-		public @Bean Foo foo() {
+		public @Bean
+		Foo foo() {
 			return new Foo();
 		}
 	}
@@ -1172,11 +1182,13 @@ public class ConfigurationClassPostProcessorTests {
 		@Order(1)
 		static class SingletonBeanConfig {
 
-			public @Bean Foo foo() {
+			public @Bean
+			Foo foo() {
 				return new Foo();
 			}
 
-			public @Bean Bar bar() {
+			public @Bean
+			Bar bar() {
 				return new Bar(foo());
 			}
 		}
@@ -1185,11 +1197,13 @@ public class ConfigurationClassPostProcessorTests {
 		@Order(2)
 		static class OverridingSingletonBeanConfig {
 
-			public @Bean ExtendedFoo foo() {
+			public @Bean
+			ExtendedFoo foo() {
 				return new ExtendedFoo();
 			}
 
-			public @Bean Bar bar() {
+			public @Bean
+			Bar bar() {
 				return new Bar(foo());
 			}
 		}
@@ -1205,11 +1219,13 @@ public class ConfigurationClassPostProcessorTests {
 			public SingletonBeanConfig(ConfigWithOrderedInnerClasses other) {
 			}
 
-			public @Bean Foo foo() {
+			public @Bean
+			Foo foo() {
 				return new Foo();
 			}
 
-			public @Bean Bar bar() {
+			public @Bean
+			Bar bar() {
 				return new Bar(foo());
 			}
 		}
@@ -1222,11 +1238,13 @@ public class ConfigurationClassPostProcessorTests {
 				other.getObject();
 			}
 
-			public @Bean ExtendedFoo foo() {
+			public @Bean
+			ExtendedFoo foo() {
 				return new ExtendedFoo();
 			}
 
-			public @Bean Bar bar() {
+			public @Bean
+			Bar bar() {
 				return new Bar(foo());
 			}
 		}
@@ -1253,7 +1271,8 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration
 	static class UnloadedConfig {
 
-		public @Bean Foo foo() {
+		public @Bean
+		Foo foo() {
 			return new Foo();
 		}
 	}
@@ -1261,7 +1280,8 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration
 	static class LoadedConfig {
 
-		public @Bean Bar bar() {
+		public @Bean
+		Bar bar() {
 			return new Bar(new Foo());
 		}
 	}
@@ -1275,7 +1295,9 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration
 	public static class ScopedProxyConfigurationClass {
 
-		@Bean @Lazy @Scope(proxyMode = ScopedProxyMode.INTERFACES)
+		@Bean
+		@Lazy
+		@Scope(proxyMode = ScopedProxyMode.INTERFACES)
 		public ITestBean scopedClass() {
 			return new TestBean();
 		}
@@ -1795,7 +1817,8 @@ public class ConfigurationClassPostProcessorTests {
 	@Configuration
 	static class BeanArgumentConfigWithSingleton {
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		public DependingFoo foo(BarArgument bar) {
 			return new DependingFoo(bar);
 		}
@@ -1819,7 +1842,8 @@ public class ConfigurationClassPostProcessorTests {
 			return foo(null);
 		}
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		public DependingFoo foo(BarArgument bar) {
 			return new DependingFoo(bar);
 		}
@@ -1913,12 +1937,13 @@ public class ConfigurationClassPostProcessorTests {
 
 		@Bean(autowireCandidate = false)
 		Runnable testBean(Map<String, Runnable> testBeans,
-				@Qualifier("systemProperties") Map<String, String> sysprops,
-				@Qualifier("systemEnvironment") Map<String, String> sysenv) {
+						  @Qualifier("systemProperties") Map<String, String> sysprops,
+						  @Qualifier("systemEnvironment") Map<String, String> sysenv) {
 			this.testBeans = testBeans;
 			assertThat(sysprops).isSameAs(env.getSystemProperties());
 			assertThat(sysenv).isSameAs(env.getSystemEnvironment());
-			return () -> {};
+			return () -> {
+			};
 		}
 
 		// Unrelated, not to be considered as a factory method
@@ -1947,7 +1972,8 @@ public class ConfigurationClassPostProcessorTests {
 
 		@Bean
 		Runnable testBean() {
-			return () -> {};
+			return () -> {
+			};
 		}
 
 		// Unrelated, not to be considered as a factory method
@@ -1978,6 +2004,7 @@ public class ConfigurationClassPostProcessorTests {
 				public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
 					registry.registerBeanDefinition("myTestBean", new RootBeanDefinition(TestBean.class));
 				}
+
 				@Override
 				public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
 				}

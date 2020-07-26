@@ -44,33 +44,33 @@ public class MapAccessorTests {
 
 		// basic
 		Expression ex = sep.parseExpression("foo");
-		assertThat(ex.getValue(sec,testMap)).isEqualTo("bar");
+		assertThat(ex.getValue(sec, testMap)).isEqualTo("bar");
 		assertThat(SpelCompiler.compile(ex)).isTrue();
-		assertThat(ex.getValue(sec,testMap)).isEqualTo("bar");
+		assertThat(ex.getValue(sec, testMap)).isEqualTo("bar");
 
 		// compound expression
 		ex = sep.parseExpression("foo.toUpperCase()");
-		assertThat(ex.getValue(sec,testMap)).isEqualTo("BAR");
+		assertThat(ex.getValue(sec, testMap)).isEqualTo("BAR");
 		assertThat(SpelCompiler.compile(ex)).isTrue();
-		assertThat(ex.getValue(sec,testMap)).isEqualTo("BAR");
+		assertThat(ex.getValue(sec, testMap)).isEqualTo("BAR");
 
 		// nested map
-		Map<String,Map<String,Object>> nestedMap = getNestedTestMap();
+		Map<String, Map<String, Object>> nestedMap = getNestedTestMap();
 		ex = sep.parseExpression("aaa.foo.toUpperCase()");
-		assertThat(ex.getValue(sec,nestedMap)).isEqualTo("BAR");
+		assertThat(ex.getValue(sec, nestedMap)).isEqualTo("BAR");
 		assertThat(SpelCompiler.compile(ex)).isTrue();
-		assertThat(ex.getValue(sec,nestedMap)).isEqualTo("BAR");
+		assertThat(ex.getValue(sec, nestedMap)).isEqualTo("BAR");
 
 		// avoiding inserting checkcast because first part of expression returns a Map
 		ex = sep.parseExpression("getMap().foo");
 		MapGetter mapGetter = new MapGetter();
-		assertThat(ex.getValue(sec,mapGetter)).isEqualTo("bar");
+		assertThat(ex.getValue(sec, mapGetter)).isEqualTo("bar");
 		assertThat(SpelCompiler.compile(ex)).isTrue();
-		assertThat(ex.getValue(sec,mapGetter)).isEqualTo("bar");
+		assertThat(ex.getValue(sec, mapGetter)).isEqualTo("bar");
 	}
 
 	public static class MapGetter {
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 
 		public MapGetter() {
 			map.put("foo", "bar");
@@ -82,16 +82,16 @@ public class MapAccessorTests {
 		}
 	}
 
-	public Map<String,Object> getSimpleTestMap() {
-		Map<String,Object> map = new HashMap<>();
-		map.put("foo","bar");
+	public Map<String, Object> getSimpleTestMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("foo", "bar");
 		return map;
 	}
 
-	public Map<String,Map<String,Object>> getNestedTestMap() {
-		Map<String,Object> map = new HashMap<>();
-		map.put("foo","bar");
-		Map<String,Map<String,Object>> map2 = new HashMap<>();
+	public Map<String, Map<String, Object>> getNestedTestMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("foo", "bar");
+		Map<String, Map<String, Object>> map2 = new HashMap<>();
 		map2.put("aaa", map);
 		return map2;
 	}

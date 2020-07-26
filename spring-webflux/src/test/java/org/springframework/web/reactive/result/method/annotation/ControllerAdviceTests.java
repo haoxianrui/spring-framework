@@ -135,7 +135,7 @@ public class ControllerAdviceTests {
 	}
 
 	private HandlerResult handle(RequestMappingHandlerAdapter adapter,
-			Object controller, String methodName) throws Exception {
+								 Object controller, String methodName) throws Exception {
 
 		Method method = controller.getClass().getMethod(methodName);
 		HandlerMethod handlerMethod = new HandlerMethod(controller, method);

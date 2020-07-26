@@ -51,13 +51,13 @@ class MetaAnnotationSqlScriptsTests extends AbstractTransactionalTests {
 	}
 
 
-	@Sql({ "drop-schema.sql", "schema.sql", "data.sql" })
+	@Sql({"drop-schema.sql", "schema.sql", "data.sql"})
 	@Retention(RUNTIME)
 	@Target(METHOD)
 	@interface MetaSql {
 	}
 
-	@SqlGroup({ @Sql("drop-schema.sql"), @Sql("schema.sql"), @Sql("data.sql") })
+	@SqlGroup({@Sql("drop-schema.sql"), @Sql("schema.sql"), @Sql("data.sql")})
 	@Retention(RUNTIME)
 	@Target(METHOD)
 	@interface MetaSqlGroup {

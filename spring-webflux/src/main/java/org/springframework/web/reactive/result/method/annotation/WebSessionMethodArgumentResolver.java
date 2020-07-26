@@ -30,8 +30,8 @@ import org.springframework.web.server.WebSession;
  * Resolves method argument value of type {@link WebSession}.
  *
  * @author Rossen Stoyanchev
- * @since 5.2
  * @see ServerWebExchangeMethodArgumentResolver
+ * @since 5.2
  */
 public class WebSessionMethodArgumentResolver extends HandlerMethodArgumentResolverSupport {
 

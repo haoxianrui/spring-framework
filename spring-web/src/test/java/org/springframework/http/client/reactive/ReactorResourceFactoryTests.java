@@ -31,6 +31,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
  * Unit tests for {@link ReactorResourceFactory}.
+ *
  * @author Rossen Stoyanchev
  */
 public class ReactorResourceFactoryTests {

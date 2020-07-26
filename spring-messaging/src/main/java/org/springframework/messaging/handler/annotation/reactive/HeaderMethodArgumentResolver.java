@@ -38,9 +38,9 @@ import org.springframework.util.Assert;
  * {@link NativeMessageHeaderAccessor native} header map.
  *
  * @author Rossen Stoyanchev
- * @since 5.2
  * @see HeadersMethodArgumentResolver
  * @see NativeMessageHeaderAccessor
+ * @since 5.2
  */
 public class HeaderMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
 

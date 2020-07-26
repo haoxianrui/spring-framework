@@ -82,7 +82,7 @@ public class InvocableHandlerMethodTests {
 		Method method = ResolvableMethod.on(Handler.class).mockCall(c -> c.handle(0, "")).method();
 		assertThatExceptionOfType(MethodArgumentResolutionException.class).isThrownBy(() ->
 				invokeAndBlock(new Handler(), method))
-			.withMessageContaining("Could not resolve parameter [0]");
+				.withMessageContaining("Could not resolve parameter [0]");
 	}
 
 	@Test
@@ -120,12 +120,12 @@ public class InvocableHandlerMethodTests {
 		Method method = ResolvableMethod.on(Handler.class).mockCall(c -> c.handle(0, "")).method();
 		assertThatIllegalStateException().isThrownBy(() ->
 				invokeAndBlock(new Handler(), method))
-			.withCauseInstanceOf(IllegalArgumentException.class)
-			.withMessageContaining("Endpoint [")
-			.withMessageContaining("Method [")
-			.withMessageContaining("with argument values:")
-			.withMessageContaining("[0] [type=java.lang.String] [value=__not_an_int__]")
-			.withMessageContaining("[1] [type=java.lang.String] [value=value");
+				.withCauseInstanceOf(IllegalArgumentException.class)
+				.withMessageContaining("Endpoint [")
+				.withMessageContaining("Method [")
+				.withMessageContaining("with argument values:")
+				.withMessageContaining("[0] [type=java.lang.String] [value=__not_an_int__]")
+				.withMessageContaining("[1] [type=java.lang.String] [value=value");
 	}
 
 	@Test
@@ -175,7 +175,6 @@ public class InvocableHandlerMethodTests {
 	private StubArgumentResolver getStubResolver(int index) {
 		return (StubArgumentResolver) this.resolvers.get(index);
 	}
-
 
 
 	@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})

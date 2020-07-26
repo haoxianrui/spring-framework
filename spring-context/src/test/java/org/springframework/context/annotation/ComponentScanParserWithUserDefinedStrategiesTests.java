@@ -50,8 +50,8 @@ public class ComponentScanParserWithUserDefinedStrategiesTests {
 	@Test
 	public void testInvalidConstructorBeanNameGenerator() {
 		assertThatExceptionOfType(BeansException.class).isThrownBy(() ->
-			new ClassPathXmlApplicationContext(
-					"org/springframework/context/annotation/invalidConstructorNameGeneratorTests.xml"));
+				new ClassPathXmlApplicationContext(
+						"org/springframework/context/annotation/invalidConstructorNameGeneratorTests.xml"));
 	}
 
 	@Test

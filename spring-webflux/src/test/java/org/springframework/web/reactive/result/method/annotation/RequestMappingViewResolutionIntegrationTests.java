@@ -80,7 +80,8 @@ class RequestMappingViewResolutionIntegrationTests extends AbstractRequestMappin
 		assertThat(response.getBody()).isNull();
 	}
 
-	@ParameterizedHttpServerTest  // SPR-15291
+	@ParameterizedHttpServerTest
+		// SPR-15291
 	void redirect(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 

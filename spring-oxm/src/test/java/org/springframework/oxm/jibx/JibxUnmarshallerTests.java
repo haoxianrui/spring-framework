@@ -83,7 +83,7 @@ public class JibxUnmarshallerTests extends AbstractUnmarshallerTests<JibxMarshal
 		Object flights = unmarshaller.unmarshal(source);
 		testFlights(flights);
 
-		FlightType flight = ((Flights)flights).getFlight(0);
+		FlightType flight = ((Flights) flights).getFlight(0);
 		assertThat(flight.getAirline()).as("Airline is invalid").isEqualTo("Air Libert\u00e9");
 	}
 

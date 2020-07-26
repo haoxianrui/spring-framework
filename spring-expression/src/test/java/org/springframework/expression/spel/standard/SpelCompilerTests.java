@@ -35,7 +35,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class SpelCompilerTests {
 
-	@Test // gh-24357
+	@Test
+		// gh-24357
 	void expressionCompilesWhenMethodComesFromPublicInterface() {
 		SpelParserConfiguration config = new SpelParserConfiguration(SpelCompilerMode.IMMEDIATE, null);
 		SpelExpressionParser parser = new SpelExpressionParser(config);

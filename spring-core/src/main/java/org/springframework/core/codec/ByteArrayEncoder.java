@@ -49,8 +49,8 @@ public class ByteArrayEncoder extends AbstractEncoder<byte[]> {
 
 	@Override
 	public Flux<DataBuffer> encode(Publisher<? extends byte[]> inputStream,
-			DataBufferFactory bufferFactory, ResolvableType elementType, @Nullable MimeType mimeType,
-			@Nullable Map<String, Object> hints) {
+								   DataBufferFactory bufferFactory, ResolvableType elementType, @Nullable MimeType mimeType,
+								   @Nullable Map<String, Object> hints) {
 
 		// Use (byte[] bytes) for Eclipse
 		return Flux.from(inputStream).map((byte[] bytes) ->
@@ -59,7 +59,7 @@ public class ByteArrayEncoder extends AbstractEncoder<byte[]> {
 
 	@Override
 	public DataBuffer encodeValue(byte[] bytes, DataBufferFactory bufferFactory,
-			ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								  ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		DataBuffer dataBuffer = bufferFactory.wrap(bytes);
 		if (logger.isDebugEnabled() && !Hints.isLoggingSuppressed(hints)) {

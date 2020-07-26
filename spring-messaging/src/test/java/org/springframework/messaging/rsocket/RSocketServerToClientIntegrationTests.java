@@ -44,7 +44,7 @@ import org.springframework.stereotype.Controller;
 /**
  * Client-side handling of requests initiated from the server side.
  *
- *  @author Rossen Stoyanchev
+ * @author Rossen Stoyanchev
  * @author Brian Clozel
  */
 public class RSocketServerToClientIntegrationTests {
@@ -112,8 +112,7 @@ public class RSocketServerToClientIntegrationTests {
 					.block();
 
 			context.getBean(ServerController.class).await(Duration.ofSeconds(5));
-		}
-		finally {
+		} finally {
 			if (requester != null) {
 				requester.rsocket().dispose();
 			}

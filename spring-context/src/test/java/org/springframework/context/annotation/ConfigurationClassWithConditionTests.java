@@ -311,7 +311,7 @@ public class ConfigurationClassWithConditionTests {
 
 		@Override
 		public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
-				BeanDefinitionRegistry registry) {
+											BeanDefinitionRegistry registry) {
 		}
 	}
 
@@ -323,7 +323,7 @@ public class ConfigurationClassWithConditionTests {
 
 		@Override
 		public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-			return new String[] {};
+			return new String[]{};
 		}
 
 	}

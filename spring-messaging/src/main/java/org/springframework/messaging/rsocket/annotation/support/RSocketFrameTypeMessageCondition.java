@@ -41,37 +41,52 @@ import org.springframework.util.Assert;
  */
 public class RSocketFrameTypeMessageCondition extends AbstractMessageCondition<RSocketFrameTypeMessageCondition> {
 
-	/** The name of the header that contains the RSocket frame type being processed. */
+	/**
+	 * The name of the header that contains the RSocket frame type being processed.
+	 */
 	public static final String FRAME_TYPE_HEADER = "rsocketFrameType";
 
 
-	/** Match connection-level frames "SETUP" or "METADATA_PUSH". */
+	/**
+	 * Match connection-level frames "SETUP" or "METADATA_PUSH".
+	 */
 	public static final RSocketFrameTypeMessageCondition CONNECT_CONDITION =
 			new RSocketFrameTypeMessageCondition(FrameType.SETUP, FrameType.METADATA_PUSH);
 
-	/** Match RSocket frames "REQUEST_FNF" or "REQUEST_RESPONSE". */
+	/**
+	 * Match RSocket frames "REQUEST_FNF" or "REQUEST_RESPONSE".
+	 */
 	public static final RSocketFrameTypeMessageCondition REQUEST_FNF_OR_RESPONSE_CONDITION =
 			new RSocketFrameTypeMessageCondition(FrameType.REQUEST_FNF, FrameType.REQUEST_RESPONSE);
 
-	/** Match RSocket frame "REQUEST_RESPONSE". */
+	/**
+	 * Match RSocket frame "REQUEST_RESPONSE".
+	 */
 	public static final RSocketFrameTypeMessageCondition REQUEST_RESPONSE_CONDITION =
 			new RSocketFrameTypeMessageCondition(FrameType.REQUEST_RESPONSE);
 
-	/** Match RSocket frame "REQUEST_STREAM". */
+	/**
+	 * Match RSocket frame "REQUEST_STREAM".
+	 */
 	public static final RSocketFrameTypeMessageCondition REQUEST_STREAM_CONDITION =
 			new RSocketFrameTypeMessageCondition(FrameType.REQUEST_STREAM);
 
-	/** Match RSocket frame "REQUEST_CHANNEL". */
+	/**
+	 * Match RSocket frame "REQUEST_CHANNEL".
+	 */
 	public static final RSocketFrameTypeMessageCondition REQUEST_CHANNEL_CONDITION =
 			new RSocketFrameTypeMessageCondition(FrameType.REQUEST_CHANNEL);
 
-	/** Empty condition that does not match to any RSocket frames (e.g. for type-level mappings) */
+	/**
+	 * Empty condition that does not match to any RSocket frames (e.g. for type-level mappings)
+	 */
 	public static final RSocketFrameTypeMessageCondition EMPTY_CONDITION = new RSocketFrameTypeMessageCondition();
 
 
 	/**
 	 * Condition to match "REQUEST_FNF", "REQUEST_RESPONSE", "REQUEST_STREAM",
 	 * and "REQUEST_CHANNEL".
+	 *
 	 * @deprecated as of 5.2.2 because matching to all interaction types is too
 	 * flexible. Please use one of the other constants in this class that match
 	 * to specific frames.
@@ -84,7 +99,9 @@ public class RSocketFrameTypeMessageCondition extends AbstractMessageCondition<R
 					FrameType.REQUEST_STREAM,
 					FrameType.REQUEST_CHANNEL);
 
-	/** Per FrameType cache to return ready instances from getMatchingCondition. */
+	/**
+	 * Per FrameType cache to return ready instances from getMatchingCondition.
+	 */
 	private static final Map<String, RSocketFrameTypeMessageCondition> frameTypeConditionCache;
 
 	static {
@@ -128,6 +145,7 @@ public class RSocketFrameTypeMessageCondition extends AbstractMessageCondition<R
 
 	/**
 	 * Find the RSocket frame type in the message headers.
+	 *
 	 * @param message the current message
 	 * @return the frame type or {@code null} if not found
 	 */
@@ -158,7 +176,7 @@ public class RSocketFrameTypeMessageCondition extends AbstractMessageCondition<R
 				}
 			}
 		}
-		return  null;
+		return null;
 	}
 
 	@Override
@@ -199,10 +217,11 @@ public class RSocketFrameTypeMessageCondition extends AbstractMessageCondition<R
 	 * <td>Request-Channel</td>
 	 * </tr>
 	 * </table>
-	 * @param cardinalityIn -- the request cardinality: 1 for a single payload,
-	 * 2 for many payloads, and 0 if input is not handled.
+	 *
+	 * @param cardinalityIn  -- the request cardinality: 1 for a single payload,
+	 *                       2 for many payloads, and 0 if input is not handled.
 	 * @param cardinalityOut -- the response cardinality: 0 for no output
-	 * payloads, 1 for a single payload, and 2 for many payloads.
+	 *                       payloads, 1 for a single payload, and 2 for many payloads.
 	 * @return a condition to use for matching the interaction type
 	 * @since 5.2.2
 	 */
@@ -211,10 +230,14 @@ public class RSocketFrameTypeMessageCondition extends AbstractMessageCondition<R
 			case 0:
 			case 1:
 				switch (cardinalityOut) {
-					case 0: return REQUEST_FNF_OR_RESPONSE_CONDITION;
-					case 1: return REQUEST_RESPONSE_CONDITION;
-					case 2: return REQUEST_STREAM_CONDITION;
-					default: throw new IllegalStateException("Invalid cardinality: " + cardinalityOut);
+					case 0:
+						return REQUEST_FNF_OR_RESPONSE_CONDITION;
+					case 1:
+						return REQUEST_RESPONSE_CONDITION;
+					case 2:
+						return REQUEST_STREAM_CONDITION;
+					default:
+						throw new IllegalStateException("Invalid cardinality: " + cardinalityOut);
 				}
 			case 2:
 				return REQUEST_CHANNEL_CONDITION;

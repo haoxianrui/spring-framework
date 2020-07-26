@@ -61,7 +61,7 @@ class MergedAnnotationClassLoaderTests {
 		assertThat(metaAnnotation.getClass().getClassLoader()).isEqualTo(parent);
 		assertThat(
 				getEnumAttribute(metaAnnotation).getClass().getClassLoader()).isEqualTo(
-						parent);
+				parent);
 		assertThat(getClassAttribute(metaAnnotation).getClassLoader()).isEqualTo(child);
 		// MergedAnnotation should follow the same class loader logic
 		MergedAnnotations mergedAnnotations = MergedAnnotations.from(source);
@@ -75,7 +75,7 @@ class MergedAnnotationClassLoaderTests {
 		assertThat(getClassAttribute(synthesizedMeta).getClassLoader()).isEqualTo(child);
 		assertThat(
 				getEnumAttribute(synthesizedMeta).getClass().getClassLoader()).isEqualTo(
-						parent);
+				parent);
 		assertThat(synthesized).isEqualTo(annotation);
 		assertThat(synthesizedMeta).isEqualTo(metaAnnotation);
 		// Also check utils version

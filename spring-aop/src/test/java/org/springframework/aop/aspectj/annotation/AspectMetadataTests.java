@@ -28,10 +28,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 /**
- * @since 2.0
  * @author Rod Johnson
  * @author Chris Beams
  * @author Sam Brannen
+ * @since 2.0
  */
 class AspectMetadataTests {
 
@@ -56,7 +56,7 @@ class AspectMetadataTests {
 		assertThat(am.getAjType().getPerClause().getKind()).isEqualTo(PerClauseKind.PERTARGET);
 		assertThat(am.getPerClausePointcut()).isInstanceOf(AspectJExpressionPointcut.class);
 		assertThat(((AspectJExpressionPointcut) am.getPerClausePointcut()).getExpression())
-			.isEqualTo("execution(* *.getSpouse())");
+				.isEqualTo("execution(* *.getSpouse())");
 	}
 
 	@Test
@@ -67,7 +67,7 @@ class AspectMetadataTests {
 		assertThat(am.getAjType().getPerClause().getKind()).isEqualTo(PerClauseKind.PERTHIS);
 		assertThat(am.getPerClausePointcut()).isInstanceOf(AspectJExpressionPointcut.class);
 		assertThat(((AspectJExpressionPointcut) am.getPerClausePointcut()).getExpression())
-			.isEqualTo("execution(* *.getSpouse())");
+				.isEqualTo("execution(* *.getSpouse())");
 	}
 
 }

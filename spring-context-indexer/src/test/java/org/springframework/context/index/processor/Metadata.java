@@ -38,7 +38,7 @@ class Metadata {
 	}
 
 	public static Condition<CandidateComponentsMetadata> of(String type,
-			List<String> stereotypes) {
+															List<String> stereotypes) {
 		return new Condition<>(metadata -> {
 			ItemMetadata itemMetadata = metadata.getItems().stream()
 					.filter(item -> item.getType().equals(type))

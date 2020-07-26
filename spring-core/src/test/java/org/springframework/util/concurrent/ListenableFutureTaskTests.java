@@ -47,6 +47,7 @@ class ListenableFutureTaskTests {
 			public void onSuccess(String result) {
 				assertThat(result).isEqualTo(s);
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				throw new AssertionError(ex.getMessage(), ex);
@@ -72,6 +73,7 @@ class ListenableFutureTaskTests {
 			public void onSuccess(String result) {
 				fail("onSuccess not expected");
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				assertThat(ex.getMessage()).isEqualTo(s);
@@ -81,10 +83,10 @@ class ListenableFutureTaskTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				task::get)
-			.satisfies(ex -> assertThat(ex.getCause().getMessage()).isEqualTo(s));
+				.satisfies(ex -> assertThat(ex.getCause().getMessage()).isEqualTo(s));
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				task.completable()::get)
-		.satisfies(ex -> assertThat(ex.getCause().getMessage()).isEqualTo(s));
+				.satisfies(ex -> assertThat(ex.getCause().getMessage()).isEqualTo(s));
 	}
 
 	@Test
@@ -123,10 +125,10 @@ class ListenableFutureTaskTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				task::get)
-			.satisfies(e -> assertThat(e.getCause().getMessage()).isEqualTo(s));
+				.satisfies(e -> assertThat(e.getCause().getMessage()).isEqualTo(s));
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				task.completable()::get)
-			.satisfies(e -> assertThat(e.getCause().getMessage()).isEqualTo(s));
+				.satisfies(e -> assertThat(e.getCause().getMessage()).isEqualTo(s));
 	}
 
 }

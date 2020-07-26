@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!--
 		Not yet in use: illustration of possible approach
@@ -35,21 +35,21 @@
 	</bean>
 
 	<bean id="replaceVoidMethod" parent="someParent"
-			class="org.springframework.beans.factory.xml.OverrideOneMethodSubclass">
+		  class="org.springframework.beans.factory.xml.OverrideOneMethodSubclass">
 
 	</bean>
 
 	<bean id="reverseReplacer"
-		class="org.springframework.beans.factory.xml.ReverseMethodReplacer"/>
+		  class="org.springframework.beans.factory.xml.ReverseMethodReplacer"/>
 
 	<bean id="fixedReplacer"
-		class="org.springframework.beans.factory.xml.FixedMethodReplacer"/>
+		  class="org.springframework.beans.factory.xml.FixedMethodReplacer"/>
 
 	<bean id="doSomethingReplacer"
-		class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$DoSomethingReplacer"/>
+		  class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$DoSomethingReplacer"/>
 
 	<bean id="serializableReplacer"
-		class="org.springframework.beans.factory.xml.SerializableMethodReplacerCandidate">
+		  class="org.springframework.beans.factory.xml.SerializableMethodReplacerCandidate">
 
 		<!-- Arbitrary method replacer -->
 		<replaced-method name="replaceMe" replacer="reverseReplacer">
@@ -59,17 +59,21 @@
 	</bean>
 
 	<bean id="jenny" class="org.springframework.beans.testfixture.beans.TestBean"
-		scope="prototype">
-		<property name="name"><value>Jenny</value></property>
-		<property name="age"><value>30</value></property>
+		  scope="prototype">
+		<property name="name">
+			<value>Jenny</value>
+		</property>
+		<property name="age">
+			<value>30</value>
+		</property>
 		<property name="spouse">
-		<!-- Could use id and href -->
+			<!-- Could use id and href -->
 			<ref bean="david"/>
 		</property>
 	</bean>
 
 	<bean id="david" class="org.springframework.beans.testfixture.beans.TestBean"
-		scope="singleton">
+		  scope="singleton">
 		<description>
 			Simple bean, without any collections.
 		</description>
@@ -77,7 +81,9 @@
 			<description>The name of the user</description>
 			<value>David</value>
 		</property>
-		<property name="age"><value>27</value></property>
+		<property name="age">
+			<value>27</value>
+		</property>
 	</bean>
 
 	<bean id="overrideOneMethodByAttribute" class="org.springframework.beans.factory.xml.OverrideOneMethod">

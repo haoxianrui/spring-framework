@@ -97,11 +97,9 @@ public class Jackson2SmileEncoderTests extends AbstractEncoderTests<Jackson2Smil
 						Object actual = this.mapper.reader().forType(List.class)
 								.readValue(dataBuffer.asInputStream());
 						assertThat(actual).isEqualTo(list);
-					}
-					catch (IOException e) {
+					} catch (IOException e) {
 						throw new UncheckedIOException(e);
-					}
-					finally {
+					} finally {
 						release(dataBuffer);
 					}
 				}));
@@ -132,8 +130,7 @@ public class Jackson2SmileEncoderTests extends AbstractEncoderTests<Jackson2Smil
 				.map(buffer -> {
 					try {
 						return this.mapper.reader().forType(Pojo.class).readValues(buffer.asInputStream(true));
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						throw new UncheckedIOException(ex);
 					}
 				});

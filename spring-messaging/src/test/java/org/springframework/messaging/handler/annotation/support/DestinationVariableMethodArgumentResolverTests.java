@@ -61,7 +61,7 @@ public class DestinationVariableMethodArgumentResolverTests {
 		vars.put("name", "value");
 
 		Message<byte[]> message = MessageBuilder.withPayload(new byte[0]).setHeader(
-			DestinationVariableMethodArgumentResolver.DESTINATION_TEMPLATE_VARIABLES_HEADER, vars).build();
+				DestinationVariableMethodArgumentResolver.DESTINATION_TEMPLATE_VARIABLES_HEADER, vars).build();
 
 		MethodParameter param = this.resolvable.annot(destinationVar().noValue()).arg();
 		Object result = this.resolver.resolveArgument(param, message);

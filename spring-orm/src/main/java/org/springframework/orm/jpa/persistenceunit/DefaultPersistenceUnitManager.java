@@ -81,11 +81,11 @@ import org.springframework.util.ResourceUtils;
  *
  * @author Juergen Hoeller
  * @author Stephane Nicoll
- * @since 2.0
  * @see #setPersistenceXmlLocations
  * @see #setDataSourceLookup
  * @see #setLoadTimeWeaver
  * @see org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean#setPersistenceUnitManager
+ * @since 2.0
  */
 public class DefaultPersistenceUnitManager
 		implements PersistenceUnitManager, ResourceLoaderAware, LoadTimeWeaverAware, InitializingBean {
@@ -129,7 +129,7 @@ public class DefaultPersistenceUnitManager
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private String[] persistenceXmlLocations = new String[] {DEFAULT_PERSISTENCE_XML_LOCATION};
+	private String[] persistenceXmlLocations = new String[]{DEFAULT_PERSISTENCE_XML_LOCATION};
 
 	@Nullable
 	private String defaultPersistenceUnitRootLocation = ORIGINAL_DEFAULT_PERSISTENCE_UNIT_ROOT_LOCATION;
@@ -179,15 +179,16 @@ public class DefaultPersistenceUnitManager
 	 * <p>Default is "classpath*:META-INF/persistence.xml".
 	 */
 	public void setPersistenceXmlLocation(String persistenceXmlLocation) {
-		this.persistenceXmlLocations = new String[] {persistenceXmlLocation};
+		this.persistenceXmlLocations = new String[]{persistenceXmlLocation};
 	}
 
 	/**
 	 * Specify multiple locations of {@code persistence.xml} files to load.
 	 * These can be specified as Spring resource locations and/or location patterns.
 	 * <p>Default is "classpath*:META-INF/persistence.xml".
+	 *
 	 * @param persistenceXmlLocations an array of Spring resource Strings
-	 * identifying the location of the {@code persistence.xml} files to read
+	 *                                identifying the location of the {@code persistence.xml} files to read
 	 */
 	public void setPersistenceXmlLocations(String... persistenceXmlLocations) {
 		this.persistenceXmlLocations = persistenceXmlLocations;
@@ -208,6 +209,7 @@ public class DefaultPersistenceUnitManager
 	 * Specify the name of the default persistence unit, if any. Default is "default".
 	 * <p>Primarily applied to a scanned persistence unit without {@code persistence.xml}.
 	 * Also applicable to selecting a default unit from several persistence units available.
+	 *
 	 * @see #setPackagesToScan
 	 * @see #obtainDefaultPersistenceUnitInfo
 	 */
@@ -238,6 +240,7 @@ public class DefaultPersistenceUnitManager
 	 * resource for the default unit if the mapping file is not co-located with a
 	 * {@code persistence.xml} file (in which case we assume it is only meant to be
 	 * used with the persistence units defined there, like in standard JPA).
+	 *
 	 * @see #setDefaultPersistenceUnitName
 	 * @see #setMappingResources
 	 */
@@ -263,6 +266,7 @@ public class DefaultPersistenceUnitManager
 	 * {@code META-INF/orm.xml} check. On the other hand, explicitly specifying
 	 * {@code META-INF/orm.xml} here will register that file even if it happens
 	 * to be co-located with a {@code persistence.xml} file.
+	 *
 	 * @see #setDefaultPersistenceUnitName
 	 * @see #setPackagesToScan
 	 */
@@ -273,8 +277,9 @@ public class DefaultPersistenceUnitManager
 	/**
 	 * Specify the JPA 2.0 shared cache mode for all of this manager's persistence
 	 * units, overriding any value in {@code persistence.xml} if set.
-	 * @since 4.0
+	 *
 	 * @see javax.persistence.spi.PersistenceUnitInfo#getSharedCacheMode()
+	 * @since 4.0
 	 */
 	public void setSharedCacheMode(SharedCacheMode sharedCacheMode) {
 		this.sharedCacheMode = sharedCacheMode;
@@ -283,8 +288,9 @@ public class DefaultPersistenceUnitManager
 	/**
 	 * Specify the JPA 2.0 validation mode for all of this manager's persistence
 	 * units, overriding any value in {@code persistence.xml} if set.
-	 * @since 4.0
+	 *
 	 * @see javax.persistence.spi.PersistenceUnitInfo#getValidationMode()
+	 * @since 4.0
 	 */
 	public void setValidationMode(ValidationMode validationMode) {
 		this.validationMode = validationMode;
@@ -298,6 +304,7 @@ public class DefaultPersistenceUnitManager
 	 * objects, matching the data source names used in {@code persistence.xml}.
 	 * If not specified, data source names will be resolved as JNDI names instead
 	 * (as defined by standard JPA).
+	 *
 	 * @see org.springframework.jdbc.datasource.lookup.MapDataSourceLookup
 	 */
 	public void setDataSources(Map<String, DataSource> dataSources) {
@@ -315,6 +322,7 @@ public class DefaultPersistenceUnitManager
 	 * via the "dataSources" property. If the {@code persistence.xml} file
 	 * does not define DataSource names at all, specify a default DataSource
 	 * via the "defaultDataSource" property.
+	 *
 	 * @see org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup
 	 * @see org.springframework.jdbc.datasource.lookup.BeanFactoryDataSourceLookup
 	 * @see #setDataSources
@@ -341,6 +349,7 @@ public class DefaultPersistenceUnitManager
 	 * <p>In JPA speak, a DataSource passed in here will be uses as "nonJtaDataSource"
 	 * on the PersistenceUnitInfo passed to the PersistenceProvider, provided that
 	 * none has been registered before.
+	 *
 	 * @see javax.persistence.spi.PersistenceUnitInfo#getNonJtaDataSource()
 	 */
 	public void setDefaultDataSource(@Nullable DataSource defaultDataSource) {
@@ -363,6 +372,7 @@ public class DefaultPersistenceUnitManager
 	 * <p>In JPA speak, a DataSource passed in here will be uses as "jtaDataSource"
 	 * on the PersistenceUnitInfo passed to the PersistenceProvider, provided that
 	 * none has been registered before.
+	 *
 	 * @see javax.persistence.spi.PersistenceUnitInfo#getJtaDataSource()
 	 */
 	public void setDefaultJtaDataSource(@Nullable DataSource defaultJtaDataSource) {
@@ -412,6 +422,7 @@ public class DefaultPersistenceUnitManager
 	 * on it (for example, interacting with Spring's TomcatInstrumentableClassLoader).
 	 * Consider using the {@code context:load-time-weaver} XML tag for creating
 	 * such a shared LoadTimeWeaver (autodetecting the environment by default).
+	 *
 	 * @see org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver
 	 * @see org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver
 	 */
@@ -450,6 +461,7 @@ public class DefaultPersistenceUnitManager
 	 * parsing all matching files, configuring and post-processing them.
 	 * <p>PersistenceUnitInfos cannot be obtained before this preparation
 	 * method has been invoked.
+	 *
 	 * @see #obtainDefaultPersistenceUnitInfo()
 	 * @see #obtainPersistenceUnitInfo(String)
 	 */
@@ -476,8 +488,7 @@ public class DefaultPersistenceUnitManager
 			}
 			if (this.loadTimeWeaver != null) {
 				pui.init(this.loadTimeWeaver);
-			}
-			else {
+			} else {
 				pui.init(this.resourcePatternResolver.getClassLoader());
 			}
 			postProcessPersistenceUnitInfo(pui);
@@ -518,8 +529,7 @@ public class DefaultPersistenceUnitManager
 					logger.warn("Found explicit default persistence unit with name '" + defaultName + "' in persistence.xml - " +
 							"overriding local default persistence unit settings ('packagesToScan'/'mappingResources')");
 				}
-			}
-			else {
+			} else {
 				infos.add(buildDefaultPersistenceUnitInfo());
 			}
 		}
@@ -528,6 +538,7 @@ public class DefaultPersistenceUnitManager
 
 	/**
 	 * Perform Spring-based scanning for entity classes.
+	 *
 	 * @see #setPackagesToScan
 	 */
 	private SpringPersistenceUnitInfo buildDefaultPersistenceUnitInfo() {
@@ -547,8 +558,7 @@ public class DefaultPersistenceUnitManager
 			for (String mappingFileName : this.mappingResources) {
 				scannedUnit.addMappingFileName(mappingFileName);
 			}
-		}
-		else {
+		} else {
 			Resource ormXml = getOrmXmlForDefaultPersistenceUnit();
 			if (ormXml != null) {
 				scannedUnit.addMappingFileName(DEFAULT_ORM_XML_RESOURCE);
@@ -556,8 +566,7 @@ public class DefaultPersistenceUnitManager
 					try {
 						scannedUnit.setPersistenceUnitRootUrl(
 								PersistenceUnitReader.determinePersistenceUnitRootUrl(ormXml));
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						logger.debug("Failed to determine persistence unit root URL from orm.xml location", ex);
 					}
 				}
@@ -596,15 +605,13 @@ public class DefaultPersistenceUnitManager
 								scannedUnit.setPersistenceUnitRootUrl(ResourceUtils.extractJarFileURL(url));
 							}
 						}
-					}
-					else if (className.endsWith(PACKAGE_INFO_SUFFIX)) {
+					} else if (className.endsWith(PACKAGE_INFO_SUFFIX)) {
 						scannedUnit.addManagedPackage(
 								className.substring(0, className.length() - PACKAGE_INFO_SUFFIX.length()));
 					}
 				}
 			}
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new PersistenceException("Failed to scan classpath for unlisted entity classes", ex);
 		}
 	}
@@ -625,6 +632,7 @@ public class DefaultPersistenceUnitManager
 	/**
 	 * Try to determine the persistence unit root URL based on the given
 	 * "defaultPersistenceUnitRootLocation".
+	 *
 	 * @return the persistence unit root URL to pass to the JPA PersistenceProvider
 	 * @see #setDefaultPersistenceUnitRootLocation
 	 */
@@ -636,8 +644,7 @@ public class DefaultPersistenceUnitManager
 		try {
 			URL url = this.resourcePatternResolver.getResource(this.defaultPersistenceUnitRootLocation).getURL();
 			return (ResourceUtils.isJarURL(url) ? ResourceUtils.extractJarFileURL(url) : url);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new PersistenceException("Unable to resolve persistence unit root URL", ex);
 		}
 	}
@@ -658,8 +665,7 @@ public class DefaultPersistenceUnitManager
 				if (!persistenceXml.exists()) {
 					return ormXml;
 				}
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				// Cannot resolve relative persistence.xml file - let's assume it's not there.
 				return ormXml;
 			}
@@ -674,6 +680,7 @@ public class DefaultPersistenceUnitManager
 	 * 'obtaining' it for use but rather just accessing it for post-processing).
 	 * <p>This can be used in {@link #postProcessPersistenceUnitInfo} implementations,
 	 * detecting existing persistence units of the same name and potentially merging them.
+	 *
 	 * @param persistenceUnitName the name of the desired persistence unit
 	 * @return the PersistenceUnitInfo in mutable form, or {@code null} if not available
 	 */
@@ -688,8 +695,9 @@ public class DefaultPersistenceUnitManager
 	 * <p>The default implementation delegates to all registered PersistenceUnitPostProcessors.
 	 * It is usually preferable to register further entity classes, jar files etc there
 	 * rather than in a subclass of this manager, to be able to reuse the post-processors.
+	 *
 	 * @param pui the chosen PersistenceUnitInfo, as read from {@code persistence.xml}.
-	 * Passed in as MutablePersistenceUnitInfo.
+	 *            Passed in as MutablePersistenceUnitInfo.
 	 * @see #setPersistenceUnitPostProcessors
 	 */
 	protected void postProcessPersistenceUnitInfo(MutablePersistenceUnitInfo pui) {
@@ -736,8 +744,7 @@ public class DefaultPersistenceUnitManager
 			if (!this.persistenceUnitInfoNames.contains(persistenceUnitName)) {
 				throw new IllegalArgumentException(
 						"No persistence unit with name '" + persistenceUnitName + "' found");
-			}
-			else {
+			} else {
 				throw new IllegalStateException(
 						"Persistence unit with name '" + persistenceUnitName + "' already obtained");
 			}

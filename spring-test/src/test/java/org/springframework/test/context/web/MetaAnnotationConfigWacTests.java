@@ -34,8 +34,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * and {@link ContextConfiguration}.
  *
  * @author Sam Brannen
- * @since 4.0
  * @see WebTestConfiguration
+ * @since 4.0
  */
 @ExtendWith(SpringExtension.class)
 @WebTestConfiguration

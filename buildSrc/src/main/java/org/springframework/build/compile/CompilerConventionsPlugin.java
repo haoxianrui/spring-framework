@@ -75,6 +75,7 @@ public class CompilerConventionsPlugin implements Plugin<Project> {
 	/**
 	 * Applies the common Java compiler options for main sources, test fixture sources, and
 	 * test sources.
+	 *
 	 * @param project the current project
 	 */
 	private void applyJavaCompileConventions(Project project) {
@@ -82,8 +83,7 @@ public class CompilerConventionsPlugin implements Plugin<Project> {
 		if (project.hasProperty(JAVA_SOURCE_VERSION_PROPERTY)) {
 			JavaVersion javaSourceVersion = JavaVersion.toVersion(project.property(JAVA_SOURCE_VERSION_PROPERTY));
 			java.setSourceCompatibility(javaSourceVersion);
-		}
-		else {
+		} else {
 			java.setSourceCompatibility(DEFAULT_COMPILER_VERSION);
 		}
 		java.setTargetCompatibility(DEFAULT_COMPILER_VERSION);

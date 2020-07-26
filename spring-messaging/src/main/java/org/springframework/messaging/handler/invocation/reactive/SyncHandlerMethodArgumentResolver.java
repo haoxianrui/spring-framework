@@ -43,8 +43,9 @@ public interface SyncHandlerMethodArgumentResolver extends HandlerMethodArgument
 
 	/**
 	 * Resolve the value for the method parameter synchronously.
+	 *
 	 * @param parameter the method parameter
-	 * @param message the currently processed message
+	 * @param message   the currently processed message
 	 * @return the resolved value, if any
 	 */
 	@Nullable

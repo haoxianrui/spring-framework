@@ -38,7 +38,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
- *
  * Integration tests with {@code @RequestMapping} handler methods and global
  * CORS configuration.
  *
@@ -85,7 +84,7 @@ class GlobalCorsConfigIntegrationTests extends AbstractRequestMappingIntegration
 
 		assertThatExceptionOfType(HttpClientErrorException.class).isThrownBy(() ->
 				performGet("/cors-restricted", this.headers, String.class))
-			.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN));
+				.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN));
 	}
 
 	@ParameterizedHttpServerTest
@@ -127,7 +126,7 @@ class GlobalCorsConfigIntegrationTests extends AbstractRequestMappingIntegration
 		this.headers.add(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, "GET");
 		assertThatExceptionOfType(HttpClientErrorException.class).isThrownBy(() ->
 				performOptions("/cors-restricted", this.headers, String.class))
-			.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN));
+				.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN));
 	}
 
 	@ParameterizedHttpServerTest
@@ -137,7 +136,7 @@ class GlobalCorsConfigIntegrationTests extends AbstractRequestMappingIntegration
 		this.headers.add(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, "GET");
 		assertThatExceptionOfType(HttpClientErrorException.class).isThrownBy(() ->
 				performOptions("/welcome", this.headers, String.class))
-			.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN));
+				.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN));
 	}
 
 	@ParameterizedHttpServerTest
@@ -186,7 +185,8 @@ class GlobalCorsConfigIntegrationTests extends AbstractRequestMappingIntegration
 		}
 	}
 
-	@RestController @SuppressWarnings("unused")
+	@RestController
+	@SuppressWarnings("unused")
 	static class TestController {
 
 		@GetMapping("/welcome")

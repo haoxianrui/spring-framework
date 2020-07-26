@@ -180,7 +180,8 @@ public class PayloadMethodArgumentResolverTests {
 			this.decoders.add(StringDecoder.allMimeTypes());
 		}
 		List<StringDecoder> decoders = Collections.singletonList(StringDecoder.allMimeTypes());
-		return new PayloadMethodArgumentResolver(decoders, validator, null, useDefaultResolution) {};
+		return new PayloadMethodArgumentResolver(decoders, validator, null, useDefaultResolution) {
+		};
 	}
 
 

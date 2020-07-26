@@ -7,7 +7,7 @@
 		  scope="prototype"/>
 
 	<bean id="testInterceptor" class="org.springframework.aop.framework.PrototypeTargetTests$TestInterceptor"
-			scope="singleton"/>
+		  scope="singleton"/>
 
 	<bean id="testBeanPrototype" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="proxyInterfaces">

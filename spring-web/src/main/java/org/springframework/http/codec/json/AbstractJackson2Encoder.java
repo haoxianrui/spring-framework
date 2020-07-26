@@ -91,6 +91,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 	 * Configure "streaming" media types for which flushing should be performed
 	 * automatically vs at the end of the stream.
 	 * <p>By default this is set to {@link MediaType#APPLICATION_STREAM_JSON}.
+	 *
 	 * @param mediaTypes one or more media types to add to the list
 	 * @see HttpMessageEncoder#getStreamingMediaTypes()
 	 */
@@ -109,7 +110,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 
 	@Override
 	public Flux<DataBuffer> encode(Publisher<?> inputStream, DataBufferFactory bufferFactory,
-			ResolvableType elementType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								   ResolvableType elementType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		Assert.notNull(inputStream, "'inputStream' must not be null");
 		Assert.notNull(bufferFactory, "'bufferFactory' must not be null");
@@ -119,8 +120,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 			return Mono.from(inputStream)
 					.map(value -> encodeValue(value, bufferFactory, elementType, mimeType, hints))
 					.flux();
-		}
-		else {
+		} else {
 			byte[] separator = streamSeparator(mimeType);
 			if (separator != null) { // streaming
 				try {
@@ -133,12 +133,10 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 					return Flux.from(inputStream)
 							.map(value -> encodeStreamingValue(value, bufferFactory, hints, sequenceWriter, byteBuilder,
 									separator));
-				}
-				catch (IOException ex) {
+				} catch (IOException ex) {
 					return Flux.error(ex);
 				}
-			}
-			else { // non-streaming
+			} else { // non-streaming
 				ResolvableType listType = ResolvableType.forClassWithGenerics(List.class, elementType);
 				return Flux.from(inputStream)
 						.collectList()
@@ -151,7 +149,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 
 	@Override
 	public DataBuffer encodeValue(Object value, DataBufferFactory bufferFactory,
-			ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								  ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		ObjectWriter writer = createObjectWriter(valueType, mimeType, hints);
 		ByteArrayBuilder byteBuilder = new ByteArrayBuilder(writer.getFactory()._getBufferRecycler());
@@ -163,14 +161,11 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 			JsonGenerator generator = getObjectMapper().getFactory().createGenerator(byteBuilder, encoding);
 			writer.writeValue(generator, value);
 			generator.flush();
-		}
-		catch (InvalidDefinitionException ex) {
+		} catch (InvalidDefinitionException ex) {
 			throw new CodecException("Type definition error: " + ex.getType(), ex);
-		}
-		catch (JsonProcessingException ex) {
+		} catch (JsonProcessingException ex) {
 			throw new EncodingException("JSON encoding error: " + ex.getOriginalMessage(), ex);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new IllegalStateException("Unexpected I/O error while writing to byte array builder", ex);
 		}
 
@@ -182,21 +177,18 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 	}
 
 	private DataBuffer encodeStreamingValue(Object value, DataBufferFactory bufferFactory, @Nullable Map<String, Object> hints,
-			SequenceWriter sequenceWriter, ByteArrayBuilder byteArrayBuilder, byte[] separator) {
+											SequenceWriter sequenceWriter, ByteArrayBuilder byteArrayBuilder, byte[] separator) {
 
 		logValue(hints, value);
 
 		try {
 			sequenceWriter.write(value);
 			sequenceWriter.flush();
-		}
-		catch (InvalidDefinitionException ex) {
+		} catch (InvalidDefinitionException ex) {
 			throw new CodecException("Type definition error: " + ex.getType(), ex);
-		}
-		catch (JsonProcessingException ex) {
+		} catch (JsonProcessingException ex) {
 			throw new EncodingException("JSON encoding error: " + ex.getOriginalMessage(), ex);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new IllegalStateException("Unexpected I/O error while writing to byte array builder", ex);
 		}
 
@@ -209,8 +201,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 			// SequenceWriter writes an unnecessary space in between values
 			offset = 1;
 			length = bytes.length - 1;
-		}
-		else {
+		} else {
 			offset = 0;
 			length = bytes.length;
 		}
@@ -231,7 +222,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 	}
 
 	private ObjectWriter createObjectWriter(ResolvableType valueType, @Nullable MimeType mimeType,
-			@Nullable Map<String, Object> hints) {
+											@Nullable Map<String, Object> hints) {
 
 		JavaType javaType = getJavaType(valueType.getType(), null);
 		Class<?> jsonView = (hints != null ? (Class<?>) hints.get(Jackson2CodecSupport.JSON_VIEW_HINT) : null);
@@ -246,7 +237,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 	}
 
 	protected ObjectWriter customizeWriter(ObjectWriter writer, @Nullable MimeType mimeType,
-			ResolvableType elementType, @Nullable Map<String, Object> hints) {
+										   ResolvableType elementType, @Nullable Map<String, Object> hints) {
 
 		return writer;
 	}
@@ -263,6 +254,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 
 	/**
 	 * Determine the JSON encoding to use for the given mime type.
+	 *
 	 * @param mimeType the mime type as requested by the caller
 	 * @return the JSON encoding to use (never {@code null})
 	 * @since 5.0.5
@@ -294,7 +286,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 
 	@Override
 	public Map<String, Object> getEncodeHints(@Nullable ResolvableType actualType, ResolvableType elementType,
-			@Nullable MediaType mediaType, ServerHttpRequest request, ServerHttpResponse response) {
+											  @Nullable MediaType mediaType, ServerHttpRequest request, ServerHttpResponse response) {
 
 		return (actualType != null ? getHints(actualType) : Hints.none());
 	}

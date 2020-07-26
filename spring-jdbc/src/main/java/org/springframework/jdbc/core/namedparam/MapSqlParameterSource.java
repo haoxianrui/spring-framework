@@ -38,11 +38,11 @@ import org.springframework.util.StringUtils;
  *
  * @author Thomas Risberg
  * @author Juergen Hoeller
- * @since 2.0
  * @see #addValue(String, Object)
  * @see #addValue(String, Object, int)
  * @see #registerSqlType
  * @see NamedParameterJdbcTemplate
+ * @since 2.0
  */
 public class MapSqlParameterSource extends AbstractSqlParameterSource {
 
@@ -52,6 +52,7 @@ public class MapSqlParameterSource extends AbstractSqlParameterSource {
 	/**
 	 * Create an empty MapSqlParameterSource,
 	 * with values to be added via {@code addValue}.
+	 *
 	 * @see #addValue(String, Object)
 	 */
 	public MapSqlParameterSource() {
@@ -60,8 +61,9 @@ public class MapSqlParameterSource extends AbstractSqlParameterSource {
 	/**
 	 * Create a new MapSqlParameterSource, with one value
 	 * comprised of the supplied arguments.
+	 *
 	 * @param paramName the name of the parameter
-	 * @param value the value of the parameter
+	 * @param value     the value of the parameter
 	 * @see #addValue(String, Object)
 	 */
 	public MapSqlParameterSource(String paramName, @Nullable Object value) {
@@ -70,6 +72,7 @@ public class MapSqlParameterSource extends AbstractSqlParameterSource {
 
 	/**
 	 * Create a new MapSqlParameterSource based on a Map.
+	 *
 	 * @param values a Map holding existing parameter values (can be {@code null})
 	 */
 	public MapSqlParameterSource(@Nullable Map<String, ?> values) {
@@ -79,8 +82,9 @@ public class MapSqlParameterSource extends AbstractSqlParameterSource {
 
 	/**
 	 * Add a parameter to this parameter source.
+	 *
 	 * @param paramName the name of the parameter
-	 * @param value the value of the parameter
+	 * @param value     the value of the parameter
 	 * @return a reference to this parameter source,
 	 * so it's possible to chain several calls together
 	 */
@@ -95,9 +99,10 @@ public class MapSqlParameterSource extends AbstractSqlParameterSource {
 
 	/**
 	 * Add a parameter to this parameter source.
+	 *
 	 * @param paramName the name of the parameter
-	 * @param value the value of the parameter
-	 * @param sqlType the SQL type of the parameter
+	 * @param value     the value of the parameter
+	 * @param sqlType   the SQL type of the parameter
 	 * @return a reference to this parameter source,
 	 * so it's possible to chain several calls together
 	 */
@@ -110,10 +115,11 @@ public class MapSqlParameterSource extends AbstractSqlParameterSource {
 
 	/**
 	 * Add a parameter to this parameter source.
+	 *
 	 * @param paramName the name of the parameter
-	 * @param value the value of the parameter
-	 * @param sqlType the SQL type of the parameter
-	 * @param typeName the type name of the parameter
+	 * @param value     the value of the parameter
+	 * @param sqlType   the SQL type of the parameter
+	 * @param typeName  the type name of the parameter
 	 * @return a reference to this parameter source,
 	 * so it's possible to chain several calls together
 	 */
@@ -127,6 +133,7 @@ public class MapSqlParameterSource extends AbstractSqlParameterSource {
 
 	/**
 	 * Add a Map of parameters to this parameter source.
+	 *
 	 * @param values a Map holding existing parameter values (can be {@code null})
 	 * @return a reference to this parameter source,
 	 * so it's possible to chain several calls together

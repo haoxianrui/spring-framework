@@ -9,30 +9,30 @@
 	<aop:config>
 		<aop:aspect id="afterThrowingAdviceBindingTests" ref="testAspect">
 			<aop:after-throwing
-			    method="noArgs"
-			    pointcut="execution(* exceptional(..))"
+					method="noArgs"
+					pointcut="execution(* exceptional(..))"
 			/>
 			<aop:after-throwing
-				method="oneThrowable"
-				throwing="t"
-				pointcut="execution(* exceptional(..))"
+					method="oneThrowable"
+					throwing="t"
+					pointcut="execution(* exceptional(..))"
 			/>
 			<aop:after-throwing
-				method="oneRuntimeException"
-				throwing="ex"
-				pointcut="execution(* exceptional(..))"
-			/>		
-			<aop:after-throwing
-				method="noArgsOnThrowableMatch"
-				throwing="java.lang.Throwable"
-				pointcut="execution(* exceptional(..))"
+					method="oneRuntimeException"
+					throwing="ex"
+					pointcut="execution(* exceptional(..))"
 			/>
 			<aop:after-throwing
-				method="noArgsOnRuntimeExceptionMatch"
-				throwing="java.lang.RuntimeException"
-				pointcut="execution(* exceptional(..))"
-			/>		
-	</aop:aspect>	
+					method="noArgsOnThrowableMatch"
+					throwing="java.lang.Throwable"
+					pointcut="execution(* exceptional(..))"
+			/>
+			<aop:after-throwing
+					method="noArgsOnRuntimeExceptionMatch"
+					throwing="java.lang.RuntimeException"
+					pointcut="execution(* exceptional(..))"
+			/>
+		</aop:aspect>
 	</aop:config>
 
 	<bean id="testAspect" class="org.springframework.aop.aspectj.AfterThrowingAdviceBindingTestAspect"/>

@@ -4,7 +4,7 @@
 			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			targetNamespace="http://www.springframework.org/schema/beans/test"
 			elementFormDefault="qualified">
-	
+
 	<xsd:element name="person">
 		<xsd:complexType>
 			<xsd:attribute name="id" type="xsd:string" use="optional" form="unqualified"/>

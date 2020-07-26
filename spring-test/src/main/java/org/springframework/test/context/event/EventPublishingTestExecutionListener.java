@@ -65,7 +65,6 @@ import org.springframework.test.context.support.AbstractTestExecutionListener;
  *
  * @author Sam Brannen
  * @author Frank Scheffler
- * @since 5.2
  * @see org.springframework.test.context.event.annotation.BeforeTestClass @BeforeTestClass
  * @see org.springframework.test.context.event.annotation.PrepareTestInstance @PrepareTestInstance
  * @see org.springframework.test.context.event.annotation.BeforeTestMethod @BeforeTestMethod
@@ -73,6 +72,7 @@ import org.springframework.test.context.support.AbstractTestExecutionListener;
  * @see org.springframework.test.context.event.annotation.AfterTestExecution @AfterTestExecution
  * @see org.springframework.test.context.event.annotation.AfterTestMethod @AfterTestMethod
  * @see org.springframework.test.context.event.annotation.AfterTestClass @AfterTestClass
+ * @since 5.2
  */
 public class EventPublishingTestExecutionListener extends AbstractTestExecutionListener {
 

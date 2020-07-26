@@ -20,7 +20,7 @@ import org.hamcrest.Matcher
 import org.springframework.test.web.servlet.ResultMatcher
 
 /**
- * Extension for [StatusResultMatchers.is] providing an `isEqualTo` alias since `is` is
+ * Extension for [StatusResultMatchers. is] providing an `isEqualTo` alias since `is` is
  * a reserved keyword in Kotlin.
  *
  * @author Sebastien Deleuze
@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultMatcher
 fun StatusResultMatchers.isEqualTo(matcher: Matcher<Int>): ResultMatcher = `is`(matcher)
 
 /**
- * Extension for [StatusResultMatchers.is] providing an `isEqualTo` alias since `is` is
+ * Extension for [StatusResultMatchers. is] providing an `isEqualTo` alias since `is` is
  * a reserved keyword in Kotlin.
  *
  * @author Sebastien Deleuze

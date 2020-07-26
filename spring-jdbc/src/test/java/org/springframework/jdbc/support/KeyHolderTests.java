@@ -57,7 +57,7 @@ public class KeyHolderTests {
 
 		assertThatExceptionOfType(DataRetrievalFailureException.class).isThrownBy(() ->
 				kh.getKey().intValue())
-			.withMessageStartingWith("The generated key is not of a supported numeric type.");
+				.withMessageStartingWith("The generated key is not of a supported numeric type.");
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class KeyHolderTests {
 
 		assertThatExceptionOfType(DataRetrievalFailureException.class).isThrownBy(() ->
 				kh.getKey())
-			.withMessageStartingWith("Unable to retrieve the generated key.");
+				.withMessageStartingWith("Unable to retrieve the generated key.");
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class KeyHolderTests {
 		assertThat(kh.getKeys().size()).as("two keys should be in the map").isEqualTo(2);
 		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(() ->
 				kh.getKey())
-			.withMessageStartingWith("The getKey method should only be used when a single key is returned.");
+				.withMessageStartingWith("The getKey method should only be used when a single key is returned.");
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public class KeyHolderTests {
 		assertThat(kh.getKeyList().size()).as("two rows should be in the list").isEqualTo(2);
 		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(() ->
 				kh.getKeys())
-			.withMessageStartingWith("The getKeys method should only be used when keys for a single row are returned.");
+				.withMessageStartingWith("The getKeys method should only be used when keys for a single row are returned.");
 	}
 
 }

@@ -46,10 +46,10 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
  * @author Juergen Hoeller
  * @author Dave Syer
  * @author Chris Beams
- * @since 3.0
  * @see EnableScheduling
  * @see ScheduledAnnotationBeanPostProcessor
  * @see Schedules
+ * @since 3.0
  */
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -61,8 +61,9 @@ public @interface Scheduled {
 	 * A special cron expression value that indicates a disabled trigger: {@value}.
 	 * <p>This is primarily meant for use with <code>${...}</code> placeholders,
 	 * allowing for external disabling of corresponding scheduled methods.
-	 * @since 5.1
+	 *
 	 * @see ScheduledTaskRegistrar#CRON_DISABLED
+	 * @since 5.1
 	 */
 	String CRON_DISABLED = ScheduledTaskRegistrar.CRON_DISABLED;
 
@@ -84,6 +85,7 @@ public @interface Scheduled {
 	 * <p>The special value {@link #CRON_DISABLED "-"} indicates a disabled cron
 	 * trigger, primarily meant for externally specified values resolved by a
 	 * <code>${...}</code> placeholder.
+	 *
 	 * @return an expression that can be parsed to a cron schedule
 	 * @see org.springframework.scheduling.support.CronSequenceGenerator
 	 */
@@ -92,17 +94,19 @@ public @interface Scheduled {
 	/**
 	 * A time zone for which the cron expression will be resolved. By default, this
 	 * attribute is the empty String (i.e. the server's local time zone will be used).
+	 *
 	 * @return a zone id accepted by {@link java.util.TimeZone#getTimeZone(String)},
 	 * or an empty String to indicate the server's default time zone
-	 * @since 4.0
 	 * @see org.springframework.scheduling.support.CronTrigger#CronTrigger(String, java.util.TimeZone)
 	 * @see java.util.TimeZone
+	 * @since 4.0
 	 */
 	String zone() default "";
 
 	/**
 	 * Execute the annotated method with a fixed period in milliseconds between the
 	 * end of the last invocation and the start of the next.
+	 *
 	 * @return the delay in milliseconds
 	 */
 	long fixedDelay() default -1;
@@ -110,6 +114,7 @@ public @interface Scheduled {
 	/**
 	 * Execute the annotated method with a fixed period in milliseconds between the
 	 * end of the last invocation and the start of the next.
+	 *
 	 * @return the delay in milliseconds as a String value, e.g. a placeholder
 	 * or a {@link java.time.Duration#parse java.time.Duration} compliant value
 	 * @since 3.2.2
@@ -119,6 +124,7 @@ public @interface Scheduled {
 	/**
 	 * Execute the annotated method with a fixed period in milliseconds between
 	 * invocations.
+	 *
 	 * @return the period in milliseconds
 	 */
 	long fixedRate() default -1;
@@ -126,6 +132,7 @@ public @interface Scheduled {
 	/**
 	 * Execute the annotated method with a fixed period in milliseconds between
 	 * invocations.
+	 *
 	 * @return the period in milliseconds as a String value, e.g. a placeholder
 	 * or a {@link java.time.Duration#parse java.time.Duration} compliant value
 	 * @since 3.2.2
@@ -135,6 +142,7 @@ public @interface Scheduled {
 	/**
 	 * Number of milliseconds to delay before the first execution of a
 	 * {@link #fixedRate} or {@link #fixedDelay} task.
+	 *
 	 * @return the initial delay in milliseconds
 	 * @since 3.2
 	 */
@@ -143,6 +151,7 @@ public @interface Scheduled {
 	/**
 	 * Number of milliseconds to delay before the first execution of a
 	 * {@link #fixedRate} or {@link #fixedDelay} task.
+	 *
 	 * @return the initial delay in milliseconds as a String value, e.g. a placeholder
 	 * or a {@link java.time.Duration#parse java.time.Duration} compliant value
 	 * @since 3.2.2

@@ -70,8 +70,7 @@ class ResourceDecoderTests extends AbstractDecoderTests<ResourceDecoder> {
 					try {
 						byte[] bytes = StreamUtils.copyToByteArray(resource.getInputStream());
 						assertThat(new String(bytes)).isEqualTo("foobar");
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						throw new AssertionError(ex.getMessage(), ex);
 					}
 				})
@@ -91,8 +90,7 @@ class ResourceDecoderTests extends AbstractDecoderTests<ResourceDecoder> {
 								byte[] bytes = StreamUtils.copyToByteArray(resource.getInputStream());
 								assertThat(new String(bytes)).isEqualTo("foobar");
 								assertThat(resource.getFilename()).isEqualTo("testFile");
-							}
-							catch (IOException ex) {
+							} catch (IOException ex) {
 								throw new AssertionError(ex.getMessage(), ex);
 							}
 						})
@@ -111,8 +109,7 @@ class ResourceDecoderTests extends AbstractDecoderTests<ResourceDecoder> {
 						byte[] bytes = StreamUtils.copyToByteArray(resource.getInputStream());
 						assertThat(new String(bytes)).isEqualTo("foobar");
 						assertThat(resource.contentLength()).isEqualTo(fooBytes.length + barBytes.length);
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						throw new AssertionError(ex.getMessage(), ex);
 					}
 				})

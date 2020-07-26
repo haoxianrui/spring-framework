@@ -28,13 +28,14 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
  */
 public class StompClientSupportTests {
 
-	private final StompClientSupport stompClient = new StompClientSupport() {};
+	private final StompClientSupport stompClient = new StompClientSupport() {
+	};
 
 
 	@Test
 	public void defaultHeartbeatValidation() throws Exception {
-		trySetDefaultHeartbeat(new long[] {-1, 0});
-		trySetDefaultHeartbeat(new long[] {0, -1});
+		trySetDefaultHeartbeat(new long[]{-1, 0});
+		trySetDefaultHeartbeat(new long[]{0, -1});
 	}
 
 	private void trySetDefaultHeartbeat(long[] heartbeat) {
@@ -44,15 +45,15 @@ public class StompClientSupportTests {
 
 	@Test
 	public void defaultHeartbeatValue() throws Exception {
-		assertThat(this.stompClient.getDefaultHeartbeat()).isEqualTo(new long[] {10000, 10000});
+		assertThat(this.stompClient.getDefaultHeartbeat()).isEqualTo(new long[]{10000, 10000});
 	}
 
 	@Test
 	public void isDefaultHeartbeatEnabled() throws Exception {
-		assertThat(this.stompClient.getDefaultHeartbeat()).isEqualTo(new long[] {10000, 10000});
+		assertThat(this.stompClient.getDefaultHeartbeat()).isEqualTo(new long[]{10000, 10000});
 		assertThat(this.stompClient.isDefaultHeartbeatEnabled()).isTrue();
 
-		this.stompClient.setDefaultHeartbeat(new long[] {0, 0});
+		this.stompClient.setDefaultHeartbeat(new long[]{0, 0});
 		assertThat(this.stompClient.isDefaultHeartbeatEnabled()).isFalse();
 	}
 
@@ -61,18 +62,18 @@ public class StompClientSupportTests {
 		StompHeaders connectHeaders = this.stompClient.processConnectHeaders(null);
 
 		assertThat(connectHeaders).isNotNull();
-		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[] {10000, 10000});
+		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[]{10000, 10000});
 	}
 
 	@Test
 	public void processConnectHeadersWithExplicitHeartbeat() throws Exception {
 
 		StompHeaders connectHeaders = new StompHeaders();
-		connectHeaders.setHeartbeat(new long[] {15000, 15000});
+		connectHeaders.setHeartbeat(new long[]{15000, 15000});
 		connectHeaders = this.stompClient.processConnectHeaders(connectHeaders);
 
 		assertThat(connectHeaders).isNotNull();
-		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[] {15000, 15000});
+		assertThat(connectHeaders.getHeartbeat()).isEqualTo(new long[]{15000, 15000});
 	}
 
 }

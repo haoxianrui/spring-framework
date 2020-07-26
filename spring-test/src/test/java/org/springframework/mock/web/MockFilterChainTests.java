@@ -88,7 +88,7 @@ class MockFilterChainTests {
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				chain.doFilter(this.request, this.response))
-			.withMessage("This FilterChain has already been called!");
+				.withMessage("This FilterChain has already been called!");
 	}
 
 	@Test
@@ -99,7 +99,7 @@ class MockFilterChainTests {
 		verify(servlet).service(this.request, this.response);
 		assertThatIllegalStateException().isThrownBy(() ->
 				chain.doFilter(this.request, this.response))
-			.withMessage("This FilterChain has already been called!");
+				.withMessage("This FilterChain has already been called!");
 	}
 
 	@Test
@@ -119,7 +119,7 @@ class MockFilterChainTests {
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				chain.doFilter(this.request, this.response))
-			.withMessage("This FilterChain has already been called!");
+				.withMessage("This FilterChain has already been called!");
 	}
 
 
@@ -141,8 +141,7 @@ class MockFilterChainTests {
 
 			if (this.servlet != null) {
 				this.servlet.service(request, response);
-			}
-			else {
+			} else {
 				chain.doFilter(request, response);
 			}
 		}

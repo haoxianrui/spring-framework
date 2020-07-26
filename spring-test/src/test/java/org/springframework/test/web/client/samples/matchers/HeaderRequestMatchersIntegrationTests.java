@@ -68,8 +68,8 @@ public class HeaderRequestMatchersIntegrationTests {
 	@Test
 	public void testString() throws Exception {
 		this.mockServer.expect(requestTo("/person/1"))
-			.andExpect(header("Accept", "application/json, application/*+json"))
-			.andRespond(withSuccess(RESPONSE_BODY, MediaType.APPLICATION_JSON));
+				.andExpect(header("Accept", "application/json, application/*+json"))
+				.andRespond(withSuccess(RESPONSE_BODY, MediaType.APPLICATION_JSON));
 
 		executeAndVerify();
 	}
@@ -77,8 +77,8 @@ public class HeaderRequestMatchersIntegrationTests {
 	@Test
 	public void testStringContains() throws Exception {
 		this.mockServer.expect(requestTo("/person/1"))
-			.andExpect(header("Accept", containsString("json")))
-			.andRespond(withSuccess(RESPONSE_BODY, MediaType.APPLICATION_JSON));
+				.andExpect(header("Accept", containsString("json")))
+				.andRespond(withSuccess(RESPONSE_BODY, MediaType.APPLICATION_JSON));
 
 		executeAndVerify();
 	}

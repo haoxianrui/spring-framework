@@ -92,7 +92,7 @@ class AnnotationDrivenNamespaceTests extends AbstractJmsAnnotationDrivenTests {
 
 		assertThatExceptionOfType(ListenerExecutionFailedException.class).isThrownBy(() ->
 				testJmsHandlerMethodFactoryConfiguration(context))
-			.withCauseInstanceOf(MethodArgumentNotValidException.class);
+				.withCauseInstanceOf(MethodArgumentNotValidException.class);
 	}
 
 	@Override

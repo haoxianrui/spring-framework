@@ -87,13 +87,14 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 	 * The underlying implementation uses a hashMap to cache messageFormats
 	 * once a message has been asked for.  This test is an attempt to
 	 * make sure the cache is being used properly.
+	 *
 	 * @see org.springframework.context.support.AbstractMessageSource for more details.
 	 */
 	@Test
 	public void getMessageWithMessageAlreadyLookedFor() {
 		Object[] arguments = {
-			7, new Date(System.currentTimeMillis()),
-			"a disturbance in the Force"
+				7, new Date(System.currentTimeMillis()),
+				"a disturbance in the Force"
 		};
 
 		// The first time searching, we don't care about for this test
@@ -102,16 +103,16 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 
 		// Now msg better be as expected
 		assertThat(sac.getMessage("message.format.example1", arguments, Locale.US).
-						contains("there was \"a disturbance in the Force\" on planet 7.")).as("2nd search within MsgFormat cache returned expected message for Locale.US").isTrue();
+				contains("there was \"a disturbance in the Force\" on planet 7.")).as("2nd search within MsgFormat cache returned expected message for Locale.US").isTrue();
 
 		Object[] newArguments = {
-			8, new Date(System.currentTimeMillis()),
-			"a disturbance in the Force"
+				8, new Date(System.currentTimeMillis()),
+				"a disturbance in the Force"
 		};
 
 		// Now msg better be as expected even with different args
 		assertThat(sac.getMessage("message.format.example1", newArguments, Locale.US).
-						contains("there was \"a disturbance in the Force\" on planet 8.")).as("2nd search within MsgFormat cache with different args returned expected message for Locale.US").isTrue();
+				contains("there was \"a disturbance in the Force\" on planet 8.")).as("2nd search within MsgFormat cache with different args returned expected message for Locale.US").isTrue();
 	}
 
 	/**
@@ -120,8 +121,8 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 	@Test
 	public void getMessageWithNoDefaultPassedInAndFoundInMsgCatalog() {
 		Object[] arguments = {
-			7, new Date(System.currentTimeMillis()),
-			"a disturbance in the Force"
+				7, new Date(System.currentTimeMillis()),
+				"a disturbance in the Force"
 		};
 
 		/*
@@ -133,11 +134,11 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 		 minutes of the time might not be the same.
 		 */
 		assertThat(sac.getMessage("message.format.example1", arguments, Locale.US).
-						contains("there was \"a disturbance in the Force\" on planet 7.")).as("msg from staticMsgSource for Locale.US substituting args for placeholders is as expected").isTrue();
+				contains("there was \"a disturbance in the Force\" on planet 7.")).as("msg from staticMsgSource for Locale.US substituting args for placeholders is as expected").isTrue();
 
 		// Try with Locale.UK
 		assertThat(sac.getMessage("message.format.example1", arguments, Locale.UK).
-						contains("there was \"a disturbance in the Force\" on station number 7.")).as("msg from staticMsgSource for Locale.UK substituting args for placeholders is as expected").isTrue();
+				contains("there was \"a disturbance in the Force\" on station number 7.")).as("msg from staticMsgSource for Locale.UK substituting args for placeholders is as expected").isTrue();
 
 		// Try with Locale.US - Use a different test msg that requires no args
 		assertThat(sac.getMessage("message.format.example2", null, Locale.US)
@@ -154,22 +155,22 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 	@Test
 	public void messageSourceResolvable() {
 		// first code valid
-		String[] codes1 = new String[] {"message.format.example3", "message.format.example2"};
+		String[] codes1 = new String[]{"message.format.example3", "message.format.example2"};
 		MessageSourceResolvable resolvable1 = new DefaultMessageSourceResolvable(codes1, null, "default");
 		assertThat(MSG_TXT3_US.equals(sac.getMessage(resolvable1, Locale.US))).as("correct message retrieved").isTrue();
 
 		// only second code valid
-		String[] codes2 = new String[] {"message.format.example99", "message.format.example2"};
+		String[] codes2 = new String[]{"message.format.example99", "message.format.example2"};
 		MessageSourceResolvable resolvable2 = new DefaultMessageSourceResolvable(codes2, null, "default");
 		assertThat(MSG_TXT2_US.equals(sac.getMessage(resolvable2, Locale.US))).as("correct message retrieved").isTrue();
 
 		// no code valid, but default given
-		String[] codes3 = new String[] {"message.format.example99", "message.format.example98"};
+		String[] codes3 = new String[]{"message.format.example99", "message.format.example98"};
 		MessageSourceResolvable resolvable3 = new DefaultMessageSourceResolvable(codes3, null, "default");
 		assertThat("default".equals(sac.getMessage(resolvable3, Locale.US))).as("correct message retrieved").isTrue();
 
 		// no code valid, no default
-		String[] codes4 = new String[] {"message.format.example99", "message.format.example98"};
+		String[] codes4 = new String[]{"message.format.example99", "message.format.example98"};
 		MessageSourceResolvable resolvable4 = new DefaultMessageSourceResolvable(codes4);
 
 		assertThatExceptionOfType(NoSuchMessageException.class).isThrownBy(() ->
@@ -223,7 +224,7 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 		parent.addMessage("with.param", Locale.ENGLISH, "put {0} here");
 
 		MessageSourceResolvable resolvable = new DefaultMessageSourceResolvable(
-				new String[] {"with.param"}, new Object[] {new DefaultMessageSourceResolvable("param")});
+				new String[]{"with.param"}, new Object[]{new DefaultMessageSourceResolvable("param")});
 
 		assertThat(source.getMessage(resolvable, Locale.ENGLISH)).isEqualTo("put value here");
 	}
@@ -238,7 +239,7 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 		source.addMessage("with.param", Locale.ENGLISH, "put {0} here");
 
 		MessageSourceResolvable resolvable = new DefaultMessageSourceResolvable(
-				new String[] {"with.param"}, new Object[] {new DefaultMessageSourceResolvable("param")});
+				new String[]{"with.param"}, new Object[]{new DefaultMessageSourceResolvable("param")});
 
 		assertThat(source.getMessage(resolvable, Locale.ENGLISH)).isEqualTo("put value here");
 	}

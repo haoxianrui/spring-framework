@@ -101,7 +101,7 @@ public class CustomScopeConfigurerTests {
 				figurer.postProcessBeanFactory(factory));
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Test
 	public void testWhereScopeMapHasNonStringTypedScopeNameInKeySet() {
 		Map scopes = new HashMap();

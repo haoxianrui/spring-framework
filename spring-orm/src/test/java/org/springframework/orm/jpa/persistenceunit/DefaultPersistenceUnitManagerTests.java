@@ -26,7 +26,6 @@ import org.springframework.orm.jpa.domain.Person;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-
 /**
  * Tests for {@link DefaultPersistenceUnitManager}.
  *

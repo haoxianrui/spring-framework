@@ -42,8 +42,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * to provide dependency injection to a <em>parameterized test instance</em>.
  *
  * @author Sam Brannen
- * @since 4.2
  * @see org.springframework.test.context.junit4.ParameterizedDependencyInjectionTests
+ * @since 4.2
  */
 @RunWith(Parameterized.class)
 @ContextConfiguration("/org/springframework/test/context/junit4/ParameterizedDependencyInjectionTests-context.xml")
@@ -72,7 +72,7 @@ public class ParameterizedSpringRuleTests {
 
 	@Parameters(name = "bean [{0}], employee [{1}]")
 	public static String[][] employeeData() {
-		return new String[][] { { "employee1", "John Smith" }, { "employee2", "Jane Smith" } };
+		return new String[][]{{"employee1", "John Smith"}, {"employee2", "Jane Smith"}};
 	}
 
 	@BeforeClass

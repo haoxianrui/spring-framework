@@ -103,7 +103,7 @@ public class MessageReceivingTemplateTests {
 
 		assertThatExceptionOfType(MessageConversionException.class).isThrownBy(() ->
 				this.template.receiveAndConvert("somewhere", Integer.class))
-			.withCauseInstanceOf(ConversionFailedException.class);
+				.withCauseInstanceOf(ConversionFailedException.class);
 	}
 
 	@Test
@@ -114,13 +114,11 @@ public class MessageReceivingTemplateTests {
 		this.template.setMessageConverter(new GenericMessageConverter());
 		try {
 			this.template.receiveAndConvert(Writer.class);
-		}
-		catch (MessageConversionException ex) {
+		} catch (MessageConversionException ex) {
 			assertThat(ex.getMessage().contains("payload")).as("Invalid exception message '" + ex.getMessage() + "'").isTrue();
 			assertThat(ex.getFailedMessage()).isSameAs(expected);
 		}
 	}
-
 
 
 	private static class TestMessagingTemplate extends AbstractMessagingTemplate<String> {

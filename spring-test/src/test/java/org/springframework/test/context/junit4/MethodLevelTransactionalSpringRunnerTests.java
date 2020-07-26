@@ -54,11 +54,11 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * at the <strong>method level</strong>.
  *
  * @author Sam Brannen
- * @since 2.5
  * @see ClassLevelTransactionalSpringRunnerTests
+ * @since 2.5
  */
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
-	TransactionalTestExecutionListener.class })
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
+		TransactionalTestExecutionListener.class})
 public class MethodLevelTransactionalSpringRunnerTests extends AbstractTransactionalSpringRunnerTests {
 
 	protected static JdbcTemplate jdbcTemplate;

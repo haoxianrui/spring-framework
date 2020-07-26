@@ -49,7 +49,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 	}
 
 	private RouterFunctions.Builder add(RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+										HandlerFunction<ServerResponse> handlerFunction) {
 
 		this.routerFunctions.add(RouterFunctions.route(predicate, handlerFunction));
 		return this;
@@ -62,7 +62,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder GET(String pattern, RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+									   HandlerFunction<ServerResponse> handlerFunction) {
 
 		return add(RequestPredicates.GET(pattern).and(predicate), handlerFunction);
 	}
@@ -74,7 +74,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder HEAD(String pattern, RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+										HandlerFunction<ServerResponse> handlerFunction) {
 
 		return add(RequestPredicates.HEAD(pattern).and(predicate), handlerFunction);
 	}
@@ -86,7 +86,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder POST(String pattern, RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+										HandlerFunction<ServerResponse> handlerFunction) {
 
 		return add(RequestPredicates.POST(pattern).and(predicate), handlerFunction);
 	}
@@ -98,7 +98,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder PUT(String pattern, RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+									   HandlerFunction<ServerResponse> handlerFunction) {
 
 		return add(RequestPredicates.PUT(pattern).and(predicate), handlerFunction);
 	}
@@ -110,7 +110,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder PATCH(String pattern, RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+										 HandlerFunction<ServerResponse> handlerFunction) {
 
 		return add(RequestPredicates.PATCH(pattern).and(predicate), handlerFunction);
 	}
@@ -122,7 +122,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder DELETE(String pattern, RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+										  HandlerFunction<ServerResponse> handlerFunction) {
 
 		return add(RequestPredicates.DELETE(pattern).and(predicate), handlerFunction);
 	}
@@ -134,13 +134,13 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder route(RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+										 HandlerFunction<ServerResponse> handlerFunction) {
 		return add(RouterFunctions.route(predicate, handlerFunction));
 	}
 
 	@Override
 	public RouterFunctions.Builder OPTIONS(String pattern, RequestPredicate predicate,
-			HandlerFunction<ServerResponse> handlerFunction) {
+										   HandlerFunction<ServerResponse> handlerFunction) {
 
 		return add(RequestPredicates.OPTIONS(pattern).and(predicate), handlerFunction);
 	}
@@ -157,7 +157,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder nest(RequestPredicate predicate,
-			Consumer<RouterFunctions.Builder> builderConsumer) {
+										Consumer<RouterFunctions.Builder> builderConsumer) {
 
 		Assert.notNull(builderConsumer, "Consumer must not be null");
 
@@ -170,7 +170,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder nest(RequestPredicate predicate,
-			Supplier<RouterFunction<ServerResponse>> routerFunctionSupplier) {
+										Supplier<RouterFunction<ServerResponse>> routerFunctionSupplier) {
 
 		Assert.notNull(routerFunctionSupplier, "RouterFunction Supplier must not be null");
 
@@ -181,14 +181,14 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder path(String pattern,
-			Consumer<RouterFunctions.Builder> builderConsumer) {
+										Consumer<RouterFunctions.Builder> builderConsumer) {
 
 		return nest(RequestPredicates.path(pattern), builderConsumer);
 	}
 
 	@Override
 	public RouterFunctions.Builder path(String pattern,
-			Supplier<RouterFunction<ServerResponse>> routerFunctionSupplier) {
+										Supplier<RouterFunction<ServerResponse>> routerFunctionSupplier) {
 
 		return nest(RequestPredicates.path(pattern), routerFunctionSupplier);
 	}
@@ -217,7 +217,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder onError(Predicate<Throwable> predicate,
-			BiFunction<Throwable, ServerRequest, ServerResponse> responseProvider) {
+										   BiFunction<Throwable, ServerRequest, ServerResponse> responseProvider) {
 
 		Assert.notNull(predicate, "Predicate must not be null");
 		Assert.notNull(responseProvider, "ResponseProvider must not be null");
@@ -227,7 +227,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 	@Override
 	public RouterFunctions.Builder onError(Class<? extends Throwable> exceptionType,
-			BiFunction<Throwable, ServerRequest, ServerResponse> responseProvider) {
+										   BiFunction<Throwable, ServerRequest, ServerResponse> responseProvider) {
 		Assert.notNull(exceptionType, "ExceptionType must not be null");
 		Assert.notNull(responseProvider, "ResponseProvider must not be null");
 
@@ -244,8 +244,7 @@ class RouterFunctionBuilder implements RouterFunctions.Builder {
 
 		if (this.filterFunctions.isEmpty()) {
 			return result;
-		}
-		else {
+		} else {
 			HandlerFilterFunction<ServerResponse, ServerResponse> filter =
 					this.filterFunctions.stream()
 							.reduce(HandlerFilterFunction::andThen)

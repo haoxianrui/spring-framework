@@ -27,9 +27,9 @@ package org.springframework.transaction;
  *
  * @author Mark Paluch
  * @author Juergen Hoeller
- * @since 5.2
  * @see #setRollbackOnly()
  * @see ReactiveTransactionManager#getReactiveTransaction
+ * @since 5.2
  */
 public interface ReactiveTransaction extends TransactionExecution {
 

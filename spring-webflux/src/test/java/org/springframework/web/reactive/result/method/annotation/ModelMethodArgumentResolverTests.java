@@ -81,6 +81,7 @@ public class ModelMethodArgumentResolverTests {
 			Map<String, Object> map,
 			@RequestBody Map<String, Object> annotatedMap,
 			ModelMap modelMap,
-			Object object) {}
+			Object object) {
+	}
 
 }

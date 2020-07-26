@@ -45,7 +45,7 @@ public class BeanValidationPostProcessorTests {
 		ac.registerBeanDefinition("bean", new RootBeanDefinition(NotNullConstrainedBean.class));
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				ac::refresh)
-			.satisfies(ex -> assertThat(ex.getRootCause().getMessage()).contains("testBean", "invalid"));
+				.satisfies(ex -> assertThat(ex.getRootCause().getMessage()).contains("testBean", "invalid"));
 		ac.close();
 	}
 
@@ -83,7 +83,7 @@ public class BeanValidationPostProcessorTests {
 		ac.registerBeanDefinition("bean", bd);
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				ac::refresh)
-			.satisfies(ex -> assertThat(ex.getRootCause().getMessage()).contains("stringValue", "invalid"));
+				.satisfies(ex -> assertThat(ex.getRootCause().getMessage()).contains("stringValue", "invalid"));
 		ac.close();
 	}
 

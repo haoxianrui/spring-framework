@@ -56,12 +56,10 @@ public class MockUOWManager implements UOWManager {
 			this.status = UOW_STATUS_ACTIVE;
 			action.run();
 			this.status = (this.rollbackOnly ? UOW_STATUS_ROLLEDBACK : UOW_STATUS_COMMITTED);
-		}
-		catch (Error | RuntimeException ex) {
+		} catch (Error | RuntimeException ex) {
 			this.status = UOW_STATUS_ROLLEDBACK;
 			throw ex;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			this.status = UOW_STATUS_ROLLEDBACK;
 			throw new UOWActionException(ex);
 		}

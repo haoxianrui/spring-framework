@@ -42,10 +42,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Platform, simply run {@link SpringJUnitJupiterTestSuite} as a JUnit 4 test.
  *
  * @author Sam Brannen
- * @since 5.0
  * @see SpringExtension
  * @see SpringJUnitConfig
  * @see SpringExtensionTests
+ * @since 5.0
  */
 @SpringJUnitConfig(TestConfig.class)
 @DisplayName("@SpringJUnitConfig Tests")

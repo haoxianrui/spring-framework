@@ -58,6 +58,7 @@ import static org.springframework.web.testfixture.method.MvcAnnotationPredicates
 
 /**
  * Unit tests for {@link RequestPartMethodArgumentResolver}.
+ *
  * @author Rossen Stoyanchev
  * @author Ilya Lukyanovich
  */
@@ -339,7 +340,8 @@ public class RequestPartMethodArgumentResolverTests {
 			@RequestPart(name = "name", required = false) Mono<Part> anotherPartMono,
 			@RequestPart(name = "name", required = false) Flux<Part> anotherPartFlux,
 			@RequestPart(name = "name", required = false) List<Part> anotherPartList,
-			Person notAnnotated) {}
+			Person notAnnotated) {
+	}
 
 
 	private static class Person {

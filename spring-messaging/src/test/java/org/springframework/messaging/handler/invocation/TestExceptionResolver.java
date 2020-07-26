@@ -24,6 +24,7 @@ import org.springframework.util.ReflectionUtils;
 
 /**
  * Sub-class for {@link AbstractExceptionHandlerMethodResolver} for testing.
+ *
  * @author Rossen Stoyanchev
  */
 public class TestExceptionResolver extends AbstractExceptionHandlerMethodResolver {

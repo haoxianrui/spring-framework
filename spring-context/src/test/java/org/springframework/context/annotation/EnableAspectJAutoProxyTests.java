@@ -130,6 +130,7 @@ public class EnableAspectJAutoProxyTests {
 					assertThat(AopContext.currentProxy()).isNotNull();
 					return super.foo(id);
 				}
+
 				@Override
 				protected FooDao fooDao() {
 					return context.getBean(FooDao.class);

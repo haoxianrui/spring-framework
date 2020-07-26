@@ -39,7 +39,7 @@ public class SimpMessageMappingInfo implements MessageCondition<SimpMessageMappi
 
 
 	public SimpMessageMappingInfo(SimpMessageTypeMessageCondition messageTypeMessageCondition,
-			DestinationPatternsMessageCondition destinationConditions) {
+								  DestinationPatternsMessageCondition destinationConditions) {
 
 		this.delegate = new CompositeMessageCondition(messageTypeMessageCondition, destinationConditions);
 	}

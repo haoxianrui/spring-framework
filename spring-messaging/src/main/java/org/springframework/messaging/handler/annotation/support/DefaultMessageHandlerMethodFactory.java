@@ -52,10 +52,10 @@ import org.springframework.validation.Validator;
  *
  * @author Stephane Nicoll
  * @author Juergen Hoeller
- * @since 4.1
  * @see #setConversionService
  * @see #setValidator
  * @see #setCustomArgumentResolvers
+ * @since 4.1
  */
 public class DefaultMessageHandlerMethodFactory
 		implements MessageHandlerMethodFactory, BeanFactoryAware, InitializingBean {
@@ -81,6 +81,7 @@ public class DefaultMessageHandlerMethodFactory
 	/**
 	 * Set the {@link ConversionService} to use to convert the original
 	 * message payload or headers.
+	 *
 	 * @see HeaderMethodArgumentResolver
 	 * @see GenericMessageConverter
 	 */
@@ -91,6 +92,7 @@ public class DefaultMessageHandlerMethodFactory
 	/**
 	 * Set the {@link MessageConverter} to use. By default a {@link GenericMessageConverter}
 	 * is used.
+	 *
 	 * @see GenericMessageConverter
 	 */
 	public void setMessageConverter(MessageConverter messageConverter) {
@@ -99,6 +101,7 @@ public class DefaultMessageHandlerMethodFactory
 
 	/**
 	 * Set the Validator instance used for validating {@code @Payload} arguments.
+	 *
 	 * @see org.springframework.validation.annotation.Validated
 	 * @see PayloadMethodArgumentResolver
 	 */
@@ -109,6 +112,7 @@ public class DefaultMessageHandlerMethodFactory
 	/**
 	 * Set the list of custom {@code HandlerMethodArgumentResolver}s that will be used
 	 * after resolvers for supported argument type.
+	 *
 	 * @param customArgumentResolvers the list of resolvers (never {@code null})
 	 */
 	public void setCustomArgumentResolvers(List<HandlerMethodArgumentResolver> customArgumentResolvers) {

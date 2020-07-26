@@ -103,12 +103,12 @@ public abstract class AbstractContainerEntityManagerFactoryIntegrationTests
 	@Test
 	public void testGetReferenceWhenNoRow() {
 		assertThatExceptionOfType(Exception.class).isThrownBy(() -> {
-				Person notThere = sharedEntityManager.getReference(Person.class, 666);
-				// We may get here (as with Hibernate). Either behaviour is valid:
-				// throw exception on first access or on getReference itself.
-				notThere.getFirstName();
-			})
-		.matches(ex -> ex.getClass().getName().endsWith("NotFoundException"));
+			Person notThere = sharedEntityManager.getReference(Person.class, 666);
+			// We may get here (as with Hibernate). Either behaviour is valid:
+			// throw exception on first access or on getReference itself.
+			notThere.getFirstName();
+		})
+				.matches(ex -> ex.getClass().getName().endsWith("NotFoundException"));
 	}
 
 	@Test
@@ -131,8 +131,7 @@ public abstract class AbstractContainerEntityManagerFactoryIntegrationTests
 			assertThat(newTony.getDriversLicense()).isNotNull();
 
 			newTony.getDriversLicense().getSerialNumber();
-		}
-		finally {
+		} finally {
 			deleteFromTables("person", "drivers_license");
 		}
 	}
@@ -226,7 +225,7 @@ public abstract class AbstractContainerEntityManagerFactoryIntegrationTests
 		assertThat(people.size()).isEqualTo(0);
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				q.getSingleResult())
-			.withMessageContaining("closed");
+				.withMessageContaining("closed");
 		// We would typically expect an IllegalStateException, but Hibernate throws a
 		// PersistenceException. So we assert the contents of the exception message instead.
 

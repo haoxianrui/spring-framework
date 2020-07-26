@@ -84,8 +84,7 @@ public class InjectAnnotationBeanPostProcessorTests {
 		bf.registerBeanDefinition("testBean", new GenericBeanDefinition());
 		try {
 			bf.getBean("testBean");
-		}
-		catch (BeanCreationException ex) {
+		} catch (BeanCreationException ex) {
 			boolean condition = ex.getRootCause() instanceof IllegalStateException;
 			assertThat(condition).isTrue();
 		}
@@ -825,7 +824,7 @@ public class InjectAnnotationBeanPostProcessorTests {
 
 		@Inject
 		public ConstructorResourceInjectionBean(ITestBean testBean4, NestedTestBean nestedTestBean,
-				ConfigurableListableBeanFactory beanFactory) {
+												ConfigurableListableBeanFactory beanFactory) {
 			this.testBean4 = testBean4;
 			this.nestedTestBean = nestedTestBean;
 			this.beanFactory = beanFactory;
@@ -932,7 +931,7 @@ public class InjectAnnotationBeanPostProcessorTests {
 		}
 
 		public ConstructorsCollectionResourceInjectionBean(ITestBean testBean3, ITestBean testBean4,
-				NestedTestBean nestedTestBean) {
+														   NestedTestBean nestedTestBean) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -1152,12 +1151,14 @@ public class InjectAnnotationBeanPostProcessorTests {
 
 
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface Nullable {}
+	public @interface Nullable {
+	}
 
 
 	public static class NullableFieldInjectionBean {
 
-		@Inject @Nullable
+		@Inject
+		@Nullable
 		private TestBean testBean;
 
 		public TestBean getTestBean() {

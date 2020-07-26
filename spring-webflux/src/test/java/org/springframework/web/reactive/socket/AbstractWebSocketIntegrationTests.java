@@ -86,7 +86,7 @@ abstract class AbstractWebSocketIntegrationTests {
 
 	static Stream<Object[]> arguments() throws IOException {
 
-		WebSocketClient[] clients = new WebSocketClient[] {
+		WebSocketClient[] clients = new WebSocketClient[]{
 				new TomcatWebSocketClient(),
 				new JettyWebSocketClient(),
 				new ReactorNettyWebSocketClient(),

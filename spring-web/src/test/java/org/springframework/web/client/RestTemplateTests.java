@@ -501,8 +501,7 @@ public class RestTemplateTests {
 			template.setRequestFactory(new SimpleClientHttpRequestFactory());
 			template.put(server.url("/internal/server/error").uri(), null);
 			assertThat(server.takeRequest().getHeader("Accept")).isEqualTo("*/*");
-		}
-		finally {
+		} finally {
 			server.shutdown();
 		}
 	}
@@ -529,8 +528,7 @@ public class RestTemplateTests {
 			assertThat(accepts).hasSize(1);
 			assertThat(accepts.get(0)).hasSize(1);
 			assertThat(accepts.get(0).get(0)).isEqualTo("application/json");
-		}
-		finally {
+		} finally {
 			server.shutdown();
 		}
 	}
@@ -590,8 +588,7 @@ public class RestTemplateTests {
 			template.setRequestFactory(new SimpleClientHttpRequestFactory());
 			template.delete(server.url("/internal/server/error").uri());
 			assertThat(server.takeRequest().getHeader("Accept")).isEqualTo("*/*");
-		}
-		finally {
+		} finally {
 			server.shutdown();
 		}
 	}
@@ -620,8 +617,8 @@ public class RestTemplateTests {
 
 		assertThatExceptionOfType(ResourceAccessException.class).isThrownBy(() ->
 				template.getForObject(url, String.class))
-			.withMessage("I/O error on GET request for \"https://example.com/resource\": " +
-							"Socket failure; nested exception is java.io.IOException: Socket failure");
+				.withMessage("I/O error on GET request for \"https://example.com/resource\": " +
+						"Socket failure; nested exception is java.io.IOException: Socket failure");
 	}
 
 	@Test  // SPR-15900
@@ -638,8 +635,8 @@ public class RestTemplateTests {
 
 		assertThatExceptionOfType(ResourceAccessException.class).isThrownBy(() ->
 				template.getForObject(uri, String.class))
-			.withMessage("I/O error on GET request for \"https://example.com/resource\": " +
-					"Socket failure; nested exception is java.io.IOException: Socket failure");
+				.withMessage("I/O error on GET request for \"https://example.com/resource\": " +
+						"Socket failure; nested exception is java.io.IOException: Socket failure");
 	}
 
 	@Test
@@ -669,7 +666,8 @@ public class RestTemplateTests {
 	public void exchangeParameterizedType() throws Exception {
 		GenericHttpMessageConverter converter = mock(GenericHttpMessageConverter.class);
 		template.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(converter));
-		ParameterizedTypeReference<List<Integer>> intList = new ParameterizedTypeReference<List<Integer>>() {};
+		ParameterizedTypeReference<List<Integer>> intList = new ParameterizedTypeReference<List<Integer>>() {
+		};
 		given(converter.canRead(intList.getType(), null, null)).willReturn(true);
 		given(converter.getSupportedMediaTypes()).willReturn(Collections.singletonList(MediaType.TEXT_PLAIN));
 		given(converter.canWrite(String.class, String.class, null)).willReturn(true);
@@ -747,7 +745,7 @@ public class RestTemplateTests {
 	@Test
 	public void clientHttpRequestInitializerAndRequestInterceptorAreBothApplied() throws Exception {
 		ClientHttpRequestInitializer initializer = request ->
-			request.getHeaders().add("MyHeader", "MyInitializerValue");
+				request.getHeaders().add("MyHeader", "MyInitializerValue");
 		ClientHttpRequestInterceptor interceptor = (request, body, execution) -> {
 			request.getHeaders().add("MyHeader", "MyInterceptorValue");
 			return execution.execute(request, body);

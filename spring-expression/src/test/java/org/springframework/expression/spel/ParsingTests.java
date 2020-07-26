@@ -272,7 +272,7 @@ public class ParsingTests {
 	public void testReferences01() {
 		parseCheck("@foo");
 		parseCheck("@'foo.bar'");
-		parseCheck("@\"foo.bar.goo\"","@'foo.bar.goo'");
+		parseCheck("@\"foo.bar.goo\"", "@'foo.bar.goo'");
 	}
 
 	@Test
@@ -400,7 +400,7 @@ public class ParsingTests {
 
 	@Test
 	public void testTernaryOperator01() {
-		parseCheck("1>2?3:4","(1 > 2) ? 3 : 4");
+		parseCheck("1>2?3:4", "(1 > 2) ? 3 : 4");
 	}
 
 	// public void testTernaryOperator01() {
@@ -448,7 +448,7 @@ public class ParsingTests {
 	 * Parse the supplied expression and then create a string representation of the resultant AST, it should be the
 	 * expected value.
 	 *
-	 * @param expression the expression to parse
+	 * @param expression              the expression to parse
 	 * @param expectedStringFormOfAST the expected string form of the AST
 	 */
 	public void parseCheck(String expression, String expectedStringFormOfAST) {

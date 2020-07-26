@@ -29,8 +29,7 @@ import org.springframework.test.web.reactive.server.WebTestClient.*
  * @author Sebastien Deleuze
  * @since 5.0
  */
-inline fun <reified T : Any, S : Publisher<T>> RequestBodySpec.body(publisher: S): RequestHeadersSpec<*>
-		= body(publisher, object : ParameterizedTypeReference<T>() {})
+inline fun <reified T : Any, S : Publisher<T>> RequestBodySpec.body(publisher: S): RequestHeadersSpec<*> = body(publisher, object : ParameterizedTypeReference<T>() {})
 
 /**
  * Extension for [RequestBodySpec.body] providing a `body<T>(Any)` variant
@@ -43,8 +42,7 @@ inline fun <reified T : Any, S : Publisher<T>> RequestBodySpec.body(publisher: S
  * @author Sebastien Deleuze
  * @since 5.2
  */
-inline fun <reified T : Any> RequestBodySpec.body(producer: Any): RequestHeadersSpec<*>
-		= body(producer, object : ParameterizedTypeReference<T>() {})
+inline fun <reified T : Any> RequestBodySpec.body(producer: Any): RequestHeadersSpec<*> = body(producer, object : ParameterizedTypeReference<T>() {})
 
 /**
  * Extension for [RequestBodySpec.body] providing a `body(Flow<T>)` variant
@@ -76,7 +74,7 @@ inline fun <reified B : Any> ResponseSpec.expectBody(): KotlinBodySpec<B> =
 						.let { this }
 
 				override fun consumeWith(consumer: (EntityExchangeResult<B>) -> Unit): KotlinBodySpec<B> =
-					it.assertWithDiagnostics { consumer.invoke(it) }.let { this }
+						it.assertWithDiagnostics { consumer.invoke(it) }.let { this }
 
 				override fun returnResult(): EntityExchangeResult<B> = it
 			}

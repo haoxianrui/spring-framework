@@ -63,7 +63,7 @@ public class ProtobufJsonFormatMessageConverter extends ProtobufMessageConverter
 	 * JsonFormat.Printer}, and {@link ExtensionRegistry}.
 	 */
 	public ProtobufJsonFormatMessageConverter(@Nullable JsonFormat.Parser parser,
-			@Nullable JsonFormat.Printer printer, @Nullable ExtensionRegistry extensionRegistry) {
+											  @Nullable JsonFormat.Printer printer, @Nullable ExtensionRegistry extensionRegistry) {
 
 		super(new ProtobufJavaUtilSupport(parser, printer), extensionRegistry);
 	}

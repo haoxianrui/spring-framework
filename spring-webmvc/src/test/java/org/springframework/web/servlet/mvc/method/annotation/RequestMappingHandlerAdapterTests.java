@@ -373,7 +373,7 @@ public class RequestMappingHandlerAdapterTests {
 
 		@Override
 		protected void beforeBodyWriteInternal(MappingJacksonValue bodyContainer, MediaType contentType,
-				MethodParameter returnType, ServerHttpRequest request, ServerHttpResponse response) {
+											   MethodParameter returnType, ServerHttpRequest request, ServerHttpResponse response) {
 
 			int status = ((ServletServerHttpResponse) response).getServletResponse().getStatus();
 			response.setStatusCode(HttpStatus.OK);
@@ -386,28 +386,28 @@ public class RequestMappingHandlerAdapterTests {
 
 		@Override
 		public boolean supports(MethodParameter methodParameter, Type targetType,
-				Class<? extends HttpMessageConverter<?>> converterType) {
+								Class<? extends HttpMessageConverter<?>> converterType) {
 
 			return StringHttpMessageConverter.class.equals(converterType);
 		}
 
 		@Override
 		public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter,
-				Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+											   Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
 
 			return inputMessage;
 		}
 
 		@Override
 		public Object afterBodyRead(Object body, HttpInputMessage inputMessage, MethodParameter parameter,
-				Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+									Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
 
 			return body;
 		}
 
 		@Override
 		public Object handleEmptyBody(@Nullable Object body, HttpInputMessage inputMessage, MethodParameter parameter,
-				Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+									  Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
 
 			return "default value for empty body";
 		}

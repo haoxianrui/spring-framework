@@ -48,7 +48,7 @@ public class BeanNameUrlHandlerMappingTests {
 		MockServletContext sc = new MockServletContext("");
 		wac = new XmlWebApplicationContext();
 		wac.setServletContext(sc);
-		wac.setConfigLocations(new String[] {CONF});
+		wac.setConfigLocations(new String[]{CONF});
 		wac.refresh();
 	}
 

@@ -320,7 +320,7 @@ public class ModelAttributeMethodProcessorTests {
 	}
 
 
-	@SessionAttributes(types=TestBean.class)
+	@SessionAttributes(types = TestBean.class)
 	private static class ModelAttributeHandler {
 
 		@SuppressWarnings("unused")
@@ -329,13 +329,14 @@ public class ModelAttributeMethodProcessorTests {
 				Errors errors,
 				int intArg,
 				@ModelAttribute TestBean defaultNameAttr,
-				@ModelAttribute(name="noBindAttr", binding=false) @Valid TestBean noBindAttr,
+				@ModelAttribute(name = "noBindAttr", binding = false) @Valid TestBean noBindAttr,
 				TestBean notAnnotatedAttr) {
 		}
 	}
 
 
-	@ModelAttribute("modelAttrName") @SuppressWarnings("unused")
+	@ModelAttribute("modelAttrName")
+	@SuppressWarnings("unused")
 	private String annotatedReturnValue() {
 		return null;
 	}

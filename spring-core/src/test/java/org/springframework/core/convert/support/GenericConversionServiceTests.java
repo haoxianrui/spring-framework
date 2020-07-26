@@ -279,7 +279,7 @@ class GenericConversionServiceTests {
 	void interfaceArrayToStringArray() {
 		conversionService.addConverter(new MyBaseInterfaceToStringConverter());
 		conversionService.addConverter(new ArrayToArrayConverter(conversionService));
-		String[] converted = conversionService.convert(new MyInterface[] {new MyInterfaceImplementer()}, String[].class);
+		String[] converted = conversionService.convert(new MyInterface[]{new MyInterfaceImplementer()}, String[].class);
 		assertThat(converted[0]).isEqualTo("RESULT");
 	}
 
@@ -287,14 +287,14 @@ class GenericConversionServiceTests {
 	void objectArrayToStringArray() {
 		conversionService.addConverter(new MyBaseInterfaceToStringConverter());
 		conversionService.addConverter(new ArrayToArrayConverter(conversionService));
-		String[] converted = conversionService.convert(new MyInterfaceImplementer[] {new MyInterfaceImplementer()}, String[].class);
+		String[] converted = conversionService.convert(new MyInterfaceImplementer[]{new MyInterfaceImplementer()}, String[].class);
 		assertThat(converted[0]).isEqualTo("RESULT");
 	}
 
 	@Test
 	void stringArrayToResourceArray() {
 		conversionService.addConverter(new MyStringArrayToResourceArrayConverter());
-		Resource[] converted = conversionService.convert(new String[] { "x1", "z3" }, Resource[].class);
+		Resource[] converted = conversionService.convert(new String[]{"x1", "z3"}, Resource[].class);
 		List<String> descriptions = Arrays.stream(converted).map(Resource::getDescription).sorted(naturalOrder()).collect(toList());
 		assertThat(descriptions).isEqualTo(Arrays.asList("1", "3"));
 	}
@@ -302,15 +302,15 @@ class GenericConversionServiceTests {
 	@Test
 	void stringArrayToIntegerArray() {
 		conversionService.addConverter(new MyStringArrayToIntegerArrayConverter());
-		Integer[] converted = conversionService.convert(new String[] {"x1", "z3"}, Integer[].class);
-		assertThat(converted).isEqualTo(new Integer[] { 1, 3 });
+		Integer[] converted = conversionService.convert(new String[]{"x1", "z3"}, Integer[].class);
+		assertThat(converted).isEqualTo(new Integer[]{1, 3});
 	}
 
 	@Test
 	void stringToIntegerArray() {
 		conversionService.addConverter(new MyStringToIntegerArrayConverter());
 		Integer[] converted = conversionService.convert("x1,z3", Integer[].class);
-		assertThat(converted).isEqualTo(new Integer[] { 1, 3 });
+		assertThat(converted).isEqualTo(new Integer[]{1, 3});
 	}
 
 	@Test
@@ -512,7 +512,7 @@ class GenericConversionServiceTests {
 		GenericConverter converter = new NonConditionalGenericConverter();
 		assertThatIllegalStateException().isThrownBy(() ->
 				conversionService.addConverter(converter))
-			.withMessage("Only conditional converters may return null convertible types");
+				.withMessage("Only conditional converters may return null convertible types");
 	}
 
 	@Test
@@ -527,7 +527,7 @@ class GenericConversionServiceTests {
 	@Test
 	void convertOptimizeArray() {
 		// SPR-9566
-		byte[] byteArray = new byte[] { 1, 2, 3 };
+		byte[] byteArray = new byte[]{1, 2, 3};
 		byte[] converted = conversionService.convert(byteArray, byte[].class);
 		assertThat(converted).isSameAs(byteArray);
 	}
@@ -700,7 +700,7 @@ class GenericConversionServiceTests {
 	}
 
 
-	private static class MyStringToIntegerArrayConverter implements Converter<String, Integer[]>	{
+	private static class MyStringToIntegerArrayConverter implements Converter<String, Integer[]> {
 
 		@Override
 		public Integer[] convert(String source) {
@@ -712,10 +712,12 @@ class GenericConversionServiceTests {
 
 	private static class WithCopyConstructor {
 
-		WithCopyConstructor() {}
+		WithCopyConstructor() {
+		}
 
 		@SuppressWarnings("unused")
-		WithCopyConstructor(WithCopyConstructor value) {}
+		WithCopyConstructor(WithCopyConstructor value) {
+		}
 	}
 
 

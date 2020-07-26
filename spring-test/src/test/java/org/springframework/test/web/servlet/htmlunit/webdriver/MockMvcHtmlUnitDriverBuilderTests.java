@@ -104,7 +104,8 @@ class MockMvcHtmlUnitDriverBuilderTests {
 		assertThat(this.driver.isJavascriptEnabled()).isFalse();
 	}
 
-	@Test // SPR-14066
+	@Test
+		// SPR-14066
 	void cookieManagerShared() throws Exception {
 		WebConnectionHtmlUnitDriver otherDriver = new WebConnectionHtmlUnitDriver();
 		this.mockMvc = MockMvcBuilders.standaloneSetup(new CookieController()).build();

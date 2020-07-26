@@ -37,8 +37,7 @@ class LeakAwareDataBufferFactoryTests {
 		try {
 			assertThatExceptionOfType(AssertionError.class).isThrownBy(
 					this.bufferFactory::checkForLeaks);
-		}
-		finally {
+		} finally {
 			release(dataBuffer);
 		}
 	}

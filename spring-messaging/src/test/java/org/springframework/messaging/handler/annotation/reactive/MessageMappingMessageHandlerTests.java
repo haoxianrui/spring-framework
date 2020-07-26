@@ -55,6 +55,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link MessageMappingMessageHandler}.
+ *
  * @author Rossen Stoyanchev
  */
 @SuppressWarnings("ALL")

@@ -423,8 +423,7 @@ public class OpenEntityManagerInViewTests {
 			Runnable decoratedTask = () -> {
 				try {
 					task.run();
-				}
-				finally {
+				} finally {
 					latch.countDown();
 				}
 			};

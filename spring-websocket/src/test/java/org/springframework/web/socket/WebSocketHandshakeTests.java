@@ -48,7 +48,7 @@ class WebSocketHandshakeTests extends AbstractWebSocketIntegrationTests {
 
 	@Override
 	protected Class<?>[] getAnnotatedConfigClasses() {
-		return new Class<?>[] {TestConfig.class};
+		return new Class<?>[]{TestConfig.class};
 	}
 
 
@@ -64,12 +64,14 @@ class WebSocketHandshakeTests extends AbstractWebSocketIntegrationTests {
 		session.close();
 	}
 
-	@ParameterizedWebSocketTest  // SPR-12727
+	@ParameterizedWebSocketTest
+		// SPR-12727
 	void unsolicitedPongWithEmptyPayload(WebSocketTestServer server, WebSocketClient webSocketClient, TestInfo testInfo) throws Exception {
 		super.setup(server, webSocketClient, testInfo);
 
 		String url = getWsBaseUrl() + "/ws";
-		WebSocketSession session = this.webSocketClient.doHandshake(new AbstractWebSocketHandler() {}, url).get();
+		WebSocketSession session = this.webSocketClient.doHandshake(new AbstractWebSocketHandler() {
+		}, url).get();
 
 		TestWebSocketHandler serverHandler = this.wac.getBean(TestWebSocketHandler.class);
 		serverHandler.setWaitMessageCount(1);

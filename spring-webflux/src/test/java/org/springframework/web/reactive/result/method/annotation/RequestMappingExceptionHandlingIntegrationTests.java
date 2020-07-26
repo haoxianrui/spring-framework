@@ -85,16 +85,18 @@ class RequestMappingExceptionHandlingIntegrationTests extends AbstractRequestMap
 		doTest("/mono-error", "Recovered from error: Argument");
 	}
 
-	@ParameterizedHttpServerTest  // SPR-16051
+	@ParameterizedHttpServerTest
+		// SPR-16051
 	void exceptionAfterSeveralItems(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				performGet("/SPR-16051", new HttpHeaders(), String.class).getBody())
-			.withMessageStartingWith("Error while extracting response");
+				.withMessageStartingWith("Error while extracting response");
 	}
 
-	@ParameterizedHttpServerTest  // SPR-16318
+	@ParameterizedHttpServerTest
+		// SPR-16318
 	void exceptionFromMethodWithProducesCondition(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 
@@ -102,11 +104,11 @@ class RequestMappingExceptionHandlingIntegrationTests extends AbstractRequestMap
 		headers.add("Accept", "text/plain, application/problem+json");
 		assertThatExceptionOfType(HttpStatusCodeException.class).isThrownBy(() ->
 				performGet("/SPR-16318", headers, String.class).getBody())
-			.satisfies(ex -> {
-				assertThat(ex.getRawStatusCode()).isEqualTo(500);
-				assertThat(ex.getResponseHeaders().getContentType().toString()).isEqualTo("application/problem+json");
-				assertThat(ex.getResponseBodyAsString()).isEqualTo("{\"reason\":\"error\"}");
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getRawStatusCode()).isEqualTo(500);
+					assertThat(ex.getResponseHeaders().getContentType().toString()).isEqualTo("application/problem+json");
+					assertThat(ex.getResponseBodyAsString()).isEqualTo("{\"reason\":\"error\"}");
+				});
 	}
 
 	private void doTest(String url, String expected) throws Exception {

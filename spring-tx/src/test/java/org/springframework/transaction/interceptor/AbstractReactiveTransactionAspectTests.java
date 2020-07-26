@@ -127,7 +127,7 @@ public abstract class AbstractReactiveTransactionAspectTests {
 		given(rtm.commit(status)).willReturn(Mono.empty());
 
 		DefaultTestBean tb = new DefaultTestBean();
-		TestBean itb = (TestBean) advised(tb, rtm, new TransactionAttributeSource[] {tas1, tas2});
+		TestBean itb = (TestBean) advised(tb, rtm, new TransactionAttributeSource[]{tas1, tas2});
 
 		itb.getName()
 				.as(StepVerifier::create)
@@ -210,7 +210,8 @@ public abstract class AbstractReactiveTransactionAspectTests {
 	/**
 	 * Check that the when exception thrown by the target can produce the
 	 * desired behavior with the appropriate transaction attribute.
-	 * @param ex exception to be thrown by the target
+	 *
+	 * @param ex             exception to be thrown by the target
 	 * @param shouldRollback whether this should cause a transaction rollback
 	 */
 	@SuppressWarnings("serial")
@@ -239,12 +240,10 @@ public abstract class AbstractReactiveTransactionAspectTests {
 		if (rollbackException) {
 			if (shouldRollback) {
 				given(rtm.rollback(status)).willReturn(Mono.error(tex));
-			}
-			else {
+			} else {
 				given(rtm.commit(status)).willReturn(Mono.error(tex));
 			}
-		}
-		else {
+		} else {
 			given(rtm.commit(status)).willReturn(Mono.empty());
 			given(rtm.rollback(status)).willReturn(Mono.empty());
 		}
@@ -257,8 +256,7 @@ public abstract class AbstractReactiveTransactionAspectTests {
 				.expectErrorSatisfies(actual -> {
 					if (rollbackException) {
 						assertThat(actual).isEqualTo(tex);
-					}
-					else {
+					} else {
 						assertThat(actual).isEqualTo(ex);
 					}
 				}).verify();
@@ -266,8 +264,7 @@ public abstract class AbstractReactiveTransactionAspectTests {
 		if (!rollbackException) {
 			if (shouldRollback) {
 				verify(rtm).rollback(status);
-			}
-			else {
+			} else {
 				verify(rtm).commit(status);
 			}
 		}
@@ -371,8 +368,9 @@ public abstract class AbstractReactiveTransactionAspectTests {
 	 * have been created, as there's no distinction between target and proxy.
 	 * In the case of Spring's own AOP framework, a proxy must be created
 	 * using a suitably configured transaction interceptor
+	 *
 	 * @param target the target if there's a distinct target. If not (AspectJ),
-	 * return target.
+	 *               return target.
 	 * @return transactional advised object
 	 */
 	protected abstract Object advised(

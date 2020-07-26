@@ -71,19 +71,19 @@ class SseIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 	}
 
 	static Object[][] arguments() {
-		return new Object[][] {
-			{new JettyHttpServer(), new ReactorClientHttpConnector()},
-			{new JettyHttpServer(), new JettyClientHttpConnector()},
-			{new JettyHttpServer(), new HttpComponentsClientHttpConnector()},
-			{new ReactorHttpServer(), new ReactorClientHttpConnector()},
-			{new ReactorHttpServer(), new JettyClientHttpConnector()},
-			{new ReactorHttpServer(), new HttpComponentsClientHttpConnector()},
-			{new TomcatHttpServer(), new ReactorClientHttpConnector()},
-			{new TomcatHttpServer(), new JettyClientHttpConnector()},
-			{new TomcatHttpServer(), new HttpComponentsClientHttpConnector()},
-			{new UndertowHttpServer(), new ReactorClientHttpConnector()},
-			{new UndertowHttpServer(), new JettyClientHttpConnector()},
-			{new UndertowHttpServer(), new HttpComponentsClientHttpConnector()}
+		return new Object[][]{
+				{new JettyHttpServer(), new ReactorClientHttpConnector()},
+				{new JettyHttpServer(), new JettyClientHttpConnector()},
+				{new JettyHttpServer(), new HttpComponentsClientHttpConnector()},
+				{new ReactorHttpServer(), new ReactorClientHttpConnector()},
+				{new ReactorHttpServer(), new JettyClientHttpConnector()},
+				{new ReactorHttpServer(), new HttpComponentsClientHttpConnector()},
+				{new TomcatHttpServer(), new ReactorClientHttpConnector()},
+				{new TomcatHttpServer(), new JettyClientHttpConnector()},
+				{new TomcatHttpServer(), new HttpComponentsClientHttpConnector()},
+				{new UndertowHttpServer(), new ReactorClientHttpConnector()},
+				{new UndertowHttpServer(), new JettyClientHttpConnector()},
+				{new UndertowHttpServer(), new HttpComponentsClientHttpConnector()}
 		};
 	}
 
@@ -154,7 +154,8 @@ class SseIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 				.uri("/event")
 				.accept(TEXT_EVENT_STREAM)
 				.retrieve()
-				.bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<Person>>() {});
+				.bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<Person>>() {
+				});
 
 		verifyPersonEvents(result);
 	}
@@ -167,21 +168,22 @@ class SseIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 				.uri("/event")
 				.accept(TEXT_EVENT_STREAM)
 				.retrieve()
-				.bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<Person>>() {});
+				.bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<Person>>() {
+				});
 
 		verifyPersonEvents(result);
 	}
 
 	private void verifyPersonEvents(Flux<ServerSentEvent<Person>> result) {
 		StepVerifier.create(result)
-				.consumeNextWith( event -> {
+				.consumeNextWith(event -> {
 					assertThat(event.id()).isEqualTo("0");
 					assertThat(event.data()).isEqualTo(new Person("foo 0"));
 					assertThat(event.comment()).isEqualTo("bar 0");
 					assertThat(event.event()).isNull();
 					assertThat(event.retry()).isNull();
 				})
-				.consumeNextWith( event -> {
+				.consumeNextWith(event -> {
 					assertThat(event.id()).isEqualTo("1");
 					assertThat(event.data()).isEqualTo(new Person("foo 1"));
 					assertThat(event.comment()).isEqualTo("bar 1");
@@ -193,7 +195,8 @@ class SseIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 	}
 
 	@ParameterizedSseTest // SPR-16494
-	@Disabled // https://github.com/reactor/reactor-netty/issues/283
+	@Disabled
+		// https://github.com/reactor/reactor-netty/issues/283
 	void serverDetectsClientDisconnect(HttpServer httpServer, ClientHttpConnector connector) throws Exception {
 		assumeTrue(httpServer instanceof ReactorHttpServer);
 

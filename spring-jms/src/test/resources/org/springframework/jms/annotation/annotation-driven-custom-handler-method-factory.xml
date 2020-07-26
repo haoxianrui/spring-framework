@@ -9,7 +9,8 @@
 
 	<jms:annotation-driven handler-method-factory="customMessageHandlerMethodFactory"/>
 
-	<bean id="customMessageHandlerMethodFactory" class="org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory">
+	<bean id="customMessageHandlerMethodFactory"
+		  class="org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory">
 		<property name="validator">
 			<bean class="org.springframework.jms.annotation.AbstractJmsAnnotationDrivenTests$TestValidator"/>
 		</property>

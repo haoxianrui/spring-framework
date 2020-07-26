@@ -138,7 +138,7 @@ class EnableJmsTests extends AbstractJmsAnnotationDrivenTests {
 
 		assertThatExceptionOfType(ListenerExecutionFailedException.class).isThrownBy(() ->
 				testJmsHandlerMethodFactoryConfiguration(context))
-			.withCauseInstanceOf(MethodArgumentNotValidException.class);
+				.withCauseInstanceOf(MethodArgumentNotValidException.class);
 	}
 
 	@Override
@@ -160,19 +160,19 @@ class EnableJmsTests extends AbstractJmsAnnotationDrivenTests {
 	@Test
 	void composedJmsListeners() {
 		try (ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(
-			EnableJmsDefaultContainerFactoryConfig.class, ComposedJmsListenersBean.class)) {
+				EnableJmsDefaultContainerFactoryConfig.class, ComposedJmsListenersBean.class)) {
 			JmsListenerContainerTestFactory simpleFactory = context.getBean("jmsListenerContainerFactory",
-				JmsListenerContainerTestFactory.class);
+					JmsListenerContainerTestFactory.class);
 			assertThat(simpleFactory.getListenerContainers().size()).isEqualTo(2);
 
 			MethodJmsListenerEndpoint first = (MethodJmsListenerEndpoint) simpleFactory.getListenerContainer(
-				"first").getEndpoint();
+					"first").getEndpoint();
 			assertThat(first.getId()).isEqualTo("first");
 			assertThat(first.getDestination()).isEqualTo("orderQueue");
 			assertThat(first.getConcurrency()).isNull();
 
 			MethodJmsListenerEndpoint second = (MethodJmsListenerEndpoint) simpleFactory.getListenerContainer(
-				"second").getEndpoint();
+					"second").getEndpoint();
 			assertThat(second.getId()).isEqualTo("second");
 			assertThat(second.getDestination()).isEqualTo("billingQueue");
 			assertThat(second.getConcurrency()).isEqualTo("2-10");
@@ -182,10 +182,10 @@ class EnableJmsTests extends AbstractJmsAnnotationDrivenTests {
 	@Test
 	@SuppressWarnings("resource")
 	void unknownFactory() {
-		 // not found
+		// not found
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				new AnnotationConfigApplicationContext(EnableJmsSampleConfig.class, CustomBean.class))
-			.withMessageContaining("customFactory");
+				.withMessageContaining("customFactory");
 	}
 
 	@Test

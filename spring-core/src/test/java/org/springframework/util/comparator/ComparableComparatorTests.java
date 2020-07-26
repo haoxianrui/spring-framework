@@ -40,7 +40,7 @@ class ComparableComparatorTests {
 		assertThat(c.compare(s1, s2) < 0).isTrue();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Test
 	void shouldNeedComparable() {
 		Comparator c = new ComparableComparator();

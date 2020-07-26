@@ -49,7 +49,7 @@ public class ByteBufferDecoder extends AbstractDataBufferDecoder<ByteBuffer> {
 
 	@Override
 	public ByteBuffer decode(DataBuffer dataBuffer, ResolvableType elementType,
-			@Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+							 @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		int byteCount = dataBuffer.readableByteCount();
 		ByteBuffer copy = ByteBuffer.allocate(byteCount);

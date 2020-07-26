@@ -12,14 +12,16 @@
 		<property name="targetClass">
 			<value>org.springframework.aop.interceptor.ExposeInvocationInterceptor</value>
 		</property>
-		<property name="targetField"><value>INSTANCE</value></property>
+		<property name="targetField">
+			<value>INSTANCE</value>
+		</property>
 	</bean>
 
 	<bean id="countingBeforeAdvice" class="org.springframework.aop.testfixture.advice.CountingBeforeAdvice"/>
 
 	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target">
-			<bean class="org.springframework.aop.interceptor.InvocationCheckExposedInvocationTestBean" />
+			<bean class="org.springframework.aop.interceptor.InvocationCheckExposedInvocationTestBean"/>
 		</property>
 		<property name="interceptorNames">
 			<value>exposeInvocation,countingBeforeAdvice,nopInterceptor</value>

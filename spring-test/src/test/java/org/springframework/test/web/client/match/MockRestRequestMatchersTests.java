@@ -60,7 +60,7 @@ public class MockRestRequestMatchersTests {
 		this.request.setURI(new URI("http://www.foo.example/bar"));
 
 		assertThatThrownBy(
-			() -> MockRestRequestMatchers.requestTo("http://www.foo.example/wrong").match(this.request))
+				() -> MockRestRequestMatchers.requestTo("http://www.foo.example/wrong").match(this.request))
 				.isInstanceOf(AssertionError.class);
 	}
 
@@ -83,8 +83,8 @@ public class MockRestRequestMatchersTests {
 		this.request.setMethod(HttpMethod.POST);
 
 		assertThatThrownBy(() -> MockRestRequestMatchers.method(HttpMethod.GET).match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("expected:<GET> but was:<POST>");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("expected:<GET> but was:<POST>");
 	}
 
 	@Test
@@ -103,15 +103,15 @@ public class MockRestRequestMatchersTests {
 		List<String> values = Arrays.asList("bar", "baz");
 		this.request.getHeaders().put("foo", values);
 		assertThatThrownBy(() -> MockRestRequestMatchers.headerDoesNotExist("foo").match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessage("Expected header <foo> not to exist, but it exists with values: " + values);
+				.isInstanceOf(AssertionError.class)
+				.hasMessage("Expected header <foo> not to exist, but it exists with values: " + values);
 	}
 
 	@Test
 	public void headerMissing() throws Exception {
 		assertThatThrownBy(() -> MockRestRequestMatchers.header("foo", "bar").match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("was null");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("was null");
 	}
 
 	@Test
@@ -119,8 +119,8 @@ public class MockRestRequestMatchersTests {
 		this.request.getHeaders().put("foo", Arrays.asList("bar", "baz"));
 
 		assertThatThrownBy(() -> MockRestRequestMatchers.header("foo", "bad").match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("expected:<bad> but was:<bar>");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("expected:<bad> but was:<bar>");
 	}
 
 	@Test
@@ -133,8 +133,8 @@ public class MockRestRequestMatchersTests {
 	@Test
 	public void headerContainsWithMissingHeader() throws Exception {
 		assertThatThrownBy(() -> MockRestRequestMatchers.header("foo", containsString("baz")).match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("but was null");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("but was null");
 	}
 
 	@Test
@@ -142,8 +142,8 @@ public class MockRestRequestMatchersTests {
 		this.request.getHeaders().put("foo", Arrays.asList("bar", "baz"));
 
 		assertThatThrownBy(() -> MockRestRequestMatchers.header("foo", containsString("bx")).match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("was \"bar\"");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("was \"bar\"");
 	}
 
 	@Test
@@ -156,8 +156,8 @@ public class MockRestRequestMatchersTests {
 	@Test
 	public void headersWithMissingHeader() throws Exception {
 		assertThatThrownBy(() -> MockRestRequestMatchers.header("foo", "bar").match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("but was null");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("but was null");
 	}
 
 	@Test
@@ -165,8 +165,8 @@ public class MockRestRequestMatchersTests {
 		this.request.getHeaders().put("foo", Collections.singletonList("bar"));
 
 		assertThatThrownBy(() -> MockRestRequestMatchers.header("foo", "bar", "baz").match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("to have at least <2> values");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("to have at least <2> values");
 	}
 
 	@Test
@@ -181,8 +181,8 @@ public class MockRestRequestMatchersTests {
 		this.request.setURI(new URI("http://www.foo.example/a"));
 
 		assertThatThrownBy(() -> MockRestRequestMatchers.queryParam("foo", "bar").match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("but was null");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("but was null");
 	}
 
 	@Test
@@ -190,8 +190,8 @@ public class MockRestRequestMatchersTests {
 		this.request.setURI(new URI("http://www.foo.example/a?foo=bar&foo=baz"));
 
 		assertThatThrownBy(() -> MockRestRequestMatchers.queryParam("foo", "bad").match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("expected:<bad> but was:<bar>");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("expected:<bad> but was:<bar>");
 	}
 
 	@Test
@@ -206,8 +206,8 @@ public class MockRestRequestMatchersTests {
 		this.request.setURI(new URI("http://www.foo.example/a?foo=bar&foo=baz"));
 
 		assertThatThrownBy(() -> MockRestRequestMatchers.queryParam("foo", containsString("bx")).match(this.request))
-			.isInstanceOf(AssertionError.class)
-			.hasMessageContaining("was \"bar\"");
+				.isInstanceOf(AssertionError.class)
+				.hasMessageContaining("was \"bar\"");
 	}
 
 }

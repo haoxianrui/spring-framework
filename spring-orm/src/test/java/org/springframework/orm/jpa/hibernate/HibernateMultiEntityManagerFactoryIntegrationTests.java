@@ -41,7 +41,7 @@ public class HibernateMultiEntityManagerFactoryIntegrationTests extends Abstract
 
 	@Override
 	protected String[] getConfigLocations() {
-		return new String[] {"/org/springframework/orm/jpa/hibernate/hibernate-manager-multi.xml",
+		return new String[]{"/org/springframework/orm/jpa/hibernate/hibernate-manager-multi.xml",
 				"/org/springframework/orm/jpa/memdb.xml"};
 	}
 
@@ -63,8 +63,7 @@ public class HibernateMultiEntityManagerFactoryIntegrationTests extends Abstract
 		try {
 			assertThatIllegalArgumentException().isThrownBy(() ->
 					em.createQuery("select tb from TestBean"));
-		}
-		finally {
+		} finally {
 			em.close();
 		}
 	}

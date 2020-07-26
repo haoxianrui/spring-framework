@@ -514,7 +514,7 @@ public class ClassPathScanningCandidateComponentProviderTests {
 
 	private void assertBeanDefinitionType(Set<BeanDefinition> candidates) {
 		candidates.forEach(c ->
-			assertThat(c).isInstanceOf(ScannedGenericBeanDefinition.class)
+				assertThat(c).isInstanceOf(ScannedGenericBeanDefinition.class)
 		);
 	}
 
@@ -531,7 +531,8 @@ public class ClassPathScanningCandidateComponentProviderTests {
 		static final String BEAN_NAME = "defaultAndDevProfileAnnotatedComponent";
 	}
 
-	@DefaultProfile @DevProfile
+	@DefaultProfile
+	@DevProfile
 	@Component(MetaProfileAnnotatedComponent.BEAN_NAME)
 	private static class MetaProfileAnnotatedComponent {
 		static final String BEAN_NAME = "metaProfileAnnotatedComponent";

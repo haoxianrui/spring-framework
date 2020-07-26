@@ -31,8 +31,8 @@ import org.springframework.util.Assert;
  * used for testing application controllers.
  *
  * @author Juergen Hoeller
- * @since 1.0.2
  * @see MockHttpServletRequest
+ * @since 1.0.2
  */
 public class DelegatingServletInputStream extends ServletInputStream {
 
@@ -43,6 +43,7 @@ public class DelegatingServletInputStream extends ServletInputStream {
 
 	/**
 	 * Create a DelegatingServletInputStream for the given source stream.
+	 *
 	 * @param sourceStream the source stream (never {@code null})
 	 */
 	public DelegatingServletInputStream(InputStream sourceStream) {

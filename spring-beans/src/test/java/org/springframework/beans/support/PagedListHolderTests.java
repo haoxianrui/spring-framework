@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PagedListHolderTests {
 
 	@Test
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void testPagedListHolder() {
 		TestBean tb1 = new TestBean();
 		tb1.setName("eva");
@@ -160,7 +160,6 @@ public class PagedListHolderTests {
 		holder.previousPage();
 		assertThat(holder.getPage()).isEqualTo(0);
 	}
-
 
 
 	public static class MockFilter {

@@ -403,7 +403,7 @@ class NumberUtilsTests {
 		String msg = "overflow: from=" + number + ", toClass=" + targetClass;
 		assertThatIllegalArgumentException().as(msg).isThrownBy(() ->
 				NumberUtils.convertNumberToTargetClass(number, targetClass))
-			.withMessageEndingWith("overflow");
+				.withMessageEndingWith("overflow");
 	}
 
 }

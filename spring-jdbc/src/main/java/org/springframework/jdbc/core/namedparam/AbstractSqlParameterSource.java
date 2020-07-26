@@ -34,10 +34,10 @@ import org.springframework.util.Assert;
  *
  * @author Juergen Hoeller
  * @author Jens Schauder
- * @since 2.0
  * @see #hasValue(String)
  * @see #getValue(String)
  * @see #getParameterNames()
+ * @since 2.0
  */
 public abstract class AbstractSqlParameterSource implements SqlParameterSource {
 
@@ -48,8 +48,9 @@ public abstract class AbstractSqlParameterSource implements SqlParameterSource {
 
 	/**
 	 * Register an SQL type for the given parameter.
+	 *
 	 * @param paramName the name of the parameter
-	 * @param sqlType the SQL type of the parameter
+	 * @param sqlType   the SQL type of the parameter
 	 */
 	public void registerSqlType(String paramName, int sqlType) {
 		Assert.notNull(paramName, "Parameter name must not be null");
@@ -58,8 +59,9 @@ public abstract class AbstractSqlParameterSource implements SqlParameterSource {
 
 	/**
 	 * Register an SQL type for the given parameter.
+	 *
 	 * @param paramName the name of the parameter
-	 * @param typeName the type name of the parameter
+	 * @param typeName  the type name of the parameter
 	 */
 	public void registerTypeName(String paramName, String typeName) {
 		Assert.notNull(paramName, "Parameter name must not be null");
@@ -68,6 +70,7 @@ public abstract class AbstractSqlParameterSource implements SqlParameterSource {
 
 	/**
 	 * Return the SQL type for the given parameter, if registered.
+	 *
 	 * @param paramName the name of the parameter
 	 * @return the SQL type of the parameter,
 	 * or {@code TYPE_UNKNOWN} if not registered
@@ -80,6 +83,7 @@ public abstract class AbstractSqlParameterSource implements SqlParameterSource {
 
 	/**
 	 * Return the type name for the given parameter, if registered.
+	 *
 	 * @param paramName the name of the parameter
 	 * @return the type name of the parameter,
 	 * or {@code null} if not registered
@@ -95,8 +99,9 @@ public abstract class AbstractSqlParameterSource implements SqlParameterSource {
 	/**
 	 * Enumerate the parameter names and values with their corresponding SQL type if available,
 	 * or just return the simple {@code SqlParameterSource} implementation class name otherwise.
-	 * @since 5.2
+	 *
 	 * @see #getParameterNames()
+	 * @since 5.2
 	 */
 	@Override
 	public String toString() {
@@ -126,8 +131,7 @@ public abstract class AbstractSqlParameterSource implements SqlParameterSource {
 				result.add(entry);
 			}
 			return result.toString();
-		}
-		else {
+		} else {
 			return getClass().getSimpleName();
 		}
 	}

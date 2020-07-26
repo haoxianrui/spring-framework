@@ -98,7 +98,7 @@ public class ExtractingResponseErrorHandlerTests {
 
 		assertThatExceptionOfType(MyRestClientException.class).isThrownBy(() ->
 				this.errorHandler.handleError(this.response))
-			.satisfies(ex -> assertThat(ex.getFoo()).isEqualTo("bar"));
+				.satisfies(ex -> assertThat(ex.getFoo()).isEqualTo("bar"));
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class ExtractingResponseErrorHandlerTests {
 
 		assertThatExceptionOfType(MyRestClientException.class).isThrownBy(() ->
 				this.errorHandler.handleError(this.response))
-			.satisfies(ex -> assertThat(ex.getFoo()).isEqualTo("bar"));
+				.satisfies(ex -> assertThat(ex.getFoo()).isEqualTo("bar"));
 	}
 
 	@Test
@@ -130,10 +130,10 @@ public class ExtractingResponseErrorHandlerTests {
 
 		assertThatExceptionOfType(HttpClientErrorException.class).isThrownBy(() ->
 				this.errorHandler.handleError(this.response))
-			.satisfies(ex -> {
-				assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-				assertThat(ex.getResponseBodyAsByteArray()).isEqualTo(body);
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+					assertThat(ex.getResponseBodyAsByteArray()).isEqualTo(body);
+				});
 	}
 
 	@Test

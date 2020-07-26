@@ -76,6 +76,7 @@ public class MockHttpSession implements HttpSession {
 
 	/**
 	 * Create a new MockHttpSession with a default {@link MockServletContext}.
+	 *
 	 * @see MockServletContext
 	 */
 	public MockHttpSession() {
@@ -84,6 +85,7 @@ public class MockHttpSession implements HttpSession {
 
 	/**
 	 * Create a new MockHttpSession.
+	 *
 	 * @param servletContext the ServletContext that the session runs in
 	 */
 	public MockHttpSession(@Nullable ServletContext servletContext) {
@@ -92,8 +94,9 @@ public class MockHttpSession implements HttpSession {
 
 	/**
 	 * Create a new MockHttpSession.
+	 *
 	 * @param servletContext the ServletContext that the session runs in
-	 * @param id a unique identifier for this session
+	 * @param id             a unique identifier for this session
 	 */
 	public MockHttpSession(@Nullable ServletContext servletContext, @Nullable String id) {
 		this.servletContext = (servletContext != null ? servletContext : new MockServletContext());
@@ -114,6 +117,7 @@ public class MockHttpSession implements HttpSession {
 
 	/**
 	 * As of Servlet 3.1, the id of a session can be changed.
+	 *
 	 * @return the new session id
 	 * @since 4.0.3
 	 */
@@ -191,8 +195,7 @@ public class MockHttpSession implements HttpSession {
 					((HttpSessionBindingListener) value).valueBound(new HttpSessionBindingEvent(this, name, value));
 				}
 			}
-		}
-		else {
+		} else {
 			removeAttribute(name);
 		}
 	}
@@ -221,7 +224,7 @@ public class MockHttpSession implements HttpSession {
 	 * Clear all of this session's attributes.
 	 */
 	public void clearAttributes() {
-		for (Iterator<Map.Entry<String, Object>> it = this.attributes.entrySet().iterator(); it.hasNext();) {
+		for (Iterator<Map.Entry<String, Object>> it = this.attributes.entrySet().iterator(); it.hasNext(); ) {
 			Map.Entry<String, Object> entry = it.next();
 			String name = entry.getKey();
 			Object value = entry.getValue();
@@ -234,6 +237,7 @@ public class MockHttpSession implements HttpSession {
 
 	/**
 	 * Invalidates this session then unbinds any objects bound to it.
+	 *
 	 * @throws IllegalStateException if this method is called on an already invalidated session
 	 */
 	@Override
@@ -250,6 +254,7 @@ public class MockHttpSession implements HttpSession {
 	/**
 	 * Convenience method for asserting that this session has not been
 	 * {@linkplain #invalidate() invalidated}.
+	 *
 	 * @throws IllegalStateException if this session has been invalidated
 	 */
 	private void assertIsValid() {
@@ -269,19 +274,19 @@ public class MockHttpSession implements HttpSession {
 	/**
 	 * Serialize the attributes of this session into an object that can be
 	 * turned into a byte array with standard Java serialization.
+	 *
 	 * @return a representation of this session's serialized state
 	 */
 	public Serializable serializeState() {
 		HashMap<String, Serializable> state = new HashMap<>();
-		for (Iterator<Map.Entry<String, Object>> it = this.attributes.entrySet().iterator(); it.hasNext();) {
+		for (Iterator<Map.Entry<String, Object>> it = this.attributes.entrySet().iterator(); it.hasNext(); ) {
 			Map.Entry<String, Object> entry = it.next();
 			String name = entry.getKey();
 			Object value = entry.getValue();
 			it.remove();
 			if (value instanceof Serializable) {
 				state.put(name, (Serializable) value);
-			}
-			else {
+			} else {
 				// Not serializable... Servlet containers usually automatically
 				// unbind the attribute in this case.
 				if (value instanceof HttpSessionBindingListener) {
@@ -295,6 +300,7 @@ public class MockHttpSession implements HttpSession {
 	/**
 	 * Deserialize the attributes of this session from a state object created by
 	 * {@link #serializeState()}.
+	 *
 	 * @param state a representation of this session's serialized state
 	 */
 	@SuppressWarnings("unchecked")

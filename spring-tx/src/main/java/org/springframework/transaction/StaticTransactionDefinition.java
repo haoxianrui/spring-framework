@@ -20,8 +20,8 @@ package org.springframework.transaction;
  * A static unmodifiable transaction definition.
  *
  * @author Juergen Hoeller
- * @since 5.2
  * @see TransactionDefinition#withDefaults()
+ * @since 5.2
  */
 final class StaticTransactionDefinition implements TransactionDefinition {
 

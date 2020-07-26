@@ -36,6 +36,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 /**
  * Unit tests for {@link DefaultRequestExpectation}.
+ *
  * @author Rossen Stoyanchev
  */
 public class DefaultRequestExpectationTests {
@@ -53,7 +54,7 @@ public class DefaultRequestExpectationTests {
 		expectation.andExpect(method(POST));
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				expectation.match(createRequest(GET, "/foo")))
-			.withMessageContaining("Unexpected HttpMethod expected:<POST> but was:<GET>");
+				.withMessageContaining("Unexpected HttpMethod expected:<POST> but was:<GET>");
 	}
 
 	@Test
@@ -84,9 +85,8 @@ public class DefaultRequestExpectationTests {
 	@SuppressWarnings("deprecation")
 	private ClientHttpRequest createRequest(HttpMethod method, String url) {
 		try {
-			return new org.springframework.mock.http.client.MockAsyncClientHttpRequest(method,  new URI(url));
-		}
-		catch (URISyntaxException ex) {
+			return new org.springframework.mock.http.client.MockAsyncClientHttpRequest(method, new URI(url));
+		} catch (URISyntaxException ex) {
 			throw new IllegalStateException(ex);
 		}
 	}

@@ -85,7 +85,7 @@ public class JmsListenerEndpointRegistrarTests {
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.registrar.afterPropertiesSet())
-			.withMessageContaining(endpoint.toString());
+				.withMessageContaining(endpoint.toString());
 	}
 
 	@Test

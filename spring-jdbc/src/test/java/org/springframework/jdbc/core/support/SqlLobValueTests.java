@@ -44,23 +44,23 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Test cases for the SQL LOB value:
- *
+ * <p>
  * BLOB:
- *   1. Types.BLOB: setBlobAsBytes (byte[])
- *   2. String: setBlobAsBytes (byte[])
- *   3. else: IllegalArgumentException
- *
+ * 1. Types.BLOB: setBlobAsBytes (byte[])
+ * 2. String: setBlobAsBytes (byte[])
+ * 3. else: IllegalArgumentException
+ * <p>
  * CLOB:
- *   4. String or NULL: setClobAsString (String)
- *   5. InputStream: setClobAsAsciiStream (InputStream)
- *   6. Reader: setClobAsCharacterStream (Reader)
- *   7. else: IllegalArgumentException
+ * 4. String or NULL: setClobAsString (String)
+ * 5. InputStream: setClobAsAsciiStream (InputStream)
+ * 6. Reader: setClobAsCharacterStream (Reader)
+ * 7. else: IllegalArgumentException
  *
  * @author Alef Arendsen
  */
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-class SqlLobValueTests  {
+class SqlLobValueTests {
 
 	@Mock
 	private PreparedStatement preparedStatement;

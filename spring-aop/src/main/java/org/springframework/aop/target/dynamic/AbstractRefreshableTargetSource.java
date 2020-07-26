@@ -33,13 +33,15 @@ import org.springframework.lang.Nullable;
  * @author Rod Johnson
  * @author Rob Harrop
  * @author Juergen Hoeller
- * @since 2.0
  * @see #requiresRefresh()
  * @see #freshTarget()
+ * @since 2.0
  */
 public abstract class AbstractRefreshableTargetSource implements TargetSource, Refreshable {
 
-	/** Logger available to subclasses. */
+	/**
+	 * Logger available to subclasses.
+	 */
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	@Nullable
@@ -144,6 +146,7 @@ public abstract class AbstractRefreshableTargetSource implements TargetSource, R
 	 * <p>The default implementation always returns {@code true}, triggering
 	 * a refresh every time the delay has elapsed. To be overridden by subclasses
 	 * with an appropriate check of the underlying target resource.
+	 *
 	 * @return whether a refresh is required
 	 */
 	protected boolean requiresRefresh() {
@@ -154,6 +157,7 @@ public abstract class AbstractRefreshableTargetSource implements TargetSource, R
 	 * Obtain a fresh target object.
 	 * <p>Only invoked if a refresh check has found that a refresh is required
 	 * (that is, {@link #requiresRefresh()} has returned {@code true}).
+	 *
 	 * @return the fresh target object
 	 */
 	protected abstract Object freshTarget();

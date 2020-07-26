@@ -132,7 +132,7 @@ class ClassPathResourceTests {
 	private void assertExceptionContainsFullyQualifiedPath(ClassPathResource resource) {
 		assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(
 				resource::getInputStream)
-			.withMessageContaining(FQ_RESOURCE_PATH);
+				.withMessageContaining(FQ_RESOURCE_PATH);
 	}
 
 }

@@ -31,6 +31,7 @@ public interface MediaTypeFileExtensionResolver {
 
 	/**
 	 * Resolve the given media type to a list of file extensions.
+	 *
 	 * @param mediaType the media type to resolve
 	 * @return a list of extensions or an empty list (never {@code null})
 	 */
@@ -38,6 +39,7 @@ public interface MediaTypeFileExtensionResolver {
 
 	/**
 	 * Get all registered file extensions.
+	 *
 	 * @return a list of extensions or an empty list (never {@code null})
 	 */
 	List<String> getAllFileExtensions();

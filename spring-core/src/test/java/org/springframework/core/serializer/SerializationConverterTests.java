@@ -48,7 +48,7 @@ class SerializationConverterTests {
 		SerializingConverter toBytes = new SerializingConverter();
 		assertThatExceptionOfType(SerializationFailedException.class).isThrownBy(() ->
 				toBytes.convert(new Object()))
-			.withCauseInstanceOf(IllegalArgumentException.class);
+				.withCauseInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ class SerializationConverterTests {
 		SerializingConverter toBytes = new SerializingConverter();
 		assertThatExceptionOfType(SerializationFailedException.class).isThrownBy(() ->
 				toBytes.convert(new UnSerializable()))
-			.withCauseInstanceOf(NotSerializableException.class);
+				.withCauseInstanceOf(NotSerializableException.class);
 	}
 
 	@Test

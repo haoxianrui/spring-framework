@@ -71,7 +71,8 @@ public class HandlerResultHandlerTests {
 		assertThat(actual).isEqualTo(IMAGE_GIF);
 	}
 
-	@Test  // SPR-9160
+	@Test
+		// SPR-9160
 	void sortsByQuality() {
 		MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/path")
 				.header("Accept", "text/plain; q=0.5, application/json"));
@@ -92,7 +93,8 @@ public class HandlerResultHandlerTests {
 		assertThat(actual).isEqualTo(text8859);
 	}
 
-	@Test // SPR-12894
+	@Test
+		// SPR-12894
 	void noConcreteMediaType() {
 		List<MediaType> producible = Collections.singletonList(ALL);
 		MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/path"));

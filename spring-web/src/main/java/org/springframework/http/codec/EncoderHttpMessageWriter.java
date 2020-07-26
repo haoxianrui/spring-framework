@@ -46,13 +46,13 @@ import org.springframework.util.StringUtils;
  * from the extra information available on the server side such as the request
  * or controller method annotations.
  *
+ * @param <T> the type of objects in the input stream
  * @author Arjen Poutsma
  * @author Sebastien Deleuze
  * @author Rossen Stoyanchev
  * @author Brian Clozel
  * @author Sam Brannen
  * @since 5.0
- * @param <T> the type of objects in the input stream
  */
 public class EncoderHttpMessageWriter<T> implements HttpMessageWriter<T> {
 
@@ -109,7 +109,7 @@ public class EncoderHttpMessageWriter<T> implements HttpMessageWriter<T> {
 
 	@Override
 	public Mono<Void> write(Publisher<? extends T> inputStream, ResolvableType elementType,
-			@Nullable MediaType mediaType, ReactiveHttpOutputMessage message, Map<String, Object> hints) {
+							@Nullable MediaType mediaType, ReactiveHttpOutputMessage message, Map<String, Object> hints) {
 
 		MediaType contentType = updateContentType(message, mediaType);
 
@@ -193,8 +193,8 @@ public class EncoderHttpMessageWriter<T> implements HttpMessageWriter<T> {
 
 	@Override
 	public Mono<Void> write(Publisher<? extends T> inputStream, ResolvableType actualType,
-			ResolvableType elementType, @Nullable MediaType mediaType, ServerHttpRequest request,
-			ServerHttpResponse response, Map<String, Object> hints) {
+							ResolvableType elementType, @Nullable MediaType mediaType, ServerHttpRequest request,
+							ServerHttpResponse response, Map<String, Object> hints) {
 
 		Map<String, Object> allHints = Hints.merge(hints,
 				getWriteHints(actualType, elementType, mediaType, request, response));
@@ -208,7 +208,7 @@ public class EncoderHttpMessageWriter<T> implements HttpMessageWriter<T> {
 	 * the encoder if it is an instance of {@link HttpMessageEncoder}.
 	 */
 	protected Map<String, Object> getWriteHints(ResolvableType streamType, ResolvableType elementType,
-			@Nullable MediaType mediaType, ServerHttpRequest request, ServerHttpResponse response) {
+												@Nullable MediaType mediaType, ServerHttpRequest request, ServerHttpResponse response) {
 
 		if (this.encoder instanceof HttpMessageEncoder) {
 			HttpMessageEncoder<?> encoder = (HttpMessageEncoder<?>) this.encoder;

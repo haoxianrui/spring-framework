@@ -57,8 +57,8 @@ public class EventPublicationInterceptorTests {
 		EventPublicationInterceptor interceptor = new EventPublicationInterceptor();
 		interceptor.setApplicationEventPublisher(this.publisher);
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-				interceptor.setApplicationEventClass(getClass());
-				interceptor.afterPropertiesSet();
+			interceptor.setApplicationEventClass(getClass());
+			interceptor.afterPropertiesSet();
 		});
 	}
 
@@ -67,8 +67,8 @@ public class EventPublicationInterceptorTests {
 		EventPublicationInterceptor interceptor = new EventPublicationInterceptor();
 		interceptor.setApplicationEventPublisher(this.publisher);
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-				interceptor.setApplicationEventClass(ApplicationEvent.class);
-				interceptor.afterPropertiesSet();
+			interceptor.setApplicationEventClass(ApplicationEvent.class);
+			interceptor.afterPropertiesSet();
 		});
 	}
 
@@ -77,8 +77,8 @@ public class EventPublicationInterceptorTests {
 		EventPublicationInterceptor interceptor = new EventPublicationInterceptor();
 		interceptor.setApplicationEventPublisher(this.publisher);
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-				interceptor.setApplicationEventClass(TestEventWithNoValidOneArgObjectCtor.class);
-				interceptor.afterPropertiesSet();
+			interceptor.setApplicationEventClass(TestEventWithNoValidOneArgObjectCtor.class);
+			interceptor.afterPropertiesSet();
 		});
 	}
 

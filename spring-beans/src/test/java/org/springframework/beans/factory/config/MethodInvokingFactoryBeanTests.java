@@ -197,7 +197,7 @@ public class MethodInvokingFactoryBeanTests {
 		mcfb.setArguments(new ArrayList<>(), new ArrayList<Object>(), "hello", "bogus");
 		assertThatExceptionOfType(NoSuchMethodException.class).as(
 				"Matched method with wrong number of args").isThrownBy(
-						mcfb::afterPropertiesSet);
+				mcfb::afterPropertiesSet);
 
 		mcfb = new MethodInvokingFactoryBean();
 		mcfb.setTargetClass(TestClass1.class);
@@ -205,7 +205,7 @@ public class MethodInvokingFactoryBeanTests {
 		mcfb.setArguments(1, new Object());
 		assertThatExceptionOfType(NoSuchMethodException.class).as(
 				"Should have failed on getObject with mismatched argument types").isThrownBy(
-						mcfb::afterPropertiesSet);
+				mcfb::afterPropertiesSet);
 
 		mcfb = new MethodInvokingFactoryBean();
 		mcfb.setTargetClass(TestClass1.class);
@@ -220,7 +220,7 @@ public class MethodInvokingFactoryBeanTests {
 		mcfb.setArguments(new ArrayList<>(), new ArrayList<Object>(), new Object());
 		assertThatExceptionOfType(NoSuchMethodException.class).as(
 				"Matched method when shouldn't have matched").isThrownBy(
-						mcfb::afterPropertiesSet);
+				mcfb::afterPropertiesSet);
 	}
 
 	@Test
@@ -228,7 +228,7 @@ public class MethodInvokingFactoryBeanTests {
 		MethodInvoker methodInvoker = new MethodInvoker();
 		methodInvoker.setTargetClass(TestClass1.class);
 		methodInvoker.setTargetMethod("nullArgument");
-		methodInvoker.setArguments(new Object[] {null});
+		methodInvoker.setArguments(new Object[]{null});
 		methodInvoker.prepare();
 		methodInvoker.invoke();
 	}
@@ -255,19 +255,19 @@ public class MethodInvokingFactoryBeanTests {
 		MethodInvokingBean methodInvoker = new MethodInvokingBean();
 		methodInvoker.setTargetClass(TestClass1.class);
 		methodInvoker.setTargetMethod("intArguments");
-		methodInvoker.setArguments(new Object[] {new Integer[] {5, 10}});
+		methodInvoker.setArguments(new Object[]{new Integer[]{5, 10}});
 		methodInvoker.afterPropertiesSet();
 
 		methodInvoker = new MethodInvokingBean();
 		methodInvoker.setTargetClass(TestClass1.class);
 		methodInvoker.setTargetMethod("intArguments");
-		methodInvoker.setArguments(new Object[] {new String[] {"5", "10"}});
+		methodInvoker.setArguments(new Object[]{new String[]{"5", "10"}});
 		methodInvoker.afterPropertiesSet();
 
 		methodInvoker = new MethodInvokingBean();
 		methodInvoker.setTargetClass(TestClass1.class);
 		methodInvoker.setTargetMethod("intArguments");
-		methodInvoker.setArguments(new Object[] {new Integer[] {5, 10}});
+		methodInvoker.setArguments(new Object[]{new Integer[]{5, 10}});
 		methodInvoker.afterPropertiesSet();
 
 		methodInvoker = new MethodInvokingBean();
@@ -279,7 +279,7 @@ public class MethodInvokingFactoryBeanTests {
 		methodInvoker = new MethodInvokingBean();
 		methodInvoker.setTargetClass(TestClass1.class);
 		methodInvoker.setTargetMethod("intArguments");
-		methodInvoker.setArguments(new Object[] {new Integer[] {5, 10}});
+		methodInvoker.setArguments(new Object[]{new Integer[]{5, 10}});
 		methodInvoker.afterPropertiesSet();
 
 		methodInvoker = new MethodInvokingBean();

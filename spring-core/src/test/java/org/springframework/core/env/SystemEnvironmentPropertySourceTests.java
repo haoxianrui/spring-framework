@@ -78,7 +78,7 @@ class SystemEnvironmentPropertySourceTests {
 		assertThat(ps.containsProperty("a.key")).isEqualTo(true);
 
 		assertThat(ps.getProperty("a_key")).isEqualTo("a_value");
-		assertThat( ps.getProperty("a.key")).isEqualTo("a_value");
+		assertThat(ps.getProperty("a.key")).isEqualTo("a_value");
 	}
 
 	@Test
@@ -87,7 +87,7 @@ class SystemEnvironmentPropertySourceTests {
 		envMap.put("a.key", "a.value");
 
 		assertThat(ps.getProperty("a_key")).isEqualTo("a_value");
-		assertThat( ps.getProperty("a.key")).isEqualTo("a.value");
+		assertThat(ps.getProperty("a.key")).isEqualTo("a.value");
 	}
 
 	@Test
@@ -156,6 +156,7 @@ class SystemEnvironmentPropertySourceTests {
 			public boolean containsKey(Object key) {
 				throw new UnsupportedOperationException();
 			}
+
 			@Override
 			public Set<String> keySet() {
 				return new HashSet<>(super.keySet());

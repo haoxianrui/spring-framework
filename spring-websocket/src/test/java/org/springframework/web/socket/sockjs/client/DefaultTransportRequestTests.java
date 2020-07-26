@@ -96,7 +96,7 @@ public class DefaultTransportRequestTests {
 		assertThat(this.connectFuture.isDone()).isTrue();
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				this.connectFuture::get)
-			.withMessageContaining("Fake exception 2");
+				.withMessageContaining("Fake exception 2");
 	}
 
 	@Test

@@ -144,16 +144,14 @@ public abstract class AbstractCacheAnnotationTests {
 		service.evict(o1, null);
 		if (successExpected) {
 			assertThat(cache.get(o1)).isNull();
-		}
-		else {
+		} else {
 			assertThat(cache.get(o1)).isNotNull();
 		}
 
 		Object r2 = service.cache(o1);
 		if (successExpected) {
 			assertThat(r2).isNotSameAs(r1);
-		}
-		else {
+		} else {
 			assertThat(r2).isSameAs(r1);
 		}
 	}
@@ -167,8 +165,7 @@ public abstract class AbstractCacheAnnotationTests {
 
 		try {
 			service.evictEarly(o1);
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			// expected
 		}
 		assertThat(cache.get(o1)).isNull();
@@ -183,8 +180,7 @@ public abstract class AbstractCacheAnnotationTests {
 
 		try {
 			service.evictWithException(o1);
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			// expected
 		}
 		// exception occurred, eviction skipped, data should still be in the cache
@@ -207,8 +203,7 @@ public abstract class AbstractCacheAnnotationTests {
 
 		try {
 			service.evictEarly(o1);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			// expected
 		}
 		Object r2 = service.cache(o1);
@@ -231,8 +226,7 @@ public abstract class AbstractCacheAnnotationTests {
 		if (successExpected) {
 			assertThat(cache.get(o1)).isNull();
 			assertThat(cache.get(o2)).isNull();
-		}
-		else {
+		} else {
 			assertThat(cache.get(o1)).isNotNull();
 			assertThat(cache.get(o2)).isNotNull();
 		}
@@ -242,8 +236,7 @@ public abstract class AbstractCacheAnnotationTests {
 		if (successExpected) {
 			assertThat(r3).isNotSameAs(r1);
 			assertThat(r4).isNotSameAs(r2);
-		}
-		else {
+		} else {
 			assertThat(r3).isSameAs(r1);
 			assertThat(r4).isSameAs(r2);
 		}
@@ -263,8 +256,7 @@ public abstract class AbstractCacheAnnotationTests {
 
 		try {
 			service.evictAllEarly(new Object());
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			// expected
 		}
 		assertThat(cache.get(o1)).isNull();
@@ -366,26 +358,26 @@ public abstract class AbstractCacheAnnotationTests {
 		String arg = UUID.randomUUID().toString();
 		assertThatIOException().isThrownBy(() ->
 				service.throwChecked(arg))
-			.withMessage(arg);
+				.withMessage(arg);
 	}
 
 	protected void testUncheckedThrowable(CacheableService<?> service) {
 		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() ->
 				service.throwUnchecked(1L))
-			.withMessage("1");
+				.withMessage("1");
 	}
 
 	protected void testCheckedThrowableSync(CacheableService<?> service) {
 		String arg = UUID.randomUUID().toString();
 		assertThatIOException().isThrownBy(() ->
 				service.throwCheckedSync(arg))
-			.withMessage(arg);
+				.withMessage(arg);
 	}
 
 	protected void testUncheckedThrowableSync(CacheableService<?> service) {
 		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() ->
 				service.throwUncheckedSync(1L))
-			.withMessage("1");
+				.withMessage("1");
 	}
 
 	protected void testNullArg(CacheableService<?> service) {

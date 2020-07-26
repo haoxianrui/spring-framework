@@ -45,16 +45,16 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class PathMatchingResourcePatternResolverTests {
 
 	private static final String[] CLASSES_IN_CORE_IO_SUPPORT =
-			new String[] {"EncodedResource.class", "LocalizedResourceHelper.class",
+			new String[]{"EncodedResource.class", "LocalizedResourceHelper.class",
 					"PathMatchingResourcePatternResolver.class", "PropertiesLoaderSupport.class",
 					"PropertiesLoaderUtils.class", "ResourceArrayPropertyEditor.class",
 					"ResourcePatternResolver.class", "ResourcePatternUtils.class"};
 
 	private static final String[] TEST_CLASSES_IN_CORE_IO_SUPPORT =
-			new String[] {"PathMatchingResourcePatternResolverTests.class"};
+			new String[]{"PathMatchingResourcePatternResolverTests.class"};
 
 	private static final String[] CLASSES_IN_REACTOR_UTIL_ANNOTATIONS =
-			new String[] {"NonNull.class", "NonNullApi.class", "Nullable.class"};
+			new String[]{"NonNull.class", "NonNullApi.class", "Nullable.class"};
 
 	private PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
@@ -101,7 +101,7 @@ class PathMatchingResourcePatternResolverTests {
 	void getResourcesOnFileSystemContainingHashtagsInTheirFileNames() throws IOException {
 		Resource[] resources = resolver.getResources("classpath*:org/springframework/core/io/**/resource#test*.txt");
 		assertThat(resources).extracting(Resource::getFile).extracting(File::getName)
-			.containsExactlyInAnyOrder("resource#test1.txt", "resource#test2.txt");
+				.containsExactlyInAnyOrder("resource#test1.txt", "resource#test2.txt");
 	}
 
 	@Test
