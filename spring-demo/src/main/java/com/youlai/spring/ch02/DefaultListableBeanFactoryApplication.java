@@ -1,4 +1,4 @@
-package com.fly4j.spring.ch02;
+package com.youlai.spring.ch02;
 
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;

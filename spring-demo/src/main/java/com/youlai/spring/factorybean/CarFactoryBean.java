@@ -1,4 +1,4 @@
-package com.fly4j.spring.ch05.factorybean;
+package com.youlai.spring.factorybean;
 
 import org.springframework.beans.factory.FactoryBean;
 

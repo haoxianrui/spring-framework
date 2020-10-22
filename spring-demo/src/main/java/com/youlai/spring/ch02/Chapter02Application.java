@@ -1,6 +1,6 @@
-package com.fly4j.spring.ch02;
+package com.youlai.spring.ch02;
 
-import com.fly4j.spring.ch02.service.IUserService;
+import com.youlai.spring.ch02.service.IUserService;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
