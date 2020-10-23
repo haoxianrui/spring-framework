@@ -4,7 +4,8 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/websocket https://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
-	<websocket:message-broker application-destination-prefix="/app" user-destination-prefix="/personal" validator="myValidator">
+	<websocket:message-broker application-destination-prefix="/app" user-destination-prefix="/personal"
+							  validator="myValidator">
 		<websocket:stomp-endpoint path="/foo,/bar">
 			<websocket:handshake-handler ref="myHandler"/>
 		</websocket:stomp-endpoint>

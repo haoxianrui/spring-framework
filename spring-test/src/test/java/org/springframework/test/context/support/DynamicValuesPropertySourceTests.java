@@ -33,10 +33,10 @@ class DynamicValuesPropertySourceTests {
 
 	@SuppressWarnings("serial")
 	private final DynamicValuesPropertySource source = new DynamicValuesPropertySource("test",
-		new HashMap<String, Supplier<Object>>() {{
-			put("a", () -> "A");
-			put("b", () -> "B");
-		}});
+			new HashMap<String, Supplier<Object>>() {{
+				put("a", () -> "A");
+				put("b", () -> "B");
+			}});
 
 
 	@Test

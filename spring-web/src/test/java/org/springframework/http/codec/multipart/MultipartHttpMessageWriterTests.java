@@ -204,8 +204,8 @@ public class MultipartHttpMessageWriterTests extends AbstractLeakCheckingTests {
 	@SuppressWarnings("ConstantConditions")
 	private String decodeToString(Part part) {
 		return StringDecoder.textPlainOnly().decodeToMono(part.content(),
-					ResolvableType.forClass(String.class), MediaType.TEXT_PLAIN,
-					Collections.emptyMap()).block(Duration.ZERO);
+				ResolvableType.forClass(String.class), MediaType.TEXT_PLAIN,
+				Collections.emptyMap()).block(Duration.ZERO);
 	}
 
 	@Test  // SPR-16402

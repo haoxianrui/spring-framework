@@ -107,10 +107,10 @@ public class RequestParamMethodArgumentResolverTests {
 	public void doesNotSupportReactiveWrapper() {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.resolver.supportsParameter(this.testMethod.annot(requestParam()).arg(Mono.class, String.class)))
-			.withMessageStartingWith("RequestParamMethodArgumentResolver does not support reactive type wrapper");
+				.withMessageStartingWith("RequestParamMethodArgumentResolver does not support reactive type wrapper");
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.resolver.supportsParameter(this.testMethod.annotNotPresent(RequestParam.class).arg(Mono.class, String.class)))
-			.withMessageStartingWith("RequestParamMethodArgumentResolver does not support reactive type wrapper");
+				.withMessageStartingWith("RequestParamMethodArgumentResolver does not support reactive type wrapper");
 	}
 
 	@Test
@@ -127,7 +127,7 @@ public class RequestParamMethodArgumentResolverTests {
 		Object result = resolve(param, MockServerWebExchange.from(request));
 		boolean condition = result instanceof String[];
 		assertThat(condition).isTrue();
-		assertThat((String[]) result).isEqualTo(new String[] {"foo", "bar"});
+		assertThat((String[]) result).isEqualTo(new String[]{"foo", "bar"});
 	}
 
 	@Test

@@ -42,6 +42,7 @@ import static org.springframework.web.testfixture.method.MvcAnnotationPredicates
 
 /**
  * Test fixture with {@link MatrixVariableMethodArgumentResolver}.
+ *
  * @author Rossen Stoyanchev
  */
 public class MatrixVariablesMethodArgumentResolverTests {

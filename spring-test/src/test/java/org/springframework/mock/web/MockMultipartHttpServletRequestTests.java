@@ -59,7 +59,7 @@ class MockMultipartHttpServletRequestTests {
 		MockMultipartHttpServletRequest request = new MockMultipartHttpServletRequest();
 		request.addFile(new MockMultipartFile("file1", new ByteArrayInputStream("myContent1".getBytes())));
 		request.addFile(new MockMultipartFile("file2", "myOrigFilename", "text/plain", new ByteArrayInputStream(
-			"myContent2".getBytes())));
+				"myContent2".getBytes())));
 		doTestMultipartHttpServletRequest(request);
 	}
 
@@ -103,13 +103,13 @@ class MockMultipartHttpServletRequestTests {
 		assertThat(file1.getContentType()).isNull();
 		assertThat(ObjectUtils.nullSafeEquals("myContent1".getBytes(), file1.getBytes())).isTrue();
 		assertThat(ObjectUtils.nullSafeEquals("myContent1".getBytes(),
-			FileCopyUtils.copyToByteArray(file1.getInputStream()))).isTrue();
+				FileCopyUtils.copyToByteArray(file1.getInputStream()))).isTrue();
 		assertThat(file2.getName()).isEqualTo("file2");
 		assertThat(file2.getOriginalFilename()).isEqualTo("myOrigFilename");
 		assertThat(file2.getContentType()).isEqualTo("text/plain");
 		assertThat(ObjectUtils.nullSafeEquals("myContent2".getBytes(), file2.getBytes())).isTrue();
 		assertThat(ObjectUtils.nullSafeEquals("myContent2".getBytes(),
-			FileCopyUtils.copyToByteArray(file2.getInputStream()))).isTrue();
+				FileCopyUtils.copyToByteArray(file2.getInputStream()))).isTrue();
 	}
 
 }

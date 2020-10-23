@@ -131,8 +131,7 @@ public class CauchoRemotingTests {
 			assertThat(proxy.getName()).isEqualTo("tb");
 			proxy.setName("test");
 			assertThat(proxy.getName()).isEqualTo("test");
-		}
-		finally {
+		} finally {
 			server.stop(Integer.MAX_VALUE);
 		}
 	}

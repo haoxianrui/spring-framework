@@ -128,7 +128,7 @@ public class ObjectFactoryCreatingFactoryBeanTests {
 	public void testWhenTargetBeanNameIsNull() throws Exception {
 		assertThatIllegalArgumentException().as(
 				"'targetBeanName' property not set").isThrownBy(
-						new ObjectFactoryCreatingFactoryBean()::afterPropertiesSet);
+				new ObjectFactoryCreatingFactoryBean()::afterPropertiesSet);
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public class ObjectFactoryCreatingFactoryBeanTests {
 		factory.setTargetBeanName("");
 		assertThatIllegalArgumentException().as(
 				"'targetBeanName' property set to (invalid) empty string").isThrownBy(
-						factory::afterPropertiesSet);
+				factory::afterPropertiesSet);
 	}
 
 	@Test
@@ -146,7 +146,7 @@ public class ObjectFactoryCreatingFactoryBeanTests {
 		factory.setTargetBeanName("  \t");
 		assertThatIllegalArgumentException().as(
 				"'targetBeanName' property set to (invalid) only-whitespace string").isThrownBy(
-						factory::afterPropertiesSet);
+				factory::afterPropertiesSet);
 	}
 
 	@Test

@@ -75,6 +75,7 @@ public class FreeMarkerConfigurationFactoryBeanTests {
 				}
 				return new ByteArrayResource("test".getBytes(), "test");
 			}
+
 			@Override
 			public ClassLoader getClassLoader() {
 				return getClass().getClassLoader();

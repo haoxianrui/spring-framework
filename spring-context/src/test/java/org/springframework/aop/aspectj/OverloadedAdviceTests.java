@@ -35,8 +35,7 @@ public class OverloadedAdviceTests {
 	public void testExceptionOnConfigParsingWithMismatchedAdviceMethod() {
 		try {
 			new ClassPathXmlApplicationContext(getClass().getSimpleName() + ".xml", getClass());
-		}
-		catch (BeanCreationException ex) {
+		} catch (BeanCreationException ex) {
 			Throwable cause = ex.getRootCause();
 			boolean condition = cause instanceof IllegalArgumentException;
 			assertThat(condition).as("Should be IllegalArgumentException").isTrue();
@@ -48,8 +47,7 @@ public class OverloadedAdviceTests {
 	public void testExceptionOnConfigParsingWithAmbiguousAdviceMethod() {
 		try {
 			new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-ambiguous.xml", getClass());
-		}
-		catch (BeanCreationException ex) {
+		} catch (BeanCreationException ex) {
 			Throwable cause = ex.getRootCause();
 			boolean condition = cause instanceof IllegalArgumentException;
 			assertThat(condition).as("Should be IllegalArgumentException").isTrue();

@@ -60,7 +60,9 @@ public class HiddenHttpMethodFilter extends OncePerRequestFilter {
 			Collections.unmodifiableList(Arrays.asList(HttpMethod.PUT.name(),
 					HttpMethod.DELETE.name(), HttpMethod.PATCH.name()));
 
-	/** Default method parameter: {@code _method}. */
+	/**
+	 * Default method parameter: {@code _method}.
+	 */
 	public static final String DEFAULT_METHOD_PARAM = "_method";
 
 	private String methodParam = DEFAULT_METHOD_PARAM;
@@ -68,6 +70,7 @@ public class HiddenHttpMethodFilter extends OncePerRequestFilter {
 
 	/**
 	 * Set the parameter name to look for HTTP methods.
+	 *
 	 * @see #DEFAULT_METHOD_PARAM
 	 */
 	public void setMethodParam(String methodParam) {

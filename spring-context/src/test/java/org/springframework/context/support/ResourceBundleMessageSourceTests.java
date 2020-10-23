@@ -103,12 +103,11 @@ public class ResourceBundleMessageSourceTests {
 		String basepath = "org/springframework/context/support/";
 		String[] basenames;
 		if (reloadable) {
-			basenames = new String[] {
+			basenames = new String[]{
 					"classpath:" + basepath + "messages",
 					"classpath:" + basepath + "more-messages"};
-		}
-		else {
-			basenames = new String[] {
+		} else {
+			basenames = new String[]{
 					basepath + "messages",
 					basepath + "more-messages"};
 		}
@@ -144,22 +143,21 @@ public class ResourceBundleMessageSourceTests {
 		LocaleContextHolder.setLocale(new Locale("DE", "at"));
 		try {
 			assertThat(accessor.getMessage("code2")).isEqualTo("nochricht2");
-		}
-		finally {
+		} finally {
 			LocaleContextHolder.setLocale(null);
 		}
 
 		assertThat(ac.getMessage("code3", null, Locale.ENGLISH)).isEqualTo("message3");
 		MessageSourceResolvable resolvable = new DefaultMessageSourceResolvable("code3");
 		assertThat(ac.getMessage(resolvable, Locale.ENGLISH)).isEqualTo("message3");
-		resolvable = new DefaultMessageSourceResolvable(new String[] {"code4", "code3"});
+		resolvable = new DefaultMessageSourceResolvable(new String[]{"code4", "code3"});
 		assertThat(ac.getMessage(resolvable, Locale.ENGLISH)).isEqualTo("message3");
 
 		assertThat(ac.getMessage("code3", null, Locale.ENGLISH)).isEqualTo("message3");
-		resolvable = new DefaultMessageSourceResolvable(new String[] {"code4", "code3"});
+		resolvable = new DefaultMessageSourceResolvable(new String[]{"code4", "code3"});
 		assertThat(ac.getMessage(resolvable, Locale.ENGLISH)).isEqualTo("message3");
 
-		Object[] args = new Object[] {"Hello", new DefaultMessageSourceResolvable(new String[] {"code1"})};
+		Object[] args = new Object[]{"Hello", new DefaultMessageSourceResolvable(new String[]{"code1"})};
 		assertThat(ac.getMessage("hello", args, Locale.ENGLISH)).isEqualTo("Hello, message1");
 
 		// test default message without and with args
@@ -185,16 +183,14 @@ public class ResourceBundleMessageSourceTests {
 
 		if (alwaysUseMessageFormat) {
 			assertThat(ac.getMessage("escaped", null, Locale.ENGLISH)).isEqualTo("I'm");
-		}
-		else {
+		} else {
 			assertThat(ac.getMessage("escaped", null, Locale.ENGLISH)).isEqualTo("I''m");
 		}
 		assertThat(ac.getMessage("escaped", new Object[]{"some arg"}, Locale.ENGLISH)).isEqualTo("I'm");
 
 		if (useCodeAsDefaultMessage) {
 			assertThat(ac.getMessage("code4", null, Locale.GERMAN)).isEqualTo("code4");
-		}
-		else {
+		} else {
 			assertThatExceptionOfType(NoSuchMessageException.class).isThrownBy(() ->
 					ac.getMessage("code4", null, Locale.GERMAN));
 		}

@@ -85,4 +85,5 @@ class FooFactoryBean extends AbstractFactoryBean<Foo> {
 	}
 }
 
-class Foo { }
+class Foo {
+}

@@ -3,6 +3,7 @@
 
 <beans>
 
-	<bean id="abstractFactoryBean" class="org.springframework.beans.factory.FactoryBeanTests$AbstractFactoryBean" abstract="true"/>
+	<bean id="abstractFactoryBean" class="org.springframework.beans.factory.FactoryBeanTests$AbstractFactoryBean"
+		  abstract="true"/>
 
 </beans>

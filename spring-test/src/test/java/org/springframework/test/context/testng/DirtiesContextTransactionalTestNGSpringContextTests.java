@@ -55,11 +55,11 @@ public class DirtiesContextTransactionalTestNGSpringContextTests extends Abstrac
 	private void performCommonAssertions() {
 		assertThatTransaction().isActive();
 		assertThat(super.applicationContext)
-			.as("The application context should have been set due to ApplicationContextAware semantics.")
-			.isNotNull();
+				.as("The application context should have been set due to ApplicationContextAware semantics.")
+				.isNotNull();
 		assertThat(super.jdbcTemplate)
-			.as("The JdbcTemplate should have been created in setDataSource() via DI for the DataSource.")
-			.isNotNull();
+				.as("The JdbcTemplate should have been created in setDataSource() via DI for the DataSource.")
+				.isNotNull();
 	}
 
 	@Test
@@ -69,20 +69,20 @@ public class DirtiesContextTransactionalTestNGSpringContextTests extends Abstrac
 		this.dirtiedApplicationContext = super.applicationContext;
 	}
 
-	@Test(dependsOnMethods = { "dirtyContext" })
+	@Test(dependsOnMethods = {"dirtyContext"})
 	public void verifyContextWasDirtied() {
 		performCommonAssertions();
 		assertThat(super.applicationContext)
-			.as("The application context should have been 'dirtied'.")
-			.isNotSameAs(this.dirtiedApplicationContext);
+				.as("The application context should have been 'dirtied'.")
+				.isNotSameAs(this.dirtiedApplicationContext);
 		this.dirtiedApplicationContext = super.applicationContext;
 	}
 
-	@Test(dependsOnMethods = { "verifyContextWasDirtied" })
+	@Test(dependsOnMethods = {"verifyContextWasDirtied"})
 	public void verifyContextWasNotDirtied() {
 		assertThat(this.applicationContext)
-			.as("The application context should NOT have been 'dirtied'.")
-			.isSameAs(this.dirtiedApplicationContext);
+				.as("The application context should NOT have been 'dirtied'.")
+				.isSameAs(this.dirtiedApplicationContext);
 	}
 
 }

@@ -34,8 +34,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-
-
 /**
  * @author Rob Winch
  */

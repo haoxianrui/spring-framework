@@ -42,7 +42,8 @@ import static org.assertj.core.api.Assertions.assertThatCode;
  */
 class RequestScopedControllerAdviceIntegrationTests {
 
-	@Test // gh-23985
+	@Test
+		// gh-23985
 	void loadContextWithRequestScopedControllerAdvice() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.setServletContext(new MockServletContext());

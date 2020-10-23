@@ -101,8 +101,8 @@ public class TransactionalEventListenerTests {
 					getContext().publishEvent("FAIL");
 					throw new AssertionError("Should have thrown an exception at this point");
 				}))
-			.withMessageContaining("Test exception")
-			.withMessageContaining(EventCollector.IMMEDIATELY);
+				.withMessageContaining("Test exception")
+				.withMessageContaining(EventCollector.IMMEDIATELY);
 
 		getEventCollector().assertEvents(EventCollector.IMMEDIATELY, "FAIL");
 		getEventCollector().assertTotalEventsCount(1);
@@ -411,7 +411,7 @@ public class TransactionalEventListenerTests {
 			for (String phase : phases) {
 				List<Object> eventsForPhase = getEvents(phase);
 				assertThat(eventsForPhase.size()).as("Expected no events for phase '" + phase + "' " +
-								"but got " + eventsForPhase + ":").isEqualTo(0);
+						"but got " + eventsForPhase + ":").isEqualTo(0);
 			}
 		}
 
@@ -429,7 +429,7 @@ public class TransactionalEventListenerTests {
 				size += entry.getValue().size();
 			}
 			assertThat(size).as("Wrong number of total events (" + this.events.size() + ") " +
-						"registered phase(s)").isEqualTo(number);
+					"registered phase(s)").isEqualTo(number);
 		}
 	}
 

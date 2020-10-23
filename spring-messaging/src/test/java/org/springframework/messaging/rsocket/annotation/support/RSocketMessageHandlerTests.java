@@ -52,6 +52,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Unit tests for {@link RSocketMessageHandler}.
+ *
  * @author Rossen Stoyanchev
  * @since 5.2
  */
@@ -167,8 +168,7 @@ public class RSocketMessageHandlerTests {
 		DestinationPatternsMessageCondition c2 = condition.getCondition(DestinationPatternsMessageCondition.class);
 		if (ObjectUtils.isEmpty(expectedPatterns)) {
 			assertThat(c2.getPatterns()).isEmpty();
-		}
-		else {
+		} else {
 			assertThat(c2.getPatterns()).contains(expectedPatterns);
 		}
 	}
@@ -244,7 +244,7 @@ public class RSocketMessageHandlerTests {
 		testHandleNoMatch(FrameType.REQUEST_FNF);
 
 		assertThatThrownBy(() -> testHandleNoMatch(FrameType.REQUEST_RESPONSE))
-			.hasMessage("No handler for destination 'path'");
+				.hasMessage("No handler for destination 'path'");
 	}
 
 	private static void testHandleNoMatch(FrameType frameType) {

@@ -78,7 +78,7 @@ public class ExpressionEvaluatorTests {
 		AnnotatedClass target = new AnnotatedClass();
 		Method method = ReflectionUtils.findMethod(
 				AnnotatedClass.class, "multipleCaching", Object.class, Object.class);
-		Object[] args = new Object[] {new Object(), new Object()};
+		Object[] args = new Object[]{new Object(), new Object()};
 		Collection<ConcurrentMapCache> caches = Collections.singleton(new ConcurrentMapCache("test"));
 
 		EvaluationContext evalCtx = this.eval.createEvaluationContext(caches, method, args,
@@ -121,7 +121,7 @@ public class ExpressionEvaluatorTests {
 		EvaluationContext context = createEvaluationContext(CacheOperationExpressionEvaluator.RESULT_UNAVAILABLE);
 		assertThatExceptionOfType(VariableNotAvailableException.class).isThrownBy(() ->
 				new SpelExpressionParser().parseExpression("#result").getValue(context))
-			.satisfies(ex ->  assertThat(ex.getName()).isEqualTo("result"));
+				.satisfies(ex -> assertThat(ex.getName()).isEqualTo("result"));
 	}
 
 	@Test
@@ -144,7 +144,7 @@ public class ExpressionEvaluatorTests {
 		AnnotatedClass target = new AnnotatedClass();
 		Method method = ReflectionUtils.findMethod(
 				AnnotatedClass.class, "multipleCaching", Object.class, Object.class);
-		Object[] args = new Object[] {new Object(), new Object()};
+		Object[] args = new Object[]{new Object(), new Object()};
 		Collection<ConcurrentMapCache> caches = Collections.singleton(new ConcurrentMapCache("test"));
 		return this.eval.createEvaluationContext(
 				caches, method, args, target, target.getClass(), method, result, beanFactory);
@@ -153,7 +153,7 @@ public class ExpressionEvaluatorTests {
 
 	private static class AnnotatedClass {
 
-		@Caching(cacheable = { @Cacheable(value = "test", key = "#a"), @Cacheable(value = "test", key = "#b") })
+		@Caching(cacheable = {@Cacheable(value = "test", key = "#a"), @Cacheable(value = "test", key = "#b")})
 		public void multipleCaching(Object a, Object b) {
 		}
 	}

@@ -61,13 +61,13 @@ class ServletRequestUtilsTests {
 
 	@Test
 	void testIntParameters() throws ServletRequestBindingException {
-		request.addParameter("param", new String[] {"1", "2", "3"});
+		request.addParameter("param", new String[]{"1", "2", "3"});
 
 		request.addParameter("param2", "1");
 		request.addParameter("param2", "2");
 		request.addParameter("param2", "bogus");
 
-		int[] array = new int[] {1, 2, 3};
+		int[] array = new int[]{1, 2, 3};
 		int[] values = ServletRequestUtils.getRequiredIntParameters(request, "param");
 		assertThat(3).isEqualTo(values.length);
 		for (int i = 0; i < array.length; i++) {
@@ -103,7 +103,7 @@ class ServletRequestUtilsTests {
 
 	@Test
 	void testLongParameters() throws ServletRequestBindingException {
-		request.setParameter("param", new String[] {"1", "2", "3"});
+		request.setParameter("param", new String[]{"1", "2", "3"});
 
 		request.setParameter("param2", "0");
 		request.setParameter("param2", "1");
@@ -116,7 +116,7 @@ class ServletRequestUtilsTests {
 		assertThatExceptionOfType(ServletRequestBindingException.class).isThrownBy(() ->
 				ServletRequestUtils.getRequiredLongParameters(request, "param2"));
 
-		request.setParameter("param2", new String[] {"1", "2"});
+		request.setParameter("param2", new String[]{"1", "2"});
 		values = ServletRequestUtils.getRequiredLongParameters(request, "param2");
 		assertThat(values).containsExactly(1, 2);
 
@@ -150,7 +150,7 @@ class ServletRequestUtilsTests {
 
 	@Test
 	void testFloatParameters() throws ServletRequestBindingException {
-		request.addParameter("param", new String[] {"1.5", "2.5", "3"});
+		request.addParameter("param", new String[]{"1.5", "2.5", "3"});
 
 		request.addParameter("param2", "1.5");
 		request.addParameter("param2", "2");
@@ -188,7 +188,7 @@ class ServletRequestUtilsTests {
 
 	@Test
 	void testDoubleParameters() throws ServletRequestBindingException {
-		request.addParameter("param", new String[] {"1.5", "2.5", "3"});
+		request.addParameter("param", new String[]{"1.5", "2.5", "3"});
 
 		request.addParameter("param2", "1.5");
 		request.addParameter("param2", "2");
@@ -230,20 +230,20 @@ class ServletRequestUtilsTests {
 
 	@Test
 	void testBooleanParameters() throws ServletRequestBindingException {
-		request.addParameter("param", new String[] {"true", "yes", "off", "1", "bogus"});
+		request.addParameter("param", new String[]{"true", "yes", "off", "1", "bogus"});
 
 		request.addParameter("param2", "false");
 		request.addParameter("param2", "true");
 		request.addParameter("param2", "");
 
-		boolean[] array = new boolean[] {true, true, false, true, false};
+		boolean[] array = new boolean[]{true, true, false, true, false};
 		boolean[] values = ServletRequestUtils.getRequiredBooleanParameters(request, "param");
 		assertThat(array.length).isEqualTo(values.length);
 		for (int i = 0; i < array.length; i++) {
 			assertThat(array[i]).isEqualTo(values[i]);
 		}
 
-		array = new boolean[] {false, true, false};
+		array = new boolean[]{false, true, false};
 		values = ServletRequestUtils.getRequiredBooleanParameters(request, "param2");
 		assertThat(array.length).isEqualTo(values.length);
 		for (int i = 0; i < array.length; i++) {

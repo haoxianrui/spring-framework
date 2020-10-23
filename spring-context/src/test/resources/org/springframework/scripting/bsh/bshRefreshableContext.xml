@@ -18,7 +18,7 @@
 	</bean>
 
 	<bean id="messengerPrototype" class="org.springframework.scripting.bsh.BshScriptFactory"
-			scope="prototype" init-method="init">
+		  scope="prototype" init-method="init">
 		<constructor-arg value="classpath:org/springframework/scripting/bsh/MessengerImpl.bsh"/>
 		<property name="message" value="Hello World!"/>
 	</bean>

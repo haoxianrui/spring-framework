@@ -54,7 +54,7 @@ public class UndertowRequestUpgradeStrategy implements RequestUpgradeStrategy {
 
 	@Override
 	public Mono<Void> upgrade(ServerWebExchange exchange, WebSocketHandler handler,
-			@Nullable String subProtocol, Supplier<HandshakeInfo> handshakeInfoFactory) {
+							  @Nullable String subProtocol, Supplier<HandshakeInfo> handshakeInfoFactory) {
 
 		HttpServerExchange httpExchange = getNativeRequest(exchange.getRequest());
 
@@ -77,11 +77,9 @@ public class UndertowRequestUpgradeStrategy implements RequestUpgradeStrategy {
 	private static HttpServerExchange getNativeRequest(ServerHttpRequest request) {
 		if (request instanceof AbstractServerHttpRequest) {
 			return ((AbstractServerHttpRequest) request).getNativeRequest();
-		}
-		else if (request instanceof ServerHttpRequestDecorator) {
+		} else if (request instanceof ServerHttpRequestDecorator) {
 			return getNativeRequest(((ServerHttpRequestDecorator) request).getDelegate());
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException(
 					"Couldn't find HttpServerExchange in " + request.getClass().getName());
 		}

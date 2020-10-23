@@ -57,8 +57,7 @@ public abstract class CorsUtils {
 		if (port == -1) {
 			if ("http".equals(scheme) || "ws".equals(scheme)) {
 				port = 80;
-			}
-			else if ("https".equals(scheme) || "wss".equals(scheme)) {
+			} else if ("https".equals(scheme) || "wss".equals(scheme)) {
 				port = 443;
 			}
 		}

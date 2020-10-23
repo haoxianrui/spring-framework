@@ -75,7 +75,8 @@ public class MessagingMessageListenerAdapterTests {
 
 	@Test
 	public void buildMessageWithStandardMessage() throws JMSException {
-		Destination replyTo = new Destination() {};
+		Destination replyTo = new Destination() {
+		};
 		Message<String> result = MessageBuilder.withPayload("Response")
 				.setHeader("foo", "bar")
 				.setHeader(JmsHeaders.TYPE, "msg_type")
@@ -102,8 +103,8 @@ public class MessagingMessageListenerAdapterTests {
 		MessagingMessageListenerAdapter listener = getSimpleInstance("fail", String.class);
 		assertThatExceptionOfType(ListenerExecutionFailedException.class).isThrownBy(() ->
 				listener.onMessage(message, session))
-			.withCauseExactlyInstanceOf(IllegalArgumentException.class)
-			.satisfies(ex -> assertThat(ex.getCause().getMessage()).isEqualTo("Expected test exception"));
+				.withCauseExactlyInstanceOf(IllegalArgumentException.class)
+				.satisfies(ex -> assertThat(ex.getCause().getMessage()).isEqualTo("Expected test exception"));
 	}
 
 	@Test
@@ -114,7 +115,7 @@ public class MessagingMessageListenerAdapterTests {
 
 		assertThatExceptionOfType(ListenerExecutionFailedException.class).isThrownBy(() ->
 				listener.onMessage(message, session))
-			.withCauseExactlyInstanceOf(MessageConversionException.class);
+				.withCauseExactlyInstanceOf(MessageConversionException.class);
 	}
 
 	@Test
@@ -140,7 +141,7 @@ public class MessagingMessageListenerAdapterTests {
 		// Triggers headers resolution
 		assertThatIllegalArgumentException().isThrownBy(
 				message::getHeaders)
-			.withMessageContaining("Header failure");
+				.withMessageContaining("Header failure");
 	}
 
 	@Test
@@ -352,7 +353,7 @@ public class MessagingMessageListenerAdapterTests {
 	}
 
 	protected MessagingMessageListenerAdapter getPayloadInstance(final Object payload,
-			String methodName, Class... parameterTypes) {
+																 String methodName, Class... parameterTypes) {
 
 		Method method = ReflectionUtils.findMethod(SampleBean.class, methodName, parameterTypes);
 		MessagingMessageListenerAdapter adapter = new MessagingMessageListenerAdapter() {
@@ -431,8 +432,15 @@ public class MessagingMessageListenerAdapterTests {
 		}
 	}
 
-	interface Summary {};
-	interface Full extends Summary {};
+	interface Summary {
+	}
+
+	;
+
+	interface Full extends Summary {
+	}
+
+	;
 
 	private static class SampleResponse {
 

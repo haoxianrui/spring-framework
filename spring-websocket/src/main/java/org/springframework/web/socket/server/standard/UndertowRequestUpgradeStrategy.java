@@ -46,7 +46,7 @@ import org.springframework.web.socket.server.HandshakeFailureException;
  */
 public class UndertowRequestUpgradeStrategy extends AbstractStandardUpgradeStrategy {
 
-	private static final String[] VERSIONS = new String[] {
+	private static final String[] VERSIONS = new String[]{
 			WebSocketVersion.V13.toHttpHeaderValue(),
 			WebSocketVersion.V08.toHttpHeaderValue(),
 			WebSocketVersion.V07.toHttpHeaderValue()
@@ -60,7 +60,7 @@ public class UndertowRequestUpgradeStrategy extends AbstractStandardUpgradeStrat
 
 	@Override
 	protected void upgradeInternal(ServerHttpRequest request, ServerHttpResponse response,
-			@Nullable String selectedProtocol, List<Extension> selectedExtensions, Endpoint endpoint)
+								   @Nullable String selectedProtocol, List<Extension> selectedExtensions, Endpoint endpoint)
 			throws HandshakeFailureException {
 
 		HttpServletRequest servletRequest = getHttpServletRequest(request);
@@ -76,12 +76,10 @@ public class UndertowRequestUpgradeStrategy extends AbstractStandardUpgradeStrat
 
 		try {
 			getContainer(servletRequest).doUpgrade(servletRequest, servletResponse, endpointConfig, pathParams);
-		}
-		catch (ServletException ex) {
+		} catch (ServletException ex) {
 			throw new HandshakeFailureException(
 					"Servlet request failed to upgrade to WebSocket: " + requestUrl, ex);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new HandshakeFailureException(
 					"Response update failed during upgrade to WebSocket: " + requestUrl, ex);
 		}

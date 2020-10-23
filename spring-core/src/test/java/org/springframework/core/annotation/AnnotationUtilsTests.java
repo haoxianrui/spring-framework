@@ -199,14 +199,16 @@ class AnnotationUtilsTests {
 		assertThat(order).isNotNull();
 	}
 
-	@Test  // SPR-16060
+	@Test
+		// SPR-16060
 	void findMethodAnnotationFromGenericInterface() throws Exception {
 		Method method = ImplementsInterfaceWithGenericAnnotatedMethod.class.getMethod("foo", String.class);
 		Order order = findAnnotation(method, Order.class);
 		assertThat(order).isNotNull();
 	}
 
-	@Test  // SPR-17146
+	@Test
+		// SPR-17146
 	void findMethodAnnotationFromGenericSuperclass() throws Exception {
 		Method method = ExtendsBaseClassWithGenericAnnotatedMethod.class.getMethod("foo", String.class);
 		Order order = findAnnotation(method, Order.class);
@@ -491,8 +493,8 @@ class AnnotationUtilsTests {
 		WebMapping webMapping = method.getAnnotation(WebMapping.class);
 		assertThatExceptionOfType(AnnotationConfigurationException.class).isThrownBy(() ->
 				getAnnotationAttributes(webMapping))
-			.withMessageContaining("attribute 'path' and its alias 'value'")
-			.withMessageContaining("values of [{/test}] and [{/enigma}]");
+				.withMessageContaining("attribute 'path' and its alias 'value'")
+				.withMessageContaining("values of [{/test}] and [{/enigma}]");
 	}
 
 	@Test
@@ -729,10 +731,10 @@ class AnnotationUtilsTests {
 
 		assertThatExceptionOfType(AnnotationConfigurationException.class).isThrownBy(() ->
 				synthesizeAnnotation(config, clazz))
-			.withMessageStartingWith("Misconfigured aliases:")
-			.withMessageContaining("attribute 'location1' in annotation [" + annotationType.getName() + "]")
-			.withMessageContaining("attribute 'location2' in annotation [" + annotationType.getName() + "]")
-			.withMessageContaining("default values");
+				.withMessageStartingWith("Misconfigured aliases:")
+				.withMessageContaining("attribute 'location1' in annotation [" + annotationType.getName() + "]")
+				.withMessageContaining("attribute 'location2' in annotation [" + annotationType.getName() + "]")
+				.withMessageContaining("default values");
 	}
 
 	@Test
@@ -744,10 +746,10 @@ class AnnotationUtilsTests {
 		assertThat(config).isNotNull();
 		assertThatExceptionOfType(AnnotationConfigurationException.class).isThrownBy(() ->
 				synthesizeAnnotation(config, clazz))
-			.withMessageStartingWith("Misconfigured aliases:")
-			.withMessageContaining("attribute 'location1' in annotation [" + annotationType.getName() + "]")
-			.withMessageContaining("attribute 'location2' in annotation [" + annotationType.getName() + "]")
-			.withMessageContaining("same default value");
+				.withMessageStartingWith("Misconfigured aliases:")
+				.withMessageContaining("attribute 'location1' in annotation [" + annotationType.getName() + "]")
+				.withMessageContaining("attribute 'location2' in annotation [" + annotationType.getName() + "]")
+				.withMessageContaining("same default value");
 	}
 
 	@Test
@@ -760,12 +762,12 @@ class AnnotationUtilsTests {
 
 		assertThatExceptionOfType(AnnotationConfigurationException.class).isThrownBy(() ->
 				synthesizeAnnotation(config, clazz).location1())
-			.withMessageStartingWith("Different @AliasFor mirror values")
-			.withMessageContaining(annotationType.getName())
-			.withMessageContaining("declared on class")
-			.withMessageContaining(clazz.getName())
-			.withMessageContaining("attribute 'location1' and its alias 'location2'")
-			.withMessageContaining("with values of [1] and [2]");
+				.withMessageStartingWith("Different @AliasFor mirror values")
+				.withMessageContaining(annotationType.getName())
+				.withMessageContaining("declared on class")
+				.withMessageContaining(clazz.getName())
+				.withMessageContaining("attribute 'location1' and its alias 'location2'")
+				.withMessageContaining("with values of [1] and [2]");
 	}
 
 	@Test
@@ -848,7 +850,7 @@ class AnnotationUtilsTests {
 		assertThat(annotationWithDefaults).isNotNull();
 		assertThat(annotationWithDefaults.text()).as("text: ").isEqualTo("enigma");
 		assertThat(annotationWithDefaults.predicate()).as("predicate: ").isTrue();
-		assertThat(annotationWithDefaults.characters()).as("characters: ").isEqualTo(new char[] { 'a', 'b', 'c' });
+		assertThat(annotationWithDefaults.characters()).as("characters: ").isEqualTo(new char[]{'a', 'b', 'c'});
 	}
 
 	@Test
@@ -920,7 +922,7 @@ class AnnotationUtilsTests {
 	private void assertMissingTextAttribute(Map<String, Object> attributes) {
 		assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() ->
 				synthesizeAnnotation(attributes, AnnotationWithoutDefaults.class, null).text())
-			.withMessageContaining("No value found for attribute named 'text' in merged annotation");
+				.withMessageContaining("No value found for attribute named 'text' in merged annotation");
 	}
 
 	@Test
@@ -928,8 +930,8 @@ class AnnotationUtilsTests {
 		Map<String, Object> map = Collections.singletonMap(VALUE, 42L);
 		assertThatIllegalStateException().isThrownBy(() ->
 				synthesizeAnnotation(map, Component.class, null).value())
-			.withMessageContaining("Attribute 'value' in annotation org.springframework.core.testfixture.stereotype.Component "
-					+ "should be compatible with java.lang.String but a java.lang.Long value was returned");
+				.withMessageContaining("Attribute 'value' in annotation org.springframework.core.testfixture.stereotype.Component "
+						+ "should be compatible with java.lang.String but a java.lang.Long value was returned");
 	}
 
 	@Test
@@ -953,15 +955,17 @@ class AnnotationUtilsTests {
 		assertThat(synthesizedComponent.value()).as("value from synthesized component: ").isEqualTo("webController");
 	}
 
-	@Test  // gh-22702
+	@Test
+		// gh-22702
 	void findAnnotationWithRepeatablesElements() throws Exception {
 		assertThat(AnnotationUtils.findAnnotation(TestRepeatablesClass.class,
 				TestRepeatable.class)).isNull();
 		assertThat(AnnotationUtils.findAnnotation(TestRepeatablesClass.class,
-		TestRepeatableContainer.class)).isNotNull();
+				TestRepeatableContainer.class)).isNotNull();
 	}
 
-	@Test  // gh-23856
+	@Test
+		// gh-23856
 	void findAnnotationFindsRepeatableContainerOnComposedAnnotationMetaAnnotatedWithRepeatableAnnotations() throws Exception {
 		MyRepeatableContainer annotation = AnnotationUtils.findAnnotation(MyRepeatableMeta1And2.class, MyRepeatableContainer.class);
 
@@ -969,7 +973,8 @@ class AnnotationUtilsTests {
 		assertThat(annotation.value()).extracting(MyRepeatable::value).containsExactly("meta1", "meta2");
 	}
 
-	@Test  // gh-23856
+	@Test
+		// gh-23856
 	void findAnnotationFindsRepeatableContainerOnComposedAnnotationMetaAnnotatedWithRepeatableAnnotationsOnMethod() throws Exception {
 		Method method = getClass().getDeclaredMethod("methodWithComposedAnnotationMetaAnnotatedWithRepeatableAnnotations");
 		MyRepeatableContainer annotation = AnnotationUtils.findAnnotation(method, MyRepeatableContainer.class);
@@ -978,7 +983,8 @@ class AnnotationUtilsTests {
 		assertThat(annotation.value()).extracting(MyRepeatable::value).containsExactly("meta1", "meta2");
 	}
 
-	@Test  // gh-23929
+	@Test
+		// gh-23929
 	void findDeprecatedAnnotation() throws Exception {
 		assertThat(getAnnotation(DeprecatedClass.class, Deprecated.class)).isNotNull();
 		assertThat(getAnnotation(SubclassOfDeprecatedClass.class, Deprecated.class)).isNull();
@@ -1377,7 +1383,7 @@ class AnnotationUtilsTests {
 		public void handleMappedWithValueAttribute() {
 		}
 
-		@WebMapping(path = "/test", name = "bar", method = { RequestMethod.GET, RequestMethod.POST })
+		@WebMapping(path = "/test", name = "bar", method = {RequestMethod.GET, RequestMethod.POST})
 		public void handleMappedWithPathAttribute() {
 		}
 
@@ -1396,7 +1402,7 @@ class AnnotationUtilsTests {
 		/**
 		 * mapping is logically "equal" to handleMappedWithPathAttribute().
 		 */
-		@WebMapping(value = "/test", path = "/test", name = "bar", method = { RequestMethod.GET, RequestMethod.POST })
+		@WebMapping(value = "/test", path = "/test", name = "bar", method = {RequestMethod.GET, RequestMethod.POST})
 		public void handleMappedWithSamePathAndValueAttributes() {
 		}
 
@@ -1446,7 +1452,7 @@ class AnnotationUtilsTests {
 		char[] chars() default {};
 	}
 
-	@CharsContainer(chars = { 'x', 'y', 'z' })
+	@CharsContainer(chars = {'x', 'y', 'z'})
 	static class GroupOfCharsClass {
 	}
 
@@ -1795,7 +1801,9 @@ class AnnotationUtilsTests {
 	@Retention(RetentionPolicy.RUNTIME)
 	@interface AnnotationWithDefaults {
 		String text() default "enigma";
+
 		boolean predicate() default true;
+
 		char[] characters() default {'a', 'b', 'c'};
 	}
 

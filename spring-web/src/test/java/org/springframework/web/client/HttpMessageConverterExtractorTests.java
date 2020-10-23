@@ -153,7 +153,8 @@ public class HttpMessageConverterExtractorTests {
 	public void generics() throws IOException {
 		responseHeaders.setContentType(contentType);
 		String expected = "Foo";
-		ParameterizedTypeReference<List<String>> reference = new ParameterizedTypeReference<List<String>>() {};
+		ParameterizedTypeReference<List<String>> reference = new ParameterizedTypeReference<List<String>>() {
+		};
 		Type type = reference.getType();
 
 		GenericHttpMessageConverter<String> converter = mock(GenericHttpMessageConverter.class);
@@ -178,8 +179,8 @@ public class HttpMessageConverterExtractorTests {
 		given(converter.canRead(String.class, contentType)).willReturn(true);
 		given(converter.read(eq(String.class), any(HttpInputMessage.class))).willThrow(IOException.class);
 		assertThatExceptionOfType(RestClientException.class).isThrownBy(() -> extractor.extractData(response))
-			.withMessageContaining("Error while extracting response for type [class java.lang.String] and content type [text/plain]")
-			.withCauseInstanceOf(IOException.class);
+				.withMessageContaining("Error while extracting response for type [class java.lang.String] and content type [text/plain]")
+				.withCauseInstanceOf(IOException.class);
 	}
 
 	@Test  // SPR-13592
@@ -190,8 +191,8 @@ public class HttpMessageConverterExtractorTests {
 		given(response.getBody()).willReturn(new ByteArrayInputStream("Foobar".getBytes()));
 		given(converter.canRead(String.class, contentType)).willThrow(HttpMessageNotReadableException.class);
 		assertThatExceptionOfType(RestClientException.class).isThrownBy(() -> extractor.extractData(response))
-			.withMessageContaining("Error while extracting response for type [class java.lang.String] and content type [text/plain]")
-			.withCauseInstanceOf(HttpMessageNotReadableException.class);
+				.withMessageContaining("Error while extracting response for type [class java.lang.String] and content type [text/plain]")
+				.withCauseInstanceOf(HttpMessageNotReadableException.class);
 	}
 
 }

@@ -80,24 +80,24 @@ class DefaultResponseErrorHandlerHttpStatusTests {
 
 	static Object[][] errorCodes() {
 		return new Object[][]{
-			// 4xx
-			{BAD_REQUEST, HttpClientErrorException.BadRequest.class},
-			{UNAUTHORIZED, HttpClientErrorException.Unauthorized.class},
-			{FORBIDDEN, HttpClientErrorException.Forbidden.class},
-			{NOT_FOUND, HttpClientErrorException.NotFound.class},
-			{METHOD_NOT_ALLOWED, HttpClientErrorException.MethodNotAllowed.class},
-			{NOT_ACCEPTABLE, HttpClientErrorException.NotAcceptable.class},
-			{CONFLICT, HttpClientErrorException.Conflict.class},
-			{TOO_MANY_REQUESTS, HttpClientErrorException.TooManyRequests.class},
-			{UNPROCESSABLE_ENTITY, HttpClientErrorException.UnprocessableEntity.class},
-			{I_AM_A_TEAPOT, HttpClientErrorException.class},
-			// 5xx
-			{INTERNAL_SERVER_ERROR, HttpServerErrorException.InternalServerError.class},
-			{NOT_IMPLEMENTED, HttpServerErrorException.NotImplemented.class},
-			{BAD_GATEWAY, HttpServerErrorException.BadGateway.class},
-			{SERVICE_UNAVAILABLE, HttpServerErrorException.ServiceUnavailable.class},
-			{GATEWAY_TIMEOUT, HttpServerErrorException.GatewayTimeout.class},
-			{HTTP_VERSION_NOT_SUPPORTED, HttpServerErrorException.class}
+				// 4xx
+				{BAD_REQUEST, HttpClientErrorException.BadRequest.class},
+				{UNAUTHORIZED, HttpClientErrorException.Unauthorized.class},
+				{FORBIDDEN, HttpClientErrorException.Forbidden.class},
+				{NOT_FOUND, HttpClientErrorException.NotFound.class},
+				{METHOD_NOT_ALLOWED, HttpClientErrorException.MethodNotAllowed.class},
+				{NOT_ACCEPTABLE, HttpClientErrorException.NotAcceptable.class},
+				{CONFLICT, HttpClientErrorException.Conflict.class},
+				{TOO_MANY_REQUESTS, HttpClientErrorException.TooManyRequests.class},
+				{UNPROCESSABLE_ENTITY, HttpClientErrorException.UnprocessableEntity.class},
+				{I_AM_A_TEAPOT, HttpClientErrorException.class},
+				// 5xx
+				{INTERNAL_SERVER_ERROR, HttpServerErrorException.InternalServerError.class},
+				{NOT_IMPLEMENTED, HttpServerErrorException.NotImplemented.class},
+				{BAD_GATEWAY, HttpServerErrorException.BadGateway.class},
+				{SERVICE_UNAVAILABLE, HttpServerErrorException.ServiceUnavailable.class},
+				{GATEWAY_TIMEOUT, HttpServerErrorException.GatewayTimeout.class},
+				{HTTP_VERSION_NOT_SUPPORTED, HttpServerErrorException.class}
 		};
 	}
 

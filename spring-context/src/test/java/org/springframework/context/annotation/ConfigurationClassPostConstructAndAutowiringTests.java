@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * (or other initializer) method, the container would become confused about the
  * 'currently in creation' status of the autowired bean and result in creating multiple
  * instances of the given @Bean, violating container scoping / singleton semantics.
- *
+ * <p>
  * This is resolved through no longer relying on 'currently in creation' status, but
  * rather on a thread local that informs the enhanced bean method implementation whether
  * the factory is the caller or not.

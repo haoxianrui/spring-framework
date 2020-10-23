@@ -42,9 +42,9 @@ import org.springframework.util.ObjectUtils;
  * a Serializable object to a {@link javax.jms.ObjectMessage} (or vice versa).
  *
  * @author Juergen Hoeller
- * @since 1.1
  * @see org.springframework.jms.core.JmsTemplate#convertAndSend
  * @see org.springframework.jms.core.JmsTemplate#receiveAndConvert
+ * @since 1.1
  */
 public class SimpleMessageConverter implements MessageConverter {
 
@@ -52,6 +52,7 @@ public class SimpleMessageConverter implements MessageConverter {
 	 * This implementation creates a TextMessage for a String, a
 	 * BytesMessage for a byte array, a MapMessage for a Map,
 	 * and an ObjectMessage for a Serializable object.
+	 *
 	 * @see #createMessageForString
 	 * @see #createMessageForByteArray
 	 * @see #createMessageForMap
@@ -61,20 +62,15 @@ public class SimpleMessageConverter implements MessageConverter {
 	public Message toMessage(Object object, Session session) throws JMSException, MessageConversionException {
 		if (object instanceof Message) {
 			return (Message) object;
-		}
-		else if (object instanceof String) {
+		} else if (object instanceof String) {
 			return createMessageForString((String) object, session);
-		}
-		else if (object instanceof byte[]) {
+		} else if (object instanceof byte[]) {
 			return createMessageForByteArray((byte[]) object, session);
-		}
-		else if (object instanceof Map) {
-			return createMessageForMap((Map<? ,?>) object, session);
-		}
-		else if (object instanceof Serializable) {
+		} else if (object instanceof Map) {
+			return createMessageForMap((Map<?, ?>) object, session);
+		} else if (object instanceof Serializable) {
 			return createMessageForSerializable(((Serializable) object), session);
-		}
-		else {
+		} else {
 			throw new MessageConversionException("Cannot convert object of type [" +
 					ObjectUtils.nullSafeClassName(object) + "] to JMS message. Supported message " +
 					"payloads are: String, byte array, Map<String,?>, Serializable object.");
@@ -86,6 +82,7 @@ public class SimpleMessageConverter implements MessageConverter {
 	 * ByteMessage back to a byte array, a MapMessage back to a Map,
 	 * and an ObjectMessage back to a Serializable object. Returns
 	 * the plain Message object in case of an unknown message type.
+	 *
 	 * @see #extractStringFromMessage
 	 * @see #extractByteArrayFromMessage
 	 * @see #extractMapFromMessage
@@ -95,17 +92,13 @@ public class SimpleMessageConverter implements MessageConverter {
 	public Object fromMessage(Message message) throws JMSException, MessageConversionException {
 		if (message instanceof TextMessage) {
 			return extractStringFromMessage((TextMessage) message);
-		}
-		else if (message instanceof BytesMessage) {
+		} else if (message instanceof BytesMessage) {
 			return extractByteArrayFromMessage((BytesMessage) message);
-		}
-		else if (message instanceof MapMessage) {
+		} else if (message instanceof MapMessage) {
 			return extractMapFromMessage((MapMessage) message);
-		}
-		else if (message instanceof ObjectMessage) {
+		} else if (message instanceof ObjectMessage) {
 			return extractSerializableFromMessage((ObjectMessage) message);
-		}
-		else {
+		} else {
 			return message;
 		}
 	}
@@ -113,7 +106,8 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Create a JMS TextMessage for the given String.
-	 * @param text the String to convert
+	 *
+	 * @param text    the String to convert
 	 * @param session current JMS session
 	 * @return the resulting message
 	 * @throws JMSException if thrown by JMS methods
@@ -125,7 +119,8 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Create a JMS BytesMessage for the given byte array.
-	 * @param bytes the byte array to convert
+	 *
+	 * @param bytes   the byte array to convert
 	 * @param session current JMS session
 	 * @return the resulting message
 	 * @throws JMSException if thrown by JMS methods
@@ -139,7 +134,8 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Create a JMS MapMessage for the given Map.
-	 * @param map the Map to convert
+	 *
+	 * @param map     the Map to convert
 	 * @param session current JMS session
 	 * @return the resulting message
 	 * @throws JMSException if thrown by JMS methods
@@ -160,7 +156,8 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Create a JMS ObjectMessage for the given Serializable object.
-	 * @param object the Serializable object to convert
+	 *
+	 * @param object  the Serializable object to convert
 	 * @param session current JMS session
 	 * @return the resulting message
 	 * @throws JMSException if thrown by JMS methods
@@ -173,6 +170,7 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Extract a String from the given TextMessage.
+	 *
 	 * @param message the message to convert
 	 * @return the resulting String
 	 * @throws JMSException if thrown by JMS methods
@@ -183,6 +181,7 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Extract a byte array from the given {@link BytesMessage}.
+	 *
 	 * @param message the message to convert
 	 * @return the resulting byte array
 	 * @throws JMSException if thrown by JMS methods
@@ -195,6 +194,7 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Extract a Map from the given {@link MapMessage}.
+	 *
 	 * @param message the message to convert
 	 * @return the resulting Map
 	 * @throws JMSException if thrown by JMS methods
@@ -212,6 +212,7 @@ public class SimpleMessageConverter implements MessageConverter {
 
 	/**
 	 * Extract a Serializable object from the given {@link ObjectMessage}.
+	 *
 	 * @param message the message to convert
 	 * @return the resulting Serializable object
 	 * @throws JMSException if thrown by JMS methods

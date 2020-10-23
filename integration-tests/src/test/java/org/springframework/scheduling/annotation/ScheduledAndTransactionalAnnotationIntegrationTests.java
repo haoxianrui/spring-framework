@@ -60,8 +60,8 @@ class ScheduledAndTransactionalAnnotationIntegrationTests {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(Config.class, JdkProxyTxConfig.class, RepoConfigA.class);
 		assertThatExceptionOfType(BeanCreationException.class)
-			.isThrownBy(ctx::refresh)
-			.satisfies(ex -> assertThat(ex.getRootCause()).isInstanceOf(IllegalStateException.class));
+				.isThrownBy(ctx::refresh)
+				.satisfies(ex -> assertThat(ex.getRootCause()).isInstanceOf(IllegalStateException.class));
 	}
 
 	@Test

@@ -170,8 +170,7 @@ public class EvalTag extends HtmlEscapingAwareTag {
 		if (this.var != null) {
 			Object result = (this.expression != null ? this.expression.getValue(evaluationContext) : null);
 			this.pageContext.setAttribute(this.var, result, this.scope);
-		}
-		else {
+		} else {
 			try {
 				String result = (this.expression != null ?
 						this.expression.getValue(evaluationContext, String.class) : null);
@@ -179,8 +178,7 @@ public class EvalTag extends HtmlEscapingAwareTag {
 				result = htmlEscape(result);
 				result = (this.javaScriptEscape ? JavaScriptUtils.javaScriptEscape(result) : result);
 				this.pageContext.getOut().print(result);
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				throw new JspException(ex);
 			}
 		}
@@ -257,8 +255,7 @@ public class EvalTag extends HtmlEscapingAwareTag {
 			}
 			try {
 				return this.variableResolver.resolveVariable(name);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new AccessException(
 						"Unexpected exception occurred accessing '" + name + "' as an implicit variable", ex);
 			}

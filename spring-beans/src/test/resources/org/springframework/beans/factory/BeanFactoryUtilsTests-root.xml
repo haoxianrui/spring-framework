@@ -14,14 +14,20 @@
 
 	<!-- Overridden by next factory -->
 	<bean id="test" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>custom</value></property>
-		<property name="age"><value>25</value></property>
+		<property name="name">
+			<value>custom</value>
+		</property>
+		<property name="age">
+			<value>25</value>
+		</property>
 	</bean>
 
 	<bean id="testFactory1" class="org.springframework.beans.testfixture.beans.factory.DummyFactory"/>
 
 	<bean id="testFactory2" class="org.springframework.beans.testfixture.beans.factory.DummyFactory">
-		<property name="singleton"><value>false</value></property>
+		<property name="singleton">
+			<value>false</value>
+		</property>
 	</bean>
 
 </beans>

@@ -84,7 +84,7 @@ public class MapMethodProcessorTests {
 		Map<String, Object> returnValue = new ModelMap("attr2", "value2");
 
 		this.processor.handleReturnValue(
-				returnValue , this.resolvable.returnType(), this.mavContainer, this.webRequest);
+				returnValue, this.resolvable.returnType(), this.mavContainer, this.webRequest);
 
 		assertThat(mavContainer.getModel().get("attr1")).isEqualTo("value1");
 		assertThat(mavContainer.getModel().get("attr2")).isEqualTo("value2");

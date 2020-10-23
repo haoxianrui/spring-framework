@@ -150,8 +150,7 @@ public class ThreadPoolTaskSchedulerTests extends AbstractSchedulingTaskExecutor
 	private void await(CountDownLatch latch) {
 		try {
 			latch.await(1000, TimeUnit.MILLISECONDS);
-		}
-		catch (InterruptedException ex) {
+		} catch (InterruptedException ex) {
 			throw new IllegalStateException(ex);
 		}
 		assertThat(latch.getCount()).as("latch did not count down,").isEqualTo(0);

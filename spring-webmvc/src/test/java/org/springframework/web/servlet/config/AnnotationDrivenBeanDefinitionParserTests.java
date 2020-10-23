@@ -171,8 +171,7 @@ public class AnnotationDrivenBeanDefinitionParserTests {
 		List<HttpMessageConverter<?>> converters = (List<HttpMessageConverter<?>>) value;
 		if (hasDefaultRegistrations) {
 			assertThat(converters.size() > 2).as("Default and custom converter expected").isTrue();
-		}
-		else {
+		} else {
 			assertThat(converters.size() == 2).as("Only custom converters expected").isTrue();
 		}
 		assertThat(converters.get(0) instanceof StringHttpMessageConverter).isTrue();
@@ -220,7 +219,7 @@ class TestHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver
 
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+								  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		return null;
 	}
 }
@@ -234,8 +233,8 @@ class TestHandlerMethodReturnValueHandler implements HandlerMethodReturnValueHan
 
 	@Override
 	public void handleReturnValue(Object returnValue,
-			MethodParameter returnType, ModelAndViewContainer mavContainer,
-			NativeWebRequest webRequest) throws Exception {
+								  MethodParameter returnType, ModelAndViewContainer mavContainer,
+								  NativeWebRequest webRequest) throws Exception {
 	}
 
 }
@@ -244,17 +243,19 @@ class TestMessageCodesResolver implements MessageCodesResolver {
 
 	@Override
 	public String[] resolveMessageCodes(String errorCode, String objectName) {
-		return new String[] { "test.foo.bar" };
+		return new String[]{"test.foo.bar"};
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public String[] resolveMessageCodes(String errorCode, String objectName, String field, @Nullable Class fieldType) {
-		return new String[] { "test.foo.bar" };
+		return new String[]{"test.foo.bar"};
 	}
 
 }
 
-class TestPathMatcher extends AntPathMatcher { }
+class TestPathMatcher extends AntPathMatcher {
+}
 
-class TestPathHelper extends UrlPathHelper { }
+class TestPathHelper extends UrlPathHelper {
+}

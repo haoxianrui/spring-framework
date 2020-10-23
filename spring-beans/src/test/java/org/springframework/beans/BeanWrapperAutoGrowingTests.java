@@ -132,7 +132,7 @@ public class BeanWrapperAutoGrowingTests {
 		wrapper.setAutoGrowCollectionLimit(2);
 		assertThatExceptionOfType(InvalidPropertyException.class).isThrownBy(() ->
 				assertNotNull(wrapper.getPropertyValue("list[4]")))
-			.withRootCauseInstanceOf(IndexOutOfBoundsException.class);
+				.withRootCauseInstanceOf(IndexOutOfBoundsException.class);
 	}
 
 	@Test

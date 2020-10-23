@@ -5,8 +5,12 @@
 
 	<!-- Simple target -->
 	<bean id="test" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>custom</value></property>
-		<property name="age"><value>666</value></property>
+		<property name="name">
+			<value>custom</value>
+		</property>
+		<property name="age">
+			<value>666</value>
+		</property>
 	</bean>
 
 
@@ -14,14 +18,24 @@
 	</bean>
 
 	<bean id="frozen"
-			class="org.springframework.aop.framework.ProxyFactoryBean"
+		  class="org.springframework.aop.framework.ProxyFactoryBean"
 	>
-		<property name="proxyInterfaces"><value>org.springframework.beans.testfixture.beans.ITestBean</value></property>
+		<property name="proxyInterfaces">
+			<value>org.springframework.beans.testfixture.beans.ITestBean</value>
+		</property>
 
-		<property name="target"><ref bean="test"/></property>
-		<property name="interceptorNames"><value>debugInterceptor</value></property>
-		<property name="frozen"><value>true</value></property>
-		<property name="optimize"><value>true</value></property>
+		<property name="target">
+			<ref bean="test"/>
+		</property>
+		<property name="interceptorNames">
+			<value>debugInterceptor</value>
+		</property>
+		<property name="frozen">
+			<value>true</value>
+		</property>
+		<property name="optimize">
+			<value>true</value>
+		</property>
 
 	</bean>
 

@@ -109,13 +109,13 @@ public class DispatcherServletTests {
 	public void configuredDispatcherServlets() {
 		assertThat(("simple" + FrameworkServlet.DEFAULT_NAMESPACE_SUFFIX).equals(simpleDispatcherServlet.getNamespace())).as("Correct namespace").isTrue();
 		assertThat((FrameworkServlet.SERVLET_CONTEXT_PREFIX + "simple").equals(
-		simpleDispatcherServlet.getServletContextAttributeName())).as("Correct attribute").isTrue();
+				simpleDispatcherServlet.getServletContextAttributeName())).as("Correct attribute").isTrue();
 		assertThat(simpleDispatcherServlet.getWebApplicationContext() ==
-		getServletContext().getAttribute(FrameworkServlet.SERVLET_CONTEXT_PREFIX + "simple")).as("Context published").isTrue();
+				getServletContext().getAttribute(FrameworkServlet.SERVLET_CONTEXT_PREFIX + "simple")).as("Context published").isTrue();
 
 		assertThat("test".equals(complexDispatcherServlet.getNamespace())).as("Correct namespace").isTrue();
 		assertThat((FrameworkServlet.SERVLET_CONTEXT_PREFIX + "complex").equals(
-		complexDispatcherServlet.getServletContextAttributeName())).as("Correct attribute").isTrue();
+				complexDispatcherServlet.getServletContextAttributeName())).as("Correct attribute").isTrue();
 		assertThat(getServletContext().getAttribute(FrameworkServlet.SERVLET_CONTEXT_PREFIX + "complex") == null).as("Context not published").isTrue();
 
 		simpleDispatcherServlet.destroy();
@@ -256,7 +256,7 @@ public class DispatcherServletTests {
 		assertThat("failed0.jsp".equals(response.getForwardedUrl())).as("forwarded to failed").isTrue();
 		assertThat(response.getStatus()).isEqualTo(200);
 		assertThat(request.getAttribute(
-		SimpleMappingExceptionResolver.DEFAULT_EXCEPTION_ATTRIBUTE) instanceof MaxUploadSizeExceededException).as("correct exception").isTrue();
+				SimpleMappingExceptionResolver.DEFAULT_EXCEPTION_ATTRIBUTE) instanceof MaxUploadSizeExceededException).as("correct exception").isTrue();
 	}
 
 	@Test
@@ -546,7 +546,7 @@ public class DispatcherServletTests {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		assertThatExceptionOfType(ServletException.class).isThrownBy(() ->
 				complexDispatcherServlet.service(request, response))
-			.withMessageContaining("No adapter for handler");
+				.withMessageContaining("No adapter for handler");
 	}
 
 	@Test
@@ -561,7 +561,7 @@ public class DispatcherServletTests {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		assertThatExceptionOfType(ServletException.class).isThrownBy(() ->
 				complexDispatcherServlet.service(request, response))
-			.withMessageContaining("failed0");
+				.withMessageContaining("failed0");
 	}
 
 	@Test
@@ -771,7 +771,8 @@ public class DispatcherServletTests {
 		assertThat(servlet.getEnvironment()).isSameAs(env1);
 		assertThatIllegalArgumentException().as("non-configurable Environment").isThrownBy(() ->
 				servlet.setEnvironment(new DummyEnvironment()));
-		class CustomServletEnvironment extends StandardServletEnvironment { }
+		class CustomServletEnvironment extends StandardServletEnvironment {
+		}
 		@SuppressWarnings("serial")
 		DispatcherServlet custom = new DispatcherServlet() {
 			@Override

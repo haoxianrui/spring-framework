@@ -36,6 +36,7 @@ public class ArgumentResolverConfigurer {
 
 	/**
 	 * Configure resolvers for custom handler method arguments.
+	 *
 	 * @param resolver the resolvers to add
 	 */
 	public void addCustomResolver(HandlerMethodArgumentResolver... resolver) {

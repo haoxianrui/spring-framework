@@ -54,8 +54,8 @@ import org.springframework.util.Assert;
  *
  * @author Rob Winch
  * @author Sam Brannen
- * @since 4.2
  * @see org.springframework.test.web.servlet.htmlunit.webdriver.WebConnectionHtmlUnitDriver
+ * @since 4.2
  */
 public final class MockMvcWebConnection implements WebConnection {
 
@@ -74,7 +74,8 @@ public final class MockMvcWebConnection implements WebConnection {
 	 * is {@code ""} (i.e., the root context).
 	 * <p>For example, the URL {@code http://localhost/test/this} would use
 	 * {@code ""} as the context path.
-	 * @param mockMvc the {@code MockMvc} instance to use; never {@code null}
+	 *
+	 * @param mockMvc   the {@code MockMvc} instance to use; never {@code null}
 	 * @param webClient the {@link WebClient} to use. never {@code null}
 	 */
 	public MockMvcWebConnection(MockMvc mockMvc, WebClient webClient) {
@@ -88,8 +89,9 @@ public final class MockMvcWebConnection implements WebConnection {
 	 * to {@link javax.servlet.http.HttpServletRequest#getContextPath()}
 	 * which states that it can be an empty string and otherwise must start
 	 * with a "/" character and not end with a "/" character.
-	 * @param mockMvc the {@code MockMvc} instance to use (never {@code null})
-	 * @param webClient the {@link WebClient} to use (never {@code null})
+	 *
+	 * @param mockMvc     the {@code MockMvc} instance to use (never {@code null})
+	 * @param webClient   the {@link WebClient} to use (never {@code null})
 	 * @param contextPath the contextPath to use
 	 */
 	public MockMvcWebConnection(MockMvc mockMvc, WebClient webClient, @Nullable String contextPath) {
@@ -108,6 +110,7 @@ public final class MockMvcWebConnection implements WebConnection {
 	 * {@link javax.servlet.http.HttpServletRequest#getContextPath()} which
 	 * states that it can be an empty string and otherwise must start with
 	 * a "/" character and not end with a "/" character.
+	 *
 	 * @param contextPath the path to validate
 	 */
 	static void validateContextPath(@Nullable String contextPath) {
@@ -147,8 +150,7 @@ public final class MockMvcWebConnection implements WebConnection {
 		ResultActions resultActions;
 		try {
 			resultActions = this.mockMvc.perform(requestBuilder);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new IOException(ex);
 		}
 
@@ -166,8 +168,7 @@ public final class MockMvcWebConnection implements WebConnection {
 			Date expires = toManage.getExpires();
 			if (expires == null || expires.after(now)) {
 				cookieManager.addCookie(toManage);
-			}
-			else {
+			} else {
 				cookieManager.removeCookie(toManage);
 			}
 		}

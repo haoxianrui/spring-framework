@@ -207,12 +207,11 @@ public class AnnotationCacheOperationSourceTests extends AbstractJCacheTests {
 	}
 
 	private void assertJCacheResolver(CacheResolver actual,
-			Class<? extends javax.cache.annotation.CacheResolver> expectedTargetType) {
+									  Class<? extends javax.cache.annotation.CacheResolver> expectedTargetType) {
 
 		if (expectedTargetType == null) {
 			assertThat(actual).isNull();
-		}
-		else {
+		} else {
 			assertThat(actual.getClass()).as("Wrong cache resolver implementation").isEqualTo(CacheResolverAdapter.class);
 			CacheResolverAdapter adapter = (CacheResolverAdapter) actual;
 			assertThat(adapter.getTarget().getClass()).as("Wrong target JCache implementation").isEqualTo(expectedTargetType);
@@ -220,7 +219,7 @@ public class AnnotationCacheOperationSourceTests extends AbstractJCacheTests {
 	}
 
 	private void assertCacheKeyGenerator(KeyGenerator actual,
-			Class<? extends CacheKeyGenerator> expectedTargetType) {
+										 Class<? extends CacheKeyGenerator> expectedTargetType) {
 		assertThat(actual.getClass()).as("Wrong cache resolver implementation").isEqualTo(KeyGeneratorAdapter.class);
 		KeyGeneratorAdapter adapter = (KeyGeneratorAdapter) actual;
 		assertThat(adapter.getTarget().getClass()).as("Wrong target CacheKeyGenerator implementation").isEqualTo(expectedTargetType);

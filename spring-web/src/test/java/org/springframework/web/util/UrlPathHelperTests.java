@@ -279,8 +279,7 @@ public class UrlPathHelperTests {
 		try {
 			request.setAttribute(WEBSPHERE_URI_ATTRIBUTE, "/test/foo/");
 			tomcatDefaultServletFolder();
-		}
-		finally {
+		} finally {
 			UrlPathHelper.websphereComplianceFlag = false;
 		}
 	}

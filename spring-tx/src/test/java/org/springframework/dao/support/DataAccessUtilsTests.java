@@ -48,19 +48,19 @@ public class DataAccessUtilsTests {
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.requiredUniqueResult(col))
-			.satisfies(sizeRequirements(1, 0));
+				.satisfies(sizeRequirements(1, 0));
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.objectResult(col, String.class))
-			.satisfies(sizeRequirements(1, 0));
+				.satisfies(sizeRequirements(1, 0));
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.intResult(col))
-			.satisfies(sizeRequirements(1, 0));
+				.satisfies(sizeRequirements(1, 0));
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.longResult(col))
-			.satisfies(sizeRequirements(1, 0));
+				.satisfies(sizeRequirements(1, 0));
 	}
 
 	@Test
@@ -71,23 +71,23 @@ public class DataAccessUtilsTests {
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.uniqueResult(col))
-			.satisfies(sizeRequirements(1, 2));
+				.satisfies(sizeRequirements(1, 2));
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.requiredUniqueResult(col))
-			.satisfies(sizeRequirements(1, 2));
+				.satisfies(sizeRequirements(1, 2));
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.objectResult(col, String.class))
-			.satisfies(sizeRequirements(1, 2));
+				.satisfies(sizeRequirements(1, 2));
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.intResult(col))
-			.satisfies(sizeRequirements(1, 2));
+				.satisfies(sizeRequirements(1, 2));
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.longResult(col))
-			.satisfies(sizeRequirements(1, 2));
+				.satisfies(sizeRequirements(1, 2));
 	}
 
 	@Test
@@ -127,7 +127,7 @@ public class DataAccessUtilsTests {
 
 		assertThatExceptionOfType(IncorrectResultSizeDataAccessException.class).isThrownBy(() ->
 				DataAccessUtils.uniqueResult(col))
-			.satisfies(sizeRequirements(1, 2));
+				.satisfies(sizeRequirements(1, 2));
 	}
 
 	@Test

@@ -33,8 +33,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  * configuration use cases, e.g. with Spring 3.1's WebApplicationInitializer.
  *
  * @author Chris Beams
- * @since 3.1
  * @see org.springframework.web.context.ContextLoaderTests
+ * @since 3.1
  */
 public class Spr8510Tests {
 
@@ -48,7 +48,7 @@ public class Spr8510Tests {
 
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				cll.contextInitialized(new ServletContextEvent(sc)))
-			.withMessageEndingWith("Could not open ServletContext resource [/programmatic.xml]");
+				.withMessageEndingWith("Could not open ServletContext resource [/programmatic.xml]");
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class Spr8510Tests {
 
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				cll.contextInitialized(new ServletContextEvent(sc)))
-			.withMessageEndingWith("Could not open ServletContext resource [/from-init-param.xml]");
+				.withMessageEndingWith("Could not open ServletContext resource [/from-init-param.xml]");
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Spr8510Tests {
 
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				cll.contextInitialized(new ServletContextEvent(sc)))
-			.withMessageEndingWith("Could not open ServletContext resource [/from-init-param.xml]");
+				.withMessageEndingWith("Could not open ServletContext resource [/from-init-param.xml]");
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class Spr8510Tests {
 		XmlWebApplicationContext ctx = new XmlWebApplicationContext() {
 			@Override
 			protected String[] getDefaultConfigLocations() {
-				return new String[] { "/WEB-INF/custom.xml" };
+				return new String[]{"/WEB-INF/custom.xml"};
 			}
 		};
 		//ctx.setConfigLocation("programmatic.xml"); // nothing set programmatically
@@ -109,7 +109,7 @@ public class Spr8510Tests {
 
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				cll.contextInitialized(new ServletContextEvent(sc)))
-			.withMessageEndingWith("Could not open ServletContext resource [/from-init-param.xml]");
+				.withMessageEndingWith("Could not open ServletContext resource [/from-init-param.xml]");
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class Spr8510Tests {
 
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				cll.contextInitialized(new ServletContextEvent(sc)))
-			.withMessageEndingWith("Could not open ServletContext resource [/WEB-INF/applicationContext.xml]");
+				.withMessageEndingWith("Could not open ServletContext resource [/WEB-INF/applicationContext.xml]");
 	}
 
 	/**

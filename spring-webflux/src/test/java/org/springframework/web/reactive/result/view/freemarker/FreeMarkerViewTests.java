@@ -81,7 +81,7 @@ public class FreeMarkerViewTests {
 		view.setUrl("anythingButNull");
 		assertThatExceptionOfType(ApplicationContextException.class).isThrownBy(
 				view::afterPropertiesSet)
-			.withMessageContaining("Must define a single FreeMarkerConfig bean");
+				.withMessageContaining("Must define a single FreeMarkerConfig bean");
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class FreeMarkerViewTests {
 		FreeMarkerView freeMarkerView = new FreeMarkerView();
 		assertThatIllegalArgumentException().isThrownBy(
 				freeMarkerView::afterPropertiesSet)
-			.withMessageContaining("Property 'url' is required");
+				.withMessageContaining("Property 'url' is required");
 	}
 
 	@Test

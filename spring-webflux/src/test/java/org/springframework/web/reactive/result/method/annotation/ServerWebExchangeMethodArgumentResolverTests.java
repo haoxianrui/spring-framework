@@ -72,7 +72,7 @@ public class ServerWebExchangeMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(this.testMethod.arg(String.class))).isFalse();
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.resolver.supportsParameter(this.testMethod.arg(Mono.class, ServerWebExchange.class)))
-			.withMessageStartingWith("ServerWebExchangeMethodArgumentResolver does not support reactive type wrapper");
+				.withMessageStartingWith("ServerWebExchangeMethodArgumentResolver does not support reactive type wrapper");
 	}
 
 	@Test
@@ -99,7 +99,6 @@ public class ServerWebExchangeMethodArgumentResolverTests {
 		assertThat(value.getClass()).isEqualTo(UriComponentsBuilder.class);
 		assertThat(((UriComponentsBuilder) value).path("/next").toUriString()).isEqualTo("https://example.org:9999/next");
 	}
-
 
 
 	@SuppressWarnings("unused")

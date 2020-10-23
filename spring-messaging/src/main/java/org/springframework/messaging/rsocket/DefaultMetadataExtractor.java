@@ -114,8 +114,7 @@ public class DefaultMetadataExtractor implements MetadataExtractor, MetadataExtr
 			for (CompositeMetadata.Entry entry : new CompositeMetadata(payload.metadata(), false)) {
 				extractEntry(entry.getContent(), entry.getMimeType(), result);
 			}
-		}
-		else {
+		} else {
 			extractEntry(payload.metadata().slice(), metadataMimeType.toString(), result);
 		}
 		return result;
@@ -156,7 +155,7 @@ public class DefaultMetadataExtractor implements MetadataExtractor, MetadataExtr
 
 
 		EntryExtractor(Decoder<T> decoder, MimeType mimeType, ResolvableType targetType,
-				BiConsumer<T, Map<String, Object>> accumulator) {
+					   BiConsumer<T, Map<String, Object>> accumulator) {
 
 			this.decoder = decoder;
 			this.mimeType = mimeType;

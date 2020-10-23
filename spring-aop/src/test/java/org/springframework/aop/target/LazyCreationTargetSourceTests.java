@@ -37,6 +37,7 @@ public class LazyCreationTargetSourceTests {
 			protected Object createObject() {
 				return new InitCountingBean();
 			}
+
 			@Override
 			public Class<?> getTargetClass() {
 				return InitCountingBean.class;

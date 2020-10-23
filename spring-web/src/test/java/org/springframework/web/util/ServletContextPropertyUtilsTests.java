@@ -43,8 +43,7 @@ public class ServletContextPropertyUtilsTests {
 		try {
 			String resolved = ServletContextPropertyUtils.resolvePlaceholders("${test.prop:foo}", servletContext);
 			assertThat(resolved).isEqualTo("bar");
-		}
-		finally {
+		} finally {
 			System.clearProperty("test.prop");
 		}
 	}

@@ -35,7 +35,7 @@ class ServerResponseExtensionsTests {
 		val builder = mockk<ServerResponse.BodyBuilder>()
 		val response = mockk<ServerResponse>()
 		val body = listOf("foo", "bar")
-		val typeReference = object: ParameterizedTypeReference<List<String>>() {}
+		val typeReference = object : ParameterizedTypeReference<List<String>>() {}
 		every { builder.body(body, typeReference) } returns response
 		assertThat(builder.bodyWithType<List<String>>(body)).isEqualTo(response)
 		verify { builder.body(body, typeReference) }

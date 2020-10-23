@@ -70,7 +70,7 @@ public class FreeMarkerViewTests {
 
 		assertThatExceptionOfType(ApplicationContextException.class).isThrownBy(() ->
 				fv.setApplicationContext(wac))
-			.withMessageContaining("FreeMarkerConfig");
+				.withMessageContaining("FreeMarkerConfig");
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class FreeMarkerViewTests {
 
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				fv.afterPropertiesSet())
-			.withMessageContaining("url");
+				.withMessageContaining("url");
 	}
 
 	@Test
@@ -197,8 +197,7 @@ public class FreeMarkerViewTests {
 						assertThat(fmModel.get("myattr").toString()).isEqualTo("myvalue");
 					}
 				};
-			}
-			else {
+			} else {
 				throw new FileNotFoundException();
 			}
 		}

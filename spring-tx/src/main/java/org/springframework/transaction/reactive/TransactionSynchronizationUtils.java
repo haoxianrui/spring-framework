@@ -34,9 +34,9 @@ import org.springframework.util.ClassUtils;
  *
  * @author Mark Paluch
  * @author Juergen Hoeller
- * @since 5.2
  * @see TransactionSynchronization
  * @see TransactionSynchronizationManager#getSynchronizations()
+ * @since 5.2
  */
 abstract class TransactionSynchronizationUtils {
 
@@ -49,6 +49,7 @@ abstract class TransactionSynchronizationUtils {
 	/**
 	 * Unwrap the given resource handle if necessary; otherwise return
 	 * the given handle as-is.
+	 *
 	 * @see InfrastructureProxy#getWrappedObject()
 	 */
 	static Object unwrapResourceIfNecessary(Object resource) {
@@ -69,6 +70,7 @@ abstract class TransactionSynchronizationUtils {
 	/**
 	 * Actually invoke the {@code triggerBeforeCommit} methods of the
 	 * given Spring TransactionSynchronization objects.
+	 *
 	 * @param synchronizations a List of TransactionSynchronization objects
 	 * @see TransactionSynchronization#beforeCommit(boolean)
 	 */
@@ -79,6 +81,7 @@ abstract class TransactionSynchronizationUtils {
 	/**
 	 * Actually invoke the {@code beforeCompletion} methods of the
 	 * given Spring TransactionSynchronization objects.
+	 *
 	 * @param synchronizations a List of TransactionSynchronization objects
 	 * @see TransactionSynchronization#beforeCompletion()
 	 */
@@ -91,6 +94,7 @@ abstract class TransactionSynchronizationUtils {
 	/**
 	 * Actually invoke the {@code afterCommit} methods of the
 	 * given Spring TransactionSynchronization objects.
+	 *
 	 * @param synchronizations a List of TransactionSynchronization objects
 	 * @see TransactionSynchronization#afterCommit()
 	 */
@@ -103,9 +107,10 @@ abstract class TransactionSynchronizationUtils {
 	/**
 	 * Actually invoke the {@code afterCompletion} methods of the
 	 * given Spring TransactionSynchronization objects.
+	 *
 	 * @param synchronizations a List of TransactionSynchronization objects
 	 * @param completionStatus the completion status according to the
-	 * constants in the TransactionSynchronization interface
+	 *                         constants in the TransactionSynchronization interface
 	 * @see TransactionSynchronization#afterCompletion(int)
 	 * @see TransactionSynchronization#STATUS_COMMITTED
 	 * @see TransactionSynchronization#STATUS_ROLLED_BACK
@@ -127,8 +132,7 @@ abstract class TransactionSynchronizationUtils {
 		public static Object unwrapIfNecessary(Object resource) {
 			if (resource instanceof ScopedObject) {
 				return ((ScopedObject) resource).getTargetObject();
-			}
-			else {
+			} else {
 				return resource;
 			}
 		}

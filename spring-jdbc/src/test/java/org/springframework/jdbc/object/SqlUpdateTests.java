@@ -156,8 +156,7 @@ public class SqlUpdateTests {
 				if (namedDeclarations) {
 					declareParameter(new SqlParameter("priceId", Types.DECIMAL));
 					declareParameter(new SqlParameter("perfId", Types.NUMERIC));
-				}
-				else {
+				} else {
 					declareParameter(new SqlParameter(Types.NUMERIC));
 					declareParameter(new SqlParameter(Types.DECIMAL));
 				}
@@ -217,7 +216,7 @@ public class SqlUpdateTests {
 		given(preparedStatement.getGeneratedKeys()).willReturn(resultSet);
 		given(connection.prepareStatement(INSERT_GENERATE_KEYS,
 				PreparedStatement.RETURN_GENERATED_KEYS)
-			).willReturn(preparedStatement);
+		).willReturn(preparedStatement);
 
 		GeneratedKeysUpdater pc = new GeneratedKeysUpdater();
 		KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
@@ -387,7 +386,7 @@ public class SqlUpdateTests {
 		}
 
 		public int run(String name, KeyHolder generatedKeyHolder) {
-			return update(new Object[] {name}, generatedKeyHolder);
+			return update(new Object[]{name}, generatedKeyHolder);
 		}
 	}
 
@@ -396,7 +395,7 @@ public class SqlUpdateTests {
 
 		public ConstructorUpdater() {
 			super(dataSource, UPDATE_OBJECTS,
-					new int[] {Types.NUMERIC, Types.NUMERIC, Types.VARCHAR, Types.BOOLEAN });
+					new int[]{Types.NUMERIC, Types.NUMERIC, Types.VARCHAR, Types.BOOLEAN});
 			compile();
 		}
 

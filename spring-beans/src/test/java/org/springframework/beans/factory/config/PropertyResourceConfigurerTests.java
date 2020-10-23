@@ -57,8 +57,8 @@ import static org.springframework.core.testfixture.io.ResourceTestUtils.qualifie
  * @author Juergen Hoeller
  * @author Chris Beams
  * @author Phillip Webb
- * @since 02.10.2003
  * @see PropertyPlaceholderConfigurerTests
+ * @since 02.10.2003
  */
 @SuppressWarnings("deprecation")
 public class PropertyResourceConfigurerTests {
@@ -273,8 +273,7 @@ public class PropertyResourceConfigurerTests {
 			poc.setOrder(0); // won't actually do anything since we're not processing through an app ctx
 			try {
 				poc.postProcessBeanFactory(factory);
-			}
-			catch (BeanInitializationException ex) {
+			} catch (BeanInitializationException ex) {
 				// prove that the processor chokes on the invalid key
 				assertThat(ex.getMessage().toLowerCase().contains("argh")).isTrue();
 			}
@@ -338,8 +337,7 @@ public class PropertyResourceConfigurerTests {
 			ChildBeanDefinition bd = new ChildBeanDefinition("${parent}", pvs2);
 			factory.registerBeanDefinition("parent1", parent);
 			factory.registerBeanDefinition("tb1", bd);
-		}
-		else {
+		} else {
 			MutablePropertyValues pvs = new MutablePropertyValues();
 			pvs.add("age", "${age}");
 			pvs.add("name", "name${var}${var}${");
@@ -355,7 +353,7 @@ public class PropertyResourceConfigurerTests {
 		cas.addGenericArgumentValue("${var}name${age}");
 
 		MutablePropertyValues pvs = new MutablePropertyValues();
-		pvs.add("stringArray", new String[] {"${os.name}", "${age}"});
+		pvs.add("stringArray", new String[]{"${os.name}", "${age}"});
 
 		List<Object> friends = new ManagedList<>();
 		friends.add("na${age}me");
@@ -481,7 +479,7 @@ public class PropertyResourceConfigurerTests {
 		ppc.setSystemPropertiesMode(PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_NEVER);
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() ->
 				ppc.postProcessBeanFactory(factory))
-			.withMessageContaining("user.dir");
+				.withMessageContaining("user.dir");
 	}
 
 	@Test
@@ -491,7 +489,7 @@ public class PropertyResourceConfigurerTests {
 		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() ->
 				ppc.postProcessBeanFactory(factory))
-			.withMessageContaining("ref");
+				.withMessageContaining("ref");
 	}
 
 	@Test

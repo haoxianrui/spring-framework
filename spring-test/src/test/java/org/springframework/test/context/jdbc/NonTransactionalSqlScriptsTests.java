@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SpringJUnitConfig(EmptyDatabaseConfig.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@Sql({ "schema.sql", "data.sql" })
+@Sql({"schema.sql", "data.sql"})
 @DirtiesContext
 class NonTransactionalSqlScriptsTests {
 

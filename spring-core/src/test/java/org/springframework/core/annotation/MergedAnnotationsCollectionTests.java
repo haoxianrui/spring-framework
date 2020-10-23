@@ -42,7 +42,7 @@ class MergedAnnotationsCollectionTests {
 	void ofWhenDirectAnnotationsIsNullThrowsException() {
 		assertThatIllegalArgumentException().isThrownBy(
 				() -> MergedAnnotationsCollection.of(null)).withMessage(
-						"Annotations must not be null");
+				"Annotations must not be null");
 	}
 
 	@Test
@@ -57,7 +57,7 @@ class MergedAnnotationsCollectionTests {
 		given(annotation.isDirectlyPresent()).willReturn(false);
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				MergedAnnotationsCollection.of(Collections.singleton(annotation)))
-			.withMessage("Annotation must be directly present");
+				.withMessage("Annotation must be directly present");
 	}
 
 	@Test
@@ -67,7 +67,7 @@ class MergedAnnotationsCollectionTests {
 		given(annotation.getAggregateIndex()).willReturn(1);
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				MergedAnnotationsCollection.of(Collections.singleton(annotation)))
-			.withMessage("Annotation must have aggregate index of zero");
+				.withMessage("Annotation must have aggregate index of zero");
 	}
 
 	@Test
@@ -164,15 +164,15 @@ class MergedAnnotationsCollectionTests {
 		MergedAnnotations annotations = getMultiRoute1();
 		assertThat(annotations.get(MultiRouteTarget.class,
 				annotation -> annotation.getDistance() >= 3).getString(
-						MergedAnnotation.VALUE)).isEqualTo("111");
+				MergedAnnotation.VALUE)).isEqualTo("111");
 	}
 
 	@Test
 	void getWithSelectorReturnsSelected() {
 		MergedAnnotations annotations = getMultiRoute1();
 		MergedAnnotationSelector<MultiRouteTarget> deepest = (existing,
-				candidate) -> candidate.getDistance() > existing.getDistance() ? candidate
-						: existing;
+															  candidate) -> candidate.getDistance() > existing.getDistance() ? candidate
+				: existing;
 		assertThat(annotations.get(MultiRouteTarget.class, null, deepest).getString(
 				MergedAnnotation.VALUE)).isEqualTo("111");
 	}

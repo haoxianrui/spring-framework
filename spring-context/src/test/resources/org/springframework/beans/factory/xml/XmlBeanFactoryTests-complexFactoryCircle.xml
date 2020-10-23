@@ -9,7 +9,7 @@
 	</bean>
 
 	<bean id="target1" class="org.springframework.beans.factory.xml.ConstructorDependenciesBean"
-		autowire="constructor"/>
+		  autowire="constructor"/>
 
 	<bean id="toBeFoundByType" class="org.springframework.beans.testfixture.beans.TestBean"/>
 

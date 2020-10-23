@@ -72,21 +72,21 @@ class PathResourceTests {
 	void nullPath() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				new PathResource((Path) null))
-			.withMessageContaining("Path must not be null");
+				.withMessageContaining("Path must not be null");
 	}
 
 	@Test
 	void nullPathString() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				new PathResource((String) null))
-			.withMessageContaining("Path must not be null");
+				.withMessageContaining("Path must not be null");
 	}
 
 	@Test
 	void nullUri() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				new PathResource((URI) null))
-			.withMessageContaining("URI must not be null");
+				.withMessageContaining("URI must not be null");
 	}
 
 	@Test
@@ -298,8 +298,7 @@ class PathResourceTests {
 			channel.read(buffer);
 			buffer.rewind();
 			assertThat(buffer.limit()).isGreaterThan(0);
-		}
-		finally {
+		} finally {
 			if (channel != null) {
 				channel.close();
 			}
@@ -311,8 +310,7 @@ class PathResourceTests {
 		PathResource resource = new PathResource(TEST_DIR);
 		try {
 			resource.readableChannel();
-		}
-		catch (AccessDeniedException ex) {
+		} catch (AccessDeniedException ex) {
 			// on Windows
 		}
 	}
@@ -334,8 +332,7 @@ class PathResourceTests {
 		try {
 			channel = resource.writableChannel();
 			channel.write(buffer);
-		}
-		finally {
+		} finally {
 			if (channel != null) {
 				channel.close();
 			}

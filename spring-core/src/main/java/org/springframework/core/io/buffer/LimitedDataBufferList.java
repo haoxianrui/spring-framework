@@ -87,8 +87,7 @@ public class LimitedDataBufferList extends ArrayList<DataBuffer> {
 		}
 		if (bytesToAdd > Integer.MAX_VALUE - this.byteCount) {
 			raiseLimitException();
-		}
-		else {
+		} else {
 			this.byteCount += bytesToAdd;
 			if (this.byteCount > this.maxByteCount) {
 				raiseLimitException();
@@ -146,8 +145,7 @@ public class LimitedDataBufferList extends ArrayList<DataBuffer> {
 		forEach(buf -> {
 			try {
 				DataBufferUtils.release(buf);
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				// Keep going..
 			}
 		});

@@ -86,8 +86,8 @@ public class AnnotationConfigTransactionalTestNGSpringContextTests
 
 	private void assertNumRowsInPersonTable(int expectedNumRows, String testState) {
 		assertThat(countRowsInTable("person"))
-			.as("the number of rows in the person table (" + testState + ").")
-			.isEqualTo(expectedNumRows);
+				.as("the number of rows in the person table (" + testState + ").")
+				.isEqualTo(expectedNumRows);
 	}
 
 	private void assertAddPerson(String name) {
@@ -184,9 +184,9 @@ public class AnnotationConfigTransactionalTestNGSpringContextTests
 		@Bean
 		DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder()//
-			.addScript("classpath:/org/springframework/test/jdbc/schema.sql")//
-			.addScript("classpath:/org/springframework/test/jdbc/data.sql")//
-			.build();
+					.addScript("classpath:/org/springframework/test/jdbc/schema.sql")//
+					.addScript("classpath:/org/springframework/test/jdbc/data.sql")//
+					.build();
 		}
 
 	}

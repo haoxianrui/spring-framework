@@ -46,9 +46,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Platform, simply run {@link SpringJUnitJupiterTestSuite} as a JUnit 4 test.
  *
  * @author Sam Brannen
- * @since 5.0
  * @see SpringExtension
  * @see ComposedSpringExtensionTests
+ * @since 5.0
  */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestConfig.class)
@@ -186,7 +186,7 @@ class SpringExtensionTests {
 
 	@Test
 	void junitAndSpringMethodInjectionCombined(@Autowired Cat kittyCat, TestInfo testInfo, ApplicationContext context,
-			TestReporter testReporter) {
+											   TestReporter testReporter) {
 
 		assertThat(testInfo).as("TestInfo should have been injected by JUnit").isNotNull();
 		assertThat(testReporter).as("TestReporter should have been injected by JUnit").isNotNull();

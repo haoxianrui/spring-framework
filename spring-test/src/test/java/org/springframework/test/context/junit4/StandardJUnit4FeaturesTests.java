@@ -42,8 +42,8 @@ import static org.junit.Assume.assumeTrue;
  * </p>
  *
  * @author Sam Brannen
- * @since 2.5
  * @see StandardJUnit4FeaturesSpringRunnerTests
+ * @since 2.5
  */
 public class StandardJUnit4FeaturesTests {
 

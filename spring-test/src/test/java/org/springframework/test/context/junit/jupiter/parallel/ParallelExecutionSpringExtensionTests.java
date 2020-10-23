@@ -64,7 +64,7 @@ class ParallelExecutionSpringExtensionTests {
 		launcher.execute(request);
 
 		assertThat(listener.getSummary().getTestsSucceededCount()).as(
-			"number of tests executed successfully").isEqualTo(NUM_TESTS);
+				"number of tests executed successfully").isEqualTo(NUM_TESTS);
 	}
 
 	@SpringJUnitConfig

@@ -72,11 +72,11 @@ public class WebAsyncManagerTests {
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				manager.startCallableProcessing(new StubCallable(1)))
-			.withMessage("AsyncWebRequest must not be null");
+				.withMessage("AsyncWebRequest must not be null");
 
 		assertThatIllegalStateException().isThrownBy(() ->
 				manager.startDeferredResultProcessing(new DeferredResult<String>()))
-			.withMessage("AsyncWebRequest must not be null");
+				.withMessage("AsyncWebRequest must not be null");
 	}
 
 	@Test
@@ -154,7 +154,7 @@ public class WebAsyncManagerTests {
 
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				this.asyncManager.startCallableProcessing(task))
-			.isEqualTo(exception);
+				.isEqualTo(exception);
 
 		assertThat(this.asyncManager.hasConcurrentResult()).isFalse();
 
@@ -250,7 +250,7 @@ public class WebAsyncManagerTests {
 	public void startCallableProcessingNullInput() throws Exception {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.asyncManager.startCallableProcessing((Callable<?>) null))
-			.withMessage("Callable must not be null");
+				.withMessage("Callable must not be null");
 	}
 
 	@Test
@@ -287,7 +287,7 @@ public class WebAsyncManagerTests {
 
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				this.asyncManager.startDeferredResultProcessing(deferredResult))
-			.isEqualTo(exception);
+				.isEqualTo(exception);
 
 		assertThat(this.asyncManager.hasConcurrentResult()).isFalse();
 
@@ -342,7 +342,7 @@ public class WebAsyncManagerTests {
 	public void startDeferredResultProcessingNullInput() throws Exception {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.asyncManager.startDeferredResultProcessing(null))
-			.withMessage("DeferredResult must not be null");
+				.withMessage("DeferredResult must not be null");
 	}
 
 	private void setupDefaultAsyncScenario() {

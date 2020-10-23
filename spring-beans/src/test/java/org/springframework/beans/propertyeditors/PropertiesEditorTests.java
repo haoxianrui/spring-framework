@@ -37,7 +37,7 @@ public class PropertiesEditorTests {
 	@Test
 	public void oneProperty() {
 		String s = "foo=bar";
-		PropertiesEditor pe= new PropertiesEditor();
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(s);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.entrySet().size() == 1).as("contains one entry").isTrue();
@@ -47,8 +47,8 @@ public class PropertiesEditorTests {
 	@Test
 	public void twoProperties() {
 		String s = "foo=bar with whitespace\n" +
-			"me=mi";
-		PropertiesEditor pe= new PropertiesEditor();
+				"me=mi";
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(s);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.entrySet().size() == 2).as("contains two entries").isTrue();
@@ -59,9 +59,9 @@ public class PropertiesEditorTests {
 	@Test
 	public void handlesEqualsInValue() {
 		String s = "foo=bar\n" +
-			"me=mi\n" +
-			"x=y=z";
-		PropertiesEditor pe= new PropertiesEditor();
+				"me=mi\n" +
+				"x=y=z";
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(s);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.entrySet().size() == 3).as("contains two entries").isTrue();
@@ -73,7 +73,7 @@ public class PropertiesEditorTests {
 	@Test
 	public void handlesEmptyProperty() {
 		String s = "foo=bar\nme=mi\nx=";
-		PropertiesEditor pe= new PropertiesEditor();
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(s);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.entrySet().size() == 3).as("contains two entries").isTrue();
@@ -85,7 +85,7 @@ public class PropertiesEditorTests {
 	@Test
 	public void handlesEmptyPropertyWithoutEquals() {
 		String s = "foo\nme=mi\nx=x";
-		PropertiesEditor pe= new PropertiesEditor();
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(s);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.entrySet().size() == 3).as("contains three entries").isTrue();
@@ -99,12 +99,12 @@ public class PropertiesEditorTests {
 	@Test
 	public void ignoresCommentLinesAndEmptyLines() {
 		String s = "#Ignore this comment\n" +
-			"foo=bar\n" +
-			"#Another=comment more junk /\n" +
-			"me=mi\n" +
-			"x=x\n" +
-			"\n";
-		PropertiesEditor pe= new PropertiesEditor();
+				"foo=bar\n" +
+				"#Another=comment more junk /\n" +
+				"me=mi\n" +
+				"x=x\n" +
+				"\n";
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(s);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.entrySet().size() == 3).as("contains three entries").isTrue();
@@ -121,12 +121,12 @@ public class PropertiesEditorTests {
 	@Test
 	public void ignoresLeadingSpacesAndTabs() {
 		String s = "    #Ignore this comment\n" +
-			"\t\tfoo=bar\n" +
-			"\t#Another comment more junk \n" +
-			" me=mi\n" +
-			"x=x\n" +
-			"\n";
-		PropertiesEditor pe= new PropertiesEditor();
+				"\t\tfoo=bar\n" +
+				"\t#Another comment more junk \n" +
+				" me=mi\n" +
+				"x=x\n" +
+				"\n";
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(s);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.size() == 3).as("contains 3 entries, not " + p.size()).isTrue();
@@ -136,7 +136,7 @@ public class PropertiesEditorTests {
 
 	@Test
 	public void nullValue() {
-		PropertiesEditor pe= new PropertiesEditor();
+		PropertiesEditor pe = new PropertiesEditor();
 		pe.setAsText(null);
 		Properties p = (Properties) pe.getValue();
 		assertThat(p.size()).isEqualTo(0);

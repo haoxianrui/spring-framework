@@ -70,16 +70,16 @@ public abstract class Literal extends SpelNodeImpl {
 	 * Process the string form of a number, using the specified base if supplied
 	 * and return an appropriate literal to hold it. Any suffix to indicate a
 	 * long will be taken into account (either 'l' or 'L' is supported).
+	 *
 	 * @param numberToken the token holding the number as its payload (eg. 1234 or 0xCAFE)
-	 * @param radix the base of number
+	 * @param radix       the base of number
 	 * @return a subtype of Literal that can represent it
 	 */
 	public static Literal getIntLiteral(String numberToken, int startPos, int endPos, int radix) {
 		try {
 			int value = Integer.parseInt(numberToken, radix);
 			return new IntLiteral(numberToken, startPos, endPos, value);
-		}
-		catch (NumberFormatException ex) {
+		} catch (NumberFormatException ex) {
 			throw new InternalParseException(new SpelParseException(startPos, ex, SpelMessage.NOT_AN_INTEGER, numberToken));
 		}
 	}
@@ -88,8 +88,7 @@ public abstract class Literal extends SpelNodeImpl {
 		try {
 			long value = Long.parseLong(numberToken, radix);
 			return new LongLiteral(numberToken, startPos, endPos, value);
-		}
-		catch (NumberFormatException ex) {
+		} catch (NumberFormatException ex) {
 			throw new InternalParseException(new SpelParseException(startPos, ex, SpelMessage.NOT_A_LONG, numberToken));
 		}
 	}
@@ -99,13 +98,11 @@ public abstract class Literal extends SpelNodeImpl {
 			if (isFloat) {
 				float value = Float.parseFloat(numberToken);
 				return new FloatLiteral(numberToken, startPos, endPos, value);
-			}
-			else {
+			} else {
 				double value = Double.parseDouble(numberToken);
 				return new RealLiteral(numberToken, startPos, endPos, value);
 			}
-		}
-		catch (NumberFormatException ex) {
+		} catch (NumberFormatException ex) {
 			throw new InternalParseException(new SpelParseException(startPos, ex, SpelMessage.NOT_A_REAL, numberToken));
 		}
 	}

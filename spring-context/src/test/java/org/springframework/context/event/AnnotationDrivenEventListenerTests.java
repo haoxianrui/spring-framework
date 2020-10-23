@@ -166,8 +166,8 @@ public class AnnotationDrivenEventListenerTests {
 
 		assertThatExceptionOfType(BeanInitializationException.class).isThrownBy(() ->
 				failingContext.refresh())
-			.withMessageContaining(InvalidMethodSignatureEventListener.class.getName())
-			.withMessageContaining("cannotBeCalled");
+				.withMessageContaining(InvalidMethodSignatureEventListener.class.getName())
+				.withMessageContaining("cannotBeCalled");
 	}
 
 	@Test
@@ -366,7 +366,7 @@ public class AnnotationDrivenEventListenerTests {
 	public void privateMethodOnCglibProxyFails() {
 		assertThatExceptionOfType(BeanInitializationException.class).isThrownBy(() ->
 				load(CglibProxyWithPrivateMethod.class))
-			.withCauseInstanceOf(IllegalStateException.class);
+				.withCauseInstanceOf(IllegalStateException.class);
 	}
 
 	@Test
@@ -395,7 +395,7 @@ public class AnnotationDrivenEventListenerTests {
 		customScope.active = false;
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				this.context.publishEvent(new TestEvent()))
-			.withCauseInstanceOf(IllegalStateException.class);
+				.withCauseInstanceOf(IllegalStateException.class);
 	}
 
 	@Test
@@ -451,7 +451,7 @@ public class AnnotationDrivenEventListenerTests {
 		this.eventCollector.assertNoEventReceived(listener);
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.context.publishEvent(event))
-			.withMessage("Test exception");
+				.withMessage("Test exception");
 		this.eventCollector.assertEvent(listener, event);
 		this.eventCollector.assertTotalEventsCount(1);
 	}
@@ -616,7 +616,8 @@ public class AnnotationDrivenEventListenerTests {
 		assertThat(listener.order).contains("first", "second", "third");
 	}
 
-	@Test @Disabled  // SPR-15122
+	@Test
+	@Disabled  // SPR-15122
 	public void listenersReceiveEarlyEvents() {
 		load(EventOnPostConstruct.class, OrderedTestListener.class);
 		OrderedTestListener listener = this.context.getBean(OrderedTestListener.class);
@@ -756,13 +757,11 @@ public class AnnotationDrivenEventListenerTests {
 			collectEvent(event);
 			if (event.content == null) {
 				return null;
-			}
-			else if (event.content instanceof String) {
+			} else if (event.content instanceof String) {
 				String s = (String) event.content;
 				if (s.equals("String")) {
 					return event.content;
-				}
-				else {
+				} else {
 					return new TestEvent(this, event.getId(), s);
 				}
 			}
@@ -960,7 +959,6 @@ public class AnnotationDrivenEventListenerTests {
 			collectEvent(value);
 		}
 	}
-
 
 
 	@EventListener

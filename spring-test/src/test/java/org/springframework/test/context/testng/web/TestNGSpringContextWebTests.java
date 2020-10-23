@@ -102,15 +102,15 @@ public class TestNGSpringContextWebTests extends AbstractTestNGSpringContextTest
 
 		Object rootWac = mockServletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 		assertThat(rootWac)
-			.as("Root WAC must be stored in the ServletContext as: " + WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE)
-			.isNotNull();
+				.as("Root WAC must be stored in the ServletContext as: " + WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE)
+				.isNotNull();
 		assertThat(rootWac).as("test WAC and Root WAC in ServletContext must be the same object.").isSameAs(wac);
 		assertThat(wac.getServletContext()).as("ServletContext instances must be the same object.").isSameAs(mockServletContext);
 		assertThat(request.getServletContext()).as("ServletContext in the WAC and in the mock request").isSameAs(mockServletContext);
 
 		assertThat(mockServletContext.getRealPath("index.jsp"))
-			.as("Getting real path for ServletContext resource.")
-			.isEqualTo(new File("src/main/webapp/index.jsp").getCanonicalPath());
+				.as("Getting real path for ServletContext resource.")
+				.isEqualTo(new File("src/main/webapp/index.jsp").getCanonicalPath());
 	}
 
 	@Test

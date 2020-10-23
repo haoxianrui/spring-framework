@@ -40,10 +40,10 @@ import org.springframework.util.Assert;
  * {@code org.springframework.jdbc.object} operation objects.
  *
  * @author Juergen Hoeller
- * @since 28.07.2003
  * @see #setDataSource
  * @see #getJdbcTemplate
  * @see org.springframework.jdbc.core.JdbcTemplate
+ * @since 28.07.2003
  */
 public abstract class JdbcDaoSupport extends DaoSupport {
 
@@ -66,6 +66,7 @@ public abstract class JdbcDaoSupport extends DaoSupport {
 	 * Only invoked if populating the DAO with a DataSource reference!
 	 * <p>Can be overridden in subclasses to provide a JdbcTemplate instance
 	 * with different configuration, or a custom JdbcTemplate subclass.
+	 *
 	 * @param dataSource the JDBC DataSource to create a JdbcTemplate for
 	 * @return the new JdbcTemplate instance
 	 * @see #setDataSource
@@ -106,6 +107,7 @@ public abstract class JdbcDaoSupport extends DaoSupport {
 	 * or through a DataSource.
 	 * <p>This implementation is empty. Subclasses may override this
 	 * to configure further objects based on the JdbcTemplate.
+	 *
 	 * @see #getJdbcTemplate()
 	 */
 	protected void initTemplateConfig() {
@@ -122,6 +124,7 @@ public abstract class JdbcDaoSupport extends DaoSupport {
 	/**
 	 * Return the SQLExceptionTranslator of this DAO's JdbcTemplate,
 	 * for translating SQLExceptions in custom JDBC access code.
+	 *
 	 * @see org.springframework.jdbc.core.JdbcTemplate#getExceptionTranslator()
 	 */
 	protected final SQLExceptionTranslator getExceptionTranslator() {
@@ -132,6 +135,7 @@ public abstract class JdbcDaoSupport extends DaoSupport {
 
 	/**
 	 * Get a JDBC Connection, either from the current transaction or a new one.
+	 *
 	 * @return the JDBC Connection
 	 * @throws CannotGetJdbcConnectionException if the attempt to get a Connection failed
 	 * @see org.springframework.jdbc.datasource.DataSourceUtils#getConnection(javax.sql.DataSource)
@@ -145,6 +149,7 @@ public abstract class JdbcDaoSupport extends DaoSupport {
 	/**
 	 * Close the given JDBC Connection, created via this DAO's DataSource,
 	 * if it isn't bound to the thread.
+	 *
 	 * @param con the Connection to close
 	 * @see org.springframework.jdbc.datasource.DataSourceUtils#releaseConnection
 	 */

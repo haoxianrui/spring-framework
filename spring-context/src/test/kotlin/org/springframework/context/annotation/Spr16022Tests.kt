@@ -53,7 +53,8 @@ class Spr16022Tests {
 		constructor(foo: Int, bar: String) : this(foo + bar.length)
 	}
 
-	@Configuration @ImportResource(CONTEXT)
+	@Configuration
+	@ImportResource(CONTEXT)
 	open class Config
 }
 

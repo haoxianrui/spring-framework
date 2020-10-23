@@ -97,7 +97,7 @@ import static org.springframework.http.MediaType.APPLICATION_XML;
 /**
  * A test fixture with a sub-class of {@link WebMvcConfigurationSupport} that also
  * implements the various {@link WebMvcConfigurer} extension points.
- *
+ * <p>
  * The former doesn't implement the latter but the two must have compatible
  * callback method signatures to support moving from simple to advanced
  * configuration -- i.e. dropping @EnableWebMvc + WebMvcConfigurer and extending
@@ -451,7 +451,7 @@ public class WebMvcConfigurationSupportExtensionTests {
 			return new DefaultMessageCodesResolver() {
 				@Override
 				public String[] resolveMessageCodes(String errorCode, String objectName) {
-					return new String[] {"custom." + errorCode};
+					return new String[]{"custom." + errorCode};
 				}
 			};
 		}

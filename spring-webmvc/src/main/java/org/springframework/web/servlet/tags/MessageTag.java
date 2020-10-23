@@ -205,6 +205,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 	/**
 	 * Set the separator to use for splitting an arguments String.
 	 * Default is a comma (",").
+	 *
 	 * @see #setArguments
 	 */
 	public void setArgumentSeparator(String argumentSeparator) {
@@ -226,6 +227,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 	/**
 	 * Set PageContext attribute name under which to expose
 	 * a variable that contains the resolved message.
+	 *
 	 * @see #setScope
 	 * @see javax.servlet.jsp.PageContext#setAttribute
 	 */
@@ -236,6 +238,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 	/**
 	 * Set the scope to export the variable to.
 	 * Default is SCOPE_PAGE ("page").
+	 *
 	 * @see #setVar
 	 * @see org.springframework.web.util.TagUtils#SCOPE_PAGE
 	 * @see javax.servlet.jsp.PageContext#setAttribute
@@ -262,6 +265,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 	/**
 	 * Resolves the message, escapes it if demanded,
 	 * and writes it to the page (or exposes it as variable).
+	 *
 	 * @see #resolveMessage()
 	 * @see org.springframework.web.util.HtmlUtils#htmlEscape(String)
 	 * @see org.springframework.web.util.JavaScriptUtils#javaScriptEscape(String)
@@ -280,17 +284,14 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 			// Expose as variable, if demanded, else write to the page.
 			if (this.var != null) {
 				this.pageContext.setAttribute(this.var, msg, TagUtils.getScope(this.scope));
-			}
-			else {
+			} else {
 				writeMessage(msg);
 			}
 
 			return EVAL_PAGE;
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new JspTagException(ex.getMessage(), ex);
-		}
-		catch (NoSuchMessageException ex) {
+		} catch (NoSuchMessageException ex) {
 			throw new JspTagException(getNoSuchMessageExceptionDescription(ex));
 		}
 	}
@@ -327,8 +328,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 				String msg = messageSource.getMessage(
 						this.code, argumentsArray, this.text, getRequestContext().getLocale());
 				return (msg != null ? msg : "");
-			}
-			else {
+			} else {
 				// We have no fallback text to consider.
 				return messageSource.getMessage(
 						this.code, argumentsArray, getRequestContext().getLocale());
@@ -350,6 +350,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 
 	/**
 	 * Resolve the given arguments Object into an arguments array.
+	 *
 	 * @param arguments the specified arguments Object
 	 * @return the resolved arguments as array
 	 * @throws JspException if argument conversion failed
@@ -364,26 +365,20 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 				Object argument = stringArray[0];
 				if (argument != null && argument.getClass().isArray()) {
 					return ObjectUtils.toObjectArray(argument);
+				} else {
+					return new Object[]{argument};
 				}
-				else {
-					return new Object[] {argument};
-				}
-			}
-			else {
+			} else {
 				return stringArray;
 			}
-		}
-		else if (arguments instanceof Object[]) {
+		} else if (arguments instanceof Object[]) {
 			return (Object[]) arguments;
-		}
-		else if (arguments instanceof Collection) {
+		} else if (arguments instanceof Collection) {
 			return ((Collection<?>) arguments).toArray();
-		}
-		else if (arguments != null) {
+		} else if (arguments != null) {
 			// Assume a single argument object.
-			return new Object[] {arguments};
-		}
-		else {
+			return new Object[]{arguments};
+		} else {
 			return null;
 		}
 	}
@@ -391,6 +386,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 	/**
 	 * Write the message to the page.
 	 * <p>Can be overridden in subclasses, e.g. for testing purposes.
+	 *
 	 * @param msg the message to write
 	 * @throws IOException if writing failed
 	 */

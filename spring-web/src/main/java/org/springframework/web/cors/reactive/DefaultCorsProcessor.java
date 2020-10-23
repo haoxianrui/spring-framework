@@ -64,8 +64,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 		List<String> varyHeaders = responseHeaders.get(HttpHeaders.VARY);
 		if (varyHeaders == null) {
 			responseHeaders.addAll(HttpHeaders.VARY, VARY_HEADERS);
-		}
-		else {
+		} else {
 			for (String header : VARY_HEADERS) {
 				if (!varyHeaders.contains(header)) {
 					responseHeaders.add(HttpHeaders.VARY, header);
@@ -87,8 +86,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 			if (preFlightRequest) {
 				rejectRequest(response);
 				return false;
-			}
-			else {
+			} else {
 				return true;
 			}
 		}
@@ -107,7 +105,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 	 * Handle the given request.
 	 */
 	protected boolean handleInternal(ServerWebExchange exchange,
-			CorsConfiguration config, boolean preFlightRequest) {
+									 CorsConfiguration config, boolean preFlightRequest) {
 
 		ServerHttpRequest request = exchange.getRequest();
 		ServerHttpResponse response = exchange.getResponse();

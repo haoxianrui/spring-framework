@@ -50,8 +50,7 @@ public class PathResourceLookupFunctionTests {
 				.expectNextMatches(resource -> {
 					try {
 						return expected.equals(resource.getFile());
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						return false;
 					}
 				})
@@ -73,8 +72,7 @@ public class PathResourceLookupFunctionTests {
 				.expectNextMatches(resource -> {
 					try {
 						return expected.equals(resource.getFile());
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						return false;
 					}
 				})
@@ -105,7 +103,7 @@ public class PathResourceLookupFunctionTests {
 
 		Function<ServerRequest, Mono<Resource>> customLookupFunction =
 				lookupFunction.andThen(resourceMono -> resourceMono
-								.switchIfEmpty(Mono.just(defaultResource)));
+						.switchIfEmpty(Mono.just(defaultResource)));
 
 		MockServerHttpRequest mockRequest = MockServerHttpRequest.get("https://localhost/resources/foo").build();
 		ServerRequest request = new DefaultServerRequest(MockServerWebExchange.from(mockRequest), Collections.emptyList());
@@ -115,8 +113,7 @@ public class PathResourceLookupFunctionTests {
 				.expectNextMatches(resource -> {
 					try {
 						return defaultResource.getFile().equals(resource.getFile());
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						return false;
 					}
 				})

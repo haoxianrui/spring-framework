@@ -67,7 +67,7 @@ public class PerformanceTests {
 		endtime = System.currentTimeMillis();
 		long freshParseTime = endtime - starttime;
 		if (DEBUG) {
-			System.out.println("PropertyAccess: Time for parsing and evaluation x 10000: "+freshParseTime+"ms");
+			System.out.println("PropertyAccess: Time for parsing and evaluation x 10000: " + freshParseTime + "ms");
 		}
 
 		Expression expr = parser.parseExpression("placeOfBirth.city");
@@ -79,7 +79,7 @@ public class PerformanceTests {
 		endtime = System.currentTimeMillis();
 		long reuseTime = endtime - starttime;
 		if (DEBUG) {
-			System.out.println("PropertyAccess: Time for just evaluation x 10000: "+reuseTime+"ms");
+			System.out.println("PropertyAccess: Time for just evaluation x 10000: " + reuseTime + "ms");
 		}
 		if (reuseTime > freshParseTime) {
 			System.out.println("Fresh parse every time, ITERATIONS iterations = " + freshParseTime + "ms");
@@ -109,7 +109,7 @@ public class PerformanceTests {
 		endtime = System.currentTimeMillis();
 		long freshParseTime = endtime - starttime;
 		if (DEBUG) {
-			System.out.println("MethodExpression: Time for parsing and evaluation x 10000: "+freshParseTime+"ms");
+			System.out.println("MethodExpression: Time for parsing and evaluation x 10000: " + freshParseTime + "ms");
 		}
 
 		Expression expr = parser.parseExpression("getPlaceOfBirth().getCity()");
@@ -121,7 +121,7 @@ public class PerformanceTests {
 		endtime = System.currentTimeMillis();
 		long reuseTime = endtime - starttime;
 		if (DEBUG) {
-			System.out.println("MethodExpression: Time for just evaluation x 10000: "+reuseTime+"ms");
+			System.out.println("MethodExpression: Time for just evaluation x 10000: " + reuseTime + "ms");
 		}
 
 		if (reuseTime > freshParseTime) {

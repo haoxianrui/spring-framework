@@ -145,7 +145,7 @@ public class ModelFactoryOrderingTests {
 		List<String> actual = getInvokedMethods();
 		for (String afterMethod : afterMethods) {
 			assertThat(actual.indexOf(beforeMethod) < actual.indexOf(afterMethod)).as(beforeMethod + " should be before " + afterMethod + ". Actual order: " +
-						actual.toString()).isTrue();
+					actual.toString()).isTrue();
 		}
 	}
 
@@ -312,13 +312,26 @@ public class ModelFactoryOrderingTests {
 		}
 	}
 
-	private static class A { }
-	private static class B1 { }
-	private static class B2 { }
-	private static class C1 { }
-	private static class C2 { }
-	private static class C3 { }
-	private static class C4 { }
+	private static class A {
+	}
+
+	private static class B1 {
+	}
+
+	private static class B2 {
+	}
+
+	private static class C1 {
+	}
+
+	private static class C2 {
+	}
+
+	private static class C3 {
+	}
+
+	private static class C4 {
+	}
 
 
 	private static final ReflectionUtils.MethodFilter METHOD_FILTER = new ReflectionUtils.MethodFilter() {

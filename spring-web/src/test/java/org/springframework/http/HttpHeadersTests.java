@@ -279,8 +279,7 @@ public class HttpHeadersTests {
 			headers.setDate(date);
 			assertThat(headers.getFirst("date")).as("Invalid Date header").isEqualTo("Thu, 18 Dec 2008 10:20:00 GMT");
 			assertThat(headers.getDate()).as("Invalid Date header").isEqualTo(date);
-		}
-		finally {
+		} finally {
 			Locale.setDefault(defaultLocale);
 		}
 	}
@@ -505,7 +504,7 @@ public class HttpHeadersTests {
 
 	@Test
 	public void contentLanguageSerialized() {
-		headers.set(HttpHeaders.CONTENT_LANGUAGE,  "de, en_CA");
+		headers.set(HttpHeaders.CONTENT_LANGUAGE, "de, en_CA");
 		assertThat(headers.getContentLanguage()).as("Expected one (first) locale").isEqualTo(Locale.GERMAN);
 	}
 
@@ -597,7 +596,7 @@ public class HttpHeadersTests {
 		assertThat(keySet.contains("Charlie")).as("Charlie should not be present").isFalse();
 
 		// toArray()
-		assertThat(keySet.toArray()).isEqualTo(new String[] {"Alpha", "Bravo"});
+		assertThat(keySet.toArray()).isEqualTo(new String[]{"Alpha", "Bravo"});
 
 		// spliterator() via stream()
 		assertThat(keySet.stream().collect(toList())).isEqualTo(Arrays.asList("Alpha", "Bravo"));
@@ -624,9 +623,9 @@ public class HttpHeadersTests {
 
 		// Unsupported operations
 		assertThatExceptionOfType(UnsupportedOperationException.class)
-			.isThrownBy(() -> keySet.add("x"));
+				.isThrownBy(() -> keySet.add("x"));
 		assertThatExceptionOfType(UnsupportedOperationException.class)
-			.isThrownBy(() -> keySet.addAll(Collections.singleton("enigma")));
+				.isThrownBy(() -> keySet.addAll(Collections.singleton("enigma")));
 	}
 
 	/**
@@ -695,7 +694,7 @@ public class HttpHeadersTests {
 		headers.add("dog", "enigma");
 		headers.add("elephant", "enigma");
 
-		String[] expectedKeys = new String[] { "aardvark", "beaver", "cat", "dog", "elephant" };
+		String[] expectedKeys = new String[]{"aardvark", "beaver", "cat", "dog", "elephant"};
 
 		assertThat(headers.entrySet()).extracting(Entry::getKey).containsExactly(expectedKeys);
 

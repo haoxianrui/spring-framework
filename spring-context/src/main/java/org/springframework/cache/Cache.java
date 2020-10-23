@@ -49,6 +49,7 @@ public interface Cache {
 	 * <p>Returns {@code null} if the cache contains no mapping for this key;
 	 * otherwise, the cached value (which may be {@code null} itself) will
 	 * be returned in a {@link ValueWrapper}.
+	 *
 	 * @param key the key whose associated value is to be returned
 	 * @return the value to which this cache maps the specified key,
 	 * contained within a {@link ValueWrapper} which may also hold
@@ -66,17 +67,18 @@ public interface Cache {
 	 * <p>Note: This variant of {@code get} does not allow for differentiating
 	 * between a cached {@code null} value and no cache entry found at all.
 	 * Use the standard {@link #get(Object)} variant for that purpose instead.
-	 * @param key the key whose associated value is to be returned
+	 *
+	 * @param key  the key whose associated value is to be returned
 	 * @param type the required type of the returned value (may be
-	 * {@code null} to bypass a type check; in case of a {@code null}
-	 * value found in the cache, the specified type is irrelevant)
+	 *             {@code null} to bypass a type check; in case of a {@code null}
+	 *             value found in the cache, the specified type is irrelevant)
 	 * @return the value to which this cache maps the specified key
 	 * (which may be {@code null} itself), or also {@code null} if
 	 * the cache contains no mapping for this key
 	 * @throws IllegalStateException if a cache entry has been found
-	 * but failed to match the specified type
-	 * @since 4.0
+	 *                               but failed to match the specified type
 	 * @see #get(Object)
+	 * @since 4.0
 	 */
 	@Nullable
 	<T> T get(Object key, @Nullable Class<T> type);
@@ -91,11 +93,12 @@ public interface Cache {
 	 * once in case of concurrent access on the same key.
 	 * <p>If the {@code valueLoader} throws an exception, it is wrapped in
 	 * a {@link ValueRetrievalException}
+	 *
 	 * @param key the key whose associated value is to be returned
 	 * @return the value to which this cache maps the specified key
 	 * @throws ValueRetrievalException if the {@code valueLoader} throws an exception
-	 * @since 4.3
 	 * @see #get(Object)
+	 * @since 4.3
 	 */
 	@Nullable
 	<T> T get(Object key, Callable<T> valueLoader);
@@ -108,7 +111,8 @@ public interface Cache {
 	 * fashion, with subsequent lookups possibly not seeing the entry yet.
 	 * This may for example be the case with transactional cache decorators.
 	 * Use {@link #putIfAbsent} for guaranteed immediate registration.
-	 * @param key the key with which the specified value is to be associated
+	 *
+	 * @param key   the key with which the specified value is to be associated
 	 * @param value the value to be associated with the specified key
 	 * @see #putIfAbsent(Object, Object)
 	 */
@@ -132,14 +136,15 @@ public interface Cache {
 	 * of the native cache implementation that you are using for more details.
 	 * <p>The default implementation delegates to {@link #get(Object)} and
 	 * {@link #put(Object, Object)} along the lines of the code snippet above.
-	 * @param key the key with which the specified value is to be associated
+	 *
+	 * @param key   the key with which the specified value is to be associated
 	 * @param value the value to be associated with the specified key
 	 * @return the value to which this cache maps the specified key (which may be
 	 * {@code null} itself), or also {@code null} if the cache did not contain any
 	 * mapping for that key prior to this call. Returning {@code null} is therefore
 	 * an indicator that the given {@code value} has been associated with the key.
-	 * @since 4.1
 	 * @see #put(Object, Object)
+	 * @since 4.1
 	 */
 	@Nullable
 	default ValueWrapper putIfAbsent(Object key, @Nullable Object value) {
@@ -156,6 +161,7 @@ public interface Cache {
 	 * fashion, with subsequent lookups possibly still seeing the entry.
 	 * This may for example be the case with transactional cache decorators.
 	 * Use {@link #evictIfPresent} for guaranteed immediate removal.
+	 *
 	 * @param key the key whose mapping is to be removed from the cache
 	 * @see #evictIfPresent(Object)
 	 */
@@ -170,12 +176,13 @@ public interface Cache {
 	 * to perform immediate eviction if possible (e.g. in case of generally
 	 * deferred cache operations within a transaction) and to reliably
 	 * determine prior presence of the given key.
+	 *
 	 * @param key the key whose mapping is to be removed from the cache
 	 * @return {@code true} if the cache was known to have a mapping for
 	 * this key before, {@code false} if it did not (or if prior presence
 	 * could not be determined)
-	 * @since 5.2
 	 * @see #evict(Object)
+	 * @since 5.2
 	 */
 	default boolean evictIfPresent(Object key) {
 		evict(key);
@@ -188,6 +195,7 @@ public interface Cache {
 	 * fashion, with subsequent lookups possibly still seeing the entries.
 	 * This may for example be the case with transactional cache decorators.
 	 * Use {@link #invalidate()} for guaranteed immediate removal of entries.
+	 *
 	 * @see #invalidate()
 	 */
 	void clear();
@@ -195,11 +203,12 @@ public interface Cache {
 	/**
 	 * Invalidate the cache through removing all mappings, expecting all
 	 * entries to be immediately invisible for subsequent lookups.
+	 *
 	 * @return {@code true} if the cache was known to have mappings before,
 	 * {@code false} if it did not (or if prior presence of entries could
 	 * not be determined)
-	 * @since 5.2
 	 * @see #clear()
+	 * @since 5.2
 	 */
 	default boolean invalidate() {
 		clear();
@@ -224,6 +233,7 @@ public interface Cache {
 	/**
 	 * Wrapper exception to be thrown from {@link #get(Object, Callable)}
 	 * in case of the value loader callback failing with an exception.
+	 *
 	 * @since 4.3
 	 */
 	@SuppressWarnings("serial")

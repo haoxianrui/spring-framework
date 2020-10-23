@@ -42,9 +42,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
 @ContextHierarchy({
-	//
-	@ContextConfiguration(name = "root", classes = AppConfig.class),
-	@ContextConfiguration(name = "dispatcher", classes = WebConfig.class) //
+		//
+		@ContextConfiguration(name = "root", classes = AppConfig.class),
+		@ContextConfiguration(name = "dispatcher", classes = WebConfig.class) //
 })
 class ControllerIntegrationTests {
 

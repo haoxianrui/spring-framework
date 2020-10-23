@@ -75,7 +75,7 @@ public class GroovyMarkupViewTests {
 		view.setUrl("sampleView");
 		assertThatExceptionOfType(ApplicationContextException.class).isThrownBy(() ->
 				view.setApplicationContext(this.webAppContext))
-			.withMessageContaining("GroovyMarkupConfig");
+				.withMessageContaining("GroovyMarkupConfig");
 	}
 
 	@Test

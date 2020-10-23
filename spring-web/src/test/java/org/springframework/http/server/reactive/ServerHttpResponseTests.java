@@ -62,7 +62,8 @@ public class ServerHttpResponseTests {
 		assertThat(new String(response.body.get(2).asByteBuffer().array(), StandardCharsets.UTF_8)).isEqualTo("c");
 	}
 
-	@Test  // SPR-14952
+	@Test
+		// SPR-14952
 	void writeAndFlushWithFluxOfDefaultDataBuffer() {
 		TestServerHttpResponse response = new TestServerHttpResponse();
 		Flux<Flux<DefaultDataBuffer>> flux = Flux.just(Flux.just(wrap("foo")));
@@ -150,7 +151,8 @@ public class ServerHttpResponseTests {
 		assertThat(response.getCookies().getFirst("ID")).isSameAs(cookie);
 	}
 
-	@Test // gh-24186
+	@Test
+		// gh-24186
 	void beforeCommitErrorShouldLeaveResponseNotCommitted() {
 
 		Consumer<Supplier<Mono<Void>>> tester = preCommitAction -> {
@@ -231,10 +233,10 @@ public class ServerHttpResponseTests {
 		protected Mono<Void> writeAndFlushWithInternal(
 				Publisher<? extends Publisher<? extends DataBuffer>> bodyWithFlush) {
 			return Flux.from(bodyWithFlush).flatMap(body ->
-				Flux.from(body).map(b -> {
-					this.body.add(b);
-					return b;
-				})
+					Flux.from(body).map(b -> {
+						this.body.add(b);
+						return b;
+					})
 			).then();
 		}
 	}

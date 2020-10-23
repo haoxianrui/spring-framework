@@ -34,6 +34,7 @@ public interface ServerHttpResponse extends ReactiveHttpOutputMessage {
 
 	/**
 	 * Set the HTTP status code of the response.
+	 *
 	 * @param status the HTTP status as an {@link HttpStatus} enum value
 	 * @return {@code false} if the status code change wasn't processed because
 	 * the HTTP response is committed, {@code true} if successfully set.
@@ -53,6 +54,7 @@ public interface ServerHttpResponse extends ReactiveHttpOutputMessage {
 	/**
 	 * Set the HTTP status code to the given value (potentially non-standard and
 	 * not resolvable through the {@link HttpStatus} enum) as an integer.
+	 *
 	 * @param value the status code value
 	 * @return {@code false} if the status code change wasn't processed because
 	 * the HTTP response is committed, {@code true} if successfully set.
@@ -61,8 +63,7 @@ public interface ServerHttpResponse extends ReactiveHttpOutputMessage {
 	default boolean setRawStatusCode(@Nullable Integer value) {
 		if (value == null) {
 			return setStatusCode(null);
-		}
-		else {
+		} else {
 			HttpStatus httpStatus = HttpStatus.resolve(value);
 			if (httpStatus == null) {
 				throw new IllegalStateException(
@@ -76,6 +77,7 @@ public interface ServerHttpResponse extends ReactiveHttpOutputMessage {
 	 * Return the status code that has been set, or otherwise fall back on the
 	 * status of the response from the underlying server. The return value may
 	 * be {@code null} if there is no default value from the underlying server.
+	 *
 	 * @since 5.2.4
 	 */
 	@Nullable
@@ -91,6 +93,7 @@ public interface ServerHttpResponse extends ReactiveHttpOutputMessage {
 
 	/**
 	 * Add the given {@code ResponseCookie}.
+	 *
 	 * @param cookie the cookie to add
 	 * @throws IllegalStateException if the response has already been committed
 	 */

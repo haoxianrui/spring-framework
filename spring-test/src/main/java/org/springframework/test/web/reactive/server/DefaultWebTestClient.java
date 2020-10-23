@@ -73,7 +73,7 @@ class DefaultWebTestClient implements WebTestClient {
 
 
 	DefaultWebTestClient(WebClient.Builder clientBuilder, ClientHttpConnector connector,
-			@Nullable Duration timeout, DefaultWebTestClientBuilder webTestClientBuilder) {
+						 @Nullable Duration timeout, DefaultWebTestClientBuilder webTestClientBuilder) {
 
 		Assert.notNull(clientBuilder, "WebClient.Builder is required");
 		this.wiretapConnector = new WiretapConnector(connector);
@@ -322,7 +322,7 @@ class DefaultWebTestClient implements WebTestClient {
 
 
 		DefaultResponseSpec(WiretapConnector.Info wiretapInfo, ClientResponse response,
-				@Nullable String uriTemplate, Duration timeout) {
+							@Nullable String uriTemplate, Duration timeout) {
 
 			this.exchangeResult = wiretapInfo.createExchangeResult(timeout, uriTemplate);
 			this.response = response;
@@ -518,8 +518,7 @@ class DefaultWebTestClient implements WebTestClient {
 			this.result.assertWithDiagnostics(() -> {
 				try {
 					new JsonExpectationsHelper().assertJsonEqual(json, getBodyAsString());
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					throw new AssertionError("JSON parsing error", ex);
 				}
 			});
@@ -531,8 +530,7 @@ class DefaultWebTestClient implements WebTestClient {
 			this.result.assertWithDiagnostics(() -> {
 				try {
 					new XmlExpectationsHelper().assertXmlEqual(expectedXml, getBodyAsString());
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					throw new AssertionError("XML parsing error", ex);
 				}
 			});

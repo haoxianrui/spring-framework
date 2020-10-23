@@ -210,14 +210,13 @@ public class ResultSetWrappingRowSetTests {
 		if (arg instanceof String) {
 			given(resultSet.findColumn((String) arg)).willReturn(1);
 			given(rsetMethod.invoke(resultSet, 1)).willReturn(ret).willThrow(new SQLException("test"));
-		}
-		else {
+		} else {
 			given(rsetMethod.invoke(resultSet, arg)).willReturn(ret).willThrow(new SQLException("test"));
 		}
 		rowsetMethod.invoke(rowSet, arg);
 		assertThatExceptionOfType(InvocationTargetException.class).isThrownBy(() ->
 				rowsetMethod.invoke(rowSet, arg)).
-			satisfies(ex -> assertThat(ex.getTargetException()).isExactlyInstanceOf(InvalidResultSetAccessException.class));
+				satisfies(ex -> assertThat(ex.getTargetException()).isExactlyInstanceOf(InvalidResultSetAccessException.class));
 	}
 
 }

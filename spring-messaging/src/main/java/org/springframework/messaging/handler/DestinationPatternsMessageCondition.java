@@ -59,6 +59,7 @@ public class DestinationPatternsMessageCondition
 	 * Constructor with patterns only. Creates and uses an instance of
 	 * {@link AntPathMatcher} with default settings.
 	 * <p>Non-empty patterns that don't start with "/" are prepended with "/".
+	 *
 	 * @param patterns the URL patterns to match to, or if 0 then always match
 	 */
 	public DestinationPatternsMessageCondition(String... patterns) {
@@ -67,8 +68,9 @@ public class DestinationPatternsMessageCondition
 
 	/**
 	 * Constructor with patterns and a {@code PathMatcher} instance.
+	 *
 	 * @param patterns the URL patterns to match to, or if 0 then always match
-	 * @param matcher the {@code PathMatcher} to use
+	 * @param matcher  the {@code PathMatcher} to use
 	 */
 	public DestinationPatternsMessageCondition(String[] patterns, @Nullable PathMatcher matcher) {
 		this(patterns, new SimpleRouteMatcher(matcher != null ? matcher : new AntPathMatcher()));
@@ -76,7 +78,8 @@ public class DestinationPatternsMessageCondition
 
 	/**
 	 * Constructor with patterns and a {@code RouteMatcher} instance.
-	 * @param patterns the URL patterns to match to, or if 0 then always match
+	 *
+	 * @param patterns     the URL patterns to match to, or if 0 then always match
 	 * @param routeMatcher the {@code RouteMatcher} to use
 	 * @since 5.2
 	 */
@@ -100,7 +103,6 @@ public class DestinationPatternsMessageCondition
 		this.patterns = patterns;
 		this.routeMatcher = routeMatcher;
 	}
-
 
 
 	public Set<String> getPatterns() {
@@ -137,14 +139,11 @@ public class DestinationPatternsMessageCondition
 					result.add(this.routeMatcher.combine(pattern1, pattern2));
 				}
 			}
-		}
-		else if (!this.patterns.isEmpty()) {
+		} else if (!this.patterns.isEmpty()) {
 			result.addAll(this.patterns);
-		}
-		else if (!other.patterns.isEmpty()) {
+		} else if (!other.patterns.isEmpty()) {
 			result.addAll(other.patterns);
-		}
-		else {
+		} else {
 			result.add("");
 		}
 		return new DestinationPatternsMessageCondition(result, this.routeMatcher);
@@ -154,6 +153,7 @@ public class DestinationPatternsMessageCondition
 	 * Check if any of the patterns match the given Message destination and return an instance
 	 * that is guaranteed to contain matching patterns, sorted via
 	 * {@link org.springframework.util.PathMatcher#getPatternComparator(String)}.
+	 *
 	 * @param message the message to match to
 	 * @return the same instance if the condition contains no patterns;
 	 * or a new condition with sorted matching patterns;
@@ -195,8 +195,8 @@ public class DestinationPatternsMessageCondition
 
 	private Comparator<String> getPatternComparator(Object destination) {
 		return destination instanceof RouteMatcher.Route ?
-			this.routeMatcher.getPatternComparator((RouteMatcher.Route) destination) :
-			((SimpleRouteMatcher) this.routeMatcher).getPathMatcher().getPatternComparator((String) destination);
+				this.routeMatcher.getPatternComparator((RouteMatcher.Route) destination) :
+				((SimpleRouteMatcher) this.routeMatcher).getPathMatcher().getPatternComparator((String) destination);
 	}
 
 	/**
@@ -228,11 +228,9 @@ public class DestinationPatternsMessageCondition
 
 		if (iterator.hasNext()) {
 			return -1;
-		}
-		else if (iteratorOther.hasNext()) {
+		} else if (iteratorOther.hasNext()) {
 			return 1;
-		}
-		else {
+		} else {
 			return 0;
 		}
 	}

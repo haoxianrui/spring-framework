@@ -164,11 +164,11 @@ public class LiteralTests extends AbstractExpressionTests {
 
 	@Test
 	public void testNotWritable() throws Exception {
-		SpelExpression expr = (SpelExpression)parser.parseExpression("37");
+		SpelExpression expr = (SpelExpression) parser.parseExpression("37");
 		assertThat(expr.isWritable(new StandardEvaluationContext())).isFalse();
-		expr = (SpelExpression)parser.parseExpression("37L");
+		expr = (SpelExpression) parser.parseExpression("37L");
 		assertThat(expr.isWritable(new StandardEvaluationContext())).isFalse();
-		expr = (SpelExpression)parser.parseExpression("true");
+		expr = (SpelExpression) parser.parseExpression("true");
 		assertThat(expr.isWritable(new StandardEvaluationContext())).isFalse();
 	}
 }

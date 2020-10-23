@@ -51,8 +51,7 @@ public class EhCacheSupportTests {
 			assertThat(cm.getCacheNames().length == 0).as("Loaded CacheManager with no caches").isTrue();
 			Cache myCache1 = cm.getCache("myCache1");
 			assertThat(myCache1 == null).as("No myCache1 defined").isTrue();
-		}
-		finally {
+		} finally {
 			cacheManagerFb.destroy();
 		}
 	}
@@ -74,8 +73,7 @@ public class EhCacheSupportTests {
 			cacheManagerFb2.setCacheManagerName("myCacheManager");
 			assertThatExceptionOfType(CacheException.class).as("because of naming conflict").isThrownBy(
 					cacheManagerFb2::afterPropertiesSet);
-		}
-		finally {
+		} finally {
 			cacheManagerFb.destroy();
 		}
 	}
@@ -100,8 +98,7 @@ public class EhCacheSupportTests {
 			CacheManager cm2 = cacheManagerFb2.getObject();
 			assertThat(cm2).isSameAs(cm);
 			cacheManagerFb2.destroy();
-		}
-		finally {
+		} finally {
 			cacheManagerFb.destroy();
 		}
 	}
@@ -117,8 +114,7 @@ public class EhCacheSupportTests {
 			Cache myCache1 = cm.getCache("myCache1");
 			assertThat(myCache1.getCacheConfiguration().isEternal()).as("myCache1 is not eternal").isFalse();
 			assertThat(myCache1.getCacheConfiguration().getMaxEntriesLocalHeap() == 300).as("myCache1.maxElements == 300").isTrue();
-		}
-		finally {
+		} finally {
 			cacheManagerFb.destroy();
 		}
 	}
@@ -158,10 +154,9 @@ public class EhCacheSupportTests {
 			assertThat(objectType2).isSameAs(objectType);
 			CacheConfiguration config = cache.getCacheConfiguration();
 			assertThat(cache.getName()).isEqualTo("myCache1");
-			if (useCacheManagerFb){
+			if (useCacheManagerFb) {
 				assertThat(config.getMaxEntriesLocalHeap()).as("myCache1.maxElements").isEqualTo(300);
-			}
-			else {
+			} else {
 				assertThat(config.getMaxEntriesLocalHeap()).as("myCache1.maxElements").isEqualTo(10000);
 			}
 
@@ -200,12 +195,10 @@ public class EhCacheSupportTests {
 			assertThat(config.getTimeToLiveSeconds() == 8).as("default timeToLive is correct").isTrue();
 			assertThat(config.getTimeToIdleSeconds() == 7).as("default timeToIdle is correct").isTrue();
 			assertThat(config.getDiskExpiryThreadIntervalSeconds() == 10).as("overridden diskExpiryThreadIntervalSeconds is correct").isTrue();
-		}
-		finally {
+		} finally {
 			if (cacheManagerFbInitialized) {
 				cacheManagerFb.destroy();
-			}
-			else {
+			} else {
 				CacheManager.getInstance().shutdown();
 			}
 		}
@@ -226,8 +219,7 @@ public class EhCacheSupportTests {
 			Ehcache myCache1 = cm.getEhcache("myCache1");
 			boolean condition = myCache1 instanceof BlockingCache;
 			assertThat(condition).isTrue();
-		}
-		finally {
+		} finally {
 			cacheManagerFb.destroy();
 		}
 	}
@@ -248,8 +240,7 @@ public class EhCacheSupportTests {
 			boolean condition = myCache1 instanceof SelfPopulatingCache;
 			assertThat(condition).isTrue();
 			assertThat(myCache1.get("myKey1").getObjectValue()).isEqualTo("myKey1");
-		}
-		finally {
+		} finally {
 			cacheManagerFb.destroy();
 		}
 	}
@@ -268,6 +259,7 @@ public class EhCacheSupportTests {
 				public Object createEntry(Object key) {
 					return key;
 				}
+
 				@Override
 				public void updateEntryValue(Object key, Object value) {
 				}
@@ -278,8 +270,7 @@ public class EhCacheSupportTests {
 			boolean condition = myCache1 instanceof UpdatingSelfPopulatingCache;
 			assertThat(condition).isTrue();
 			assertThat(myCache1.get("myKey1").getObjectValue()).isEqualTo("myKey1");
-		}
-		finally {
+		} finally {
 			cacheManagerFb.destroy();
 		}
 	}

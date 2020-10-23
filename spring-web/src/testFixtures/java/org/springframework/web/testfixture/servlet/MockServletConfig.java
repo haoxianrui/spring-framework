@@ -52,6 +52,7 @@ public class MockServletConfig implements ServletConfig {
 
 	/**
 	 * Create a new MockServletConfig with a default {@link MockServletContext}.
+	 *
 	 * @param servletName the name of the servlet
 	 */
 	public MockServletConfig(String servletName) {
@@ -60,6 +61,7 @@ public class MockServletConfig implements ServletConfig {
 
 	/**
 	 * Create a new MockServletConfig.
+	 *
 	 * @param servletContext the ServletContext that the servlet runs in
 	 */
 	public MockServletConfig(@Nullable ServletContext servletContext) {
@@ -68,8 +70,9 @@ public class MockServletConfig implements ServletConfig {
 
 	/**
 	 * Create a new MockServletConfig.
+	 *
 	 * @param servletContext the ServletContext that the servlet runs in
-	 * @param servletName the name of the servlet
+	 * @param servletName    the name of the servlet
 	 */
 	public MockServletConfig(@Nullable ServletContext servletContext, String servletName) {
 		this.servletContext = (servletContext != null ? servletContext : new MockServletContext());

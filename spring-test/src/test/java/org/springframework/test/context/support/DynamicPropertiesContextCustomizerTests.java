@@ -47,15 +47,15 @@ class DynamicPropertiesContextCustomizerTests {
 	@Test
 	void createWhenNonStaticDynamicPropertiesMethodThrowsException() {
 		assertThatIllegalStateException()
-			.isThrownBy(() -> customizerFor("nonStatic"))
-			.withMessage("@DynamicPropertySource method 'nonStatic' must be static");
+				.isThrownBy(() -> customizerFor("nonStatic"))
+				.withMessage("@DynamicPropertySource method 'nonStatic' must be static");
 	}
 
 	@Test
 	void createWhenBadDynamicPropertiesSignatureThrowsException() {
 		assertThatIllegalStateException()
-			.isThrownBy(() -> customizerFor("badArgs"))
-			.withMessage("@DynamicPropertySource method 'badArgs' must accept a single DynamicPropertyRegistry argument");
+				.isThrownBy(() -> customizerFor("badArgs"))
+				.withMessage("@DynamicPropertySource method 'badArgs' must accept a single DynamicPropertyRegistry argument");
 	}
 
 	@Test
@@ -63,8 +63,8 @@ class DynamicPropertiesContextCustomizerTests {
 		DynamicPropertiesContextCustomizer customizer = customizerFor("nullName");
 		ConfigurableApplicationContext context = new StaticApplicationContext();
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> customizer.customizeContext(context, mock(MergedContextConfiguration.class)))
-			.withMessage("'name' must not be null or blank");
+				.isThrownBy(() -> customizer.customizeContext(context, mock(MergedContextConfiguration.class)))
+				.withMessage("'name' must not be null or blank");
 	}
 
 	@Test
@@ -72,8 +72,8 @@ class DynamicPropertiesContextCustomizerTests {
 		DynamicPropertiesContextCustomizer customizer = customizerFor("emptyName");
 		ConfigurableApplicationContext context = new StaticApplicationContext();
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> customizer.customizeContext(context, mock(MergedContextConfiguration.class)))
-			.withMessage("'name' must not be null or blank");
+				.isThrownBy(() -> customizer.customizeContext(context, mock(MergedContextConfiguration.class)))
+				.withMessage("'name' must not be null or blank");
 	}
 
 	@Test
@@ -81,8 +81,8 @@ class DynamicPropertiesContextCustomizerTests {
 		DynamicPropertiesContextCustomizer customizer = customizerFor("nullValueSupplier");
 		ConfigurableApplicationContext context = new StaticApplicationContext();
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> customizer.customizeContext(context, mock(MergedContextConfiguration.class)))
-			.withMessage("'valueSupplier' must not be null");
+				.isThrownBy(() -> customizer.customizeContext(context, mock(MergedContextConfiguration.class)))
+				.withMessage("'valueSupplier' must not be null");
 	}
 
 	@Test
@@ -107,7 +107,7 @@ class DynamicPropertiesContextCustomizerTests {
 	}
 
 
-	private static DynamicPropertiesContextCustomizer customizerFor(String...methods) {
+	private static DynamicPropertiesContextCustomizer customizerFor(String... methods) {
 		return new DynamicPropertiesContextCustomizer(findMethods(methods));
 	}
 

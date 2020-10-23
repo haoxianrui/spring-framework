@@ -1,1 +1,3 @@
-function getMessage() { return "Hello World!" }
+function getMessage() {
+    return "Hello World!"
+}

@@ -72,10 +72,10 @@ import static org.springframework.core.annotation.AnnotationUtilsTests.asArray;
  * @author Sam Brannen
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
- * @since 4.0.3
  * @see AnnotationUtilsTests
  * @see MultipleComposedAnnotationsOnSingleAnnotatedElementTests
  * @see ComposedRepeatableAnnotationsTests
+ * @since 4.0.3
  */
 class AnnotatedElementUtilsTests {
 
@@ -225,7 +225,7 @@ class AnnotatedElementUtilsTests {
 
 	@Test
 	void getAllAnnotationAttributesFavorsInheritedComposedAnnotationsOverMoreLocallyDeclaredComposedAnnotations() {
-		MultiValueMap<String, Object> attributes = getAllAnnotationAttributes( SubSubClassWithInheritedComposedAnnotation.class, TX_NAME);
+		MultiValueMap<String, Object> attributes = getAllAnnotationAttributes(SubSubClassWithInheritedComposedAnnotation.class, TX_NAME);
 		assertThat(attributes).as("Annotation attributes map for @Transactional on SubSubClassWithInheritedComposedAnnotation").isNotNull();
 		assertThat(attributes.get("qualifier")).isEqualTo(asList("composed1"));
 	}
@@ -612,6 +612,7 @@ class AnnotatedElementUtilsTests {
 	/**
 	 * Bridge/bridged method setup code copied from
 	 * {@link org.springframework.core.BridgeMethodResolverTests#testWithGenericParameter()}.
+	 *
 	 * @since 4.2
 	 */
 	@Test
@@ -624,8 +625,7 @@ class AnnotatedElementUtilsTests {
 			if ("getFor".equals(method.getName()) && !method.getParameterTypes()[0].equals(Integer.class)) {
 				if (method.getReturnType().equals(Object.class)) {
 					bridgeMethod = method;
-				}
-				else {
+				} else {
 					bridgedMethod = method;
 				}
 			}
@@ -688,8 +688,8 @@ class AnnotatedElementUtilsTests {
 	}
 
 	/**
-	 * @since 5.2.1
 	 * @see <a href="https://github.com/spring-projects/spring-framework/issues/23767">#23767</a>
+	 * @since 5.2.1
 	 */
 	@Test
 	void findMergedAnnotationAttributesOnMethodWithComposedMetaTransactionalAnnotation() throws Exception {
@@ -702,8 +702,8 @@ class AnnotatedElementUtilsTests {
 	}
 
 	/**
-	 * @since 5.2.1
 	 * @see <a href="https://github.com/spring-projects/spring-framework/issues/23767">#23767</a>
+	 * @since 5.2.1
 	 */
 	@Test
 	void findMergedAnnotationOnMethodWithComposedMetaTransactionalAnnotation() throws Exception {
@@ -716,8 +716,8 @@ class AnnotatedElementUtilsTests {
 	}
 
 	/**
-	 * @since 5.2.1
 	 * @see <a href="https://github.com/spring-projects/spring-framework/issues/23767">#23767</a>
+	 * @since 5.2.1
 	 */
 	@Test
 	void findMergedAnnotationAttributesOnClassWithComposedMetaTransactionalAnnotation() throws Exception {
@@ -730,8 +730,8 @@ class AnnotatedElementUtilsTests {
 	}
 
 	/**
-	 * @since 5.2.1
 	 * @see <a href="https://github.com/spring-projects/spring-framework/issues/23767">#23767</a>
+	 * @since 5.2.1
 	 */
 	@Test
 	void findMergedAnnotationOnClassWithComposedMetaTransactionalAnnotation() throws Exception {
@@ -810,7 +810,7 @@ class AnnotatedElementUtilsTests {
 		assertThat(contextConfig.locations()).as("locations for " + element).isEqualTo(EMPTY);
 		// 'value' in @SpringAppConfig should not override 'value' in @ContextConfig
 		assertThat(contextConfig.value()).as("value for " + element).isEqualTo(EMPTY);
-		assertThat(contextConfig.classes()).as("classes for " + element).isEqualTo(new Class<?>[] {Number.class});
+		assertThat(contextConfig.classes()).as("classes for " + element).isEqualTo(new Class<?>[]{Number.class});
 	}
 
 	@Test
@@ -870,21 +870,24 @@ class AnnotatedElementUtilsTests {
 		assertThat(allMergedAnnotations.size()).isEqualTo(1);
 	}
 
-	@Test  // SPR-16060
+	@Test
+		// SPR-16060
 	void findMethodAnnotationFromGenericInterface() throws Exception {
 		Method method = ImplementsInterfaceWithGenericAnnotatedMethod.class.getMethod("foo", String.class);
 		Order order = findMergedAnnotation(method, Order.class);
 		assertThat(order).isNotNull();
 	}
 
-	@Test  // SPR-17146
+	@Test
+		// SPR-17146
 	void findMethodAnnotationFromGenericSuperclass() throws Exception {
 		Method method = ExtendsBaseClassWithGenericAnnotatedMethod.class.getMethod("foo", String.class);
 		Order order = findMergedAnnotation(method, Order.class);
 		assertThat(order).isNotNull();
 	}
 
-	@Test // gh-22655
+	@Test
+		// gh-22655
 	void forAnnotationsCreatesCopyOfArrayOnEachCall() {
 		AnnotatedElement element = AnnotatedElementUtils.forAnnotations(ForAnnotationsClass.class.getDeclaredAnnotations());
 		// Trigger the NPE as originally reported in the bug
@@ -894,7 +897,8 @@ class AnnotatedElementUtilsTests {
 		assertThat(element.getDeclaredAnnotations()).isNotSameAs(element.getDeclaredAnnotations());
 	}
 
-	@Test // gh-22703
+	@Test
+		// gh-22703
 	void getMergedAnnotationOnThreeDeepMetaWithValue() {
 		ValueAttribute annotation = AnnotatedElementUtils.getMergedAnnotation(
 				ValueAttributeMetaMetaClass.class, ValueAttribute.class);
@@ -1188,7 +1192,7 @@ class AnnotatedElementUtilsTests {
 	 * requires a value for the aliased 'locations', this does not result in
 	 * an error since 'locations' effectively <em>shadows</em> the 'value'
 	 * attribute (which cannot be set via the composed annotation anyway).
-	 *
+	 * <p>
 	 * If 'value' were not shadowed, such a declaration would not make sense.
 	 */
 	@ContextConfig(value = "duplicateDeclaration")

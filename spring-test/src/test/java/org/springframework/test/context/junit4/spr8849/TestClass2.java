@@ -35,8 +35,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Mickael Leduque
  * @author Sam Brannen
- * @since 3.2
  * @see Spr8849Tests
+ * @since 3.2
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration

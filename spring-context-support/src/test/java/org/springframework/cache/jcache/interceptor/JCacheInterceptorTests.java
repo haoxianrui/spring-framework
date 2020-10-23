@@ -49,8 +49,8 @@ public class JCacheInterceptorTests extends AbstractJCacheTests {
 		Method m = ReflectionUtils.findMethod(AnnotatedJCacheableService.class, "cache", String.class);
 
 		assertThatIllegalStateException().isThrownBy(() ->
-				interceptor.execute(dummyInvoker, service, m, new Object[] {"myId"}))
-			.withMessageContaining("JSR-107 only supports a single cache");
+				interceptor.execute(dummyInvoker, service, m, new Object[]{"myId"}))
+				.withMessageContaining("JSR-107 only supports a single cache");
 	}
 
 	@Test
@@ -62,8 +62,8 @@ public class JCacheInterceptorTests extends AbstractJCacheTests {
 		AnnotatedJCacheableService service = new AnnotatedJCacheableService(cacheManager.getCache("default"));
 		Method m = ReflectionUtils.findMethod(AnnotatedJCacheableService.class, "cache", String.class);
 		assertThatIllegalStateException().isThrownBy(() ->
-				interceptor.execute(dummyInvoker, service, m, new Object[] {"myId"}))
-			.withMessageContaining("Cache could not have been resolved for");
+				interceptor.execute(dummyInvoker, service, m, new Object[]{"myId"}))
+				.withMessageContaining("Cache could not have been resolved for");
 	}
 
 	@Test
@@ -86,14 +86,14 @@ public class JCacheInterceptorTests extends AbstractJCacheTests {
 		Method method = ReflectionUtils.findMethod(AnnotatedJCacheableService.class, "cache", String.class);
 
 		CacheOperationInvoker invoker = new DummyInvoker(0L);
-		Object execute = interceptor.execute(invoker, service, method, new Object[] {"myId"});
+		Object execute = interceptor.execute(invoker, service, method, new Object[]{"myId"});
 		assertThat(execute).as("result cannot be null.").isNotNull();
 		assertThat(execute.getClass()).as("Wrong result type").isEqualTo(Long.class);
 		assertThat(execute).as("Wrong result").isEqualTo(0L);
 	}
 
 	protected JCacheOperationSource createOperationSource(CacheManager cacheManager,
-			CacheResolver cacheResolver, CacheResolver exceptionCacheResolver, KeyGenerator keyGenerator) {
+														  CacheResolver cacheResolver, CacheResolver exceptionCacheResolver, KeyGenerator keyGenerator) {
 
 		DefaultJCacheOperationSource source = new DefaultJCacheOperationSource();
 		source.setCacheManager(cacheManager);

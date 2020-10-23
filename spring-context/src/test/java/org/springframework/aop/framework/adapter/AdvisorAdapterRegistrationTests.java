@@ -51,7 +51,7 @@ public class AdvisorAdapterRegistrationTests {
 	@Test
 	public void testAdvisorAdapterRegistrationManagerNotPresentInContext() {
 		ClassPathXmlApplicationContext ctx =
-			new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-without-bpp.xml", getClass());
+				new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-without-bpp.xml", getClass());
 		ITestBean tb = (ITestBean) ctx.getBean("testBean");
 		// just invoke any method to see if advice fired
 		assertThatExceptionOfType(UnknownAdviceTypeException.class).isThrownBy(
@@ -62,7 +62,7 @@ public class AdvisorAdapterRegistrationTests {
 	@Test
 	public void testAdvisorAdapterRegistrationManagerPresentInContext() {
 		ClassPathXmlApplicationContext ctx =
-			new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-with-bpp.xml", getClass());
+				new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-with-bpp.xml", getClass());
 		ITestBean tb = (ITestBean) ctx.getBean("testBean");
 		// just invoke any method to see if advice fired
 		tb.getName();
@@ -96,7 +96,7 @@ class SimpleBeforeAdviceAdapter implements AdvisorAdapter, Serializable {
 	@Override
 	public MethodInterceptor getInterceptor(Advisor advisor) {
 		SimpleBeforeAdvice advice = (SimpleBeforeAdvice) advisor.getAdvice();
-		return new SimpleBeforeAdviceInterceptor(advice) ;
+		return new SimpleBeforeAdviceInterceptor(advice);
 	}
 
 }

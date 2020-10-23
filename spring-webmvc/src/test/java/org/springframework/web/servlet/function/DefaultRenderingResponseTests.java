@@ -181,7 +181,7 @@ public class DefaultRenderingResponseTests {
 				.build();
 
 		MockHttpServletRequest request = new MockHttpServletRequest("GET", "https://example.com");
-		request.addHeader(HttpHeaders.IF_MODIFIED_SINCE,DateTimeFormatter.RFC_1123_DATE_TIME.format(now));
+		request.addHeader(HttpHeaders.IF_MODIFIED_SINCE, DateTimeFormatter.RFC_1123_DATE_TIME.format(now));
 		MockHttpServletResponse response = new MockHttpServletResponse();
 
 		ModelAndView mav = result.writeTo(request, response, EMPTY_CONTEXT);

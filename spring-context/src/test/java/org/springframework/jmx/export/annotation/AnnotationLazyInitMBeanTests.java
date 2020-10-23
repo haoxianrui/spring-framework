@@ -43,8 +43,7 @@ public class AnnotationLazyInitMBeanTests {
 			assertThat(server.getObjectInstance(oname)).isNotNull();
 			String name = (String) server.getAttribute(oname, "Name");
 			assertThat(name).as("Invalid name returned").isEqualTo("TEST");
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -76,8 +75,7 @@ public class AnnotationLazyInitMBeanTests {
 			assertThat(server.getObjectInstance(oname)).isNotNull();
 			name = (String) server.getAttribute(oname, "Name");
 			assertThat(name).as("Invalid name returned").isEqualTo("Juergen Hoeller");
-		}
-		finally {
+		} finally {
 			System.clearProperty("domain");
 			ctx.close();
 		}
@@ -93,8 +91,7 @@ public class AnnotationLazyInitMBeanTests {
 			assertThat(server.getObjectInstance(oname)).isNotNull();
 			String name = (String) server.getAttribute(oname, "Name");
 			assertThat(name).isNull();
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}

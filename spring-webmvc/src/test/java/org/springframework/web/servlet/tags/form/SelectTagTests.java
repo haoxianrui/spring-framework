@@ -58,7 +58,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  * @author Jeremy Grelle
  * @author Dave Syer
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class SelectTagTests extends AbstractFormTagTests {
 
 	private static final Locale LOCALE_AT = new Locale("de", "AT");
@@ -196,6 +196,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 			public void setAsText(String text) throws IllegalArgumentException {
 				setValue(Country.getCountryWithIsoCode(text));
 			}
+
 			@Override
 			public String getAsText() {
 				return ((Country) getValue()).getName();
@@ -225,6 +226,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 			public void setAsText(String text) throws IllegalArgumentException {
 				setValue(Country.getCountryWithIsoCode(text));
 			}
+
 			@Override
 			public String getAsText() {
 				return ((Country) getValue()).getName();
@@ -249,20 +251,21 @@ public class SelectTagTests extends AbstractFormTagTests {
 		TestBeanWithRealCountry withCountry = (TestBeanWithRealCountry) getTestBean();
 		withCountry.setRealCountry(null);
 		testBean.setBean(withCountry);
-		BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(testBean , "testBean");
+		BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(testBean, "testBean");
 		bindingResult.getPropertyAccessor().registerCustomEditor(Country.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) throws IllegalArgumentException {
-				if (text==null || text.length()==0) {
+				if (text == null || text.length() == 0) {
 					setValue(null);
 					return;
 				}
 				setValue(Country.getCountryWithIsoCode(text));
 			}
+
 			@Override
 			public String getAsText() {
 				Country value = (Country) getValue();
-				if (value==null) {
+				if (value == null) {
 					return null;
 				}
 				return value.getName();
@@ -285,12 +288,13 @@ public class SelectTagTests extends AbstractFormTagTests {
 		this.tag.setItemLabel("name");
 		TestBeanWrapper testBean = new TestBeanWrapper();
 		testBean.setBean(getTestBean());
-		BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(testBean , "testBean");
+		BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(testBean, "testBean");
 		bindingResult.getPropertyAccessor().registerCustomEditor(Country.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) throws IllegalArgumentException {
 				setValue(Country.getCountryWithIsoCode(text));
 			}
+
 			@Override
 			public String getAsText() {
 				return ((Country) getValue()).getName();
@@ -318,10 +322,11 @@ public class SelectTagTests extends AbstractFormTagTests {
 			public void setAsText(String text) throws IllegalArgumentException {
 				setValue(Country.getCountryWithIsoCode(text));
 			}
+
 			@Override
 			public String getAsText() {
 				Country value = (Country) getValue();
-				if (value==null) {
+				if (value == null) {
 					return "";
 				}
 				return value.getName();
@@ -350,8 +355,8 @@ public class SelectTagTests extends AbstractFormTagTests {
 		this.tag.setItemValue("isoCode");
 		assertThatExceptionOfType(JspException.class).as("use a non-Collection typed value as the value of 'items'").isThrownBy(
 				this.tag::doStartTag)
-			.withMessageContaining("items")
-			.withMessageContaining("org.springframework.beans.testfixture.beans.TestBean");
+				.withMessageContaining("items")
+				.withMessageContaining("org.springframework.beans.testfixture.beans.TestBean");
 	}
 
 	@Test
@@ -429,7 +434,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 
 		this.tag.setPath("myFloat");
 
-		Float[] array = new Float[] {
+		Float[] array = new Float[]{
 				new Float("12.30"), new Float("12.32"), new Float("12.34"), new Float("12.36"),
 				new Float("12.38"), new Float("12.40"), new Float("12.42"), new Float("12.44"),
 				new Float("12.46"), new Float("12.48")
@@ -506,6 +511,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 			public String print(Country object, Locale locale) {
 				return object.getName();
 			}
+
 			@Override
 			public Country parse(String text, Locale locale) throws ParseException {
 				return new Country(text, text);
@@ -554,6 +560,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 			public String print(Country object, Locale locale) {
 				return object.getName();
 			}
+
 			@Override
 			public Country parse(String text, Locale locale) throws ParseException {
 				return new Country(text, text);
@@ -751,8 +758,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 			assertThat(e.attribute("selected").getValue()).as("US node not selected.").isEqualTo("selected");
 			assertThat(e.getData()).as("US Locale displayLanguage property not used for option label.").isEqualTo(Locale.US.getDisplayLanguage());
 
-		}
-		finally {
+		} finally {
 			// Restore original default locale.
 			Locale.setDefault(defaultLocale);
 		}
@@ -953,7 +959,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 		Map map = new TreeMap(new Comparator() {
 			@Override
 			public int compare(Object o1, Object o2) {
-				return ((Country)o1).getName().compareTo(((Country)o2).getName());
+				return ((Country) o1).getName().compareTo(((Country) o2).getName());
 			}
 		});
 		map.put(Country.COUNTRY_AT, LOCALE_AT);
@@ -999,8 +1005,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 		Attribute selectedAttr = e.attribute("selected");
 		if (selected) {
 			assertThat(selectedAttr != null && "selected".equals(selectedAttr.getValue())).isTrue();
-		}
-		else {
+		} else {
 			assertThat(selectedAttr).isNull();
 		}
 	}

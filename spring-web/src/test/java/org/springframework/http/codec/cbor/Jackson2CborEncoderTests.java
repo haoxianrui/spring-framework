@@ -58,8 +58,7 @@ public class Jackson2CborEncoderTests extends AbstractLeakCheckingTests {
 						.readValue(DataBufferTestUtils.dumpBytes(dataBuffer));
 				assertThat(actual).isEqualTo(expected);
 				release(dataBuffer);
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				throw new UncheckedIOException(ex);
 			}
 		};

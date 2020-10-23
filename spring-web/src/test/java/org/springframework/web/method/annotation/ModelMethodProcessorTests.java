@@ -81,7 +81,7 @@ public class ModelMethodProcessorTests {
 		Model returnValue = new ExtendedModelMap();
 		returnValue.addAttribute("attr2", "value2");
 
-		processor.handleReturnValue(returnValue , returnParamModel, mavContainer, webRequest);
+		processor.handleReturnValue(returnValue, returnParamModel, mavContainer, webRequest);
 
 		assertThat(mavContainer.getModel().get("attr1")).isEqualTo("value1");
 		assertThat(mavContainer.getModel().get("attr2")).isEqualTo("value2");

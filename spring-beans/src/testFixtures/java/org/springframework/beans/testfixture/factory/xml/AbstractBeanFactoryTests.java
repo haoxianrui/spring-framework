@@ -118,11 +118,11 @@ public abstract class AbstractBeanFactoryTests {
 	public void getInstanceByNonmatchingClass() {
 		assertThatExceptionOfType(BeanNotOfRequiredTypeException.class).isThrownBy(() ->
 				getBeanFactory().getBean("rod", BeanFactory.class))
-			.satisfies(ex -> {
-				assertThat(ex.getBeanName()).isEqualTo("rod");
-				assertThat(ex.getRequiredType()).isEqualTo(BeanFactory.class);
-				assertThat(ex.getActualType()).isEqualTo(TestBean.class).isEqualTo(getBeanFactory().getBean("rod").getClass());
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getBeanName()).isEqualTo("rod");
+					assertThat(ex.getRequiredType()).isEqualTo(BeanFactory.class);
+					assertThat(ex.getActualType()).isEqualTo(TestBean.class).isEqualTo(getBeanFactory().getBean("rod").getClass());
+				});
 	}
 
 	@Test
@@ -143,11 +143,11 @@ public abstract class AbstractBeanFactoryTests {
 	public void getSharedInstanceByNonmatchingClass() {
 		assertThatExceptionOfType(BeanNotOfRequiredTypeException.class).isThrownBy(() ->
 				getBeanFactory().getBean("rod", BeanFactory.class))
-			.satisfies(ex -> {
-				assertThat(ex.getBeanName()).isEqualTo("rod");
-				assertThat(ex.getRequiredType()).isEqualTo(BeanFactory.class);
-				assertThat(ex.getActualType()).isEqualTo(TestBean.class);
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getBeanName()).isEqualTo("rod");
+					assertThat(ex.getRequiredType()).isEqualTo(BeanFactory.class);
+					assertThat(ex.getActualType()).isEqualTo(TestBean.class);
+				});
 	}
 
 	@Test
@@ -194,8 +194,8 @@ public abstract class AbstractBeanFactoryTests {
 	@Test
 	public void typeMismatch() {
 		assertThatExceptionOfType(BeanCreationException.class)
-			.isThrownBy(() -> getBeanFactory().getBean("typeMismatch"))
-			.withCauseInstanceOf(TypeMismatchException.class);
+				.isThrownBy(() -> getBeanFactory().getBean("typeMismatch"))
+				.withCauseInstanceOf(TypeMismatchException.class);
 	}
 
 	@Test
@@ -270,7 +270,7 @@ public abstract class AbstractBeanFactoryTests {
 
 		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).isThrownBy(() ->
 				cbf.getBean(alias))
-			.satisfies(ex -> assertThat(ex.getBeanName()).isEqualTo(alias));
+				.satisfies(ex -> assertThat(ex.getBeanName()).isEqualTo(alias));
 
 		// Create alias
 		cbf.registerAlias("rod", alias);

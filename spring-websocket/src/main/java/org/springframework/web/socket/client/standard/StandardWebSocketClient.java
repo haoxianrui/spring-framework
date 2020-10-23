@@ -61,7 +61,7 @@ public class StandardWebSocketClient extends AbstractWebSocketClient {
 
 	private final WebSocketContainer webSocketContainer;
 
-	private final Map<String,Object> userProperties = new HashMap<>();
+	private final Map<String, Object> userProperties = new HashMap<>();
 
 	@Nullable
 	private AsyncListenableTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
@@ -128,8 +128,8 @@ public class StandardWebSocketClient extends AbstractWebSocketClient {
 
 	@Override
 	protected ListenableFuture<WebSocketSession> doHandshakeInternal(WebSocketHandler webSocketHandler,
-			HttpHeaders headers, final URI uri, List<String> protocols,
-			List<WebSocketExtension> extensions, Map<String, Object> attributes) {
+																	 HttpHeaders headers, final URI uri, List<String> protocols,
+																	 List<WebSocketExtension> extensions, Map<String, Object> attributes) {
 
 		int port = getPort(uri);
 		InetSocketAddress localAddress = new InetSocketAddress(getLocalHost(), port);
@@ -154,8 +154,7 @@ public class StandardWebSocketClient extends AbstractWebSocketClient {
 
 		if (this.taskExecutor != null) {
 			return this.taskExecutor.submitListenable(connectTask);
-		}
-		else {
+		} else {
 			ListenableFutureTask<WebSocketSession> task = new ListenableFutureTask<>(connectTask);
 			task.run();
 			return task;
@@ -173,8 +172,7 @@ public class StandardWebSocketClient extends AbstractWebSocketClient {
 	private InetAddress getLocalHost() {
 		try {
 			return InetAddress.getLocalHost();
-		}
-		catch (UnknownHostException ex) {
+		} catch (UnknownHostException ex) {
 			return InetAddress.getLoopbackAddress();
 		}
 	}
@@ -203,6 +201,7 @@ public class StandardWebSocketClient extends AbstractWebSocketClient {
 				logger.trace("Handshake request headers: " + requestHeaders);
 			}
 		}
+
 		@Override
 		public void afterResponse(HandshakeResponse response) {
 			if (logger.isTraceEnabled()) {

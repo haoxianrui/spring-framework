@@ -6,18 +6,18 @@ apply from: "$rootDir/gradle/publications.gradle"
 group = "org.springframework"
 
 dependencies {
-	constraints {
-		parent.moduleProjects.sort { "$it.name" }.each {
-			api it
-		}
-	}
+    constraints {
+        parent.moduleProjects.sort { "$it.name" }.each {
+            api it
+        }
+    }
 }
 
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			artifactId = 'spring-framework-bom'
-			from components.javaPlatform
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'spring-framework-bom'
+            from components.javaPlatform
+        }
+    }
 }

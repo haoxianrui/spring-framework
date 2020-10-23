@@ -96,10 +96,10 @@ class DefaultValueStylerTests {
 		int[] array = new int[0];
 		assertThat(styler.style(array)).isEqualTo("array<Object>[[empty]]");
 
-		array = new int[] { 1 };
+		array = new int[]{1};
 		assertThat(styler.style(array)).isEqualTo("array<Integer>[1]");
 
-		array = new int[] { 1, 2 };
+		array = new int[]{1, 2};
 		assertThat(styler.style(array)).isEqualTo("array<Integer>[1, 2]");
 	}
 
@@ -108,10 +108,10 @@ class DefaultValueStylerTests {
 		String[] array = new String[0];
 		assertThat(styler.style(array)).isEqualTo("array<String>[[empty]]");
 
-		array = new String[] { "str1" };
+		array = new String[]{"str1"};
 		assertThat(styler.style(array)).isEqualTo("array<String>['str1']");
 
-		array = new String[] { "str1", "str2" };
+		array = new String[]{"str1", "str2"};
 		assertThat(styler.style(array)).isEqualTo("array<String>['str1', 'str2']");
 	}
 

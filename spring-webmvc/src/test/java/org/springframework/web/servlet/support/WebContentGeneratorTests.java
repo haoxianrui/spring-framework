@@ -25,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link WebContentGenerator}.
+ *
  * @author Rossen Stoyanchev
  */
 public class WebContentGeneratorTests {

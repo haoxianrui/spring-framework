@@ -155,8 +155,8 @@ public class RequestResponseBodyAdviceChainTests {
 
 		@Override
 		public String beforeBodyWrite(String body, MethodParameter returnType,
-				MediaType contentType, Class<? extends HttpMessageConverter<?>> converterType,
-				ServerHttpRequest request, ServerHttpResponse response) {
+									  MediaType contentType, Class<? extends HttpMessageConverter<?>> converterType,
+									  ServerHttpRequest request, ServerHttpResponse response) {
 
 			return body + "-MyControllerAdvice";
 		}
@@ -173,8 +173,8 @@ public class RequestResponseBodyAdviceChainTests {
 
 		@Override
 		public String beforeBodyWrite(String body, MethodParameter returnType,
-				MediaType contentType, Class<? extends HttpMessageConverter<?>> converterType,
-				ServerHttpRequest request, ServerHttpResponse response) {
+									  MediaType contentType, Class<? extends HttpMessageConverter<?>> converterType,
+									  ServerHttpRequest request, ServerHttpResponse response) {
 
 			return body + "-TargetedControllerAdvice";
 		}

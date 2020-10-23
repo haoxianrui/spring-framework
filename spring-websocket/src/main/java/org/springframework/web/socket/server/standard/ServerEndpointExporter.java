@@ -48,10 +48,10 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
  *
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
- * @since 4.0
  * @see ServerEndpointRegistration
  * @see SpringConfigurator
  * @see ServletServerContainerFactoryBean
+ * @since 4.0
  */
 public class ServerEndpointExporter extends WebApplicationObjectSupport
 		implements InitializingBean, SmartInitializingSingleton {
@@ -67,6 +67,7 @@ public class ServerEndpointExporter extends WebApplicationObjectSupport
 	 * Explicitly list annotated endpoint types that should be registered on startup. This
 	 * can be done if you wish to turn off a Servlet container's scan for endpoints, which
 	 * goes through all 3rd party jars in the, and rely on Spring configuration instead.
+	 *
 	 * @param annotatedEndpointClasses {@link ServerEndpoint}-annotated types
 	 */
 	public void setAnnotatedEndpointClasses(Class<?>... annotatedEndpointClasses) {
@@ -146,16 +147,15 @@ public class ServerEndpointExporter extends WebApplicationObjectSupport
 		ServerContainer serverContainer = getServerContainer();
 		Assert.state(serverContainer != null,
 				"No ServerContainer set. Most likely the server's own WebSocket ServletContainerInitializer " +
-				"has not run yet. Was the Spring ApplicationContext refreshed through a " +
-				"org.springframework.web.context.ContextLoaderListener, " +
-				"i.e. after the ServletContext has been fully initialized?");
+						"has not run yet. Was the Spring ApplicationContext refreshed through a " +
+						"org.springframework.web.context.ContextLoaderListener, " +
+						"i.e. after the ServletContext has been fully initialized?");
 		try {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Registering @ServerEndpoint class: " + endpointClass);
 			}
 			serverContainer.addEndpoint(endpointClass);
-		}
-		catch (DeploymentException ex) {
+		} catch (DeploymentException ex) {
 			throw new IllegalStateException("Failed to register @ServerEndpoint class: " + endpointClass, ex);
 		}
 	}
@@ -168,8 +168,7 @@ public class ServerEndpointExporter extends WebApplicationObjectSupport
 				logger.debug("Registering ServerEndpointConfig: " + endpointConfig);
 			}
 			serverContainer.addEndpoint(endpointConfig);
-		}
-		catch (DeploymentException ex) {
+		} catch (DeploymentException ex) {
 			throw new IllegalStateException("Failed to register ServerEndpointConfig: " + endpointConfig, ex);
 		}
 	}

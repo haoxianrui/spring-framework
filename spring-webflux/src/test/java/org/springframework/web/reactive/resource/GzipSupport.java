@@ -50,7 +50,7 @@ class GzipSupport implements AfterEachCallback, ParameterResolver {
 	public void afterEach(ExtensionContext context) throws Exception {
 		GzippedFiles gzippedFiles = getStore(context).remove(GzippedFiles.class, GzippedFiles.class);
 		if (gzippedFiles != null) {
-			for (File gzippedFile: gzippedFiles.created) {
+			for (File gzippedFile : gzippedFiles.created) {
 				gzippedFile.delete();
 			}
 		}
@@ -86,8 +86,7 @@ class GzipSupport implements AfterEachCallback, ParameterResolver {
 				GZIPOutputStream out = new GZIPOutputStream(new FileOutputStream(gzFile));
 				FileCopyUtils.copy(resource.getInputStream(), out);
 				created.add(gzFile);
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				throw new RuntimeException(ex);
 			}
 		}

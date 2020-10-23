@@ -21,9 +21,9 @@ package org.springframework.transaction;
  * either traditional or reactive.
  *
  * @author Juergen Hoeller
- * @since 5.2
  * @see PlatformTransactionManager
  * @see ReactiveTransactionManager
+ * @since 5.2
  */
 public interface TransactionManager {
 

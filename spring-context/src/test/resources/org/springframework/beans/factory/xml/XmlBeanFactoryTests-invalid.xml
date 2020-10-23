@@ -5,10 +5,14 @@
 
 
 	<bean id="jenny" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>Jenny</value></property>
-		<property name="age"><value>30</value></property>
+		<property name="name">
+			<value>Jenny</value>
+		</property>
+		<property name="age">
+			<value>30</value>
+		</property>
 		<property name="spouse">
-		<!-- Could use id and href -->
+			<!-- Could use id and href -->
 			<ref bean="david"/>
 		</property>
 	</bean>

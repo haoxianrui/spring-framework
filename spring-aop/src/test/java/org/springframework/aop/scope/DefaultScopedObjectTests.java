@@ -37,7 +37,7 @@ public class DefaultScopedObjectTests {
 	@Test
 	public void testCtorWithNullBeanFactory() throws Exception {
 		assertThatIllegalArgumentException().isThrownBy(() ->
-			new DefaultScopedObject(null, GOOD_BEAN_NAME));
+				new DefaultScopedObject(null, GOOD_BEAN_NAME));
 	}
 
 	@Test

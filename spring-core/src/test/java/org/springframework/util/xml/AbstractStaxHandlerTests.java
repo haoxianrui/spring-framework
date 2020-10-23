@@ -52,8 +52,8 @@ abstract class AbstractStaxHandlerTests {
 					"</root>";
 
 	private static final String SIMPLE_XML = "<?xml version='1.0' encoding='UTF-8'?>" +
-					"<?pi content?><root xmlns='namespace'><prefix:child xmlns:prefix='namespace2' prefix:attr='value'>content</prefix:child>" +
-					"</root>";
+			"<?pi content?><root xmlns='namespace'><prefix:child xmlns:prefix='namespace2' prefix:attr='value'>content</prefix:child>" +
+			"</root>";
 
 	private static final Predicate<Node> nodeFilter = (n -> n.getNodeType() != Node.COMMENT_NODE &&
 			n.getNodeType() != Node.DOCUMENT_TYPE_NODE && n.getNodeType() != Node.PROCESSING_INSTRUCTION_NODE);
@@ -63,7 +63,8 @@ abstract class AbstractStaxHandlerTests {
 
 
 	@BeforeEach
-	@SuppressWarnings("deprecation")  // on JDK 9
+	@SuppressWarnings("deprecation")
+		// on JDK 9
 	void createXMLReader() throws Exception {
 		xmlReader = org.xml.sax.helpers.XMLReaderFactory.createXMLReader();
 		xmlReader.setEntityResolver((publicId, systemId) -> new InputSource(new StringReader("")));

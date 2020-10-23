@@ -5,8 +5,8 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.0.xsd
        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    
-    <!--
+
+	<!--
 	<bean
 		class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
 	-->

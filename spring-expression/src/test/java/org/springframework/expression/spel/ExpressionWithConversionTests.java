@@ -93,7 +93,7 @@ public class ExpressionWithConversionTests extends AbstractExpressionTests {
 		assertThat(e.getValue(context, Integer.class).intValue()).isEqualTo(0);
 		context.setTypeConverter(new TypeConvertorUsingConversionService());
 		// Assign a List<String> to the List<Integer> field - the component elements should be converted
-		parser.parseExpression("listOfInteger").setValue(context,listOfString);
+		parser.parseExpression("listOfInteger").setValue(context, listOfString);
 		// size now 3
 		assertThat(e.getValue(context, Integer.class).intValue()).isEqualTo(3);
 		Class<?> clazz = parser.parseExpression("listOfInteger[1].getClass()").getValue(context, Class.class); // element type correctly Integer

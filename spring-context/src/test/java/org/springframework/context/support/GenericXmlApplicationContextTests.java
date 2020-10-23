@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link GenericXmlApplicationContext}.
- *
+ * <p>
  * See SPR-7530.
  *
  * @author Chris Beams

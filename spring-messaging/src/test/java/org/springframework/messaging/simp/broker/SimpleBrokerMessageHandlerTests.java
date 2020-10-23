@@ -161,7 +161,7 @@ public class SimpleBrokerMessageHandlerTests {
 		assertThat(connectAckHeaders.getHeader(SimpMessageHeaderAccessor.CONNECT_MESSAGE_HEADER)).isEqualTo(connectMessage);
 		assertThat(connectAckHeaders.getSessionId()).isEqualTo(id);
 		assertThat(connectAckHeaders.getUser().getName()).isEqualTo("joe");
-		assertThat(SimpMessageHeaderAccessor.getHeartbeat(connectAckHeaders.getMessageHeaders())).isEqualTo(new long[] {10000, 10000});
+		assertThat(SimpMessageHeaderAccessor.getHeartbeat(connectAckHeaders.getMessageHeaders())).isEqualTo(new long[]{10000, 10000});
 	}
 
 	@Test
@@ -170,12 +170,12 @@ public class SimpleBrokerMessageHandlerTests {
 		this.messageHandler.setTaskScheduler(this.taskScheduler);
 
 		assertThat(this.messageHandler.getHeartbeatValue()).isNotNull();
-		assertThat(this.messageHandler.getHeartbeatValue()).isEqualTo(new long[] {10000, 10000});
+		assertThat(this.messageHandler.getHeartbeatValue()).isEqualTo(new long[]{10000, 10000});
 	}
 
 	@Test
 	public void startWithHeartbeatValueWithoutTaskScheduler() {
-		this.messageHandler.setHeartbeatValue(new long[] {10000, 10000});
+		this.messageHandler.setHeartbeatValue(new long[]{10000, 10000});
 		assertThatIllegalArgumentException().isThrownBy(
 				this.messageHandler::start);
 	}
@@ -187,7 +187,7 @@ public class SimpleBrokerMessageHandlerTests {
 		given(this.taskScheduler.scheduleWithFixedDelay(any(Runnable.class), eq(15000L))).willReturn(future);
 
 		this.messageHandler.setTaskScheduler(this.taskScheduler);
-		this.messageHandler.setHeartbeatValue(new long[] {15000, 16000});
+		this.messageHandler.setHeartbeatValue(new long[]{15000, 16000});
 		this.messageHandler.start();
 
 		verify(this.taskScheduler).scheduleWithFixedDelay(any(Runnable.class), eq(15000L));
@@ -202,7 +202,7 @@ public class SimpleBrokerMessageHandlerTests {
 	@Test
 	public void startWithOneZeroHeartbeatValue() {
 		this.messageHandler.setTaskScheduler(this.taskScheduler);
-		this.messageHandler.setHeartbeatValue(new long[] {0, 10000});
+		this.messageHandler.setHeartbeatValue(new long[]{0, 10000});
 		this.messageHandler.start();
 
 		verify(this.taskScheduler).scheduleWithFixedDelay(any(Runnable.class), eq(10000L));
@@ -210,7 +210,7 @@ public class SimpleBrokerMessageHandlerTests {
 
 	@Test
 	public void readInactivity() throws Exception {
-		this.messageHandler.setHeartbeatValue(new long[] {0, 1});
+		this.messageHandler.setHeartbeatValue(new long[]{0, 1});
 		this.messageHandler.setTaskScheduler(this.taskScheduler);
 		this.messageHandler.start();
 
@@ -221,7 +221,7 @@ public class SimpleBrokerMessageHandlerTests {
 
 		String id = "sess1";
 		TestPrincipal user = new TestPrincipal("joe");
-		Message<String> connectMessage = createConnectMessage(id, user, new long[] {1, 0});
+		Message<String> connectMessage = createConnectMessage(id, user, new long[]{1, 0});
 		this.messageHandler.handleMessage(connectMessage);
 
 		Thread.sleep(10);
@@ -241,7 +241,7 @@ public class SimpleBrokerMessageHandlerTests {
 
 	@Test
 	public void writeInactivity() throws Exception {
-		this.messageHandler.setHeartbeatValue(new long[] {1, 0});
+		this.messageHandler.setHeartbeatValue(new long[]{1, 0});
 		this.messageHandler.setTaskScheduler(this.taskScheduler);
 		this.messageHandler.start();
 
@@ -252,7 +252,7 @@ public class SimpleBrokerMessageHandlerTests {
 
 		String id = "sess1";
 		TestPrincipal user = new TestPrincipal("joe");
-		Message<String> connectMessage = createConnectMessage(id, user, new long[] {0, 1});
+		Message<String> connectMessage = createConnectMessage(id, user, new long[]{0, 1});
 		this.messageHandler.handleMessage(connectMessage);
 
 		Thread.sleep(10);
@@ -272,7 +272,7 @@ public class SimpleBrokerMessageHandlerTests {
 
 	@Test
 	public void readWriteIntervalCalculation() throws Exception {
-		this.messageHandler.setHeartbeatValue(new long[] {1, 1});
+		this.messageHandler.setHeartbeatValue(new long[]{1, 1});
 		this.messageHandler.setTaskScheduler(this.taskScheduler);
 		this.messageHandler.start();
 
@@ -283,7 +283,7 @@ public class SimpleBrokerMessageHandlerTests {
 
 		String id = "sess1";
 		TestPrincipal user = new TestPrincipal("joe");
-		Message<String> connectMessage = createConnectMessage(id, user, new long[] {10000, 10000});
+		Message<String> connectMessage = createConnectMessage(id, user, new long[]{10000, 10000});
 		this.messageHandler.handleMessage(connectMessage);
 
 		Thread.sleep(10);

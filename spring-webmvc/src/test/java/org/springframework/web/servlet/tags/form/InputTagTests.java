@@ -362,14 +362,14 @@ public class InputTagTests extends AbstractFormTagTests {
 	public void dynamicTypeRadioAttribute() throws JspException {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.tag.setDynamicAttribute(null, "type", "radio"))
-			.withMessage("Attribute type=\"radio\" is not allowed");
+				.withMessage("Attribute type=\"radio\" is not allowed");
 	}
 
 	@Test
 	public void dynamicTypeCheckboxAttribute() throws JspException {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.tag.setDynamicAttribute(null, "type", "checkbox"))
-			.withMessage("Attribute type=\"checkbox\" is not allowed");
+				.withMessage("Attribute type=\"checkbox\" is not allowed");
 	}
 
 	protected final void assertTagClosed(String output) {

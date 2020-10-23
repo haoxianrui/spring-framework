@@ -4,15 +4,15 @@
 <beans default-lazy-init="true">
 
 	<bean id="lazy-and-bad"
-		class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$BadInitializer"
-		init-method="init2"
+		  class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$BadInitializer"
+		  init-method="init2"
 	/>
 
 	<bean id="init-and-ib"
-		class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$InitAndIB"
-		lazy-init="false"
-		init-method="customInit"
-		destroy-method="customDestroy"
+		  class="org.springframework.beans.factory.xml.XmlBeanFactoryTests$InitAndIB"
+		  lazy-init="false"
+		  init-method="customInit"
+		  destroy-method="customDestroy"
 	/>
 
 	<bean id="prototype" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype"/>

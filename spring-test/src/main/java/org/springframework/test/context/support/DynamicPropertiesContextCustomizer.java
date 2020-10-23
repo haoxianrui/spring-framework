@@ -39,8 +39,8 @@ import org.springframework.util.ReflectionUtils;
  *
  * @author Phillip Webb
  * @author Sam Brannen
- * @since 5.2.5
  * @see DynamicPropertiesContextCustomizerFactory
+ * @since 5.2.5
  */
 class DynamicPropertiesContextCustomizer implements ContextCustomizer {
 
@@ -66,7 +66,7 @@ class DynamicPropertiesContextCustomizer implements ContextCustomizer {
 
 	@Override
 	public void customizeContext(ConfigurableApplicationContext context,
-			MergedContextConfiguration mergedConfig) {
+								 MergedContextConfiguration mergedConfig) {
 
 		MutablePropertySources sources = context.getEnvironment().getPropertySources();
 		sources.addFirst(new DynamicValuesPropertySource(PROPERTY_SOURCE_NAME, buildDynamicPropertiesMap()));

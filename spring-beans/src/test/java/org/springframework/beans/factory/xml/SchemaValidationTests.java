@@ -38,7 +38,7 @@ public class SchemaValidationTests {
 		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(bf);
 		assertThatExceptionOfType(BeansException.class).isThrownBy(() ->
 				reader.loadBeanDefinitions(new ClassPathResource("invalidPerSchema.xml", getClass())))
-			.withCauseInstanceOf(SAXParseException.class);
+				.withCauseInstanceOf(SAXParseException.class);
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class SchemaValidationTests {
 		reader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_XSD);
 		assertThatExceptionOfType(BeansException.class).isThrownBy(() ->
 				reader.loadBeanDefinitions(new ClassPathResource("invalidPerSchema.xml", getClass())))
-			.withCauseInstanceOf(SAXParseException.class);
+				.withCauseInstanceOf(SAXParseException.class);
 	}
 
 	@Test

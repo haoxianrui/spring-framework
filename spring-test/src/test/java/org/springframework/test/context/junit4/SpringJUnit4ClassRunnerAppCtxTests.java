@@ -67,10 +67,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * {@value #DEFAULT_CONTEXT_RESOURCE_PATH}.
  *
  * @author Sam Brannen
- * @since 2.5
  * @see AbsolutePathSpringJUnit4ClassRunnerAppCtxTests
  * @see RelativePathSpringJUnit4ClassRunnerAppCtxTests
  * @see InheritedConfigSpringJUnit4ClassRunnerAppCtxTests
+ * @since 2.5
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration

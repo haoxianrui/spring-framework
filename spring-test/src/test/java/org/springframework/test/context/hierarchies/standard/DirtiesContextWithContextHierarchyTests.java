@@ -47,8 +47,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @ExtendWith(SpringExtension.class)
 @ContextHierarchy({
-	@ContextConfiguration(classes = DirtiesContextWithContextHierarchyTests.ParentConfig.class),
-	@ContextConfiguration(classes = DirtiesContextWithContextHierarchyTests.ChildConfig.class)
+		@ContextConfiguration(classes = DirtiesContextWithContextHierarchyTests.ParentConfig.class),
+		@ContextConfiguration(classes = DirtiesContextWithContextHierarchyTests.ChildConfig.class)
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DirtiesContextWithContextHierarchyTests {

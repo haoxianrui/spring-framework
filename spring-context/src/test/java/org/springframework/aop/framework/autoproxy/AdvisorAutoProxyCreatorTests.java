@@ -42,11 +42,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Tests for auto proxy creation by advisor recognition.
  *
- * @see org.springframework.aop.framework.autoproxy.AdvisorAutoProxyCreatorIntegrationTests
- *
  * @author Rod Johnson
  * @author Dave Syer
  * @author Chris Beams
+ * @see org.springframework.aop.framework.autoproxy.AdvisorAutoProxyCreatorIntegrationTests
  */
 @SuppressWarnings("resource")
 public class AdvisorAutoProxyCreatorTests {

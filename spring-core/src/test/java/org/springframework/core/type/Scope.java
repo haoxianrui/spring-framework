@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * Copy of the {@code @Scope} annotation for testing purposes.
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Scope {
 

@@ -111,8 +111,8 @@ public class MessageMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(parameter)).isTrue();
 		assertThatExceptionOfType(MessageConversionException.class).isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, message))
-			.withMessageContaining(Integer.class.getName())
-			.withMessageContaining(String.class.getName());
+				.withMessageContaining(Integer.class.getName())
+				.withMessageContaining(String.class.getName());
 	}
 
 	@Test
@@ -123,9 +123,9 @@ public class MessageMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(parameter)).isTrue();
 		assertThatExceptionOfType(MessageConversionException.class).isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, message))
-			.withMessageContaining("payload is empty")
-			.withMessageContaining(Integer.class.getName())
-			.withMessageContaining(String.class.getName());
+				.withMessageContaining("payload is empty")
+				.withMessageContaining(Integer.class.getName())
+				.withMessageContaining(String.class.getName());
 	}
 
 	@Test
@@ -145,8 +145,8 @@ public class MessageMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(parameter)).isTrue();
 		assertThatExceptionOfType(MessageConversionException.class).isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, message))
-			.withMessageContaining(Number.class.getName())
-			.withMessageContaining(Locale.class.getName());
+				.withMessageContaining(Number.class.getName())
+				.withMessageContaining(Locale.class.getName());
 	}
 
 	@Test
@@ -176,8 +176,8 @@ public class MessageMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(parameter)).isTrue();
 		assertThatExceptionOfType(MethodArgumentTypeMismatchException.class).isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, message))
-			.withMessageContaining(ErrorMessage.class.getName())
-			.withMessageContaining(GenericMessage.class.getName());
+				.withMessageContaining(ErrorMessage.class.getName())
+				.withMessageContaining(GenericMessage.class.getName());
 	}
 
 	@Test
@@ -201,8 +201,8 @@ public class MessageMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(parameter)).isTrue();
 		assertThatExceptionOfType(MessageConversionException.class).isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, message))
-			.withMessageContaining(Integer.class.getName())
-			.withMessageContaining(String.class.getName());
+				.withMessageContaining(Integer.class.getName())
+				.withMessageContaining(String.class.getName());
 	}
 
 	@Test
@@ -215,9 +215,9 @@ public class MessageMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(parameter)).isTrue();
 		assertThatExceptionOfType(MessageConversionException.class).isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, message))
-			.withMessageContaining("payload is empty")
-			.withMessageContaining(Integer.class.getName())
-			.withMessageContaining(String.class.getName());
+				.withMessageContaining("payload is empty")
+				.withMessageContaining(Integer.class.getName())
+				.withMessageContaining(String.class.getName());
 	}
 
 	@Test // SPR-16486

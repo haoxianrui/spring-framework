@@ -36,11 +36,11 @@ import org.springframework.util.Assert;
  * Response extractor that uses the given {@linkplain HttpMessageConverter entity converters}
  * to convert the response into a type {@code T}.
  *
+ * @param <T> the data type
  * @author Arjen Poutsma
  * @author Sam Brannen
- * @since 3.0
- * @param <T> the data type
  * @see RestTemplate
+ * @since 3.0
  */
 public class HttpMessageConverterExtractor<T> implements ResponseExtractor<T> {
 
@@ -114,8 +114,7 @@ public class HttpMessageConverterExtractor<T> implements ResponseExtractor<T> {
 					}
 				}
 			}
-		}
-		catch (IOException | HttpMessageNotReadableException ex) {
+		} catch (IOException | HttpMessageNotReadableException ex) {
 			throw new RestClientException("Error while extracting response for type [" +
 					this.responseType + "] and content type [" + contentType + "]", ex);
 		}
@@ -127,6 +126,7 @@ public class HttpMessageConverterExtractor<T> implements ResponseExtractor<T> {
 	/**
 	 * Determine the Content-Type of the response based on the "Content-Type"
 	 * header or otherwise default to {@link MediaType#APPLICATION_OCTET_STREAM}.
+	 *
 	 * @param response the response
 	 * @return the MediaType, possibly {@code null}.
 	 */

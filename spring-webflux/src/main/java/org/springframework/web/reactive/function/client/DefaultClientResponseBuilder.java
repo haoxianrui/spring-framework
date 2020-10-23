@@ -92,8 +92,7 @@ final class DefaultClientResponseBuilder implements ClientResponse.Builder {
 		cookies(cookies -> cookies.addAll(other.cookies()));
 		if (other instanceof DefaultClientResponse) {
 			this.request = ((DefaultClientResponse) other).request();
-		}
-		else {
+		} else {
 			this.request = EMPTY_REQUEST;
 		}
 	}
@@ -193,7 +192,7 @@ final class DefaultClientResponseBuilder implements ClientResponse.Builder {
 		private final Flux<DataBuffer> body;
 
 		public BuiltClientHttpResponse(int statusCode, HttpHeaders headers,
-				MultiValueMap<String, ResponseCookie> cookies, Flux<DataBuffer> body) {
+									   MultiValueMap<String, ResponseCookie> cookies, Flux<DataBuffer> body) {
 
 			this.statusCode = statusCode;
 			this.headers = HttpHeaders.readOnlyHttpHeaders(headers);

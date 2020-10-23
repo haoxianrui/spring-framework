@@ -41,6 +41,7 @@ import static org.springframework.messaging.handler.annotation.MessagingPredicat
 
 /**
  * Test fixture for {@link HeaderMethodArgumentResolver} tests.
+ *
  * @author Rossen Stoyanchev
  */
 public class HeaderMethodArgumentResolverTests {
@@ -116,8 +117,7 @@ public class HeaderMethodArgumentResolverTests {
 			MethodParameter param = this.resolvable.annot(header("name", "#{systemProperties.systemProperty}")).arg();
 			Object result = resolveArgument(param, message);
 			assertThat(result).isEqualTo("sysbar");
-		}
-		finally {
+		} finally {
 			System.clearProperty("systemProperty");
 		}
 	}
@@ -130,8 +130,7 @@ public class HeaderMethodArgumentResolverTests {
 			MethodParameter param = this.resolvable.annot(header("#{systemProperties.systemProperty}")).arg();
 			Object result = resolveArgument(param, message);
 			assertThat(result).isEqualTo("foo");
-		}
-		finally {
+		} finally {
 			System.clearProperty("systemProperty");
 		}
 	}

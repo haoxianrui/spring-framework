@@ -114,7 +114,7 @@ public class ResourceHandlerRegistryTests {
 
 	@Test
 	public void order() {
-		assertThat(registry.getHandlerMapping().getOrder()).isEqualTo(Integer.MAX_VALUE -1);
+		assertThat(registry.getHandlerMapping().getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
 
 		registry.setOrder(0);
 		assertThat(registry.getHandlerMapping().getOrder()).isEqualTo(0);
@@ -198,13 +198,13 @@ public class ResourceHandlerRegistryTests {
 
 		this.registration.setCachePeriod(3600)
 				.resourceChain(false)
-					.addResolver(cachingResolver)
-					.addResolver(versionResolver)
-					.addResolver(webjarsResolver)
-					.addResolver(pathResourceResolver)
-					.addTransformer(cachingTransformer)
-					.addTransformer(appCacheTransformer)
-					.addTransformer(cssLinkTransformer);
+				.addResolver(cachingResolver)
+				.addResolver(versionResolver)
+				.addResolver(webjarsResolver)
+				.addResolver(pathResourceResolver)
+				.addTransformer(cachingTransformer)
+				.addTransformer(appCacheTransformer)
+				.addTransformer(cssLinkTransformer);
 
 		ResourceHttpRequestHandler handler = getHandler("/resources/**");
 		List<ResourceResolver> resolvers = handler.getResourceResolvers();
@@ -232,7 +232,7 @@ public class ResourceHandlerRegistryTests {
 		assertThat(handler.getUrlPathHelper()).isNotNull();
 
 		List<ResourceResolver> resolvers = handler.getResourceResolvers();
-		PathResourceResolver resolver = (PathResourceResolver) resolvers.get(resolvers.size()-1);
+		PathResourceResolver resolver = (PathResourceResolver) resolvers.get(resolvers.size() - 1);
 		Map<Resource, Charset> locationCharsets = resolver.getLocationCharsets();
 		assertThat(locationCharsets.size()).isEqualTo(1);
 		assertThat(locationCharsets.values().iterator().next()).isEqualTo(StandardCharsets.ISO_8859_1);

@@ -40,8 +40,8 @@ import static org.springframework.jdbc.datasource.init.ScriptUtils.splitSqlScrip
  * @author Phillip Webb
  * @author Chris Baldwin
  * @author Nicolas Debeissat
- * @since 4.0.3
  * @see ScriptUtilsIntegrationTests
+ * @since 4.0.3
  */
 public class ScriptUtilsUnitTests {
 

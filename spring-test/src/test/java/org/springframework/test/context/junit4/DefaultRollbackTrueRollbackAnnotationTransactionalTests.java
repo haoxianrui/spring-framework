@@ -40,10 +40,10 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * via {@link Transactional @Transactional}.
  *
  * @author Sam Brannen
- * @since 4.2
  * @see Rollback
  * @see Transactional#transactionManager
  * @see DefaultRollbackTrueTransactionalTests
+ * @since 4.2
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = EmbeddedPersonDatabaseTestsConfig.class, inheritLocations = false)

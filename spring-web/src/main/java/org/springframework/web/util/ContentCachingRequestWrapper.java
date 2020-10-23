@@ -45,8 +45,8 @@ import org.springframework.lang.Nullable;
  *
  * @author Juergen Hoeller
  * @author Brian Clozel
- * @since 4.1.3
  * @see ContentCachingResponseWrapper
+ * @since 4.1.3
  */
 public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
@@ -67,6 +67,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
 	/**
 	 * Create a new ContentCachingRequestWrapper for the given servlet request.
+	 *
 	 * @param request the original servlet request
 	 */
 	public ContentCachingRequestWrapper(HttpServletRequest request) {
@@ -78,10 +79,11 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
 	/**
 	 * Create a new ContentCachingRequestWrapper for the given servlet request.
-	 * @param request the original servlet request
+	 *
+	 * @param request           the original servlet request
 	 * @param contentCacheLimit the maximum number of bytes to cache per request
-	 * @since 4.3.6
 	 * @see #handleContentOverflow(int)
+	 * @since 4.3.6
 	 */
 	public ContentCachingRequestWrapper(HttpServletRequest request, int contentCacheLimit) {
 		super(request);
@@ -175,8 +177,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 					}
 				}
 			}
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new IllegalStateException("Failed to write request parameters to cached content", ex);
 		}
 	}
@@ -184,6 +185,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 	/**
 	 * Return the cached request content as a byte array.
 	 * <p>The returned array will never be larger than the content cache limit.
+	 *
 	 * @see #ContentCachingRequestWrapper(HttpServletRequest, int)
 	 */
 	public byte[] getContentAsByteArray() {
@@ -195,10 +197,11 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 	 * body being read that exceeds the specified content cache limit.
 	 * <p>The default implementation is empty. Subclasses may override this to
 	 * throw a payload-too-large exception or the like.
+	 *
 	 * @param contentCacheLimit the maximum number of bytes to cache per request
-	 * which has just been exceeded
-	 * @since 4.3.6
+	 *                          which has just been exceeded
 	 * @see #ContentCachingRequestWrapper(HttpServletRequest, int)
+	 * @since 4.3.6
 	 */
 	protected void handleContentOverflow(int contentCacheLimit) {
 	}
@@ -221,8 +224,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 				if (contentCacheLimit != null && cachedContent.size() == contentCacheLimit) {
 					this.overflow = true;
 					handleContentOverflow(contentCacheLimit);
-				}
-				else {
+				} else {
 					cachedContent.write(ch);
 				}
 			}

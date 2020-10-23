@@ -286,12 +286,12 @@ public class RequestPartMethodArgumentResolverTests {
 	public void resolveRequestPartNotValid() throws Exception {
 		assertThatExceptionOfType(MethodArgumentNotValidException.class).isThrownBy(() ->
 				testResolveArgument(new SimpleBean(null), paramValidRequestPart))
-			.satisfies(ex -> {
-				BindingResult bindingResult = ex.getBindingResult();
-				assertThat(bindingResult.getObjectName()).isEqualTo("requestPart");
-				assertThat(bindingResult.getErrorCount()).isEqualTo(1);
-				assertThat(bindingResult.getFieldError("name")).isNotNull();
-			});
+				.satisfies(ex -> {
+					BindingResult bindingResult = ex.getBindingResult();
+					assertThat(bindingResult.getObjectName()).isEqualTo("requestPart");
+					assertThat(bindingResult.getErrorCount()).isEqualTo(1);
+					assertThat(bindingResult.getFieldError("name")).isNotNull();
+				});
 	}
 
 	@Test
@@ -303,7 +303,7 @@ public class RequestPartMethodArgumentResolverTests {
 	public void resolveRequestPartRequired() throws Exception {
 		assertThatExceptionOfType(MissingServletRequestPartException.class).isThrownBy(() ->
 				testResolveArgument(null, paramValidRequestPart))
-			.satisfies(ex -> assertThat(ex.getRequestPartName()).isEqualTo("requestPart"));
+				.satisfies(ex -> assertThat(ex.getRequestPartName()).isEqualTo("requestPart"));
 	}
 
 	@Test
@@ -577,7 +577,7 @@ public class RequestPartMethodArgumentResolverTests {
 
 		@Override
 		public WebDataBinder createBinder(NativeWebRequest webRequest, @Nullable Object target,
-				String objectName) throws Exception {
+										  String objectName) throws Exception {
 
 			LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
 			validator.afterPropertiesSet();
@@ -591,7 +591,7 @@ public class RequestPartMethodArgumentResolverTests {
 	@SuppressWarnings("unused")
 	public void handle(
 			@RequestPart SimpleBean requestPart,
-			@RequestPart(value="requestPart", required=false) SimpleBean namedRequestPart,
+			@RequestPart(value = "requestPart", required = false) SimpleBean namedRequestPart,
 			@Valid @RequestPart("requestPart") SimpleBean validRequestPart,
 			@RequestPart("requestPart") MultipartFile multipartFile,
 			@RequestPart("requestPart") List<MultipartFile> multipartFileList,

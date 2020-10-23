@@ -190,7 +190,7 @@ public class ClientSockJsSessionTests {
 		this.session.handleFrame(SockJsFrame.openFrame().getContent());
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.session.close(null))
-			.withMessageContaining("Invalid close status");
+				.withMessageContaining("Invalid close status");
 	}
 
 	@Test
@@ -198,7 +198,7 @@ public class ClientSockJsSessionTests {
 		this.session.handleFrame(SockJsFrame.openFrame().getContent());
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.session.close(new CloseStatus(2999, "reason")))
-			.withMessageContaining("Invalid close status");
+				.withMessageContaining("Invalid close status");
 	}
 
 	@Test
@@ -223,7 +223,7 @@ public class ClientSockJsSessionTests {
 
 
 		protected TestClientSockJsSession(TransportRequest request, WebSocketHandler handler,
-				SettableListenableFuture<WebSocketSession> connectFuture) {
+										  SettableListenableFuture<WebSocketSession> connectFuture) {
 			super(request, handler, connectFuture);
 		}
 

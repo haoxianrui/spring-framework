@@ -35,8 +35,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 4.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ConfigClassesAndProfilesWithCustomDefaultsMetaConfig(classes = { PojoAndStringConfig.class,
-	ConfigClassesAndProfilesWithCustomDefaultsMetaConfig.ProductionConfig.class }, profiles = "prod")
+@ConfigClassesAndProfilesWithCustomDefaultsMetaConfig(classes = {PojoAndStringConfig.class,
+		ConfigClassesAndProfilesWithCustomDefaultsMetaConfig.ProductionConfig.class}, profiles = "prod")
 public class ConfigClassesAndProfilesWithCustomDefaultsMetaConfigWithOverridesTests {
 
 	@Autowired

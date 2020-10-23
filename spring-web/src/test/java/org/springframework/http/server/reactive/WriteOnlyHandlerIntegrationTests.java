@@ -59,7 +59,7 @@ class WriteOnlyHandlerIntegrationTests extends AbstractHttpHandlerIntegrationTes
 		this.body = randomBytes();
 		RequestEntity<byte[]> request = RequestEntity.post(
 				new URI("http://localhost:" + port)).body(
-						"".getBytes(StandardCharsets.UTF_8));
+				"".getBytes(StandardCharsets.UTF_8));
 		ResponseEntity<byte[]> response = restTemplate.exchange(request, byte[].class);
 
 		assertThat(response.getBody()).isEqualTo(body);

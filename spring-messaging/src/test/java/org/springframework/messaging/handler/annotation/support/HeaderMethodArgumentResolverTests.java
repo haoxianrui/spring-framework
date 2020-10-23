@@ -118,8 +118,7 @@ public class HeaderMethodArgumentResolverTests {
 			MethodParameter param = this.resolvable.annot(header("name", "#{systemProperties.systemProperty}")).arg();
 			Object result = resolver.resolveArgument(param, message);
 			assertThat(result).isEqualTo("sysbar");
-		}
-		finally {
+		} finally {
 			System.clearProperty("systemProperty");
 		}
 	}
@@ -132,8 +131,7 @@ public class HeaderMethodArgumentResolverTests {
 			MethodParameter param = this.resolvable.annot(header("#{systemProperties.systemProperty}")).arg();
 			Object result = resolver.resolveArgument(param, message);
 			assertThat(result).isEqualTo("foo");
-		}
-		finally {
+		} finally {
 			System.clearProperty("systemProperty");
 		}
 	}

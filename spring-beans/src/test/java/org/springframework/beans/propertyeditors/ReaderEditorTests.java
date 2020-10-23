@@ -53,8 +53,7 @@ public class ReaderEditorTests {
 			assertThat(condition).isTrue();
 			reader = (Reader) value;
 			assertThat(reader.ready()).isTrue();
-		}
-		finally {
+		} finally {
 			if (reader != null) {
 				reader.close();
 			}

@@ -46,8 +46,8 @@ class MBeanServerConnectionFactoryBeanTests extends AbstractMBeanServerTests {
 	void noServiceUrl() throws Exception {
 		MBeanServerConnectionFactoryBean bean = new MBeanServerConnectionFactoryBean();
 		assertThatIllegalArgumentException()
-			.isThrownBy(bean::afterPropertiesSet)
-			.withMessage("Property 'serviceUrl' is required");
+				.isThrownBy(bean::afterPropertiesSet)
+				.withMessage("Property 'serviceUrl' is required");
 	}
 
 	@Test
@@ -65,12 +65,10 @@ class MBeanServerConnectionFactoryBeanTests extends AbstractMBeanServerTests {
 
 				// perform simple MBean count test
 				assertThat(connection.getMBeanCount()).as("MBean count should be the same").isEqualTo(getServer().getMBeanCount());
-			}
-			finally {
+			} finally {
 				bean.destroy();
 			}
-		}
-		finally {
+		} finally {
 			connectorServer.stop();
 		}
 	}
@@ -89,8 +87,7 @@ class MBeanServerConnectionFactoryBeanTests extends AbstractMBeanServerTests {
 		try {
 			connector = startConnectorServer();
 			assertThat(connection.getMBeanCount()).as("Incorrect MBean count").isEqualTo(getServer().getMBeanCount());
-		}
-		finally {
+		} finally {
 			bean.destroy();
 			if (connector != null) {
 				connector.stop();

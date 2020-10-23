@@ -160,8 +160,7 @@ class BridgeMethodResolverTests {
 			if ("getFor".equals(method.getName()) && !method.getParameterTypes()[0].equals(Integer.class)) {
 				if (method.getReturnType().equals(Object.class)) {
 					bridgeMethod = method;
-				}
-				else {
+				} else {
 					bridgedMethod = method;
 				}
 			}
@@ -252,7 +251,7 @@ class BridgeMethodResolverTests {
 		Method bridgedMethod = MegaMessageProducerImpl.class.getDeclaredMethod("receive", MegaMessageEvent.class);
 		assertThat(bridgedMethod.isBridge()).isFalse();
 
-		Method bridgeMethod  = MegaMessageProducerImpl.class.getDeclaredMethod("receive", MegaEvent.class);
+		Method bridgeMethod = MegaMessageProducerImpl.class.getDeclaredMethod("receive", MegaEvent.class);
 		assertThat(bridgeMethod.isBridge()).isTrue();
 
 		assertThat(BridgeMethodResolver.findBridgedMethod(bridgeMethod)).isEqualTo(bridgedMethod);
@@ -304,18 +303,20 @@ class BridgeMethodResolverTests {
 		assertThat(bridgedMethod.getName()).isEqualTo("findBy");
 	}
 
-	@Test  // SPR-16103
+	@Test
+		// SPR-16103
 	void testClassHierarchy() throws Exception {
 		doTestHierarchyResolution(FooClass.class);
 	}
 
-	@Test  // SPR-16103
+	@Test
+		// SPR-16103
 	void testInterfaceHierarchy() throws Exception {
 		doTestHierarchyResolution(FooInterface.class);
 	}
 
 	private void doTestHierarchyResolution(Class<?> clazz) throws Exception {
-		for (Method method : clazz.getDeclaredMethods()){
+		for (Method method : clazz.getDeclaredMethods()) {
 			Method bridged = BridgeMethodResolver.findBridgedMethod(method);
 			Method expected = clazz.getMethod("test", FooEntity.class);
 			assertThat(bridged).isEqualTo(expected);
@@ -1140,7 +1141,7 @@ class BridgeMethodResolverTests {
 	}
 
 
-	private static class Other<S,E> {
+	private static class Other<S, E> {
 	}
 
 

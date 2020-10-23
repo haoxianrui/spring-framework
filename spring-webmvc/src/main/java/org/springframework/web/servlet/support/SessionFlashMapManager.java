@@ -59,6 +59,7 @@ public class SessionFlashMapManager extends AbstractFlashMapManager {
 
 	/**
 	 * Exposes the best available session mutex.
+	 *
 	 * @see org.springframework.web.util.WebUtils#getSessionMutex
 	 * @see org.springframework.web.util.HttpSessionMutexListener
 	 */

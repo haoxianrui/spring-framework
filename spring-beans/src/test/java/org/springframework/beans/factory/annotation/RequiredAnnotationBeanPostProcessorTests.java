@@ -47,47 +47,47 @@ public class RequiredAnnotationBeanPostProcessorTests {
 	public void testWithRequiredPropertyOmitted() {
 		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 		BeanDefinition beanDef = BeanDefinitionBuilder
-			.genericBeanDefinition(RequiredTestBean.class)
-			.addPropertyValue("name", "Rob Harrop")
-			.addPropertyValue("favouriteColour", "Blue")
-			.addPropertyValue("jobTitle", "Grand Poobah")
-			.getBeanDefinition();
+				.genericBeanDefinition(RequiredTestBean.class)
+				.addPropertyValue("name", "Rob Harrop")
+				.addPropertyValue("favouriteColour", "Blue")
+				.addPropertyValue("jobTitle", "Grand Poobah")
+				.getBeanDefinition();
 		factory.registerBeanDefinition("testBean", beanDef);
 		factory.addBeanPostProcessor(new RequiredAnnotationBeanPostProcessor());
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				factory::preInstantiateSingletons)
-			.withMessageContaining("Property")
-			.withMessageContaining("age")
-			.withMessageContaining("testBean");
+				.withMessageContaining("Property")
+				.withMessageContaining("age")
+				.withMessageContaining("testBean");
 	}
 
 	@Test
 	public void testWithThreeRequiredPropertiesOmitted() {
 		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 		BeanDefinition beanDef = BeanDefinitionBuilder
-			.genericBeanDefinition(RequiredTestBean.class)
-			.addPropertyValue("name", "Rob Harrop")
-			.getBeanDefinition();
+				.genericBeanDefinition(RequiredTestBean.class)
+				.addPropertyValue("name", "Rob Harrop")
+				.getBeanDefinition();
 		factory.registerBeanDefinition("testBean", beanDef);
 		factory.addBeanPostProcessor(new RequiredAnnotationBeanPostProcessor());
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				factory::preInstantiateSingletons)
-			.withMessageContaining("Properties")
-			.withMessageContaining("age")
-			.withMessageContaining("favouriteColour")
-			.withMessageContaining("jobTitle")
-			.withMessageContaining("testBean");
+				.withMessageContaining("Properties")
+				.withMessageContaining("age")
+				.withMessageContaining("favouriteColour")
+				.withMessageContaining("jobTitle")
+				.withMessageContaining("testBean");
 	}
 
 	@Test
 	public void testWithAllRequiredPropertiesSpecified() {
 		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 		BeanDefinition beanDef = BeanDefinitionBuilder
-			.genericBeanDefinition(RequiredTestBean.class)
-			.addPropertyValue("age", "24")
-			.addPropertyValue("favouriteColour", "Blue")
-			.addPropertyValue("jobTitle", "Grand Poobah")
-			.getBeanDefinition();
+				.genericBeanDefinition(RequiredTestBean.class)
+				.addPropertyValue("age", "24")
+				.addPropertyValue("favouriteColour", "Blue")
+				.addPropertyValue("jobTitle", "Grand Poobah")
+				.getBeanDefinition();
 		factory.registerBeanDefinition("testBean", beanDef);
 		factory.addBeanPostProcessor(new RequiredAnnotationBeanPostProcessor());
 		factory.preInstantiateSingletons();
@@ -100,17 +100,17 @@ public class RequiredAnnotationBeanPostProcessorTests {
 	public void testWithCustomAnnotation() {
 		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 		BeanDefinition beanDef = BeanDefinitionBuilder
-			.genericBeanDefinition(RequiredTestBean.class)
-			.getBeanDefinition();
+				.genericBeanDefinition(RequiredTestBean.class)
+				.getBeanDefinition();
 		factory.registerBeanDefinition("testBean", beanDef);
 		RequiredAnnotationBeanPostProcessor rabpp = new RequiredAnnotationBeanPostProcessor();
 		rabpp.setRequiredAnnotationType(MyRequired.class);
 		factory.addBeanPostProcessor(rabpp);
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				factory::preInstantiateSingletons)
-			.withMessageContaining("Property")
-			.withMessageContaining("name")
-			.withMessageContaining("testBean");
+				.withMessageContaining("Property")
+				.withMessageContaining("name")
+				.withMessageContaining("testBean");
 	}
 
 	@Test
@@ -127,9 +127,9 @@ public class RequiredAnnotationBeanPostProcessorTests {
 		factory.addBeanPostProcessor(new RequiredAnnotationBeanPostProcessor());
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				factory::preInstantiateSingletons)
-			.withMessageContaining("Property")
-			.withMessageContaining("age")
-			.withMessageContaining("testBean");
+				.withMessageContaining("Property")
+				.withMessageContaining("age")
+				.withMessageContaining("testBean");
 	}
 
 	@Test

@@ -39,8 +39,8 @@ public class VariableAndFunctionTests extends AbstractExpressionTests {
 
 	@Test
 	public void testVariableAccess_WellKnownVariables() {
-		evaluate("#this.getName()","Nikola Tesla",String.class);
-		evaluate("#root.getName()","Nikola Tesla",String.class);
+		evaluate("#this.getName()", "Nikola Tesla", String.class);
+		evaluate("#root.getName()", "Nikola Tesla", String.class);
 	}
 
 	@Test
@@ -77,7 +77,7 @@ public class VariableAndFunctionTests extends AbstractExpressionTests {
 		ctx.setVariable("notStatic", this.getClass().getMethod("nonStatic"));
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				parser.parseRaw("#notStatic()").getValue(ctx)).
-			satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.FUNCTION_MUST_BE_STATIC));
+				satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.FUNCTION_MUST_BE_STATIC));
 	}
 
 

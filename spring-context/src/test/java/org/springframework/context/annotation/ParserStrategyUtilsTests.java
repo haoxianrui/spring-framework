@@ -113,8 +113,8 @@ public class ParserStrategyUtilsTests {
 	public void instantiateClassWhenHasUnsupportedParameterThrowsException() {
 		assertThatExceptionOfType(BeanInstantiationException.class).isThrownBy(() ->
 				instantiateClass(InvalidConstructorParameterType.class))
-			.withCauseInstanceOf(IllegalStateException.class)
-			.withMessageContaining("No suitable constructor found");
+				.withCauseInstanceOf(IllegalStateException.class)
+				.withMessageContaining("No suitable constructor found");
 	}
 
 	@Test
@@ -122,8 +122,8 @@ public class ParserStrategyUtilsTests {
 		// To keep the algorithm simple we don't support subtypes
 		assertThatExceptionOfType(BeanInstantiationException.class).isThrownBy(() ->
 				instantiateClass(InvalidConstructorParameterSubType.class))
-			.withCauseInstanceOf(IllegalStateException.class)
-			.withMessageContaining("No suitable constructor found");
+				.withCauseInstanceOf(IllegalStateException.class)
+				.withMessageContaining("No suitable constructor found");
 	}
 
 	@Test
@@ -193,7 +193,7 @@ public class ParserStrategyUtilsTests {
 		final ResourceLoader resourceLoader;
 
 		ArgsConstructor(Environment environment, BeanFactory beanFactory,
-				ClassLoader beanClassLoader, ResourceLoader resourceLoader) {
+						ClassLoader beanClassLoader, ResourceLoader resourceLoader) {
 			this.environment = environment;
 			this.beanFactory = beanFactory;
 			this.beanClassLoader = beanClassLoader;
@@ -213,7 +213,7 @@ public class ParserStrategyUtilsTests {
 		final ResourceLoader resourceLoader;
 
 		ArgsConstructorAndAware(Environment environment, BeanFactory beanFactory,
-				ClassLoader beanClassLoader, ResourceLoader resourceLoader) {
+								ClassLoader beanClassLoader, ResourceLoader resourceLoader) {
 			this.environment = environment;
 			this.beanFactory = beanFactory;
 			this.beanClassLoader = beanClassLoader;

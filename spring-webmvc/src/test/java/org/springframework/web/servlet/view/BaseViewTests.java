@@ -241,7 +241,7 @@ public class BaseViewTests {
 		AbstractView v = new ConcreteView();
 		// No equals
 		assertThatIllegalArgumentException().isThrownBy(() ->
-			v.setAttributesCSV("fweoiruiu"));
+				v.setAttributesCSV("fweoiruiu"));
 
 		// No value
 		assertThatIllegalArgumentException().isThrownBy(() ->
@@ -266,10 +266,10 @@ public class BaseViewTests {
 	/**
 	 * Check that all keys in expected have same values in actual.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void checkContainsAll(Map expected, Map<String, Object> actual) {
 		expected.forEach((k, v) -> assertThat(actual.get(k)).as("Values for model key '" + k
-						+ "' must match").isEqualTo(expected.get(k)));
+				+ "' must match").isEqualTo(expected.get(k)));
 	}
 
 
@@ -281,9 +281,9 @@ public class BaseViewTests {
 		// Do-nothing concrete subclass
 		@Override
 		protected void renderMergedOutputModel(Map<String, Object> model,
-				HttpServletRequest request, HttpServletResponse response)
+											   HttpServletRequest request, HttpServletResponse response)
 
-			throws ServletException, IOException {
+				throws ServletException, IOException {
 			throw new UnsupportedOperationException();
 		}
 	}
@@ -298,7 +298,9 @@ public class BaseViewTests {
 
 		boolean initialized;
 
-		/** Captured model in render */
+		/**
+		 * Captured model in render
+		 */
 		Map<String, Object> model;
 
 		TestView(WebApplicationContext wac) {
@@ -307,7 +309,7 @@ public class BaseViewTests {
 
 		@Override
 		protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
-				HttpServletResponse response) throws ServletException, IOException {
+											   HttpServletResponse response) throws ServletException, IOException {
 			this.model = model;
 		}
 

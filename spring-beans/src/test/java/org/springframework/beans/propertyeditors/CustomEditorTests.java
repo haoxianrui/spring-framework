@@ -478,7 +478,7 @@ public class CustomEditorTests {
 	public void testParseShortGreaterThanMaxValueWithoutNumberFormat() {
 		CustomNumberEditor editor = new CustomNumberEditor(Short.class, true);
 		assertThatExceptionOfType(NumberFormatException.class).as("greater than Short.MAX_VALUE + 1").isThrownBy(() ->
-			editor.setAsText(String.valueOf(Short.MAX_VALUE + 1)));
+				editor.setAsText(String.valueOf(Short.MAX_VALUE + 1)));
 	}
 
 	@Test
@@ -599,8 +599,8 @@ public class CustomEditorTests {
 	}
 
 	/*
-	* SPR_2165 - ClassEditor is inconsistent with multidimensional arrays
-	*/
+	 * SPR_2165 - ClassEditor is inconsistent with multidimensional arrays
+	 */
 	@Test
 	public void testGetAsTextWithTwoDimensionalArray() throws Exception {
 		String[][] chessboard = new String[8][8];
@@ -633,8 +633,7 @@ public class CustomEditorTests {
 		PropertyEditor fileEditor = new FileEditor();
 		try {
 			fileEditor.setAsText("myfile.txt");
-		}
-		catch (IllegalArgumentException ex) {
+		} catch (IllegalArgumentException ex) {
 			// expected: should get resolved as class path resource,
 			// and there is no such resource in the class path...
 		}
@@ -749,7 +748,7 @@ public class CustomEditorTests {
 		editor.setAsText(validDate);
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				editor.setAsText(invalidDate))
-			.withMessageContaining("10");
+				.withMessageContaining("10");
 	}
 
 	@Test
@@ -1356,7 +1355,7 @@ public class CustomEditorTests {
 		bw.registerCustomEditor(Vector.class, new CustomCollectionEditor(Vector.class));
 		bw.registerCustomEditor(Hashtable.class, new CustomMapEditor(Hashtable.class));
 
-		bw.setPropertyValue("vector", new String[] {"a", "b"});
+		bw.setPropertyValue("vector", new String[]{"a", "b"});
 		assertThat(tb.getVector().size()).isEqualTo(2);
 		assertThat(tb.getVector().get(0)).isEqualTo("a");
 		assertThat(tb.getVector().get(1)).isEqualTo("b");
@@ -1392,7 +1391,7 @@ public class CustomEditorTests {
 				setValue(new TestBean(text, 99));
 			}
 		});
-		bw.setPropertyValue("array", new String[] {"a", "b"});
+		bw.setPropertyValue("array", new String[]{"a", "b"});
 		assertThat(tb.getArray().length).isEqualTo(2);
 		assertThat(tb.getArray()[0].getName()).isEqualTo("a");
 		assertThat(tb.getArray()[1].getName()).isEqualTo("b");
@@ -1408,7 +1407,7 @@ public class CustomEditorTests {
 				setValue("-" + text + "-");
 			}
 		});
-		bw.setPropertyValue("name", new String[] {"a", "b"});
+		bw.setPropertyValue("name", new String[]{"a", "b"});
 		assertThat(tb.getName()).isEqualTo("-a,b-");
 	}
 

@@ -68,7 +68,7 @@ class DefaultClientResponse implements ClientResponse {
 
 
 	public DefaultClientResponse(ClientHttpResponse response, ExchangeStrategies strategies,
-			String logPrefix, String requestDescription, Supplier<HttpRequest> requestSupplier) {
+								 String logPrefix, String requestDescription, Supplier<HttpRequest> requestSupplier) {
 
 		this.response = response;
 		this.strategies = strategies;
@@ -126,11 +126,9 @@ class DefaultClientResponse implements ClientResponse {
 		String description = "Body from " + this.requestDescription + " [DefaultClientResponse]";
 		if (result instanceof Mono) {
 			return (T) ((Mono<?>) result).checkpoint(description);
-		}
-		else if (result instanceof Flux) {
+		} else if (result instanceof Flux) {
 			return (T) ((Flux<?>) result).checkpoint(description);
-		}
-		else {
+		} else {
 			return result;
 		}
 	}
@@ -210,8 +208,7 @@ class DefaultClientResponse implements ClientResponse {
 								bodyBytes,
 								charset,
 								request);
-					}
-					else {
+					} else {
 						return new UnknownHttpStatusCodeException(
 								statusCode,
 								headers().asHttpHeaders(),

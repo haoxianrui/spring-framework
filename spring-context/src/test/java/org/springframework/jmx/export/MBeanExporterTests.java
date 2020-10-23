@@ -104,7 +104,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 		exporter.setNotificationListenerMappings(listeners);
 		assertThatExceptionOfType(MBeanExportException.class).as("NotificationListener on a non-existent MBean").isThrownBy(() ->
 				start(exporter))
-			.satisfies(ex -> assertThat(ex.contains(InstanceNotFoundException.class)));
+				.satisfies(ex -> assertThat(ex.contains(InstanceNotFoundException.class)));
 	}
 
 	@Test
@@ -116,8 +116,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 			start(exporter);
 			assertIsRegistered("The bean was not registered with the MBeanServer",
 					ObjectNameManager.getInstance(OBJECT_NAME));
-		}
-		finally {
+		} finally {
 			exporter.destroy();
 		}
 	}
@@ -139,8 +138,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 			Object name = server.getAttribute(ObjectNameManager.getInstance("spring:name=dynBean"), "Name");
 			assertThat(name).as("The name attribute is incorrect").isEqualTo("Rob Harrop");
 			assertThat(asm.invoked).as("Assembler should not have been invoked").isFalse();
-		}
-		finally {
+		} finally {
 			exporter.destroy();
 		}
 	}
@@ -157,8 +155,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 			assertThat(instance).isNotNull();
 			instance = server.getObjectInstance(ObjectNameManager.getInstance("spring:mbean3=true"));
 			assertThat(instance).isNotNull();
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -174,8 +171,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 
 			assertThatExceptionOfType(InstanceNotFoundException.class).isThrownBy(() ->
 					server.getObjectInstance(ObjectNameManager.getInstance("spring:mbean=false")));
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -196,8 +192,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 			assertThat(server.getObjectInstance(oname)).isNotNull();
 			name = (String) server.getAttribute(oname, "Name");
 			assertThat(name).as("Invalid name returned").isEqualTo("Juergen Hoeller");
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -207,8 +202,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 		ConfigurableApplicationContext ctx = load("autodetectNoMBeans.xml");
 		try {
 			ctx.getBean("exporter");
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -357,7 +351,7 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 
 		assertIsRegistered("Bean instance not registered", objectName);
 
-		Object result = server.invoke(objectName, "add", new Object[] {new Integer(2), new Integer(3)}, new String[] {
+		Object result = server.invoke(objectName, "add", new Object[]{new Integer(2), new Integer(3)}, new String[]{
 				int.class.getName(), int.class.getName()});
 
 		assertThat(new Integer(5)).as("Incorrect result return from add").isEqualTo(result);
@@ -803,22 +797,27 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 	}
 
 
-	public interface SomethingMBean {}
+	public interface SomethingMBean {
+	}
 
-	public static class Something implements SomethingMBean {}
+	public static class Something implements SomethingMBean {
+	}
 
 
 	public static class ProperSomethingFactoryBean implements FactoryBean<Something> {
 
-		@Override public Something getObject() {
+		@Override
+		public Something getObject() {
 			return new Something();
 		}
 
-		@Override public Class<?> getObjectType() {
+		@Override
+		public Class<?> getObjectType() {
 			return Something.class;
 		}
 
-		@Override public boolean isSingleton() {
+		@Override
+		public boolean isSingleton() {
 			return true;
 		}
 	}
@@ -826,15 +825,18 @@ public class MBeanExporterTests extends AbstractMBeanServerTests {
 
 	public static class NullSomethingFactoryBean implements FactoryBean<Something> {
 
-		@Override public Something getObject() {
+		@Override
+		public Something getObject() {
 			return null;
 		}
 
-		@Override public Class<?> getObjectType() {
+		@Override
+		public Class<?> getObjectType() {
 			return Something.class;
 		}
 
-		@Override public boolean isSingleton() {
+		@Override
+		public boolean isSingleton() {
 			return true;
 		}
 	}

@@ -115,7 +115,7 @@ class KotlinMethodParameterTests {
 	private fun returnGenericParameterTypeBoundName(funName: String) = (returnGenericParameterType(funName) as TypeVariable<*>).bounds[0].typeName
 
 	private fun returnMethodParameter(funName: String) =
-		MethodParameter(this::class.declaredFunctions.first { it.name == funName }.javaMethod!!, -1)
+			MethodParameter(this::class.declaredFunctions.first { it.name == funName }.javaMethod!!, -1)
 
 	@Suppress("unused_parameter")
 	fun nullable(nullable: String?): Int? = 42
@@ -144,13 +144,13 @@ class KotlinMethodParameterTests {
 	suspend fun suspendFun4(p1: String): Consumer<Number> = TODO()
 
 	@Suppress("unused", "unused_parameter")
-	suspend fun <T: Producer<Number>> suspendFun5(p1: String): T = TODO()
+	suspend fun <T : Producer<Number>> suspendFun5(p1: String): T = TODO()
 
 	@Suppress("unused", "unused_parameter")
-	suspend fun <T: Wrapper<Number>> suspendFun6(p1: String): T = TODO()
+	suspend fun <T : Wrapper<Number>> suspendFun6(p1: String): T = TODO()
 
 	@Suppress("unused", "unused_parameter")
-	suspend fun <T: Consumer<Number>> suspendFun7(p1: String): T = TODO()
+	suspend fun <T : Consumer<Number>> suspendFun7(p1: String): T = TODO()
 
 	@Suppress("unused", "unused_parameter")
 	suspend fun suspendFun8(p1: String): Any? = TODO()

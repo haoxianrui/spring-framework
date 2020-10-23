@@ -51,8 +51,7 @@ public class ResourceUrlProviderExposingInterceptor extends HandlerInterceptorAd
 
 		try {
 			request.setAttribute(RESOURCE_URL_PROVIDER_ATTR, this.resourceUrlProvider);
-		}
-		catch (ResourceUrlEncodingFilter.LookupPathIndexException ex) {
+		} catch (ResourceUrlEncodingFilter.LookupPathIndexException ex) {
 			throw new ServletRequestBindingException(ex.getMessage(), ex);
 		}
 		return true;

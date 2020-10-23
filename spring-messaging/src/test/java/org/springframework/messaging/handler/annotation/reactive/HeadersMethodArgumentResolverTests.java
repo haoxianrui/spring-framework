@@ -36,6 +36,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 /**
  * Test fixture for {@link HeadersMethodArgumentResolver} tests.
+ *
  * @author Rossen Stoyanchev
  */
 public class HeadersMethodArgumentResolverTests {

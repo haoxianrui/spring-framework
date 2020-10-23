@@ -106,8 +106,7 @@ class MultipartIntegrationTests extends AbstractRouterFunctionIntegrationTests {
 						byte[] actualBytes = Files.readAllBytes(Paths.get(location));
 						byte[] expectedBytes = FileCopyUtils.copyToByteArray(this.resource.getInputStream());
 						assertThat(actualBytes).isEqualTo(expectedBytes);
-					}
-					catch (IOException ex) {
+					} catch (IOException ex) {
 						fail("IOException", ex);
 					}
 				})
@@ -144,8 +143,7 @@ class MultipartIntegrationTests extends AbstractRouterFunctionIntegrationTests {
 							assertThat(((FilePart) parts.get("fooPart")).filename()).isEqualTo("foo.txt");
 							assertThat(((FormFieldPart) parts.get("barPart")).value()).isEqualTo("bar");
 							return ServerResponse.ok().build();
-						}
-						catch(Exception e) {
+						} catch (Exception e) {
 							return Mono.error(e);
 						}
 					});
@@ -159,8 +157,7 @@ class MultipartIntegrationTests extends AbstractRouterFunctionIntegrationTests {
 							assertThat(((FilePart) parts.get(0)).filename()).isEqualTo("foo.txt");
 							assertThat(((FormFieldPart) parts.get(1)).value()).isEqualTo("bar");
 							return ServerResponse.ok().build();
-						}
-						catch(Exception e) {
+						} catch (Exception e) {
 							return Mono.error(e);
 						}
 					});
@@ -177,8 +174,7 @@ class MultipartIntegrationTests extends AbstractRouterFunctionIntegrationTests {
 							return part.transferTo(tempFile)
 									.then(ServerResponse.ok()
 											.bodyValue(tempFile.toString()));
-						}
-						catch (Exception e) {
+						} catch (Exception e) {
 							return Mono.error(e);
 						}
 					});

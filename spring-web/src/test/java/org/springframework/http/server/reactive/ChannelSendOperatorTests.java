@@ -103,7 +103,7 @@ public class ChannelSendOperatorTests {
 	@Test
 	public void errorAfterMultipleItems() {
 		IllegalStateException error = new IllegalStateException("boo");
-		Flux<String> publisher = Flux.generate(() -> 0, (idx , subscriber) -> {
+		Flux<String> publisher = Flux.generate(() -> 0, (idx, subscriber) -> {
 			int i = ++idx;
 			subscriber.next(String.valueOf(i));
 			if (i == 3) {
@@ -140,7 +140,8 @@ public class ChannelSendOperatorTests {
 					return Mono.never();
 				});
 
-		BaseSubscriber<Void> subscriber = new BaseSubscriber<Void>() {};
+		BaseSubscriber<Void> subscriber = new BaseSubscriber<Void>() {
+		};
 		operator.subscribe(subscriber);
 		subscriber.cancel();
 
@@ -170,11 +171,11 @@ public class ChannelSendOperatorTests {
 				});
 
 
-		operator.subscribe(new BaseSubscriber<Void>() {});
+		operator.subscribe(new BaseSubscriber<Void>() {
+		});
 		try {
 			writeSubscriber.signalDemand(1);  // Let cached signals ("foo" and error) be published..
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			assertThat(ex.getCause()).isNotNull();
 			assertThat(ex.getCause().getMessage()).isEqualTo("err");
 		}
@@ -225,7 +226,7 @@ public class ChannelSendOperatorTests {
 	}
 
 
-	private <T> Mono<Void> sendOperator(Publisher<String> source){
+	private <T> Mono<Void> sendOperator(Publisher<String> source) {
 		return new ChannelSendOperator<>(source, writer::send);
 	}
 
@@ -241,7 +242,7 @@ public class ChannelSendOperatorTests {
 
 		public Publisher<Void> send(Publisher<String> publisher) {
 			return subscriber -> Executors.newSingleThreadScheduledExecutor().schedule(() ->
-							publisher.subscribe(new WriteSubscriber(subscriber)),50, TimeUnit.MILLISECONDS);
+					publisher.subscribe(new WriteSubscriber(subscriber)), 50, TimeUnit.MILLISECONDS);
 		}
 
 

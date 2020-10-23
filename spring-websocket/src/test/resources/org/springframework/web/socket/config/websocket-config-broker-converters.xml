@@ -6,9 +6,9 @@
 
 	<websocket:message-broker>
 
-		<websocket:stomp-endpoint path="/foo" />
+		<websocket:stomp-endpoint path="/foo"/>
 
-		<websocket:simple-broker />
+		<websocket:simple-broker/>
 
 		<websocket:message-converters>
 			<bean class="org.springframework.messaging.converter.StringMessageConverter"/>

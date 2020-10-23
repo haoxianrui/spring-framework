@@ -192,7 +192,7 @@ public class HttpEntityMethodProcessorTests {
 
 	@Test  // SPR-13423
 	public void handleReturnValueCharSequence() throws Exception {
-		List<HttpMessageConverter<?>>converters = new ArrayList<>();
+		List<HttpMessageConverter<?>> converters = new ArrayList<>();
 		converters.add(new ByteArrayHttpMessageConverter());
 		converters.add(new StringHttpMessageConverter());
 
@@ -228,8 +228,7 @@ public class HttpEntityMethodProcessorTests {
 				assertThat(this.servletResponse.getContentAsString())
 						.as("Response body was cached? It should be written directly to the raw response")
 						.isEqualTo(content);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new IllegalStateException(ex);
 			}
 		};
@@ -273,7 +272,7 @@ public class HttpEntityMethodProcessorTests {
 	}
 
 
-	@SuppressWarnings({ "serial" })
+	@SuppressWarnings({"serial"})
 	private static class SimpleBean implements Identifiable {
 
 		private Long id;

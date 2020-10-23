@@ -322,7 +322,7 @@ public class MappingJackson2JsonViewTests {
 	private void validateResult() throws Exception {
 		String json = response.getContentAsString();
 		DirectFieldAccessor viewAccessor = new DirectFieldAccessor(view);
-		String jsonPrefix = (String)viewAccessor.getPropertyValue("jsonPrefix");
+		String jsonPrefix = (String) viewAccessor.getPropertyValue("jsonPrefix");
 		if (jsonPrefix != null) {
 			json = json.substring(5);
 		}
@@ -376,7 +376,7 @@ public class MappingJackson2JsonViewTests {
 	}
 
 
-	@JsonSerialize(using=TestBeanSimpleSerializer.class)
+	@JsonSerialize(using = TestBeanSimpleSerializer.class)
 	public static class TestBeanSimpleAnnotated extends TestBeanSimple {
 	}
 
@@ -455,8 +455,7 @@ public class MappingJackson2JsonViewTests {
 		public JsonSerializer<Object> createSerializer(SerializerProvider prov, JavaType type) throws JsonMappingException {
 			if (type.getRawClass() == TestBeanSimple.class) {
 				return new TestBeanSimpleSerializer();
-			}
-			else {
+			} else {
 				return super.createSerializer(prov, type);
 			}
 		}

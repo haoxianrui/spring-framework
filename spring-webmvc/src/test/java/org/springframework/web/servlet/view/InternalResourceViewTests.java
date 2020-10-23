@@ -90,7 +90,7 @@ public class InternalResourceViewTests {
 		assertThat(response.getForwardedUrl()).isEqualTo(url);
 
 		model.forEach((key, value) -> assertThat(request.getAttribute(key)).as("Values for model key '" + key
-						+ "' must match").isEqualTo(value));
+				+ "' must match").isEqualTo(value));
 	}
 
 	@Test

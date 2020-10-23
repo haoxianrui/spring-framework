@@ -32,21 +32,21 @@ class PackagesAnnotationFilterTests {
 	void createWhenPackagesIsNullThrowsException() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				new PackagesAnnotationFilter((String[]) null))
-			.withMessage("Packages array must not be null");
+				.withMessage("Packages array must not be null");
 	}
 
 	@Test
 	void createWhenPackagesContainsNullThrowsException() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				new PackagesAnnotationFilter((String) null))
-			.withMessage("Packages array must not have empty elements");
+				.withMessage("Packages array must not have empty elements");
 	}
 
 	@Test
 	void createWhenPackagesContainsEmptyTextThrowsException() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				new PackagesAnnotationFilter(""))
-			.withMessage("Packages array must not have empty elements");
+				.withMessage("Packages array must not have empty elements");
 	}
 
 	@Test

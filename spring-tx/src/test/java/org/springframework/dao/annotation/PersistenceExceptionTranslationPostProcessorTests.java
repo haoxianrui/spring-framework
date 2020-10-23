@@ -79,7 +79,7 @@ public class PersistenceExceptionTranslationPostProcessorTests {
 		checkWillTranslateExceptions(rwi2);
 		assertThatExceptionOfType(DataAccessResourceFailureException.class).isThrownBy(() ->
 				rwi2.additionalMethod(true))
-			.withMessage("my failure");
+				.withMessage("my failure");
 	}
 
 	protected void checkWillTranslateExceptions(Object o) {

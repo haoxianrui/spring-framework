@@ -53,7 +53,6 @@ import org.springframework.util.Assert;
  * @author Juergen Hoeller
  * @author Stephane Nicoll
  * @author Kazuki Shimizu
- * @since 4.2
  * @see GenericObjectPool
  * @see #createObjectPool()
  * @see #setMaxSize
@@ -62,6 +61,7 @@ import org.springframework.util.Assert;
  * @see #setMaxWait
  * @see #setTimeBetweenEvictionRunsMillis
  * @see #setMinEvictableIdleTimeMillis
+ * @since 4.2
  */
 @SuppressWarnings({"rawtypes", "unchecked", "serial"})
 public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implements PooledObjectFactory<Object> {
@@ -88,6 +88,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	/**
 	 * Create a CommonsPoolTargetSource with default settings.
 	 * Default maximum size of the pool is 8.
+	 *
 	 * @see #setMaxSize
 	 * @see GenericObjectPoolConfig#setMaxTotal
 	 */
@@ -99,6 +100,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	/**
 	 * Set the maximum number of idle objects in the pool.
 	 * Default is 8.
+	 *
 	 * @see GenericObjectPool#setMaxIdle
 	 */
 	public void setMaxIdle(int maxIdle) {
@@ -115,6 +117,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	/**
 	 * Set the minimum number of idle objects in the pool.
 	 * Default is 0.
+	 *
 	 * @see GenericObjectPool#setMinIdle
 	 */
 	public void setMinIdle(int minIdle) {
@@ -131,6 +134,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	/**
 	 * Set the maximum waiting time for fetching an object from the pool.
 	 * Default is -1, waiting forever.
+	 *
 	 * @see GenericObjectPool#setMaxWaitMillis
 	 */
 	public void setMaxWait(long maxWait) {
@@ -148,6 +152,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	 * Set the time between eviction runs that check idle objects whether
 	 * they have been idle for too long or have become invalid.
 	 * Default is -1, not performing any eviction.
+	 *
 	 * @see GenericObjectPool#setTimeBetweenEvictionRunsMillis
 	 */
 	public void setTimeBetweenEvictionRunsMillis(long timeBetweenEvictionRunsMillis) {
@@ -166,6 +171,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	 * it becomes subject to eviction. Default is 1800000 (30 minutes).
 	 * <p>Note that eviction runs need to be performed to take this
 	 * setting into effect.
+	 *
 	 * @see #setTimeBetweenEvictionRunsMillis
 	 * @see GenericObjectPool#setMinEvictableIdleTimeMillis
 	 */
@@ -197,6 +203,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 
 	/**
 	 * Creates and holds an ObjectPool instance.
+	 *
 	 * @see #createObjectPool()
 	 */
 	@Override
@@ -209,6 +216,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	 * Subclasses can override this if they want to return a specific Commons pool.
 	 * They should apply any configuration properties to the pool here.
 	 * <p>Default is a GenericObjectPool instance with the given pool size.
+	 *
 	 * @return an empty Commons {@code ObjectPool}.
 	 * @see GenericObjectPool
 	 * @see #setMaxSize

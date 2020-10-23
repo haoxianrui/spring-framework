@@ -104,7 +104,7 @@ public class MarshallingHttpMessageConverterTests {
 		MarshallingHttpMessageConverter converter = new MarshallingHttpMessageConverter(marshaller, unmarshaller);
 		assertThatExceptionOfType(HttpMessageNotReadableException.class).isThrownBy(() ->
 				converter.read(String.class, inputMessage))
-			.withCauseInstanceOf(TypeMismatchException.class);
+				.withCauseInstanceOf(TypeMismatchException.class);
 	}
 
 	@Test
@@ -120,7 +120,7 @@ public class MarshallingHttpMessageConverterTests {
 
 		assertThatExceptionOfType(HttpMessageNotReadableException.class).isThrownBy(() ->
 				converter.read(Object.class, inputMessage))
-			.withCause(ex);
+				.withCause(ex);
 	}
 
 	@Test
@@ -149,7 +149,7 @@ public class MarshallingHttpMessageConverterTests {
 		MarshallingHttpMessageConverter converter = new MarshallingHttpMessageConverter(marshaller);
 		assertThatExceptionOfType(HttpMessageNotWritableException.class).isThrownBy(() ->
 				converter.write(body, null, outputMessage))
-			.withCause(ex);
+				.withCause(ex);
 	}
 
 	@Test

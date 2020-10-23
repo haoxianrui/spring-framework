@@ -36,10 +36,10 @@ import static org.assertj.core.api.Assertions.fail;
  *
  * @author Tadaya Tsuyukubo
  * @author Sam Brannen
- * @since 5.0
  * @see EnabledIfConditionTests
  * @see EnabledIf
  * @see SpringExtension
+ * @since 5.0
  */
 class EnabledIfTests {
 

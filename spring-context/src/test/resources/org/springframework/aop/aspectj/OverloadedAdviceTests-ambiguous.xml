@@ -10,7 +10,7 @@
 		<aop:aspect id="ambiguousAdviceTest" ref="testAspect">
 			<aop:pointcut id="setter" expression="execution(* setName(..)) and args(name)"/>
 			<aop:before pointcut-ref="setter" method="myBeforeAdvice"/>
-		</aop:aspect>	
+		</aop:aspect>
 	</aop:config>
 
 	<bean id="testAspect" class="org.springframework.aop.aspectj.OverloadedAdviceTestAspect"/>

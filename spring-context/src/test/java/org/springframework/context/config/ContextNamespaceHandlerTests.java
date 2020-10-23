@@ -63,8 +63,7 @@ public class ContextNamespaceHandlerTests {
 					"contextNamespaceHandlerTests-system.xml", getClass());
 			assertThat(applicationContext.getBean("string")).isEqualTo("spam");
 			assertThat(applicationContext.getBean("fallback")).isEqualTo("none");
-		}
-		finally {
+		} finally {
 			if (value != null) {
 				System.setProperty("foo", value);
 			}
@@ -101,8 +100,7 @@ public class ContextNamespaceHandlerTests {
 			assertThat(applicationContext.getBean("foo")).isEqualTo("bar");
 			assertThat(applicationContext.getBean("bar")).isEqualTo("foo");
 			assertThat(applicationContext.getBean("spam")).isEqualTo("maps");
-		}
-		finally {
+		} finally {
 			System.clearProperty("properties");
 		}
 	}
@@ -111,16 +109,15 @@ public class ContextNamespaceHandlerTests {
 	public void propertyPlaceholderLocationWithSystemPropertyForMultipleLocations() {
 		System.setProperty("properties",
 				"classpath*:/org/springframework/context/config/test-*.properties," +
-				"classpath*:/org/springframework/context/config/empty-*.properties," +
-				"classpath*:/org/springframework/context/config/missing-*.properties");
+						"classpath*:/org/springframework/context/config/empty-*.properties," +
+						"classpath*:/org/springframework/context/config/missing-*.properties");
 		try {
 			ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 					"contextNamespaceHandlerTests-location-placeholder.xml", getClass());
 			assertThat(applicationContext.getBean("foo")).isEqualTo("bar");
 			assertThat(applicationContext.getBean("bar")).isEqualTo("foo");
 			assertThat(applicationContext.getBean("spam")).isEqualTo("maps");
-		}
-		finally {
+		} finally {
 			System.clearProperty("properties");
 		}
 	}
@@ -129,9 +126,9 @@ public class ContextNamespaceHandlerTests {
 	public void propertyPlaceholderLocationWithSystemPropertyMissing() {
 		assertThatExceptionOfType(FatalBeanException.class).isThrownBy(() ->
 				new ClassPathXmlApplicationContext("contextNamespaceHandlerTests-location-placeholder.xml", getClass()))
-			.satisfies(ex -> assertThat(ex.getRootCause())
-					.isInstanceOf(IllegalArgumentException.class)
-					.hasMessage("Could not resolve placeholder 'foo' in value \"${foo}\""));
+				.satisfies(ex -> assertThat(ex.getRootCause())
+						.isInstanceOf(IllegalArgumentException.class)
+						.hasMessage("Could not resolve placeholder 'foo' in value \"${foo}\""));
 	}
 
 	@Test

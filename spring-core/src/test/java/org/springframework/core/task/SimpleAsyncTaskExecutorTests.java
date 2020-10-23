@@ -83,8 +83,7 @@ class SimpleAsyncTaskExecutorTests {
 			executor.execute(task);
 			try {
 				monitor.wait();
-			}
-			catch (InterruptedException ignored) {
+			} catch (InterruptedException ignored) {
 			}
 		}
 	}
@@ -112,8 +111,7 @@ class SimpleAsyncTaskExecutorTests {
 			synchronized (this.monitor) {
 				try {
 					doRun();
-				}
-				finally {
+				} finally {
 					this.monitor.notifyAll();
 				}
 			}

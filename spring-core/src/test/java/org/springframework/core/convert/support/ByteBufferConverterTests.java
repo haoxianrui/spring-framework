@@ -46,7 +46,7 @@ class ByteBufferConverterTests {
 
 	@Test
 	void byteArrayToByteBuffer() throws Exception {
-		byte[] bytes = new byte[] { 1, 2, 3 };
+		byte[] bytes = new byte[]{1, 2, 3};
 		ByteBuffer convert = this.conversionService.convert(bytes, ByteBuffer.class);
 		assertThat(convert.array()).isNotSameAs(bytes);
 		assertThat(convert.array()).isEqualTo(bytes);
@@ -54,7 +54,7 @@ class ByteBufferConverterTests {
 
 	@Test
 	void byteBufferToByteArray() throws Exception {
-		byte[] bytes = new byte[] { 1, 2, 3 };
+		byte[] bytes = new byte[]{1, 2, 3};
 		ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 		byte[] convert = this.conversionService.convert(byteBuffer, byte[].class);
 		assertThat(convert).isNotSameAs(bytes);
@@ -63,7 +63,7 @@ class ByteBufferConverterTests {
 
 	@Test
 	void byteBufferToOtherType() throws Exception {
-		byte[] bytes = new byte[] { 1, 2, 3 };
+		byte[] bytes = new byte[]{1, 2, 3};
 		ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 		OtherType convert = this.conversionService.convert(byteBuffer, OtherType.class);
 		assertThat(convert.bytes).isNotSameAs(bytes);
@@ -72,7 +72,7 @@ class ByteBufferConverterTests {
 
 	@Test
 	void otherTypeToByteBuffer() throws Exception {
-		byte[] bytes = new byte[] { 1, 2, 3 };
+		byte[] bytes = new byte[]{1, 2, 3};
 		OtherType otherType = new OtherType(bytes);
 		ByteBuffer convert = this.conversionService.convert(otherType, ByteBuffer.class);
 		assertThat(convert.array()).isNotSameAs(bytes);
@@ -81,7 +81,7 @@ class ByteBufferConverterTests {
 
 	@Test
 	void byteBufferToByteBuffer() throws Exception {
-		byte[] bytes = new byte[] { 1, 2, 3 };
+		byte[] bytes = new byte[]{1, 2, 3};
 		ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 		ByteBuffer convert = this.conversionService.convert(byteBuffer, ByteBuffer.class);
 		assertThat(convert).isNotSameAs(byteBuffer.rewind());

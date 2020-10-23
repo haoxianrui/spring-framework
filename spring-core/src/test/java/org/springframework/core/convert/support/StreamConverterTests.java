@@ -111,7 +111,7 @@ class StreamConverterTests {
 		TypeDescriptor arrayOfLongs = new TypeDescriptor(Types.class.getField("arrayOfLongs"));
 		assertThatExceptionOfType(ConversionFailedException.class).isThrownBy(() ->
 				this.conversionService.convert(stream, arrayOfLongs))
-			.withCauseInstanceOf(ConverterNotFoundException.class);
+				.withCauseInstanceOf(ConverterNotFoundException.class);
 	}
 
 	@Test
@@ -133,7 +133,7 @@ class StreamConverterTests {
 	@Test
 	@SuppressWarnings("resource")
 	void convertFromArrayToStream() throws NoSuchFieldException {
-		Integer[] stream = new Integer[] {1, 0, 1};
+		Integer[] stream = new Integer[]{1, 0, 1};
 		this.conversionService.addConverter(new Converter<Integer, Boolean>() {
 			@Override
 			public Boolean convert(Integer source) {
@@ -180,11 +180,11 @@ class StreamConverterTests {
 		TypeDescriptor sourceType = new TypeDescriptor(Types.class.getField("listOfStrings"));
 		TypeDescriptor targetType = new TypeDescriptor(Types.class.getField("arrayOfLongs"));
 		assertThatIllegalStateException().isThrownBy(() ->
-			this.streamConverter.convert(new Object(), sourceType, targetType));
+				this.streamConverter.convert(new Object(), sourceType, targetType));
 	}
 
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({"rawtypes"})
 	static class Types {
 
 		public List<String> listOfStrings;

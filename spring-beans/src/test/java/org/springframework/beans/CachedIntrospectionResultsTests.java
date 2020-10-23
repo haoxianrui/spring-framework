@@ -68,8 +68,13 @@ public class CachedIntrospectionResultsTests {
 		// given a class with a non-void returning setter method
 		@SuppressWarnings("unused")
 		class C {
-			public Object setFoo(String s) { return this; }
-			public String getFoo() { return null; }
+			public Object setFoo(String s) {
+				return this;
+			}
+
+			public String getFoo() {
+				return null;
+			}
 		}
 
 		// CachedIntrospectionResults should delegate to ExtendedBeanInfo

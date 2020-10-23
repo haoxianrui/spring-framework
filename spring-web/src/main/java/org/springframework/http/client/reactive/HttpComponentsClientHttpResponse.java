@@ -40,8 +40,8 @@ import org.springframework.util.MultiValueMap;
  *
  * @author Martin Tarjányi
  * @author Arjen Poutsma
- * @since 5.3
  * @see <a href="https://hc.apache.org/index.html">Apache HttpComponents</a>
+ * @since 5.3
  */
 class HttpComponentsClientHttpResponse implements ClientHttpResponse {
 
@@ -55,8 +55,8 @@ class HttpComponentsClientHttpResponse implements ClientHttpResponse {
 
 
 	public HttpComponentsClientHttpResponse(DataBufferFactory dataBufferFactory,
-			Message<HttpResponse, Publisher<ByteBuffer>> message,
-			HttpClientContext context) {
+											Message<HttpResponse, Publisher<ByteBuffer>> message,
+											HttpClientContext context) {
 
 		this.dataBufferFactory = dataBufferFactory;
 		this.message = message;

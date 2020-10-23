@@ -186,11 +186,9 @@ public class InterceptorRegistryTests {
 				if (mappedInterceptor.matches(lookupPath, pathMatcher)) {
 					result.add(mappedInterceptor.getInterceptor());
 				}
-			}
-			else if (interceptor instanceof HandlerInterceptor) {
+			} else if (interceptor instanceof HandlerInterceptor) {
 				result.add((HandlerInterceptor) interceptor);
-			}
-			else {
+			} else {
 				fail("Unexpected interceptor type: " + interceptor.getClass().getName());
 			}
 		}
@@ -198,7 +196,7 @@ public class InterceptorRegistryTests {
 	}
 
 	private void verifyWebInterceptor(HandlerInterceptor interceptor,
-			TestWebRequestInterceptor webInterceptor) throws Exception {
+									  TestWebRequestInterceptor webInterceptor) throws Exception {
 
 		boolean condition = interceptor instanceof WebRequestHandlerInterceptorAdapter;
 		assertThat(condition).isTrue();

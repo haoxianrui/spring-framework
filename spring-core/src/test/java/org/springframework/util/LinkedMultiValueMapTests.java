@@ -69,7 +69,7 @@ class LinkedMultiValueMapTests {
 		map.add("key", "value1");
 		map.addAll("key", Arrays.asList("value2", "value3"));
 		assertThat(map).hasSize(1);
-		assertThat(map.get("key")).containsExactly("value1","value2","value3");
+		assertThat(map.get("key")).containsExactly("value1", "value2", "value3");
 	}
 
 	@Test

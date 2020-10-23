@@ -246,8 +246,7 @@ class ResourceTests {
 			connection.setRequestMethod("HEAD");
 			connection.setReadTimeout(5_000);
 			return connection.getResponseCode() == HttpURLConnection.HTTP_OK;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			return false;
 		}
 	}
@@ -261,6 +260,7 @@ class ResourceTests {
 			public String getDescription() {
 				return name;
 			}
+
 			@Override
 			public InputStream getInputStream() throws IOException {
 				throw new FileNotFoundException();
@@ -269,13 +269,13 @@ class ResourceTests {
 
 		assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(
 				resource::getURL)
-			.withMessageContaining(name);
+				.withMessageContaining(name);
 		assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(
 				resource::getFile)
-			.withMessageContaining(name);
+				.withMessageContaining(name);
 		assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(() ->
 				resource.createRelative("/testing"))
-			.withMessageContaining(name);
+				.withMessageContaining(name);
 
 		assertThat(resource.getFilename()).isNull();
 	}
@@ -285,8 +285,9 @@ class ResourceTests {
 		AbstractResource resource = new AbstractResource() {
 			@Override
 			public InputStream getInputStream() {
-				return new ByteArrayInputStream(new byte[] { 'a', 'b', 'c' });
+				return new ByteArrayInputStream(new byte[]{'a', 'b', 'c'});
 			}
+
 			@Override
 			public String getDescription() {
 				return "";
@@ -305,8 +306,7 @@ class ResourceTests {
 			channel.read(buffer);
 			buffer.rewind();
 			assertThat(buffer.limit() > 0).isTrue();
-		}
-		finally {
+		} finally {
 			if (channel != null) {
 				channel.close();
 			}

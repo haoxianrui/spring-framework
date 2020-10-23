@@ -443,8 +443,7 @@ public class HttpEntityMethodProcessorMockTests {
 			initStringMessageConversion(TEXT_PLAIN);
 			try {
 				processor.handleReturnValue(returnValue, returnTypeResponseEntity, mavContainer, webRequest);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new IllegalStateException(ex);
 			}
 		};
@@ -750,8 +749,7 @@ public class HttpEntityMethodProcessorMockTests {
 		assertThat(mavContainer.isRequestHandled()).isTrue();
 		if (body != null) {
 			assertResponseBody(body);
-		}
-		else {
+		} else {
 			assertThat(servletResponse.getContentAsByteArray().length).isEqualTo(0);
 		}
 		if (etag != null) {
@@ -767,7 +765,7 @@ public class HttpEntityMethodProcessorMockTests {
 
 	@SuppressWarnings("unused")
 	public ResponseEntity<String> handle1(HttpEntity<String> httpEntity, ResponseEntity<String> entity,
-			int i, RequestEntity<String> requestEntity) {
+										  int i, RequestEntity<String> requestEntity) {
 
 		return entity;
 	}

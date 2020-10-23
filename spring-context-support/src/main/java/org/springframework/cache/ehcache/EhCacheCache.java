@@ -42,6 +42,7 @@ public class EhCacheCache implements Cache {
 
 	/**
 	 * Create an {@link EhCacheCache} instance.
+	 *
 	 * @param ehcache the backing Ehcache instance
 	 */
 	public EhCacheCache(Ehcache ehcache) {
@@ -92,19 +93,16 @@ public class EhCacheCache implements Cache {
 		Element element = lookup(key);
 		if (element != null) {
 			return (T) element.getObjectValue();
-		}
-		else {
+		} else {
 			this.cache.acquireWriteLockOnKey(key);
 			try {
 				element = lookup(key);  // one more attempt with the write lock
 				if (element != null) {
 					return (T) element.getObjectValue();
-				}
-				else {
+				} else {
 					return loadValue(key, valueLoader);
 				}
-			}
-			finally {
+			} finally {
 				this.cache.releaseWriteLockOnKey(key);
 			}
 		}
@@ -114,8 +112,7 @@ public class EhCacheCache implements Cache {
 		T value;
 		try {
 			value = valueLoader.call();
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			throw new ValueRetrievalException(key, valueLoader, ex);
 		}
 		put(key, value);

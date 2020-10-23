@@ -49,10 +49,10 @@ import org.springframework.util.Assert;
  * an error, the write function is bypassed, and the error is sent directly
  * through the result publisher. Otherwise the write function is invoked.
  *
+ * @param <T> the type of element signaled
  * @author Rossen Stoyanchev
  * @author Stephane Maldini
  * @since 5.2
- * @param <T> the type of element signaled
  */
 class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 
@@ -88,7 +88,9 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 
 	private enum State {
 
-		/** No emissions from the upstream source yet. */
+		/**
+		 * No emissions from the upstream source yet.
+		 */
 		NEW,
 
 		/**
@@ -137,24 +139,36 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 		@Nullable
 		private Subscription subscription;
 
-		/** Cached data item before readyToWrite. */
+		/**
+		 * Cached data item before readyToWrite.
+		 */
 		@Nullable
 		private T item;
 
-		/** Cached error signal before readyToWrite. */
+		/**
+		 * Cached error signal before readyToWrite.
+		 */
 		@Nullable
 		private Throwable error;
 
-		/** Cached onComplete signal before readyToWrite. */
+		/**
+		 * Cached onComplete signal before readyToWrite.
+		 */
 		private boolean completed = false;
 
-		/** Recursive demand while emitting cached signals. */
+		/**
+		 * Recursive demand while emitting cached signals.
+		 */
 		private long demandBeforeReadyToWrite;
 
-		/** Current state. */
+		/**
+		 * Current state.
+		 */
 		private State state = State.NEW;
 
-		/** The actual writeSubscriber from the HTTP server adapter. */
+		/**
+		 * The actual writeSubscriber from the HTTP server adapter.
+		 */
 		@Nullable
 		private Subscriber<? super T> writeSubscriber;
 
@@ -185,21 +199,18 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 			synchronized (this) {
 				if (this.state == State.READY_TO_WRITE) {
 					requiredWriteSubscriber().onNext(item);
-				}
-				else if (this.state == State.NEW) {
+				} else if (this.state == State.NEW) {
 					this.item = item;
 					this.state = State.FIRST_SIGNAL_RECEIVED;
 					Publisher<Void> result;
 					try {
 						result = writeFunction.apply(this);
-					}
-					catch (Throwable ex) {
+					} catch (Throwable ex) {
 						this.writeCompletionBarrier.onError(ex);
 						return;
 					}
 					result.subscribe(this.writeCompletionBarrier);
-				}
-				else {
+				} else {
 					if (this.subscription != null) {
 						this.subscription.cancel();
 					}
@@ -222,12 +233,10 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 			synchronized (this) {
 				if (this.state == State.READY_TO_WRITE) {
 					requiredWriteSubscriber().onError(ex);
-				}
-				else if (this.state == State.NEW) {
+				} else if (this.state == State.NEW) {
 					this.state = State.FIRST_SIGNAL_RECEIVED;
 					this.writeCompletionBarrier.onError(ex);
-				}
-				else {
+				} else {
 					this.error = ex;
 				}
 			}
@@ -242,21 +251,18 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 			synchronized (this) {
 				if (this.state == State.READY_TO_WRITE) {
 					requiredWriteSubscriber().onComplete();
-				}
-				else if (this.state == State.NEW) {
+				} else if (this.state == State.NEW) {
 					this.completed = true;
 					this.state = State.FIRST_SIGNAL_RECEIVED;
 					Publisher<Void> result;
 					try {
 						result = writeFunction.apply(this);
-					}
-					catch (Throwable ex) {
+					} catch (Throwable ex) {
 						this.writeCompletionBarrier.onError(ex);
 						return;
 					}
 					result.subscribe(this.writeCompletionBarrier);
-				}
-				else {
+				} else {
 					this.completed = true;
 				}
 			}
@@ -295,8 +301,7 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 						if (n == 0) {
 							return;
 						}
-					}
-					finally {
+					} finally {
 						this.state = State.READY_TO_WRITE;
 					}
 				}
@@ -308,8 +313,7 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 			if (this.error != null) {
 				try {
 					requiredWriteSubscriber().onError(this.error);
-				}
-				finally {
+				} finally {
 					releaseCachedItem();
 				}
 				return true;
@@ -333,8 +337,7 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 				this.subscription = null;
 				try {
 					s.cancel();
-				}
-				finally {
+				} finally {
 					releaseCachedItem();
 				}
 			}
@@ -361,8 +364,7 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 				if (this.error != null || this.completed) {
 					this.writeSubscriber.onSubscribe(Operators.emptySubscription());
 					emitCachedSignals();
-				}
-				else {
+				} else {
 					this.writeSubscriber.onSubscribe(this);
 				}
 			}
@@ -420,8 +422,7 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 		public void onError(Throwable ex) {
 			try {
 				this.completionSubscriber.onError(ex);
-			}
-			finally {
+			} finally {
 				this.writeBarrier.releaseCachedItem();
 			}
 		}

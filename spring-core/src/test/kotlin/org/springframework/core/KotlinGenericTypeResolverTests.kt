@@ -56,7 +56,7 @@ class KotlinGenericTypeResolverTests {
 
 	interface MyInterfaceType<T>
 
-	interface MySimpleInterfaceType: MyInterfaceType<String>
+	interface MySimpleInterfaceType : MyInterfaceType<String>
 
-	open class MySimpleTypeWithMethods: MyTypeWithMethods<Int>()
+	open class MySimpleTypeWithMethods : MyTypeWithMethods<Int>()
 }

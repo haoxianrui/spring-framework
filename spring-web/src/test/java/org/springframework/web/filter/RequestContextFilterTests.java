@@ -59,6 +59,7 @@ public class RequestContextFilterTests {
 		// Expect one invocation by the filter being tested
 		class DummyFilterChain implements FilterChain {
 			public int invocations = 0;
+
 			@Override
 			public void doFilter(ServletRequest req, ServletResponse resp) throws IOException, ServletException {
 				++invocations;
@@ -67,8 +68,7 @@ public class RequestContextFilterTests {
 					if (sex != null) {
 						throw sex;
 					}
-				}
-				else {
+				} else {
 					throw new IllegalStateException("Too many invocations");
 				}
 			}
@@ -83,8 +83,7 @@ public class RequestContextFilterTests {
 		try {
 			rbf.doFilter(req, resp, fc);
 			assertThat(sex).isNull();
-		}
-		catch (ServletException ex) {
+		} catch (ServletException ex) {
 			assertThat(sex).isNotNull();
 		}
 

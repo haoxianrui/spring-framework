@@ -39,7 +39,7 @@ public class AopNamespaceHandlerReturningTests {
 	public void testParseReturningOnOtherAdviceType() {
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() ->
 				new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-error.xml", getClass()))
-			.matches(ex -> ex.contains(SAXParseException.class));
+				.matches(ex -> ex.contains(SAXParseException.class));
 	}
 
 }

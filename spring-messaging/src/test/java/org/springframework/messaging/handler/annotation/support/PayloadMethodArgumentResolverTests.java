@@ -109,9 +109,9 @@ public class PayloadMethodArgumentResolverTests {
 	@Test
 	public void resolveRequiredEmpty() throws Exception {
 		Message<?> message = MessageBuilder.withPayload("").build();
-		 // required but empty
+		// required but empty
 		assertThatExceptionOfType(MethodArgumentNotValidException.class).isThrownBy(() ->
-		this.resolver.resolveArgument(paramAnnotated, message));
+				this.resolver.resolveArgument(paramAnnotated, message));
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class PayloadMethodArgumentResolverTests {
 
 		assertThatExceptionOfType(MessageConversionException.class).isThrownBy(() ->
 				this.resolver.resolveArgument(this.paramAnnotatedRequired, notEmptyMessage))
-			.withMessageContaining("Cannot convert");
+				.withMessageContaining("Cannot convert");
 	}
 
 	@Test
@@ -190,7 +190,7 @@ public class PayloadMethodArgumentResolverTests {
 		Message<?> message = MessageBuilder.withPayload("invalidValue".getBytes()).build();
 
 		assertThatExceptionOfType(MethodArgumentNotValidException.class).isThrownBy(() -> assertThat(this.resolver.resolveArgument(this.paramValidatedNotAnnotated, message)).isEqualTo("invalidValue"))
-			.withMessageContaining("invalid value");
+				.withMessageContaining("invalid value");
 	}
 
 
@@ -200,6 +200,7 @@ public class PayloadMethodArgumentResolverTests {
 			public boolean supports(Class<?> clazz) {
 				return String.class.isAssignableFrom(clazz);
 			}
+
 			@Override
 			public void validate(Object target, Errors errors) {
 				String value = (String) target;
@@ -214,8 +215,8 @@ public class PayloadMethodArgumentResolverTests {
 	@SuppressWarnings("unused")
 	private void handleMessage(
 			@Payload String param,
-			@Payload(required=false) String paramNotRequired,
-			@Payload(required=true) Locale nonConvertibleRequiredParam,
+			@Payload(required = false) String paramNotRequired,
+			@Payload(required = true) Locale nonConvertibleRequiredParam,
 			@Payload("foo.bar") String paramWithSpelExpression,
 			@MyValid @Payload String validParam,
 			@Validated String validParamNotAnnotated,

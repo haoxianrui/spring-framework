@@ -88,7 +88,8 @@ public class Spr8954Tests {
 
 	static class FooConfig {
 
-		@Bean FooFactoryBean foo() {
+		@Bean
+		FooFactoryBean foo() {
 			return new FooFactoryBean();
 		}
 	}

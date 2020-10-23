@@ -40,7 +40,7 @@ public class PrincipalMethodArgumentResolver implements HandlerMethodArgumentRes
 	}
 
 	@Override
-	public Object resolveArgument(MethodParameter parameter, Message<?> message){
+	public Object resolveArgument(MethodParameter parameter, Message<?> message) {
 		Principal user = SimpMessageHeaderAccessor.getUser(message.getHeaders());
 		return parameter.isOptional() ? Optional.ofNullable(user) : user;
 	}

@@ -102,8 +102,7 @@ public class ConfigurationWithFactoryBeanBeanEarlyDeductionTests {
 			context.addBeanFactoryPostProcessor(postProcessor);
 			context.refresh();
 			assertContainsMyBeanName(postProcessor.getNames());
-		}
-		finally {
+		} finally {
 			context.close();
 		}
 	}
@@ -115,7 +114,7 @@ public class ConfigurationWithFactoryBeanBeanEarlyDeductionTests {
 	}
 
 	private void assertPreFreeze(Class<?> configurationClass,
-			BeanFactoryPostProcessor... postProcessors) {
+								 BeanFactoryPostProcessor... postProcessors) {
 		NameCollectingBeanFactoryPostProcessor postProcessor = new NameCollectingBeanFactoryPostProcessor();
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		try {
@@ -124,8 +123,7 @@ public class ConfigurationWithFactoryBeanBeanEarlyDeductionTests {
 			context.register(configurationClass);
 			context.refresh();
 			assertContainsMyBeanName(postProcessor.getNames());
-		}
-		finally {
+		} finally {
 			context.close();
 		}
 	}

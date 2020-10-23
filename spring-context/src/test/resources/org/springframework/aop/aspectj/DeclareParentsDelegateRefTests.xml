@@ -8,11 +8,11 @@
 	<aop:config>
 		<aop:aspect id="testAspect">
 			<aop:declare-parents
-				types-matching="org.springframework.aop.aspectj.NoMethodsBean+"
-				implement-interface="org.springframework.aop.aspectj.ICounter"
-				delegate-ref="counter"
+					types-matching="org.springframework.aop.aspectj.NoMethodsBean+"
+					implement-interface="org.springframework.aop.aspectj.ICounter"
+					delegate-ref="counter"
 			/>
-		</aop:aspect>	
+		</aop:aspect>
 	</aop:config>
 
 	<bean id="noMethodsBean" class="org.springframework.aop.aspectj.NoMethodsBeanImpl"/>

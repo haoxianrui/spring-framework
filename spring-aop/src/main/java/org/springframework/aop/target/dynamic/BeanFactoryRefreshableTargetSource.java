@@ -30,10 +30,10 @@ import org.springframework.util.Assert;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Mark Fisher
- * @since 2.0
  * @see org.springframework.beans.factory.BeanFactory
  * @see #requiresRefresh()
  * @see #setRefreshCheckDelay
+ * @since 2.0
  */
 public class BeanFactoryRefreshableTargetSource extends AbstractRefreshableTargetSource {
 
@@ -47,8 +47,9 @@ public class BeanFactoryRefreshableTargetSource extends AbstractRefreshableTarge
 	 * bean factory and bean name.
 	 * <p>Note that the passed-in BeanFactory should have an appropriate
 	 * bean definition set up for the given bean name.
+	 *
 	 * @param beanFactory the BeanFactory to fetch beans from
-	 * @param beanName the name of the target bean
+	 * @param beanName    the name of the target bean
 	 */
 	public BeanFactoryRefreshableTargetSource(BeanFactory beanFactory, String beanName) {
 		Assert.notNull(beanFactory, "BeanFactory is required");
@@ -71,6 +72,7 @@ public class BeanFactoryRefreshableTargetSource extends AbstractRefreshableTarge
 	 * fresh target object for the given bean factory and bean name.
 	 * <p>This default implementation fetches a new target bean
 	 * instance from the bean factory.
+	 *
 	 * @see org.springframework.beans.factory.BeanFactory#getBean
 	 */
 	protected Object obtainFreshBean(BeanFactory beanFactory, String beanName) {

@@ -44,14 +44,15 @@ import org.springframework.util.ObjectUtils;
  * @author Arjen Poutsma
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
- * @since 3.0
  * @see RestTemplate#setErrorHandler
+ * @since 3.0
  */
 public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 
 	/**
 	 * Delegates to {@link #hasError(HttpStatus)} (for a standard status enum value) or
 	 * {@link #hasError(int)} (for an unknown status code) with the response status code.
+	 *
 	 * @see ClientHttpResponse#getRawStatusCode()
 	 * @see #hasError(HttpStatus)
 	 * @see #hasError(int)
@@ -67,6 +68,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 	 * Template method called from {@link #hasError(ClientHttpResponse)}.
 	 * <p>The default implementation checks {@link HttpStatus#isError()}.
 	 * Can be overridden in subclasses.
+	 *
 	 * @param statusCode the HTTP status code as enum value
 	 * @return {@code true} if the response indicates an error; {@code false} otherwise
 	 * @see HttpStatus#isError()
@@ -81,11 +83,12 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 	 * {@link org.springframework.http.HttpStatus.Series#CLIENT_ERROR CLIENT_ERROR} or
 	 * {@link org.springframework.http.HttpStatus.Series#SERVER_ERROR SERVER_ERROR}.
 	 * Can be overridden in subclasses.
+	 *
 	 * @param unknownStatusCode the HTTP status code as raw value
 	 * @return {@code true} if the response indicates an error; {@code false} otherwise
-	 * @since 4.3.21
 	 * @see org.springframework.http.HttpStatus.Series#CLIENT_ERROR
 	 * @see org.springframework.http.HttpStatus.Series#SERVER_ERROR
+	 * @since 4.3.21
 	 */
 	protected boolean hasError(int unknownStatusCode) {
 		HttpStatus.Series series = HttpStatus.Series.resolve(unknownStatusCode);
@@ -95,6 +98,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 	/**
 	 * Delegates to {@link #handleError(ClientHttpResponse, HttpStatus)} with the
 	 * response status code.
+	 *
 	 * @throws UnknownHttpStatusCodeException in case of an unresolvable status code
 	 * @see #handleError(ClientHttpResponse, HttpStatus)
 	 */
@@ -140,8 +144,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 			reader.close();
 			buffer.flip();
 			return preface + "[" + buffer.toString() + "... (" + responseBody.length + " bytes)]";
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			// should never happen
 			throw new IllegalStateException(ex);
 		}
@@ -154,9 +157,10 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 	 * CLIENT_ERROR}, an {@link HttpServerErrorException} if it is
 	 * {@link org.springframework.http.HttpStatus.Series#SERVER_ERROR SERVER_ERROR},
 	 * or an {@link UnknownHttpStatusCodeException} in other cases.
-	 * @since 5.0
+	 *
 	 * @see HttpClientErrorException#create
 	 * @see HttpServerErrorException#create
+	 * @since 5.0
 	 */
 	protected void handleError(ClientHttpResponse response, HttpStatus statusCode) throws IOException {
 		String statusText = response.getStatusText();
@@ -177,11 +181,12 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 
 	/**
 	 * Determine the HTTP status of the given response.
+	 *
 	 * @param response the response to inspect
 	 * @return the associated HTTP status
-	 * @throws IOException in case of I/O errors
+	 * @throws IOException                    in case of I/O errors
 	 * @throws UnknownHttpStatusCodeException in case of an unknown status code
-	 * that cannot be represented with the {@link HttpStatus} enum
+	 *                                        that cannot be represented with the {@link HttpStatus} enum
 	 * @since 4.3.8
 	 * @deprecated as of 5.0, in favor of {@link #handleError(ClientHttpResponse, HttpStatus)}
 	 */
@@ -197,6 +202,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 
 	/**
 	 * Read the body of the given response (for inclusion in a status exception).
+	 *
 	 * @param response the response to inspect
 	 * @return the response body as a byte array,
 	 * or an empty byte array if the body could not be read
@@ -205,8 +211,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 	protected byte[] getResponseBody(ClientHttpResponse response) {
 		try {
 			return FileCopyUtils.copyToByteArray(response.getBody());
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			// ignore
 		}
 		return new byte[0];
@@ -214,6 +219,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 
 	/**
 	 * Determine the charset of the response (for inclusion in a status exception).
+	 *
 	 * @param response the response to inspect
 	 * @return the associated charset, or {@code null} if none
 	 * @since 4.3.8

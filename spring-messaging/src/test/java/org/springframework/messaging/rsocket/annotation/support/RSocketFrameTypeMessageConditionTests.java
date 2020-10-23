@@ -31,6 +31,7 @@ import static org.springframework.messaging.rsocket.annotation.support.RSocketFr
 
 /**
  * Unit tests for {@link RSocketFrameTypeMessageCondition}.
+ *
  * @author Rossen Stoyanchev
  */
 public class RSocketFrameTypeMessageConditionTests {

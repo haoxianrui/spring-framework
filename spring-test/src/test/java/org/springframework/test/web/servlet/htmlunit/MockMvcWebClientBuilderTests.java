@@ -97,7 +97,8 @@ class MockMvcWebClientBuilderTests {
 		}
 	}
 
-	@Test // SPR-14066
+	@Test
+		// SPR-14066
 	void cookieManagerShared() throws Exception {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(new CookieController()).build();
 		WebClient client = MockMvcWebClientBuilder.mockMvcSetup(this.mockMvc).build();
@@ -107,7 +108,8 @@ class MockMvcWebClientBuilderTests {
 		assertThat(getResponse(client, "http://localhost/").getContentAsString()).isEqualTo("cookieManagerShared");
 	}
 
-	@Test // SPR-14265
+	@Test
+		// SPR-14265
 	void cookiesAreManaged() throws Exception {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(new CookieController()).build();
 		WebClient client = MockMvcWebClientBuilder.mockMvcSetup(this.mockMvc).build();

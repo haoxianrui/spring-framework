@@ -56,7 +56,7 @@ class ServerRequestExtensionsTests {
 	@Test
 	fun body() {
 		val body = listOf("foo", "bar")
-		val typeReference = object: ParameterizedTypeReference<List<String>>() {}
+		val typeReference = object : ParameterizedTypeReference<List<String>>() {}
 		every { request.body(typeReference) } returns body
 		assertThat(request.body<List<String>>()).isEqualTo(body)
 		verify { request.body(typeReference) }

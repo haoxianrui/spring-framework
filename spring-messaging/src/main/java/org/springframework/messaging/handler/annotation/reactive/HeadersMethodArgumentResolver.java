@@ -54,17 +54,14 @@ public class HeadersMethodArgumentResolver implements SyncHandlerMethodArgumentR
 		Class<?> paramType = parameter.getParameterType();
 		if (Map.class.isAssignableFrom(paramType)) {
 			return message.getHeaders();
-		}
-		else if (MessageHeaderAccessor.class == paramType) {
+		} else if (MessageHeaderAccessor.class == paramType) {
 			MessageHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, MessageHeaderAccessor.class);
 			return accessor != null ? accessor : new MessageHeaderAccessor(message);
-		}
-		else if (MessageHeaderAccessor.class.isAssignableFrom(paramType)) {
+		} else if (MessageHeaderAccessor.class.isAssignableFrom(paramType)) {
 			MessageHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, MessageHeaderAccessor.class);
 			if (accessor != null && paramType.isAssignableFrom(accessor.getClass())) {
 				return accessor;
-			}
-			else {
+			} else {
 				Method method = ReflectionUtils.findMethod(paramType, "wrap", Message.class);
 				if (method == null) {
 					throw new IllegalStateException(
@@ -72,8 +69,7 @@ public class HeadersMethodArgumentResolver implements SyncHandlerMethodArgumentR
 				}
 				return ReflectionUtils.invokeMethod(method, null, message);
 			}
-		}
-		else {
+		} else {
 			throw new IllegalStateException("Unexpected parameter of type " + paramType +
 					" in method " + parameter.getMethod() + ". ");
 		}

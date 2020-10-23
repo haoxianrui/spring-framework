@@ -36,7 +36,9 @@ import org.springframework.util.Assert;
  */
 public class DestinationVariableMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
 
-	/** The name of the header used to for template variables. */
+	/**
+	 * The name of the header used to for template variables.
+	 */
 	public static final String DESTINATION_TEMPLATE_VARIABLES_HEADER =
 			DestinationVariableMethodArgumentResolver.class.getSimpleName() + ".templateVariables";
 

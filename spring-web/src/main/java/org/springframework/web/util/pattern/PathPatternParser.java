@@ -88,6 +88,7 @@ public class PathPatternParser {
 	 * options used to parse input paths.
 	 * <p>{@link org.springframework.http.server.PathContainer.Options#HTTP_PATH}
 	 * is used by default.
+	 *
 	 * @since 5.2
 	 */
 	public void setPathOptions(PathContainer.Options pathOptions) {
@@ -96,6 +97,7 @@ public class PathPatternParser {
 
 	/**
 	 * Return the {@link #setPathOptions configured} pattern parsing options.
+	 *
 	 * @since 5.2
 	 */
 	public PathContainer.Options getPathOptions() {
@@ -109,6 +111,7 @@ public class PathPatternParser {
 	 * stage. Produces a PathPattern object that can be used for fast matching
 	 * against paths. Each invocation of this method delegates to a new instance of
 	 * the {@link InternalPathPatternParser} because that class is not thread-safe.
+	 *
 	 * @param pathPattern the input path pattern, e.g. /project/{name}
 	 * @return a PathPattern for quickly matching paths against request paths
 	 * @throws PatternParseException in case of parse errors

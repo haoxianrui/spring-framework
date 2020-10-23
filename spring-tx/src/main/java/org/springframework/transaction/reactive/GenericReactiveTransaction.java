@@ -34,9 +34,9 @@ import org.springframework.util.Assert;
  *
  * @author Mark Paluch
  * @author Juergen Hoeller
- * @since 5.2
  * @see AbstractReactiveTransactionManager
  * @see #getTransaction
+ * @since 5.2
  */
 public class GenericReactiveTransaction implements ReactiveTransaction {
 
@@ -61,18 +61,19 @@ public class GenericReactiveTransaction implements ReactiveTransaction {
 
 	/**
 	 * Create a new {@code DefaultReactiveTransactionStatus} instance.
-	 * @param transaction underlying transaction object that can hold state
-	 * for the internal transaction implementation
-	 * @param newTransaction if the transaction is new, otherwise participating
-	 * in an existing transaction
+	 *
+	 * @param transaction        underlying transaction object that can hold state
+	 *                           for the internal transaction implementation
+	 * @param newTransaction     if the transaction is new, otherwise participating
+	 *                           in an existing transaction
 	 * @param newSynchronization if a new transaction synchronization has been
-	 * opened for the given transaction
-	 * @param readOnly whether the transaction is marked as read-only
-	 * @param debug should debug logging be enabled for the handling of this transaction?
-	 * Caching it in here can prevent repeated calls to ask the logging system whether
-	 * debug logging should be enabled.
+	 *                           opened for the given transaction
+	 * @param readOnly           whether the transaction is marked as read-only
+	 * @param debug              should debug logging be enabled for the handling of this transaction?
+	 *                           Caching it in here can prevent repeated calls to ask the logging system whether
+	 *                           debug logging should be enabled.
 	 * @param suspendedResources a holder for resources that have been suspended
-	 * for this transaction, if any
+	 *                           for this transaction, if any
 	 */
 	public GenericReactiveTransaction(
 			@Nullable Object transaction, boolean newTransaction, boolean newSynchronization,
@@ -89,6 +90,7 @@ public class GenericReactiveTransaction implements ReactiveTransaction {
 
 	/**
 	 * Return the underlying transaction object.
+	 *
 	 * @throws IllegalStateException if no transaction is active
 	 */
 	public Object getTransaction() {

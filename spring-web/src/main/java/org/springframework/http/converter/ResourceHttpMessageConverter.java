@@ -59,8 +59,9 @@ public class ResourceHttpMessageConverter extends AbstractHttpMessageConverter<R
 
 	/**
 	 * Create a new instance of the {@code ResourceHttpMessageConverter}.
+	 *
 	 * @param supportsReadStreaming whether the converter should support
-	 * read streaming, i.e. convert to {@code InputStreamResource}
+	 *                              read streaming, i.e. convert to {@code InputStreamResource}
 	 * @since 5.0
 	 */
 	public ResourceHttpMessageConverter(boolean supportsReadStreaming) {
@@ -84,14 +85,14 @@ public class ResourceHttpMessageConverter extends AbstractHttpMessageConverter<R
 				public String getFilename() {
 					return inputMessage.getHeaders().getContentDisposition().getFilename();
 				}
+
 				@Override
 				public long contentLength() throws IOException {
 					long length = inputMessage.getHeaders().getContentLength();
 					return (length != -1 ? length : super.contentLength());
 				}
 			};
-		}
-		else if (Resource.class == clazz || ByteArrayResource.class.isAssignableFrom(clazz)) {
+		} else if (Resource.class == clazz || ByteArrayResource.class.isAssignableFrom(clazz)) {
 			byte[] body = StreamUtils.copyToByteArray(inputMessage.getBody());
 			return new ByteArrayResource(body) {
 				@Override
@@ -100,8 +101,7 @@ public class ResourceHttpMessageConverter extends AbstractHttpMessageConverter<R
 					return inputMessage.getHeaders().getContentDisposition().getFilename();
 				}
 			};
-		}
-		else {
+		} else {
 			throw new HttpMessageNotReadableException("Unsupported resource class: " + clazz, inputMessage);
 		}
 	}
@@ -135,20 +135,16 @@ public class ResourceHttpMessageConverter extends AbstractHttpMessageConverter<R
 			InputStream in = resource.getInputStream();
 			try {
 				StreamUtils.copy(in, outputMessage.getBody());
-			}
-			catch (NullPointerException ex) {
+			} catch (NullPointerException ex) {
 				// ignore, see SPR-13620
-			}
-			finally {
+			} finally {
 				try {
 					in.close();
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					// ignore, see SPR-12999
 				}
 			}
-		}
-		catch (FileNotFoundException ex) {
+		} catch (FileNotFoundException ex) {
 			// ignore, see SPR-12999
 		}
 	}

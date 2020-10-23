@@ -10,7 +10,7 @@
 	<context:load-time-weaver aspectj-weaving="on"/>
 	-->
 
-	<task:annotation-driven executor="executor"  exception-handler="exceptionHandler" scheduler="scheduler"/>
+	<task:annotation-driven executor="executor" exception-handler="exceptionHandler" scheduler="scheduler"/>
 
 	<task:scheduled-tasks scheduler="scheduler">
 		<task:scheduled ref="target" method="test" fixed-rate="1000"/>

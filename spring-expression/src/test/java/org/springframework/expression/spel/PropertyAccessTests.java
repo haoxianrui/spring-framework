@@ -80,15 +80,15 @@ public class PropertyAccessTests extends AbstractExpressionTests {
 	 */
 	@Test
 	public void testAccessingOnNullObject() {
-		SpelExpression expr = (SpelExpression)parser.parseExpression("madeup");
+		SpelExpression expr = (SpelExpression) parser.parseExpression("madeup");
 		EvaluationContext context = new StandardEvaluationContext(null);
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expr.getValue(context))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL));
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL));
 		assertThat(expr.isWritable(context)).isFalse();
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expr.setValue(context, "abc"))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_WRITABLE_ON_NULL));
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_WRITABLE_ON_NULL));
 	}
 
 	@Test
@@ -261,8 +261,8 @@ public class PropertyAccessTests extends AbstractExpressionTests {
 		EvaluationContext context = SimpleEvaluationContext.forReadOnlyDataBinding().build();
 		Expression expression = parser.parseExpression("stringArrayOfThreeItems[3]");
 		assertThatExceptionOfType(SpelEvaluationException.class)
-			.isThrownBy(() -> expression.getValue(context, new Inventor()))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.ARRAY_INDEX_OUT_OF_BOUNDS));
+				.isThrownBy(() -> expression.getValue(context, new Inventor()))
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.ARRAY_INDEX_OUT_OF_BOUNDS));
 	}
 
 
@@ -273,7 +273,7 @@ public class PropertyAccessTests extends AbstractExpressionTests {
 
 		@Override
 		public Class<?>[] getSpecificTargetClasses() {
-			return new Class<?>[] {String.class};
+			return new Class<?>[]{String.class};
 		}
 
 		@Override
@@ -308,8 +308,7 @@ public class PropertyAccessTests extends AbstractExpressionTests {
 			try {
 				flibbles = (Integer) context.getTypeConverter().convertValue(newValue,
 						TypeDescriptor.forObject(newValue), TypeDescriptor.valueOf(Integer.class));
-			}
-			catch (EvaluationException ex) {
+			} catch (EvaluationException ex) {
 				throw new AccessException("Cannot set flibbles to an object of type '" + newValue.getClass() + "'");
 			}
 		}

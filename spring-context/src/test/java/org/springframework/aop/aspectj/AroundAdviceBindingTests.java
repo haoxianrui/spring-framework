@@ -52,7 +52,7 @@ public class AroundAdviceBindingTests {
 	public void onSetUp() throws Exception {
 		ctx = new ClassPathXmlApplicationContext(getClass().getSimpleName() + ".xml", getClass());
 
-		AroundAdviceBindingTestAspect  aroundAdviceAspect = ((AroundAdviceBindingTestAspect) ctx.getBean("testAspect"));
+		AroundAdviceBindingTestAspect aroundAdviceAspect = ((AroundAdviceBindingTestAspect) ctx.getBean("testAspect"));
 
 		ITestBean injectedTestBean = (ITestBean) ctx.getBean("testBean");
 		assertThat(AopUtils.isAopProxy(injectedTestBean)).isTrue();
@@ -112,8 +112,8 @@ class AroundAdviceBindingTestAspect {
 		return ((Integer) pjp.proceed()).intValue();
 	}
 
-	public void oneIntAndOneObject(ProceedingJoinPoint pjp, int x , Object o) throws Throwable {
-		this.collaborator.oneIntAndOneObject(x,o);
+	public void oneIntAndOneObject(ProceedingJoinPoint pjp, int x, Object o) throws Throwable {
+		this.collaborator.oneIntAndOneObject(x, o);
 		pjp.proceed();
 	}
 

@@ -56,8 +56,7 @@ class MethodMetadataReadingVisitorTests extends AbstractMethodMetadataTests {
 				classReader.accept(metadata, ClassReader.SKIP_DEBUG);
 				return metadata;
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 	}

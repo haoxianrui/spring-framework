@@ -63,23 +63,23 @@ import static org.springframework.test.context.junit4.JUnitTestingUtils.runTests
  * LONG_RUNNING} test group is enabled.
  *
  * @author Sam Brannen
- * @since 5.0
  * @see org.springframework.test.context.TestContextConcurrencyTests
+ * @since 5.0
  */
 public class SpringJUnit4ConcurrencyTests {
 
-	private final Class<?>[] testClasses = new Class<?>[] {
-		// Basics
+	private final Class<?>[] testClasses = new Class<?>[]{
+			// Basics
 			SpringJUnit4ClassRunnerAppCtxTests.class,
 			InheritedConfigSpringJUnit4ClassRunnerAppCtxTests.class,
 			SpringJUnit47ClassRunnerRuleTests.class,
 			BaseAppCtxRuleTests.class,
-		// Transactional
+			// Transactional
 			MethodLevelTransactionalSpringRunnerTests.class,
 			TimedTransactionalSpringRunnerTests.class,
-		// Web and Scopes
+			// Web and Scopes
 			BasicAnnotationConfigWacSpringRuleTests.class,
-		// Spring MVC Test
+			// Spring MVC Test
 	};
 
 

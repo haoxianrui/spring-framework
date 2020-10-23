@@ -70,7 +70,8 @@ class BeanUtilsTests {
 				BeanUtils.instantiateClass(CustomDateEditor.class));
 	}
 
-	@Test  // gh-22531
+	@Test
+		// gh-22531
 	void instantiateClassWithOptionalNullableType() throws NoSuchMethodException {
 		Constructor<BeanWithNullableTypes> ctor = BeanWithNullableTypes.class.getDeclaredConstructor(
 				Integer.class, Boolean.class, String.class);
@@ -80,7 +81,8 @@ class BeanUtilsTests {
 		assertThat(bean.getValue()).isEqualTo("foo");
 	}
 
-	@Test  // gh-22531
+	@Test
+		// gh-22531
 	void instantiateClassWithOptionalPrimitiveType() throws NoSuchMethodException {
 		Constructor<BeanWithPrimitiveTypes> ctor = BeanWithPrimitiveTypes.class.getDeclaredConstructor(int.class, boolean.class, String.class);
 		BeanWithPrimitiveTypes bean = BeanUtils.instantiateClass(ctor, null, null, "foo");
@@ -89,7 +91,8 @@ class BeanUtilsTests {
 		assertThat(bean.getValue()).isEqualTo("foo");
 	}
 
-	@Test  // gh-22531
+	@Test
+		// gh-22531
 	void instantiateClassWithMoreArgsThanParameters() throws NoSuchMethodException {
 		Constructor<BeanWithPrimitiveTypes> ctor = BeanWithPrimitiveTypes.class.getDeclaredConstructor(int.class, boolean.class, String.class);
 		assertThatExceptionOfType(BeanInstantiationException.class).isThrownBy(() ->
@@ -325,33 +328,33 @@ class BeanUtilsTests {
 
 	@ParameterizedTest
 	@ValueSource(classes = {
-		boolean.class, char.class, byte.class, short.class, int.class, long.class, float.class, double.class,
-		Boolean.class, Character.class, Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class,
-		DayOfWeek.class, String.class, LocalDateTime.class, Date.class, URI.class, URL.class, Locale.class, Class.class
+			boolean.class, char.class, byte.class, short.class, int.class, long.class, float.class, double.class,
+			Boolean.class, Character.class, Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class,
+			DayOfWeek.class, String.class, LocalDateTime.class, Date.class, URI.class, URL.class, Locale.class, Class.class
 	})
 	void isSimpleValueType(Class<?> type) {
 		assertThat(BeanUtils.isSimpleValueType(type)).as("Type [" + type.getName() + "] should be a simple value type").isTrue();
 	}
 
 	@ParameterizedTest
-	@ValueSource(classes = { int[].class, Object.class, List.class, void.class, Void.class })
+	@ValueSource(classes = {int[].class, Object.class, List.class, void.class, Void.class})
 	void isNotSimpleValueType(Class<?> type) {
 		assertThat(BeanUtils.isSimpleValueType(type)).as("Type [" + type.getName() + "] should not be a simple value type").isFalse();
 	}
 
 	@ParameterizedTest
 	@ValueSource(classes = {
-		boolean.class, char.class, byte.class, short.class, int.class, long.class, float.class, double.class,
-		Boolean.class, Character.class, Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class,
-		DayOfWeek.class, String.class, LocalDateTime.class, Date.class, URI.class, URL.class, Locale.class, Class.class,
-		boolean[].class, Boolean[].class, LocalDateTime[].class, Date[].class
+			boolean.class, char.class, byte.class, short.class, int.class, long.class, float.class, double.class,
+			Boolean.class, Character.class, Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class,
+			DayOfWeek.class, String.class, LocalDateTime.class, Date.class, URI.class, URL.class, Locale.class, Class.class,
+			boolean[].class, Boolean[].class, LocalDateTime[].class, Date[].class
 	})
 	void isSimpleProperty(Class<?> type) {
 		assertThat(BeanUtils.isSimpleProperty(type)).as("Type [" + type.getName() + "] should be a simple property").isTrue();
 	}
 
 	@ParameterizedTest
-	@ValueSource(classes = { Object.class, List.class, void.class, Void.class })
+	@ValueSource(classes = {Object.class, List.class, void.class, Void.class})
 	void isNotSimpleProperty(Class<?> type) {
 		assertThat(BeanUtils.isSimpleProperty(type)).as("Type [" + type.getName() + "] should not be a simple property").isFalse();
 	}

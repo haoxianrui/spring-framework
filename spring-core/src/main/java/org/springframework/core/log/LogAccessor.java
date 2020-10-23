@@ -36,6 +36,7 @@ public class LogAccessor {
 
 	/**
 	 * Create a new accessor for the given Commons Log.
+	 *
 	 * @see LogFactory#getLog(Class)
 	 * @see LogFactory#getLog(String)
 	 */
@@ -45,6 +46,7 @@ public class LogAccessor {
 
 	/**
 	 * Create a new accessor for the specified Commons Log category.
+	 *
 	 * @see LogFactory#getLog(Class)
 	 */
 	public LogAccessor(Class<?> logCategory) {
@@ -53,6 +55,7 @@ public class LogAccessor {
 
 	/**
 	 * Create a new accessor for the specified Commons Log category.
+	 *
 	 * @see LogFactory#getLog(String)
 	 */
 	public LogAccessor(String logCategory) {
@@ -117,6 +120,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with fatal log level.
+	 *
 	 * @param message the message to log
 	 */
 	public void fatal(CharSequence message) {
@@ -125,7 +129,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with fatal log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause   the exception to log
 	 * @param message the message to log
 	 */
 	public void fatal(Throwable cause, CharSequence message) {
@@ -134,6 +139,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with error log level.
+	 *
 	 * @param message the message to log
 	 */
 	public void error(CharSequence message) {
@@ -142,7 +148,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with error log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause   the exception to log
 	 * @param message the message to log
 	 */
 	public void error(Throwable cause, CharSequence message) {
@@ -151,6 +158,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with warn log level.
+	 *
 	 * @param message the message to log
 	 */
 	public void warn(CharSequence message) {
@@ -159,7 +167,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with warn log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause   the exception to log
 	 * @param message the message to log
 	 */
 	public void warn(Throwable cause, CharSequence message) {
@@ -168,6 +177,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with info log level.
+	 *
 	 * @param message the message to log
 	 */
 	public void info(CharSequence message) {
@@ -176,7 +186,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with info log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause   the exception to log
 	 * @param message the message to log
 	 */
 	public void info(Throwable cause, CharSequence message) {
@@ -185,6 +196,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with debug log level.
+	 *
 	 * @param message the message to log
 	 */
 	public void debug(CharSequence message) {
@@ -193,7 +205,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with debug log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause   the exception to log
 	 * @param message the message to log
 	 */
 	public void debug(Throwable cause, CharSequence message) {
@@ -202,6 +215,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with trace log level.
+	 *
 	 * @param message the message to log
 	 */
 	public void trace(CharSequence message) {
@@ -210,7 +224,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with trace log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause   the exception to log
 	 * @param message the message to log
 	 */
 	public void trace(Throwable cause, CharSequence message) {
@@ -222,6 +237,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with fatal log level.
+	 *
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void fatal(Supplier<? extends CharSequence> messageSupplier) {
@@ -230,7 +246,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with fatal log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause           the exception to log
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void fatal(Throwable cause, Supplier<? extends CharSequence> messageSupplier) {
@@ -239,6 +256,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with error log level.
+	 *
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void error(Supplier<? extends CharSequence> messageSupplier) {
@@ -247,7 +265,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with error log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause           the exception to log
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void error(Throwable cause, Supplier<? extends CharSequence> messageSupplier) {
@@ -256,6 +275,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with warn log level.
+	 *
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void warn(Supplier<? extends CharSequence> messageSupplier) {
@@ -264,7 +284,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with warn log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause           the exception to log
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void warn(Throwable cause, Supplier<? extends CharSequence> messageSupplier) {
@@ -273,6 +294,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with info log level.
+	 *
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void info(Supplier<? extends CharSequence> messageSupplier) {
@@ -281,7 +303,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with info log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause           the exception to log
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void info(Throwable cause, Supplier<? extends CharSequence> messageSupplier) {
@@ -290,6 +313,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with debug log level.
+	 *
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void debug(Supplier<? extends CharSequence> messageSupplier) {
@@ -298,7 +322,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with debug log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause           the exception to log
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void debug(Throwable cause, Supplier<? extends CharSequence> messageSupplier) {
@@ -307,6 +332,7 @@ public class LogAccessor {
 
 	/**
 	 * Log a message with trace log level.
+	 *
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void trace(Supplier<? extends CharSequence> messageSupplier) {
@@ -315,7 +341,8 @@ public class LogAccessor {
 
 	/**
 	 * Log an error with trace log level.
-	 * @param cause the exception to log
+	 *
+	 * @param cause           the exception to log
 	 * @param messageSupplier a lazy supplier for the message to log
 	 */
 	public void trace(Throwable cause, Supplier<? extends CharSequence> messageSupplier) {

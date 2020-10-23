@@ -64,6 +64,7 @@ public class RequestResultMatchers {
 	 * <p>Neither a {@code Callable} nor a {@code DeferredResult} will complete
 	 * processing all the way since a {@link MockHttpServletRequest} does not
 	 * perform asynchronous dispatches.
+	 *
 	 * @see #asyncNotStarted()
 	 */
 	public ResultMatcher asyncStarted() {
@@ -72,6 +73,7 @@ public class RequestResultMatchers {
 
 	/**
 	 * Assert that asynchronous processing was not started.
+	 *
 	 * @see #asyncStarted()
 	 */
 	public ResultMatcher asyncNotStarted() {
@@ -151,6 +153,7 @@ public class RequestResultMatchers {
 
 	/**
 	 * Assert the given session attributes do not exist.
+	 *
 	 * @since 5.2.1
 	 */
 	public ResultMatcher sessionAttributeDoesNotExist(String... names) {

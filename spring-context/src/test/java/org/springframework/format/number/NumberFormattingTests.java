@@ -54,8 +54,7 @@ public class NumberFormattingTests {
 			public String resolveStringValue(String strVal) {
 				if ("${pattern}".equals(strVal)) {
 					return "#,##.00";
-				}
-				else {
+				} else {
 					return strVal;
 				}
 			}
@@ -121,7 +120,7 @@ public class NumberFormattingTests {
 	@Test
 	public void testPatternArrayFormatting() {
 		MutablePropertyValues propertyValues = new MutablePropertyValues();
-		propertyValues.add("patternArray", new String[] { "1,25.00", "2,35.00" });
+		propertyValues.add("patternArray", new String[]{"1,25.00", "2,35.00"});
 		binder.bind(propertyValues);
 		assertThat(binder.getBindingResult().getErrorCount()).isEqualTo(0);
 		assertThat(binder.getBindingResult().getFieldValue("patternArray[0]")).isEqualTo("1,25.00");
@@ -139,7 +138,7 @@ public class NumberFormattingTests {
 	@Test
 	public void testPatternListFormatting() {
 		MutablePropertyValues propertyValues = new MutablePropertyValues();
-		propertyValues.add("patternList", new String[] { "1,25.00", "2,35.00" });
+		propertyValues.add("patternList", new String[]{"1,25.00", "2,35.00"});
 		binder.bind(propertyValues);
 		assertThat(binder.getBindingResult().getErrorCount()).isEqualTo(0);
 		assertThat(binder.getBindingResult().getFieldValue("patternList[0]")).isEqualTo("1,25.00");

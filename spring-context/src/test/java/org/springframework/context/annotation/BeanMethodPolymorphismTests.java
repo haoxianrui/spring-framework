@@ -193,7 +193,8 @@ public class BeanMethodPolymorphismTests {
 	@Configuration
 	static class OverridingConfig extends BaseConfig {
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		@Override
 		public TestBean testBean() {
 			return new TestBean() {
@@ -213,7 +214,8 @@ public class BeanMethodPolymorphismTests {
 	@Configuration
 	static class NarrowedOverridingConfig extends BaseConfig {
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		@Override
 		public ExtendedTestBean testBean() {
 			return new ExtendedTestBean() {
@@ -244,12 +246,14 @@ public class BeanMethodPolymorphismTests {
 	@Configuration
 	static class ConfigWithOverloadingAndAdditionalMetadata {
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		String aString() {
 			return "regular";
 		}
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		String aString(Integer dependency) {
 			return "overloaded" + dependency;
 		}
@@ -274,7 +278,8 @@ public class BeanMethodPolymorphismTests {
 			return 5;
 		}
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		String aString(Integer dependency) {
 			return "overloaded" + dependency;
 		}
@@ -289,7 +294,8 @@ public class BeanMethodPolymorphismTests {
 			return 5;
 		}
 
-		@Bean @Lazy
+		@Bean
+		@Lazy
 		String aString(List<Integer> dependency) {
 			return "overloaded" + dependency.get(0);
 		}

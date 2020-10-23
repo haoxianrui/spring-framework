@@ -49,7 +49,7 @@ import org.springframework.web.util.WebUtils;
  *   &lt;property name="prefix" value="/WEB-INF/jsp/"/&gt;
  *   &lt;property name="suffix" value=".jsp"/&gt;
  * &lt;/bean&gt;</pre>
- *
+ * <p>
  * Every view name returned from a handler will be translated to a JSP
  * resource (for example: "myView" -> "/WEB-INF/jsp/myView.jsp"), using
  * this view class by default.
@@ -72,6 +72,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 
 	/**
 	 * Constructor for use as a bean.
+	 *
 	 * @see #setUrl
 	 * @see #setAlwaysInclude
 	 */
@@ -80,6 +81,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 
 	/**
 	 * Create a new InternalResourceView with the given URL.
+	 *
 	 * @param url the URL to forward to
 	 * @see #setAlwaysInclude
 	 */
@@ -89,7 +91,8 @@ public class InternalResourceView extends AbstractUrlBasedView {
 
 	/**
 	 * Create a new InternalResourceView with the given URL.
-	 * @param url the URL to forward to
+	 *
+	 * @param url           the URL to forward to
 	 * @param alwaysInclude whether to always include the view rather than forward to it
 	 */
 	public InternalResourceView(String url, boolean alwaysInclude) {
@@ -102,6 +105,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * Specify whether to always include the view rather than forward to it.
 	 * <p>Default is "false". Switch this flag on to enforce the use of a
 	 * Servlet include, even if a forward would be possible.
+	 *
 	 * @see javax.servlet.RequestDispatcher#forward
 	 * @see javax.servlet.RequestDispatcher#include
 	 * @see #useInclude(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -161,9 +165,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 				logger.debug("Including [" + getUrl() + "]");
 			}
 			rd.include(request, response);
-		}
-
-		else {
+		} else {
 			// Note: The forwarded resource is supposed to determine the content type itself.
 			if (logger.isDebugEnabled()) {
 				logger.debug("Forwarding to [" + getUrl() + "]");
@@ -178,6 +180,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * <p>Called by {@link #renderMergedOutputModel(Map, HttpServletRequest, HttpServletResponse)}.
 	 * The default implementation is empty. This method can be overridden to add
 	 * custom helpers as request attributes.
+	 *
 	 * @param request current HTTP request
 	 * @throws Exception if there's a fatal error while we're adding attributes
 	 * @see #renderMergedOutputModel
@@ -192,7 +195,8 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * <p>This implementation simply returns the configured URL.
 	 * Subclasses can override this to determine a resource to render,
 	 * typically interpreting the URL in a different manner.
-	 * @param request current HTTP request
+	 *
+	 * @param request  current HTTP request
 	 * @param response current HTTP response
 	 * @return the request dispatcher path to use
 	 * @throws Exception if preparations failed
@@ -220,8 +224,9 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * <p>The default implementation simply calls
 	 * {@link HttpServletRequest#getRequestDispatcher(String)}.
 	 * Can be overridden in subclasses.
+	 *
 	 * @param request current HTTP request
-	 * @param path the target URL (as returned from {@link #prepareForRendering})
+	 * @param path    the target URL (as returned from {@link #prepareForRendering})
 	 * @return a corresponding RequestDispatcher
 	 */
 	@Nullable
@@ -235,7 +240,8 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * <p>Performs a check whether an include URI attribute is found in the request,
 	 * indicating an include request, and whether the response has already been committed.
 	 * In both cases, an include will be performed, as a forward is not possible anymore.
-	 * @param request current HTTP request
+	 *
+	 * @param request  current HTTP request
 	 * @param response current HTTP response
 	 * @return {@code true} for include, {@code false} for forward
 	 * @see javax.servlet.RequestDispatcher#forward

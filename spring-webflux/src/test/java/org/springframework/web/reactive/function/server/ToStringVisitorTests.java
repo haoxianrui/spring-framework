@@ -43,9 +43,9 @@ public class ToStringVisitorTests {
 		HandlerFunction<ServerResponse> handler = new SimpleHandlerFunction();
 		RouterFunction<ServerResponse> routerFunction = route()
 				.path("/foo", builder ->
-					builder.path("/bar", () -> route()
-							.GET("/baz", handler)
-							.build())
+						builder.path("/bar", () -> route()
+								.GET("/baz", handler)
+								.build())
 				)
 				.build();
 
@@ -84,8 +84,8 @@ public class ToStringVisitorTests {
 		testPredicate(method(HttpMethod.GET).negate(), "!(GET)");
 
 		testPredicate(GET("/foo")
-				.or(contentType(MediaType.TEXT_PLAIN))
-				.and(accept(MediaType.APPLICATION_JSON).negate()),
+						.or(contentType(MediaType.TEXT_PLAIN))
+						.and(accept(MediaType.APPLICATION_JSON).negate()),
 				"(((GET && /foo) || Content-Type: text/plain) && !(Accept: application/json))");
 	}
 

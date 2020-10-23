@@ -81,12 +81,12 @@ import org.springframework.core.annotation.AliasFor;
  * </ul>
  *
  * @author Sam Brannen
- * @since 4.1
  * @see ContextConfiguration
  * @see DynamicPropertySource
  * @see org.springframework.core.env.Environment
  * @see org.springframework.core.env.PropertySource
  * @see org.springframework.context.annotation.PropertySource
+ * @since 4.1
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -99,6 +99,7 @@ public @interface TestPropertySource {
 	 * Alias for {@link #locations}.
 	 * <p>This attribute may <strong>not</strong> be used in conjunction with
 	 * {@link #locations}, but it may be used <em>instead</em> of {@link #locations}.
+	 *
 	 * @see #locations
 	 */
 	@AliasFor("locations")
@@ -138,6 +139,7 @@ public @interface TestPropertySource {
 	 * inlined {@link #properties}.
 	 * <p>This attribute may <strong>not</strong> be used in conjunction with
 	 * {@link #value}, but it may be used <em>instead</em> of {@link #value}.
+	 *
 	 * @see #inheritLocations
 	 * @see #value
 	 * @see #properties
@@ -193,6 +195,7 @@ public @interface TestPropertySource {
 	 * allows a local annotation to extend the list of test property source
 	 * locations, potentially overriding individual properties.</li>
 	 * </ol>
+	 *
 	 * @see #locations
 	 */
 	boolean inheritLocations() default true;
@@ -218,6 +221,7 @@ public @interface TestPropertySource {
 	 * properties loaded from resource {@link #locations}.
 	 * <p>This attribute may be used in conjunction with {@link #value}
 	 * <em>or</em> {@link #locations}.
+	 *
 	 * @see #inheritProperties
 	 * @see #locations
 	 * @see org.springframework.core.env.PropertySource
@@ -268,6 +272,7 @@ public @interface TestPropertySource {
 	 * local annotation to extend the list of inlined properties, potentially
 	 * overriding individual properties.</li>
 	 * </ol>
+	 *
 	 * @see #properties
 	 */
 	boolean inheritProperties() default true;

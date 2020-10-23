@@ -36,6 +36,7 @@ public class PrototypeTargetSource extends AbstractPrototypeBasedTargetSource {
 
 	/**
 	 * Obtain a new prototype instance for every call.
+	 *
 	 * @see #newPrototypeInstance()
 	 */
 	@Override
@@ -45,6 +46,7 @@ public class PrototypeTargetSource extends AbstractPrototypeBasedTargetSource {
 
 	/**
 	 * Destroy the given independent instance.
+	 *
 	 * @see #destroyPrototypeInstance
 	 */
 	@Override

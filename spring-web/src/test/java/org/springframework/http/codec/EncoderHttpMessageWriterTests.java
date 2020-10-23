@@ -164,7 +164,8 @@ class EncoderHttpMessageWriterTests {
 		assertThat(this.response.getHeaders().getContentLength()).isEqualTo(4);
 	}
 
-	@Test // gh-22952
+	@Test
+		// gh-22952
 	void monoBodyDoesNotCancelEncodedFlux() {
 		Mono<String> inputStream = Mono.just("body")
 				.doOnCancel(() -> {
@@ -175,7 +176,8 @@ class EncoderHttpMessageWriterTests {
 				.block();
 	}
 
-	@Test // SPR-17220
+	@Test
+		// SPR-17220
 	void emptyBodyWritten() {
 		configureEncoder(MimeTypeUtils.TEXT_PLAIN);
 		HttpMessageWriter<String> writer = new EncoderHttpMessageWriter<>(this.encoder);
@@ -184,7 +186,8 @@ class EncoderHttpMessageWriterTests {
 		assertThat(this.response.getHeaders().getContentLength()).isEqualTo(0);
 	}
 
-	@Test  // gh-22936
+	@Test
+		// gh-22936
 	void isStreamingMediaType() throws InvocationTargetException, IllegalAccessException {
 		configureEncoder(TEXT_HTML);
 		MediaType streamingMediaType = new MediaType(TEXT_PLAIN, Collections.singletonMap("streaming", "true"));

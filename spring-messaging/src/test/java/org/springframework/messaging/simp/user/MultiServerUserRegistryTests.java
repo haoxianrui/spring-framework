@@ -123,7 +123,8 @@ class MultiServerUserRegistryTests {
 		assertThat(sessionIds).isEqualTo(new HashSet<>(Arrays.asList("sess1", "sess2")));
 	}
 
-	@Test  // SPR-13800
+	@Test
+		// SPR-13800
 	void getSessionsWhenUserIsConnectedToMultipleServers() {
 		// Add user to local registry
 		TestSimpUser localUser = new TestSimpUser("joe");

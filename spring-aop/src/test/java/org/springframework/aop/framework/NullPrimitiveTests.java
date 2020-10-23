@@ -53,7 +53,7 @@ public class NullPrimitiveTests {
 
 		assertThatExceptionOfType(AopInvocationException.class).isThrownBy(() ->
 				foo.getValue())
-			.withMessageContaining("Foo.getValue()");
+				.withMessageContaining("Foo.getValue()");
 	}
 
 	public static class Bar {
@@ -73,7 +73,7 @@ public class NullPrimitiveTests {
 
 		assertThatExceptionOfType(AopInvocationException.class).isThrownBy(() ->
 				bar.getValue())
-			.withMessageContaining("Bar.getValue()");
+				.withMessageContaining("Bar.getValue()");
 	}
 
 }

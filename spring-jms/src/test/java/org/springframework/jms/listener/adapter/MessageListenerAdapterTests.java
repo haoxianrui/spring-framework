@@ -311,7 +311,7 @@ public class MessageListenerAdapterTests {
 		};
 		assertThatExceptionOfType(ReplyFailureException.class).isThrownBy(() ->
 				adapter.onMessage(sentTextMessage, session))
-			.withCauseExactlyInstanceOf(InvalidDestinationException.class);
+				.withCauseExactlyInstanceOf(InvalidDestinationException.class);
 
 		verify(responseTextMessage).setJMSCorrelationID(CORRELATION_ID);
 		verify(delegate).handleMessage(sentTextMessage);
@@ -346,7 +346,7 @@ public class MessageListenerAdapterTests {
 		};
 		assertThatExceptionOfType(ReplyFailureException.class).isThrownBy(() ->
 				adapter.onMessage(sentTextMessage, session))
-			.withCauseExactlyInstanceOf(JMSException.class);
+				.withCauseExactlyInstanceOf(JMSException.class);
 
 		verify(responseTextMessage).setJMSCorrelationID(CORRELATION_ID);
 		verify(messageProducer).close();
@@ -387,7 +387,7 @@ public class MessageListenerAdapterTests {
 		adapter.setMessageConverter(null);
 		assertThatExceptionOfType(ReplyFailureException.class).isThrownBy(() ->
 				adapter.onMessage(sentTextMessage, session))
-			.withCauseExactlyInstanceOf(MessageConversionException.class);
+				.withCauseExactlyInstanceOf(MessageConversionException.class);
 	}
 
 	@Test

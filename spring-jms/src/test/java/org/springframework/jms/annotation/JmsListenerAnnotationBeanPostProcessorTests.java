@@ -96,8 +96,7 @@ public class JmsListenerAnnotationBeanPostProcessorTests {
 			assertThat(methodEndpoint.getMethod()).isEqualTo(MetaAnnotationTestBean.class.getMethod("handleIt", String.class));
 			assertThat(methodEndpoint.getMostSpecificMethod()).isEqualTo(MetaAnnotationTestBean.class.getMethod("handleIt", String.class));
 			assertThat(((AbstractJmsListenerEndpoint) endpoint).getDestination()).isEqualTo("metaTestQueue");
-		}
-		finally {
+		} finally {
 			context.close();
 		}
 	}
@@ -123,8 +122,7 @@ public class JmsListenerAnnotationBeanPostProcessorTests {
 			ReflectionUtils.makeAccessible(method);
 			Object destination = ReflectionUtils.invokeMethod(method, endpoint);
 			assertThat(destination).as("SendTo annotation not found on proxy").isEqualTo("foobar");
-		}
-		finally {
+		} finally {
 			context.close();
 		}
 	}
@@ -150,8 +148,7 @@ public class JmsListenerAnnotationBeanPostProcessorTests {
 			ReflectionUtils.makeAccessible(method);
 			Object destination = ReflectionUtils.invokeMethod(method, endpoint);
 			assertThat(destination).as("SendTo annotation not found on proxy").isEqualTo("foobar");
-		}
-		finally {
+		} finally {
 			context.close();
 		}
 	}
@@ -161,8 +158,8 @@ public class JmsListenerAnnotationBeanPostProcessorTests {
 	public void invalidProxy() {
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				new AnnotationConfigApplicationContext(Config.class, ProxyConfig.class, InvalidProxyTestBean.class))
-			.withCauseInstanceOf(IllegalStateException.class)
-			.withMessageContaining("handleIt2");
+				.withCauseInstanceOf(IllegalStateException.class)
+				.withMessageContaining("handleIt2");
 	}
 
 

@@ -194,19 +194,21 @@ class MergedAnnotationsComposedOnSingleAnnotatedElementTests {
 
 	// @formatter:off
 
-	@Target({ ElementType.METHOD, ElementType.TYPE })
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@Inherited
 	@interface Cacheable {
 		@AliasFor("cacheName")
 		String value() default "";
+
 		@AliasFor("value")
 		String cacheName() default "";
+
 		String key() default "";
 	}
 
 	@Cacheable("fooCache")
-	@Target({ ElementType.METHOD, ElementType.TYPE })
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@Inherited
 	@interface FooCache {
@@ -215,7 +217,7 @@ class MergedAnnotationsComposedOnSingleAnnotatedElementTests {
 	}
 
 	@Cacheable("barCache")
-	@Target({ ElementType.METHOD, ElementType.TYPE })
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@Inherited
 	@interface BarCache {
@@ -224,7 +226,7 @@ class MergedAnnotationsComposedOnSingleAnnotatedElementTests {
 	}
 
 	@Cacheable("noninheritedCache1")
-	@Target({ ElementType.METHOD, ElementType.TYPE })
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@interface NoninheritedCache1 {
 		@AliasFor(annotation = Cacheable.class)
@@ -232,7 +234,7 @@ class MergedAnnotationsComposedOnSingleAnnotatedElementTests {
 	}
 
 	@Cacheable("noninheritedCache2")
-	@Target({ ElementType.METHOD, ElementType.TYPE })
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@interface NoninheritedCache2 {
 		@AliasFor(annotation = Cacheable.class)
@@ -297,8 +299,13 @@ class MergedAnnotationsComposedOnSingleAnnotatedElementTests {
 		@FooCache(key = "fooKey")
 		@BarCache(key = "barKey")
 		@Override
-		public String getFor(Class<String> cls) { return "foo"; }
-		public String getFor(Integer integer) { return "foo"; }
+		public String getFor(Class<String> cls) {
+			return "foo";
+		}
+
+		public String getFor(Integer integer) {
+			return "foo";
+		}
 	}
 
 	// @formatter:on

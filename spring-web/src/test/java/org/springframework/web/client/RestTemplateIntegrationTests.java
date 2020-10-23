@@ -90,10 +90,10 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 	@SuppressWarnings("deprecation")
 	static Stream<ClientHttpRequestFactory> clientHttpRequestFactories() {
 		return Stream.of(
-			new SimpleClientHttpRequestFactory(),
-			new HttpComponentsClientHttpRequestFactory(),
-			new org.springframework.http.client.Netty4ClientHttpRequestFactory(),
-			new OkHttp3ClientHttpRequestFactory()
+				new SimpleClientHttpRequestFactory(),
+				new HttpComponentsClientHttpRequestFactory(),
+				new org.springframework.http.client.Netty4ClientHttpRequestFactory(),
+				new OkHttp3ClientHttpRequestFactory()
 		);
 	}
 
@@ -239,11 +239,11 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 
 		assertThatExceptionOfType(HttpClientErrorException.class).isThrownBy(() ->
 				template.execute(baseUrl + "/status/notfound", HttpMethod.GET, null, null))
-			.satisfies(ex -> {
-				assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-				assertThat(ex.getStatusText()).isNotNull();
-				assertThat(ex.getResponseBodyAsString()).isNotNull();
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+					assertThat(ex.getStatusText()).isNotNull();
+					assertThat(ex.getResponseBodyAsString()).isNotNull();
+				});
 	}
 
 	@ParameterizedRestTemplateTest
@@ -252,10 +252,10 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 
 		assertThatExceptionOfType(HttpClientErrorException.class).isThrownBy(() ->
 				template.execute(baseUrl + "/status/badrequest", HttpMethod.GET, null, null))
-			.satisfies(ex -> {
-				assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-				assertThat(ex.getMessage()).isEqualTo("400 Client Error: [no body]");
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+					assertThat(ex.getMessage()).isEqualTo("400 Client Error: [no body]");
+				});
 	}
 
 	@ParameterizedRestTemplateTest
@@ -264,11 +264,11 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 
 		assertThatExceptionOfType(HttpServerErrorException.class).isThrownBy(() ->
 				template.execute(baseUrl + "/status/server", HttpMethod.GET, null, null))
-			.satisfies(ex -> {
-				assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-				assertThat(ex.getStatusText()).isNotNull();
-				assertThat(ex.getResponseBodyAsString()).isNotNull();
-			});
+				.satisfies(ex -> {
+					assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+					assertThat(ex.getStatusText()).isNotNull();
+					assertThat(ex.getResponseBodyAsString()).isNotNull();
+				});
 	}
 
 	@ParameterizedRestTemplateTest
@@ -409,7 +409,8 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 		assertThat(s.contains("\"without\":\"without\"")).isFalse();
 	}
 
-	@ParameterizedRestTemplateTest  // SPR-12123
+	@ParameterizedRestTemplateTest
+		// SPR-12123
 	void serverPort(ClientHttpRequestFactory clientHttpRequestFactory) {
 		setUpClient(clientHttpRequestFactory);
 
@@ -417,14 +418,16 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 		assertThat(s).as("Invalid content").isEqualTo(helloWorld);
 	}
 
-	@ParameterizedRestTemplateTest  // SPR-13154
+	@ParameterizedRestTemplateTest
+		// SPR-13154
 	void jsonPostForObjectWithJacksonTypeInfoList(ClientHttpRequestFactory clientHttpRequestFactory) throws Exception {
 		setUpClient(clientHttpRequestFactory);
 
 		List<ParentClass> list = new ArrayList<>();
 		list.add(new Foo("foo"));
 		list.add(new Bar("bar"));
-		ParameterizedTypeReference<?> typeReference = new ParameterizedTypeReference<List<ParentClass>>() {};
+		ParameterizedTypeReference<?> typeReference = new ParameterizedTypeReference<List<ParentClass>>() {
+		};
 		RequestEntity<List<ParentClass>> entity = RequestEntity
 				.post(new URI(baseUrl + "/jsonpost"))
 				.contentType(new MediaType("application", "json", StandardCharsets.UTF_8))
@@ -434,7 +437,8 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 		assertThat(content.contains("\"type\":\"bar\"")).isTrue();
 	}
 
-	@ParameterizedRestTemplateTest  // SPR-15015
+	@ParameterizedRestTemplateTest
+		// SPR-15015
 	void postWithoutBody(ClientHttpRequestFactory clientHttpRequestFactory) throws Exception {
 		setUpClient(clientHttpRequestFactory);
 
@@ -442,9 +446,11 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 	}
 
 
-	public interface MyJacksonView1 {}
+	public interface MyJacksonView1 {
+	}
 
-	public interface MyJacksonView2 {}
+	public interface MyJacksonView2 {
+	}
 
 
 	public static class MySampleBean {

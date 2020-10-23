@@ -32,7 +32,7 @@
 	</bean>
 
 	<bean id="rod5" class="org.springframework.beans.testfixture.beans.DependenciesBean"
-			scope="prototype" autowire="constructor">
+		  scope="prototype" autowire="constructor">
 		<!-- Should pick up spouse automatically -->
 	</bean>
 
@@ -51,7 +51,9 @@
 				<value>/org/springframework/beans/factory/xml/XmlBeanFactoryTests-initializers.xml</value>
 			</list>
 		</constructor-arg>
-		<constructor-arg><ref bean="parentAppCtx"/></constructor-arg>
+		<constructor-arg>
+			<ref bean="parentAppCtx"/>
+		</constructor-arg>
 	</bean>
 
 </beans>

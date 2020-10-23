@@ -140,7 +140,7 @@ public class DriverManagerDataSourceTests {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		assertThatIllegalStateException().isThrownBy(() ->
 				ds.setDriverClassName(bogusClassName))
-			.withCauseInstanceOf(ClassNotFoundException.class);
+				.withCauseInstanceOf(ClassNotFoundException.class);
 	}
 
 }

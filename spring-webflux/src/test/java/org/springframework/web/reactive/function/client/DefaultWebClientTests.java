@@ -98,8 +98,8 @@ public class DefaultWebClientTests {
 	@Test // gh-22705
 	public void uriBuilderWithUriTemplate() {
 		this.builder.build().get()
-					.uri("/path/{id}", builder -> builder.queryParam("q", "12").build("identifier"))
-					.exchange().block(Duration.ofSeconds(10));
+				.uri("/path/{id}", builder -> builder.queryParam("q", "12").build("identifier"))
+				.exchange().block(Duration.ofSeconds(10));
 
 		ClientRequest request = verifyAndGetRequest();
 		assertThat(request.url().toString()).isEqualTo("/base/path/identifier?q=12");
@@ -119,7 +119,7 @@ public class DefaultWebClientTests {
 	@Test
 	public void requestHeaderAndCookie() {
 		this.builder.build().get().uri("/path").accept(MediaType.APPLICATION_JSON)
-				.cookies(cookies -> cookies.add("id", "123"))	// SPR-16178
+				.cookies(cookies -> cookies.add("id", "123"))    // SPR-16178
 				.exchange().block(Duration.ofSeconds(10));
 
 		ClientRequest request = verifyAndGetRequest();
@@ -176,8 +176,7 @@ public class DefaultWebClientTests {
 			context.set("bar");
 			client.get().uri("/path").attribute("foo", "bar")
 					.exchange().block(Duration.ofSeconds(10));
-		}
-		finally {
+		} finally {
 			context.remove();
 		}
 
@@ -235,7 +234,8 @@ public class DefaultWebClientTests {
 
 	@Test
 	void cloneBuilder() {
-		Consumer<ClientCodecConfigurer> codecsConfig = c -> {};
+		Consumer<ClientCodecConfigurer> codecsConfig = c -> {
+		};
 		ExchangeFunction exchangeFunction = request -> Mono.empty();
 		WebClient.Builder builder = WebClient.builder().baseUrl("https://example.org")
 				.exchangeFunction(exchangeFunction)
@@ -317,10 +317,10 @@ public class DefaultWebClientTests {
 	public void shouldApplyFiltersAtSubscription() {
 		WebClient client = this.builder
 				.filter((request, next) ->
-					next.exchange(ClientRequest
-							.from(request)
-							.header("Custom", "value")
-							.build())
+						next.exchange(ClientRequest
+								.from(request)
+								.header("Custom", "value")
+								.build())
 				)
 				.build();
 		Mono<ClientResponse> exchange = client.get().uri("/path").exchange();

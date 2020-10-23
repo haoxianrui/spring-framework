@@ -10,11 +10,13 @@
 
 
 	<bean id="adam" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>Adam</value></property>
+		<property name="name">
+			<value>Adam</value>
+		</property>
 	</bean>
 
 	<bean id="countingBeforeAdvice"
-		class="org.springframework.aop.testfixture.advice.CountingBeforeAdvice"
+		  class="org.springframework.aop.testfixture.advice.CountingBeforeAdvice"
 	/>
 
 	<!--
@@ -22,13 +24,17 @@
        must be last
     -->
 	<bean id="targetSourceNotLast"
-		class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces"><value>org.springframework.beans.testfixture.beans.ITestBean</value></property>
+		  class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.springframework.beans.testfixture.beans.ITestBean</value>
+		</property>
 		<!-- this is the one used and NOT the one set by targetSource -->
-		<property name="interceptorNames"><value>adam,countingBeforeAdvice</value></property>
-	
+		<property name="interceptorNames">
+			<value>adam,countingBeforeAdvice</value>
+		</property>
+
 	</bean>
-	
+
 </beans>	
 
 

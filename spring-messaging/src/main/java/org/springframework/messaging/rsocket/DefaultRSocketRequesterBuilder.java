@@ -193,8 +193,7 @@ final class DefaultRSocketRequesterBuilder implements RSocketRequester.Builder {
 							new RSocketConnectorHelper().connect(
 									this.rsocketConnectorConfigurers, this.rsocketFactoryConfigurers,
 									metaMimeType, dataMimeType, payload, rsocketStrategies, transport));
-		}
-		else {
+		} else {
 			return getSetupPayload(dataMimeType, metaMimeType, rsocketStrategies)
 					.flatMap(payload ->
 							new RSocketFactoryHelper().connect(
@@ -209,8 +208,7 @@ final class DefaultRSocketRequesterBuilder implements RSocketRequester.Builder {
 					this.strategies != null ? this.strategies.mutate() : RSocketStrategies.builder();
 			this.strategiesConfigurers.forEach(c -> c.accept(builder));
 			return builder.build();
-		}
-		else {
+		} else {
 			return this.strategies != null ? this.strategies : RSocketStrategies.builder().build();
 		}
 	}

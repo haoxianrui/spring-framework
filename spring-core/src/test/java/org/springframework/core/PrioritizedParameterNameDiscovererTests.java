@@ -28,15 +28,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PrioritizedParameterNameDiscovererTests {
 
-	private static final String[] FOO_BAR = new String[] { "foo", "bar" };
+	private static final String[] FOO_BAR = new String[]{"foo", "bar"};
 
-	private static final String[] SOMETHING_ELSE = new String[] { "something", "else" };
+	private static final String[] SOMETHING_ELSE = new String[]{"something", "else"};
 
 	private final ParameterNameDiscoverer returnsFooBar = new ParameterNameDiscoverer() {
 		@Override
 		public String[] getParameterNames(Method m) {
 			return FOO_BAR;
 		}
+
 		@Override
 		public String[] getParameterNames(Constructor<?> ctor) {
 			return FOO_BAR;
@@ -48,6 +49,7 @@ class PrioritizedParameterNameDiscovererTests {
 		public String[] getParameterNames(Method m) {
 			return SOMETHING_ELSE;
 		}
+
 		@Override
 		public String[] getParameterNames(Constructor<?> ctor) {
 			return SOMETHING_ELSE;

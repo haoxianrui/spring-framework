@@ -46,8 +46,8 @@ import org.springframework.lang.Nullable;
  * Nashorn, by setting the {@link #setSharedEngine sharedEngine} property to {@code false}.
  *
  * @author Sebastien Deleuze
- * @since 5.0
  * @see ScriptTemplateView
+ * @since 5.0
  */
 public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 
@@ -101,6 +101,7 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	 * the script engine with this setter, but with the {@link #setEngineName(String)}
 	 * or {@link #setEngineSupplier(Supplier)} (since it implies multiple lazy
 	 * instantiations of the script engine).
+	 *
 	 * @see #setEngineName(String)
 	 * @see #setEngineSupplier(Supplier)
 	 */
@@ -119,9 +120,10 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	 * {@link #setSharedEngine(Boolean)} set to {@code false}.
 	 * If {@code renderFunction} is specified, the script engine must implement {@code Invocable}.
 	 * You must either define {@code engineSupplier}, {@code engine} or {@code engineName}.
-	 * @since 5.2
+	 *
 	 * @see #setEngine(ScriptEngine)
 	 * @see #setEngineName(String)
+	 * @since 5.2
 	 */
 	public void setEngineSupplier(@Nullable Supplier<ScriptEngine> engineSupplier) {
 		this.engineSupplier = engineSupplier;
@@ -137,6 +139,7 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	 * Set the engine name that will be used to instantiate the {@link ScriptEngine}.
 	 * If {@code renderFunction} is specified, the script engine must implement {@code Invocable}.
 	 * You must define {@code engine} or {@code engineName}, not both.
+	 *
 	 * @see #setEngine(ScriptEngine)
 	 * @see #setEngineSupplier(Supplier)
 	 */
@@ -160,6 +163,7 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	 * {@link #setEngineName(String)}. Using {@link #setEngine(ScriptEngine)} is not
 	 * possible because multiple instances of the script engine need to be created for
 	 * each request.
+	 *
 	 * @see <a href="https://docs.oracle.com/javase/8/docs/api/javax/script/ScriptEngineFactory.html#getParameter-java.lang.String-">THREADING ScriptEngine parameter</a>
 	 */
 	public void setSharedEngine(@Nullable Boolean sharedEngine) {
@@ -180,6 +184,7 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	 * and a custom "render.js" file, you should call
 	 * {@code configurer.setScripts("/META-INF/resources/webjars/library/version/library.js",
 	 * "com/myproject/script/render.js");}.
+	 *
 	 * @see #setResourceLoaderPath
 	 * @see <a href="https://www.webjars.org">WebJars</a>
 	 */
@@ -217,6 +222,7 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	 * <li>{@code Map model}: the view model</li>
 	 * <li>{@code RenderingContext context}: the rendering context</li>
 	 * </ol>
+	 *
 	 * @see RenderingContext
 	 */
 	public void setRenderFunction(@Nullable String renderFunction) {

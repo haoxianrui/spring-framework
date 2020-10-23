@@ -24,9 +24,9 @@ import java.util.function.Predicate;
  * for {@link MergedAnnotation} instances.
  *
  * @author Phillip Webb
- * @since 5.2
  * @see MergedAnnotations#get(Class, Predicate, MergedAnnotationSelector)
  * @see MergedAnnotations#get(String, Predicate, MergedAnnotationSelector)
+ * @since 5.2
  */
 public abstract class MergedAnnotationSelectors {
 
@@ -41,6 +41,7 @@ public abstract class MergedAnnotationSelectors {
 
 	/**
 	 * Select the nearest annotation, i.e. the one with the lowest distance.
+	 *
 	 * @return a selector that picks the annotation with the lowest distance
 	 */
 	@SuppressWarnings("unchecked")
@@ -51,6 +52,7 @@ public abstract class MergedAnnotationSelectors {
 	/**
 	 * Select the first directly declared annotation when possible. If no direct
 	 * annotations are declared then the nearest annotation is selected.
+	 *
 	 * @return a selector that picks the first directly declared annotation whenever possible
 	 */
 	@SuppressWarnings("unchecked")

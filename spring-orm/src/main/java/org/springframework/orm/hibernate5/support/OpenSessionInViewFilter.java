@@ -68,13 +68,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * the default bean name is "sessionFactory".
  *
  * @author Juergen Hoeller
- * @since 4.2
  * @see #lookupSessionFactory
  * @see OpenSessionInViewInterceptor
  * @see OpenSessionInterceptor
  * @see org.springframework.orm.hibernate5.HibernateTransactionManager
  * @see TransactionSynchronizationManager
  * @see SessionFactory#getCurrentSession()
+ * @since 4.2
  */
 public class OpenSessionInViewFilter extends OncePerRequestFilter {
 
@@ -89,6 +89,7 @@ public class OpenSessionInViewFilter extends OncePerRequestFilter {
 	/**
 	 * Set the bean name of the SessionFactory to fetch from Spring's
 	 * root application context. Default is "sessionFactory".
+	 *
 	 * @see #DEFAULT_SESSION_FACTORY_BEAN_NAME
 	 */
 	public void setSessionFactoryBeanName(String sessionFactoryBeanName) {
@@ -137,8 +138,7 @@ public class OpenSessionInViewFilter extends OncePerRequestFilter {
 		if (TransactionSynchronizationManager.hasResource(sessionFactory)) {
 			// Do not modify the Session: just set the participate flag.
 			participate = true;
-		}
-		else {
+		} else {
 			boolean isFirstRequest = !isAsyncDispatch(request);
 			if (isFirstRequest || !applySessionBindingInterceptor(asyncManager, key)) {
 				logger.debug("Opening Hibernate Session in OpenSessionInViewFilter");
@@ -154,9 +154,7 @@ public class OpenSessionInViewFilter extends OncePerRequestFilter {
 
 		try {
 			filterChain.doFilter(request, response);
-		}
-
-		finally {
+		} finally {
 			if (!participate) {
 				SessionHolder sessionHolder =
 						(SessionHolder) TransactionSynchronizationManager.unbindResource(sessionFactory);
@@ -173,6 +171,7 @@ public class OpenSessionInViewFilter extends OncePerRequestFilter {
 	 * taking the current HTTP request as argument.
 	 * <p>The default implementation delegates to the {@link #lookupSessionFactory()}
 	 * variant without arguments.
+	 *
 	 * @param request the current request
 	 * @return the SessionFactory to use
 	 */
@@ -184,6 +183,7 @@ public class OpenSessionInViewFilter extends OncePerRequestFilter {
 	 * Look up the SessionFactory that this filter should use.
 	 * <p>The default implementation looks for a bean with the specified name
 	 * in Spring's root application context.
+	 *
 	 * @return the SessionFactory to use
 	 * @see #getSessionFactoryBeanName
 	 */
@@ -199,6 +199,7 @@ public class OpenSessionInViewFilter extends OncePerRequestFilter {
 	 * Open a Session for the SessionFactory that this filter uses.
 	 * <p>The default implementation delegates to the {@link SessionFactory#openSession}
 	 * method and sets the {@link Session}'s flush mode to "MANUAL".
+	 *
 	 * @param sessionFactory the SessionFactory that this filter uses
 	 * @return the Session to use
 	 * @throws DataAccessResourceFailureException if the Session could not be created
@@ -210,8 +211,7 @@ public class OpenSessionInViewFilter extends OncePerRequestFilter {
 			Session session = sessionFactory.openSession();
 			session.setFlushMode(FlushMode.MANUAL);
 			return session;
-		}
-		catch (HibernateException ex) {
+		} catch (HibernateException ex) {
 			throw new DataAccessResourceFailureException("Could not open Hibernate Session", ex);
 		}
 	}

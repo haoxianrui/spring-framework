@@ -44,6 +44,7 @@ public class RuntimeBeanReference implements BeanReference {
 
 	/**
 	 * Create a new RuntimeBeanReference to the given bean name.
+	 *
 	 * @param beanName name of the target bean
 	 */
 	public RuntimeBeanReference(String beanName) {
@@ -53,9 +54,10 @@ public class RuntimeBeanReference implements BeanReference {
 	/**
 	 * Create a new RuntimeBeanReference to the given bean name,
 	 * with the option to mark it as reference to a bean in the parent factory.
+	 *
 	 * @param beanName name of the target bean
 	 * @param toParent whether this is an explicit reference to a bean in the
-	 * parent factory
+	 *                 parent factory
 	 */
 	public RuntimeBeanReference(String beanName, boolean toParent) {
 		Assert.hasText(beanName, "'beanName' must not be empty");
@@ -66,6 +68,7 @@ public class RuntimeBeanReference implements BeanReference {
 
 	/**
 	 * Create a new RuntimeBeanReference to a bean of the given type.
+	 *
 	 * @param beanType type of the target bean
 	 * @since 5.2
 	 */
@@ -76,9 +79,10 @@ public class RuntimeBeanReference implements BeanReference {
 	/**
 	 * Create a new RuntimeBeanReference to a bean of the given type,
 	 * with the option to mark it as reference to a bean in the parent factory.
+	 *
 	 * @param beanType type of the target bean
 	 * @param toParent whether this is an explicit reference to a bean in the
-	 * parent factory
+	 *                 parent factory
 	 * @since 5.2
 	 */
 	public RuntimeBeanReference(Class<?> beanType, boolean toParent) {
@@ -92,6 +96,7 @@ public class RuntimeBeanReference implements BeanReference {
 	/**
 	 * Return the requested bean name, or the fully-qualified type name
 	 * in case of by-type resolution.
+	 *
 	 * @see #getBeanType()
 	 */
 	@Override
@@ -101,6 +106,7 @@ public class RuntimeBeanReference implements BeanReference {
 
 	/**
 	 * Return the requested bean type if resolution by type is demanded.
+	 *
 	 * @since 5.2
 	 */
 	@Nullable

@@ -68,8 +68,7 @@ public class JndiJtaTransactionManagerTests {
 		TransactionManager tm = mock(TransactionManager.class);
 		if (defaultUt) {
 			given(ut.getStatus()).willReturn(Status.STATUS_NO_TRANSACTION, Status.STATUS_ACTIVE, Status.STATUS_ACTIVE);
-		}
-		else {
+		} else {
 			given(tm.getStatus()).willReturn(Status.STATUS_NO_TRANSACTION, Status.STATUS_ACTIVE, Status.STATUS_ACTIVE);
 		}
 
@@ -84,15 +83,13 @@ public class JndiJtaTransactionManagerTests {
 
 		if (tmFound) {
 			assertThat(ptm.getTransactionManager()).isEqualTo(tm);
-		}
-		else {
+		} else {
 			assertThat(ptm.getTransactionManager()).isNull();
 		}
 
 		if (defaultUt) {
 			assertThat(ptm.getUserTransaction()).isEqualTo(ut);
-		}
-		else {
+		} else {
 			boolean condition = ptm.getUserTransaction() instanceof UserTransactionAdapter;
 			assertThat(condition).isTrue();
 			UserTransactionAdapter uta = (UserTransactionAdapter) ptm.getUserTransaction();
@@ -119,8 +116,7 @@ public class JndiJtaTransactionManagerTests {
 		if (defaultUt) {
 			verify(ut).begin();
 			verify(ut).commit();
-		}
-		else {
+		} else {
 			verify(tm).begin();
 			verify(tm).commit();
 		}

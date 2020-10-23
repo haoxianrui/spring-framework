@@ -189,7 +189,7 @@ public class TransactionSupportTests {
 						throw ex;
 					}
 				}))
-			.isSameAs(ex);
+				.isSameAs(ex);
 		assertThat(tm.begin).as("triggered begin").isTrue();
 		assertThat(tm.commit).as("no commit").isFalse();
 		assertThat(tm.rollback).as("triggered rollback").isTrue();
@@ -216,7 +216,7 @@ public class TransactionSupportTests {
 						throw ex;
 					}
 				}))
-			.isSameAs(tex);
+				.isSameAs(tex);
 		assertThat(tm.begin).as("triggered begin").isTrue();
 		assertThat(tm.commit).as("no commit").isFalse();
 		assertThat(tm.rollback).as("triggered rollback").isTrue();

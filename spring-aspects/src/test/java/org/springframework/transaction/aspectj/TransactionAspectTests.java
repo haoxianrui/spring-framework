@@ -106,7 +106,7 @@ public class TransactionAspectTests {
 		Exception ex = new Exception();
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				testRollback(() -> annotationOnlyOnClassWithNoInterface.echo(ex), false))
-			.isSameAs(ex);
+				.isSameAs(ex);
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class TransactionAspectTests {
 		RuntimeException ex = new RuntimeException();
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
 				testRollback(() -> annotationOnlyOnClassWithNoInterface.echo(ex), true))
-			.isSameAs(ex);
+				.isSameAs(ex);
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class TransactionAspectTests {
 		Exception ex = new Exception();
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				testRollback(() -> new SubclassOfClassWithTransactionalAnnotation().echo(ex), false))
-			.isSameAs(ex);
+				.isSameAs(ex);
 	}
 
 	@Test
@@ -130,7 +130,7 @@ public class TransactionAspectTests {
 		Exception ex = new Exception();
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				testRollback(() -> new SubclassOfClassWithTransactionalMethodAnnotation().echo(ex), false))
-			.isSameAs(ex);
+				.isSameAs(ex);
 	}
 
 	@Test
@@ -152,8 +152,7 @@ public class TransactionAspectTests {
 		assertThat(txManager.begun).isEqualTo(0);
 		try {
 			toc.performTransactionalOperation();
-		}
-		finally {
+		} finally {
 			assertThat(txManager.begun).isEqualTo(1);
 			long expected1 = rollback ? 0 : 1;
 			assertThat(txManager.commits).isEqualTo(expected1);

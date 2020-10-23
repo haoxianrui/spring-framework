@@ -30,8 +30,8 @@ import org.springframework.util.MimeType;
  *
  * @author Rossen Stoyanchev
  * @author Brian Clozel
- * @since 5.2
  * @see MetadataExtractor
+ * @since 5.2
  */
 public interface MetadataExtractorRegistry {
 
@@ -39,10 +39,11 @@ public interface MetadataExtractorRegistry {
 	 * Decode metadata entries with the given {@link MimeType} to the specified
 	 * target class, and store the decoded value in the output map under the
 	 * given name.
-	 * @param mimeType the mime type of metadata entries to extract
+	 *
+	 * @param mimeType   the mime type of metadata entries to extract
 	 * @param targetType the target value type to decode to
-	 * @param name assign a name for the decoded value; if not provided, then
-	 * the mime type is used as the key
+	 * @param name       assign a name for the decoded value; if not provided, then
+	 *                   the mime type is used as the key
 	 */
 	default void metadataToExtract(MimeType mimeType, Class<?> targetType, @Nullable String name) {
 		String key = name != null ? name : mimeType.toString();
@@ -53,7 +54,8 @@ public interface MetadataExtractorRegistry {
 	 * Variant of {@link #metadataToExtract(MimeType, Class, String)} that accepts
 	 * {@link ParameterizedTypeReference} instead of {@link Class} for
 	 * specifying a target type with generic parameters.
-	 * @param mimeType the mime type of metadata entries to extract
+	 *
+	 * @param mimeType   the mime type of metadata entries to extract
 	 * @param targetType the target value type to decode to
 	 */
 	default void metadataToExtract(
@@ -67,10 +69,11 @@ public interface MetadataExtractorRegistry {
 	 * Variant of {@link #metadataToExtract(MimeType, Class, String)} that allows
 	 * custom logic to be used to map the decoded value to any number of values
 	 * in the output map.
-	 * @param mimeType the mime type of metadata entries to extract
+	 *
+	 * @param mimeType   the mime type of metadata entries to extract
 	 * @param targetType the target value type to decode to
-	 * @param mapper custom logic to add the decoded value to the output map
-	 * @param <T> the target value type
+	 * @param mapper     custom logic to add the decoded value to the output map
+	 * @param <T>        the target value type
 	 */
 	<T> void metadataToExtract(
 			MimeType mimeType, Class<T> targetType, BiConsumer<T, Map<String, Object>> mapper);
@@ -79,10 +82,11 @@ public interface MetadataExtractorRegistry {
 	 * Variant of {@link #metadataToExtract(MimeType, Class, BiConsumer)} that
 	 * accepts {@link ParameterizedTypeReference} instead of {@link Class} for
 	 * specifying a target type with generic parameters.
+	 *
 	 * @param mimeType the mime type of metadata entries to extract
-	 * @param type the target value type to decode to
-	 * @param mapper custom logic to add the decoded value to the output map
-	 * @param <T> the target value type
+	 * @param type     the target value type to decode to
+	 * @param mapper   custom logic to add the decoded value to the output map
+	 * @param <T>      the target value type
 	 */
 	<T> void metadataToExtract(
 			MimeType mimeType, ParameterizedTypeReference<T> type, BiConsumer<T, Map<String, Object>> mapper);

@@ -86,8 +86,8 @@ class DefaultWebClient implements WebClient {
 
 
 	DefaultWebClient(ExchangeFunction exchangeFunction, @Nullable UriBuilderFactory factory,
-			@Nullable HttpHeaders defaultHeaders, @Nullable MultiValueMap<String, String> defaultCookies,
-			@Nullable Consumer<RequestHeadersSpec<?>> defaultRequest, DefaultWebClientBuilder builder) {
+					 @Nullable HttpHeaders defaultHeaders, @Nullable MultiValueMap<String, String> defaultCookies,
+					 @Nullable Consumer<RequestHeadersSpec<?>> defaultRequest, DefaultWebClientBuilder builder) {
 
 		this.exchangeFunction = exchangeFunction;
 		this.uriBuilderFactory = (factory != null ? factory : new DefaultUriBuilderFactory());
@@ -357,11 +357,9 @@ class DefaultWebClient implements WebClient {
 		private HttpHeaders initHeaders() {
 			if (CollectionUtils.isEmpty(this.headers)) {
 				return (defaultHeaders != null ? defaultHeaders : new HttpHeaders());
-			}
-			else if (CollectionUtils.isEmpty(defaultHeaders)) {
+			} else if (CollectionUtils.isEmpty(defaultHeaders)) {
 				return this.headers;
-			}
-			else {
+			} else {
 				HttpHeaders result = new HttpHeaders();
 				result.putAll(defaultHeaders);
 				result.putAll(this.headers);
@@ -372,11 +370,9 @@ class DefaultWebClient implements WebClient {
 		private MultiValueMap<String, String> initCookies() {
 			if (CollectionUtils.isEmpty(this.cookies)) {
 				return (defaultCookies != null ? defaultCookies : new LinkedMultiValueMap<>());
-			}
-			else if (CollectionUtils.isEmpty(defaultCookies)) {
+			} else if (CollectionUtils.isEmpty(defaultCookies)) {
 				return this.cookies;
-			}
-			else {
+			} else {
 				MultiValueMap<String, String> result = new LinkedMultiValueMap<>();
 				result.putAll(defaultCookies);
 				result.putAll(this.cookies);
@@ -398,14 +394,17 @@ class DefaultWebClient implements WebClient {
 				public HttpMethod getMethod() {
 					return httpMethod;
 				}
+
 				@Override
 				public String getMethodValue() {
 					return httpMethod.name();
 				}
+
 				@Override
 				public URI getURI() {
 					return this.uri;
 				}
+
 				@Override
 				public HttpHeaders getHeaders() {
 					return this.headers;
@@ -439,7 +438,7 @@ class DefaultWebClient implements WebClient {
 
 		@Override
 		public ResponseSpec onStatus(Predicate<HttpStatus> statusPredicate,
-				Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
+									 Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
 
 			return onRawStatus(toIntPredicate(statusPredicate), exceptionFunction);
 		}
@@ -453,7 +452,7 @@ class DefaultWebClient implements WebClient {
 
 		@Override
 		public ResponseSpec onRawStatus(IntPredicate statusCodePredicate,
-				Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
+										Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
 
 			Assert.notNull(statusCodePredicate, "IntPredicate must not be null");
 			Assert.notNull(exceptionFunction, "Function must not be null");
@@ -478,8 +477,7 @@ class DefaultWebClient implements WebClient {
 			Mono<T> result = statusHandlers(response);
 			if (result != null) {
 				return result.switchIfEmpty(bodyPublisher);
-			}
-			else {
+			} else {
 				return bodyPublisher;
 			}
 		}
@@ -500,8 +498,7 @@ class DefaultWebClient implements WebClient {
 			Mono<T> result = statusHandlers(response);
 			if (result != null) {
 				return result.flux().switchIfEmpty(bodyPublisher);
-			}
-			else {
+			} else {
 				return bodyPublisher;
 			}
 		}
@@ -516,8 +513,7 @@ class DefaultWebClient implements WebClient {
 						exMono = handler.apply(response);
 						exMono = exMono.flatMap(ex -> drainBody(response, ex));
 						exMono = exMono.onErrorResume(ex -> drainBody(response, ex));
-					}
-					catch (Throwable ex2) {
+					} catch (Throwable ex2) {
 						exMono = drainBody(response, ex2);
 					}
 					Mono<T> result = exMono.flatMap(Mono::error);
@@ -587,7 +583,7 @@ class DefaultWebClient implements WebClient {
 			private final Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction;
 
 			public StatusHandler(IntPredicate predicate,
-					Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
+								 Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
 
 				this.predicate = predicate;
 				this.exceptionFunction = exceptionFunction;

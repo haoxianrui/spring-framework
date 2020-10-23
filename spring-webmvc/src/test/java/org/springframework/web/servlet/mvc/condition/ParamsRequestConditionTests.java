@@ -27,6 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link ParamsRequestCondition}.
+ *
  * @author Arjen Poutsma
  */
 public class ParamsRequestConditionTests {

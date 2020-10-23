@@ -37,6 +37,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Unit tests for {@link org.springframework.web.servlet.HandlerMapping}.
+ *
  * @author Brian Clozel
  */
 public class HandlerMappingTests {

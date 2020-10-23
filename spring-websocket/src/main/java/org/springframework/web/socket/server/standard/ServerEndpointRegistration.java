@@ -51,8 +51,8 @@ import org.springframework.web.socket.handler.BeanCreatingHandlerProvider;
  *
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
- * @since 4.0
  * @see ServerEndpointExporter
+ * @since 4.0
  */
 public class ServerEndpointRegistration extends ServerEndpointConfig.Configurator
 		implements ServerEndpointConfig, BeanFactoryAware {
@@ -79,7 +79,8 @@ public class ServerEndpointRegistration extends ServerEndpointConfig.Configurato
 	/**
 	 * Create a new {@link ServerEndpointRegistration} instance from an
 	 * {@code javax.websocket.Endpoint} instance.
-	 * @param path the endpoint path
+	 *
+	 * @param path     the endpoint path
 	 * @param endpoint the endpoint instance
 	 */
 	public ServerEndpointRegistration(String path, Endpoint endpoint) {
@@ -93,7 +94,8 @@ public class ServerEndpointRegistration extends ServerEndpointConfig.Configurato
 	/**
 	 * Create a new {@link ServerEndpointRegistration} instance from an
 	 * {@code javax.websocket.Endpoint} class.
-	 * @param path the endpoint path
+	 *
+	 * @param path          the endpoint path
 	 * @param endpointClass the endpoint class
 	 */
 	public ServerEndpointRegistration(String path, Class<? extends Endpoint> endpointClass) {
@@ -116,8 +118,7 @@ public class ServerEndpointRegistration extends ServerEndpointConfig.Configurato
 	public Class<? extends Endpoint> getEndpointClass() {
 		if (this.endpoint != null) {
 			return this.endpoint.getClass();
-		}
-		else {
+		} else {
 			Assert.state(this.endpointProvider != null, "No endpoint set");
 			return this.endpointProvider.getHandlerType();
 		}
@@ -126,8 +127,7 @@ public class ServerEndpointRegistration extends ServerEndpointConfig.Configurato
 	public Endpoint getEndpoint() {
 		if (this.endpoint != null) {
 			return this.endpoint;
-		}
-		else {
+		} else {
 			Assert.state(this.endpointProvider != null, "No endpoint set");
 			return this.endpointProvider.getHandler();
 		}

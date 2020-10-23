@@ -29,6 +29,7 @@ import static org.springframework.http.ContentDisposition.builder;
 
 /**
  * Unit tests for {@link ContentDisposition}
+ *
  * @author Sebastien Deleuze
  * @author Rossen Stoyanchev
  */
@@ -108,9 +109,9 @@ public class ContentDispositionTests {
 	public void parseWithEscapedQuote() {
 
 		BiConsumer<String, String> tester = (description, filename) ->
-			assertThat(parse("form-data; name=\"file\"; filename=\"" + filename + "\"; size=123"))
-					.as(description)
-					.isEqualTo(builder("form-data").name("file").filename(filename).size(123L).build());
+				assertThat(parse("form-data; name=\"file\"; filename=\"" + filename + "\"; size=123"))
+						.as(description)
+						.isEqualTo(builder("form-data").name("file").filename(filename).size(123L).build());
 
 		tester.accept("Escaped quotes should be ignored",
 				"\\\"The Twilight Zone\\\".txt");

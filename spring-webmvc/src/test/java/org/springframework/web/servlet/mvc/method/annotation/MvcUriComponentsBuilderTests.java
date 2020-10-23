@@ -265,7 +265,7 @@ public class MvcUriComponentsBuilderTests {
 	@Test  // SPR-14405
 	public void fromMethodNameWithOptionalParam() {
 		UriComponents uriComponents = fromMethodName(ControllerWithMethods.class,
-				"methodWithOptionalParam", new Object[] {null}).build();
+				"methodWithOptionalParam", new Object[]{null}).build();
 
 		assertThat(uriComponents.toUriString()).isEqualTo("http://localhost/something/optional-param");
 	}
@@ -381,9 +381,9 @@ public class MvcUriComponentsBuilderTests {
 	@Test // SPR-16710
 	public void fromMethodCallWithStringReturnType() {
 		assertThatIllegalStateException().isThrownBy(() -> {
-				UriComponents uriComponents = fromMethodCall(
-						on(BookingControllerWithString.class).getBooking(21L)).buildAndExpand(42);
-				uriComponents.encode().toUri().toString();
+			UriComponents uriComponents = fromMethodCall(
+					on(BookingControllerWithString.class).getBooking(21L)).buildAndExpand(42);
+			uriComponents.encode().toUri().toString();
 		});
 	}
 
@@ -555,13 +555,13 @@ public class MvcUriComponentsBuilderTests {
 
 		@RequestMapping(value = "/{id}/foo")
 		HttpEntity<Void> methodForNextPage(@PathVariable String id,
-				@RequestParam Integer offset, @RequestParam Integer limit) {
+										   @RequestParam Integer offset, @RequestParam Integer limit) {
 			return null;
 		}
 
 		@RequestMapping(value = "/{id}/foo")
 		HttpEntity<Void> methodWithMultiValueRequestParams(@PathVariable String id,
-				@RequestParam List<Integer> items, @RequestParam Integer limit) {
+														   @RequestParam List<Integer> items, @RequestParam Integer limit) {
 			return null;
 		}
 

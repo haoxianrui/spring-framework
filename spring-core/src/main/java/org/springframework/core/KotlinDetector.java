@@ -41,8 +41,7 @@ public abstract class KotlinDetector {
 		ClassLoader classLoader = KotlinDetector.class.getClassLoader();
 		try {
 			metadata = ClassUtils.forName("kotlin.Metadata", classLoader);
-		}
-		catch (ClassNotFoundException ex) {
+		} catch (ClassNotFoundException ex) {
 			// Kotlin API not available - no Kotlin support
 			metadata = null;
 		}
@@ -60,6 +59,7 @@ public abstract class KotlinDetector {
 
 	/**
 	 * Determine whether Kotlin reflection is present.
+	 *
 	 * @since 5.1
 	 */
 	public static boolean isKotlinReflectPresent() {

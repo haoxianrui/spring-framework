@@ -99,9 +99,9 @@ import org.springframework.messaging.Message;
  * the controller <i>interface</i> rather than on the implementation class.
  *
  * @author Rossen Stoyanchev
- * @since 4.0
  * @see org.springframework.messaging.simp.annotation.support.SimpAnnotationMethodMessageHandler
  * @see org.springframework.messaging.rsocket.annotation.support.RSocketMessageHandler
+ * @since 4.0
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

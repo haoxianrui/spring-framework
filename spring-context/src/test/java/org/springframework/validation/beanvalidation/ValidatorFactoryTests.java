@@ -415,6 +415,7 @@ public class ValidatorFactoryTests {
 		public String getValue() {
 			return value;
 		}
+
 		public void setValue(String value) {
 			this.value = value;
 		}
@@ -423,12 +424,12 @@ public class ValidatorFactoryTests {
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
-	@Constraint(validatedBy=InnerValidator.class)
+	@Constraint(validatedBy = InnerValidator.class)
 	public @interface InnerValid {
 
 		String message() default "NOT VALID";
 
-		Class<?>[] groups() default { };
+		Class<?>[] groups() default {};
 
 		Class<? extends Payload>[] payload() default {};
 	}

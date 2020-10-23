@@ -62,7 +62,8 @@ class DomContentHandlerTests {
 
 
 	@BeforeEach
-	@SuppressWarnings("deprecation")  // on JDK 9
+	@SuppressWarnings("deprecation")
+		// on JDK 9
 	void setUp() throws Exception {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		documentBuilderFactory.setNamespaceAware(true);

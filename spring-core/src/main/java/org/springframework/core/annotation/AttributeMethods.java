@@ -88,6 +88,7 @@ final class AttributeMethods {
 	/**
 	 * Determine if this instance only contains a single attribute named
 	 * {@code value}.
+	 *
 	 * @return {@code true} if there is only a value attribute
 	 */
 	boolean hasOnlyValueAttribute() {
@@ -99,6 +100,7 @@ final class AttributeMethods {
 	/**
 	 * Determine if values from the given annotation can be safely accessed without
 	 * causing any {@link TypeNotPresentException TypeNotPresentExceptions}.
+	 *
 	 * @param annotation the annotation to check
 	 * @return {@code true} if all values are present
 	 * @see #validate(Annotation)
@@ -109,8 +111,7 @@ final class AttributeMethods {
 			if (canThrowTypeNotPresentException(i)) {
 				try {
 					get(i).invoke(annotation);
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					return false;
 				}
 			}
@@ -124,6 +125,7 @@ final class AttributeMethods {
 	 * this method is designed to cover Google App Engine's late arrival of such
 	 * exceptions for {@code Class} values (instead of the more typical early
 	 * {@code Class.getAnnotations() failure}.
+	 *
 	 * @param annotation the annotation to validate
 	 * @throws IllegalStateException if a declared {@code Class} attribute could not be read
 	 * @see #isValid(Annotation)
@@ -134,8 +136,7 @@ final class AttributeMethods {
 			if (canThrowTypeNotPresentException(i)) {
 				try {
 					get(i).invoke(annotation);
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					throw new IllegalStateException("Could not obtain annotation attribute value for " +
 							get(i).getName() + " declared on " + annotation.annotationType(), ex);
 				}
@@ -153,6 +154,7 @@ final class AttributeMethods {
 	/**
 	 * Get the attribute with the specified name or {@code null} if no
 	 * matching attribute exists.
+	 *
 	 * @param name the attribute name to find
 	 * @return the attribute method or {@code null}
 	 */
@@ -164,10 +166,11 @@ final class AttributeMethods {
 
 	/**
 	 * Get the attribute at the specified index.
+	 *
 	 * @param index the index of the attribute to return
 	 * @return the attribute method
 	 * @throws IndexOutOfBoundsException if the index is out of range
-	 * (<tt>index &lt; 0 || index &gt;= size()</tt>)
+	 *                                   (<tt>index &lt; 0 || index &gt;= size()</tt>)
 	 */
 	Method get(int index) {
 		return this.attributeMethods[index];
@@ -176,6 +179,7 @@ final class AttributeMethods {
 	/**
 	 * Determine if the attribute at the specified index could throw a
 	 * {@link TypeNotPresentException} when accessed.
+	 *
 	 * @param index the index of the attribute to check
 	 * @return {@code true} if the attribute can throw a
 	 * {@link TypeNotPresentException}
@@ -187,6 +191,7 @@ final class AttributeMethods {
 	/**
 	 * Get the index of the attribute with the specified name, or {@code -1}
 	 * if there is no attribute with the name.
+	 *
 	 * @param name the name to find
 	 * @return the index of the attribute, or {@code -1}
 	 */
@@ -202,6 +207,7 @@ final class AttributeMethods {
 	/**
 	 * Get the index of the specified attribute, or {@code -1} if the
 	 * attribute is not in this collection.
+	 *
 	 * @param attribute the attribute to find
 	 * @return the index of the attribute, or {@code -1}
 	 */
@@ -216,6 +222,7 @@ final class AttributeMethods {
 
 	/**
 	 * Get the number of attributes in this collection.
+	 *
 	 * @return the number of attributes
 	 */
 	int size() {
@@ -224,6 +231,7 @@ final class AttributeMethods {
 
 	/**
 	 * Determine if at least one of the attribute methods has a default value.
+	 *
 	 * @return {@code true} if there is at least one attribute method with a default value
 	 */
 	boolean hasDefaultValueMethod() {
@@ -232,6 +240,7 @@ final class AttributeMethods {
 
 	/**
 	 * Determine if at least one of the attribute methods is a nested annotation.
+	 *
 	 * @return {@code true} if there is at least one attribute method with a nested
 	 * annotation type
 	 */
@@ -242,6 +251,7 @@ final class AttributeMethods {
 
 	/**
 	 * Get the attribute methods for the given annotation type.
+	 *
 	 * @param annotationType the annotation type
 	 * @return the attribute methods for the annotation type
 	 */
@@ -276,6 +286,7 @@ final class AttributeMethods {
 	/**
 	 * Create a description for the given attribute method suitable to use in
 	 * exception messages and logs.
+	 *
 	 * @param attribute the attribute to describe
 	 * @return a description of the attribute
 	 */
@@ -289,8 +300,9 @@ final class AttributeMethods {
 	/**
 	 * Create a description for the given attribute method suitable to use in
 	 * exception messages and logs.
+	 *
 	 * @param annotationType the annotation type
-	 * @param attributeName the attribute name
+	 * @param attributeName  the attribute name
 	 * @return a description of the attribute
 	 */
 	static String describe(@Nullable Class<?> annotationType, @Nullable String attributeName) {

@@ -181,11 +181,9 @@ final class DefaultRSocketRequester implements RSocketRequester {
 			Publisher<?> publisher;
 			if (input instanceof Publisher) {
 				publisher = (Publisher<?>) input;
-			}
-			else if (adapter != null) {
+			} else if (adapter != null) {
 				publisher = adapter.toPublisher(input);
-			}
-			else {
+			} else {
 				ResolvableType type = ResolvableType.forInstance(input);
 				this.payloadMono = firstPayload(Mono.fromCallable(() -> encodeData(input, type, null)));
 				this.payloadFlux = null;
@@ -219,8 +217,7 @@ final class DefaultRSocketRequester implements RSocketRequester {
 						if (data != null) {
 							return firstPayload(Mono.fromCallable(() -> data))
 									.concatWith(inner.skip(1).map(PayloadUtils::createPayload));
-						}
-						else {
+						} else {
 							return inner.map(PayloadUtils::createPayload);
 						}
 					})
@@ -239,6 +236,7 @@ final class DefaultRSocketRequester implements RSocketRequester {
 
 		/**
 		 * Create the 1st request payload with encoded data and metadata.
+		 *
 		 * @param encodedData the encoded payload data; expected to not be empty!
 		 */
 		private Mono<Payload> firstPayload(Mono<DataBuffer> encodedData) {

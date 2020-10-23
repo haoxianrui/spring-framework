@@ -49,7 +49,7 @@ public class StandardTypeLocatorTests {
 
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				locator.findType("URL"))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.TYPE_NOT_FOUND));
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.TYPE_NOT_FOUND));
 		locator.registerImport("java.net");
 		assertThat(locator.findType("URL")).isEqualTo(java.net.URL.class);
 	}

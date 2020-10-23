@@ -110,6 +110,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 				assertThat(entity.getHeaders().getContentType()).as("Invalid content-type").isEqualTo(textContentType);
 				assertThat(entity.getStatusCode()).as("Invalid status code").isEqualTo(HttpStatus.OK);
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -176,6 +177,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(HttpHeaders result) {
 				assertThat(result.containsKey("Content-Type")).as("No Content-Type header").isTrue();
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -192,7 +194,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void postForLocation() throws Exception  {
+	public void postForLocation() throws Exception {
 		HttpHeaders entityHeaders = new HttpHeaders();
 		entityHeaders.setContentType(new MediaType("text", "plain", StandardCharsets.ISO_8859_1));
 		HttpEntity<String> entity = new HttpEntity<>(helloWorld, entityHeaders);
@@ -202,7 +204,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void postForLocationCallback() throws Exception  {
+	public void postForLocationCallback() throws Exception {
 		HttpHeaders entityHeaders = new HttpHeaders();
 		entityHeaders.setContentType(new MediaType("text", "plain", StandardCharsets.ISO_8859_1));
 		HttpEntity<String> entity = new HttpEntity<>(helloWorld, entityHeaders);
@@ -213,6 +215,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(URI result) {
 				assertThat(result).as("Invalid location").isEqualTo(expected);
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -222,7 +225,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void postForLocationCallbackWithLambdas() throws Exception  {
+	public void postForLocationCallbackWithLambdas() throws Exception {
 		HttpHeaders entityHeaders = new HttpHeaders();
 		entityHeaders.setContentType(new MediaType("text", "plain", StandardCharsets.ISO_8859_1));
 		HttpEntity<String> entity = new HttpEntity<>(helloWorld, entityHeaders);
@@ -234,7 +237,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void postForEntity() throws Exception  {
+	public void postForEntity() throws Exception {
 		HttpEntity<String> requestEntity = new HttpEntity<>(helloWorld);
 		Future<ResponseEntity<String>> responseEntityFuture =
 				template.postForEntity(baseUrl + "/{method}", requestEntity, String.class, "post");
@@ -243,7 +246,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void postForEntityCallback() throws Exception  {
+	public void postForEntityCallback() throws Exception {
 		HttpEntity<String> requestEntity = new HttpEntity<>(helloWorld);
 		ListenableFuture<ResponseEntity<String>> responseEntityFuture =
 				template.postForEntity(baseUrl + "/{method}", requestEntity, String.class, "post");
@@ -252,6 +255,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(ResponseEntity<String> result) {
 				assertThat(result.getBody()).as("Invalid content").isEqualTo(helloWorld);
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -261,7 +265,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void postForEntityCallbackWithLambdas() throws Exception  {
+	public void postForEntityCallbackWithLambdas() throws Exception {
 		HttpEntity<String> requestEntity = new HttpEntity<>(helloWorld);
 		ListenableFuture<ResponseEntity<String>> responseEntityFuture =
 				template.postForEntity(baseUrl + "/{method}", requestEntity, String.class, "post");
@@ -272,14 +276,14 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void put() throws Exception  {
+	public void put() throws Exception {
 		HttpEntity<String> requestEntity = new HttpEntity<>(helloWorld);
 		Future<?> responseEntityFuture = template.put(baseUrl + "/{method}", requestEntity, "put");
 		responseEntityFuture.get();
 	}
 
 	@Test
-	public void putCallback() throws Exception  {
+	public void putCallback() throws Exception {
 		HttpEntity<String> requestEntity = new HttpEntity<>(helloWorld);
 		ListenableFuture<?> responseEntityFuture = template.put(baseUrl + "/{method}", requestEntity, "put");
 		responseEntityFuture.addCallback(new ListenableFutureCallback<Object>() {
@@ -287,6 +291,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(Object result) {
 				assertThat(result).isNull();
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -296,19 +301,20 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void delete() throws Exception  {
+	public void delete() throws Exception {
 		Future<?> deletedFuture = template.delete(new URI(baseUrl + "/delete"));
 		deletedFuture.get();
 	}
 
 	@Test
-	public void deleteCallback() throws Exception  {
+	public void deleteCallback() throws Exception {
 		ListenableFuture<?> deletedFuture = template.delete(new URI(baseUrl + "/delete"));
 		deletedFuture.addCallback(new ListenableFutureCallback<Object>() {
 			@Override
 			public void onSuccess(Object result) {
 				assertThat(result).isNull();
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -318,7 +324,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void deleteCallbackWithLambdas() throws Exception  {
+	public void deleteCallbackWithLambdas() throws Exception {
 		ListenableFuture<?> deletedFuture = template.delete(new URI(baseUrl + "/delete"));
 		deletedFuture.addCallback(result -> assertThat(result).isNull(), ex -> fail(ex.getMessage()));
 		waitTillDone(deletedFuture);
@@ -335,6 +341,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(Object result) {
 				fail("onSuccess not expected");
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				boolean condition = ex instanceof HttpClientErrorException;
@@ -347,8 +354,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 		try {
 			future.get();
 			fail("Exception expected");
-		}
-		catch (ExecutionException ex) {
+		} catch (ExecutionException ex) {
 			Throwable cause = ex.getCause();
 			boolean condition = cause instanceof HttpClientErrorException;
 			assertThat(condition).isTrue();
@@ -360,16 +366,16 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	@Test
 	public void notFoundGet() throws Exception {
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(() -> {
-				Future<?> future = template.execute(baseUrl + "/status/notfound", HttpMethod.GET, null, null);
-				future.get();
-				})
-			.withCauseInstanceOf(HttpClientErrorException.class)
-			.satisfies(ex -> {
-				HttpClientErrorException cause = (HttpClientErrorException) ex.getCause();
-				assertThat(cause.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-				assertThat(cause.getStatusText()).isNotNull();
-				assertThat(cause.getResponseBodyAsString()).isNotNull();
-			});
+			Future<?> future = template.execute(baseUrl + "/status/notfound", HttpMethod.GET, null, null);
+			future.get();
+		})
+				.withCauseInstanceOf(HttpClientErrorException.class)
+				.satisfies(ex -> {
+					HttpClientErrorException cause = (HttpClientErrorException) ex.getCause();
+					assertThat(cause.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+					assertThat(cause.getStatusText()).isNotNull();
+					assertThat(cause.getResponseBodyAsString()).isNotNull();
+				});
 	}
 
 	@Test
@@ -380,6 +386,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(Object result) {
 				fail("onSuccess not expected");
 			}
+
 			@Override
 			public void onFailure(Throwable t) {
 				boolean condition = t instanceof HttpClientErrorException;
@@ -413,11 +420,10 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			Future<Void> future = template.execute(baseUrl + "/status/server", HttpMethod.GET, null, null);
 			future.get();
 			fail("HttpServerErrorException expected");
-		}
-		catch (ExecutionException ex) {
+		} catch (ExecutionException ex) {
 			boolean condition = ex.getCause() instanceof HttpServerErrorException;
 			assertThat(condition).isTrue();
-			HttpServerErrorException cause = (HttpServerErrorException)ex.getCause();
+			HttpServerErrorException cause = (HttpServerErrorException) ex.getCause();
 
 			assertThat(cause.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
 			assertThat(cause.getStatusText()).isNotNull();
@@ -433,6 +439,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(Void result) {
 				fail("onSuccess not expected");
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				boolean condition = ex instanceof HttpServerErrorException;
@@ -474,8 +481,9 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			@Override
 			public void onSuccess(Set<HttpMethod> result) {
 				assertThat(result).as("Invalid response").isEqualTo(EnumSet.of(HttpMethod.GET, HttpMethod.OPTIONS,
-								HttpMethod.HEAD, HttpMethod.TRACE));
+						HttpMethod.HEAD, HttpMethod.TRACE));
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -485,15 +493,15 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	public void optionsForAllowCallbackWithLambdas() throws Exception{
+	public void optionsForAllowCallbackWithLambdas() throws Exception {
 		ListenableFuture<Set<HttpMethod>> allowedFuture = template.optionsForAllow(new URI(baseUrl + "/get"));
-		allowedFuture.addCallback(result -> assertThat(result).as("Invalid response").isEqualTo(EnumSet.of(HttpMethod.GET, HttpMethod.OPTIONS, HttpMethod.HEAD,HttpMethod.TRACE)),
+		allowedFuture.addCallback(result -> assertThat(result).as("Invalid response").isEqualTo(EnumSet.of(HttpMethod.GET, HttpMethod.OPTIONS, HttpMethod.HEAD, HttpMethod.TRACE)),
 				ex -> fail(ex.getMessage()));
 		waitTillDone(allowedFuture);
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void exchangeGet() throws Exception {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.set("MyHeader", "MyValue");
@@ -505,7 +513,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void exchangeGetCallback() throws Exception {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.set("MyHeader", "MyValue");
@@ -517,6 +525,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 			public void onSuccess(ResponseEntity<String> result) {
 				assertThat(result.getBody()).as("Invalid content").isEqualTo(helloWorld);
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -526,7 +535,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void exchangeGetCallbackWithLambdas() throws Exception {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.set("MyHeader", "MyValue");
@@ -558,13 +567,14 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 		HttpEntity<String> requestEntity = new HttpEntity<>(helloWorld, requestHeaders);
 		ListenableFuture<ResponseEntity<Void>> resultFuture =
 				template.exchange(baseUrl + "/{method}", HttpMethod.POST, requestEntity, Void.class, "post");
-		final URI expected =new URI(baseUrl + "/post/1");
+		final URI expected = new URI(baseUrl + "/post/1");
 		resultFuture.addCallback(new ListenableFutureCallback<ResponseEntity<Void>>() {
 			@Override
 			public void onSuccess(ResponseEntity<Void> result) {
 				assertThat(result.getHeaders().getLocation()).as("Invalid location").isEqualTo(expected);
 				assertThat(result.hasBody()).isFalse();
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				fail(ex.getMessage());
@@ -581,7 +591,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 		HttpEntity<String> requestEntity = new HttpEntity<>(helloWorld, requestHeaders);
 		ListenableFuture<ResponseEntity<Void>> resultFuture =
 				template.exchange(baseUrl + "/{method}", HttpMethod.POST, requestEntity, Void.class, "post");
-		final URI expected =new URI(baseUrl + "/post/1");
+		final URI expected = new URI(baseUrl + "/post/1");
 		resultFuture.addCallback(result -> {
 			assertThat(result.getHeaders().getLocation()).as("Invalid location").isEqualTo(expected);
 			assertThat(result.hasBody()).isFalse();
@@ -632,8 +642,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 		while (!future.isDone()) {
 			try {
 				Thread.sleep(5);
-			}
-			catch (InterruptedException ex) {
+			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
 		}
@@ -650,7 +659,7 @@ public class AsyncRestTemplateIntegrationTests extends AbstractMockWebServerTest
 
 		@Override
 		public ListenableFuture<ClientHttpResponse> intercept(HttpRequest request, byte[] body,
-				org.springframework.http.client.AsyncClientHttpRequestExecution execution) throws IOException {
+															  org.springframework.http.client.AsyncClientHttpRequestExecution execution) throws IOException {
 
 			ListenableFuture<ClientHttpResponse> future = execution.executeAsync(request, body);
 			future.addCallback(

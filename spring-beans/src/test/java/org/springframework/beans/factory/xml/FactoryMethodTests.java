@@ -250,7 +250,7 @@ public class FactoryMethodTests {
 		reader.loadBeanDefinitions(new ClassPathResource("factory-methods.xml", getClass()));
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				xbf.getBean("invalidPrototype"))
-			.withMessageContaining("nonExisting(TestBean)");
+				.withMessageContaining("nonExisting(TestBean)");
 	}
 
 	@Test
@@ -260,7 +260,7 @@ public class FactoryMethodTests {
 		reader.loadBeanDefinitions(new ClassPathResource("factory-methods.xml", getClass()));
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				xbf.getBean("invalidPrototype", new TestBean()))
-			.withMessageContaining("nonExisting(TestBean)");
+				.withMessageContaining("nonExisting(TestBean)");
 	}
 
 	@Test

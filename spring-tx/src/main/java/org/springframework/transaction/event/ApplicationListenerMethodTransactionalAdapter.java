@@ -39,9 +39,9 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  *
  * @author Stephane Nicoll
  * @author Juergen Hoeller
- * @since 4.2
  * @see ApplicationListenerMethodAdapter
  * @see TransactionalEventListener
+ * @since 4.2
  */
 class ApplicationListenerMethodTransactionalAdapter extends ApplicationListenerMethodAdapter {
 
@@ -64,14 +64,12 @@ class ApplicationListenerMethodTransactionalAdapter extends ApplicationListenerM
 				TransactionSynchronizationManager.isActualTransactionActive()) {
 			TransactionSynchronization transactionSynchronization = createTransactionSynchronization(event);
 			TransactionSynchronizationManager.registerSynchronization(transactionSynchronization);
-		}
-		else if (this.annotation.fallbackExecution()) {
+		} else if (this.annotation.fallbackExecution()) {
 			if (this.annotation.phase() == TransactionPhase.AFTER_ROLLBACK && logger.isWarnEnabled()) {
 				logger.warn("Processing " + event + " as a fallback execution on AFTER_ROLLBACK phase");
 			}
 			processEvent(event);
-		}
-		else {
+		} else {
 			// No transactional event execution at all
 			if (logger.isDebugEnabled()) {
 				logger.debug("No transaction is active - skipping " + event);
@@ -93,7 +91,7 @@ class ApplicationListenerMethodTransactionalAdapter extends ApplicationListenerM
 		private final TransactionPhase phase;
 
 		public TransactionSynchronizationEventAdapter(ApplicationListenerMethodAdapter listener,
-				ApplicationEvent event, TransactionPhase phase) {
+													  ApplicationEvent event, TransactionPhase phase) {
 
 			this.listener = listener;
 			this.event = event;
@@ -116,11 +114,9 @@ class ApplicationListenerMethodTransactionalAdapter extends ApplicationListenerM
 		public void afterCompletion(int status) {
 			if (this.phase == TransactionPhase.AFTER_COMMIT && status == STATUS_COMMITTED) {
 				processEvent();
-			}
-			else if (this.phase == TransactionPhase.AFTER_ROLLBACK && status == STATUS_ROLLED_BACK) {
+			} else if (this.phase == TransactionPhase.AFTER_ROLLBACK && status == STATUS_ROLLED_BACK) {
 				processEvent();
-			}
-			else if (this.phase == TransactionPhase.AFTER_COMPLETION) {
+			} else if (this.phase == TransactionPhase.AFTER_COMPLETION) {
 				processEvent();
 			}
 		}

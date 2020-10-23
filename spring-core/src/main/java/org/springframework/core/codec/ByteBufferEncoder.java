@@ -50,8 +50,8 @@ public class ByteBufferEncoder extends AbstractEncoder<ByteBuffer> {
 
 	@Override
 	public Flux<DataBuffer> encode(Publisher<? extends ByteBuffer> inputStream,
-			DataBufferFactory bufferFactory, ResolvableType elementType, @Nullable MimeType mimeType,
-			@Nullable Map<String, Object> hints) {
+								   DataBufferFactory bufferFactory, ResolvableType elementType, @Nullable MimeType mimeType,
+								   @Nullable Map<String, Object> hints) {
 
 		return Flux.from(inputStream).map(byteBuffer ->
 				encodeValue(byteBuffer, bufferFactory, elementType, mimeType, hints));
@@ -59,7 +59,7 @@ public class ByteBufferEncoder extends AbstractEncoder<ByteBuffer> {
 
 	@Override
 	public DataBuffer encodeValue(ByteBuffer byteBuffer, DataBufferFactory bufferFactory,
-			ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								  ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		DataBuffer dataBuffer = bufferFactory.wrap(byteBuffer);
 		if (logger.isDebugEnabled() && !Hints.isLoggingSuppressed(hints)) {

@@ -91,15 +91,14 @@ public class PasswordInputTagTests extends InputTagTests {
 	public void dynamicTypeAttribute() throws JspException {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.getTag().setDynamicAttribute(null, "type", "email"))
-			.withMessage("Attribute type=\"email\" is not allowed");
+				.withMessage("Attribute type=\"email\" is not allowed");
 	}
 
 	@Override
 	protected void assertValueAttribute(String output, String expectedValue) {
 		if (this.getPasswordTag().isShowPassword()) {
 			super.assertValueAttribute(output, expectedValue);
-		}
-		else {
+		} else {
 			super.assertValueAttribute(output, "");
 		}
 	}

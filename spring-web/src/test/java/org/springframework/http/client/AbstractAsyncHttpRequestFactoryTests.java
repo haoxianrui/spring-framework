@@ -74,8 +74,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 		ClientHttpResponse response = futureResponse.get();
 		try {
 			assertThat(response.getStatusCode()).as("Invalid status code").isEqualTo(HttpStatus.NOT_FOUND);
-		}
-		finally {
+		} finally {
 			response.close();
 		}
 	}
@@ -92,11 +91,11 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 			public void onSuccess(ClientHttpResponse result) {
 				try {
 					assertThat(result.getStatusCode()).as("Invalid status code").isEqualTo(HttpStatus.NOT_FOUND);
-				}
-				catch (IOException ex) {
+				} catch (IOException ex) {
 					throw new AssertionError(ex.getMessage(), ex);
 				}
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				throw new AssertionError(ex.getMessage(), ex);
@@ -105,8 +104,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 		ClientHttpResponse response = listenableFuture.get();
 		try {
 			assertThat(response.getStatusCode()).as("Invalid status code").isEqualTo(HttpStatus.NOT_FOUND);
-		}
-		finally {
+		} finally {
 			response.close();
 		}
 	}
@@ -126,8 +124,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 		if (request instanceof StreamingHttpOutputMessage) {
 			StreamingHttpOutputMessage streamingRequest = (StreamingHttpOutputMessage) request;
 			streamingRequest.setBody(outputStream -> StreamUtils.copy(body, outputStream));
-		}
-		else {
+		} else {
 			StreamUtils.copy(body, request.getBody());
 		}
 
@@ -139,8 +136,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 			assertThat(response.getHeaders().get(headerName)).as("Header value not found").isEqualTo(Arrays.asList(headerValue1, headerValue2));
 			byte[] result = FileCopyUtils.copyToByteArray(response.getBody());
 			assertThat(Arrays.equals(body, result)).as("Invalid body").isTrue();
-		}
-		finally {
+		} finally {
 			response.close();
 		}
 	}
@@ -153,8 +149,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 		if (request instanceof StreamingHttpOutputMessage) {
 			StreamingHttpOutputMessage streamingRequest = (StreamingHttpOutputMessage) request;
 			streamingRequest.setBody(outputStream -> StreamUtils.copy(body, outputStream));
-		}
-		else {
+		} else {
 			StreamUtils.copy(body, request.getBody());
 		}
 
@@ -163,8 +158,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 		try {
 			assertThatIllegalStateException().isThrownBy(() ->
 					FileCopyUtils.copy(body, request.getBody()));
-		}
-		finally {
+		} finally {
 			response.close();
 		}
 	}
@@ -181,8 +175,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 		try {
 			assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() ->
 					request.getHeaders().add("MyHeader", "value"));
-		}
-		finally {
+		} finally {
 			response.close();
 		}
 	}
@@ -209,8 +202,7 @@ public abstract class AbstractAsyncHttpRequestFactoryTests extends AbstractMockW
 			response = futureResponse.get();
 			assertThat(response.getStatusCode()).as("Invalid response status").isEqualTo(HttpStatus.OK);
 			assertThat(request.getMethod().name()).as("Invalid method").isEqualTo(path.toUpperCase(Locale.ENGLISH));
-		}
-		finally {
+		} finally {
 			if (response != null) {
 				response.close();
 			}

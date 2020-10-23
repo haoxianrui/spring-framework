@@ -203,7 +203,7 @@ public class BshScriptFactoryTests {
 	public void scriptCompilationException() {
 		assertThatExceptionOfType(NestedRuntimeException.class).isThrownBy(() ->
 				new ClassPathXmlApplicationContext("org/springframework/scripting/bsh/bshBrokenContext.xml"))
-			.matches(ex -> ex.contains(ScriptCompilationException.class));
+				.matches(ex -> ex.contains(ScriptCompilationException.class));
 	}
 
 	@Test

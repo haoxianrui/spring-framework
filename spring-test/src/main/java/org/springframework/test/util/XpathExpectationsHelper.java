@@ -58,10 +58,11 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * XpathExpectationsHelper constructor.
+	 *
 	 * @param expression the XPath expression
 	 * @param namespaces the XML namespaces referenced in the XPath expression, or {@code null}
-	 * @param args arguments to parameterize the XPath expression with using the
-	 * formatting specifiers defined in {@link String#format(String, Object...)}
+	 * @param args       arguments to parameterize the XPath expression with using the
+	 *                   formatting specifiers defined in {@link String#format(String, Object...)}
 	 * @throws XPathExpressionException if expression compilation failed
 	 */
 	public XpathExpectationsHelper(String expression, @Nullable Map<String, String> namespaces, Object... args)
@@ -73,7 +74,7 @@ public class XpathExpectationsHelper {
 	}
 
 	private static XPathExpression compileXpathExpression(String expression,
-			@Nullable Map<String, String> namespaces) throws XPathExpressionException {
+														  @Nullable Map<String, String> namespaces) throws XPathExpressionException {
 
 		SimpleNamespaceContext namespaceContext = new SimpleNamespaceContext();
 		namespaceContext.setBindings(namespaces != null ? namespaces : Collections.emptyMap());
@@ -105,6 +106,7 @@ public class XpathExpectationsHelper {
 	/**
 	 * Parse the content, evaluate the XPath expression as a {@link NodeList},
 	 * and assert it with the given {@code Matcher<NodeList>}.
+	 *
 	 * @since 5.2.2
 	 */
 	public void assertNodeList(byte[] content, @Nullable String encoding, Matcher<? super NodeList> matcher)
@@ -117,6 +119,7 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Apply the XPath expression and assert the resulting content exists.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void exists(byte[] content, @Nullable String encoding) throws Exception {
@@ -126,6 +129,7 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Apply the XPath expression and assert the resulting content does not exist.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void doesNotExist(byte[] content, @Nullable String encoding) throws Exception {
@@ -136,6 +140,7 @@ public class XpathExpectationsHelper {
 	/**
 	 * Apply the XPath expression and assert the resulting content with the
 	 * given Hamcrest matcher.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void assertNodeCount(byte[] content, @Nullable String encoding, Matcher<Integer> matcher)
@@ -148,6 +153,7 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Apply the XPath expression and assert the resulting content as an integer.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void assertNodeCount(byte[] content, @Nullable String encoding, int expectedCount) throws Exception {
@@ -159,6 +165,7 @@ public class XpathExpectationsHelper {
 	/**
 	 * Apply the XPath expression and assert the resulting content with the
 	 * given Hamcrest matcher.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void assertString(byte[] content, @Nullable String encoding, Matcher<? super String> matcher)
@@ -170,6 +177,7 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Apply the XPath expression and assert the resulting content as a String.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void assertString(byte[] content, @Nullable String encoding, String expectedValue) throws Exception {
@@ -180,6 +188,7 @@ public class XpathExpectationsHelper {
 	/**
 	 * Apply the XPath expression and assert the resulting content with the
 	 * given Hamcrest matcher.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void assertNumber(byte[] content, @Nullable String encoding, Matcher<? super Double> matcher) throws Exception {
@@ -189,6 +198,7 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Apply the XPath expression and assert the resulting content as a Double.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void assertNumber(byte[] content, @Nullable String encoding, Double expectedValue) throws Exception {
@@ -198,6 +208,7 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Apply the XPath expression and assert the resulting content as a Boolean.
+	 *
 	 * @throws Exception if content parsing or expression evaluation fails
 	 */
 	public void assertBoolean(byte[] content, @Nullable String encoding, boolean expectedValue) throws Exception {
@@ -207,10 +218,11 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Evaluate the XPath and return the resulting value.
-	 * @param content the content to evaluate against
-	 * @param encoding the encoding to use (optionally)
+	 *
+	 * @param content     the content to evaluate against
+	 * @param encoding    the encoding to use (optionally)
 	 * @param targetClass the target class, one of Number, String, Boolean,
-	 * org.w3c.Node, or NodeList
+	 *                    org.w3c.Node, or NodeList
 	 * @throws Exception if content parsing or expression evaluation fails
 	 * @since 5.1
 	 */
@@ -222,7 +234,8 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Parse the given XML content to a {@link Document}.
-	 * @param xml the content to parse
+	 *
+	 * @param xml      the content to parse
 	 * @param encoding optional content encoding, if provided as metadata (e.g. in HTTP headers)
 	 * @return the parsed document
 	 */
@@ -239,6 +252,7 @@ public class XpathExpectationsHelper {
 
 	/**
 	 * Apply the XPath expression to given document.
+	 *
 	 * @throws XPathExpressionException if expression evaluation failed
 	 */
 	@SuppressWarnings("unchecked")
@@ -253,20 +267,15 @@ public class XpathExpectationsHelper {
 		QName evaluationType;
 		if (Number.class.isAssignableFrom(expectedClass)) {
 			evaluationType = XPathConstants.NUMBER;
-		}
-		else if (CharSequence.class.isAssignableFrom(expectedClass)) {
+		} else if (CharSequence.class.isAssignableFrom(expectedClass)) {
 			evaluationType = XPathConstants.STRING;
-		}
-		else if (Boolean.class.isAssignableFrom(expectedClass)) {
+		} else if (Boolean.class.isAssignableFrom(expectedClass)) {
 			evaluationType = XPathConstants.BOOLEAN;
-		}
-		else if (Node.class.isAssignableFrom(expectedClass)) {
+		} else if (Node.class.isAssignableFrom(expectedClass)) {
 			evaluationType = XPathConstants.NODE;
-		}
-		else if (NodeList.class.isAssignableFrom(expectedClass)) {
+		} else if (NodeList.class.isAssignableFrom(expectedClass)) {
 			evaluationType = XPathConstants.NODESET;
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException("Unexpected target class " + expectedClass + ". " +
 					"Supported: numbers, strings, boolean, and org.w3c.Node and NodeList");
 		}

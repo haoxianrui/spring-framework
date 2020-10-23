@@ -51,7 +51,7 @@ public class MappingJackson2MessageConverterTests {
 		assertThat(converter.getSupportedMimeTypes())
 				.contains(new MimeType("application", "json"));
 		assertThat(converter.getObjectMapper().getDeserializationConfig()
-		.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)).isFalse();
+				.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)).isFalse();
 	}
 
 	@Test  // SPR-12724
@@ -60,7 +60,7 @@ public class MappingJackson2MessageConverterTests {
 		MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter(mimetype);
 		assertThat(converter.getSupportedMimeTypes()).contains(mimetype);
 		assertThat(converter.getObjectMapper().getDeserializationConfig()
-		.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)).isFalse();
+				.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)).isFalse();
 	}
 
 	@Test  // SPR-12724
@@ -70,7 +70,7 @@ public class MappingJackson2MessageConverterTests {
 		MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter(jsonMimetype, xmlMimetype);
 		assertThat(converter.getSupportedMimeTypes()).contains(jsonMimetype, xmlMimetype);
 		assertThat(converter.getObjectMapper().getDeserializationConfig()
-		.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)).isFalse();
+				.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)).isFalse();
 	}
 
 	@Test
@@ -133,7 +133,7 @@ public class MappingJackson2MessageConverterTests {
 		MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
 		String payload = "{\"string\":\"string\",\"unknownProperty\":\"value\"}";
 		Message<?> message = MessageBuilder.withPayload(payload.getBytes(StandardCharsets.UTF_8)).build();
-		MyBean myBean = (MyBean)converter.fromMessage(message, MyBean.class);
+		MyBean myBean = (MyBean) converter.fromMessage(message, MyBean.class);
 		assertThat(myBean.getString()).isEqualTo("string");
 	}
 
@@ -241,7 +241,6 @@ public class MappingJackson2MessageConverterTests {
 	}
 
 
-
 	@JsonView(MyJacksonView1.class)
 	public JacksonViewBean jsonViewResponse() {
 		JacksonViewBean bean = new JacksonViewBean();
@@ -254,9 +253,11 @@ public class MappingJackson2MessageConverterTests {
 	public void jsonViewPayload(@JsonView(MyJacksonView2.class) JacksonViewBean payload) {
 	}
 
-	void handleList(List<Long> payload) {}
+	void handleList(List<Long> payload) {
+	}
 
-	void handleMessage(Message<MyBean> message) {}
+	void handleMessage(Message<MyBean> message) {
+	}
 
 	public static class MyBean {
 
@@ -322,9 +323,15 @@ public class MappingJackson2MessageConverterTests {
 	}
 
 
-	public interface MyJacksonView1 {};
+	public interface MyJacksonView1 {
+	}
 
-	public interface MyJacksonView2 {};
+	;
+
+	public interface MyJacksonView2 {
+	}
+
+	;
 
 
 	public static class JacksonViewBean {

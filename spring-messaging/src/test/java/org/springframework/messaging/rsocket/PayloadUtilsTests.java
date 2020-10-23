@@ -36,6 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link PayloadUtils}.
+ *
  * @author Rossen Stoyanchev
  * @since 5.2
  */
@@ -61,8 +62,7 @@ public class PayloadUtilsTests {
 			assertThat(buffer).isInstanceOf(NettyDataBuffer.class);
 			assertThat(((NettyDataBuffer) buffer).getNativeBuffer().refCnt()).isEqualTo(1);
 			assertThat(payload.refCnt()).isEqualTo(0);
-		}
-		finally {
+		} finally {
 			DataBufferUtils.release(buffer);
 		}
 	}
@@ -86,8 +86,7 @@ public class PayloadUtilsTests {
 			assertThat(payload).isInstanceOf(ByteBufPayload.class);
 			assertThat(payload.data()).isSameAs(data.getNativeBuffer());
 			assertThat(payload.metadata()).isSameAs(metadata.getNativeBuffer());
-		}
-		finally {
+		} finally {
 			payload.release();
 		}
 	}
@@ -112,8 +111,7 @@ public class PayloadUtilsTests {
 			assertThat(payload).isInstanceOf(ByteBufPayload.class);
 			assertThat(payload.data()).isSameAs(data.getNativeBuffer());
 			assertThat(payload.getMetadataUtf8()).isEqualTo(metadata.toString(UTF_8));
-		}
-		finally {
+		} finally {
 			payload.release();
 		}
 	}
@@ -127,8 +125,7 @@ public class PayloadUtilsTests {
 			assertThat(payload).isInstanceOf(ByteBufPayload.class);
 			assertThat(payload.getDataUtf8()).isEqualTo(data.toString(UTF_8));
 			assertThat(payload.metadata()).isSameAs(metadata.getNativeBuffer());
-		}
-		finally {
+		} finally {
 			payload.release();
 		}
 	}
@@ -140,8 +137,7 @@ public class PayloadUtilsTests {
 		try {
 			assertThat(payload).isInstanceOf(ByteBufPayload.class);
 			assertThat(payload.data()).isSameAs(data.getNativeBuffer());
-		}
-		finally {
+		} finally {
 			payload.release();
 		}
 	}

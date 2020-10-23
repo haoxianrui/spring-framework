@@ -56,7 +56,8 @@ public class DelegatingWebMvcConfigurationIntegrationTests {
 
 	@Test
 	void requestMappingHandlerMappingUsesMvcInfrastructureByDefault() {
-		load(context -> { });
+		load(context -> {
+		});
 		RequestMappingHandlerMapping handlerMapping = this.context.getBean(RequestMappingHandlerMapping.class);
 		assertThat(handlerMapping.getContentNegotiationManager()).isSameAs(this.context.getBean("mvcContentNegotiationManager"));
 	}
@@ -128,7 +129,8 @@ public class DelegatingWebMvcConfigurationIntegrationTests {
 
 	@Test
 	void requestMappingHandlerAdapterUsesMvcInfrastructureByDefault() {
-		load(context -> { });
+		load(context -> {
+		});
 		RequestMappingHandlerAdapter mappingHandlerAdapter = this.context.getBean(RequestMappingHandlerAdapter.class);
 		assertThat(mappingHandlerAdapter).hasFieldOrPropertyWithValue(
 				"contentNegotiationManager", this.context.getBean("mvcContentNegotiationManager"));

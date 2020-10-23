@@ -157,7 +157,7 @@ public class RequestParamMethodArgumentResolverTests {
 
 	@Test
 	public void resolveStringArray() throws Exception {
-		String[] expected = new String[] {"foo", "bar"};
+		String[] expected = new String[]{"foo", "bar"};
 		request.addParameter("name", expected);
 
 		MethodParameter param = this.testMethod.annotPresent(RequestParam.class).arg(String[].class);
@@ -504,7 +504,7 @@ public class RequestParamMethodArgumentResolverTests {
 		request.addParameter("name", "123", "456");
 		result = resolver.resolveArgument(param, null, webRequest, binderFactory);
 		assertThat(result.getClass()).isEqualTo(Optional.class);
-		assertThat((Integer[]) ((Optional) result).get()).isEqualTo(new Integer[] {123, 456});
+		assertThat((Integer[]) ((Optional) result).get()).isEqualTo(new Integer[]{123, 456});
 	}
 
 	@Test

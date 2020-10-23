@@ -49,6 +49,7 @@ public abstract class ExchangeFunctions {
 	 * This is the same as calling
 	 * {@link #create(ClientHttpConnector, ExchangeStrategies)} and passing
 	 * {@link ExchangeStrategies#withDefaults()}.
+	 *
 	 * @param connector the connector to use for connecting to servers
 	 * @return the created {@code ExchangeFunction}
 	 */
@@ -59,7 +60,8 @@ public abstract class ExchangeFunctions {
 	/**
 	 * Create an {@code ExchangeFunction} with the given
 	 * {@code ClientHttpConnector} and {@code ExchangeStrategies}.
-	 * @param connector the connector to use for connecting to servers
+	 *
+	 * @param connector  the connector to use for connecting to servers
 	 * @param strategies the {@code ExchangeStrategies} to use
 	 * @return the created {@code ExchangeFunction}
 	 */

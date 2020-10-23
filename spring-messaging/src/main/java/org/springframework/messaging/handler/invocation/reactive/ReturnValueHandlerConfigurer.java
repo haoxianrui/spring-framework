@@ -36,6 +36,7 @@ public class ReturnValueHandlerConfigurer {
 
 	/**
 	 * Configure custom return value handlers for handler methods.
+	 *
 	 * @param handlers the handlers to add
 	 */
 	public void addCustomHandler(HandlerMethodReturnValueHandler... handlers) {

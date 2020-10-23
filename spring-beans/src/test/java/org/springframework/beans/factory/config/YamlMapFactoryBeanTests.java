@@ -53,8 +53,8 @@ public class YamlMapFactoryBeanTests {
 	@Test
 	public void testSetBarfOnResourceNotFound() {
 		assertThatIllegalStateException().isThrownBy(() -> {
-				this.factory.setResources(new FileSystemResource("non-exsitent-file.yml"));
-				this.factory.getObject().size();
+			this.factory.setResources(new FileSystemResource("non-exsitent-file.yml"));
+			this.factory.getObject().size();
 		});
 	}
 
@@ -82,6 +82,7 @@ public class YamlMapFactoryBeanTests {
 			public String getDescription() {
 				return "non-existent";
 			}
+
 			@Override
 			public InputStream getInputStream() throws IOException {
 				throw new IOException("planned");

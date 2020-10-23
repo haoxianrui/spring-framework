@@ -26,8 +26,8 @@ import org.springframework.transaction.NoTransactionException;
  *
  * @author Mark Paluch
  * @author Juergen Hoeller
- * @since 5.2
  * @see TransactionContext
+ * @since 5.2
  */
 final class TransactionContextHolder {
 
@@ -41,6 +41,7 @@ final class TransactionContextHolder {
 
 	/**
 	 * Return the current {@link TransactionContext}.
+	 *
 	 * @throws NoTransactionException if no transaction is ongoing
 	 */
 	TransactionContext currentContext() {
@@ -58,8 +59,7 @@ final class TransactionContextHolder {
 		TransactionContext context = this.transactionStack.peek();
 		if (context != null) {
 			context = new TransactionContext(context);
-		}
-		else {
+		} else {
 			context = new TransactionContext();
 		}
 		this.transactionStack.push(context);
@@ -68,6 +68,7 @@ final class TransactionContextHolder {
 
 	/**
 	 * Check whether the holder has a {@link TransactionContext}.
+	 *
 	 * @return {@literal true} if a {@link TransactionContext} is associated
 	 */
 	boolean hasContext() {

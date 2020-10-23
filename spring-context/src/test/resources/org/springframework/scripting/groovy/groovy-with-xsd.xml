@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:aop="http://www.springframework.org/schema/aop"
-		xmlns:lang="http://www.springframework.org/schema/lang"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:lang="http://www.springframework.org/schema/lang"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 				http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 				http://www.springframework.org/schema/lang https://www.springframework.org/schema/lang/spring-lang-2.5.xsd">
 
@@ -13,26 +13,26 @@
 	</aop:config>
 
 	<lang:groovy id="getMessageAspect" script-source="classpath:org/springframework/scripting/groovy/CallCounter.groovy"
-			init-method="init" destroy-method="destroy"/>
+				 init-method="init" destroy-method="destroy"/>
 
 	<lang:groovy id="messenger" script-source="classpath:org/springframework/scripting/groovy/Messenger.groovy">
 		<lang:property name="message" value="Hello World!"/>
 	</lang:groovy>
 
 	<lang:groovy id="messengerPrototype" script-source="classpath:org/springframework/scripting/groovy/Messenger.groovy"
-			scope="prototype">
+				 scope="prototype">
 		<lang:property name="message" value="Hello World!"/>
 	</lang:groovy>
 
 	<lang:groovy id="calculator" depends-on="messenger" customizer-ref="groovyObjectCustomizer">
 		<lang:inline-script>
 			package org.springframework.scripting.groovy;
-import org.springframework.scripting.Calculator
-class GroovyCalculator implements Calculator {
-	int add(int x, int y) {
-	   return x + y;
-	}
-}
+			import org.springframework.scripting.Calculator
+			class GroovyCalculator implements Calculator {
+			int add(int x, int y) {
+			return x + y;
+			}
+			}
 		</lang:inline-script>
 	</lang:groovy>
 
@@ -49,12 +49,12 @@ public class TestCustomizer implements GroovyObjectCustomizer {
 	<bean id="importCustomizer" class="org.springframework.scripting.groovy.MyImportCustomizer"/>
 
 	<lang:groovy id="refreshableMessenger" refresh-check-delay="5000"
-			script-source="classpath:org/springframework/scripting/groovy/Messenger.groovy">
+				 script-source="classpath:org/springframework/scripting/groovy/Messenger.groovy">
 		<lang:property name="message" value="Hello World!"/>
 	</lang:groovy>
 
 	<lang:groovy script-source="classpath:org/springframework/scripting/groovy/Messenger.groovy"
-			customizer-ref="compilerConfiguration">
+				 customizer-ref="compilerConfiguration">
 		<lang:property name="message" value="Hello World!"/>
 	</lang:groovy>
 

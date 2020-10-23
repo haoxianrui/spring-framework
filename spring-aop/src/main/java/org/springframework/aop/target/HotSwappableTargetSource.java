@@ -37,16 +37,21 @@ import org.springframework.util.Assert;
  */
 public class HotSwappableTargetSource implements TargetSource, Serializable {
 
-	/** use serialVersionUID from Spring 1.2 for interoperability. */
+	/**
+	 * use serialVersionUID from Spring 1.2 for interoperability.
+	 */
 	private static final long serialVersionUID = 7497929212653839187L;
 
 
-	/** The current target object. */
+	/**
+	 * The current target object.
+	 */
 	private Object target;
 
 
 	/**
 	 * Create a new HotSwappableTargetSource with the given initial target object.
+	 *
 	 * @param initialTarget the initial target object
 	 */
 	public HotSwappableTargetSource(Object initialTarget) {
@@ -82,6 +87,7 @@ public class HotSwappableTargetSource implements TargetSource, Serializable {
 
 	/**
 	 * Swap the target, returning the old target object.
+	 *
 	 * @param newTarget the new target object
 	 * @return the old target object
 	 * @throws IllegalArgumentException if the new target is invalid

@@ -82,7 +82,7 @@ public class DefaultResponseErrorHandlerTests {
 	public void handleErrorWithLongBody() throws Exception {
 
 		Function<Integer, String> bodyGenerator =
-				size -> Flux.just("a").repeat(size-1).reduce((s, s2) -> s + s2).block();
+				size -> Flux.just("a").repeat(size - 1).reduce((s, s2) -> s + s2).block();
 
 		given(response.getRawStatusCode()).willReturn(HttpStatus.NOT_FOUND.value());
 		given(response.getStatusText()).willReturn("Not Found");

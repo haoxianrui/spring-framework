@@ -31,8 +31,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * JUnit-based integration tests for {@link ServletTestExecutionListener}.
  *
  * @author Sam Brannen
- * @since 3.2.9
  * @see org.springframework.test.context.testng.web.ServletTestExecutionListenerTestNGIntegrationTests
+ * @since 3.2.9
  */
 @SpringJUnitWebConfig
 class ServletTestExecutionListenerJUnitIntegrationTests {

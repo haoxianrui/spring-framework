@@ -31,9 +31,9 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
  *
  * @author Chris Beams
  * @author Sebastien Deleuze
- * @since 3.1
  * @see EnableTransactionManagement
  * @see TransactionManagementConfigurationSelector
+ * @since 3.1
  */
 @Configuration(proxyBeanMethods = false)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)

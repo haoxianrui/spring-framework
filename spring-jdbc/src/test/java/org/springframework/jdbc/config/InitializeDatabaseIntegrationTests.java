@@ -52,8 +52,7 @@ public class InitializeDatabaseIntegrationTests {
 	public void after() {
 		if (enabled != null) {
 			System.setProperty("ENABLED", enabled);
-		}
-		else {
+		} else {
 			System.clearProperty("ENABLED");
 		}
 		if (context != null) {
@@ -123,13 +122,13 @@ public class InitializeDatabaseIntegrationTests {
 
 		private JdbcTemplate jdbcTemplate;
 
-		private List<Map<String,Object>> cache;
+		private List<Map<String, Object>> cache;
 
 		public void setDataSource(DataSource dataSource) {
 			this.jdbcTemplate = new JdbcTemplate(dataSource);
 		}
 
-		public List<Map<String,Object>> getCachedData() {
+		public List<Map<String, Object>> getCachedData() {
 			return cache;
 		}
 

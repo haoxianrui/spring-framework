@@ -33,8 +33,8 @@ import static org.junit.platform.commons.support.AnnotationSupport.findAnnotatio
  * {@link ExecutionCondition} for Spring's {@link TestGroup} support.
  *
  * @author Sam Brannen
- * @since 5.2
  * @see EnabledForTestGroups @EnabledForTestGroups
+ * @since 5.2
  */
 class TestGroupsCondition implements ExecutionCondition {
 

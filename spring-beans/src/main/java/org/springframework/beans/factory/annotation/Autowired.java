@@ -93,10 +93,10 @@ import java.lang.annotation.Target;
  * @author Juergen Hoeller
  * @author Mark Fisher
  * @author Sam Brannen
- * @since 2.5
  * @see AutowiredAnnotationBeanPostProcessor
  * @see Qualifier
  * @see Value
+ * @since 2.5
  */
 @Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)

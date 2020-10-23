@@ -142,8 +142,7 @@ public abstract class AbstractEncoderMethodReturnValueHandler implements Handler
 					!COROUTINES_FLOW_CLASS_NAME.equals(returnValueType.toClass().getName());
 			ResolvableType genericType = isUnwrapped ? returnValueType : returnValueType.getGeneric();
 			elementType = getElementType(adapter, genericType);
-		}
-		else {
+		} else {
 			publisher = Mono.justOrEmpty(content);
 			elementType = (returnValueType.toClass() == Object.class && content != null ?
 					ResolvableType.forInstance(content) : returnValueType);
@@ -161,11 +160,9 @@ public abstract class AbstractEncoderMethodReturnValueHandler implements Handler
 	private ResolvableType getElementType(ReactiveAdapter adapter, ResolvableType type) {
 		if (adapter.isNoValue()) {
 			return VOID_RESOLVABLE_TYPE;
-		}
-		else if (type != ResolvableType.NONE) {
+		} else if (type != ResolvableType.NONE) {
 			return type;
-		}
-		else {
+		} else {
 			return OBJECT_RESOLVABLE_TYPE;
 		}
 	}
@@ -200,11 +197,12 @@ public abstract class AbstractEncoderMethodReturnValueHandler implements Handler
 	/**
 	 * Subclasses implement this method to handle encoded values in some way
 	 * such as creating and sending messages.
+	 *
 	 * @param encodedContent the encoded content; each {@code DataBuffer}
-	 * represents the fully-aggregated, encoded content for one value
-	 * (i.e. payload) returned from the HandlerMethod.
-	 * @param returnType return type of the handler method that produced the data
-	 * @param message the input message handled by the handler method
+	 *                       represents the fully-aggregated, encoded content for one value
+	 *                       (i.e. payload) returned from the HandlerMethod.
+	 * @param returnType     return type of the handler method that produced the data
+	 * @param message        the input message handled by the handler method
 	 * @return completion {@code Mono<Void>} for the handling
 	 */
 	protected abstract Mono<Void> handleEncodedContent(
@@ -213,8 +211,9 @@ public abstract class AbstractEncoderMethodReturnValueHandler implements Handler
 	/**
 	 * Invoked for a {@code null} return value, which could mean a void method
 	 * or method returning an async type parameterized by void.
+	 *
 	 * @param returnType return type of the handler method that produced the data
-	 * @param message the input message handled by the handler method
+	 * @param message    the input message handled by the handler method
 	 * @return completion {@code Mono<Void>} for the handling
 	 */
 	protected abstract Mono<Void> handleNoContent(MethodParameter returnType, Message<?> message);

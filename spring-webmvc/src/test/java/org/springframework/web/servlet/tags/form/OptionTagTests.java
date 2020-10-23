@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
  * @author Rick Evans
  * @author Jeremy Grelle
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class OptionTagTests extends AbstractHtmlElementTagTests {
 
 	private static final String ARRAY_SOURCE = "abc,123,def";
@@ -542,8 +542,7 @@ public class OptionTagTests extends AbstractHtmlElementTagTests {
 		public String toId() {
 			if (this.variant != null) {
 				return this.rules + "-" + this.variant;
-			}
-			else {
+			} else {
 				return rules;
 			}
 		}

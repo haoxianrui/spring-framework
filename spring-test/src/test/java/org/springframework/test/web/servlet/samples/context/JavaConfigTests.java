@@ -65,8 +65,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration("classpath:META-INF/web-resources")
 @ContextHierarchy({
-	@ContextConfiguration(classes = RootConfig.class),
-	@ContextConfiguration(classes = WebConfig.class)
+		@ContextConfiguration(classes = RootConfig.class),
+		@ContextConfiguration(classes = WebConfig.class)
 })
 public class JavaConfigTests {
 
@@ -92,17 +92,17 @@ public class JavaConfigTests {
 	@Test
 	public void person() throws Exception {
 		this.mockMvc.perform(get("/person/5").accept(MediaType.APPLICATION_JSON))
-			.andDo(print())
-			.andExpect(status().isOk())
-			.andExpect(request().asyncNotStarted())
-			.andExpect(content().string("{\"name\":\"Joe\",\"someDouble\":0.0,\"someBoolean\":false}"));
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(request().asyncNotStarted())
+				.andExpect(content().string("{\"name\":\"Joe\",\"someDouble\":0.0,\"someBoolean\":false}"));
 	}
 
 	@Test
 	public void tilesDefinitions() throws Exception {
 		this.mockMvc.perform(get("/"))
-			.andExpect(status().isOk())
-			.andExpect(forwardedUrl("/WEB-INF/layouts/standardLayout.jsp"));
+				.andExpect(status().isOk())
+				.andExpect(forwardedUrl("/WEB-INF/layouts/standardLayout.jsp"));
 	}
 
 	/**

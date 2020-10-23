@@ -61,7 +61,8 @@ class SimpleCommandLinePropertySourceTests {
 		assertThat(ps.getProperty("o3")).isNull();
 	}
 
-	@Test // gh-24464
+	@Test
+		// gh-24464
 	void withOptionalArg_andArgIsEmpty() {
 		EnumerablePropertySource<?> ps = new SimpleCommandLinePropertySource("--foo=");
 

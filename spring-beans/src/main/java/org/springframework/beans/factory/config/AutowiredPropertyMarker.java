@@ -29,10 +29,10 @@ import org.springframework.lang.Nullable;
  * through a {@link AutowireCapableBeanFactory#resolveDependency} step.
  *
  * @author Juergen Hoeller
- * @since 5.2
  * @see AutowireCapableBeanFactory#resolveDependency
  * @see BeanDefinition#getPropertyValues()
  * @see org.springframework.beans.factory.support.BeanDefinitionBuilder#addAutowiredProperty
+ * @since 5.2
  */
 @SuppressWarnings("serial")
 public final class AutowiredPropertyMarker implements Serializable {

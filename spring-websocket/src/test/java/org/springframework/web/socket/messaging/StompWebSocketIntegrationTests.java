@@ -67,7 +67,7 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 
 	@Override
 	protected Class<?>[] getAnnotatedConfigClasses() {
-		return new Class<?>[] {TestMessageBrokerConfiguration.class, TestMessageBrokerConfigurer.class};
+		return new Class<?>[]{TestMessageBrokerConfiguration.class, TestMessageBrokerConfigurer.class};
 	}
 
 
@@ -81,8 +81,7 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 		SimpleController controller = this.wac.getBean(SimpleController.class);
 		try {
 			assertThat(controller.latch.await(TIMEOUT, TimeUnit.SECONDS)).isTrue();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -102,13 +101,13 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 
 		try {
 			assertThat(clientHandler.latch.await(TIMEOUT, TimeUnit.SECONDS)).isTrue();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
 
-	@ParameterizedWebSocketTest  // SPR-10930
+	@ParameterizedWebSocketTest
+		// SPR-10930
 	void sendMessageToBrokerAndReceiveReplyViaTopic(WebSocketTestServer server, WebSocketClient webSocketClient, TestInfo testInfo) throws Exception {
 		super.setup(server, webSocketClient, testInfo);
 
@@ -124,13 +123,13 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 
 			String payload = clientHandler.actual.get(1).getPayload();
 			assertThat(payload.startsWith("MESSAGE\n")).as("Expected STOMP MESSAGE, got " + payload).isTrue();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
 
-	@ParameterizedWebSocketTest  // SPR-11648
+	@ParameterizedWebSocketTest
+		// SPR-11648
 	void sendSubscribeToControllerAndReceiveReply(WebSocketTestServer server, WebSocketClient webSocketClient, TestInfo testInfo) throws Exception {
 		super.setup(server, webSocketClient, testInfo);
 
@@ -146,8 +145,7 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 			String payload = clientHandler.actual.get(1).getPayload();
 			assertThat(payload.contains(destHeader)).as("Expected STOMP destination=/app/number, got " + payload).isTrue();
 			assertThat(payload.contains("42")).as("Expected STOMP Payload=42, got " + payload).isTrue();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -170,8 +168,7 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 			assertThat(payload.startsWith("MESSAGE\n")).isTrue();
 			assertThat(payload.contains("destination:/user/queue/error\n")).isTrue();
 			assertThat(payload.endsWith("Got error: Bad input\0")).isTrue();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -195,8 +192,7 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 			assertThat(payload.startsWith("MESSAGE\n")).isTrue();
 			assertThat(payload.contains("destination:/topic/scopedBeanValue\n")).isTrue();
 			assertThat(payload.endsWith("55\0")).isTrue();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}

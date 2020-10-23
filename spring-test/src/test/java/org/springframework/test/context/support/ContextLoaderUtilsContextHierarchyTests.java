@@ -91,8 +91,8 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 		assertThat(configAttributesList).isNotNull();
 		assertThat(configAttributesList.size()).isEqualTo(1);
 		debugConfigAttributes(configAttributesList);
-		assertAttributes(configAttributesList.get(0), testClass, new String[] { "A.xml" }, EMPTY_CLASS_ARRAY,
-			ContextLoader.class, true);
+		assertAttributes(configAttributesList.get(0), testClass, new String[]{"A.xml"}, EMPTY_CLASS_ARRAY,
+				ContextLoader.class, true);
 	}
 
 	@Test
@@ -105,12 +105,12 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 		assertThat(configAttributesList).isNotNull();
 		assertThat(configAttributesList.size()).isEqualTo(3);
 		debugConfigAttributes(configAttributesList);
-		assertAttributes(configAttributesList.get(0), testClass, new String[] { "A.xml" }, EMPTY_CLASS_ARRAY,
-			ContextLoader.class, true);
-		assertAttributes(configAttributesList.get(1), testClass, new String[] { "B.xml" }, EMPTY_CLASS_ARRAY,
-			ContextLoader.class, true);
-		assertAttributes(configAttributesList.get(2), testClass, new String[] { "C.xml" }, EMPTY_CLASS_ARRAY,
-			ContextLoader.class, true);
+		assertAttributes(configAttributesList.get(0), testClass, new String[]{"A.xml"}, EMPTY_CLASS_ARRAY,
+				ContextLoader.class, true);
+		assertAttributes(configAttributesList.get(1), testClass, new String[]{"B.xml"}, EMPTY_CLASS_ARRAY,
+				ContextLoader.class, true);
+		assertAttributes(configAttributesList.get(2), testClass, new String[]{"C.xml"}, EMPTY_CLASS_ARRAY,
+				ContextLoader.class, true);
 	}
 
 	@Test
@@ -126,7 +126,7 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 		List<ContextConfigurationAttributes> configAttributesListClassLevel2 = hierarchyAttributes.get(1);
 		debugConfigAttributes(configAttributesListClassLevel2);
 		assertThat(configAttributesListClassLevel2.size()).isEqualTo(1);
-		assertThat(configAttributesListClassLevel2.get(0).getLocations()).isEqualTo(new String[] { "two-A.xml", "two-B.xml" });
+		assertThat(configAttributesListClassLevel2.get(0).getLocations()).isEqualTo(new String[]{"two-A.xml", "two-B.xml"});
 
 		List<ContextConfigurationAttributes> configAttributesListClassLevel3 = hierarchyAttributes.get(2);
 		debugConfigAttributes(configAttributesListClassLevel3);
@@ -144,25 +144,25 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 		assertThat(configAttributesListClassLevel1.size()).isEqualTo(1);
 		assertThat(configAttributesListClassLevel1.get(0).getLocations()[0]).isEqualTo("A.xml");
 		assertAttributes(configAttributesListClassLevel1.get(0),
-			TestClass1WithSingleLevelContextHierarchyFromMetaAnnotation.class, new String[] { "A.xml" },
-			EMPTY_CLASS_ARRAY, ContextLoader.class, true);
+				TestClass1WithSingleLevelContextHierarchyFromMetaAnnotation.class, new String[]{"A.xml"},
+				EMPTY_CLASS_ARRAY, ContextLoader.class, true);
 
 		List<ContextConfigurationAttributes> configAttributesListClassLevel2 = hierarchyAttributes.get(1);
 		debugConfigAttributes(configAttributesListClassLevel2);
 		assertThat(configAttributesListClassLevel2.size()).isEqualTo(1);
-		assertThat(configAttributesListClassLevel2.get(0).getLocations()).isEqualTo(new String[] { "B-one.xml", "B-two.xml" });
+		assertThat(configAttributesListClassLevel2.get(0).getLocations()).isEqualTo(new String[]{"B-one.xml", "B-two.xml"});
 		assertAttributes(configAttributesListClassLevel2.get(0),
-			TestClass2WithSingleLevelContextHierarchyFromMetaAnnotation.class,
-			new String[] { "B-one.xml",
-			"B-two.xml" }, EMPTY_CLASS_ARRAY, ContextLoader.class, true);
+				TestClass2WithSingleLevelContextHierarchyFromMetaAnnotation.class,
+				new String[]{"B-one.xml",
+						"B-two.xml"}, EMPTY_CLASS_ARRAY, ContextLoader.class, true);
 
 		List<ContextConfigurationAttributes> configAttributesListClassLevel3 = hierarchyAttributes.get(2);
 		debugConfigAttributes(configAttributesListClassLevel3);
 		assertThat(configAttributesListClassLevel3.size()).isEqualTo(1);
 		assertThat(configAttributesListClassLevel3.get(0).getLocations()[0]).isEqualTo("C.xml");
 		assertAttributes(configAttributesListClassLevel3.get(0),
-			TestClass3WithSingleLevelContextHierarchyFromMetaAnnotation.class, new String[] { "C.xml" },
-			EMPTY_CLASS_ARRAY, ContextLoader.class, true);
+				TestClass3WithSingleLevelContextHierarchyFromMetaAnnotation.class, new String[]{"C.xml"},
+				EMPTY_CLASS_ARRAY, ContextLoader.class, true);
 	}
 
 	private void assertOneTwo(List<List<ContextConfigurationAttributes>> hierarchyAttributes) {
@@ -312,8 +312,8 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 	private void assertContextConfigEntriesAreNotUnique(Class<?> testClass) {
 		assertThatIllegalStateException().isThrownBy(() ->
 				buildContextHierarchyMap(testClass))
-			.withMessage(String.format(
-				"The @ContextConfiguration elements configured via @ContextHierarchy in test class [%s] and its superclasses must define unique contexts per hierarchy level.", testClass.getName()));
+				.withMessage(String.format(
+						"The @ContextConfiguration elements configured via @ContextHierarchy in test class [%s] and its superclasses must define unique contexts per hierarchy level.", testClass.getName()));
 	}
 
 	@Test
@@ -377,10 +377,10 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration("A.xml"),//
-		@ContextConfiguration("B.xml"),//
-		@ContextConfiguration("C.xml") //
+			//
+			@ContextConfiguration("A.xml"),//
+			@ContextConfiguration("B.xml"),//
+			@ContextConfiguration("C.xml") //
 	})
 	private static class SingleTestClassWithTripleLevelContextHierarchy {
 	}
@@ -389,7 +389,7 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 	private static class TestClass1WithSingleLevelContextHierarchy {
 	}
 
-	@ContextHierarchy(@ContextConfiguration({ "two-A.xml", "two-B.xml" }))
+	@ContextHierarchy(@ContextConfiguration({"two-A.xml", "two-B.xml"}))
 	private static class TestClass2WithSingleLevelContextHierarchy extends TestClass1WithSingleLevelContextHierarchy {
 	}
 
@@ -416,89 +416,89 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "1-A.xml", name = "alpha"),//
-		@ContextConfiguration(locations = "1-B.xml", name = "beta") //
+			//
+			@ContextConfiguration(locations = "1-A.xml", name = "alpha"),//
+			@ContextConfiguration(locations = "1-B.xml", name = "beta") //
 	})
 	private static class TestClass1WithMultiLevelContextHierarchy {
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "2-A.xml", name = "alpha"),//
-		@ContextConfiguration(locations = "2-B.xml", name = "beta") //
+			//
+			@ContextConfiguration(locations = "2-A.xml", name = "alpha"),//
+			@ContextConfiguration(locations = "2-B.xml", name = "beta") //
 	})
 	private static class TestClass2WithMultiLevelContextHierarchy extends TestClass1WithMultiLevelContextHierarchy {
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "3-A.xml", name = "alpha"),//
-		@ContextConfiguration(locations = "3-B.xml", name = "beta"),//
-		@ContextConfiguration(locations = "3-C.xml", name = "gamma") //
+			//
+			@ContextConfiguration(locations = "3-A.xml", name = "alpha"),//
+			@ContextConfiguration(locations = "3-B.xml", name = "beta"),//
+			@ContextConfiguration(locations = "3-C.xml", name = "gamma") //
 	})
 	private static class TestClass3WithMultiLevelContextHierarchy extends TestClass2WithMultiLevelContextHierarchy {
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "1-A.xml"),//
-		@ContextConfiguration(locations = "1-B.xml") //
+			//
+			@ContextConfiguration(locations = "1-A.xml"),//
+			@ContextConfiguration(locations = "1-B.xml") //
 	})
 	private static class TestClass1WithMultiLevelContextHierarchyAndUnnamedConfig {
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "2-A.xml"),//
-		@ContextConfiguration(locations = "2-B.xml") //
+			//
+			@ContextConfiguration(locations = "2-A.xml"),//
+			@ContextConfiguration(locations = "2-B.xml") //
 	})
 	private static class TestClass2WithMultiLevelContextHierarchyAndUnnamedConfig extends
 			TestClass1WithMultiLevelContextHierarchyAndUnnamedConfig {
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "3-A.xml"),//
-		@ContextConfiguration(locations = "3-B.xml"),//
-		@ContextConfiguration(locations = "3-C.xml") //
+			//
+			@ContextConfiguration(locations = "3-A.xml"),//
+			@ContextConfiguration(locations = "3-B.xml"),//
+			@ContextConfiguration(locations = "3-C.xml") //
 	})
 	private static class TestClass3WithMultiLevelContextHierarchyAndUnnamedConfig extends
 			TestClass2WithMultiLevelContextHierarchyAndUnnamedConfig {
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "1-A.xml", name = "parent"),//
-		@ContextConfiguration(locations = "1-B.xml") //
+			//
+			@ContextConfiguration(locations = "1-A.xml", name = "parent"),//
+			@ContextConfiguration(locations = "1-B.xml") //
 	})
 	private static class TestClass1WithMultiLevelContextHierarchyAndPartiallyNamedConfig {
 	}
 
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(locations = "2-A.xml", name = "parent"),//
-		@ContextConfiguration(locations = "2-C.xml") //
+			//
+			@ContextConfiguration(locations = "2-A.xml", name = "parent"),//
+			@ContextConfiguration(locations = "2-C.xml") //
 	})
 	private static class TestClass2WithMultiLevelContextHierarchyAndPartiallyNamedConfig extends
 			TestClass1WithMultiLevelContextHierarchyAndPartiallyNamedConfig {
 	}
 
 	@ContextHierarchy({
-		//
-		@ContextConfiguration,//
-		@ContextConfiguration //
+			//
+			@ContextConfiguration,//
+			@ContextConfiguration //
 	})
 	private static class SingleTestClassWithMultiLevelContextHierarchyWithEmptyContextConfig {
 	}
 
 	@ContextHierarchy({
-		//
-		@ContextConfiguration("foo.xml"),//
-		@ContextConfiguration(classes = BarConfig.class),// duplicate!
-		@ContextConfiguration("baz.xml"),//
-		@ContextConfiguration(classes = BarConfig.class),// duplicate!
-		@ContextConfiguration(loader = AnnotationConfigContextLoader.class) //
+			//
+			@ContextConfiguration("foo.xml"),//
+			@ContextConfiguration(classes = BarConfig.class),// duplicate!
+			@ContextConfiguration("baz.xml"),//
+			@ContextConfiguration(classes = BarConfig.class),// duplicate!
+			@ContextConfiguration(loader = AnnotationConfigContextLoader.class) //
 	})
 	private static class SingleTestClassWithMultiLevelContextHierarchyWithDuplicatedContextConfig {
 	}
@@ -507,9 +507,9 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 	 * Used to reproduce bug reported in https://jira.spring.io/browse/SPR-10997
 	 */
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(name = "alpha", locations = "1-A.xml"),//
-		@ContextConfiguration(name = "beta", locations = "1-B.xml") //
+			//
+			@ContextConfiguration(name = "alpha", locations = "1-A.xml"),//
+			@ContextConfiguration(name = "beta", locations = "1-B.xml") //
 	})
 	private static class TestClass1WithMultiLevelContextHierarchyWithUniqueContextConfig {
 	}
@@ -518,9 +518,9 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 	 * Used to reproduce bug reported in https://jira.spring.io/browse/SPR-10997
 	 */
 	@ContextHierarchy({//
-	//
-		@ContextConfiguration(name = "alpha", initializers = DummyApplicationContextInitializer.class),//
-		@ContextConfiguration(name = "beta", initializers = DummyApplicationContextInitializer.class) //
+			//
+			@ContextConfiguration(name = "alpha", initializers = DummyApplicationContextInitializer.class),//
+			@ContextConfiguration(name = "beta", initializers = DummyApplicationContextInitializer.class) //
 	})
 	private static class TestClass2WithMultiLevelContextHierarchyWithOverriddenInitializers extends
 			TestClass1WithMultiLevelContextHierarchyWithUniqueContextConfig {
@@ -545,7 +545,7 @@ class ContextLoaderUtilsContextHierarchyTests extends AbstractContextConfigurati
 	private static @interface ContextHierarchyA {
 	}
 
-	@ContextHierarchy(@ContextConfiguration({ "B-one.xml", "B-two.xml" }))
+	@ContextHierarchy(@ContextConfiguration({"B-one.xml", "B-two.xml"}))
 	@Retention(RetentionPolicy.RUNTIME)
 	private static @interface ContextHierarchyB {
 	}

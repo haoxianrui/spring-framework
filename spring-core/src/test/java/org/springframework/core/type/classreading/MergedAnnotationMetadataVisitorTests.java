@@ -61,32 +61,32 @@ class MergedAnnotationMetadataVisitorTests {
 		loadFrom(WithSimpleArrayTypesAnnotation.class);
 		assertThat(this.annotation.getType()).isEqualTo(SimpleArrayTypesAnnotation.class);
 		assertThat(this.annotation.getValue("stringValue")).contains(
-				new String[] { "string" });
-		assertThat(this.annotation.getValue("byteValue")).contains(new byte[] { 1 });
-		assertThat(this.annotation.getValue("shortValue")).contains(new short[] { 2 });
-		assertThat(this.annotation.getValue("intValue")).contains(new int[] { 3 });
-		assertThat(this.annotation.getValue("longValue")).contains(new long[] { 4 });
+				new String[]{"string"});
+		assertThat(this.annotation.getValue("byteValue")).contains(new byte[]{1});
+		assertThat(this.annotation.getValue("shortValue")).contains(new short[]{2});
+		assertThat(this.annotation.getValue("intValue")).contains(new int[]{3});
+		assertThat(this.annotation.getValue("longValue")).contains(new long[]{4});
 		assertThat(this.annotation.getValue("booleanValue")).contains(
-				new boolean[] { true });
-		assertThat(this.annotation.getValue("charValue")).contains(new char[] { 'c' });
+				new boolean[]{true});
+		assertThat(this.annotation.getValue("charValue")).contains(new char[]{'c'});
 		assertThat(this.annotation.getValue("doubleValue")).contains(
-				new double[] { 5.0 });
-		assertThat(this.annotation.getValue("floatValue")).contains(new float[] { 6.0f });
+				new double[]{5.0});
+		assertThat(this.annotation.getValue("floatValue")).contains(new float[]{6.0f});
 	}
 
 	@Test
 	void visitWhenHasEmptySimpleArrayTypesCreatesAnnotation() {
 		loadFrom(WithSimpleEmptyArrayTypesAnnotation.class);
 		assertThat(this.annotation.getType()).isEqualTo(SimpleArrayTypesAnnotation.class);
-		assertThat(this.annotation.getValue("stringValue")).contains(new String[] {});
-		assertThat(this.annotation.getValue("byteValue")).contains(new byte[] {});
-		assertThat(this.annotation.getValue("shortValue")).contains(new short[] {});
-		assertThat(this.annotation.getValue("intValue")).contains(new int[] {});
-		assertThat(this.annotation.getValue("longValue")).contains(new long[] {});
-		assertThat(this.annotation.getValue("booleanValue")).contains(new boolean[] {});
-		assertThat(this.annotation.getValue("charValue")).contains(new char[] {});
-		assertThat(this.annotation.getValue("doubleValue")).contains(new double[] {});
-		assertThat(this.annotation.getValue("floatValue")).contains(new float[] {});
+		assertThat(this.annotation.getValue("stringValue")).contains(new String[]{});
+		assertThat(this.annotation.getValue("byteValue")).contains(new byte[]{});
+		assertThat(this.annotation.getValue("shortValue")).contains(new short[]{});
+		assertThat(this.annotation.getValue("intValue")).contains(new int[]{});
+		assertThat(this.annotation.getValue("longValue")).contains(new long[]{});
+		assertThat(this.annotation.getValue("booleanValue")).contains(new boolean[]{});
+		assertThat(this.annotation.getValue("charValue")).contains(new char[]{});
+		assertThat(this.annotation.getValue("doubleValue")).contains(new double[]{});
+		assertThat(this.annotation.getValue("floatValue")).contains(new float[]{});
 	}
 
 	@Test
@@ -95,7 +95,7 @@ class MergedAnnotationMetadataVisitorTests {
 		assertThat(this.annotation.getType()).isEqualTo(EnumAnnotation.class);
 		assertThat(this.annotation.getValue("enumValue")).contains(ExampleEnum.ONE);
 		assertThat(this.annotation.getValue("enumArrayValue")).contains(
-				new ExampleEnum[] { ExampleEnum.ONE, ExampleEnum.TWO });
+				new ExampleEnum[]{ExampleEnum.ONE, ExampleEnum.TWO});
 	}
 
 	@Test
@@ -121,7 +121,7 @@ class MergedAnnotationMetadataVisitorTests {
 		assertThat(this.annotation.getClass("classValue")).isEqualTo(InputStream.class);
 		assertThat(this.annotation.getValue("classValue")).contains(InputStream.class);
 		assertThat(this.annotation.getStringArray("classArrayValue")).containsExactly(OutputStream.class.getName());
-		assertThat(this.annotation.getValue("classArrayValue")).contains(new Class<?>[] {OutputStream.class});
+		assertThat(this.annotation.getValue("classArrayValue")).contains(new Class<?>[]{OutputStream.class});
 	}
 
 	private void loadFrom(Class<?> type) {
@@ -138,8 +138,7 @@ class MergedAnnotationMetadataVisitorTests {
 		try {
 			new ClassReader(type.getName()).accept(visitor, ClassReader.SKIP_DEBUG
 					| ClassReader.SKIP_CODE | ClassReader.SKIP_FRAMES);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new IllegalStateException(ex);
 		}
 	}
@@ -205,8 +204,8 @@ class MergedAnnotationMetadataVisitorTests {
 
 	}
 
-	@EnumAnnotation(enumValue = ExampleEnum.ONE, enumArrayValue = { ExampleEnum.ONE,
-		ExampleEnum.TWO })
+	@EnumAnnotation(enumValue = ExampleEnum.ONE, enumArrayValue = {ExampleEnum.ONE,
+			ExampleEnum.TWO})
 	static class WithEnumAnnotation {
 
 	}
@@ -225,7 +224,7 @@ class MergedAnnotationMetadataVisitorTests {
 	}
 
 	@AnnotationAnnotation(annotationValue = @NestedAnnotation("a"), annotationArrayValue = {
-		@NestedAnnotation("b"), @NestedAnnotation("c") })
+			@NestedAnnotation("b"), @NestedAnnotation("c")})
 	static class WithAnnotationAnnotation {
 
 	}

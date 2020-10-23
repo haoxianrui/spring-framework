@@ -75,7 +75,7 @@ public class ResourceHttpMessageConverterTests {
 
 	@Test  // SPR-13443
 	public void shouldReadInputStreamResource() throws IOException {
-		try (InputStream body = getClass().getResourceAsStream("logo.jpg") ) {
+		try (InputStream body = getClass().getResourceAsStream("logo.jpg")) {
 			MockHttpInputMessage inputMessage = new MockHttpInputMessage(body);
 			inputMessage.getHeaders().setContentType(MediaType.IMAGE_JPEG);
 			inputMessage.getHeaders().setContentDisposition(
@@ -92,7 +92,7 @@ public class ResourceHttpMessageConverterTests {
 	@Test  // SPR-14882
 	public void shouldNotReadInputStreamResource() throws IOException {
 		ResourceHttpMessageConverter noStreamConverter = new ResourceHttpMessageConverter(false);
-		try (InputStream body = getClass().getResourceAsStream("logo.jpg") ) {
+		try (InputStream body = getClass().getResourceAsStream("logo.jpg")) {
 			MockHttpInputMessage inputMessage = new MockHttpInputMessage(body);
 			inputMessage.getHeaders().setContentType(MediaType.IMAGE_JPEG);
 			assertThatExceptionOfType(HttpMessageNotReadableException.class).isThrownBy(() ->

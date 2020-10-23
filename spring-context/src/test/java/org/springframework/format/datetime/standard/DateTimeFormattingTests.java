@@ -127,7 +127,7 @@ public class DateTimeFormattingTests {
 	@Test
 	public void testBindLocalDateArray() {
 		MutablePropertyValues propertyValues = new MutablePropertyValues();
-		propertyValues.add("localDate", new String[] {"10/31/09"});
+		propertyValues.add("localDate", new String[]{"10/31/09"});
 		binder.bind(propertyValues);
 		assertThat(binder.getBindingResult().getErrorCount()).isEqualTo(0);
 	}
@@ -368,8 +368,7 @@ public class DateTimeFormattingTests {
 			binder.bind(propertyValues);
 			assertThat(binder.getBindingResult().getErrorCount()).isEqualTo(0);
 			assertThat(binder.getBindingResult().getFieldValue("instant").toString().startsWith("2009-10-31")).isTrue();
-		}
-		finally {
+		} finally {
 			TimeZone.setDefault(defaultZone);
 		}
 	}

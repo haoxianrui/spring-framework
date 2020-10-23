@@ -52,11 +52,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @author Frank Scheffler
  * @author Sam Brannen
- * @since 5.2
  * @see AfterTestClassEvent
+ * @since 5.2
  */
 @Retention(RUNTIME)
-@Target({ METHOD, ANNOTATION_TYPE })
+@Target({METHOD, ANNOTATION_TYPE})
 @Documented
 @EventListener(AfterTestClassEvent.class)
 public @interface AfterTestClass {

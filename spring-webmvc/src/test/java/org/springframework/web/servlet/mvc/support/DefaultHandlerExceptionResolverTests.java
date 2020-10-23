@@ -183,9 +183,9 @@ public class DefaultHandlerExceptionResolverTests {
 	@Test
 	public void handleNoHandlerFoundException() throws Exception {
 		ServletServerHttpRequest req = new ServletServerHttpRequest(
-				new MockHttpServletRequest("GET","/resource"));
+				new MockHttpServletRequest("GET", "/resource"));
 		NoHandlerFoundException ex = new NoHandlerFoundException(req.getMethod().name(),
-				req.getServletRequest().getRequestURI(),req.getHeaders());
+				req.getServletRequest().getRequestURI(), req.getHeaders());
 		ModelAndView mav = exceptionResolver.resolveException(request, response, null, ex);
 		assertThat(mav).as("No ModelAndView returned").isNotNull();
 		assertThat(mav.isEmpty()).as("No Empty ModelAndView returned").isTrue();

@@ -150,7 +150,8 @@ class RSocketBufferLeakTests {
 	}
 
 	@Test // gh-24741
-	@Disabled // pending https://github.com/rsocket/rsocket-java/pull/777
+	@Disabled
+		// pending https://github.com/rsocket/rsocket-java/pull/777
 	void noSuchRouteOnChannelInteraction() {
 		Flux<String> input = Flux.just("foo", "bar", "baz");
 		Flux<String> result = requester.route("no-such-route").data(input).retrieveFlux(String.class);
@@ -261,16 +262,14 @@ class RSocketBufferLeakTests {
 					int count = info.getReferenceCount();
 					assertThat(count == 0).as("Leaked payload (refCnt=" + count + "): " + info).isTrue();
 					break;
-				}
-				catch (AssertionError ex) {
+				} catch (AssertionError ex) {
 					if (Instant.now().isAfter(start.plus(Duration.ofSeconds(5)))) {
 						throw ex;
 					}
 				}
 				try {
 					Thread.sleep(50);
-				}
-				catch (InterruptedException ex) {
+				} catch (InterruptedException ex) {
 					// ignore
 				}
 			}

@@ -40,12 +40,12 @@ public class SPR3064Tests {
 	@Test
 	public void testServiceIsAdvised() {
 		ClassPathXmlApplicationContext ctx =
-			new ClassPathXmlApplicationContext(getClass().getSimpleName() + ".xml", getClass());
+				new ClassPathXmlApplicationContext(getClass().getSimpleName() + ".xml", getClass());
 
 		service = (Service) ctx.getBean("service");
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(
 				this.service::serveMe)
-			.withMessageContaining("advice invoked");
+				.withMessageContaining("advice invoked");
 	}
 
 }
@@ -59,7 +59,7 @@ public class SPR3064Tests {
 @Aspect
 class TransactionInterceptor {
 
-	@Around(value="execution(* *..Service.*(..)) && @annotation(transaction)")
+	@Around(value = "execution(* *..Service.*(..)) && @annotation(transaction)")
 	public Object around(ProceedingJoinPoint pjp, Transaction transaction) throws Throwable {
 		throw new RuntimeException("advice invoked");
 		//return pjp.proceed();

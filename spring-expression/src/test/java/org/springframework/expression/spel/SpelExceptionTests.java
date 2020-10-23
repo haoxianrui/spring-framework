@@ -152,7 +152,7 @@ public class SpelExceptionTests {
 		StandardEvaluationContext ctx = new StandardEvaluationContext();
 		ctx.setVariables(new HashMap<String, Object>() {
 			{
-				put("anArray", new int[] {1,2,3});
+				put("anArray", new int[]{1, 2, 3});
 			}
 		});
 		boolean result = spelExpression.getValue(ctx, Boolean.class);

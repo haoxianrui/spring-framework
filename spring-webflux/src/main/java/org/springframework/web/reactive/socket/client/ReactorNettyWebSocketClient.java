@@ -61,6 +61,7 @@ public class ReactorNettyWebSocketClient implements WebSocketClient {
 
 	/**
 	 * Constructor that accepts an existing {@link HttpClient} builder.
+	 *
 	 * @since 5.1
 	 */
 	public ReactorNettyWebSocketClient(HttpClient httpClient) {
@@ -84,6 +85,7 @@ public class ReactorNettyWebSocketClient implements WebSocketClient {
 	 * {@link io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory
 	 * WebSocketServerHandshakerFactory} in Netty.
 	 * <p>By default set to 65536 (64K).
+	 *
 	 * @param maxFramePayloadLength the max length for frames.
 	 * @since 5.2
 	 */
@@ -93,6 +95,7 @@ public class ReactorNettyWebSocketClient implements WebSocketClient {
 
 	/**
 	 * Return the configured {@link #setMaxFramePayloadLength(int) maxFramePayloadLength}.
+	 *
 	 * @since 5.2
 	 */
 	public int getMaxFramePayloadLength() {
@@ -107,6 +110,7 @@ public class ReactorNettyWebSocketClient implements WebSocketClient {
 	 * <p>By default this is set to {@code false} in which case ping frames are
 	 * handled automatically by Reactor Netty. If set to {@code true}, ping
 	 * frames will be passed through to the {@link WebSocketHandler}.
+	 *
 	 * @param handlePing whether to let Ping frames through for handling
 	 * @since 5.2.4
 	 */
@@ -116,6 +120,7 @@ public class ReactorNettyWebSocketClient implements WebSocketClient {
 
 	/**
 	 * Return the configured {@link #setHandlePing(boolean)}.
+	 *
 	 * @since 5.2.4
 	 */
 	public boolean getHandlePing() {

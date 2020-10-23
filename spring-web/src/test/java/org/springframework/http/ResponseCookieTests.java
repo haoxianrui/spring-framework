@@ -25,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Unit tests for {@link ResponseCookie}.
+ *
  * @author Rossen Stoyanchev
  */
 public class ResponseCookieTests {

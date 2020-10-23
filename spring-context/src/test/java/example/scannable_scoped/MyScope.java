@@ -25,5 +25,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyScope {
 	String value() default ConfigurableBeanFactory.SCOPE_SINGLETON;
+
 	ScopedProxyMode proxyMode() default ScopedProxyMode.DEFAULT;
 }

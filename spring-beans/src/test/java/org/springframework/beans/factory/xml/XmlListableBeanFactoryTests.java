@@ -81,6 +81,7 @@ public class XmlListableBeanFactoryTests extends AbstractListableBeanFactoryTest
 				}
 				return bean;
 			}
+
 			@Override
 			public Object postProcessAfterInitialization(Object bean, String name) throws BeansException {
 				return bean;

@@ -19,7 +19,8 @@
 			<cache:cacheable method="key" key="#p0"/>
 			<cache:cacheable method="varArgsKey"/>
 			<cache:cacheable method="nam*" key="#root.methodName"/>
-			<cache:cacheable method="rootVars" key="#root.methodName + #root.method.name + #root.targetClass + #root.target"/>
+			<cache:cacheable method="rootVars"
+							 key="#root.methodName + #root.method.name + #root.targetClass + #root.target"/>
 			<cache:cacheable method="customKeyGenerator" key-generator="customKeyGenerator"/>
 			<cache:cacheable method="unknownCustomKeyGenerator" key-generator="unknownBeanName"/>
 			<cache:cacheable method="customCacheManager" cache-manager="customCacheManager"/>
@@ -62,7 +63,8 @@
 			<cache:cacheable method="key" key="#p0"/>
 			<cache:cacheable method="varArgsKey"/>
 			<cache:cacheable method="nam*" key="#root.methodName + #root.caches[0].name"/>
-			<cache:cacheable method="rootVars" key="#root.methodName + #root.method.name + #root.targetClass + #root.target"/>
+			<cache:cacheable method="rootVars"
+							 key="#root.methodName + #root.method.name + #root.targetClass + #root.target"/>
 			<cache:cacheable method="cache"/>
 			<cache:cacheable method="conditional"/>
 			<cache:cacheable method="unless"/>
@@ -97,8 +99,10 @@
 	</cache:advice>
 
 	<aop:config>
-		<aop:advisor advice-ref="cacheAdviceInterface" pointcut="execution(* *..DefaultCacheableService.*(..))" order="1"/>
-		<aop:advisor advice-ref="cacheAdviceClass" pointcut="execution(* *..AnnotatedClassCacheableService.*(..))" order="1"/>
+		<aop:advisor advice-ref="cacheAdviceInterface" pointcut="execution(* *..DefaultCacheableService.*(..))"
+					 order="1"/>
+		<aop:advisor advice-ref="cacheAdviceClass" pointcut="execution(* *..AnnotatedClassCacheableService.*(..))"
+					 order="1"/>
 		<aop:advisor advice-ref="debugInterceptor" pointcut="execution(* *..CacheableService.*(..))" order="2"/>
 	</aop:config>
 
@@ -114,7 +118,7 @@
 
 	<bean id="keyGenerator" class="org.springframework.context.testfixture.cache.SomeKeyGenerator"/>
 
-    <bean id="customKeyGenerator" class="org.springframework.context.testfixture.cache.SomeCustomKeyGenerator"/>
+	<bean id="customKeyGenerator" class="org.springframework.context.testfixture.cache.SomeCustomKeyGenerator"/>
 
 	<bean id="customCacheManager" class="org.springframework.cache.support.SimpleCacheManager">
 		<property name="caches">

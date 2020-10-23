@@ -55,8 +55,8 @@ public class SimpleUrlHandlerMappingTests {
 		wac.setConfigLocations("/org/springframework/web/servlet/handler/map2err.xml");
 		assertThatExceptionOfType(FatalBeanException.class).isThrownBy(
 				wac::refresh)
-			.withCauseInstanceOf(NoSuchBeanDefinitionException.class)
-			.satisfies(ex -> assertThat(((NoSuchBeanDefinitionException) ex.getCause()).getBeanName()).isEqualTo("mainControlle"));
+				.withCauseInstanceOf(NoSuchBeanDefinitionException.class)
+				.satisfies(ex -> assertThat(((NoSuchBeanDefinitionException) ex.getCause()).getBeanName()).isEqualTo("mainControlle"));
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class SimpleUrlHandlerMappingTests {
 	public void testNewlineInRequest() throws Exception {
 		Object controller = new Object();
 		SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping(
-			Collections.singletonMap("/*/baz", controller));
+				Collections.singletonMap("/*/baz", controller));
 		handlerMapping.setUrlDecode(false);
 		handlerMapping.setApplicationContext(new StaticApplicationContext());
 

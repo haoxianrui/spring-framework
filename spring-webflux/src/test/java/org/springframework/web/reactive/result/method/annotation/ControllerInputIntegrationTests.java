@@ -39,6 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <li>{@link RequestMappingDataBindingIntegrationTests}
  * <li>{@link RequestMappingMessageConversionIntegrationTests}
  * </ul>
+ *
  * @author Rossen Stoyanchev
  */
 class ControllerInputIntegrationTests extends AbstractRequestMappingIntegrationTests {
@@ -60,7 +61,8 @@ class ControllerInputIntegrationTests extends AbstractRequestMappingIntegrationT
 		assertThat(performGet("/param?name=George", new HttpHeaders(), String.class).getBody()).isEqualTo(expected);
 	}
 
-	@ParameterizedHttpServerTest  // SPR-15140
+	@ParameterizedHttpServerTest
+		// SPR-15140
 	void handleWithEncodedParam(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 

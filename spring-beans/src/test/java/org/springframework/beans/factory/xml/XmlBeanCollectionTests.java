@@ -52,7 +52,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  * @author Chris Beams
  * @since 19.12.2004
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class XmlBeanCollectionTests {
 
 	private final DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
@@ -178,8 +178,8 @@ public class XmlBeanCollectionTests {
 	public void testInvalidBeanNameReference() throws Exception {
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				this.beanFactory.getBean("jumble2"))
-			.withCauseInstanceOf(BeanDefinitionStoreException.class)
-			.withMessageContaining("rod2");
+				.withCauseInstanceOf(BeanDefinitionStoreException.class)
+				.withMessageContaining("rod2");
 	}
 
 	@Test
@@ -348,7 +348,7 @@ public class XmlBeanCollectionTests {
 	@Test
 	public void testClassList() throws Exception {
 		HasMap hasMap = (HasMap) this.beanFactory.getBean("classList");
-		assertThat(hasMap.getClassList().size()== 2).isTrue();
+		assertThat(hasMap.getClassList().size() == 2).isTrue();
 		assertThat(hasMap.getClassList().get(0).equals(String.class)).isTrue();
 		assertThat(hasMap.getClassList().get(1).equals(Exception.class)).isTrue();
 	}

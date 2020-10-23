@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 3.2
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(initializers = { FooBarAliasInitializer.class, DevProfileInitializer.class })
+@ContextConfiguration(initializers = {FooBarAliasInitializer.class, DevProfileInitializer.class})
 public class MultipleInitializersXmlConfigTests {
 
 	@Autowired

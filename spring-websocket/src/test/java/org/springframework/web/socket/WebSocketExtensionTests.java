@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Test fixture for {@link WebSocketExtension}
+ *
  * @author Brian Clozel
  */
 public class WebSocketExtensionTests {

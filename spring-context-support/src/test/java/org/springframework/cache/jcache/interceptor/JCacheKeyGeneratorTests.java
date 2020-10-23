@@ -151,7 +151,7 @@ public class JCacheKeyGeneratorTests {
 		@Override
 		public Object generate(Object target, Method method, Object... params) {
 			assertThat(Arrays.equals(expectedParams, params)).as("Unexpected parameters: expected: "
-								+ Arrays.toString(this.expectedParams) + " but got: " + Arrays.toString(params)).isTrue();
+					+ Arrays.toString(this.expectedParams) + " but got: " + Arrays.toString(params)).isTrue();
 			return new SimpleKey(params);
 		}
 	}

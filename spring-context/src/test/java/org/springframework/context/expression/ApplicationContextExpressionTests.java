@@ -82,22 +82,25 @@ class ApplicationContextExpressionTests {
 			public Object get(String name, ObjectFactory<?> objectFactory) {
 				return objectFactory.getObject();
 			}
+
 			@Override
 			public Object remove(String name) {
 				return null;
 			}
+
 			@Override
 			public void registerDestructionCallback(String name, Runnable callback) {
 			}
+
 			@Override
 			public Object resolveContextualObject(String key) {
 				if (key.equals("mySpecialAttr")) {
 					return "42";
-				}
-				else {
+				} else {
 					return null;
 				}
 			}
+
 			@Override
 			public String getConversationId() {
 				return null;
@@ -206,8 +209,7 @@ class ApplicationContextExpressionTests {
 			assertThat(tb6.age).isEqualTo(42);
 			assertThat(tb6.country).isEqualTo("123 UK");
 			assertThat(tb6.tb).isSameAs(tb0);
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("country");
 		}
 	}
@@ -240,8 +242,7 @@ class ApplicationContextExpressionTests {
 			assertThat(tb.getName()).isEqualTo("juergen2");
 			assertThat(tb.getCountry()).isEqualTo("UK2");
 			assertThat(tb.getCountry2()).isEqualTo("-UK2-");
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("name");
 			System.getProperties().remove("country");
 		}
@@ -269,8 +270,7 @@ class ApplicationContextExpressionTests {
 				assertThat(tb.getCountry()).isEqualTo("UK");
 			}
 			sw.stop();
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("country");
 			System.getProperties().remove("name");
 		}
@@ -296,6 +296,7 @@ class ApplicationContextExpressionTests {
 				public void checkPropertiesAccess() {
 					throw new AccessControlException("Not Allowed");
 				}
+
 				@Override
 				public void checkPermission(Permission perm) {
 					// allow everything else
@@ -307,8 +308,7 @@ class ApplicationContextExpressionTests {
 			TestBean tb = ac.getBean("tb", TestBean.class);
 			assertThat(tb.getCountry()).isEqualTo("NL");
 
-		}
-		finally {
+		} finally {
 			System.setSecurityManager(oldSecurityManager);
 			System.getProperties().remove("country");
 		}
@@ -342,8 +342,7 @@ class ApplicationContextExpressionTests {
 			assertThat(resourceInjectionBean.file).isEqualTo(resource.getFile());
 			assertThat(FileCopyUtils.copyToByteArray(resourceInjectionBean.inputStream)).isEqualTo(FileCopyUtils.copyToByteArray(resource.getInputStream()));
 			assertThat(FileCopyUtils.copyToString(resourceInjectionBean.reader)).isEqualTo(FileCopyUtils.copyToString(new EncodedResource(resource).getReader()));
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("logfile");
 		}
 	}
@@ -352,10 +351,12 @@ class ApplicationContextExpressionTests {
 	@SuppressWarnings("serial")
 	public static class ValueTestBean implements Serializable {
 
-		@Autowired @Value("XXX#{tb0.name}YYY#{mySpecialAttr}ZZZ")
+		@Autowired
+		@Value("XXX#{tb0.name}YYY#{mySpecialAttr}ZZZ")
 		public String name;
 
-		@Autowired @Value("#{mySpecialAttr}")
+		@Autowired
+		@Value("#{mySpecialAttr}")
 		public int age;
 
 		@Value("#{mySpecialAttr}")
@@ -376,7 +377,8 @@ class ApplicationContextExpressionTests {
 		@Value("${codeX:#{null}}")
 		private transient Optional<String> optionalValue3;
 
-		@Autowired @Qualifier("original")
+		@Autowired
+		@Qualifier("original")
 		public transient TestBean tb;
 	}
 
@@ -454,7 +456,8 @@ class ApplicationContextExpressionTests {
 			this.country = country;
 		}
 
-		@Autowired @Qualifier("original")
+		@Autowired
+		@Qualifier("original")
 		public void setTb(TestBean tb) {
 			this.tb = tb;
 		}

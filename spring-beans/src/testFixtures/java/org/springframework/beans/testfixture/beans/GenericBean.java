@@ -289,37 +289,37 @@ public class GenericBean<T> {
 		this.standardEnumMap = standardEnumMap;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static GenericBean createInstance(Set<Integer> integerSet) {
 		return new GenericBean(integerSet);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static GenericBean createInstance(Set<Integer> integerSet, List<Resource> resourceList) {
 		return new GenericBean(integerSet, resourceList);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static GenericBean createInstance(HashSet<Integer> integerSet, Map<Short, Integer> shortMap) {
 		return new GenericBean(integerSet, shortMap);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static GenericBean createInstance(Map<Short, Integer> shortMap, Resource resource) {
 		return new GenericBean(shortMap, resource);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static GenericBean createInstance(Map map, Map<Short, Integer> shortMap) {
 		return new GenericBean(map, shortMap);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static GenericBean createInstance(HashMap<Long, ?> longMap) {
 		return new GenericBean(longMap);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static GenericBean createInstance(boolean someFlag, Map<Number, Collection<? extends Object>> collectionMap) {
 		return new GenericBean(someFlag, collectionMap);
 	}

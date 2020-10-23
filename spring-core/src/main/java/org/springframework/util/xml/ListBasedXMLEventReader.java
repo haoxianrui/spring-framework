@@ -63,8 +63,7 @@ class ListBasedXMLEventReader extends AbstractXMLEventReader {
 			this.currentEvent = this.events.get(this.cursor);
 			this.cursor++;
 			return this.currentEvent;
-		}
-		else {
+		} else {
 			throw new NoSuchElementException();
 		}
 	}
@@ -74,8 +73,7 @@ class ListBasedXMLEventReader extends AbstractXMLEventReader {
 	public XMLEvent peek() {
 		if (hasNext()) {
 			return this.events.get(this.cursor);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
@@ -92,8 +90,7 @@ class ListBasedXMLEventReader extends AbstractXMLEventReader {
 			XMLEvent event = nextEvent();
 			if (event.isEndElement()) {
 				break;
-			}
-			else if (!event.isCharacters()) {
+			} else if (!event.isCharacters()) {
 				throw new XMLStreamException("Unexpected non-text event: " + event);
 			}
 			Characters characters = event.asCharacters();

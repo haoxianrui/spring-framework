@@ -53,12 +53,10 @@ public class HtmlCharacterEntityReferencesTests {
 				assertThat(references.convertToCharacter(referenceName))
 						.as("The entity reference [" + referenceName + "] should be mapped to unicode character " + character)
 						.isEqualTo((char) character);
-			}
-			else if (character == 39) {
+			} else if (character == 39) {
 				assertThat(references.isMappedToReference((char) character)).isTrue();
 				assertThat(references.convertToReference((char) character)).isEqualTo("&#39;");
-			}
-			else {
+			} else {
 				assertThat(references.isMappedToReference((char) character))
 						.as("The unicode character " + character + " should not be mapped to a reference")
 						.isFalse();
@@ -119,8 +117,7 @@ public class HtmlCharacterEntityReferencesTests {
 					throw new IOException("Cannot find definition resource [" + DTD_FILE + "]");
 				}
 				tokenizer = new StreamTokenizer(new BufferedReader(new InputStreamReader(inputStream, "UTF-8")));
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				throw new IllegalStateException("Failed to open definition resource [" + DTD_FILE + "]");
 			}
 		}
@@ -156,8 +153,7 @@ public class HtmlCharacterEntityReferencesTests {
 					}
 				}
 				return false;
-			}
-			catch (IOException ex) {
+			} catch (IOException ex) {
 				throw new IllegalStateException("Could not parse definition resource: " + ex.getMessage());
 			}
 		}

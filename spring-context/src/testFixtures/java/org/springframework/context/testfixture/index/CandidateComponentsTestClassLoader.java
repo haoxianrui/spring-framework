@@ -38,6 +38,7 @@ public class CandidateComponentsTestClassLoader extends ClassLoader {
 	/**
 	 * Create a test {@link ClassLoader} that disable the use of the index, even
 	 * if resources are present at the standard location.
+	 *
 	 * @param classLoader the classloader to use for all other operations
 	 * @return a test {@link ClassLoader} that has no index
 	 * @see CandidateComponentsIndexLoader#COMPONENTS_RESOURCE_LOCATION
@@ -50,6 +51,7 @@ public class CandidateComponentsTestClassLoader extends ClassLoader {
 	/**
 	 * Create a test {@link ClassLoader} that creates an index with the
 	 * specified {@link Resource} instances
+	 *
 	 * @param classLoader the classloader to use for all other operations
 	 * @return a test {@link ClassLoader} with an index built based on the
 	 * specified resources.
@@ -59,8 +61,7 @@ public class CandidateComponentsTestClassLoader extends ClassLoader {
 				Collections.enumeration(Stream.of(resources).map(r -> {
 					try {
 						return r.getURL();
-					}
-					catch (Exception ex) {
+					} catch (Exception ex) {
 						throw new IllegalArgumentException("Invalid resource " + r, ex);
 					}
 				}).collect(Collectors.toList())));

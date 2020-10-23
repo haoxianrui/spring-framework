@@ -50,8 +50,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * Jupiter's {@link Timeout @Timeout}.
  *
  * @author Sam Brannen
- * @since 5.2
  * @see org.springframework.test.context.junit4.TimedTransactionalSpringRunnerTests
+ * @since 5.2
  */
 class TimedTransactionalSpringExtensionTests {
 
@@ -64,10 +64,10 @@ class TimedTransactionalSpringExtensionTests {
 				.assertStatistics(stats -> stats.started(4).succeeded(2).failed(2));
 
 		events.failed().assertThatEvents().haveExactly(2,
-			event(test("WithExceededJUnitJupiterTimeout"),
-				finishedWithFailure(
-					instanceOf(TimeoutException.class),
-					message(msg -> msg.endsWith("timed out after 50 milliseconds")))));
+				event(test("WithExceededJUnitJupiterTimeout"),
+						finishedWithFailure(
+								instanceOf(TimeoutException.class),
+								message(msg -> msg.endsWith("timed out after 50 milliseconds")))));
 	}
 
 

@@ -36,7 +36,8 @@ class CustomEnvironmentTests {
 
 	@Test
 	void control() {
-		Environment env = new AbstractEnvironment() { };
+		Environment env = new AbstractEnvironment() {
+		};
 		assertThat(env.acceptsProfiles(defaultProfile())).isTrue();
 	}
 
@@ -74,8 +75,8 @@ class CustomEnvironmentTests {
 			@SuppressWarnings("serial")
 			protected Set<String> getReservedDefaultProfiles() {
 				return new HashSet<String>() {{
-						add("rd1");
-						add("rd2");
+					add("rd1");
+					add("rd2");
 				}};
 			}
 		}

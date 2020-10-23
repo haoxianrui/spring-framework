@@ -26,8 +26,8 @@ import org.springframework.util.function.SingletonSupplier;
  *
  * @author Stephane Nicoll
  * @author Juergen Hoeller
- * @since 4.1
  * @see org.springframework.cache.interceptor.CacheErrorHandler
+ * @since 4.1
  */
 public abstract class AbstractCacheInvoker {
 
@@ -65,14 +65,14 @@ public abstract class AbstractCacheInvoker {
 	 * invoke the error handler if an exception occurs. Return {@code null}
 	 * if the handler does not throw any exception, which simulates a cache
 	 * miss in case of error.
+	 *
 	 * @see Cache#get(Object)
 	 */
 	@Nullable
 	protected Cache.ValueWrapper doGet(Cache cache, Object key) {
 		try {
 			return cache.get(key);
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			getErrorHandler().handleCacheGetError(ex, cache, key);
 			return null;  // If the exception is handled, return a cache miss
 		}
@@ -85,8 +85,7 @@ public abstract class AbstractCacheInvoker {
 	protected void doPut(Cache cache, Object key, @Nullable Object result) {
 		try {
 			cache.put(key, result);
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			getErrorHandler().handleCachePutError(ex, cache, key, result);
 		}
 	}
@@ -99,12 +98,10 @@ public abstract class AbstractCacheInvoker {
 		try {
 			if (immediate) {
 				cache.evictIfPresent(key);
-			}
-			else {
+			} else {
 				cache.evict(key);
 			}
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			getErrorHandler().handleCacheEvictError(ex, cache, key);
 		}
 	}
@@ -117,12 +114,10 @@ public abstract class AbstractCacheInvoker {
 		try {
 			if (immediate) {
 				cache.invalidate();
-			}
-			else {
+			} else {
 				cache.clear();
 			}
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			getErrorHandler().handleCacheClearError(ex, cache);
 		}
 	}

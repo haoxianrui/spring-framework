@@ -134,7 +134,7 @@ class AttributeMethodsTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	void isValidWhenDoesNotHaveTypeNotPresentExceptionReturnsTrue() {
 		ClassValue annotation = mock(ClassValue.class);
 		given(annotation.value()).willReturn((Class) InputStream.class);
@@ -151,7 +151,7 @@ class AttributeMethodsTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	void validateWhenDoesNotHaveTypeNotPresentExceptionThrowsNothing() {
 		ClassValue annotation = mockAnnotation(ClassValue.class);
 		given(annotation.value()).willReturn((Class) InputStream.class);
@@ -167,7 +167,7 @@ class AttributeMethodsTests {
 		return result;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private <A extends Annotation> A mockAnnotation(Class<A> annotationType) {
 		A annotation = mock(annotationType);
 		given(annotation.annotationType()).willReturn((Class) annotationType);

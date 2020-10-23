@@ -53,8 +53,7 @@ class MBeanServerFactoryBeanTests {
 		try {
 			MBeanServer server = bean.getObject();
 			assertThat(server).as("The MBeanServer should not be null").isNotNull();
-		}
-		finally {
+		} finally {
 			bean.destroy();
 		}
 	}
@@ -67,8 +66,7 @@ class MBeanServerFactoryBeanTests {
 		try {
 			MBeanServer server = bean.getObject();
 			assertThat(server.getDefaultDomain()).as("The default domain should be foo").isEqualTo("foo");
-		}
-		finally {
+		} finally {
 			bean.destroy();
 		}
 	}
@@ -83,12 +81,10 @@ class MBeanServerFactoryBeanTests {
 			try {
 				MBeanServer otherServer = bean.getObject();
 				assertThat(otherServer).as("Existing MBeanServer not located").isSameAs(server);
-			}
-			finally {
+			} finally {
 				bean.destroy();
 			}
-		}
-		finally {
+		} finally {
 			MBeanServerFactory.releaseMBeanServer(server);
 		}
 	}
@@ -100,8 +96,7 @@ class MBeanServerFactoryBeanTests {
 		bean.afterPropertiesSet();
 		try {
 			assertThat(bean.getObject()).isSameAs(ManagementFactory.getPlatformMBeanServer());
-		}
-		finally {
+		} finally {
 			bean.destroy();
 		}
 	}
@@ -113,8 +108,7 @@ class MBeanServerFactoryBeanTests {
 		bean.afterPropertiesSet();
 		try {
 			assertThat(bean.getObject()).isSameAs(ManagementFactory.getPlatformMBeanServer());
-		}
-		finally {
+		} finally {
 			bean.destroy();
 		}
 	}
@@ -137,8 +131,7 @@ class MBeanServerFactoryBeanTests {
 			MBeanServer server = bean.getObject();
 			List<MBeanServer> servers = MBeanServerFactory.findMBeanServer(null);
 			assertThat(hasInstance(servers, server)).as(failMsg).isEqualTo(referenceShouldExist);
-		}
-		finally {
+		} finally {
 			bean.destroy();
 		}
 	}

@@ -116,7 +116,7 @@ public class RequestScopeTests {
 		assertThat(request.getAttribute(name)).isNull();
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				this.beanFactory.getBean(name))
-			.matches(ex -> ex.contains(BeanCurrentlyInCreationException.class));
+				.matches(ex -> ex.contains(BeanCurrentlyInCreationException.class));
 	}
 
 	@Test

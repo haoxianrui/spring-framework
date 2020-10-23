@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="jenny" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>Jenny</value></property>
-		<property name="age"><value>30</value></property>
+		<property name="name">
+			<value>Jenny</value>
+		</property>
+		<property name="age">
+			<value>30</value>
+		</property>
 		<property name="spouse">
-		<!-- Could use id and href -->
+			<!-- Could use id and href -->
 			<ref bean="david"/>
 		</property>
 	</bean>
@@ -20,12 +24,18 @@
 			<description>The name of the user</description>
 			<value>David</value>
 		</property>
-		<property name="age"><value>27</value></property>
+		<property name="age">
+			<value>27</value>
+		</property>
 	</bean>
 
 	<bean id="rod" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>Rod</value></property>
-		<property name="age"><value>32</value></property>
+		<property name="name">
+			<value>Rod</value>
+		</property>
+		<property name="age">
+			<value>32</value>
+		</property>
 		<property name="friends">
 			<description>List of Rod's friends</description>
 			<list>
@@ -36,22 +46,34 @@
 	</bean>
 
 	<bean id="pJenny" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype">
-		<property name="name"><value>Jenny</value></property>
-		<property name="age"><value>30</value></property>
+		<property name="name">
+			<value>Jenny</value>
+		</property>
+		<property name="age">
+			<value>30</value>
+		</property>
 		<property name="spouse">
-		<!-- Could use id and href -->
+			<!-- Could use id and href -->
 			<ref bean="david"/>
 		</property>
 	</bean>
 
 	<bean id="pDavid" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype">
-		<property name="name"><value>David</value></property>
-		<property name="age"><value>27</value></property>
+		<property name="name">
+			<value>David</value>
+		</property>
+		<property name="age">
+			<value>27</value>
+		</property>
 	</bean>
 
 	<bean id="pRod" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype">
-		<property name="name"><value>Rod</value></property>
-		<property name="age"><value>32</value></property>
+		<property name="name">
+			<value>Rod</value>
+		</property>
+		<property name="age">
+			<value>32</value>
+		</property>
 		<property name="friends">
 			<list>
 				<ref bean="pJenny"/>
@@ -64,8 +86,12 @@
 		Try setting a collection property to a single value
 	-->
 	<bean id="loner" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>loner</value></property>
-		<property name="age"><value>26</value></property>
+		<property name="name">
+			<value>loner</value>
+		</property>
+		<property name="age">
+			<value>26</value>
+		</property>
 		<property name="friends">
 			<list>
 				<description>My List</description>
@@ -98,15 +124,21 @@
 	</bean>
 
 	<bean id="verbose" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>verbose</value></property>
+		<property name="name">
+			<value>verbose</value>
+		</property>
 	</bean>
 
 	<bean id="verbose2" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><idref bean="verbose"/></property>
+		<property name="name">
+			<idref bean="verbose"/>
+		</property>
 	</bean>
 
 	<bean id="verbose3" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><idref bean="verbose"/></property>
+		<property name="name">
+			<idref bean="verbose"/>
+		</property>
 	</bean>
 
 	<bean id="emptyMap" class="org.springframework.beans.testfixture.beans.HasMap">
@@ -121,7 +153,9 @@
 			<map>
 				<entry key="foo" value="bar"/>
 				<entry key="fi" value="fum"/>
-				<entry key="fa"><null/></entry>
+				<entry key="fa">
+					<null/>
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -133,15 +167,15 @@
 					<value type="java.lang.Integer">10</value>
 				</entry>
 				<entry>
- 					<key>
+					<key>
 						<ref bean="jennyKey"/>
 					</key>
 					<ref bean="jenny"/>
 				</entry>
 				<entry>
- 					<key>
- 						<bean class="java.lang.Integer">
- 							<constructor-arg value="5"/>
+					<key>
+						<bean class="java.lang.Integer">
+							<constructor-arg value="5"/>
 						</bean>
 					</key>
 					<idref bean="david"/>
@@ -171,16 +205,24 @@
 		<property name="map">
 			<map>
 				<entry>
-					<key><null/></key>
+					<key>
+						<null/>
+					</key>
 					<value>bar</value>
 				</entry>
-				<entry key="jenny"><ref bean="jenny"/></entry>
+				<entry key="jenny">
+					<ref bean="jenny"/>
+				</entry>
 				<entry key="list">
 					<list>
 						<value>zero</value>
 						<map>
-							<entry key="fo"><value>bar</value></entry>
-							<entry key="jen"><ref bean="jenny"/></entry>
+							<entry key="fo">
+								<value>bar</value>
+							</entry>
+							<entry key="jen">
+								<ref bean="jenny"/>
+							</entry>
 						</map>
 						<list>
 							<ref bean="jenny"/>
@@ -191,8 +233,12 @@
 				</entry>
 				<entry key="map">
 					<map>
-						<entry key="foo"><value>bar</value></entry>
-						<entry key="jenny"><ref bean="jenny"/></entry>
+						<entry key="foo">
+							<value>bar</value>
+						</entry>
+						<entry key="jenny">
+							<ref bean="jenny"/>
+						</entry>
 					</map>
 				</entry>
 			</map>
@@ -328,8 +374,12 @@
 	<bean id="mapFactory" class="org.springframework.beans.factory.config.MapFactoryBean">
 		<property name="sourceMap">
 			<map>
-				<entry key="foo"><value>bar</value></entry>
-				<entry key="jen"><value>jenny</value></entry>
+				<entry key="foo">
+					<value>bar</value>
+				</entry>
+				<entry key="jen">
+					<value>jenny</value>
+				</entry>
 			</map>
 		</property>
 		<property name="targetMapClass">
@@ -340,8 +390,12 @@
 	<bean id="pMapFactory" class="org.springframework.beans.factory.config.MapFactoryBean">
 		<property name="sourceMap">
 			<map>
-				<entry key="foo"><value>bar</value></entry>
-				<entry key="jen"><value>jenny</value></entry>
+				<entry key="foo">
+					<value>bar</value>
+				</entry>
+				<entry key="jen">
+					<value>jenny</value>
+				</entry>
 			</map>
 		</property>
 		<property name="targetMapClass">

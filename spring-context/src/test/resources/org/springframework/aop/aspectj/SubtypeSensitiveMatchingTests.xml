@@ -8,13 +8,13 @@
 
 	<aop:config>
 		<aop:aspect id="thisMatcher" ref="testAspect">
-		  <aop:before pointcut="execution(* *(..)) and this(java.io.Serializable)" method="toString"/>
+			<aop:before pointcut="execution(* *(..)) and this(java.io.Serializable)" method="toString"/>
 		</aop:aspect>
 		<aop:aspect id="targetMatcher" ref="testAspect">
-		  <aop:before pointcut="execution(* *(..)) and target(java.io.Serializable)" method="toString"/>
+			<aop:before pointcut="execution(* *(..)) and target(java.io.Serializable)" method="toString"/>
 		</aop:aspect>
 		<aop:aspect id="argsMatcher" ref="testAspect">
-		  <aop:before pointcut="execution(* bar(..)) and args(java.io.Serializable)" method="toString"/>
+			<aop:before pointcut="execution(* bar(..)) and args(java.io.Serializable)" method="toString"/>
 		</aop:aspect>
 	</aop:config>
 

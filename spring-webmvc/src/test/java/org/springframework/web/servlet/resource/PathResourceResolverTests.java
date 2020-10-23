@@ -125,8 +125,8 @@ public class PathResourceResolverTests {
 
 	@Test // SPR-12624
 	public void checkRelativeLocation() throws Exception {
-		String locationUrl= new UrlResource(getClass().getResource("./test/")).getURL().toExternalForm();
-		Resource location = new UrlResource(locationUrl.replace("/springframework","/../org/springframework"));
+		String locationUrl = new UrlResource(getClass().getResource("./test/")).getURL().toExternalForm();
+		Resource location = new UrlResource(locationUrl.replace("/springframework", "/../org/springframework"));
 
 		assertThat(this.resolver.resolveResource(null, "main.css", Collections.singletonList(location), null)).isNotNull();
 	}

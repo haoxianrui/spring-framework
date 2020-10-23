@@ -120,8 +120,8 @@ class ModelResultMatchersTests {
 	@Test
 	void attributeErrorCount_withWrongErrorCount() throws Exception {
 		assertThatExceptionOfType(AssertionError.class)
-			.isThrownBy(() -> this.matchers.attributeErrorCount("date", 2).match(this.mvcResultWithError))
-			.withMessage("Binding/validation error count for attribute 'date', expected:<2> but was:<1>");
+				.isThrownBy(() -> this.matchers.attributeErrorCount("date", 2).match(this.mvcResultWithError))
+				.withMessage("Binding/validation error count for attribute 'date', expected:<2> but was:<1>");
 	}
 
 	@Test

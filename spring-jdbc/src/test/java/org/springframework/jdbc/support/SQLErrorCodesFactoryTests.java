@@ -131,8 +131,8 @@ public class SQLErrorCodesFactoryTests {
 		assertThat(Arrays.binarySearch(sec.getPermissionDeniedCodes(), "10") >= 0).isTrue();
 		assertThat(Arrays.binarySearch(sec.getDuplicateKeyCodes(), "301") >= 0).isTrue();
 		assertThat(Arrays.binarySearch(sec.getDataIntegrityViolationCodes(), "461") >= 0).isTrue();
-		assertThat(Arrays.binarySearch(sec.getDataAccessResourceFailureCodes(), "-813") >=0).isTrue();
-		assertThat(Arrays.binarySearch(sec.getInvalidResultSetAccessCodes(), "582") >=0).isTrue();
+		assertThat(Arrays.binarySearch(sec.getDataAccessResourceFailureCodes(), "-813") >= 0).isTrue();
+		assertThat(Arrays.binarySearch(sec.getInvalidResultSetAccessCodes(), "582") >= 0).isTrue();
 		assertThat(Arrays.binarySearch(sec.getCannotAcquireLockCodes(), "131") >= 0).isTrue();
 		assertThat(Arrays.binarySearch(sec.getCannotSerializeTransactionCodes(), "138") >= 0).isTrue();
 		assertThat(Arrays.binarySearch(sec.getDeadlockLoserCodes(), "133") >= 0).isTrue();
@@ -143,14 +143,14 @@ public class SQLErrorCodesFactoryTests {
 	public void testLookupOrder() {
 		class TestSQLErrorCodesFactory extends SQLErrorCodesFactory {
 			private int lookups = 0;
+
 			@Override
 			protected Resource loadResource(String path) {
 				++lookups;
 				if (lookups == 1) {
 					assertThat(path).isEqualTo(SQLErrorCodesFactory.SQL_ERROR_CODE_DEFAULT_PATH);
 					return null;
-				}
-				else {
+				} else {
 					// Should have only one more lookup
 					assertThat(lookups).isEqualTo(2);
 					assertThat(path).isEqualTo(SQLErrorCodesFactory.SQL_ERROR_CODE_OVERRIDE_PATH);
@@ -273,8 +273,7 @@ public class SQLErrorCodesFactoryTests {
 		SQLErrorCodesFactory secf = null;
 		if (factory != null) {
 			secf = factory;
-		}
-		else {
+		} else {
 			secf = SQLErrorCodesFactory.getInstance();
 		}
 

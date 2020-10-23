@@ -62,22 +62,28 @@ import org.springframework.util.Assert;
  *
  * @author Thomas Risberg
  * @author Juergen Hoeller
- * @since 2.0
  * @see NamedParameterJdbcOperations
  * @see org.springframework.jdbc.core.JdbcTemplate
+ * @since 2.0
  */
 public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations {
 
-	/** Default maximum number of entries for this template's SQL cache: 256. */
+	/**
+	 * Default maximum number of entries for this template's SQL cache: 256.
+	 */
 	public static final int DEFAULT_CACHE_LIMIT = 256;
 
 
-	/** The JdbcTemplate we are wrapping. */
+	/**
+	 * The JdbcTemplate we are wrapping.
+	 */
 	private final JdbcOperations classicJdbcTemplate;
 
 	private volatile int cacheLimit = DEFAULT_CACHE_LIMIT;
 
-	/** Cache of original SQL String to ParsedSql representation. */
+	/**
+	 * Cache of original SQL String to ParsedSql representation.
+	 */
 	@SuppressWarnings("serial")
 	private final Map<String, ParsedSql> parsedSqlCache =
 			new LinkedHashMap<String, ParsedSql>(DEFAULT_CACHE_LIMIT, 0.75f, true) {
@@ -91,6 +97,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 	/**
 	 * Create a new NamedParameterJdbcTemplate for the given {@link DataSource}.
 	 * <p>Creates a classic Spring {@link org.springframework.jdbc.core.JdbcTemplate} and wraps it.
+	 *
 	 * @param dataSource the JDBC DataSource to access
 	 */
 	public NamedParameterJdbcTemplate(DataSource dataSource) {
@@ -101,6 +108,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 	/**
 	 * Create a new NamedParameterJdbcTemplate for the given classic
 	 * Spring {@link org.springframework.jdbc.core.JdbcTemplate}.
+	 *
 	 * @param classicJdbcTemplate the classic Spring JdbcTemplate to wrap
 	 */
 	public NamedParameterJdbcTemplate(JdbcOperations classicJdbcTemplate) {
@@ -123,6 +131,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 	 * in particular for passing it on to other {@code JdbcTemplate} consumers.
 	 * <p>If sufficient for the purposes at hand, {@link #getJdbcOperations()}
 	 * is recommended over this variant.
+	 *
 	 * @since 5.0.3
 	 */
 	public JdbcTemplate getJdbcTemplate() {
@@ -239,7 +248,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 
 	@Override
 	@Nullable
-	public <T> T queryForObject(String sql, Map<String, ?> paramMap, RowMapper<T>rowMapper)
+	public <T> T queryForObject(String sql, Map<String, ?> paramMap, RowMapper<T> rowMapper)
 			throws DataAccessException {
 
 		return queryForObject(sql, new MapSqlParameterSource(paramMap), rowMapper);
@@ -341,8 +350,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 		PreparedStatementCreator psc = getPreparedStatementCreator(sql, paramSource, pscf -> {
 			if (keyColumnNames != null) {
 				pscf.setGeneratedKeysColumnNames(keyColumnNames);
-			}
-			else {
+			} else {
 				pscf.setReturnGeneratedKeys(true);
 			}
 		});
@@ -371,6 +379,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 						Object[] values = NamedParameterUtils.buildValueArray(parsedSql, batchArgs[i], null);
 						pscf.newPreparedStatementSetter(values).setValues(ps);
 					}
+
 					@Override
 					public int getBatchSize() {
 						return batchArgs.length;
@@ -383,7 +392,8 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 	 * Build a {@link PreparedStatementCreator} based on the given SQL and named parameters.
 	 * <p>Note: Directly called from all {@code query} variants. Delegates to the common
 	 * {@link #getPreparedStatementCreator(String, SqlParameterSource, Consumer)} method.
-	 * @param sql the SQL statement to execute
+	 *
+	 * @param sql         the SQL statement to execute
 	 * @param paramSource container of arguments to bind
 	 * @return the corresponding {@link PreparedStatementCreator}
 	 * @see #getPreparedStatementCreator(String, SqlParameterSource, Consumer)
@@ -396,19 +406,20 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 	 * Build a {@link PreparedStatementCreator} based on the given SQL and named parameters.
 	 * <p>Note: Used for the {@code update} variant with generated key handling, and also
 	 * delegated from {@link #getPreparedStatementCreator(String, SqlParameterSource)}.
-	 * @param sql the SQL statement to execute
+	 *
+	 * @param sql         the SQL statement to execute
 	 * @param paramSource container of arguments to bind
-	 * @param customizer callback for setting further properties on the
-	 * {@link PreparedStatementCreatorFactory} in use), applied before the
-	 * actual {@code newPreparedStatementCreator} call
+	 * @param customizer  callback for setting further properties on the
+	 *                    {@link PreparedStatementCreatorFactory} in use), applied before the
+	 *                    actual {@code newPreparedStatementCreator} call
 	 * @return the corresponding {@link PreparedStatementCreator}
-	 * @since 5.0.5
 	 * @see #getParsedSql(String)
 	 * @see PreparedStatementCreatorFactory#PreparedStatementCreatorFactory(String, List)
 	 * @see PreparedStatementCreatorFactory#newPreparedStatementCreator(Object[])
+	 * @since 5.0.5
 	 */
 	protected PreparedStatementCreator getPreparedStatementCreator(String sql, SqlParameterSource paramSource,
-			@Nullable Consumer<PreparedStatementCreatorFactory> customizer) {
+																   @Nullable Consumer<PreparedStatementCreatorFactory> customizer) {
 
 		ParsedSql parsedSql = getParsedSql(sql);
 		PreparedStatementCreatorFactory pscf = getPreparedStatementCreatorFactory(parsedSql, paramSource);
@@ -422,6 +433,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 	/**
 	 * Obtain a parsed representation of the given SQL statement.
 	 * <p>The default implementation uses an LRU cache with an upper limit of 256 entries.
+	 *
 	 * @param sql the original SQL statement
 	 * @return a representation of the parsed SQL statement
 	 */
@@ -436,12 +448,13 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 
 	/**
 	 * Build a {@link PreparedStatementCreatorFactory} based on the given SQL and named parameters.
-	 * @param parsedSql parsed representation of the given SQL statement
+	 *
+	 * @param parsedSql   parsed representation of the given SQL statement
 	 * @param paramSource container of arguments to bind
 	 * @return the corresponding {@link PreparedStatementCreatorFactory}
-	 * @since 5.1.3
 	 * @see #getPreparedStatementCreator(String, SqlParameterSource, Consumer)
 	 * @see #getParsedSql(String)
+	 * @since 5.1.3
 	 */
 	protected PreparedStatementCreatorFactory getPreparedStatementCreatorFactory(
 			ParsedSql parsedSql, SqlParameterSource paramSource) {

@@ -42,7 +42,7 @@ class XmlExpectationsHelperTests {
 		XmlExpectationsHelper xmlHelper = new XmlExpectationsHelper();
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				xmlHelper.assertXmlEqual(control, test))
-			.withMessageStartingWith("Body content Expected child 'field1'");
+				.withMessageStartingWith("Body content Expected child 'field1'");
 	}
 
 	@Test
@@ -60,7 +60,7 @@ class XmlExpectationsHelperTests {
 		XmlExpectationsHelper xmlHelper = new XmlExpectationsHelper();
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				xmlHelper.assertXmlEqual(control, test))
-			.withMessageContaining("Expected child nodelist length '2' but was '3'");
+				.withMessageContaining("Expected child nodelist length '2' but was '3'");
 
 	}
 
@@ -71,7 +71,7 @@ class XmlExpectationsHelperTests {
 		XmlExpectationsHelper xmlHelper = new XmlExpectationsHelper();
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
 				xmlHelper.assertXmlEqual(control, test))
-			.withMessageContaining("Expected child nodelist length '3' but was '2'");
+				.withMessageContaining("Expected child nodelist length '3' but was '2'");
 	}
 
 }

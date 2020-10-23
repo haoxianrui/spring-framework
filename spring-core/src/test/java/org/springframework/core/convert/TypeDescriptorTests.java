@@ -678,7 +678,7 @@ class TypeDescriptorTests {
 		TypeDescriptor typeDescriptor = new TypeDescriptor(property);
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				typeDescriptor.upcast(Collection.class))
-			.withMessage("interface java.util.Map is not assignable to interface java.util.Collection");
+				.withMessage("interface java.util.Map is not assignable to interface java.util.Collection");
 	}
 
 	@Test

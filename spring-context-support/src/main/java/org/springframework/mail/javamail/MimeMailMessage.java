@@ -33,9 +33,9 @@ import org.springframework.mail.MailParseException;
  * MimeMessageHelper instance or with a JavaMail MimeMessage instance.
  *
  * @author Juergen Hoeller
- * @since 1.1.5
  * @see MimeMessageHelper
  * @see javax.mail.internet.MimeMessage
+ * @since 1.1.5
  */
 public class MimeMailMessage implements MailMessage {
 
@@ -44,6 +44,7 @@ public class MimeMailMessage implements MailMessage {
 
 	/**
 	 * Create a new MimeMailMessage based on the given MimeMessageHelper.
+	 *
 	 * @param mimeMessageHelper the MimeMessageHelper
 	 */
 	public MimeMailMessage(MimeMessageHelper mimeMessageHelper) {
@@ -52,6 +53,7 @@ public class MimeMailMessage implements MailMessage {
 
 	/**
 	 * Create a new MimeMailMessage based on the given JavaMail MimeMessage.
+	 *
 	 * @param mimeMessage the JavaMail MimeMessage
 	 */
 	public MimeMailMessage(MimeMessage mimeMessage) {
@@ -77,8 +79,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setFrom(String from) throws MailParseException {
 		try {
 			this.helper.setFrom(from);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -87,8 +88,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setReplyTo(String replyTo) throws MailParseException {
 		try {
 			this.helper.setReplyTo(replyTo);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -97,8 +97,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setTo(String to) throws MailParseException {
 		try {
 			this.helper.setTo(to);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -107,8 +106,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setTo(String... to) throws MailParseException {
 		try {
 			this.helper.setTo(to);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -117,8 +115,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setCc(String cc) throws MailParseException {
 		try {
 			this.helper.setCc(cc);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -127,8 +124,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setCc(String... cc) throws MailParseException {
 		try {
 			this.helper.setCc(cc);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -137,8 +133,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setBcc(String bcc) throws MailParseException {
 		try {
 			this.helper.setBcc(bcc);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -147,8 +142,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setBcc(String... bcc) throws MailParseException {
 		try {
 			this.helper.setBcc(bcc);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -157,8 +151,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setSentDate(Date sentDate) throws MailParseException {
 		try {
 			this.helper.setSentDate(sentDate);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -167,8 +160,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setSubject(String subject) throws MailParseException {
 		try {
 			this.helper.setSubject(subject);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}
@@ -177,8 +169,7 @@ public class MimeMailMessage implements MailMessage {
 	public void setText(String text) throws MailParseException {
 		try {
 			this.helper.setText(text);
-		}
-		catch (MessagingException ex) {
+		} catch (MessagingException ex) {
 			throw new MailParseException(ex);
 		}
 	}

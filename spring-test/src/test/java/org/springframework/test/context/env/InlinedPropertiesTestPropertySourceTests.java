@@ -39,8 +39,8 @@ import static org.springframework.test.context.support.TestPropertySourceUtils.I
  */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
-@TestPropertySource(properties = { "", "foo = bar", "baz quux", "enigma: 42", "x.y.z = a=b=c",
-	"server.url = https://example.com", "key.value.1: key=value", "key.value.2 key=value", "key.value.3 key:value" })
+@TestPropertySource(properties = {"", "foo = bar", "baz quux", "enigma: 42", "x.y.z = a=b=c",
+		"server.url = https://example.com", "key.value.1: key=value", "key.value.2 key=value", "key.value.3 key:value"})
 class InlinedPropertiesTestPropertySourceTests {
 
 	@Autowired
@@ -69,10 +69,10 @@ class InlinedPropertiesTestPropertySourceTests {
 	@Test
 	@SuppressWarnings("rawtypes")
 	void propertyNameOrderingIsPreservedInEnvironment() {
-		final String[] expectedPropertyNames = new String[] { "foo", "baz", "enigma", "x.y.z", "server.url",
-			"key.value.1", "key.value.2", "key.value.3" };
+		final String[] expectedPropertyNames = new String[]{"foo", "baz", "enigma", "x.y.z", "server.url",
+				"key.value.1", "key.value.2", "key.value.3"};
 		EnumerablePropertySource eps = (EnumerablePropertySource) env.getPropertySources().get(
-			INLINED_PROPERTIES_PROPERTY_SOURCE_NAME);
+				INLINED_PROPERTIES_PROPERTY_SOURCE_NAME);
 		assertThat(eps.getPropertyNames()).isEqualTo(expectedPropertyNames);
 	}
 

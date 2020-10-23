@@ -321,7 +321,7 @@ public class Jackson2ObjectMapperBuilderTests {
 		javaTimeModule.addDeserializer(OffsetDateTime.class, new OffsetDateTimeDeserializer());
 		builder.modulesToInstall(javaTimeModule);
 		builder.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		ObjectMapper objectMapper =  builder.build();
+		ObjectMapper objectMapper = builder.build();
 		DemoPojo demoPojo = objectMapper.readValue(DATA, DemoPojo.class);
 		assertThat(demoPojo.getOffsetDateTime()).isNotNull();
 	}
@@ -336,13 +336,13 @@ public class Jackson2ObjectMapperBuilderTests {
 		builder.modulesToInstall(fooModule, barModule);
 		ObjectMapper objectMapper = builder.build();
 		assertThat(StreamSupport
-		.stream(getSerializerFactoryConfig(objectMapper).serializers().spliterator(), false)
-		.filter(s -> s.findSerializer(null, SimpleType.construct(Foo.class), null) != null)
-		.count()).isEqualTo(1);
+				.stream(getSerializerFactoryConfig(objectMapper).serializers().spliterator(), false)
+				.filter(s -> s.findSerializer(null, SimpleType.construct(Foo.class), null) != null)
+				.count()).isEqualTo(1);
 		assertThat(StreamSupport
-		.stream(getSerializerFactoryConfig(objectMapper).serializers().spliterator(), false)
-		.filter(s -> s.findSerializer(null, SimpleType.construct(Bar.class), null) != null)
-		.count()).isEqualTo(1);
+				.stream(getSerializerFactoryConfig(objectMapper).serializers().spliterator(), false)
+				.filter(s -> s.findSerializer(null, SimpleType.construct(Bar.class), null) != null)
+				.count()).isEqualTo(1);
 	}
 
 	private static SerializerFactoryConfig getSerializerFactoryConfig(ObjectMapper objectMapper) {
@@ -457,7 +457,7 @@ public class Jackson2ObjectMapperBuilderTests {
 						MapperFeature.AUTO_DETECT_FIELDS,
 						JsonParser.Feature.AUTO_CLOSE_SOURCE,
 						JsonGenerator.Feature.QUOTE_FIELD_NAMES)
-						.serializationInclusion(JsonInclude.Include.NON_NULL);
+				.serializationInclusion(JsonInclude.Include.NON_NULL);
 
 		ObjectMapper mapper = new ObjectMapper();
 		builder.configure(mapper);
@@ -677,8 +677,7 @@ public class Jackson2ObjectMapperBuilderTests {
 			try {
 				return OffsetDateTime.parse(value);
 
-			}
-			catch (DateTimeParseException exception) {
+			} catch (DateTimeParseException exception) {
 				return OffsetDateTime.parse(value + CURRENT_ZONE_OFFSET);
 			}
 		}
@@ -703,9 +702,11 @@ public class Jackson2ObjectMapperBuilderTests {
 	public static class MyXmlFactory extends XmlFactory {
 	}
 
-	static class Foo {}
+	static class Foo {
+	}
 
-	static class Bar {}
+	static class Bar {
+	}
 
 	static class FooSerializer extends JsonSerializer<Foo> {
 		@Override
@@ -722,6 +723,7 @@ public class Jackson2ObjectMapperBuilderTests {
 		@Override
 		public void serialize(Bar value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
 		}
+
 		@Override
 		public Class<Bar> handledType() {
 			return Bar.class;

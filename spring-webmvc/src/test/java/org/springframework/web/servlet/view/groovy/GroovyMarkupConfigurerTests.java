@@ -163,7 +163,7 @@ public class GroovyMarkupConfigurerTests {
 	public void failMissingTemplate() throws Exception {
 		LocaleContextHolder.setLocale(Locale.US);
 		assertThatIOException().isThrownBy(() ->
-			this.configurer.resolveTemplate(getClass().getClassLoader(), TEMPLATE_PREFIX + "missing.tpl"));
+				this.configurer.resolveTemplate(getClass().getClassLoader(), TEMPLATE_PREFIX + "missing.tpl"));
 	}
 
 }

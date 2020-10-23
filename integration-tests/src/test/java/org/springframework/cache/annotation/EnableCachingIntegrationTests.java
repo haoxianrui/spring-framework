@@ -64,7 +64,7 @@ class EnableCachingIntegrationTests {
 		// in .integration-tests that it's not found.
 		assertThatExceptionOfType(Exception.class).isThrownBy(
 				ctx::refresh)
-			.withMessageContaining("AspectJCachingConfiguration");
+				.withMessageContaining("AspectJCachingConfiguration");
 	}
 
 
@@ -75,7 +75,7 @@ class EnableCachingIntegrationTests {
 
 	private boolean isCacheProxy(FooRepository repo) {
 		if (AopUtils.isAopProxy(repo)) {
-			for (Advisor advisor : ((Advised)repo).getAdvisors()) {
+			for (Advisor advisor : ((Advised) repo).getAdvisors()) {
 				if (advisor instanceof BeanFactoryCacheOperationSourceAdvisor) {
 					return true;
 				}
@@ -86,7 +86,7 @@ class EnableCachingIntegrationTests {
 
 
 	@Configuration
-	@EnableCaching(proxyTargetClass=true)
+	@EnableCaching(proxyTargetClass = true)
 	static class ProxyTargetClassCachingConfig {
 
 		@Bean
@@ -107,7 +107,7 @@ class EnableCachingIntegrationTests {
 
 
 	@Configuration
-	@EnableCaching(mode=AdviceMode.ASPECTJ)
+	@EnableCaching(mode = AdviceMode.ASPECTJ)
 	static class AspectJCacheConfig {
 
 		@Bean

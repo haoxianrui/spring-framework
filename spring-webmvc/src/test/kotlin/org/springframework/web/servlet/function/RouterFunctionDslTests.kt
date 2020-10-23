@@ -131,7 +131,7 @@ class RouterFunctionDslTests {
 		"/api".nest {
 			POST("/foo/", ::handleFromClass)
 			POST("/bar/", contentType(APPLICATION_JSON), ::handleFromClass)
-			PUT("/foo/", :: handleFromClass)
+			PUT("/foo/", ::handleFromClass)
 			PATCH("/foo/") {
 				ok().build()
 			}
@@ -151,8 +151,7 @@ class RouterFunctionDslTests {
 		resources {
 			if (it.path() == "/response.txt") {
 				ClassPathResource("/org/springframework/web/servlet/function/response.txt")
-			}
-			else {
+			} else {
 				null
 			}
 		}
@@ -174,7 +173,7 @@ class RouterFunctionDslTests {
 		after { _, response ->
 			response
 		}
-		onError({it is IllegalStateException}) { _, _ ->
+		onError({ it is IllegalStateException }) { _, _ ->
 			ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
 		}
 		onError<IllegalStateException> { _, _ ->

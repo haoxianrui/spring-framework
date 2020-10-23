@@ -30,21 +30,21 @@ import static org.assertj.core.api.Assertions.fail;
  * TestExecutionListeners}.
  *
  * @author Sam Brannen
- * @since 5.0
  * @see Throwable#getSuppressed()
+ * @since 5.0
  */
 class TestContextManagerSuppressedExceptionsTests {
 
 	@Test
 	void afterTestExecution() throws Exception {
 		test("afterTestExecution", FailingAfterTestExecutionTestCase.class,
-			(tcm, c, m) -> tcm.afterTestExecution(this, m, null));
+				(tcm, c, m) -> tcm.afterTestExecution(this, m, null));
 	}
 
 	@Test
 	void afterTestMethod() throws Exception {
 		test("afterTestMethod", FailingAfterTestMethodTestCase.class,
-			(tcm, c, m) -> tcm.afterTestMethod(this, m, null));
+				(tcm, c, m) -> tcm.afterTestMethod(this, m, null));
 	}
 
 	@Test
@@ -57,16 +57,16 @@ class TestContextManagerSuppressedExceptionsTests {
 		assertThat(testContextManager.getTestExecutionListeners().size()).as("Registered TestExecutionListeners").isEqualTo(2);
 
 		assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> {
-				Method testMethod = getClass().getMethod("toString");
-				callback.invoke(testContextManager, testClass, testMethod);
-				fail("should have thrown an AssertionError");
-			}).satisfies(ex -> {
-				// 'after' callbacks are reversed, so 2 comes before 1.
-				assertThat(ex.getMessage()).isEqualTo(useCase + "-2");
-				Throwable[] suppressed = ex.getSuppressed();
-				assertThat(suppressed).hasSize(1);
-				assertThat(suppressed[0].getMessage()).isEqualTo(useCase + "-1");
-			});
+			Method testMethod = getClass().getMethod("toString");
+			callback.invoke(testContextManager, testClass, testMethod);
+			fail("should have thrown an AssertionError");
+		}).satisfies(ex -> {
+			// 'after' callbacks are reversed, so 2 comes before 1.
+			assertThat(ex.getMessage()).isEqualTo(useCase + "-2");
+			Throwable[] suppressed = ex.getSuppressed();
+			assertThat(suppressed).hasSize(1);
+			assertThat(suppressed[0].getMessage()).isEqualTo(useCase + "-1");
+		});
 	}
 
 
@@ -126,15 +126,15 @@ class TestContextManagerSuppressedExceptionsTests {
 		}
 	}
 
-	@TestExecutionListeners({ FailingAfterTestExecutionListener1.class, FailingAfterTestExecutionListener2.class })
+	@TestExecutionListeners({FailingAfterTestExecutionListener1.class, FailingAfterTestExecutionListener2.class})
 	private static class FailingAfterTestExecutionTestCase {
 	}
 
-	@TestExecutionListeners({ FailingAfterTestMethodListener1.class, FailingAfterTestMethodListener2.class })
+	@TestExecutionListeners({FailingAfterTestMethodListener1.class, FailingAfterTestMethodListener2.class})
 	private static class FailingAfterTestMethodTestCase {
 	}
 
-	@TestExecutionListeners({ FailingAfterTestClassListener1.class, FailingAfterTestClassListener2.class })
+	@TestExecutionListeners({FailingAfterTestClassListener1.class, FailingAfterTestClassListener2.class})
 	private static class FailingAfterTestClassTestCase {
 	}
 

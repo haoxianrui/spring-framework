@@ -30,14 +30,14 @@ class KotlinReflectionParameterNameDiscovererTests {
 
 	@Test
 	fun getParameterNamesOnInterface() {
-		val method = ReflectionUtils.findMethod(MessageService::class.java,"sendMessage", String::class.java)!!
+		val method = ReflectionUtils.findMethod(MessageService::class.java, "sendMessage", String::class.java)!!
 		val actualParams = parameterNameDiscoverer.getParameterNames(method)
 		assertThat(actualParams).contains("message")
 	}
 
 	@Test
 	fun getParameterNamesOnClass() {
-		val method = ReflectionUtils.findMethod(MessageServiceImpl::class.java,"sendMessage", String::class.java)!!
+		val method = ReflectionUtils.findMethod(MessageServiceImpl::class.java, "sendMessage", String::class.java)!!
 		val actualParams = parameterNameDiscoverer.getParameterNames(method)
 		assertThat(actualParams).contains("message")
 	}

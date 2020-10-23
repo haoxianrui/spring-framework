@@ -209,8 +209,8 @@ public class ClassPathBeanDefinitionScannerTests {
 		scanner.scan("org.springframework.context.annotation3");
 		assertThatIllegalStateException().isThrownBy(() ->
 				scanner.scan(BASE_PACKAGE))
-			.withMessageContaining("stubFooDao")
-			.withMessageContaining(StubFooDao.class.getName());
+				.withMessageContaining("stubFooDao")
+				.withMessageContaining(StubFooDao.class.getName());
 	}
 
 	@Test
@@ -269,9 +269,9 @@ public class ClassPathBeanDefinitionScannerTests {
 		scanner.scan("org.springframework.context.annotation2");
 		assertThatIllegalStateException().isThrownBy(() ->
 				scanner.scan(BASE_PACKAGE))
-			.withMessageContaining("myNamedDao")
-			.withMessageContaining(NamedStubDao.class.getName())
-			.withMessageContaining(NamedStubDao2.class.getName());
+				.withMessageContaining("myNamedDao")
+				.withMessageContaining(NamedStubDao.class.getName())
+				.withMessageContaining(NamedStubDao2.class.getName());
 	}
 
 	@Test
@@ -490,8 +490,7 @@ public class ClassPathBeanDefinitionScannerTests {
 
 		try {
 			context.getBean("fooService");
-		}
-		catch (BeanCreationException expected) {
+		} catch (BeanCreationException expected) {
 			assertThat(expected.contains(BeanInstantiationException.class)).isTrue();
 			// @Lookup method not substituted
 		}
@@ -523,7 +522,7 @@ public class ClassPathBeanDefinitionScannerTests {
 		context.refresh();
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(() ->
 				context.getBean("fooService"))
-			.satisfies(ex -> assertThat(ex.getMostSpecificCause()).isInstanceOf(NoSuchBeanDefinitionException.class));
+				.satisfies(ex -> assertThat(ex.getMostSpecificCause()).isInstanceOf(NoSuchBeanDefinitionException.class));
 	}
 
 

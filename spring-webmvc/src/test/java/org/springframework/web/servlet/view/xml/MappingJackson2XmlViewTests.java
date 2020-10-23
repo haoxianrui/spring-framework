@@ -279,7 +279,7 @@ public class MappingJackson2XmlViewTests {
 	}
 
 
-	@JsonSerialize(using=TestBeanSimpleSerializer.class)
+	@JsonSerialize(using = TestBeanSimpleSerializer.class)
 	public static class TestBeanSimpleAnnotated extends TestBeanSimple {
 	}
 
@@ -333,8 +333,7 @@ public class MappingJackson2XmlViewTests {
 		public JsonSerializer<Object> createSerializer(SerializerProvider prov, JavaType type) throws JsonMappingException {
 			if (type.getRawClass() == TestBeanSimple.class) {
 				return new TestBeanSimpleSerializer();
-			}
-			else {
+			} else {
 				return super.createSerializer(prov, type);
 			}
 		}

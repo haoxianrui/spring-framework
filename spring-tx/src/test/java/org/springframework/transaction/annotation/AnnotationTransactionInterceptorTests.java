@@ -136,11 +136,11 @@ public class AnnotationTransactionInterceptorTests {
 
 		assertThatIllegalStateException().isThrownBy(
 				proxy::doSomethingErroneous)
-			.satisfies(ex -> assertGetTransactionAndRollbackCount(1));
+				.satisfies(ex -> assertGetTransactionAndRollbackCount(1));
 
 		assertThatIllegalArgumentException().isThrownBy(
 				proxy::doSomethingElseErroneous)
-			.satisfies(ex -> assertGetTransactionAndRollbackCount(2));
+				.satisfies(ex -> assertGetTransactionAndRollbackCount(2));
 	}
 
 	@Test
@@ -153,7 +153,7 @@ public class AnnotationTransactionInterceptorTests {
 
 		assertThatExceptionOfType(Exception.class).isThrownBy(
 				proxy::doSomethingElseWithCheckedException)
-			.satisfies(ex -> assertGetTransactionAndCommitCount(1));
+				.satisfies(ex -> assertGetTransactionAndCommitCount(1));
 	}
 
 	@Test
@@ -166,7 +166,7 @@ public class AnnotationTransactionInterceptorTests {
 
 		assertThatExceptionOfType(Exception.class).isThrownBy(
 				proxy::doSomethingElseWithCheckedExceptionAndRollbackRule)
-			.satisfies(ex -> assertGetTransactionAndRollbackCount(1));
+				.satisfies(ex -> assertGetTransactionAndRollbackCount(1));
 	}
 
 	@Test

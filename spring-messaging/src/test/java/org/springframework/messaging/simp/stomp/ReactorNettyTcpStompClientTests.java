@@ -84,8 +84,7 @@ public class ReactorNettyTcpStompClientTests {
 	public void tearDown() throws Exception {
 		try {
 			this.client.shutdown();
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			logger.error("Failed to shut client", ex);
 		}
 		final CountDownLatch latch = new CountDownLatch(1);
@@ -130,7 +129,7 @@ public class ReactorNettyTcpStompClientTests {
 
 		@Override
 		public void handleException(StompSession session, StompCommand command,
-				StompHeaders headers, byte[] payload, Throwable ex) {
+									StompHeaders headers, byte[] payload, Throwable ex) {
 
 			logger.error(command + " " + headers, ex);
 		}
@@ -174,6 +173,7 @@ public class ReactorNettyTcpStompClientTests {
 					public Type getPayloadType(StompHeaders headers) {
 						return String.class;
 					}
+
 					@Override
 					public void handleFrame(StompHeaders headers, @Nullable Object payload) {
 						received.add((String) payload);

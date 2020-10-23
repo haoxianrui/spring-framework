@@ -95,9 +95,9 @@ public class MethodLocatingFactoryBeanTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void testSunnyDayPath() throws Exception {
-		given(beanFactory.getType(BEAN_NAME)).willReturn((Class)String.class);
+		given(beanFactory.getType(BEAN_NAME)).willReturn((Class) String.class);
 		factory.setTargetBeanName(BEAN_NAME);
 		factory.setMethodName("toString()");
 		factory.setBeanFactory(beanFactory);
@@ -110,9 +110,9 @@ public class MethodLocatingFactoryBeanTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void testWhereMethodCannotBeResolved() {
-		given(beanFactory.getType(BEAN_NAME)).willReturn((Class)String.class);
+		given(beanFactory.getType(BEAN_NAME)).willReturn((Class) String.class);
 		factory.setTargetBeanName(BEAN_NAME);
 		factory.setMethodName("loadOfOld()");
 		assertThatIllegalArgumentException().isThrownBy(() ->

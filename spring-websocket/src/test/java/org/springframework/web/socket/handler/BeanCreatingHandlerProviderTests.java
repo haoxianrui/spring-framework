@@ -92,6 +92,7 @@ public class BeanCreatingHandlerProviderTests {
 		}
 	}
 
-	private static class EchoService {	}
+	private static class EchoService {
+	}
 
 }

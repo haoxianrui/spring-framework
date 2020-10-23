@@ -80,7 +80,7 @@ class SettableListenableFutureTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				settableListenableFuture::get)
-			.withCause(exception);
+				.withCause(exception);
 
 		assertThat(settableListenableFuture.isCancelled()).isFalse();
 		assertThat(settableListenableFuture.isDone()).isTrue();
@@ -94,7 +94,7 @@ class SettableListenableFutureTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				completable::get)
-			.withCause(exception);
+				.withCause(exception);
 
 		assertThat(completable.isCancelled()).isFalse();
 		assertThat(completable.isDone()).isTrue();
@@ -107,7 +107,7 @@ class SettableListenableFutureTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				settableListenableFuture::get)
-			.withCause(exception);
+				.withCause(exception);
 
 		assertThat(settableListenableFuture.isCancelled()).isFalse();
 		assertThat(settableListenableFuture.isDone()).isTrue();
@@ -121,7 +121,7 @@ class SettableListenableFutureTests {
 
 		assertThatExceptionOfType(ExecutionException.class).isThrownBy(
 				completable::get)
-			.withCause(exception);
+				.withCause(exception);
 
 		assertThat(completable.isCancelled()).isFalse();
 		assertThat(completable.isDone()).isTrue();
@@ -137,6 +137,7 @@ class SettableListenableFutureTests {
 			public void onSuccess(String result) {
 				callbackHolder[0] = result;
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				throw new AssertionError("Expected onSuccess() to be called", ex);
@@ -159,6 +160,7 @@ class SettableListenableFutureTests {
 			public void onSuccess(String result) {
 				callbackHolder[0] = result;
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				throw new AssertionError("Expected onSuccess() to be called", ex);
@@ -182,6 +184,7 @@ class SettableListenableFutureTests {
 			public void onSuccess(String result) {
 				fail("Expected onFailure() to be called");
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				callbackHolder[0] = ex;
@@ -204,6 +207,7 @@ class SettableListenableFutureTests {
 			public void onSuccess(String result) {
 				fail("Expected onFailure() to be called");
 			}
+
 			@Override
 			public void onFailure(Throwable ex) {
 				callbackHolder[0] = ex;
@@ -233,8 +237,7 @@ class SettableListenableFutureTests {
 			try {
 				Thread.sleep(20L);
 				settableListenableFuture.set(string);
-			}
-			catch (InterruptedException ex) {
+			} catch (InterruptedException ex) {
 				throw new RuntimeException(ex);
 			}
 		}).start();
@@ -259,8 +262,7 @@ class SettableListenableFutureTests {
 			try {
 				Thread.sleep(20L);
 				settableListenableFuture.set(string);
-			}
-			catch (InterruptedException ex) {
+			} catch (InterruptedException ex) {
 				throw new RuntimeException(ex);
 			}
 		}).start();
@@ -345,14 +347,13 @@ class SettableListenableFutureTests {
 			try {
 				Thread.sleep(20L);
 				settableListenableFuture.cancel(true);
-			}
-			catch (InterruptedException ex) {
+			} catch (InterruptedException ex) {
 				throw new RuntimeException(ex);
 			}
 		}).start();
 
 		assertThatExceptionOfType(CancellationException.class).isThrownBy(() ->
-			settableListenableFuture.get(500L, TimeUnit.MILLISECONDS));
+				settableListenableFuture.get(500L, TimeUnit.MILLISECONDS));
 
 		assertThat(settableListenableFuture.isCancelled()).isTrue();
 		assertThat(settableListenableFuture.isDone()).isTrue();

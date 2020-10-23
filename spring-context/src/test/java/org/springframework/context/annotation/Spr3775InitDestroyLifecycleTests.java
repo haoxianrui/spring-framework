@@ -60,7 +60,9 @@ public class Spr3775InitDestroyLifecycleTests {
 
 	private static final Log logger = LogFactory.getLog(Spr3775InitDestroyLifecycleTests.class);
 
-	/** LIFECYCLE_TEST_BEAN. */
+	/**
+	 * LIFECYCLE_TEST_BEAN.
+	 */
 	private static final String LIFECYCLE_TEST_BEAN = "lifecycleTestBean";
 
 
@@ -71,13 +73,13 @@ public class Spr3775InitDestroyLifecycleTests {
 	}
 
 	private void assertMethodOrdering(Class<?> clazz, String category, List<String> expectedMethods,
-			List<String> actualMethods) {
+									  List<String> actualMethods) {
 		debugMethods(clazz, category, actualMethods);
 		assertThat(ObjectUtils.nullSafeEquals(expectedMethods, actualMethods)).as("Verifying " + category + ": expected<" + expectedMethods + "> but got<" + actualMethods + ">.").isTrue();
 	}
 
 	private DefaultListableBeanFactory createBeanFactoryAndRegisterBean(final Class<?> beanClass,
-			final String initMethodName, final String destroyMethodName) {
+																		final String initMethodName, final String destroyMethodName) {
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 		RootBeanDefinition beanDefinition = new RootBeanDefinition(beanClass);
 		beanDefinition.setInitMethodName(initMethodName);

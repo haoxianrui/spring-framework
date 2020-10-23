@@ -63,7 +63,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 3.2
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class})
 @ContextConfiguration
 public class Jsr250LifecycleTests {
 

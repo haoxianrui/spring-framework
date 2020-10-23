@@ -60,7 +60,9 @@ public abstract class AbstractBeanFactoryBasedTargetSourceCreator
 
 	private ConfigurableBeanFactory beanFactory;
 
-	/** Internally used DefaultListableBeanFactory instances, keyed by bean name. */
+	/**
+	 * Internally used DefaultListableBeanFactory instances, keyed by bean name.
+	 */
 	private final Map<String, DefaultListableBeanFactory> internalBeanFactories =
 			new HashMap<>();
 
@@ -120,6 +122,7 @@ public abstract class AbstractBeanFactoryBasedTargetSourceCreator
 
 	/**
 	 * Return the internal BeanFactory to be used for the specified bean.
+	 *
 	 * @param beanName the name of the target bean
 	 * @return the internal BeanFactory to be used
 	 */
@@ -136,6 +139,7 @@ public abstract class AbstractBeanFactoryBasedTargetSourceCreator
 
 	/**
 	 * Build an internal BeanFactory for resolving target beans.
+	 *
 	 * @param containingFactory the containing BeanFactory that originally defines the beans
 	 * @return an independent internal BeanFactory to hold copies of some target beans
 	 */
@@ -156,6 +160,7 @@ public abstract class AbstractBeanFactoryBasedTargetSourceCreator
 
 	/**
 	 * Destroys the internal BeanFactory on shutdown of the TargetSourceCreator.
+	 *
 	 * @see #getInternalBeanFactoryForBean
 	 */
 	@Override
@@ -176,6 +181,7 @@ public abstract class AbstractBeanFactoryBasedTargetSourceCreator
 	 * Return whether this TargetSourceCreator is prototype-based.
 	 * The scope of the target bean definition will be set accordingly.
 	 * <p>Default is "true".
+	 *
 	 * @see org.springframework.beans.factory.config.BeanDefinition#isSingleton()
 	 */
 	protected boolean isPrototypeBased() {
@@ -189,8 +195,9 @@ public abstract class AbstractBeanFactoryBasedTargetSourceCreator
 	 * Subclasses should not call {@code setTargetBeanName} or {@code setBeanFactory}
 	 * on the AbstractPrototypeBasedTargetSource: This class' implementation of
 	 * {@code getTargetSource()} will do that.
+	 *
 	 * @param beanClass the class of the bean to create a TargetSource for
-	 * @param beanName the name of the bean
+	 * @param beanName  the name of the bean
 	 * @return the AbstractPrototypeBasedTargetSource, or {@code null} if we don't match this
 	 */
 	@Nullable

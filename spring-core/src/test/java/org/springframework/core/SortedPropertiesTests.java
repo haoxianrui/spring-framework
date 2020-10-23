@@ -137,14 +137,14 @@ class SortedPropertiesTests {
 		String regex = "<\\?xml .*\\?>";
 		assertThat(lines[0]).matches(regex);
 		assertThat(lines).filteredOn(line -> !line.matches(regex)).containsExactly( //
-			"<!DOCTYPE properties SYSTEM \"http://java.sun.com/dtd/properties.dtd\">", //
-			"<properties>", //
-			"<entry key=\"color\">blue</entry>", //
-			"<entry key=\"fragrance\">sweet</entry>", //
-			"<entry key=\"fruit\">apple</entry>", //
-			"<entry key=\"size\">medium</entry>", //
-			"<entry key=\"vehicle\">car</entry>", //
-			"</properties>" //
+				"<!DOCTYPE properties SYSTEM \"http://java.sun.com/dtd/properties.dtd\">", //
+				"<properties>", //
+				"<entry key=\"color\">blue</entry>", //
+				"<entry key=\"fragrance\">sweet</entry>", //
+				"<entry key=\"fruit\">apple</entry>", //
+				"<entry key=\"size\">medium</entry>", //
+				"<entry key=\"vehicle\">car</entry>", //
+				"</properties>" //
 		);
 	}
 
@@ -195,21 +195,21 @@ class SortedPropertiesTests {
 
 	private void assertEntrySet(Properties properties) {
 		assertThat(properties.entrySet()).containsExactly( //
-			entry("color", "blue"), //
-			entry("fragrance", "sweet"), //
-			entry("fruit", "apple"), //
-			entry("size", "medium"), //
-			entry("vehicle", "car") //
+				entry("color", "blue"), //
+				entry("fragrance", "sweet"), //
+				entry("fruit", "apple"), //
+				entry("size", "medium"), //
+				entry("vehicle", "car") //
 		);
 	}
 
 	private void assertPropsAreSorted(String[] lines) {
 		assertThat(stream(lines).filter(s -> !s.startsWith("#"))).containsExactly( //
-			"color=blue", //
-			"fragrance=sweet", //
-			"fruit=apple", //
-			"size=medium", //
-			"vehicle=car"//
+				"color=blue", //
+				"fragrance=sweet", //
+				"fruit=apple", //
+				"size=medium", //
+				"vehicle=car"//
 		);
 	}
 

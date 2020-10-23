@@ -62,8 +62,7 @@ class ResourceArrayPropertyEditorTests {
 			editor.setAsText("${test.prop}");
 			Resource[] resources = (Resource[]) editor.getValue();
 			assertThat(resources[0].getFilename()).isEqualTo("foo");
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("test.prop");
 		}
 	}
@@ -77,8 +76,7 @@ class ResourceArrayPropertyEditorTests {
 		try {
 			assertThatIllegalArgumentException().isThrownBy(() ->
 					editor.setAsText("${test.prop}-${bar}"));
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("test.prop");
 		}
 	}

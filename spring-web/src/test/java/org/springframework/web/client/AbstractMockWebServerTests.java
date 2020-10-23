@@ -89,7 +89,7 @@ abstract class AbstractMockWebServerTests {
 	}
 
 	private MockResponse postRequest(RecordedRequest request, String expectedRequestContent,
-			String location, String contentType, byte[] responseBody) {
+									 String location, String contentType, byte[] responseBody) {
 
 		assertThat(request.getHeaders().values(CONTENT_LENGTH).size()).isEqualTo(1);
 		assertThat(Integer.parseInt(request.getHeader(CONTENT_LENGTH))).as("Invalid request content-length").isGreaterThan(0);
@@ -155,14 +155,13 @@ abstract class AbstractMockWebServerTests {
 			assertPart(body, "form-data", boundary, "name 2", "text/plain", "value 2+1");
 			assertPart(body, "form-data", boundary, "name 2", "text/plain", "value 2+2");
 			assertFilePart(body, "form-data", boundary, "logo", "logo.jpg", "image/jpeg");
-		}
-		catch (EOFException ex) {
+		} catch (EOFException ex) {
 			throw new AssertionError(ex);
 		}
 	}
 
 	private void assertPart(Buffer buffer, String disposition, String boundary, String name,
-			String contentType, String value) throws EOFException {
+							String contentType, String value) throws EOFException {
 
 		assertThat(buffer.readUtf8Line()).contains("--" + boundary);
 		String line = buffer.readUtf8Line();
@@ -175,7 +174,7 @@ abstract class AbstractMockWebServerTests {
 	}
 
 	private void assertFilePart(Buffer buffer, String disposition, String boundary, String name,
-			String filename, String contentType) throws EOFException {
+								String filename, String contentType) throws EOFException {
 
 		assertThat(buffer.readUtf8Line()).contains("--" + boundary);
 		String line = buffer.readUtf8Line();
@@ -195,7 +194,7 @@ abstract class AbstractMockWebServerTests {
 	}
 
 	private MockResponse patchRequest(RecordedRequest request, String expectedRequestContent,
-			String contentType, byte[] responseBody) {
+									  String contentType, byte[] responseBody) {
 
 		assertThat(request.getMethod()).isEqualTo("PATCH");
 		assertThat(Integer.parseInt(request.getHeader(CONTENT_LENGTH))).as("Invalid request content-length").isGreaterThan(0);
@@ -238,61 +237,43 @@ abstract class AbstractMockWebServerTests {
 
 				if (request.getPath().equals("/get")) {
 					return getRequest(request, helloWorldBytes, textContentType.toString());
-				}
-				else if (request.getPath().equals("/get/nothing")) {
+				} else if (request.getPath().equals("/get/nothing")) {
 					return getRequest(request, new byte[0], textContentType.toString());
-				}
-				else if (request.getPath().equals("/get/nocontenttype")) {
+				} else if (request.getPath().equals("/get/nocontenttype")) {
 					return getRequest(request, helloWorldBytes, null);
-				}
-				else if (request.getPath().equals("/post")) {
+				} else if (request.getPath().equals("/post")) {
 					return postRequest(request, helloWorld, "/post/1", textContentType.toString(), helloWorldBytes);
-				}
-				else if (request.getPath().equals("/jsonpost")) {
+				} else if (request.getPath().equals("/jsonpost")) {
 					return jsonPostRequest(request, "/jsonpost/1", "application/json; charset=utf-8");
-				}
-				else if (request.getPath().equals("/status/nocontent")) {
+				} else if (request.getPath().equals("/status/nocontent")) {
 					return new MockResponse().setResponseCode(204);
-				}
-				else if (request.getPath().equals("/status/notmodified")) {
+				} else if (request.getPath().equals("/status/notmodified")) {
 					return new MockResponse().setResponseCode(304);
-				}
-				else if (request.getPath().equals("/status/notfound")) {
+				} else if (request.getPath().equals("/status/notfound")) {
 					return new MockResponse().setResponseCode(404);
-				}
-				else if (request.getPath().equals("/status/badrequest")) {
+				} else if (request.getPath().equals("/status/badrequest")) {
 					return new MockResponse().setResponseCode(400);
-				}
-				else if (request.getPath().equals("/status/server")) {
+				} else if (request.getPath().equals("/status/server")) {
 					return new MockResponse().setResponseCode(500);
-				}
-				else if (request.getPath().contains("/uri/")) {
+				} else if (request.getPath().contains("/uri/")) {
 					return new MockResponse().setBody(request.getPath()).setHeader(CONTENT_TYPE, "text/plain");
-				}
-				else if (request.getPath().equals("/multipartFormData")) {
+				} else if (request.getPath().equals("/multipartFormData")) {
 					return multipartFormDataRequest(request);
-				}
-				else if (request.getPath().equals("/multipartMixed")) {
+				} else if (request.getPath().equals("/multipartMixed")) {
 					return multipartMixedRequest(request);
-				}
-				else if (request.getPath().equals("/multipartRelated")) {
+				} else if (request.getPath().equals("/multipartRelated")) {
 					return multipartRelatedRequest(request);
-				}
-				else if (request.getPath().equals("/form")) {
+				} else if (request.getPath().equals("/form")) {
 					return formRequest(request);
-				}
-				else if (request.getPath().equals("/delete")) {
+				} else if (request.getPath().equals("/delete")) {
 					return new MockResponse().setResponseCode(200);
-				}
-				else if (request.getPath().equals("/patch")) {
+				} else if (request.getPath().equals("/patch")) {
 					return patchRequest(request, helloWorld, textContentType.toString(), helloWorldBytes);
-				}
-				else if (request.getPath().equals("/put")) {
+				} else if (request.getPath().equals("/put")) {
 					return putRequest(request, helloWorld);
 				}
 				return new MockResponse().setResponseCode(404);
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				return new MockResponse().setResponseCode(500).setBody(ex.toString());
 			}
 		}

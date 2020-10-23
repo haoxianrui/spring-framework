@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-
 /**
  * Tests for {@link JndiLocatorDelegate}.
  *
@@ -43,8 +42,7 @@ public class JndiLocatorDelegateTests {
 
 		try {
 			assertThat(JndiLocatorDelegate.isDefaultJndiEnvironmentAvailable()).isEqualTo(false);
-		}
-		finally {
+		} finally {
 			builderField.set(null, oldBuilder);
 		}
 	}

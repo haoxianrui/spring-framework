@@ -79,10 +79,10 @@ import org.springframework.context.annotation.Import;
  *
  * @author Brian Clozel
  * @author Rossen Stoyanchev
- * @since 5.0
  * @see WebFluxConfigurer
  * @see WebFluxConfigurationSupport
  * @see DelegatingWebFluxConfiguration
+ * @since 5.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

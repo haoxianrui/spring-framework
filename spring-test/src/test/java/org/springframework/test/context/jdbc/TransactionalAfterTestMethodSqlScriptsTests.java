@@ -61,17 +61,17 @@ class TransactionalAfterTestMethodSqlScriptsTests extends AbstractTransactionalT
 
 	@Test
 	@SqlGroup({
-		@Sql({ "schema.sql", "data.sql" }),
-		@Sql(scripts = "drop-schema.sql", executionPhase = AFTER_TEST_METHOD)
+			@Sql({"schema.sql", "data.sql"}),
+			@Sql(scripts = "drop-schema.sql", executionPhase = AFTER_TEST_METHOD)
 	})
-	// test## is required for @TestMethodOrder.
+		// test## is required for @TestMethodOrder.
 	void test01() {
 		assertNumUsers(1);
 	}
 
 	@Test
-	@Sql({ "schema.sql", "data.sql", "data-add-dogbert.sql" })
-	// test## is required for @TestMethodOrder.
+	@Sql({"schema.sql", "data.sql", "data-add-dogbert.sql"})
+		// test## is required for @TestMethodOrder.
 	void test02() {
 		assertNumUsers(2);
 	}

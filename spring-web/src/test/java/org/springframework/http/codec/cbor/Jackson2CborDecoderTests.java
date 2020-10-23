@@ -82,8 +82,7 @@ public class Jackson2CborDecoderTests extends AbstractDecoderTests<Jackson2CborD
 	private byte[] writeObject(Object o) {
 		try {
 			return this.mapper.writer().writeValueAsBytes(o);
-		}
-		catch (JsonProcessingException e) {
+		} catch (JsonProcessingException e) {
 			throw new AssertionError(e);
 		}
 

@@ -195,10 +195,10 @@ public class Jaxb2MarshallerTests extends AbstractMarshallerTests<Jaxb2Marshalle
 
 	private void testSupports() throws Exception {
 		assertThat(marshaller.supports(Flights.class)).as("Jaxb2Marshaller does not support Flights class").isTrue();
-		assertThat(marshaller.supports((Type)Flights.class)).as("Jaxb2Marshaller does not support Flights generic type").isTrue();
+		assertThat(marshaller.supports((Type) Flights.class)).as("Jaxb2Marshaller does not support Flights generic type").isTrue();
 
 		assertThat(marshaller.supports(FlightType.class)).as("Jaxb2Marshaller supports FlightType class").isFalse();
-		assertThat(marshaller.supports((Type)FlightType.class)).as("Jaxb2Marshaller supports FlightType type").isFalse();
+		assertThat(marshaller.supports((Type) FlightType.class)).as("Jaxb2Marshaller supports FlightType type").isFalse();
 
 		Method method = ObjectFactory.class.getDeclaredMethod("createFlight", FlightType.class);
 		assertThat(marshaller.supports(method.getGenericReturnType())).as("Jaxb2Marshaller does not support JAXBElement<FlightsType>").isTrue();
@@ -209,12 +209,12 @@ public class Jaxb2MarshallerTests extends AbstractMarshallerTests<Jaxb2Marshalle
 		assertThat(marshaller.supports(flightTypeJAXBElement.getClass())).as("Jaxb2Marshaller does not support JAXBElement<FlightsType>").isTrue();
 
 		assertThat(marshaller.supports(DummyRootElement.class)).as("Jaxb2Marshaller supports class not in context path").isFalse();
-		assertThat(marshaller.supports((Type)DummyRootElement.class)).as("Jaxb2Marshaller supports type not in context path").isFalse();
+		assertThat(marshaller.supports((Type) DummyRootElement.class)).as("Jaxb2Marshaller supports type not in context path").isFalse();
 		method = getClass().getDeclaredMethod("createDummyRootElement");
 		assertThat(marshaller.supports(method.getGenericReturnType())).as("Jaxb2Marshaller supports JAXBElement not in context path").isFalse();
 
 		assertThat(marshaller.supports(DummyType.class)).as("Jaxb2Marshaller supports class not in context path").isFalse();
-		assertThat(marshaller.supports((Type)DummyType.class)).as("Jaxb2Marshaller supports type not in context path").isFalse();
+		assertThat(marshaller.supports((Type) DummyType.class)).as("Jaxb2Marshaller supports type not in context path").isFalse();
 		method = getClass().getDeclaredMethod("createDummyType");
 		assertThat(marshaller.supports(method.getGenericReturnType())).as("Jaxb2Marshaller supports JAXBElement not in context path").isFalse();
 
@@ -233,8 +233,7 @@ public class Jaxb2MarshallerTests extends AbstractMarshallerTests<Jaxb2Marshalle
 					// make sure the marshalling does not result in errors
 					Object returnValue = method.invoke(primitives);
 					marshaller.marshal(returnValue, new StreamResult(new ByteArrayOutputStream()));
-				}
-				catch (InvocationTargetException e) {
+				} catch (InvocationTargetException e) {
 					throw new AssertionError(e.getMessage(), e);
 				}
 			}
@@ -257,8 +256,7 @@ public class Jaxb2MarshallerTests extends AbstractMarshallerTests<Jaxb2Marshalle
 					// make sure the marshalling does not result in errors
 					Object returnValue = method.invoke(standardClasses);
 					marshaller.marshal(returnValue, new StreamResult(new ByteArrayOutputStream()));
-				}
-				catch (InvocationTargetException e) {
+				} catch (InvocationTargetException e) {
 					throw new AssertionError(e.getMessage(), e);
 				}
 			}
@@ -276,10 +274,10 @@ public class Jaxb2MarshallerTests extends AbstractMarshallerTests<Jaxb2Marshalle
 		marshaller.setClassesToBeBound(DummyRootElement.class, DummyType.class);
 		marshaller.afterPropertiesSet();
 		assertThat(marshaller.supports(DummyRootElement.class)).as("Jaxb2Marshaller does not support XmlRootElement class").isTrue();
-		assertThat(marshaller.supports((Type)DummyRootElement.class)).as("Jaxb2Marshaller does not support XmlRootElement generic type").isTrue();
+		assertThat(marshaller.supports((Type) DummyRootElement.class)).as("Jaxb2Marshaller does not support XmlRootElement generic type").isTrue();
 
 		assertThat(marshaller.supports(DummyType.class)).as("Jaxb2Marshaller supports DummyType class").isFalse();
-		assertThat(marshaller.supports((Type)DummyType.class)).as("Jaxb2Marshaller supports DummyType type").isFalse();
+		assertThat(marshaller.supports((Type) DummyType.class)).as("Jaxb2Marshaller supports DummyType type").isFalse();
 	}
 
 

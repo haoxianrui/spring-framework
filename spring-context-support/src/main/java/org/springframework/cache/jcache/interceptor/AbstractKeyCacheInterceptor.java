@@ -27,10 +27,10 @@ import org.springframework.cache.interceptor.KeyGenerator;
 /**
  * A base interceptor for JSR-107 key-based cache annotations.
  *
- * @author Stephane Nicoll
- * @since 4.1
  * @param <O> the operation type
  * @param <A> the annotation type
+ * @author Stephane Nicoll
+ * @since 4.1
  */
 @SuppressWarnings("serial")
 abstract class AbstractKeyCacheInterceptor<O extends AbstractJCacheKeyOperation<A>, A extends Annotation>
@@ -43,6 +43,7 @@ abstract class AbstractKeyCacheInterceptor<O extends AbstractJCacheKeyOperation<
 
 	/**
 	 * Generate a key for the specified invocation.
+	 *
 	 * @param context the context of the invocation
 	 * @return the key to use
 	 */
@@ -57,6 +58,7 @@ abstract class AbstractKeyCacheInterceptor<O extends AbstractJCacheKeyOperation<
 
 	/**
 	 * Create a {@link CacheKeyInvocationContext} based on the specified invocation.
+	 *
 	 * @param context the context of the invocation.
 	 * @return the related {@code CacheKeyInvocationContext}
 	 */

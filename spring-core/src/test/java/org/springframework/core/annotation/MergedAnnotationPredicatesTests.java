@@ -94,8 +94,8 @@ class MergedAnnotationPredicatesTests {
 	void firstRunOfAcceptsOnlyFirstRun() {
 		List<MergedAnnotation<TestAnnotation>> filtered = MergedAnnotations.from(
 				WithMultipleTestAnnotation.class).stream(TestAnnotation.class).filter(
-						MergedAnnotationPredicates.firstRunOf(
-								this::firstCharOfValue)).collect(Collectors.toList());
+				MergedAnnotationPredicates.firstRunOf(
+						this::firstCharOfValue)).collect(Collectors.toList());
 		assertThat(filtered.stream().map(
 				annotation -> annotation.getString("value"))).containsExactly("a1", "a2", "a3");
 	}
@@ -110,8 +110,8 @@ class MergedAnnotationPredicatesTests {
 	void uniqueAcceptsUniquely() {
 		List<MergedAnnotation<TestAnnotation>> filtered = MergedAnnotations.from(
 				WithMultipleTestAnnotation.class).stream(TestAnnotation.class).filter(
-						MergedAnnotationPredicates.unique(
-								this::firstCharOfValue)).collect(Collectors.toList());
+				MergedAnnotationPredicates.unique(
+						this::firstCharOfValue)).collect(Collectors.toList());
 		assertThat(filtered.stream().map(
 				annotation -> annotation.getString("value"))).containsExactly("a1", "b1", "c1");
 	}

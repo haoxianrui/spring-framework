@@ -41,9 +41,9 @@ import org.springframework.core.annotation.AliasFor;
  *
  * @author Rossen Stoyanchev
  * @author Sam Brannen
- * @since 4.3
  * @see RestController
  * @see ControllerAdvice
+ * @since 4.3
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -57,6 +57,7 @@ public @interface RestControllerAdvice {
 	 * <p>Allows for more concise annotation declarations &mdash; for example,
 	 * {@code @RestControllerAdvice("org.my.pkg")} is equivalent to
 	 * {@code @RestControllerAdvice(basePackages = "org.my.pkg")}.
+	 *
 	 * @see #basePackages
 	 */
 	@AliasFor(annotation = ControllerAdvice.class)

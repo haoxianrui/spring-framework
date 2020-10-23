@@ -32,9 +32,9 @@ import org.springframework.lang.Nullable;
  *
  * @author Colin Sampaleanu
  * @author Juergen Hoeller
- * @since 19.02.2004
  * @see #prepare
  * @see #invoke
+ * @since 19.02.2004
  */
 public class MethodInvoker {
 
@@ -56,7 +56,9 @@ public class MethodInvoker {
 	@Nullable
 	private Object[] arguments;
 
-	/** The method we will call. */
+	/**
+	 * The method we will call.
+	 */
 	@Nullable
 	private Method methodObject;
 
@@ -65,6 +67,7 @@ public class MethodInvoker {
 	 * Set the target class on which to call the target method.
 	 * Only necessary when the target method is static; else,
 	 * a target object needs to be specified anyway.
+	 *
 	 * @see #setTargetObject
 	 * @see #setTargetMethod
 	 */
@@ -84,6 +87,7 @@ public class MethodInvoker {
 	 * Set the target object on which to call the target method.
 	 * Only necessary when the target method is not static;
 	 * else, a target class is sufficient.
+	 *
 	 * @see #setTargetClass
 	 * @see #setTargetMethod
 	 */
@@ -106,6 +110,7 @@ public class MethodInvoker {
 	 * Set the name of the method to be invoked.
 	 * Refers to either a static method or a non-static method,
 	 * depending on a target object being set.
+	 *
 	 * @see #setTargetClass
 	 * @see #setTargetObject
 	 */
@@ -125,6 +130,7 @@ public class MethodInvoker {
 	 * Set a fully qualified static method name to invoke,
 	 * e.g. "example.MyExampleClass.myExampleMethod".
 	 * Convenient alternative to specifying targetClass and targetMethod.
+	 *
 	 * @see #setTargetClass
 	 * @see #setTargetMethod
 	 */
@@ -151,6 +157,7 @@ public class MethodInvoker {
 	/**
 	 * Prepare the specified method.
 	 * The method can be invoked any number of times afterwards.
+	 *
 	 * @see #getPreparedMethod
 	 * @see #invoke
 	 */
@@ -160,7 +167,7 @@ public class MethodInvoker {
 			if (lastDotIndex == -1 || lastDotIndex == this.staticMethod.length()) {
 				throw new IllegalArgumentException(
 						"staticMethod must be a fully qualified class plus method name: " +
-						"e.g. 'example.MyExampleClass.myExampleMethod'");
+								"e.g. 'example.MyExampleClass.myExampleMethod'");
 			}
 			String className = this.staticMethod.substring(0, lastDotIndex);
 			String methodName = this.staticMethod.substring(lastDotIndex + 1);
@@ -182,8 +189,7 @@ public class MethodInvoker {
 		// Try to get the exact method first.
 		try {
 			this.methodObject = targetClass.getMethod(targetMethod, argTypes);
-		}
-		catch (NoSuchMethodException ex) {
+		} catch (NoSuchMethodException ex) {
 			// Just rethrow exception if we can't get any match.
 			this.methodObject = findMatchingMethod();
 			if (this.methodObject == null) {
@@ -196,6 +202,7 @@ public class MethodInvoker {
 	 * Resolve the given class name into a Class.
 	 * <p>The default implementations uses {@code ClassUtils.forName},
 	 * using the thread context class loader.
+	 *
 	 * @param className the class name to resolve
 	 * @return the resolved Class
 	 * @throws ClassNotFoundException if the class name was invalid
@@ -206,6 +213,7 @@ public class MethodInvoker {
 
 	/**
 	 * Find a matching method with the specified name for the specified arguments.
+	 *
 	 * @return a matching method, or {@code null} if none
 	 * @see #getTargetClass()
 	 * @see #getTargetMethod()
@@ -242,6 +250,7 @@ public class MethodInvoker {
 	/**
 	 * Return the prepared Method object that will be invoked.
 	 * <p>Can for example be used to determine the return type.
+	 *
 	 * @return the prepared Method object (never {@code null})
 	 * @throws IllegalStateException if the invoker hasn't been prepared yet
 	 * @see #prepare
@@ -265,10 +274,11 @@ public class MethodInvoker {
 	/**
 	 * Invoke the specified method.
 	 * <p>The invoker needs to have been prepared before.
+	 *
 	 * @return the object (possibly null) returned by the method invocation,
 	 * or {@code null} if the method has a void return type
 	 * @throws InvocationTargetException if the target method threw an exception
-	 * @throws IllegalAccessException if the target method couldn't be accessed
+	 * @throws IllegalAccessException    if the target method couldn't be accessed
 	 * @see #prepare
 	 */
 	@Nullable
@@ -300,8 +310,9 @@ public class MethodInvoker {
 	 * <p>Note: This is the algorithm used by MethodInvoker itself and also the algorithm
 	 * used for constructor and factory method selection in Spring's bean container (in case
 	 * of lenient constructor resolution which is the default for regular bean definitions).
+	 *
 	 * @param paramTypes the parameter types to match
-	 * @param args the arguments to match
+	 * @param args       the arguments to match
 	 * @return the accumulated weight for all arguments
 	 */
 	public static int getTypeDifferenceWeight(Class<?>[] paramTypes, Object[] args) {
@@ -317,12 +328,10 @@ public class MethodInvoker {
 					if (paramType.equals(superClass)) {
 						result = result + 2;
 						superClass = null;
-					}
-					else if (ClassUtils.isAssignable(paramType, superClass)) {
+					} else if (ClassUtils.isAssignable(paramType, superClass)) {
 						result = result + 2;
 						superClass = superClass.getSuperclass();
-					}
-					else {
+					} else {
 						superClass = null;
 					}
 				}

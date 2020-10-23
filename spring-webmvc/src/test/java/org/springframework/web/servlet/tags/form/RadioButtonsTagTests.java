@@ -52,7 +52,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
  * @author Scott Andrews
  * @author Jeremy Grelle
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class RadioButtonsTagTests extends AbstractFormTagTests {
 
 	private RadioButtonsTag tag;
@@ -74,7 +74,7 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 	@Test
 	public void withMultiValueArray() throws Exception {
 		this.tag.setPath("stringArray");
-		this.tag.setItems(new Object[] {"foo", "bar", "baz"});
+		this.tag.setItems(new Object[]{"foo", "bar", "baz"});
 		int result = this.tag.doStartTag();
 		assertThat(result).isEqualTo(Tag.SKIP_BODY);
 
@@ -116,7 +116,7 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 		String dynamicAttribute2 = "attr2";
 
 		this.tag.setPath("stringArray");
-		this.tag.setItems(new Object[] {"foo", "bar", "baz"});
+		this.tag.setItems(new Object[]{"foo", "bar", "baz"});
 		this.tag.setDynamicAttribute(null, dynamicAttribute1, dynamicAttribute1);
 		this.tag.setDynamicAttribute(null, dynamicAttribute2, dynamicAttribute2);
 
@@ -168,7 +168,7 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 	public void withMultiValueArrayWithDelimiter() throws Exception {
 		this.tag.setDelimiter("<br/>");
 		this.tag.setPath("stringArray");
-		this.tag.setItems(new Object[] {"foo", "bar", "baz"});
+		this.tag.setItems(new Object[]{"foo", "bar", "baz"});
 		int result = this.tag.doStartTag();
 		assertThat(result).isEqualTo(Tag.SKIP_BODY);
 
@@ -303,7 +303,7 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 	@Test
 	public void withMultiValueWithEditor() throws Exception {
 		this.tag.setPath("stringArray");
-		this.tag.setItems(new Object[] {"   foo", "   bar", "   baz"});
+		this.tag.setItems(new Object[]{"   foo", "   bar", "   baz"});
 		BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(this.bean, COMMAND_NAME);
 		MyStringTrimmerEditor editor = new MyStringTrimmerEditor();
 		bindingResult.getPropertyEditorRegistry().registerCustomEditor(String.class, editor);
@@ -536,7 +536,7 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 	@Test
 	public void hiddenElementOmittedOnDisabled() throws Exception {
 		this.tag.setPath("stringArray");
-		this.tag.setItems(new Object[] {"foo", "bar", "baz"});
+		this.tag.setItems(new Object[]{"foo", "bar", "baz"});
 		this.tag.setDisabled(true);
 		int result = this.tag.doStartTag();
 		assertThat(result).isEqualTo(Tag.SKIP_BODY);
@@ -562,7 +562,7 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 	@Test
 	public void spanElementCustomizable() throws Exception {
 		this.tag.setPath("stringArray");
-		this.tag.setItems(new Object[] {"foo", "bar", "baz"});
+		this.tag.setItems(new Object[]{"foo", "bar", "baz"});
 		this.tag.setElement("element");
 		int result = this.tag.doStartTag();
 		assertThat(result).isEqualTo(Tag.SKIP_BODY);
@@ -581,7 +581,7 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 	public void dynamicTypeAttribute() throws JspException {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.tag.setDynamicAttribute(null, "type", "email"))
-			.withMessage("Attribute type=\"email\" is not allowed");
+				.withMessage("Attribute type=\"email\" is not allowed");
 	}
 
 	private Date getDate() {
@@ -613,8 +613,8 @@ public class RadioButtonsTagTests extends AbstractFormTagTests {
 		this.bean.setName("Rob Harrop");
 		this.bean.setJedi(true);
 		this.bean.setSomeBoolean(Boolean.TRUE);
-		this.bean.setStringArray(new String[] {"bar", "foo"});
-		this.bean.setSomeIntegerArray(new Integer[] {2, 1});
+		this.bean.setStringArray(new String[]{"bar", "foo"});
+		this.bean.setSomeIntegerArray(new Integer[]{2, 1});
 		this.bean.setOtherColours(colours);
 		this.bean.setPets(pets);
 		List list = new ArrayList();

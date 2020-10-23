@@ -39,6 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link WebSocketAnnotationMethodMessageHandler}.
+ *
  * @author Rossen Stoyanchev
  */
 public class WebSocketAnnotationMethodMessageHandlerTests {
@@ -105,7 +106,7 @@ public class WebSocketAnnotationMethodMessageHandlerTests {
 	private static class TestWebSocketAnnotationMethodMessageHandler extends WebSocketAnnotationMethodMessageHandler {
 
 		public TestWebSocketAnnotationMethodMessageHandler(SimpMessageSendingOperations brokerTemplate,
-				SubscribableChannel clientInboundChannel, MessageChannel clientOutboundChannel) {
+														   SubscribableChannel clientInboundChannel, MessageChannel clientOutboundChannel) {
 
 			super(clientInboundChannel, clientOutboundChannel, brokerTemplate);
 		}

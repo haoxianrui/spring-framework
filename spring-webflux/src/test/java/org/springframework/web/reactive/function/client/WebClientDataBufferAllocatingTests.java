@@ -89,8 +89,7 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 			ByteBufAllocator allocator = ((NettyDataBufferFactory) super.bufferFactory).getByteBufAllocator();
 			return new ReactorClientHttpConnector(this.factory, httpClient ->
 					httpClient.tcpConfiguration(tcpClient -> tcpClient.option(ChannelOption.ALLOCATOR, allocator)));
-		}
-		else {
+		} else {
 			return new ReactorClientHttpConnector();
 		}
 	}
@@ -114,7 +113,8 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 		assertThat(this.server.getRequestCount()).isEqualTo(1);
 	}
 
-	@ParameterizedDataBufferAllocatingTest // SPR-17482
+	@ParameterizedDataBufferAllocatingTest
+		// SPR-17482
 	void bodyToMonoVoidWithoutContentType(String displayName, DataBufferFactory bufferFactory) {
 		setUp(bufferFactory);
 
@@ -125,7 +125,8 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 		Mono<Map<String, String>> mono = this.webClient.get()
 				.uri("/sample").accept(MediaType.APPLICATION_JSON)
 				.retrieve()
-				.bodyToMono(new ParameterizedTypeReference<Map<String, String>>() {});
+				.bodyToMono(new ParameterizedTypeReference<Map<String, String>>() {
+				});
 
 		StepVerifier.create(mono).expectError(UnsupportedMediaTypeException.class).verify(Duration.ofSeconds(3));
 		assertThat(this.server.getRequestCount()).isEqualTo(1);
@@ -147,7 +148,8 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 		testOnStatus(ex, response -> response.bodyToMono(Void.class).thenReturn(ex));
 	}
 
-	@ParameterizedDataBufferAllocatingTest // SPR-17473
+	@ParameterizedDataBufferAllocatingTest
+		// SPR-17473
 	void onStatusWithMonoErrorAndBodyNotConsumed(String displayName, DataBufferFactory bufferFactory) {
 		setUp(bufferFactory);
 
@@ -163,7 +165,8 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 		testOnStatus(ex, response -> response.bodyToMono(Void.class).then(Mono.error(ex)));
 	}
 
-	@ParameterizedDataBufferAllocatingTest // gh-23230
+	@ParameterizedDataBufferAllocatingTest
+		// gh-23230
 	void onStatusWithImmediateErrorAndBodyNotConsumed(String displayName, DataBufferFactory bufferFactory) {
 		setUp(bufferFactory);
 
@@ -182,7 +185,7 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 				.setHeader("Content-Type", "text/plain")
 				.setBody("foo bar"));
 
-		Mono<Void> result  = this.webClient.get()
+		Mono<Void> result = this.webClient.get()
 				.exchange()
 				.flatMap(ClientResponse::releaseBody);
 
@@ -201,7 +204,7 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 				.setHeader("Foo", "bar")
 				.setBody("foo bar"));
 
-		Mono<ResponseEntity<Void>> result  = this.webClient.get()
+		Mono<ResponseEntity<Void>> result = this.webClient.get()
 				.exchange()
 				.flatMap(ClientResponse::toBodilessEntity);
 
@@ -217,7 +220,7 @@ class WebClientDataBufferAllocatingTests extends AbstractDataBufferAllocatingTes
 
 
 	private void testOnStatus(Throwable expected,
-			Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
+							  Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
 
 		HttpStatus errorStatus = HttpStatus.BAD_GATEWAY;
 

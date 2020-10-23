@@ -42,8 +42,9 @@ public interface ServerHttpRequest extends HttpRequest, ReactiveHttpInputMessage
 	/**
 	 * Return an id that represents the underlying connection, if available,
 	 * or the request for the purpose of correlating log messages.
-	 * @since 5.1
+	 *
 	 * @see org.springframework.web.server.ServerWebExchange#getLogPrefix()
+	 * @since 5.1
 	 */
 	String getId();
 
@@ -84,6 +85,7 @@ public interface ServerHttpRequest extends HttpRequest, ReactiveHttpInputMessage
 	/**
 	 * Return the SSL session information if the request has been transmitted
 	 * over a secure protocol including SSL certificates, if available.
+	 *
 	 * @return the session information, or {@code null} if none available
 	 * @since 5.0.2
 	 */
@@ -150,10 +152,11 @@ public interface ServerHttpRequest extends HttpRequest, ReactiveHttpInputMessage
 		 * Set or override the specified header values under the given name.
 		 * <p>If you need to add header values, remove headers, etc., use
 		 * {@link #headers(Consumer)} for greater control.
-		 * @param headerName the header name
+		 *
+		 * @param headerName   the header name
 		 * @param headerValues the header values
-		 * @since 5.1.9
 		 * @see #headers(Consumer)
+		 * @since 5.1.9
 		 */
 		Builder header(String headerName, String... headerValues);
 
@@ -163,6 +166,7 @@ public interface ServerHttpRequest extends HttpRequest, ReactiveHttpInputMessage
 		 * {@linkplain HttpHeaders#set(String, String) overwrite} or
 		 * {@linkplain HttpHeaders#remove(Object) remove} existing values, or
 		 * use any other {@link HttpHeaders} methods.
+		 *
 		 * @see #header(String, String...)
 		 */
 		Builder headers(Consumer<HttpHeaders> headersConsumer);
@@ -171,6 +175,7 @@ public interface ServerHttpRequest extends HttpRequest, ReactiveHttpInputMessage
 		 * Set the SSL session information. This may be useful in environments
 		 * where TLS termination is done at the router, but SSL information is
 		 * made available in some other way such as through a header.
+		 *
 		 * @since 5.0.7
 		 */
 		Builder sslInfo(SslInfo sslInfo);

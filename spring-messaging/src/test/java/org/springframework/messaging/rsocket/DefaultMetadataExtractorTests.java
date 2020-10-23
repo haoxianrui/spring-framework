@@ -49,6 +49,7 @@ import static org.springframework.util.MimeTypeUtils.TEXT_XML;
 
 /**
  * Unit tests for {@link DefaultMetadataExtractor}.
+ *
  * @author Rossen Stoyanchev
  */
 public class DefaultMetadataExtractorTests {
@@ -183,7 +184,7 @@ public class DefaultMetadataExtractorTests {
 	public void noDecoder() {
 		DefaultMetadataExtractor extractor =
 				new DefaultMetadataExtractor(Collections.singletonList(new ByteArrayDecoder())
-		);
+				);
 
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> extractor.metadataToExtract(TEXT_PLAIN, String.class, "key"))
@@ -208,7 +209,7 @@ public class DefaultMetadataExtractorTests {
 
 		@Override
 		public String decode(DataBuffer dataBuffer, ResolvableType elementType,
-				@Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+							 @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 			byte[] bytes = new byte[dataBuffer.readableByteCount()];
 			dataBuffer.read(bytes);

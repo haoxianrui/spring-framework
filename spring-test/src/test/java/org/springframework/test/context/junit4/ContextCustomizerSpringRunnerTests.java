@@ -43,7 +43,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @BootstrapWith(CustomTestContextBootstrapper.class)
 public class ContextCustomizerSpringRunnerTests {
 
-	@Autowired String foo;
+	@Autowired
+	String foo;
 
 
 	@Test
@@ -57,8 +58,8 @@ public class ContextCustomizerSpringRunnerTests {
 		@Override
 		protected List<ContextCustomizerFactory> getContextCustomizerFactories() {
 			return singletonList(
-				(ContextCustomizerFactory) (testClass, configAttributes) ->
-					(ContextCustomizer) (context, mergedConfig) -> context.getBeanFactory().registerSingleton("foo", "foo")
+					(ContextCustomizerFactory) (testClass, configAttributes) ->
+							(ContextCustomizer) (context, mergedConfig) -> context.getBeanFactory().registerSingleton("foo", "foo")
 			);
 		}
 	}

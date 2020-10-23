@@ -49,7 +49,7 @@ class DynamicPropertiesContextCustomizerFactoryTests {
 	@Test
 	void createContextCustomizerWhenSingleAnnotatedMethodReturnsCustomizer() {
 		DynamicPropertiesContextCustomizer customizer = this.factory.createContextCustomizer(
-			SingleDynamicPropertySource.class, this.configAttributes);
+				SingleDynamicPropertySource.class, this.configAttributes);
 		assertThat(customizer).isNotNull();
 		assertThat(customizer.getMethods()).flatExtracting(Method::getName).containsOnly("p1");
 	}
@@ -57,7 +57,7 @@ class DynamicPropertiesContextCustomizerFactoryTests {
 	@Test
 	void createContextCustomizerWhenMultipleAnnotatedMethodsReturnsCustomizer() {
 		DynamicPropertiesContextCustomizer customizer = this.factory.createContextCustomizer(
-			MultipleDynamicPropertySources.class, this.configAttributes);
+				MultipleDynamicPropertySources.class, this.configAttributes);
 		assertThat(customizer).isNotNull();
 		assertThat(customizer.getMethods()).flatExtracting(Method::getName).containsOnly("p1", "p2", "p3");
 	}
@@ -65,7 +65,7 @@ class DynamicPropertiesContextCustomizerFactoryTests {
 	@Test
 	void createContextCustomizerWhenAnnotatedMethodsInBaseClassReturnsCustomizer() {
 		DynamicPropertiesContextCustomizer customizer = this.factory.createContextCustomizer(
-			SubDynamicPropertySource.class, this.configAttributes);
+				SubDynamicPropertySource.class, this.configAttributes);
 		assertThat(customizer).isNotNull();
 		assertThat(customizer.getMethods()).flatExtracting(Method::getName).containsOnly("p1", "p2");
 	}

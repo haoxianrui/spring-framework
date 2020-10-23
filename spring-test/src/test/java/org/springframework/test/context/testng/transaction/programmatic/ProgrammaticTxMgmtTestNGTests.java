@@ -271,9 +271,9 @@ public class ProgrammaticTxMgmtTestNGTests extends AbstractTransactionalTestNGSp
 		@Bean
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder()//
-			.setName("programmatic-tx-mgmt-test-db")//
-			.addScript("classpath:/org/springframework/test/context/jdbc/schema.sql") //
-			.build();
+					.setName("programmatic-tx-mgmt-test-db")//
+					.addScript("classpath:/org/springframework/test/context/jdbc/schema.sql") //
+					.build();
 		}
 	}
 

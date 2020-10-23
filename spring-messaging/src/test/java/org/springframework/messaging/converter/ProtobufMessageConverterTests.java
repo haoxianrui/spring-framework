@@ -63,11 +63,11 @@ public class ProtobufMessageConverterTests {
 				.setHeader(CONTENT_TYPE, ProtobufMessageConverter.PROTOBUF).build();
 		this.messageWithoutContentType = MessageBuilder.withPayload(this.testMsg.toByteArray()).build();
 		this.messageJson = MessageBuilder.withPayload(
-					"{\n" +
-					"  \"foo\": \"Foo\",\n" +
-					"  \"blah\": {\n" +
-					"    \"blah\": 123\n" +
-					"  }\n" +
+				"{\n" +
+						"  \"foo\": \"Foo\",\n" +
+						"  \"blah\": {\n" +
+						"    \"blah\": 123\n" +
+						"  }\n" +
 						"}")
 				.setHeader(CONTENT_TYPE, APPLICATION_JSON)
 				.build();
@@ -111,7 +111,7 @@ public class ProtobufMessageConverterTests {
 
 
 	@Test
-	public void convertFromNoContentType(){
+	public void convertFromNoContentType() {
 		Msg result = (Msg) converter.fromMessage(messageWithoutContentType, Msg.class);
 		assertThat(result).isEqualTo(testMsg);
 	}

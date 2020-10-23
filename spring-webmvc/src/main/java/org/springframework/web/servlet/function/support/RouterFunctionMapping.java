@@ -59,7 +59,6 @@ public class RouterFunctionMapping extends AbstractHandlerMapping implements Ini
 	private boolean detectHandlerFunctionsInAncestorContexts = false;
 
 
-
 	/**
 	 * Create an empty {@code RouterFunctionMapping}.
 	 * <p>If this constructor is used, this mapping will detect all
@@ -71,6 +70,7 @@ public class RouterFunctionMapping extends AbstractHandlerMapping implements Ini
 	/**
 	 * Create a {@code RouterFunctionMapping} with the given {@link RouterFunction}.
 	 * <p>If this constructor is used, no application context detection will occur.
+	 *
 	 * @param routerFunction the router function to use for mapping
 	 */
 	public RouterFunctionMapping(RouterFunction<?> routerFunction) {
@@ -90,6 +90,7 @@ public class RouterFunctionMapping extends AbstractHandlerMapping implements Ini
 	 * <p><strong>Note:</strong> When router functions are detected from the
 	 * ApplicationContext, this method may return {@code null} if invoked
 	 * prior to {@link #afterPropertiesSet()}.
+	 *
 	 * @return the router function or {@code null}
 	 */
 	@Nullable
@@ -154,8 +155,7 @@ public class RouterFunctionMapping extends AbstractHandlerMapping implements Ini
 
 		try {
 			messageConverters.add(new SourceHttpMessageConverter<>());
-		}
-		catch (Error err) {
+		} catch (Error err) {
 			// Ignore when no TransformerFactory implementation is available
 		}
 		messageConverters.add(new AllEncompassingFormHttpMessageConverter());
@@ -172,8 +172,7 @@ public class RouterFunctionMapping extends AbstractHandlerMapping implements Ini
 			ServerRequest request = ServerRequest.create(servletRequest, this.messageConverters);
 			servletRequest.setAttribute(RouterFunctions.REQUEST_ATTRIBUTE, request);
 			return this.routerFunction.route(request).orElse(null);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

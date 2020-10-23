@@ -44,15 +44,17 @@ public interface RSocketStrategies {
 
 	/**
 	 * Return the configured {@link Builder#encoder(Encoder[]) encoders}.
+	 *
 	 * @see #encoder(ResolvableType, MimeType)
 	 */
 	List<Encoder<?>> encoders();
 
 	/**
 	 * Find a compatible Encoder for the given element type.
+	 *
 	 * @param elementType the element type to match
-	 * @param mimeType the MimeType to match
-	 * @param <T> for casting the Encoder to the expected element type
+	 * @param mimeType    the MimeType to match
+	 * @param <T>         for casting the Encoder to the expected element type
 	 * @return the matching Encoder
 	 * @throws IllegalArgumentException if no matching Encoder is found
 	 */
@@ -68,15 +70,17 @@ public interface RSocketStrategies {
 
 	/**
 	 * Return the configured {@link Builder#decoder(Decoder[]) decoders}.
+	 *
 	 * @see #decoder(ResolvableType, MimeType)
 	 */
 	List<Decoder<?>> decoders();
 
 	/**
 	 * Find a compatible Decoder for the given element type.
+	 *
 	 * @param elementType the element type to match
-	 * @param mimeType the MimeType to match
-	 * @param <T> for casting the Decoder to the expected element type
+	 * @param mimeType    the MimeType to match
+	 * @param <T>         for casting the Decoder to the expected element type
 	 * @return the matching Decoder
 	 * @throws IllegalArgumentException if no matching Decoder is found
 	 */

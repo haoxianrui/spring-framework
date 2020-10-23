@@ -154,8 +154,8 @@ public class ConcreteTransactionalTestNGSpringContextTests extends AbstractTrans
 	void verifyBeanNameSet() {
 		assertThatTransaction().isNotActive();
 		assertThat(this.beanName)
-			.as("The bean name of this test instance should have been set to the fully qualified class name due to BeanNameAware semantics.")
-			.startsWith(getClass().getName());
+				.as("The bean name of this test instance should have been set to the fully qualified class name due to BeanNameAware semantics.")
+				.startsWith(getClass().getName());
 	}
 
 	@Test
@@ -163,8 +163,8 @@ public class ConcreteTransactionalTestNGSpringContextTests extends AbstractTrans
 	void verifyApplicationContextSet() {
 		assertThatTransaction().isNotActive();
 		assertThat(super.applicationContext)
-			.as("The application context should have been set due to ApplicationContextAware semantics.")
-			.isNotNull();
+				.as("The application context should have been set due to ApplicationContextAware semantics.")
+				.isNotNull();
 		Employee employeeBean = (Employee) super.applicationContext.getBean("employee");
 		assertThat(employeeBean.getName()).as("employee's name.").isEqualTo("John Smith");
 	}
@@ -174,8 +174,8 @@ public class ConcreteTransactionalTestNGSpringContextTests extends AbstractTrans
 	void verifyBeanInitialized() {
 		assertThatTransaction().isNotActive();
 		assertThat(beanInitialized)
-			.as("This test instance should have been initialized due to InitializingBean semantics.")
-			.isTrue();
+				.as("This test instance should have been initialized due to InitializingBean semantics.")
+				.isTrue();
 	}
 
 	@Test
@@ -228,8 +228,8 @@ public class ConcreteTransactionalTestNGSpringContextTests extends AbstractTrans
 
 	private void assertNumRowsInPersonTable(int expectedNumRows, String testState) {
 		assertThat(countRowsInTable("person"))
-			.as("the number of rows in the person table (" + testState + ").")
-			.isEqualTo(expectedNumRows);
+				.as("the number of rows in the person table (" + testState + ").")
+				.isEqualTo(expectedNumRows);
 	}
 
 	private void assertAddPerson(String name) {

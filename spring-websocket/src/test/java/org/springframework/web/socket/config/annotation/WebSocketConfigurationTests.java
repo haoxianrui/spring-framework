@@ -44,7 +44,7 @@ class WebSocketConfigurationTests extends AbstractWebSocketIntegrationTests {
 
 	@Override
 	protected Class<?>[] getAnnotatedConfigClasses() {
-		return new Class<?>[] {TestConfig.class};
+		return new Class<?>[]{TestConfig.class};
 	}
 
 
@@ -53,7 +53,8 @@ class WebSocketConfigurationTests extends AbstractWebSocketIntegrationTests {
 		super.setup(server, webSocketClient, testInfo);
 
 		WebSocketSession session = this.webSocketClient.doHandshake(
-				new AbstractWebSocketHandler() {}, getWsBaseUrl() + "/ws").get();
+				new AbstractWebSocketHandler() {
+				}, getWsBaseUrl() + "/ws").get();
 
 		TestHandler serverHandler = this.wac.getBean(TestHandler.class);
 		assertThat(serverHandler.connectLatch.await(2, TimeUnit.SECONDS)).isTrue();
@@ -66,7 +67,8 @@ class WebSocketConfigurationTests extends AbstractWebSocketIntegrationTests {
 		super.setup(server, webSocketClient, testInfo);
 
 		WebSocketSession session = this.webSocketClient.doHandshake(
-				new AbstractWebSocketHandler() {}, getWsBaseUrl() + "/sockjs/websocket").get();
+				new AbstractWebSocketHandler() {
+				}, getWsBaseUrl() + "/sockjs/websocket").get();
 
 		TestHandler serverHandler = this.wac.getBean(TestHandler.class);
 		assertThat(serverHandler.connectLatch.await(2, TimeUnit.SECONDS)).isTrue();

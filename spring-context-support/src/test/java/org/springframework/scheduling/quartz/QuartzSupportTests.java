@@ -86,8 +86,7 @@ public class QuartzSupportTests {
 			Scheduler returnedScheduler = schedulerFactoryBean.getObject();
 			assertThat(returnedScheduler.getContext().get("testBean")).isEqualTo(tb);
 			assertThat(returnedScheduler.getContext().get("appCtx")).isEqualTo(ac);
-		}
-		finally {
+		} finally {
 			schedulerFactoryBean.destroy();
 		}
 
@@ -129,7 +128,7 @@ public class QuartzSupportTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void jobDetailWithRunnableInsteadOfJob() {
 		JobDetailImpl jobDetail = new JobDetailImpl();
 		assertThatIllegalArgumentException().isThrownBy(() ->
@@ -302,8 +301,7 @@ public class QuartzSupportTests {
 			assertThat(scheduler2).isNotSameAs(scheduler1);
 			assertThat(scheduler1.getSchedulerName()).isEqualTo("quartz1");
 			assertThat(scheduler2.getSchedulerName()).isEqualTo("quartz2");
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -317,8 +315,7 @@ public class QuartzSupportTests {
 			assertThat(scheduler2).isNotSameAs(scheduler1);
 			assertThat(scheduler1.getSchedulerName()).isEqualTo("quartz1");
 			assertThat(scheduler2.getSchedulerName()).isEqualTo("quartz2");
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -336,8 +333,7 @@ public class QuartzSupportTests {
 			assertThat(exportService.getExportCount()).as("doExport not called on exportService").isEqualTo(2);
 			assertThat(importService.getImportCount()).as("doImport not called on importService").isEqualTo(2);
 			assertThat(importService.getExportCount()).as("doExport called on importService").isEqualTo(0);
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}
@@ -355,8 +351,7 @@ public class QuartzSupportTests {
 			assertThat(exportService.getExportCount()).as("doExport not called on exportService").isEqualTo(2);
 			assertThat(importService.getImportCount()).as("doImport not called on importService").isEqualTo(2);
 			assertThat(importService.getExportCount()).as("doExport called on importService").isEqualTo(0);
-		}
-		finally {
+		} finally {
 			ctx.close();
 		}
 	}

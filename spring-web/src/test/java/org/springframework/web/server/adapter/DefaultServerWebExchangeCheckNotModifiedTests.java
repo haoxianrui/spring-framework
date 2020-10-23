@@ -63,7 +63,8 @@ class DefaultServerWebExchangeCheckNotModifiedTests {
 		assertThat(exchange.getResponse().getHeaders().getLastModified()).isEqualTo(-1);
 	}
 
-	@Test // SPR-14559
+	@Test
+		// SPR-14559
 	void checkNotModifiedInvalidIfNoneMatchHeader() {
 		String eTag = "\"etagvalue\"";
 		MockServerWebExchange exchange = MockServerWebExchange.from(get("/").ifNoneMatch("missingquotes"));
@@ -197,7 +198,7 @@ class DefaultServerWebExchangeCheckNotModifiedTests {
 		MockServerWebExchange exchange = MockServerWebExchange.from(get("/")
 				.ifNoneMatch(eTag)
 				.ifModifiedSince(oneMinuteAgo.toEpochMilli())
-				);
+		);
 
 		assertThat(exchange.checkNotModified(eTag, currentDate)).isTrue();
 

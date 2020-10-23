@@ -232,7 +232,8 @@ class CollectionFactoryTests {
 		assertThat(createCollection(EnumSet.class, Color.class, 0)).isInstanceOf(EnumSet.class);
 	}
 
-	@Test  // SPR-17619
+	@Test
+		// SPR-17619
 	void createsEnumSetSubclass() {
 		EnumSet<Color> enumSet = EnumSet.noneOf(Color.class);
 		assertThat(createCollection(enumSet.getClass(), Color.class, 0)).isInstanceOf(enumSet.getClass());

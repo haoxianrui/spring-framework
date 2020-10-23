@@ -50,13 +50,17 @@ import static org.mockito.Mockito.verify;
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class SubProtocolWebSocketHandlerTests {
 
-	@Mock SubProtocolHandler stompHandler;
+	@Mock
+	SubProtocolHandler stompHandler;
 
-	@Mock SubProtocolHandler mqttHandler;
+	@Mock
+	SubProtocolHandler mqttHandler;
 
-	@Mock SubProtocolHandler defaultHandler;
+	@Mock
+	SubProtocolHandler defaultHandler;
 
-	@Mock MessageChannel inClientChannel;
+	@Mock
+	MessageChannel inClientChannel;
 
 	@Mock
 	SubscribableChannel outClientChannel;

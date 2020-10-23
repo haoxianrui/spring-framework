@@ -18,7 +18,7 @@
 				<property name="sourceList">
 					<list>
 						<value>.*\.set[a-zA-Z]*(.*)</value>
-				 </list>
+					</list>
 				</property>
 			</bean>
 		</property>

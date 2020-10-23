@@ -144,7 +144,7 @@ public class JndiObjectFactoryBeanTests {
 		jof.setExpectedType(String.class);
 		assertThatExceptionOfType(NamingException.class).isThrownBy(
 				jof::afterPropertiesSet)
-			.withMessageContaining("java.lang.String");
+				.withMessageContaining("java.lang.String");
 	}
 
 	@Test
@@ -365,7 +365,7 @@ public class JndiObjectFactoryBeanTests {
 		jof.setProxyInterface(ITestBean.class);
 		assertThatExceptionOfType(NamingException.class).isThrownBy(
 				jof::afterPropertiesSet)
-			.withMessageContaining("org.springframework.beans.testfixture.beans.DerivedTestBean");
+				.withMessageContaining("org.springframework.beans.testfixture.beans.DerivedTestBean");
 	}
 
 	@Test

@@ -39,7 +39,7 @@ public class ExceptionHandlerTests {
 	@Test
 	public void testExceptionHandlerMethod() throws Exception {
 		standaloneSetup(new PersonController()).build()
-			.perform(get("/person/Clyde"))
+				.perform(get("/person/Clyde"))
 				.andExpect(status().isOk())
 				.andExpect(forwardedUrl("errorView"));
 	}
@@ -68,8 +68,7 @@ public class ExceptionHandlerTests {
 		public String show(@PathVariable String name) {
 			if (name.equals("Clyde")) {
 				throw new IllegalArgumentException("simulated exception");
-			}
-			else if (name.equals("Bonnie")) {
+			} else if (name.equals("Bonnie")) {
 				throw new IllegalStateException("simulated exception");
 			}
 			return "person/show";

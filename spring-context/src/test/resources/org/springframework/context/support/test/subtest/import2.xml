@@ -4,7 +4,9 @@
 <beans>
 
 	<bean name="assemblerTwo" parent="assemblerOne">
-		<property name="logic"><ref bean="logicTwo"/></property>
+		<property name="logic">
+			<ref bean="logicTwo"/>
+		</property>
 	</bean>
 
 	<!-- Returns void (null) -->

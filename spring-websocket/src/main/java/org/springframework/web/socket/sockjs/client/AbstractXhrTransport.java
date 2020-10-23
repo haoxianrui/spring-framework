@@ -110,8 +110,8 @@ public abstract class AbstractXhrTransport implements XhrTransport {
 	}
 
 	protected abstract void connectInternal(TransportRequest request, WebSocketHandler handler,
-			URI receiveUrl, HttpHeaders handshakeHeaders, XhrClientSockJsSession session,
-			SettableListenableFuture<WebSocketSession> connectFuture);
+											URI receiveUrl, HttpHeaders handshakeHeaders, XhrClientSockJsSession session,
+											SettableListenableFuture<WebSocketSession> connectFuture);
 
 
 	// InfoReceiver methods

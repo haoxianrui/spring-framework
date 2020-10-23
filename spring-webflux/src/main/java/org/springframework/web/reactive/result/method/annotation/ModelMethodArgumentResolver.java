@@ -60,11 +60,9 @@ public class ModelMethodArgumentResolver extends HandlerMethodArgumentResolverSu
 		Class<?> type = parameter.getParameterType();
 		if (Model.class.isAssignableFrom(type)) {
 			return context.getModel();
-		}
-		else if (Map.class.isAssignableFrom(type)) {
+		} else if (Map.class.isAssignableFrom(type)) {
 			return context.getModel().asMap();
-		}
-		else {
+		} else {
 			// Should never happen..
 			throw new IllegalStateException("Unexpected method parameter type: " + type);
 		}

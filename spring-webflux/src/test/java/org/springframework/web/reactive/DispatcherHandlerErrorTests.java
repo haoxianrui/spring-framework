@@ -121,9 +121,9 @@ public class DispatcherHandlerErrorTests {
 
 		StepVerifier.create(publisher)
 				.consumeErrorWith(error ->
-					assertThat(error)
-							.isInstanceOf(IllegalStateException.class)
-							.hasMessageStartingWith("No HandlerResultHandler"))
+						assertThat(error)
+								.isInstanceOf(IllegalStateException.class)
+								.hasMessageStartingWith("No HandlerResultHandler"))
 				.verify();
 	}
 

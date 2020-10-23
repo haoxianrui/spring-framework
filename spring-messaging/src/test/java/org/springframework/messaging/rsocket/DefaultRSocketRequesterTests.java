@@ -101,7 +101,7 @@ public class DefaultRSocketRequesterTests {
 
 	@Test
 	public void sendFlux() {
-		String[] values = new String[] {"bodyA", "bodyB", "bodyC"};
+		String[] values = new String[]{"bodyA", "bodyB", "bodyC"};
 		Flux<String> stringFlux = Flux.fromArray(values).delayElements(MILLIS_10);
 
 		// data(Object)
@@ -123,14 +123,13 @@ public class DefaultRSocketRequesterTests {
 		List<Payload> payloads = this.rsocket.getSavedPayloadFlux().collectList().block(Duration.ofSeconds(5));
 		assertThat(payloads).isNotNull();
 
-		if (Arrays.equals(new String[] {""}, expectedValues)) {
+		if (Arrays.equals(new String[]{""}, expectedValues)) {
 			assertThat(payloads.size()).isEqualTo(1);
 			assertThat(payloads.get(0).getMetadataUtf8()).isEqualTo("toA");
 			assertThat(payloads.get(0).getDataUtf8()).isEqualTo("");
-		}
-		else {
+		} else {
 			assertThat(payloads.stream().map(Payload::getMetadataUtf8).toArray(String[]::new))
-					.isEqualTo(new String[] {"toA", "", ""});
+					.isEqualTo(new String[]{"toA", "", ""});
 			assertThat(payloads.stream().map(Payload::getDataUtf8).toArray(String[]::new))
 					.isEqualTo(expectedValues);
 		}
@@ -207,7 +206,7 @@ public class DefaultRSocketRequesterTests {
 
 	@Test
 	public void retrieveFlux() {
-		String[] values = new String[] {"bodyA", "bodyB", "bodyC"};
+		String[] values = new String[]{"bodyA", "bodyB", "bodyC"};
 		this.rsocket.setPayloadFluxToReturn(Flux.fromArray(values).delayElements(MILLIS_10).map(this::toPayload));
 		Flux<String> response = this.requester.route("").data("").retrieveFlux(String.class);
 
@@ -253,9 +252,12 @@ public class DefaultRSocketRequesterTests {
 		private Mono<Payload> payloadMonoToReturn = Mono.empty();
 		private Flux<Payload> payloadFluxToReturn = Flux.empty();
 
-		@Nullable private volatile String savedMethodName;
-		@Nullable private volatile Payload savedPayload;
-		@Nullable private volatile Flux<Payload> savedPayloadFlux;
+		@Nullable
+		private volatile String savedMethodName;
+		@Nullable
+		private volatile Payload savedPayload;
+		@Nullable
+		private volatile Flux<Payload> savedPayloadFlux;
 
 		void setPayloadMonoToReturn(Mono<Payload> payloadMonoToReturn) {
 			this.payloadMonoToReturn = payloadMonoToReturn;

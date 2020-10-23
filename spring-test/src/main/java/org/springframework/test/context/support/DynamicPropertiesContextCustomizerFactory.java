@@ -32,15 +32,15 @@ import org.springframework.test.context.DynamicPropertySource;
  * {@link DynamicPropertySource @DynamicPropertySource} methods.
  *
  * @author Phillip Webb
- * @since 5.2.5
  * @see DynamicPropertiesContextCustomizer
+ * @since 5.2.5
  */
 class DynamicPropertiesContextCustomizerFactory implements ContextCustomizerFactory {
 
 	@Override
 	@Nullable
 	public DynamicPropertiesContextCustomizer createContextCustomizer(Class<?> testClass,
-			List<ContextConfigurationAttributes> configAttributes) {
+																	  List<ContextConfigurationAttributes> configAttributes) {
 
 		Set<Method> methods = MethodIntrospector.selectMethods(testClass, this::isAnnotated);
 		if (methods.isEmpty()) {

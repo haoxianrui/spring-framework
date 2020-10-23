@@ -31,8 +31,8 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author Darren Davison
  * @author Juergen Hoeller
  * @author Issam El-atif
- * @since 5.2
  * @see org.springframework.web.reactive.result.view.RequestContext
+ * @since 5.2
  */
 public class DummyMacroRequestContext {
 
@@ -107,7 +107,7 @@ public class DummyMacroRequestContext {
 	/**
 	 * @see org.springframework.web.reactive.result.view.RequestContext#getContextUrl(String, Map)
 	 */
-	public String getContextUrl(String relativeUrl, Map<String,String> params) {
+	public String getContextUrl(String relativeUrl, Map<String, String> params) {
 		UriComponents uric = UriComponentsBuilder.fromUriString(relativeUrl).buildAndExpand(params);
 		return getContextPath() + uric.toUri().toASCIIString();
 	}

@@ -61,7 +61,7 @@ public class ServletResponseMethodArgumentResolver implements HandlerMethodArgum
 	 */
 	@Override
 	public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
-			NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
+								  NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
 
 		if (mavContainer != null) {
 			mavContainer.setRequestHandled(true);
@@ -90,8 +90,7 @@ public class ServletResponseMethodArgumentResolver implements HandlerMethodArgum
 	private Object resolveArgument(Class<?> paramType, ServletResponse response) throws IOException {
 		if (OutputStream.class.isAssignableFrom(paramType)) {
 			return response.getOutputStream();
-		}
-		else if (Writer.class.isAssignableFrom(paramType)) {
+		} else if (Writer.class.isAssignableFrom(paramType)) {
 			return response.getWriter();
 		}
 

@@ -39,8 +39,7 @@ abstract class AbstractXMLEventReader implements XMLEventReader {
 	public Object next() {
 		try {
 			return nextEvent();
-		}
-		catch (XMLStreamException ex) {
+		} catch (XMLStreamException ex) {
 			throw new NoSuchElementException(ex.getMessage());
 		}
 	}
@@ -53,6 +52,7 @@ abstract class AbstractXMLEventReader implements XMLEventReader {
 
 	/**
 	 * This implementation throws an {@code IllegalArgumentException} for any property.
+	 *
 	 * @throws IllegalArgumentException when called
 	 */
 	@Override
@@ -67,6 +67,7 @@ abstract class AbstractXMLEventReader implements XMLEventReader {
 
 	/**
 	 * Check if the reader is closed, and throws a {@code XMLStreamException} if so.
+	 *
 	 * @throws XMLStreamException if the reader is closed
 	 * @see #close()
 	 */

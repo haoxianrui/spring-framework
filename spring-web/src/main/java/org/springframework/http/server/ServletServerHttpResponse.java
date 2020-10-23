@@ -50,6 +50,7 @@ public class ServletServerHttpResponse implements ServerHttpResponse {
 
 	/**
 	 * Construct a new instance of the ServletServerHttpResponse based on the given {@link HttpServletResponse}.
+	 *
 	 * @param servletResponse the servlet response
 	 */
 	public ServletServerHttpResponse(HttpServletResponse servletResponse) {
@@ -143,8 +144,7 @@ public class ServletServerHttpResponse implements ServerHttpResponse {
 			String value = servletResponse.getHeader(headerName);
 			if (value != null) {
 				return value;
-			}
-			else {
+			} else {
 				return super.getFirst(headerName);
 			}
 		}

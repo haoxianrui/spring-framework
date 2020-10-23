@@ -51,7 +51,7 @@ class ClassFiltersTests {
 		assertThat(union.matches(RuntimeException.class)).isTrue();
 		assertThat(union.matches(TestBean.class)).isTrue();
 		assertThat(union.toString())
-			.matches("^.+UnionClassFilter: \\[.+RootClassFilter: .+Exception, .+RootClassFilter: .+TestBean\\]$");
+				.matches("^.+UnionClassFilter: \\[.+RootClassFilter: .+Exception, .+RootClassFilter: .+TestBean\\]$");
 	}
 
 	@Test
@@ -63,7 +63,7 @@ class ClassFiltersTests {
 		assertThat(intersection.matches(TestBean.class)).isFalse();
 		assertThat(intersection.matches(NestedRuntimeException.class)).isTrue();
 		assertThat(intersection.toString())
-			.matches("^.+IntersectionClassFilter: \\[.+RootClassFilter: .+Exception, .+RootClassFilter: .+NestedRuntimeException\\]$");
+				.matches("^.+IntersectionClassFilter: \\[.+RootClassFilter: .+Exception, .+RootClassFilter: .+NestedRuntimeException\\]$");
 	}
 
 }

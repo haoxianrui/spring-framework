@@ -78,12 +78,12 @@ public class HttpRequestHandlerTests {
 		request.setParameter("exception", "ServletException");
 		assertThatExceptionOfType(ServletException.class).isThrownBy(() ->
 				servlet.service(request, response))
-			.withMessage("test");
+				.withMessage("test");
 
 		request.setParameter("exception", "IOException");
 		assertThatIOException().isThrownBy(() ->
 				servlet.service(request, response))
-			.withMessage("test");
+				.withMessage("test");
 	}
 
 }

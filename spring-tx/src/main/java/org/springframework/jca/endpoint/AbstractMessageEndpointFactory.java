@@ -43,12 +43,14 @@ import org.springframework.util.Assert;
  * exposure for endpoint invocations.
  *
  * @author Juergen Hoeller
- * @since 2.5
  * @see #setTransactionManager
+ * @since 2.5
  */
 public abstract class AbstractMessageEndpointFactory implements MessageEndpointFactory, BeanNameAware {
 
-	/** Logger available to subclasses. */
+	/**
+	 * Logger available to subclasses.
+	 */
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	@Nullable
@@ -73,17 +75,16 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 	 * will simply not be wrapped in an XA transaction. Check out your
 	 * resource provider's ActivationSpec documentation for local
 	 * transaction options of your particular provider.
+	 *
 	 * @see #setTransactionName
 	 * @see #setTransactionTimeout
 	 */
 	public void setTransactionManager(Object transactionManager) {
 		if (transactionManager instanceof TransactionFactory) {
 			this.transactionFactory = (TransactionFactory) transactionManager;
-		}
-		else if (transactionManager instanceof TransactionManager) {
+		} else if (transactionManager instanceof TransactionManager) {
 			this.transactionFactory = new SimpleTransactionFactory((TransactionManager) transactionManager);
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException("Transaction manager [" + transactionManager +
 					"] is neither a [org.springframework.transaction.jta.TransactionFactory} nor a " +
 					"[javax.transaction.TransactionManager]");
@@ -99,6 +100,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 	 * will simply not be wrapped in an XA transaction. Check out your
 	 * resource provider's ActivationSpec documentation for local
 	 * transaction options of your particular provider.
+	 *
 	 * @see #setTransactionName
 	 * @see #setTransactionTimeout
 	 */
@@ -138,6 +140,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 	/**
 	 * Implementation of the JCA 1.7 {@code #getActivationName()} method,
 	 * returning the bean name as set on this MessageEndpointFactory.
+	 *
 	 * @see #setBeanName
 	 */
 	@Override
@@ -159,6 +162,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 	/**
 	 * This implementation returns {@code true} if a transaction manager
 	 * has been specified; {@code false} otherwise.
+	 *
 	 * @see #setTransactionManager
 	 * @see #setTransactionFactory
 	 */
@@ -194,6 +198,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 	/**
 	 * Create the actual endpoint instance, as a subclass of the
 	 * {@link AbstractMessageEndpoint} inner class of this factory.
+	 *
 	 * @return the actual endpoint instance (never {@code null})
 	 * @throws UnavailableException if no endpoint is available at present
 	 */
@@ -216,6 +221,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 
 		/**
 		 * Initialize this endpoint's TransactionDelegate.
+		 *
 		 * @param xaResource the XAResource for this endpoint
 		 */
 		void initXAResource(XAResource xaResource) {
@@ -238,8 +244,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 			Assert.state(this.transactionDelegate != null, "Not initialized");
 			try {
 				this.transactionDelegate.beginTransaction();
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				throw new ApplicationServerInternalException("Failed to begin transaction", ex);
 			}
 			Thread currentThread = Thread.currentThread();
@@ -251,6 +256,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 		 * Template method for exposing the endpoint's ClassLoader
 		 * (typically the ClassLoader that the message listener class
 		 * has been loaded with).
+		 *
 		 * @return the endpoint ClassLoader (never {@code null})
 		 */
 		protected abstract ClassLoader getEndpointClassLoader();
@@ -268,6 +274,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 		 * that the concrete endpoint invocation led to an exception.
 		 * <p>To be invoked by subclasses in case of the concrete
 		 * endpoint throwing an exception.
+		 *
 		 * @param ex the exception thrown from the concrete endpoint
 		 */
 		protected void onEndpointException(Throwable ex) {
@@ -291,8 +298,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 			this.previousContextClassLoader = null;
 			try {
 				this.transactionDelegate.endTransaction();
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				logger.warn("Failed to complete transaction after endpoint delivery", ex);
 				throw new ApplicationServerInternalException("Failed to complete transaction", ex);
 			}
@@ -304,8 +310,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 				try {
 					this.transactionDelegate.setRollbackOnly();
 					this.transactionDelegate.endTransaction();
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					logger.warn("Could not complete unfinished transaction on endpoint release", ex);
 				}
 			}
@@ -354,12 +359,10 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 				try {
 					if (this.rollbackOnly) {
 						this.transaction.rollback();
-					}
-					else {
+					} else {
 						this.transaction.commit();
 					}
-				}
-				finally {
+				} finally {
 					this.transaction = null;
 					this.rollbackOnly = false;
 				}

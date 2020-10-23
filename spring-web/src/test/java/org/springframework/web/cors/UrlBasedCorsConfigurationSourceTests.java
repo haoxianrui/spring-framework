@@ -26,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * Unit tests for {@link UrlBasedCorsConfigurationSource}.
+ *
  * @author Sebastien Deleuze
  */
 public class UrlBasedCorsConfigurationSourceTests {

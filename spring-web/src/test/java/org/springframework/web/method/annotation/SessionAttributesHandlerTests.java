@@ -35,6 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Test fixture with {@link SessionAttributesHandler}.
+ *
  * @author Rossen Stoyanchev
  */
 public class SessionAttributesHandlerTests {
@@ -42,7 +43,7 @@ public class SessionAttributesHandlerTests {
 	private final SessionAttributeStore sessionAttributeStore = new DefaultSessionAttributeStore();
 
 	private final SessionAttributesHandler sessionAttributesHandler = new SessionAttributesHandler(
-		SessionAttributeHandler.class, sessionAttributeStore);
+			SessionAttributeHandler.class, sessionAttributeStore);
 
 	private final NativeWebRequest request = new ServletWebRequest(new MockHttpServletRequest());
 
@@ -105,7 +106,7 @@ public class SessionAttributesHandlerTests {
 	}
 
 
-	@SessionAttributes(names = { "attr1", "attr2" }, types = { TestBean.class })
+	@SessionAttributes(names = {"attr1", "attr2"}, types = {TestBean.class})
 	private static class SessionAttributeHandler {
 	}
 

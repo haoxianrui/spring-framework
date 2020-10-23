@@ -38,11 +38,11 @@ import org.springframework.util.StringUtils;
  *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
- * @since 3.0
  * @see #setContentHandler(org.xml.sax.ContentHandler)
  * @see #setDTDHandler(org.xml.sax.DTDHandler)
  * @see #setEntityResolver(org.xml.sax.EntityResolver)
  * @see #setErrorHandler(org.xml.sax.ErrorHandler)
+ * @since 3.0
  */
 abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 
@@ -73,8 +73,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 			case IS_STANDALONE_FEATURE_NAME:
 				if (this.isStandalone != null) {
 					return this.isStandalone;
-				}
-				else {
+				} else {
 					throw new SAXNotSupportedException("startDocument() callback not completed yet");
 				}
 			default:
@@ -86,11 +85,9 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 	public void setFeature(String name, boolean value) throws SAXNotRecognizedException, SAXNotSupportedException {
 		if (NAMESPACES_FEATURE_NAME.equals(name)) {
 			this.namespacesFeature = value;
-		}
-		else if (NAMESPACE_PREFIXES_FEATURE_NAME.equals(name)) {
+		} else if (NAMESPACE_PREFIXES_FEATURE_NAME.equals(name)) {
 			this.namespacePrefixesFeature = value;
-		}
-		else {
+		} else {
 			super.setFeature(name, value);
 		}
 	}
@@ -117,6 +114,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 	 * Convert a {@code QName} to a qualified name, as used by DOM and SAX.
 	 * The returned string has a format of {@code prefix:localName} if the
 	 * prefix is set, or just {@code localName} if not.
+	 *
 	 * @param qName the {@code QName}
 	 * @return the qualified name
 	 */
@@ -124,8 +122,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 		String prefix = qName.getPrefix();
 		if (!StringUtils.hasLength(prefix)) {
 			return qName.getLocalPart();
-		}
-		else {
+		} else {
 			return prefix + ":" + qName.getLocalPart();
 		}
 	}
@@ -134,6 +131,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 	/**
 	 * Parse the StAX XML reader passed at construction-time.
 	 * <p><b>NOTE:</b>: The given {@code InputSource} is not read, but ignored.
+	 *
 	 * @param ignored is ignored
 	 * @throws SAXException a SAX exception, possibly wrapping a {@code XMLStreamException}
 	 */
@@ -145,6 +143,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 	/**
 	 * Parse the StAX XML reader passed at construction-time.
 	 * <p><b>NOTE:</b>: The given system identifier is not read, but ignored.
+	 *
 	 * @param ignored is ignored
 	 * @throws SAXException a SAX exception, possibly wrapping a {@code XMLStreamException}
 	 */
@@ -156,8 +155,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 	private void parse() throws SAXException {
 		try {
 			parseInternal();
-		}
-		catch (XMLStreamException ex) {
+		} catch (XMLStreamException ex) {
 			Locator locator = null;
 			if (ex.getLocation() != null) {
 				locator = new StaxLocator(ex.getLocation());
@@ -165,8 +163,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 			SAXParseException saxException = new SAXParseException(ex.getMessage(), locator, ex);
 			if (getErrorHandler() != null) {
 				getErrorHandler().fatalError(saxException);
-			}
-			else {
+			} else {
 				throw saxException;
 			}
 		}
@@ -180,6 +177,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 
 	/**
 	 * Start the prefix mapping for the given prefix.
+	 *
 	 * @see org.xml.sax.ContentHandler#startPrefixMapping(String, String)
 	 */
 	protected void startPrefixMapping(@Nullable String prefix, String namespace) throws SAXException {
@@ -196,6 +194,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 
 	/**
 	 * End the prefix mapping for the given prefix.
+	 *
 	 * @see org.xml.sax.ContentHandler#endPrefixMapping(String)
 	 */
 	protected void endPrefixMapping(String prefix) throws SAXException {
@@ -208,6 +207,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 
 	/**
 	 * Implementation of the {@code Locator} interface based on a given StAX {@code Location}.
+	 *
 	 * @see Locator
 	 * @see Location
 	 */

@@ -28,6 +28,7 @@ import static org.springframework.web.testfixture.http.server.reactive.MockServe
 
 /**
  * Unit tests for {@link ParamsRequestCondition}.
+ *
  * @author Rossen Stoyanchev
  */
 public class ParamsRequestConditionTests {

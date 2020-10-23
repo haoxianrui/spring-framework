@@ -34,6 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Test fixture for {@link ContentNegotiationConfigurer} tests.
+ *
  * @author Rossen Stoyanchev
  */
 public class ContentNegotiationConfigurerTests {

@@ -56,6 +56,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * Default {@link ServerRequest.Builder} implementation.
+ *
  * @author Arjen Poutsma
  * @since 5.2
  */
@@ -183,9 +184,9 @@ class DefaultServerRequestBuilder implements ServerRequest.Builder {
 		private final List<HttpMessageConverter<?>> messageConverters;
 
 		public BuiltServerRequest(HttpServletRequest servletRequest, String methodName, URI uri,
-				HttpHeaders headers, MultiValueMap<String, Cookie> cookies,
-				Map<String, Object> attributes, byte[] body,
-				List<HttpMessageConverter<?>> messageConverters) {
+								  HttpHeaders headers, MultiValueMap<String, Cookie> cookies,
+								  Map<String, Object> attributes, byte[] body,
+								  List<HttpMessageConverter<?>> messageConverters) {
 			this.servletRequest = servletRequest;
 			this.methodName = methodName;
 			this.uri = uri;
@@ -292,8 +293,7 @@ class DefaultServerRequestBuilder implements ServerRequest.Builder {
 					.get(RouterFunctions.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 			if (pathVariables != null) {
 				return pathVariables;
-			}
-			else {
+			} else {
 				return Collections.emptyMap();
 			}
 		}

@@ -8,9 +8,9 @@
 
 	<aop:config>
 		<aop:aspect id="beforeAdviceBindingTests" ref="testAspect">
-		  <aop:pointcut id="foo" expression="execution(* foo(..)) and args(x)"/>
-		  <aop:before pointcut-ref="foo" method="doBefore(int)"/>
-		  <aop:before pointcut-ref="foo" method="doBefore(java.lang.String)"/>
+			<aop:pointcut id="foo" expression="execution(* foo(..)) and args(x)"/>
+			<aop:before pointcut-ref="foo" method="doBefore(int)"/>
+			<aop:before pointcut-ref="foo" method="doBefore(java.lang.String)"/>
 		</aop:aspect>
 	</aop:config>
 

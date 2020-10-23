@@ -28,53 +28,54 @@
 // -----------------------------------------------------------------------------
 
 import org.gradle.internal.os.OperatingSystem
+
 // import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
 def customJavaHome = System.getProperty("customJavaHome")
 
 if (customJavaHome) {
-	def customJavaHomeDir = new File(customJavaHome)
-	def customJavaSourceVersion = System.getProperty("customJavaSourceVersion")
+    def customJavaHomeDir = new File(customJavaHome)
+    def customJavaSourceVersion = System.getProperty("customJavaSourceVersion")
 
-	tasks.withType(JavaCompile) {
-		logger.info("Java home for " + it.name + " task in " + project.name + ": " + customJavaHomeDir)
-		options.forkOptions.javaHome = customJavaHomeDir
-		inputs.property("customJavaHome", customJavaHome)
-		if (customJavaSourceVersion) {
-			options.compilerArgs += [ "--release", customJavaSourceVersion]
-			inputs.property("customJavaSourceVersion", customJavaSourceVersion)
-		}
-	}
+    tasks.withType(JavaCompile) {
+        logger.info("Java home for " + it.name + " task in " + project.name + ": " + customJavaHomeDir)
+        options.forkOptions.javaHome = customJavaHomeDir
+        inputs.property("customJavaHome", customJavaHome)
+        if (customJavaSourceVersion) {
+            options.compilerArgs += ["--release", customJavaSourceVersion]
+            inputs.property("customJavaSourceVersion", customJavaSourceVersion)
+        }
+    }
 
-	tasks.withType(GroovyCompile) {
-		logger.info("Java home for " + it.name + " task in " + project.name + ": " + customJavaHomeDir)
-		options.forkOptions.javaHome = customJavaHomeDir
-		inputs.property("customJavaHome", customJavaHome)
-		if (customJavaSourceVersion) {
-			options.compilerArgs += [ "--release", customJavaSourceVersion]
-			inputs.property("customJavaSourceVersion", customJavaSourceVersion)
-		}
-	}
+    tasks.withType(GroovyCompile) {
+        logger.info("Java home for " + it.name + " task in " + project.name + ": " + customJavaHomeDir)
+        options.forkOptions.javaHome = customJavaHomeDir
+        inputs.property("customJavaHome", customJavaHome)
+        if (customJavaSourceVersion) {
+            options.compilerArgs += ["--release", customJavaSourceVersion]
+            inputs.property("customJavaSourceVersion", customJavaSourceVersion)
+        }
+    }
 
-	/*
-	tasks.withType(KotlinJvmCompile) {
-		logger.info("Java home for " + it.name + " task in " + project.name + ": " + customJavaHome)
-		kotlinOptions.jdkHome = customJavaHomeDir
-		inputs.property("customJavaHome", customJavaHome)
-	}
-	*/
+    /*
+    tasks.withType(KotlinJvmCompile) {
+        logger.info("Java home for " + it.name + " task in " + project.name + ": " + customJavaHome)
+        kotlinOptions.jdkHome = customJavaHomeDir
+        inputs.property("customJavaHome", customJavaHome)
+    }
+    */
 
-	tasks.withType(Test) {
-		def javaExecutable = customJavaHome + "/bin/java"
-		if (OperatingSystem.current().isWindows()) {
-			javaExecutable += ".exe"
-		}
-		logger.info("Java executable for " + it.name + " task in " + project.name + ": " + javaExecutable)
-		executable = javaExecutable
-		inputs.property("customJavaHome", customJavaHome)
-		if (customJavaSourceVersion) {
-			inputs.property("customJavaSourceVersion", customJavaSourceVersion)
-		}
-	}
+    tasks.withType(Test) {
+        def javaExecutable = customJavaHome + "/bin/java"
+        if (OperatingSystem.current().isWindows()) {
+            javaExecutable += ".exe"
+        }
+        logger.info("Java executable for " + it.name + " task in " + project.name + ": " + javaExecutable)
+        executable = javaExecutable
+        inputs.property("customJavaHome", customJavaHome)
+        if (customJavaSourceVersion) {
+            inputs.property("customJavaSourceVersion", customJavaSourceVersion)
+        }
+    }
 
 }

@@ -38,7 +38,7 @@ public class AopNamespaceHandlerPointcutErrorTests {
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() ->
 				new XmlBeanDefinitionReader(bf).loadBeanDefinitions(
 						qualifiedResource(getClass(), "pointcutDuplication.xml")))
-			.satisfies(ex -> ex.contains(BeanDefinitionParsingException.class));
+				.satisfies(ex -> ex.contains(BeanDefinitionParsingException.class));
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class AopNamespaceHandlerPointcutErrorTests {
 		assertThatExceptionOfType(BeanDefinitionStoreException.class).isThrownBy(() ->
 				new XmlBeanDefinitionReader(bf).loadBeanDefinitions(
 						qualifiedResource(getClass(), "pointcutMissing.xml")))
-			.satisfies(ex -> ex.contains(BeanDefinitionParsingException.class));
+				.satisfies(ex -> ex.contains(BeanDefinitionParsingException.class));
 	}
 
 }

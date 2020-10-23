@@ -131,7 +131,7 @@ public class SourceHttpMessageConverterTests {
 
 		assertThatExceptionOfType(HttpMessageNotReadableException.class).isThrownBy(() ->
 				this.converter.read(DOMSource.class, inputMessage))
-			.withMessageContaining("DOCTYPE");
+				.withMessageContaining("DOCTYPE");
 	}
 
 	@Test
@@ -189,7 +189,7 @@ public class SourceHttpMessageConverterTests {
 		XMLReader reader = result.getXMLReader();
 		assertThatExceptionOfType(SAXException.class).isThrownBy(() ->
 				reader.parse(inputSource))
-			.withMessageContaining("DOCTYPE");
+				.withMessageContaining("DOCTYPE");
 	}
 
 	@Test
@@ -222,8 +222,7 @@ public class SourceHttpMessageConverterTests {
 		try {
 			s = streamReader.getElementText();
 			assertThat(s).isNotEqualTo("Foo Bar");
-		}
-		catch (XMLStreamException ex) {
+		} catch (XMLStreamException ex) {
 			// Some parsers raise a parse exception
 		}
 		streamReader.close();
@@ -259,7 +258,7 @@ public class SourceHttpMessageConverterTests {
 		assertThat(s).isEqualTo("root");
 		assertThatExceptionOfType(XMLStreamException.class).isThrownBy(() ->
 				streamReader.getElementText())
-			.withMessageContaining("\"lol9\"");
+				.withMessageContaining("\"lol9\"");
 	}
 
 	@Test

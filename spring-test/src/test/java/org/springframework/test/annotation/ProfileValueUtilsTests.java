@@ -190,7 +190,7 @@ class ProfileValueUtilsTests {
 	}
 
 	@SuppressWarnings("unused")
-	@IfProfileValue(name = NAME, values = { "foo", VALUE, "bar" })
+	@IfProfileValue(name = NAME, values = {"foo", VALUE, "bar"})
 	private static class EnabledAnnotatedMultiValue {
 
 		public void nonAnnotatedMethod() {
@@ -222,7 +222,7 @@ class ProfileValueUtilsTests {
 	}
 
 	@SuppressWarnings("unused")
-	@IfProfileValue(name = NAME, values = { "foo", "bar" })
+	@IfProfileValue(name = NAME, values = {"foo", "bar"})
 	private static class DisabledAnnotatedMultiValue {
 
 		public void nonAnnotatedMethod() {

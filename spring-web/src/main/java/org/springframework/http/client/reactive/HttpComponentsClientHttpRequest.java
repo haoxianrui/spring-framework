@@ -46,10 +46,11 @@ import static org.springframework.http.MediaType.ALL_VALUE;
 
 /**
  * {@link ClientHttpRequest} implementation for the Apache HttpComponents HttpClient 5.x.
+ *
  * @author Martin Tarjányi
  * @author Arjen Poutsma
- * @since 5.3
  * @see <a href="https://hc.apache.org/index.html">Apache HttpComponents</a>
+ * @since 5.3
  */
 class HttpComponentsClientHttpRequest extends AbstractClientHttpRequest {
 
@@ -64,7 +65,7 @@ class HttpComponentsClientHttpRequest extends AbstractClientHttpRequest {
 
 
 	public HttpComponentsClientHttpRequest(HttpMethod method, URI uri, HttpClientContext context,
-			DataBufferFactory dataBufferFactory) {
+										   DataBufferFactory dataBufferFactory) {
 
 		this.context = context;
 		this.httpRequest = new BasicHttpRequest(method.name(), uri);
@@ -83,8 +84,7 @@ class HttpComponentsClientHttpRequest extends AbstractClientHttpRequest {
 	public URI getURI() {
 		try {
 			return this.httpRequest.getUri();
-		}
-		catch (URISyntaxException ex) {
+		} catch (URISyntaxException ex) {
 			throw new IllegalArgumentException("Invalid URI syntax.", ex);
 		}
 	}

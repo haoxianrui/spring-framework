@@ -50,6 +50,7 @@ public abstract class AbstractMultipartHttpServletRequest extends HttpServletReq
 
 	/**
 	 * Wrap the given HttpServletRequest in a MultipartHttpServletRequest.
+	 *
 	 * @param request the request to wrap
 	 */
 	protected AbstractMultipartHttpServletRequest(HttpServletRequest request) {
@@ -93,8 +94,7 @@ public abstract class AbstractMultipartHttpServletRequest extends HttpServletReq
 		List<MultipartFile> multipartFiles = getMultipartFiles().get(name);
 		if (multipartFiles != null) {
 			return multipartFiles;
-		}
-		else {
+		} else {
 			return Collections.emptyList();
 		}
 	}
@@ -111,11 +111,12 @@ public abstract class AbstractMultipartHttpServletRequest extends HttpServletReq
 
 	/**
 	 * Determine whether the underlying multipart request has been resolved.
+	 *
 	 * @return {@code true} when eagerly initialized or lazily triggered,
 	 * {@code false} in case of a lazy-resolution request that got aborted
 	 * before any parameters or multipart files have been accessed
-	 * @since 4.3.15
 	 * @see #getMultipartFiles()
+	 * @since 4.3.15
 	 */
 	public boolean isResolved() {
 		return (this.multipartFiles != null);
@@ -134,6 +135,7 @@ public abstract class AbstractMultipartHttpServletRequest extends HttpServletReq
 	/**
 	 * Obtain the MultipartFile Map for retrieval,
 	 * lazily initializing it if necessary.
+	 *
 	 * @see #initializeMultipart()
 	 */
 	protected MultiValueMap<String, MultipartFile> getMultipartFiles() {

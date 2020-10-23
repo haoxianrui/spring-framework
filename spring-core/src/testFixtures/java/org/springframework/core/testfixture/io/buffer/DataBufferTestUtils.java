@@ -33,6 +33,7 @@ public abstract class DataBufferTestUtils {
 	 * Dump all the bytes in the given data buffer, and returns them as a byte array.
 	 * <p>Note that this method reads the entire buffer into the heap,  which might
 	 * consume a lot of memory.
+	 *
 	 * @param buffer the data buffer to dump the bytes of
 	 * @return the bytes in the given data buffer
 	 */

@@ -62,7 +62,7 @@ public class SimpleTraceInterceptorTests {
 
 		final SimpleTraceInterceptor interceptor = new SimpleTraceInterceptor(true);
 		assertThatIllegalArgumentException().isThrownBy(() ->
-			interceptor.invokeUnderTrace(mi, log));
+				interceptor.invokeUnderTrace(mi, log));
 
 		verify(log).trace(anyString());
 		verify(log).trace(anyString(), eq(exception));

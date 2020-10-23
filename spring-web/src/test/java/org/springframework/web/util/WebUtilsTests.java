@@ -51,7 +51,7 @@ public class WebUtilsTests {
 		params.put("myKey1", "myValue1");
 		params.put("myKey2_myValue2", "xxx");
 		params.put("myKey3_myValue3.x", "xxx");
-		params.put("myKey4_myValue4.y", new String[] {"yyy"});
+		params.put("myKey4_myValue4.y", new String[]{"yyy"});
 
 		assertThat(WebUtils.findParameterValue(params, "myKey0")).isNull();
 		assertThat(WebUtils.findParameterValue(params, "myKey1")).isEqualTo("myValue1");
@@ -190,7 +190,7 @@ public class WebUtilsTests {
 	}
 
 	private void testWithXForwardedHeaders(String serverName, int port, String forwardedProto,
-			String forwardedHost, int forwardedPort, String originHeader) throws Exception {
+										   String forwardedHost, int forwardedPort, String originHeader) throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.setServerName(serverName);
@@ -215,7 +215,7 @@ public class WebUtilsTests {
 	}
 
 	private void testWithForwardedHeader(String serverName, int port, String forwardedHeader,
-			String originHeader) throws Exception {
+										 String originHeader) throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.setServerName(serverName);

@@ -89,8 +89,8 @@ public class GenericApplicationContextTests {
 				ac.getBean(String.class));
 
 		assertThatIllegalStateException().isThrownBy(() -> {
-				ac.getAutowireCapableBeanFactory().getBean("testBean");
-				ac.getAutowireCapableBeanFactory().getBean(String.class);
+			ac.getAutowireCapableBeanFactory().getBean("testBean");
+			ac.getAutowireCapableBeanFactory().getBean(String.class);
 		});
 	}
 
@@ -134,8 +134,8 @@ public class GenericApplicationContextTests {
 		assertThat(context.getBean(BeanA.class).c).isSameAs(context.getBean(BeanC.class));
 		assertThat(context.getBean(BeanB.class).applicationContext).isSameAs(context);
 
-		assertThat(context.getDefaultListableBeanFactory().getDependentBeans(BeanB.class.getName())).isEqualTo(new String[] {BeanA.class.getName()});
-		assertThat(context.getDefaultListableBeanFactory().getDependentBeans(BeanC.class.getName())).isEqualTo(new String[] {BeanA.class.getName()});
+		assertThat(context.getDefaultListableBeanFactory().getDependentBeans(BeanB.class.getName())).isEqualTo(new String[]{BeanA.class.getName()});
+		assertThat(context.getDefaultListableBeanFactory().getDependentBeans(BeanC.class.getName())).isEqualTo(new String[]{BeanA.class.getName()});
 	}
 
 	@Test
@@ -213,7 +213,7 @@ public class GenericApplicationContextTests {
 		}
 	}
 
-	static class BeanB implements ApplicationContextAware  {
+	static class BeanB implements ApplicationContextAware {
 
 		ApplicationContext applicationContext;
 
@@ -226,6 +226,7 @@ public class GenericApplicationContextTests {
 		}
 	}
 
-	static class BeanC {}
+	static class BeanC {
+	}
 
 }

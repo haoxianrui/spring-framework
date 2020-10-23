@@ -118,6 +118,7 @@ public class SimpleNamingContext implements Context {
 	 * Look up the object with the given name.
 	 * <p>Note: Not intended for direct use by applications.
 	 * Will be used by any standard InitialContext JNDI lookups.
+	 *
 	 * @throws javax.naming.NameNotFoundException if the object could not be found
 	 */
 	@Override
@@ -141,7 +142,7 @@ public class SimpleNamingContext implements Context {
 			}
 			throw new NameNotFoundException(
 					"Name [" + this.root + lookupName + "] not bound; " + this.boundObjects.size() + " bindings: [" +
-					StringUtils.collectionToDelimitedString(this.boundObjects.keySet(), ",") + "]");
+							StringUtils.collectionToDelimitedString(this.boundObjects.keySet(), ",") + "]");
 		}
 		return found;
 	}
@@ -156,6 +157,7 @@ public class SimpleNamingContext implements Context {
 	 * Note: Not intended for direct use by applications
 	 * if setting up a JVM-level JNDI environment.
 	 * Use SimpleNamingContextBuilder to set up JNDI bindings then.
+	 *
 	 * @see org.springframework.mock.jndi.SimpleNamingContextBuilder#bind
 	 */
 	@Override
@@ -320,8 +322,7 @@ public class SimpleNamingContext implements Context {
 					if (!contents.containsKey(strippedName)) {
 						try {
 							contents.put(strippedName, createObject(strippedName, context.lookup(proot + strippedName)));
-						}
-						catch (NameNotFoundException ex) {
+						} catch (NameNotFoundException ex) {
 							// cannot happen
 						}
 					}

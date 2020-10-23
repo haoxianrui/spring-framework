@@ -65,8 +65,7 @@ class ContextPathIntegrationTests {
 			url = "http://localhost:" + server.getPort() + "/webApp2/test";
 			actual = restTemplate.getForObject(url, String.class);
 			assertThat(actual).isEqualTo("Tested in /webApp2");
-		}
-		finally {
+		} finally {
 			server.stop();
 		}
 	}
@@ -89,8 +88,7 @@ class ContextPathIntegrationTests {
 			String url = "http://localhost:" + server.getPort() + "/app/api/test";
 			String actual = new RestTemplate().getForObject(url, String.class);
 			assertThat(actual).isEqualTo("Tested in /app/api");
-		}
-		finally {
+		} finally {
 			server.stop();
 		}
 	}

@@ -70,7 +70,7 @@ public class BeanWrapperEnumTests {
 	public void testCustomEnumArrayWithMultipleValues() {
 		GenericBean<?> gb = new GenericBean<>();
 		BeanWrapper bw = new BeanWrapperImpl(gb);
-		bw.setPropertyValue("customEnumArray", new String[] {"VALUE_1", "VALUE_2"});
+		bw.setPropertyValue("customEnumArray", new String[]{"VALUE_1", "VALUE_2"});
 		assertThat(gb.getCustomEnumArray().length).isEqualTo(2);
 		assertThat(gb.getCustomEnumArray()[0]).isEqualTo(CustomEnum.VALUE_1);
 		assertThat(gb.getCustomEnumArray()[1]).isEqualTo(CustomEnum.VALUE_2);
@@ -99,7 +99,7 @@ public class BeanWrapperEnumTests {
 	public void testCustomEnumSetWithMultipleValues() {
 		GenericBean<?> gb = new GenericBean<>();
 		BeanWrapper bw = new BeanWrapperImpl(gb);
-		bw.setPropertyValue("customEnumSet", new String[] {"VALUE_1", "VALUE_2"});
+		bw.setPropertyValue("customEnumSet", new String[]{"VALUE_1", "VALUE_2"});
 		assertThat(gb.getCustomEnumSet().size()).isEqualTo(2);
 		assertThat(gb.getCustomEnumSet().contains(CustomEnum.VALUE_1)).isTrue();
 		assertThat(gb.getCustomEnumSet().contains(CustomEnum.VALUE_2)).isTrue();
@@ -119,7 +119,7 @@ public class BeanWrapperEnumTests {
 	public void testCustomEnumSetWithGetterSetterMismatch() {
 		GenericBean<?> gb = new GenericBean<>();
 		BeanWrapper bw = new BeanWrapperImpl(gb);
-		bw.setPropertyValue("customEnumSetMismatch", new String[] {"VALUE_1", "VALUE_2"});
+		bw.setPropertyValue("customEnumSetMismatch", new String[]{"VALUE_1", "VALUE_2"});
 		assertThat(gb.getCustomEnumSet().size()).isEqualTo(2);
 		assertThat(gb.getCustomEnumSet().contains(CustomEnum.VALUE_1)).isTrue();
 		assertThat(gb.getCustomEnumSet().contains(CustomEnum.VALUE_2)).isTrue();
@@ -131,7 +131,7 @@ public class BeanWrapperEnumTests {
 		BeanWrapper bw = new BeanWrapperImpl(gb);
 		bw.setConversionService(new DefaultConversionService());
 		assertThat(gb.getStandardEnumSet()).isNull();
-		bw.setPropertyValue("standardEnumSet", new String[] {"VALUE_1", "VALUE_2"});
+		bw.setPropertyValue("standardEnumSet", new String[]{"VALUE_1", "VALUE_2"});
 		assertThat(gb.getStandardEnumSet().size()).isEqualTo(2);
 		assertThat(gb.getStandardEnumSet().contains(CustomEnum.VALUE_1)).isTrue();
 		assertThat(gb.getStandardEnumSet().contains(CustomEnum.VALUE_2)).isTrue();

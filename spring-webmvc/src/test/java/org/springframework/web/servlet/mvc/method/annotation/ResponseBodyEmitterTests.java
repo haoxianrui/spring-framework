@@ -154,7 +154,7 @@ public class ResponseBodyEmitterTests {
 	}
 
 	@Test
-	public void onTimeoutBeforeHandlerInitialized() throws Exception  {
+	public void onTimeoutBeforeHandlerInitialized() throws Exception {
 		Runnable runnable = mock(Runnable.class);
 		this.emitter.onTimeout(runnable);
 		this.emitter.initialize(this.handler);
@@ -169,7 +169,7 @@ public class ResponseBodyEmitterTests {
 	}
 
 	@Test
-	public void onTimeoutAfterHandlerInitialized() throws Exception  {
+	public void onTimeoutAfterHandlerInitialized() throws Exception {
 		this.emitter.initialize(this.handler);
 
 		ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
@@ -185,7 +185,7 @@ public class ResponseBodyEmitterTests {
 	}
 
 	@Test
-	public void onCompletionBeforeHandlerInitialized() throws Exception  {
+	public void onCompletionBeforeHandlerInitialized() throws Exception {
 		Runnable runnable = mock(Runnable.class);
 		this.emitter.onCompletion(runnable);
 		this.emitter.initialize(this.handler);
@@ -200,7 +200,7 @@ public class ResponseBodyEmitterTests {
 	}
 
 	@Test
-	public void onCompletionAfterHandlerInitialized() throws Exception  {
+	public void onCompletionAfterHandlerInitialized() throws Exception {
 		this.emitter.initialize(this.handler);
 
 		ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);

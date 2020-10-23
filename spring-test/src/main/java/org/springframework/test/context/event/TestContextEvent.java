@@ -31,8 +31,9 @@ public abstract class TestContextEvent extends ApplicationEvent {
 
 	/**
 	 * Create a new {@code TestContextEvent}.
+	 *
 	 * @param source the {@code TestContext} associated with this event
-	 * (must not be {@code null})
+	 *               (must not be {@code null})
 	 */
 	public TestContextEvent(TestContext source) {
 		super(source);
@@ -40,6 +41,7 @@ public abstract class TestContextEvent extends ApplicationEvent {
 
 	/**
 	 * Get the {@link TestContext} associated with this event.
+	 *
 	 * @return the {@code TestContext} associated with this event (never {@code null})
 	 * @see #getTestContext()
 	 */
@@ -53,6 +55,7 @@ public abstract class TestContextEvent extends ApplicationEvent {
 	 * <p>This method may be favored over {@code getSource()} &mdash; for example,
 	 * to improve readability in SpEL expressions for event processing
 	 * {@linkplain org.springframework.context.event.EventListener#condition conditions}.
+	 *
 	 * @return the {@code TestContext} associated with this event (never {@code null})
 	 * @see #getSource()
 	 */

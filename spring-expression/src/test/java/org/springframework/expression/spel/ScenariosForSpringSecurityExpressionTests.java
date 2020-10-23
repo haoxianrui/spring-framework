@@ -38,6 +38,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 ///CLOVER:OFF
+
 /**
  * Spring Security scenarios from https://wiki.springsource.com/display/SECURITY/Spring+Security+Expression-based+Authorization
  *
@@ -52,11 +53,11 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 		Expression expr = parser.parseRaw("hasAnyRole('MANAGER','TELLER')");
 
 		ctx.setRootObject(new Person("Ben"));
-		Boolean value = expr.getValue(ctx,Boolean.class);
+		Boolean value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isFalse();
 
 		ctx.setRootObject(new Manager("Luke"));
-		value = expr.getValue(ctx,Boolean.class);
+		value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isTrue();
 	}
 
@@ -72,11 +73,11 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 		Expression expr = parser.parseRaw("name == principal.name");
 
 		ctx.setRootObject(new Person("Andy"));
-		Boolean value = expr.getValue(ctx,Boolean.class);
+		Boolean value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isTrue();
 
 		ctx.setRootObject(new Person("Christian"));
-		value = expr.getValue(ctx,Boolean.class);
+		value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isFalse();
 
 		// (2) Or register an accessor that can understand 'p' and return the right person
@@ -87,11 +88,11 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 		ctx.setRootObject(null);
 
 		pAccessor.setPerson(new Person("Andy"));
-		value = expr.getValue(ctx,Boolean.class);
+		value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isTrue();
 
 		pAccessor.setPerson(new Person("Christian"));
-		value = expr.getValue(ctx,Boolean.class);
+		value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isFalse();
 	}
 
@@ -106,14 +107,14 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 
 		Boolean value = null;
 
-		ctx.setVariable("a",1.0d); // referenced as #a in the expression
+		ctx.setVariable("a", 1.0d); // referenced as #a in the expression
 		ctx.setRootObject(new Supervisor("Ben")); // so non-qualified references 'hasRole()' 'hasIpAddress()' are invoked against it
-		value = expr.getValue(ctx,Boolean.class);
+		value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isTrue();
 
 		ctx.setRootObject(new Manager("Luke"));
-		ctx.setVariable("a",1.043d);
-		value = expr.getValue(ctx,Boolean.class);
+		ctx.setVariable("a", 1.043d);
+		value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isFalse();
 	}
 
@@ -133,8 +134,8 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 
 		Boolean value = null;
 
-		ctx.setVariable("a",1.0d); // referenced as #a in the expression
-		value = expr.getValue(ctx,Boolean.class);
+		ctx.setVariable("a", 1.0d); // referenced as #a in the expression
+		value = expr.getValue(ctx, Boolean.class);
 		assertThat((boolean) value).isTrue();
 
 //			ctx.setRootObject(new Manager("Luke"));
@@ -148,9 +149,13 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 
 		private String n;
 
-		Person(String n) { this.n = n; }
+		Person(String n) {
+			this.n = n;
+		}
 
-		public String[] getRoles() { return new String[]{"NONE"}; }
+		public String[] getRoles() {
+			return new String[]{"NONE"};
+		}
 
 		public boolean hasAnyRole(String... roles) {
 			if (roles == null) return true;
@@ -171,7 +176,9 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 			return true;
 		}
 
-		public String getName() { return n; }
+		public String getName() {
+			return n;
+		}
 	}
 
 
@@ -182,7 +189,9 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 		}
 
 		@Override
-		public String[] getRoles() { return new String[]{"MANAGER"};}
+		public String[] getRoles() {
+			return new String[]{"MANAGER"};
+		}
 	}
 
 
@@ -193,7 +202,9 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 		}
 
 		@Override
-		public String[] getRoles() { return new String[]{"TELLER"};}
+		public String[] getRoles() {
+			return new String[]{"TELLER"};
+		}
 	}
 
 
@@ -204,7 +215,9 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 		}
 
 		@Override
-		public String[] getRoles() { return new String[]{"SUPERVISOR"};}
+		public String[] getRoles() {
+			return new String[]{"SUPERVISOR"};
+		}
 	}
 
 
@@ -247,7 +260,9 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 
 		Person activePerson;
 
-		void setPerson(Person p) { this.activePerson = p; }
+		void setPerson(Person p) {
+			this.activePerson = p;
+		}
 
 		@Override
 		public boolean canRead(EvaluationContext context, Object target, String name) throws AccessException {
@@ -299,9 +314,8 @@ public class ScenariosForSpringSecurityExpressionTests extends AbstractExpressio
 					if (m.isVarArgs()) {
 						args = ReflectionHelper.setupArgumentsForVarargsInvocation(m.getParameterTypes(), args);
 					}
-					return new TypedValue(m.invoke(null, args), new TypeDescriptor(new MethodParameter(m,-1)));
-				}
-				catch (Exception ex) {
+					return new TypedValue(m.invoke(null, args), new TypeDescriptor(new MethodParameter(m, -1)));
+				} catch (Exception ex) {
 					throw new AccessException("Problem invoking hasRole", ex);
 				}
 			}

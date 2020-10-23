@@ -40,6 +40,7 @@ public interface CacheOperationSource {
 	 * Returning {@code false} is therefore an optimization for non-affected
 	 * classes, whereas {@code true} simply means that the class needs to get
 	 * fully introspected for each method on the given class individually.
+	 *
 	 * @param targetClass the class to introspect
 	 * @return {@code false} if the class is known to have no cache operation
 	 * metadata at class or method level; {@code true} otherwise. The default
@@ -53,9 +54,10 @@ public interface CacheOperationSource {
 	/**
 	 * Return the collection of cache operations for this method,
 	 * or {@code null} if the method contains no <em>cacheable</em> annotations.
-	 * @param method the method to introspect
+	 *
+	 * @param method      the method to introspect
 	 * @param targetClass the target class (may be {@code null}, in which case
-	 * the declaring class of the method must be used)
+	 *                    the declaring class of the method must be used)
 	 * @return all cache operations for this method, or {@code null} if none found
 	 */
 	@Nullable

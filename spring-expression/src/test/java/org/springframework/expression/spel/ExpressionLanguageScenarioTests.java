@@ -79,8 +79,7 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 
 			assertThat(value).isEqualTo("hello world");
 			assertThat(value.getClass()).isEqualTo(String.class);
-		}
-		catch (EvaluationException | ParseException ex) {
+		} catch (EvaluationException | ParseException ex) {
 			throw new AssertionError(ex.getMessage(), ex);
 		}
 	}
@@ -94,9 +93,9 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 		SpelExpressionParser parser = new SpelExpressionParser();
 		// Use the standard evaluation context
 		StandardEvaluationContext ctx = new StandardEvaluationContext();
-		ctx.setVariable("favouriteColour","blue");
+		ctx.setVariable("favouriteColour", "blue");
 		List<Integer> primes = Arrays.asList(2, 3, 5, 7, 11, 13, 17);
-		ctx.setVariable("primes",primes);
+		ctx.setVariable("primes", primes);
 
 		Expression expr = parser.parseRaw("#favouriteColour");
 		Object value = expr.getValue(ctx);
@@ -116,8 +115,14 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 	static class TestClass {
 		public String str;
 		private int property;
-		public int getProperty() { return property; }
-		public void setProperty(int i) { property = i; }
+
+		public int getProperty() {
+			return property;
+		}
+
+		public void setProperty(int i) {
+			property = i;
+		}
 	}
 
 	/**
@@ -164,7 +169,9 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 		assertThat(value).isEqualTo(4);
 	}
 
-	public static String repeat(String s) { return s+s; }
+	public static String repeat(String s) {
+		return s + s;
+	}
 
 	/**
 	 * Scenario: using your own java methods and calling them from the expression
@@ -176,14 +183,13 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 			SpelExpressionParser parser = new SpelExpressionParser();
 			// Use the standard evaluation context
 			StandardEvaluationContext ctx = new StandardEvaluationContext();
-			ctx.registerFunction("repeat",ExpressionLanguageScenarioTests.class.getDeclaredMethod("repeat",String.class));
+			ctx.registerFunction("repeat", ExpressionLanguageScenarioTests.class.getDeclaredMethod("repeat", String.class));
 
 			Expression expr = parser.parseRaw("#repeat('hello')");
 			Object value = expr.getValue(ctx);
 			assertThat(value).isEqualTo("hellohello");
 
-		}
-		catch (EvaluationException | ParseException ex) {
+		} catch (EvaluationException | ParseException ex) {
 			throw new AssertionError(ex.getMessage(), ex);
 		}
 	}
@@ -204,7 +210,7 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 		assertThat(value).isEqualTo(Color.orange);
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expr.setValue(ctx, Color.blue))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_WRITABLE_ON_NULL));
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_WRITABLE_ON_NULL));
 	}
 
 	@Test
@@ -221,7 +227,7 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 
 		assertThatExceptionOfType(SpelEvaluationException.class).isThrownBy(() ->
 				expr.setValue(ctx, Color.blue))
-			.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_WRITABLE_ON_NULL));
+				.satisfies(ex -> assertThat(ex.getMessageCode()).isEqualTo(SpelMessage.PROPERTY_OR_FIELD_NOT_WRITABLE_ON_NULL));
 	}
 
 
@@ -231,12 +237,12 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 	 */
 	private static class FruitColourAccessor implements PropertyAccessor {
 
-		private static Map<String,Color> propertyMap = new HashMap<>();
+		private static Map<String, Color> propertyMap = new HashMap<>();
 
 		static {
-			propertyMap.put("banana",Color.yellow);
-			propertyMap.put("apple",Color.red);
-			propertyMap.put("orange",Color.orange);
+			propertyMap.put("banana", Color.yellow);
+			propertyMap.put("apple", Color.red);
+			propertyMap.put("orange", Color.orange);
 		}
 
 		/**
@@ -276,11 +282,11 @@ public class ExpressionLanguageScenarioTests extends AbstractExpressionTests {
 	 */
 	private static class VegetableColourAccessor implements PropertyAccessor {
 
-		private static Map<String,Color> propertyMap = new HashMap<>();
+		private static Map<String, Color> propertyMap = new HashMap<>();
 
 		static {
-			propertyMap.put("carrot",Color.orange);
-			propertyMap.put("pea",Color.green);
+			propertyMap.put("carrot", Color.orange);
+			propertyMap.put("pea", Color.green);
 		}
 
 		/**

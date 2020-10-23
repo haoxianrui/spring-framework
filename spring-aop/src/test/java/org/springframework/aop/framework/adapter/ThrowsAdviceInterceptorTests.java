@@ -65,7 +65,7 @@ public class ThrowsAdviceInterceptorTests {
 		given(mi.proceed()).willThrow(ex);
 		assertThatExceptionOfType(Exception.class).isThrownBy(() ->
 				ti.invoke(mi))
-			.isSameAs(ex);
+				.isSameAs(ex);
 		assertThat(th.getCalls()).isEqualTo(0);
 	}
 
@@ -80,7 +80,7 @@ public class ThrowsAdviceInterceptorTests {
 		given(mi.proceed()).willThrow(ex);
 		assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(() ->
 				ti.invoke(mi))
-			.isSameAs(ex);
+				.isSameAs(ex);
 		assertThat(th.getCalls()).isEqualTo(1);
 		assertThat(th.getCalls("ioException")).isEqualTo(1);
 	}
@@ -95,7 +95,7 @@ public class ThrowsAdviceInterceptorTests {
 		given(mi.proceed()).willThrow(ex);
 		assertThatExceptionOfType(ConnectException.class).isThrownBy(() ->
 				ti.invoke(mi))
-			.isSameAs(ex);
+				.isSameAs(ex);
 		assertThat(th.getCalls()).isEqualTo(1);
 		assertThat(th.getCalls("remoteException")).isEqualTo(1);
 	}
@@ -120,7 +120,7 @@ public class ThrowsAdviceInterceptorTests {
 		given(mi.proceed()).willThrow(ex);
 		assertThatExceptionOfType(Throwable.class).isThrownBy(() ->
 				ti.invoke(mi))
-			.isSameAs(t);
+				.isSameAs(t);
 		assertThat(th.getCalls()).isEqualTo(1);
 		assertThat(th.getCalls("remoteException")).isEqualTo(1);
 	}

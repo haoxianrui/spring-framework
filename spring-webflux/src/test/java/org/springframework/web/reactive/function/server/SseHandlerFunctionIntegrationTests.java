@@ -99,17 +99,18 @@ class SseHandlerFunctionIntegrationTests extends AbstractRouterFunctionIntegrati
 				.uri("/event")
 				.accept(TEXT_EVENT_STREAM)
 				.retrieve()
-				.bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
+				.bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {
+				});
 
 		StepVerifier.create(result)
-				.consumeNextWith( event -> {
+				.consumeNextWith(event -> {
 					assertThat(event.id()).isEqualTo("0");
 					assertThat(event.data()).isEqualTo("foo");
 					assertThat(event.comment()).isEqualTo("bar");
 					assertThat(event.event()).isNull();
 					assertThat(event.retry()).isNull();
 				})
-				.consumeNextWith( event -> {
+				.consumeNextWith(event -> {
 					assertThat(event.id()).isEqualTo("1");
 					assertThat(event.data()).isEqualTo("foo");
 					assertThat(event.comment()).isEqualTo("bar");

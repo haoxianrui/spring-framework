@@ -42,26 +42,27 @@ public class LiteralExpressionTests {
 		assertThat(lEx.getValue(new Rooty())).isInstanceOf(String.class).isEqualTo("somevalue");
 		assertThat(lEx.getValue(new Rooty(), String.class)).isInstanceOf(String.class).isEqualTo("somevalue");
 		assertThat(lEx.getValue(ctx, new Rooty())).isInstanceOf(String.class).isEqualTo("somevalue");
-		assertThat(lEx.getValue(ctx, new Rooty(),String.class)).isInstanceOf(String.class).isEqualTo("somevalue");
+		assertThat(lEx.getValue(ctx, new Rooty(), String.class)).isInstanceOf(String.class).isEqualTo("somevalue");
 		assertThat(lEx.getExpressionString()).isEqualTo("somevalue");
 		assertThat(lEx.isWritable(new StandardEvaluationContext())).isFalse();
 		assertThat(lEx.isWritable(new Rooty())).isFalse();
 		assertThat(lEx.isWritable(new StandardEvaluationContext(), new Rooty())).isFalse();
 	}
 
-	static class Rooty {}
+	static class Rooty {
+	}
 
 	@Test
 	public void testSetValue() {
 		assertThatExceptionOfType(EvaluationException.class).isThrownBy(() ->
 				new LiteralExpression("somevalue").setValue(new StandardEvaluationContext(), "flibble"))
-			.satisfies(ex -> assertThat(ex.getExpressionString()).isEqualTo("somevalue"));
+				.satisfies(ex -> assertThat(ex.getExpressionString()).isEqualTo("somevalue"));
 		assertThatExceptionOfType(EvaluationException.class).isThrownBy(() ->
 				new LiteralExpression("somevalue").setValue(new Rooty(), "flibble"))
-			.satisfies(ex -> assertThat(ex.getExpressionString()).isEqualTo("somevalue"));
+				.satisfies(ex -> assertThat(ex.getExpressionString()).isEqualTo("somevalue"));
 		assertThatExceptionOfType(EvaluationException.class).isThrownBy(() ->
 				new LiteralExpression("somevalue").setValue(new StandardEvaluationContext(), new Rooty(), "flibble"))
-			.satisfies(ex -> assertThat(ex.getExpressionString()).isEqualTo("somevalue"));
+				.satisfies(ex -> assertThat(ex.getExpressionString()).isEqualTo("somevalue"));
 	}
 
 	@Test

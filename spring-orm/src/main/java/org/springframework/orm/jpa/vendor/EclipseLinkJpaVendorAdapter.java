@@ -42,10 +42,10 @@ import org.springframework.lang.Nullable;
  *
  * @author Juergen Hoeller
  * @author Thomas Risberg
- * @since 2.5.2
  * @see EclipseLinkJpaDialect
  * @see org.eclipse.persistence.jpa.PersistenceProvider
  * @see org.eclipse.persistence.jpa.JpaEntityManager
+ * @since 2.5.2
  */
 public class EclipseLinkJpaVendorAdapter extends AbstractJpaVendorAdapter {
 
@@ -65,8 +65,7 @@ public class EclipseLinkJpaVendorAdapter extends AbstractJpaVendorAdapter {
 
 		if (getDatabasePlatform() != null) {
 			jpaProperties.put(PersistenceUnitProperties.TARGET_DATABASE, getDatabasePlatform());
-		}
-		else {
+		} else {
 			String targetDatabase = determineTargetDatabaseName(getDatabase());
 			if (targetDatabase != null) {
 				jpaProperties.put(PersistenceUnitProperties.TARGET_DATABASE, targetDatabase);
@@ -90,23 +89,35 @@ public class EclipseLinkJpaVendorAdapter extends AbstractJpaVendorAdapter {
 
 	/**
 	 * Determine the EclipseLink target database name for the given database.
+	 *
 	 * @param database the specified database
 	 * @return the EclipseLink target database name, or {@code null} if none found
 	 */
 	@Nullable
 	protected String determineTargetDatabaseName(Database database) {
 		switch (database) {
-			case DB2: return TargetDatabase.DB2;
-			case DERBY: return TargetDatabase.Derby;
-			case HANA: return TargetDatabase.HANA;
-			case HSQL: return TargetDatabase.HSQL;
-			case INFORMIX: return TargetDatabase.Informix;
-			case MYSQL: return TargetDatabase.MySQL;
-			case ORACLE: return TargetDatabase.Oracle;
-			case POSTGRESQL: return TargetDatabase.PostgreSQL;
-			case SQL_SERVER: return TargetDatabase.SQLServer;
-			case SYBASE: return TargetDatabase.Sybase;
-			default: return null;
+			case DB2:
+				return TargetDatabase.DB2;
+			case DERBY:
+				return TargetDatabase.Derby;
+			case HANA:
+				return TargetDatabase.HANA;
+			case HSQL:
+				return TargetDatabase.HSQL;
+			case INFORMIX:
+				return TargetDatabase.Informix;
+			case MYSQL:
+				return TargetDatabase.MySQL;
+			case ORACLE:
+				return TargetDatabase.Oracle;
+			case POSTGRESQL:
+				return TargetDatabase.PostgreSQL;
+			case SQL_SERVER:
+				return TargetDatabase.SQLServer;
+			case SYBASE:
+				return TargetDatabase.Sybase;
+			default:
+				return null;
 		}
 	}
 

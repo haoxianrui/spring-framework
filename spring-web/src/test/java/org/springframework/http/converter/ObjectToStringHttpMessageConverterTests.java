@@ -152,7 +152,7 @@ public class ObjectToStringHttpMessageConverterTests {
 		assertThat(this.servletResponse.getCharacterEncoding()).isEqualTo("ISO-8859-1");
 		assertThat(this.servletResponse.getContentType().startsWith(MediaType.TEXT_PLAIN_VALUE)).isTrue();
 		assertThat(this.servletResponse.getContentLength()).isEqualTo(2);
-		assertThat(this.servletResponse.getContentAsByteArray()).isEqualTo(new byte[] { '-', '8' });
+		assertThat(this.servletResponse.getContentAsByteArray()).isEqualTo(new byte[]{'-', '8'});
 	}
 
 	@Test
@@ -164,7 +164,7 @@ public class ObjectToStringHttpMessageConverterTests {
 		assertThat(this.servletResponse.getContentType().startsWith(MediaType.TEXT_PLAIN_VALUE)).isTrue();
 		assertThat(this.servletResponse.getContentLength()).isEqualTo(8);
 		// First two bytes: byte order mark
-		assertThat(this.servletResponse.getContentAsByteArray()).isEqualTo(new byte[] { -2, -1, 0, '9', 0, '5', 0, '8' });
+		assertThat(this.servletResponse.getContentAsByteArray()).isEqualTo(new byte[]{-2, -1, 0, '9', 0, '5', 0, '8'});
 	}
 
 	@Test

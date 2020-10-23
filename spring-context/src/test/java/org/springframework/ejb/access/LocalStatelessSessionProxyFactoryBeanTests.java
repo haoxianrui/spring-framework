@@ -128,7 +128,7 @@ public class LocalStatelessSessionProxyFactoryBeanTests {
 
 		LocalStatelessSessionProxyFactoryBean fb = new LocalStatelessSessionProxyFactoryBean();
 		fb.setJndiName(jndiName);
-		fb.setResourceRef(false);	// no java:comp/env prefix
+		fb.setResourceRef(false);    // no java:comp/env prefix
 		fb.setBusinessInterface(MyBusinessMethods.class);
 		assertThat(MyBusinessMethods.class).isEqualTo(fb.getBusinessInterface());
 		fb.setJndiTemplate(jt);
@@ -141,7 +141,7 @@ public class LocalStatelessSessionProxyFactoryBeanTests {
 
 		assertThatExceptionOfType(EjbAccessException.class).isThrownBy(
 				mbm::getValue)
-			.withCause(cex);
+				.withCause(cex);
 	}
 
 	@Test
@@ -172,7 +172,7 @@ public class LocalStatelessSessionProxyFactoryBeanTests {
 
 		assertThatIllegalArgumentException().isThrownBy(
 				fb::afterPropertiesSet)
-			.withMessageContaining("businessInterface");
+				.withMessageContaining("businessInterface");
 
 		// Expect no methods on home
 		verifyNoInteractions(home);
@@ -185,7 +185,7 @@ public class LocalStatelessSessionProxyFactoryBeanTests {
 	}
 
 
-	public interface MyBusinessMethods  {
+	public interface MyBusinessMethods {
 
 		int getValue();
 	}

@@ -204,11 +204,11 @@ public class MessageBrokerBeanDefinitionParserTests {
 		DefaultSubscriptionRegistry registry = (DefaultSubscriptionRegistry) brokerMessageHandler.getSubscriptionRegistry();
 		assertThat(registry.getSelectorHeaderName()).isEqualTo("my-selector");
 		assertThat(brokerMessageHandler.getTaskScheduler()).isNotNull();
-		assertThat(brokerMessageHandler.getHeartbeatValue()).isEqualTo(new long[] {15000, 15000});
+		assertThat(brokerMessageHandler.getHeartbeatValue()).isEqualTo(new long[]{15000, 15000});
 		assertThat(brokerMessageHandler.isPreservePublishOrder()).isTrue();
 
 		List<Class<? extends MessageHandler>> subscriberTypes = Arrays.asList(SimpAnnotationMethodMessageHandler.class,
-						UserDestinationMessageHandler.class, SimpleBrokerMessageHandler.class);
+				UserDestinationMessageHandler.class, SimpleBrokerMessageHandler.class);
 		testChannel("clientInboundChannel", subscriberTypes, 2);
 		testExecutor("clientInboundChannel", Runtime.getRuntime().availableProcessors() * 2, Integer.MAX_VALUE, 60);
 
@@ -267,7 +267,7 @@ public class MessageBrokerBeanDefinitionParserTests {
 		assertThat(messageBroker.getVirtualHost()).isEqualTo("spring.io");
 		assertThat(messageBroker.getSystemHeartbeatReceiveInterval()).isEqualTo(5000);
 		assertThat(messageBroker.getSystemHeartbeatSendInterval()).isEqualTo(5000);
-		assertThat(messageBroker.getDestinationPrefixes()).containsExactlyInAnyOrder("/topic","/queue");
+		assertThat(messageBroker.getDestinationPrefixes()).containsExactlyInAnyOrder("/topic", "/queue");
 		assertThat(messageBroker.isPreservePublishOrder()).isTrue();
 
 		List<Class<? extends MessageHandler>> subscriberTypes = Arrays.asList(SimpAnnotationMethodMessageHandler.class,
@@ -432,10 +432,10 @@ public class MessageBrokerBeanDefinitionParserTests {
 
 
 	private void testChannel(
-			String channelName, List<Class<? extends  MessageHandler>> subscriberTypes, int interceptorCount) {
+			String channelName, List<Class<? extends MessageHandler>> subscriberTypes, int interceptorCount) {
 
 		AbstractSubscribableChannel channel = this.appContext.getBean(channelName, AbstractSubscribableChannel.class);
-		for (Class<? extends  MessageHandler> subscriberType : subscriberTypes) {
+		for (Class<? extends MessageHandler> subscriberType : subscriberTypes) {
 			MessageHandler subscriber = this.appContext.getBean(subscriberType);
 			assertThat(subscriber).as("No subscription for " + subscriberType).isNotNull();
 			assertThat(channel.hasSubscription(subscriber)).isTrue();

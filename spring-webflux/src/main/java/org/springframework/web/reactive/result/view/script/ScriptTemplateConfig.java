@@ -42,6 +42,7 @@ public interface ScriptTemplateConfig {
 
 	/**
 	 * Return the engine supplier that will be used to instantiate the {@link ScriptEngine}.
+	 *
 	 * @since 5.2
 	 */
 	@Nullable

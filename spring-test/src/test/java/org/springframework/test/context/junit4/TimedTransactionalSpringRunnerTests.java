@@ -34,8 +34,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * timeout} attribute.
  *
  * @author Sam Brannen
- * @since 2.5
  * @see org.springframework.test.context.junit.jupiter.transaction.TimedTransactionalSpringExtensionTests
+ * @since 2.5
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration("transactionalTests-context.xml")

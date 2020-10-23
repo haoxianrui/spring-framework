@@ -81,8 +81,8 @@ public class StandardEnvironmentTests {
 		assertThat(parent.getProperty("parentKey")).isEqualTo("parentVal");
 		assertThat(parent.getProperty("bothKey")).isEqualTo("parentBothVal");
 
-		assertThat(child.getActiveProfiles()).isEqualTo(new String[]{"c1","c2"});
-		assertThat(parent.getActiveProfiles()).isEqualTo(new String[]{"p1","p2"});
+		assertThat(child.getActiveProfiles()).isEqualTo(new String[]{"c1", "c2"});
+		assertThat(parent.getActiveProfiles()).isEqualTo(new String[]{"p1", "p2"});
 
 		child.merge(parent);
 
@@ -94,8 +94,8 @@ public class StandardEnvironmentTests {
 		assertThat(parent.getProperty("parentKey")).isEqualTo("parentVal");
 		assertThat(parent.getProperty("bothKey")).isEqualTo("parentBothVal");
 
-		assertThat(child.getActiveProfiles()).isEqualTo(new String[]{"c1","c2","p1","p2"});
-		assertThat(parent.getActiveProfiles()).isEqualTo(new String[]{"p1","p2"});
+		assertThat(child.getActiveProfiles()).isEqualTo(new String[]{"c1", "c2", "p1", "p2"});
+		assertThat(parent.getActiveProfiles()).isEqualTo(new String[]{"p1", "p2"});
 	}
 
 	@Test
@@ -204,7 +204,7 @@ public class StandardEnvironmentTests {
 		System.setProperty(DEFAULT_PROFILES_PROPERTY_NAME, "d0");
 		assertThat(environment.getDefaultProfiles()).isEqualTo(new String[]{"d0"});
 		environment.setDefaultProfiles("d1", "d2");
-		assertThat(environment.getDefaultProfiles()).isEqualTo(new String[]{"d1","d2"});
+		assertThat(environment.getDefaultProfiles()).isEqualTo(new String[]{"d1", "d2"});
 		System.clearProperty(DEFAULT_PROFILES_PROPERTY_NAME);
 	}
 
@@ -213,8 +213,7 @@ public class StandardEnvironmentTests {
 		try {
 			System.setProperty(DEFAULT_PROFILES_PROPERTY_NAME, "${spring.profiles.default}");
 			assertThatIllegalArgumentException().isThrownBy(() -> environment.getDefaultProfiles());
-		}
-		finally {
+		} finally {
 			System.clearProperty(DEFAULT_PROFILES_PROPERTY_NAME);
 		}
 	}
@@ -250,7 +249,7 @@ public class StandardEnvironmentTests {
 
 	@Test
 	void getDefaultProfiles() {
-		assertThat(environment.getDefaultProfiles()).isEqualTo(new String[] {RESERVED_DEFAULT_PROFILE_NAME});
+		assertThat(environment.getDefaultProfiles()).isEqualTo(new String[]{RESERVED_DEFAULT_PROFILE_NAME});
 		environment.getPropertySources().addFirst(new MockPropertySource().withProperty(DEFAULT_PROFILES_PROPERTY_NAME, "pd1"));
 		assertThat(environment.getDefaultProfiles().length).isEqualTo(1);
 		assertThat(Arrays.asList(environment.getDefaultProfiles())).contains("pd1");
@@ -356,7 +355,7 @@ public class StandardEnvironmentTests {
 
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				env.addActiveProfile("invalid-profile"))
-			.withMessage("Invalid profile [invalid-profile]: must not contain dash character");
+				.withMessage("Invalid profile [invalid-profile]: must not contain dash character");
 	}
 
 	@Test
@@ -406,6 +405,7 @@ public class StandardEnvironmentTests {
 				// see https://download.oracle.com/javase/1.5.0/docs/api/java/lang/System.html#getProperties()
 				throw new AccessControlException("Accessing the system properties is disallowed");
 			}
+
 			@Override
 			public void checkPropertyAccess(String key) {
 				// see https://download.oracle.com/javase/1.5.0/docs/api/java/lang/System.html#getProperty(java.lang.String)
@@ -414,6 +414,7 @@ public class StandardEnvironmentTests {
 							String.format("Accessing the system property [%s] is disallowed", DISALLOWED_PROPERTY_NAME));
 				}
 			}
+
 			@Override
 			public void checkPermission(Permission perm) {
 				// allow everything else
@@ -427,7 +428,7 @@ public class StandardEnvironmentTests {
 				Map<?, ?> systemProperties = environment.getSystemProperties();
 				assertThat(systemProperties).isNotNull();
 				assertThat(systemProperties).isInstanceOf(ReadOnlySystemAttributesMap.class);
-				assertThat((String)systemProperties.get(ALLOWED_PROPERTY_NAME)).isEqualTo(ALLOWED_PROPERTY_VALUE);
+				assertThat((String) systemProperties.get(ALLOWED_PROPERTY_NAME)).isEqualTo(ALLOWED_PROPERTY_VALUE);
 				assertThat(systemProperties.get(DISALLOWED_PROPERTY_NAME)).isNull();
 
 				// nothing we can do here in terms of warning the user that there was
@@ -442,10 +443,9 @@ public class StandardEnvironmentTests {
 				// SecurityManager that disallows access to system properties), they
 				// cannot do what they're attempting.
 				assertThatIllegalArgumentException().as("searching with non-string key against ReadOnlySystemAttributesMap").isThrownBy(() ->
-				systemProperties.get(NON_STRING_PROPERTY_NAME));
+						systemProperties.get(NON_STRING_PROPERTY_NAME));
 			}
-		}
-		finally {
+		} finally {
 			System.setSecurityManager(oldSecurityManager);
 			System.clearProperty(ALLOWED_PROPERTY_NAME);
 			System.clearProperty(DISALLOWED_PROPERTY_NAME);
@@ -474,9 +474,9 @@ public class StandardEnvironmentTests {
 					throw new AccessControlException("Accessing the system environment is disallowed");
 				}
 				//see https://download.oracle.com/javase/1.5.0/docs/api/java/lang/System.html#getenv(java.lang.String)
-				if (("getenv."+DISALLOWED_PROPERTY_NAME).equals(perm.getName())) {
+				if (("getenv." + DISALLOWED_PROPERTY_NAME).equals(perm.getName())) {
 					throw new AccessControlException(
-						String.format("Accessing the system environment variable [%s] is disallowed", DISALLOWED_PROPERTY_NAME));
+							String.format("Accessing the system environment variable [%s] is disallowed", DISALLOWED_PROPERTY_NAME));
 				}
 			}
 		};
@@ -490,8 +490,7 @@ public class StandardEnvironmentTests {
 				assertThat(systemEnvironment.get(ALLOWED_PROPERTY_NAME)).isEqualTo(ALLOWED_PROPERTY_VALUE);
 				assertThat(systemEnvironment.get(DISALLOWED_PROPERTY_NAME)).isNull();
 			}
-		}
-		finally {
+		} finally {
 			System.setSecurityManager(oldSecurityManager);
 		}
 

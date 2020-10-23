@@ -37,8 +37,8 @@ import org.springframework.util.MultiValueMap;
  * {@link ClientHttpResponse} implementation for the Reactor-Netty HTTP client.
  *
  * @author Brian Clozel
- * @since 5.0
  * @see reactor.netty.http.client.HttpClient
+ * @since 5.0
  */
 class ReactorClientHttpResponse implements ClientHttpResponse {
 
@@ -67,11 +67,11 @@ class ReactorClientHttpResponse implements ClientHttpResponse {
 					}
 				})
 				.doOnCancel(() ->
-					// https://github.com/reactor/reactor-netty/issues/503
-					// FluxReceive rejects multiple subscribers, but not after a cancel().
-					// Subsequent subscribers after cancel() will not be rejected, but will hang instead.
-					// So we need to intercept and reject them in that case.
-					this.rejectSubscribers.set(true)
+						// https://github.com/reactor/reactor-netty/issues/503
+						// FluxReceive rejects multiple subscribers, but not after a cancel().
+						// Subsequent subscribers after cancel() will not be rejected, but will hang instead.
+						// So we need to intercept and reject them in that case.
+						this.rejectSubscribers.set(true)
 				)
 				.map(byteBuf -> {
 					byteBuf.retain();
@@ -101,13 +101,13 @@ class ReactorClientHttpResponse implements ClientHttpResponse {
 		MultiValueMap<String, ResponseCookie> result = new LinkedMultiValueMap<>();
 		this.response.cookies().values().stream().flatMap(Collection::stream)
 				.forEach(c ->
-					result.add(c.name(), ResponseCookie.fromClientResponse(c.name(), c.value())
-							.domain(c.domain())
-							.path(c.path())
-							.maxAge(c.maxAge())
-							.secure(c.isSecure())
-							.httpOnly(c.isHttpOnly())
-							.build()));
+						result.add(c.name(), ResponseCookie.fromClientResponse(c.name(), c.value())
+								.domain(c.domain())
+								.path(c.path())
+								.maxAge(c.maxAge())
+								.secure(c.isSecure())
+								.httpOnly(c.isHttpOnly())
+								.build()));
 		return CollectionUtils.unmodifiableMultiValueMap(result);
 	}
 

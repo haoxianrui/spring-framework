@@ -54,7 +54,9 @@ public class UrlFilenameViewController extends AbstractUrlViewController {
 
 	private String suffix = "";
 
-	/** Request URL path String to view name String. */
+	/**
+	 * Request URL path String to view name String.
+	 */
 	private final Map<String, String> viewNameCache = new ConcurrentHashMap<>(256);
 
 
@@ -92,6 +94,7 @@ public class UrlFilenameViewController extends AbstractUrlViewController {
 	/**
 	 * Returns view name based on the URL filename,
 	 * with prefix/suffix applied when appropriate.
+	 *
 	 * @see #extractViewNameFromUrlPath
 	 * @see #setPrefix
 	 * @see #setSuffix
@@ -105,6 +108,7 @@ public class UrlFilenameViewController extends AbstractUrlViewController {
 	/**
 	 * Extract a URL path from the given request,
 	 * suitable for view name extraction.
+	 *
 	 * @param request current HTTP request
 	 * @return the URL to use for view name extraction
 	 */
@@ -119,6 +123,7 @@ public class UrlFilenameViewController extends AbstractUrlViewController {
 	/**
 	 * Returns view name based on the URL filename,
 	 * with prefix/suffix applied when appropriate.
+	 *
 	 * @param uri the request URI; for example {@code "/index.html"}
 	 * @return the extracted URI filename; for example {@code "index"}
 	 * @see #extractViewNameFromUrlPath
@@ -130,6 +135,7 @@ public class UrlFilenameViewController extends AbstractUrlViewController {
 
 	/**
 	 * Extract the URL filename from the given request URI.
+	 *
 	 * @param uri the request URI; for example {@code "/index.html"}
 	 * @return the extracted URI filename; for example {@code "index"}
 	 */
@@ -146,6 +152,7 @@ public class UrlFilenameViewController extends AbstractUrlViewController {
 	 * <p>The default implementation simply applies prefix and suffix.
 	 * This can be overridden, for example, to manipulate upper case
 	 * / lower case, etc.
+	 *
 	 * @param viewName the original view name, as indicated by the URL path
 	 * @return the full view name to use
 	 * @see #getPrefix()

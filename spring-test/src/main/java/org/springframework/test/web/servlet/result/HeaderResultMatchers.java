@@ -63,6 +63,7 @@ public class HeaderResultMatchers {
 	/**
 	 * Assert the values of the response header with the given Hamcrest
 	 * Iterable {@link Matcher}.
+	 *
 	 * @since 4.3
 	 */
 	public ResultMatcher stringValues(String name, Matcher<Iterable<String>> matcher) {
@@ -81,6 +82,7 @@ public class HeaderResultMatchers {
 
 	/**
 	 * Assert the values of the response header as String values.
+	 *
 	 * @since 4.3
 	 */
 	public ResultMatcher stringValues(String name, String... values) {
@@ -92,6 +94,7 @@ public class HeaderResultMatchers {
 
 	/**
 	 * Assert that the named response header exists.
+	 *
 	 * @since 5.0.3
 	 */
 	public ResultMatcher exists(String name) {
@@ -101,6 +104,7 @@ public class HeaderResultMatchers {
 
 	/**
 	 * Assert that the named response header does not exist.
+	 *
 	 * @since 4.0
 	 */
 	public ResultMatcher doesNotExist(String name) {
@@ -131,8 +135,9 @@ public class HeaderResultMatchers {
 	 * <p>The {@link ResultMatcher} returned by this method throws an
 	 * {@link AssertionError} if the response does not contain the specified
 	 * header, or if the supplied {@code value} does not match the primary value.
-	 * @since 4.2
+	 *
 	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">Section 7.1.1.1 of RFC 7231</a>
+	 * @since 4.2
 	 */
 	public ResultMatcher dateValue(String name, long value) {
 		return result -> {

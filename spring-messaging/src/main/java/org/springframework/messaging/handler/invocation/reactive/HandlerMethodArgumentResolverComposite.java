@@ -106,8 +106,9 @@ public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgu
 	 * Iterate over registered
 	 * {@link HandlerMethodArgumentResolver HandlerMethodArgumentResolvers} and
 	 * invoke the one that supports it.
+	 *
 	 * @throws IllegalStateException if no suitable
-	 * {@link HandlerMethodArgumentResolver} is found.
+	 *                               {@link HandlerMethodArgumentResolver} is found.
 	 */
 	@Override
 	public Mono<Object> resolveArgument(MethodParameter parameter, Message<?> message) {

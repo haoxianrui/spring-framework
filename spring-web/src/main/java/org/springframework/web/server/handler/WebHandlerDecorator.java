@@ -35,6 +35,7 @@ public class WebHandlerDecorator implements WebHandler {
 
 	/**
 	 * Create a {@code WebHandlerDecorator} for the given delegate.
+	 *
 	 * @param delegate the WebHandler delegate
 	 */
 	public WebHandlerDecorator(WebHandler delegate) {

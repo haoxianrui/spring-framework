@@ -140,6 +140,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 
 	/**
 	 * Protected constructor. Not intended for direct instantiation.
+	 *
 	 * @see MockMvcBuilders#standaloneSetup(Object...)
 	 */
 	protected StandaloneMockMvcBuilder(Object... controllers) {
@@ -161,6 +162,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * <p>Normally {@code @ControllerAdvice} are auto-detected as long as they're declared
 	 * as Spring beans. However since the standalone setup does not load any Spring config,
 	 * they need to be registered explicitly here instead much like controllers.
+	 *
 	 * @since 4.2
 	 */
 	public StandaloneMockMvcBuilder setControllerAdvice(Object... controllerAdvice) {
@@ -174,7 +176,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * and response. If no message converters are added to the list, a default
 	 * list of converters is added instead.
 	 */
-	public StandaloneMockMvcBuilder setMessageConverters(HttpMessageConverter<?>...messageConverters) {
+	public StandaloneMockMvcBuilder setMessageConverters(HttpMessageConverter<?>... messageConverters) {
 		this.messageConverters = Arrays.asList(messageConverters);
 		return this;
 	}
@@ -230,6 +232,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * Specify the timeout value for async execution. In Spring MVC Test, this
 	 * value is used to determine how to long to wait for async execution to
 	 * complete so that a test can verify the results synchronously.
+	 *
 	 * @param timeout the timeout value in milliseconds
 	 */
 	public StandaloneMockMvcBuilder setAsyncRequestTimeout(long timeout) {
@@ -273,7 +276,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * Set up view resolution with the given {@link ViewResolver ViewResolvers}.
 	 * If not set, an {@link InternalResourceViewResolver} is used by default.
 	 */
-	public StandaloneMockMvcBuilder setViewResolvers(ViewResolver...resolvers) {
+	public StandaloneMockMvcBuilder setViewResolvers(ViewResolver... resolvers) {
 		this.viewResolvers = Arrays.asList(resolvers);
 		return this;
 	}
@@ -310,6 +313,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * Whether to use suffix pattern match (".*") when matching patterns to
 	 * requests. If enabled a method mapped to "/users" also matches to "/users.*".
 	 * <p>The default value is {@code true}.
+	 *
 	 * @deprecated as of 5.2.4. See class-level note in
 	 * {@link RequestMappingHandlerMapping} on the deprecation of path extension
 	 * config options.
@@ -345,6 +349,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * request mappings. This method allows manually provided placeholder values so they
 	 * can be resolved. Alternatively consider creating a test that initializes a
 	 * {@link WebApplicationContext}.
+	 *
 	 * @since 4.2.8
 	 */
 	public StandaloneMockMvcBuilder addPlaceholderValue(String name, String value) {
@@ -354,6 +359,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 
 	/**
 	 * Configure factory to create a custom {@link RequestMappingHandlerMapping}.
+	 *
 	 * @param factory the factory
 	 * @since 5.0
 	 */
@@ -434,6 +440,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * This method could be used from a sub-class to register additional Spring
 	 * MVC infrastructure such as additional {@code HandlerMapping},
 	 * {@code HandlerAdapter}, and others.
+	 *
 	 * @param servletContext the ServletContext
 	 * @return a map with additional MVC infrastructure object instances
 	 * @since 5.1.4
@@ -443,7 +450,9 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	}
 
 
-	/** Using the MVC Java configuration as the starting point for the "standalone" setup. */
+	/**
+	 * Using the MVC Java configuration as the starting point for the "standalone" setup.
+	 */
 	private class StandaloneConfiguration extends WebMvcConfigurationSupport {
 
 		@SuppressWarnings("deprecation")
@@ -510,8 +519,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 			if (mvcValidator instanceof InitializingBean) {
 				try {
 					((InitializingBean) mvcValidator).afterPropertiesSet();
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					throw new BeanInitializationException("Failed to initialize Validator", ex);
 				}
 			}
@@ -533,8 +541,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 				if (resolver instanceof InitializingBean) {
 					try {
 						((InitializingBean) resolver).afterPropertiesSet();
-					}
-					catch (Exception ex) {
+					} catch (Exception ex) {
 						throw new IllegalStateException("Failure from afterPropertiesSet", ex);
 					}
 				}

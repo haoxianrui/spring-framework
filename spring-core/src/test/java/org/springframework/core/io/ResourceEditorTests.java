@@ -71,8 +71,7 @@ class ResourceEditorTests {
 			editor.setAsText("${test.prop}");
 			Resource resolved = (Resource) editor.getValue();
 			assertThat(resolved.getFilename()).isEqualTo("foo");
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("test.prop");
 		}
 	}
@@ -85,8 +84,7 @@ class ResourceEditorTests {
 			editor.setAsText("${test.prop}-${bar}");
 			Resource resolved = (Resource) editor.getValue();
 			assertThat(resolved.getFilename()).isEqualTo("foo-${bar}");
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("test.prop");
 		}
 	}
@@ -97,11 +95,10 @@ class ResourceEditorTests {
 		System.setProperty("test.prop", "foo");
 		try {
 			assertThatIllegalArgumentException().isThrownBy(() -> {
-					editor.setAsText("${test.prop}-${bar}");
-					editor.getValue();
+				editor.setAsText("${test.prop}-${bar}");
+				editor.getValue();
 			});
-		}
-		finally {
+		} finally {
 			System.getProperties().remove("test.prop");
 		}
 	}

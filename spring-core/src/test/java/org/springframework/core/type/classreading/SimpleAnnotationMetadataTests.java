@@ -32,9 +32,8 @@ class SimpleAnnotationMetadataTests extends AbstractAnnotationMetadataTests {
 		try {
 			return new SimpleMetadataReaderFactory(
 					source.getClassLoader()).getMetadataReader(
-							source.getName()).getAnnotationMetadata();
-		}
-		catch (Exception ex) {
+					source.getName()).getAnnotationMetadata();
+		} catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 	}

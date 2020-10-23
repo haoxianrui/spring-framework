@@ -128,7 +128,7 @@ public class EventPublishingTestExecutionListenerIntegrationTests {
 		Method method = ReflectionUtils.findMethod(ExampleTestCase.class, "testWithFailingEventListener");
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
 				testContextManager.beforeTestMethod(testInstance, method))
-			.withMessageContaining("Boom!");
+				.withMessageContaining("Boom!");
 		verify(listener, only()).beforeTestMethod(testContext);
 	}
 
@@ -149,7 +149,7 @@ public class EventPublishingTestExecutionListenerIntegrationTests {
 
 		verify(listener, only()).beforeTestMethod(testContext);
 		assertThat(TrackingAsyncUncaughtExceptionHandler.asyncException.getMessage())
-			.startsWith("Asynchronous exception for test method [" + methodName + "] in thread [" + THREAD_NAME_PREFIX);
+				.startsWith("Asynchronous exception for test method [" + methodName + "] in thread [" + THREAD_NAME_PREFIX);
 	}
 
 	@Test
@@ -306,7 +306,7 @@ public class EventPublishingTestExecutionListenerIntegrationTests {
 		public void beforeTestMethodWithAsyncFailure(BeforeTestMethodEvent event) throws Exception {
 			this.listener.beforeTestMethod(event.getSource());
 			throw new RuntimeException(String.format("Asynchronous exception for test method [%s] in thread [%s]",
-				event.getTestContext().getTestMethod().getName(), Thread.currentThread().getName()));
+					event.getTestContext().getTestMethod().getName(), Thread.currentThread().getName()));
 		}
 
 	}

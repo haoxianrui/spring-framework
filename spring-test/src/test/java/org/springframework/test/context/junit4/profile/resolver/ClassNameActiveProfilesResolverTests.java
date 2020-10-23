@@ -52,7 +52,7 @@ public class ClassNameActiveProfilesResolverTests {
 	@Test
 	public void test() {
 		assertThat(Arrays.asList(applicationContext.getEnvironment().getActiveProfiles()).contains(
-			getClass().getSimpleName().toLowerCase())).isTrue();
+				getClass().getSimpleName().toLowerCase())).isTrue();
 	}
 
 }

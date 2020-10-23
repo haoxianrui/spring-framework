@@ -34,7 +34,8 @@ class NestedExceptionTests {
 	void nestedRuntimeExceptionWithNoRootCause() {
 		String mesg = "mesg of mine";
 		// Making a class abstract doesn't _really_ prevent instantiation :-)
-		NestedRuntimeException nex = new NestedRuntimeException(mesg) {};
+		NestedRuntimeException nex = new NestedRuntimeException(mesg) {
+		};
 		assertThat(nex.getCause()).isNull();
 		assertThat(mesg).isEqualTo(nex.getMessage());
 
@@ -53,7 +54,8 @@ class NestedExceptionTests {
 		String rootCauseMsg = "this is the obscure message of the root cause";
 		Exception rootCause = new Exception(rootCauseMsg);
 		// Making a class abstract doesn't _really_ prevent instantiation :-)
-		NestedRuntimeException nex = new NestedRuntimeException(myMessage, rootCause) {};
+		NestedRuntimeException nex = new NestedRuntimeException(myMessage, rootCause) {
+		};
 		assertThat(rootCause).isEqualTo(nex.getCause());
 		assertThat(nex.getMessage().contains(myMessage)).isTrue();
 		assertThat(nex.getMessage().endsWith(rootCauseMsg)).isTrue();
@@ -72,7 +74,8 @@ class NestedExceptionTests {
 	void nestedCheckedExceptionWithNoRootCause() {
 		String mesg = "mesg of mine";
 		// Making a class abstract doesn't _really_ prevent instantiation :-)
-		NestedCheckedException nex = new NestedCheckedException(mesg) {};
+		NestedCheckedException nex = new NestedCheckedException(mesg) {
+		};
 		assertThat(nex.getCause()).isNull();
 		assertThat(mesg).isEqualTo(nex.getMessage());
 
@@ -91,7 +94,8 @@ class NestedExceptionTests {
 		String rootCauseMsg = "this is the obscure message of the root cause";
 		Exception rootCause = new Exception(rootCauseMsg);
 		// Making a class abstract doesn't _really_ prevent instantiation :-)
-		NestedCheckedException nex = new NestedCheckedException(myMessage, rootCause) {};
+		NestedCheckedException nex = new NestedCheckedException(myMessage, rootCause) {
+		};
 		assertThat(rootCause).isEqualTo(nex.getCause());
 		assertThat(nex.getMessage().contains(myMessage)).isTrue();
 		assertThat(nex.getMessage().endsWith(rootCauseMsg)).isTrue();

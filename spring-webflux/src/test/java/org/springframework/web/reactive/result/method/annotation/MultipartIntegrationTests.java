@@ -208,8 +208,7 @@ class MultipartIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 			// Use FileCopyUtils since the resource might reside in a JAR instead of in the file system.
 			byte[] resourceBytes = FileCopyUtils.copyToByteArray(resource.getInputStream());
 			assertThat(tempBytes).isEqualTo(resourceBytes);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new AssertionError(ex);
 		}
 	}
@@ -232,8 +231,8 @@ class MultipartIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 
 		@PostMapping("/requestPart")
 		void requestPart(@RequestPart FormFieldPart fieldPart,
-				@RequestPart("fileParts") FilePart fileParts,
-				@RequestPart("jsonPart") Mono<Person> personMono) {
+						 @RequestPart("fileParts") FilePart fileParts,
+						 @RequestPart("jsonPart") Mono<Person> personMono) {
 
 			assertThat(fieldPart.value()).isEqualTo("fieldValue");
 			assertThat(partDescription(fileParts)).isEqualTo("fileParts:foo.txt");
@@ -271,8 +270,7 @@ class MultipartIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 					return filePart.transferTo(tempFile)
 							.then(Mono.just(tempFile.toString() + "\n"));
 
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					return Mono.error(e);
 				}
 			});

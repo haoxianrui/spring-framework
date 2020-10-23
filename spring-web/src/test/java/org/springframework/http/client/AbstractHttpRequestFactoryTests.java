@@ -92,8 +92,7 @@ public abstract class AbstractHttpRequestFactoryTests extends AbstractMockWebSer
 		if (request instanceof StreamingHttpOutputMessage) {
 			StreamingHttpOutputMessage streamingRequest = (StreamingHttpOutputMessage) request;
 			streamingRequest.setBody(outputStream -> StreamUtils.copy(body, outputStream));
-		}
-		else {
+		} else {
 			StreamUtils.copy(body, request.getBody());
 		}
 
@@ -118,8 +117,7 @@ public abstract class AbstractHttpRequestFactoryTests extends AbstractMockWebSer
 				outputStream.flush();
 				outputStream.close();
 			});
-		}
-		else {
+		} else {
 			StreamUtils.copy(body, request.getBody());
 		}
 
@@ -136,10 +134,10 @@ public abstract class AbstractHttpRequestFactoryTests extends AbstractMockWebSer
 		request.getHeaders().add("MyHeader", "value");
 		byte[] body = "Hello World".getBytes(StandardCharsets.UTF_8);
 		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> {
-				FileCopyUtils.copy(body, request.getBody());
-				try (ClientHttpResponse response = request.execute()) {
-					request.getHeaders().add("MyHeader", "value");
-				}
+			FileCopyUtils.copy(body, request.getBody());
+			try (ClientHttpResponse response = request.execute()) {
+				request.getHeaders().add("MyHeader", "value");
+			}
 		});
 	}
 
@@ -161,16 +159,14 @@ public abstract class AbstractHttpRequestFactoryTests extends AbstractMockWebSer
 				// requires a body
 				try {
 					request.getBody().write(32);
-				}
-				catch (UnsupportedOperationException ex) {
+				} catch (UnsupportedOperationException ex) {
 					// probably a streaming request - let's simply ignore it
 				}
 			}
 			response = request.execute();
 			assertThat(response.getStatusCode()).as("Invalid response status").isEqualTo(HttpStatus.OK);
 			assertThat(request.getMethod().name()).as("Invalid method").isEqualTo(path.toUpperCase(Locale.ENGLISH));
-		}
-		finally {
+		} finally {
 			if (response != null) {
 				response.close();
 			}

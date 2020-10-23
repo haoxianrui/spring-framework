@@ -32,13 +32,14 @@ import org.springframework.util.StringUtils;
  *
  * @author Mark Paluch
  * @author Juergen Hoeller
- * @since 5.2
  * @see TransactionContextManager
  * @see reactor.util.context.Context
+ * @since 5.2
  */
 public class TransactionContext {
 
-	private final @Nullable TransactionContext parent;
+	private final @Nullable
+	TransactionContext parent;
 
 	private final UUID contextId = UUID.randomUUID();
 
@@ -47,11 +48,13 @@ public class TransactionContext {
 	@Nullable
 	private Set<TransactionSynchronization> synchronizations;
 
-	private volatile @Nullable String currentTransactionName;
+	private volatile @Nullable
+	String currentTransactionName;
 
 	private volatile boolean currentTransactionReadOnly;
 
-	private volatile @Nullable Integer currentTransactionIsolationLevel;
+	private volatile @Nullable
+	Integer currentTransactionIsolationLevel;
 
 	private volatile boolean actualTransactionActive;
 

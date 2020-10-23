@@ -36,6 +36,7 @@ import static org.assertj.core.api.Assertions.fail;
 
 /**
  * Unit tests for {@link CorsFilter}.
+ *
  * @author Sebastien Deleuze
  */
 public class CorsFilterTests {
@@ -109,7 +110,7 @@ public class CorsFilterTests {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 
 		FilterChain filterChain = (filterRequest, filterResponse) ->
-			fail("Invalid requests must not be forwarded to the filter chain");
+				fail("Invalid requests must not be forwarded to the filter chain");
 		filter.doFilter(request, response, filterChain);
 		assertThat(response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isNull();
 	}

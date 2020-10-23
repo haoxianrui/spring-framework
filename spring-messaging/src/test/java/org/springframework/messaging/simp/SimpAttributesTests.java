@@ -72,7 +72,7 @@ public class SimpAttributesTests {
 		this.simpAttributes.sessionCompleted();
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.simpAttributes.registerDestructionCallback("name1", mock(Runnable.class)))
-			.withMessageContaining("already completed");
+				.withMessageContaining("already completed");
 	}
 
 	@Test

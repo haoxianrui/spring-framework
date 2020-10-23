@@ -73,8 +73,8 @@ public class ServletContextSupportTests {
 
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				wac::refresh)
-			.withCauseInstanceOf(IllegalStateException.class)
-			.withMessageContaining("myAttr");
+				.withCauseInstanceOf(IllegalStateException.class)
+				.withMessageContaining("myAttr");
 	}
 
 	@Test
@@ -107,8 +107,8 @@ public class ServletContextSupportTests {
 
 		assertThatExceptionOfType(BeanCreationException.class).isThrownBy(
 				wac::refresh)
-			.withCauseInstanceOf(IllegalStateException.class)
-			.withMessageContaining("myParam");
+				.withCauseInstanceOf(IllegalStateException.class)
+				.withMessageContaining("myParam");
 	}
 
 	@Test

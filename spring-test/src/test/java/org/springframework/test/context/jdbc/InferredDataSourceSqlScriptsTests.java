@@ -42,8 +42,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
  * {@link DataSource}s from {@link PlatformTransactionManager}s.
  *
  * @author Sam Brannen
- * @since 4.1
  * @see InferredDataSourceTransactionalSqlScriptsTests
+ * @since 4.1
  */
 @SpringJUnitConfig
 @DirtiesContext

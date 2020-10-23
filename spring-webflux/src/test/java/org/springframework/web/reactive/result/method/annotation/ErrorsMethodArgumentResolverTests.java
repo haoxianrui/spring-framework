@@ -107,8 +107,8 @@ public class ErrorsMethodArgumentResolverTests {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, this.bindingContext, this.exchange)
 						.block(Duration.ofMillis(5000)))
-			.withMessageContaining("An @ModelAttribute and an Errors/BindingResult argument " +
-					"cannot both be declared with an async type wrapper.");
+				.withMessageContaining("An @ModelAttribute and an Errors/BindingResult argument " +
+						"cannot both be declared with an async type wrapper.");
 	}
 
 	@Test  // SPR-16187
@@ -117,8 +117,8 @@ public class ErrorsMethodArgumentResolverTests {
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.resolver.resolveArgument(parameter, this.bindingContext, this.exchange)
 						.block(Duration.ofMillis(5000)))
-			.withMessageContaining("An Errors/BindingResult argument is expected " +
-					"immediately after the @ModelAttribute argument");
+				.withMessageContaining("An Errors/BindingResult argument is expected " +
+						"immediately after the @ModelAttribute argument");
 	}
 
 

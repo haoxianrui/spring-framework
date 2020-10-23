@@ -107,19 +107,32 @@ public class EncoderMethodReturnValueHandlerTests {
 	@SuppressWarnings({"unused", "ConstantConditions"})
 	private static class TestController {
 
-		String string() { return null; }
+		String string() {
+			return null;
+		}
 
-		Object object() { return null; }
+		Object object() {
+			return null;
+		}
 
-		Flux<String> fluxString() { return null; }
+		Flux<String> fluxString() {
+			return null;
+		}
 
-		Flux<Object> fluxObject() { return null; }
+		Flux<Object> fluxObject() {
+			return null;
+		}
 
-		void voidReturn() { }
+		void voidReturn() {
+		}
 
-		Mono<Void> monoVoid() { return null; }
+		Mono<Void> monoVoid() {
+			return null;
+		}
 
-		Completable completable() { return null; }
+		Completable completable() {
+			return null;
+		}
 	}
 
 }

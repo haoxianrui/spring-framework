@@ -178,7 +178,7 @@ public class ModelInitializerTests {
 		HandlerMethod handlerMethod = new HandlerMethod(controller, method);
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				this.modelInitializer.initModel(handlerMethod, context, this.exchange).block(TIMEOUT))
-			.withMessage("Required attribute 'missing-bean' is missing.");
+				.withMessage("Required attribute 'missing-bean' is missing.");
 	}
 
 	@Test
@@ -263,10 +263,12 @@ public class ModelInitializerTests {
 		}
 
 		@GetMapping
-		public void handleGet() {}
+		public void handleGet() {
+		}
 
 		@PostMapping
-		public void handlePost(@ModelAttribute("missing-bean") TestBean testBean) {}
+		public void handlePost(@ModelAttribute("missing-bean") TestBean testBean) {
+		}
 
 	}
 

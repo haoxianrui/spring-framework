@@ -3,10 +3,10 @@
 <suite name="EJB-TX-Together" verbose="1">
 	<test name="Together">
 		<classes>
-			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiredEjbTxDaoTestNGTests" />
-			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiredEjbTxDaoTestNGTests" />
-			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiresNewEjbTxDaoTestNGTests" />
-			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiresNewEjbTxDaoTestNGTests" />
+			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiredEjbTxDaoTestNGTests"/>
+			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiredEjbTxDaoTestNGTests"/>
+			<class name="org.springframework.test.context.testng.transaction.ejb.CommitForRequiresNewEjbTxDaoTestNGTests"/>
+			<class name="org.springframework.test.context.testng.transaction.ejb.RollbackForRequiresNewEjbTxDaoTestNGTests"/>
 		</classes>
 	</test>
 </suite>

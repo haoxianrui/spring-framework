@@ -286,7 +286,7 @@ public class ModelFactoryTests {
 			return null;
 		}
 
-		@ModelAttribute(name="foo", binding=false)
+		@ModelAttribute(name = "foo", binding = false)
 		public Foo modelAttrWithBindingDisabled() {
 			return new Foo();
 		}

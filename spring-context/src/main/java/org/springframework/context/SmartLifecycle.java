@@ -60,9 +60,9 @@ package org.springframework.context;
  * @author Mark Fisher
  * @author Juergen Hoeller
  * @author Sam Brannen
- * @since 3.0
  * @see LifecycleProcessor
  * @see ConfigurableApplicationContext
+ * @since 3.0
  */
 public interface SmartLifecycle extends Lifecycle, Phased {
 
@@ -72,9 +72,10 @@ public interface SmartLifecycle extends Lifecycle, Phased {
 	 * {@link Lifecycle} implementations, putting the typically auto-started
 	 * {@code SmartLifecycle} beans into a later startup phase and an earlier
 	 * shutdown phase.
-	 * @since 5.1
+	 *
 	 * @see #getPhase()
 	 * @see org.springframework.context.support.DefaultLifecycleProcessor#getPhase(Lifecycle)
+	 * @since 5.1
 	 */
 	int DEFAULT_PHASE = Integer.MAX_VALUE;
 
@@ -87,6 +88,7 @@ public interface SmartLifecycle extends Lifecycle, Phased {
 	 * be started through an explicit {@link #start()} call instead, analogous
 	 * to a plain {@link Lifecycle} implementation.
 	 * <p>The default implementation returns {@code true}.
+	 *
 	 * @see #start()
 	 * @see #getPhase()
 	 * @see LifecycleProcessor#onRefresh()
@@ -110,6 +112,7 @@ public interface SmartLifecycle extends Lifecycle, Phased {
 	 * triggers the given callback in the calling thread. Note that there is no
 	 * synchronization between the two, so custom implementations may at least
 	 * want to put the same steps within their common lifecycle monitor (if any).
+	 *
 	 * @see #stop()
 	 * @see #getPhase()
 	 */
@@ -123,6 +126,7 @@ public interface SmartLifecycle extends Lifecycle, Phased {
 	 * <p>The default implementation returns {@link #DEFAULT_PHASE} in order to
 	 * let {@code stop()} callbacks execute after regular {@code Lifecycle}
 	 * implementations.
+	 *
 	 * @see #isAutoStartup()
 	 * @see #start()
 	 * @see #stop(Runnable)

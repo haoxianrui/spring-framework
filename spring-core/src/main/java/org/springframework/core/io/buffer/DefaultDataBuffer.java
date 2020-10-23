@@ -40,8 +40,8 @@ import org.springframework.util.ObjectUtils;
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @author Brian Clozel
- * @since 5.0
  * @see DefaultDataBufferFactory
+ * @since 5.0
  */
 public class DefaultDataBuffer implements DataBuffer {
 
@@ -85,6 +85,7 @@ public class DefaultDataBuffer implements DataBuffer {
 	 * Directly exposes the native {@code ByteBuffer} that this buffer is based
 	 * on also updating the {@code ByteBuffer's} position and limit to match
 	 * the current {@link #readPosition()} and {@link #readableByteCount()}.
+	 *
 	 * @return the wrapped byte buffer
 	 */
 	public ByteBuffer getNativeBuffer() {
@@ -109,8 +110,7 @@ public class DefaultDataBuffer implements DataBuffer {
 		Assert.notNull(predicate, "IntPredicate must not be null");
 		if (fromIndex < 0) {
 			fromIndex = 0;
-		}
-		else if (fromIndex >= this.writePosition) {
+		} else if (fromIndex >= this.writePosition) {
 			return -1;
 		}
 		for (int i = fromIndex; i < this.writePosition; i++) {
@@ -196,8 +196,7 @@ public class DefaultDataBuffer implements DataBuffer {
 			newBuffer.put(oldBuffer);
 			newBuffer.clear();
 			setNativeBuffer(newBuffer);
-		}
-		else if (newCapacity < oldCapacity) {
+		} else if (newCapacity < oldCapacity) {
 			ByteBuffer oldBuffer = this.byteBuffer;
 			ByteBuffer newBuffer = allocate(newCapacity, oldBuffer.isDirect());
 			if (readPosition < newCapacity) {
@@ -209,8 +208,7 @@ public class DefaultDataBuffer implements DataBuffer {
 				newBuffer.position(readPosition).limit(writePosition);
 				newBuffer.put(oldBuffer);
 				newBuffer.clear();
-			}
-			else {
+			} else {
 				readPosition(newCapacity);
 				writePosition(newCapacity);
 			}
@@ -342,8 +340,7 @@ public class DefaultDataBuffer implements DataBuffer {
 			// Explicit cast for compatibility with covariant return type on JDK 9's ByteBuffer
 			slice.limit(length);
 			return new SlicedDefaultDataBuffer(slice, this.dataBufferFactory, length);
-		}
-		finally {
+		} finally {
 			buffer.position(oldPosition);
 		}
 	}
@@ -393,8 +390,7 @@ public class DefaultDataBuffer implements DataBuffer {
 		if (this.byteBuffer.hasArray()) {
 			bytes = this.byteBuffer.array();
 			offset = this.byteBuffer.arrayOffset() + index;
-		}
-		else {
+		} else {
 			bytes = new byte[length];
 			offset = 0;
 			ByteBuffer duplicate = this.byteBuffer.duplicate();
@@ -406,6 +402,7 @@ public class DefaultDataBuffer implements DataBuffer {
 
 	/**
 	 * Calculate the capacity of the buffer.
+	 *
 	 * @see io.netty.buffer.AbstractByteBufAllocator#calculateNewCapacity(int, int)
 	 */
 	private int calculateCapacity(int neededCapacity) {
@@ -413,18 +410,15 @@ public class DefaultDataBuffer implements DataBuffer {
 
 		if (neededCapacity == CAPACITY_THRESHOLD) {
 			return CAPACITY_THRESHOLD;
-		}
-		else if (neededCapacity > CAPACITY_THRESHOLD) {
+		} else if (neededCapacity > CAPACITY_THRESHOLD) {
 			int newCapacity = neededCapacity / CAPACITY_THRESHOLD * CAPACITY_THRESHOLD;
 			if (newCapacity > MAX_CAPACITY - CAPACITY_THRESHOLD) {
 				newCapacity = MAX_CAPACITY;
-			}
-			else {
+			} else {
 				newCapacity += CAPACITY_THRESHOLD;
 			}
 			return newCapacity;
-		}
-		else {
+		} else {
 			int newCapacity = 64;
 			while (newCapacity < neededCapacity) {
 				newCapacity <<= 1;
@@ -494,8 +488,7 @@ public class DefaultDataBuffer implements DataBuffer {
 				len = Math.min(len, available);
 				DefaultDataBuffer.this.read(bytes, off, len);
 				return len;
-			}
-			else {
+			} else {
 				return -1;
 			}
 		}

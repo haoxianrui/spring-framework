@@ -30,8 +30,8 @@ import org.springframework.util.StringUtils;
  *
  * @author Rossen Stoyanchev
  * @author Brian Clozel
- * @since 5.0
  * @see <a href="https://tools.ietf.org/html/rfc6265">RFC 6265</a>
+ * @since 5.0
  */
 public final class ResponseCookie extends HttpCookie {
 
@@ -55,7 +55,7 @@ public final class ResponseCookie extends HttpCookie {
 	 * Private constructor. See {@link #from(String, String)}.
 	 */
 	private ResponseCookie(String name, String value, Duration maxAge, @Nullable String domain,
-			@Nullable String path, boolean secure, boolean httpOnly, @Nullable String sameSite) {
+						   @Nullable String path, boolean secure, boolean httpOnly, @Nullable String sameSite) {
 
 		super(name, value);
 		Assert.notNull(maxAge, "Max age must not be null");
@@ -110,6 +110,7 @@ public final class ResponseCookie extends HttpCookie {
 
 	/**
 	 * Return {@code true} if the cookie has the "HttpOnly" attribute.
+	 *
 	 * @see <a href="https://www.owasp.org/index.php/HTTPOnly">https://www.owasp.org/index.php/HTTPOnly</a>
 	 */
 	public boolean isHttpOnly() {
@@ -120,6 +121,7 @@ public final class ResponseCookie extends HttpCookie {
 	 * Return the cookie "SameSite" attribute, or {@code null} if not set.
 	 * <p>This limits the scope of the cookie such that it will only be attached to
 	 * same site requests if {@code "Strict"} or cross-site requests if {@code "Lax"}.
+	 *
 	 * @see <a href="https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis#section-4.1.2.7">RFC6265 bis</a>
 	 * @since 5.1
 	 */
@@ -183,7 +185,8 @@ public final class ResponseCookie extends HttpCookie {
 	/**
 	 * Factory method to obtain a builder for a server-defined cookie that starts
 	 * with a name-value pair and may also include attributes.
-	 * @param name the cookie name
+	 *
+	 * @param name  the cookie name
 	 * @param value the cookie value
 	 * @return a builder to create the cookie with
 	 */
@@ -196,7 +199,8 @@ public final class ResponseCookie extends HttpCookie {
 	 * {@link #from(String, String)} this option assumes input from a remote
 	 * server, which can be handled more leniently, e.g. ignoring a empty domain
 	 * name with double quotes.
-	 * @param name the cookie name
+	 *
+	 * @param name  the cookie name
 	 * @param value the cookie value
 	 * @return a builder to create the cookie with
 	 * @since 5.2.5
@@ -326,6 +330,7 @@ public final class ResponseCookie extends HttpCookie {
 
 		/**
 		 * Add the "HttpOnly" attribute to the cookie.
+		 *
 		 * @see <a href="https://www.owasp.org/index.php/HTTPOnly">https://www.owasp.org/index.php/HTTPOnly</a>
 		 */
 		ResponseCookieBuilder httpOnly(boolean httpOnly);
@@ -335,8 +340,9 @@ public final class ResponseCookie extends HttpCookie {
 		 * <p>This limits the scope of the cookie such that it will only be
 		 * attached to same site requests if {@code "Strict"} or cross-site
 		 * requests if {@code "Lax"}.
-		 * @since 5.1
+		 *
 		 * @see <a href="https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis#section-4.1.2.7">RFC6265 bis</a>
+		 * @since 5.1
 		 */
 		ResponseCookieBuilder sameSite(@Nullable String sameSite);
 
@@ -349,7 +355,7 @@ public final class ResponseCookie extends HttpCookie {
 
 	private static class Rfc6265Utils {
 
-		private static final String SEPARATOR_CHARS = new String(new char[] {
+		private static final String SEPARATOR_CHARS = new String(new char[]{
 				'(', ')', '<', '>', '@', ',', ';', ':', '\\', '"', '/', '[', ']', '?', '=', '{', '}', ' '
 		});
 

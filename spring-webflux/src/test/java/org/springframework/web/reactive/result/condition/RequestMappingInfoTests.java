@@ -68,7 +68,7 @@ public class RequestMappingInfoTests {
 	public void throwWhenInvalidPattern() {
 		assertThatExceptionOfType(PatternParseException.class).isThrownBy(() ->
 				paths("/{foo").build())
-			.withMessageContaining("Expected close capture character after variable name }");
+				.withMessageContaining("Expected close capture character after variable name }");
 	}
 
 	@Test
@@ -279,7 +279,7 @@ public class RequestMappingInfoTests {
 		MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.options("/foo")
 				.header("Origin", "https://domain.com")
 				.header(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS, "POST")
-				);
+		);
 
 		RequestMappingInfo info = paths("/foo").methods(RequestMethod.POST).build();
 		RequestMappingInfo match = info.getMatchingCondition(exchange);

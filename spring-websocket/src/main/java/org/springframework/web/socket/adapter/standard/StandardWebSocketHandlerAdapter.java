@@ -77,8 +77,7 @@ public class StandardWebSocketHandlerAdapter extends Endpoint {
 					handleBinaryMessage(session, message, isLast);
 				}
 			});
-		}
-		else {
+		} else {
 			session.addMessageHandler(new MessageHandler.Whole<String>() {
 				@Override
 				public void onMessage(String message) {
@@ -102,8 +101,7 @@ public class StandardWebSocketHandlerAdapter extends Endpoint {
 
 		try {
 			this.handler.afterConnectionEstablished(this.wsSession);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			ExceptionWebSocketHandlerDecorator.tryCloseWithError(this.wsSession, ex, logger);
 		}
 	}
@@ -112,8 +110,7 @@ public class StandardWebSocketHandlerAdapter extends Endpoint {
 		TextMessage textMessage = new TextMessage(payload, isLast);
 		try {
 			this.handler.handleMessage(this.wsSession, textMessage);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			ExceptionWebSocketHandlerDecorator.tryCloseWithError(this.wsSession, ex, logger);
 		}
 	}
@@ -122,8 +119,7 @@ public class StandardWebSocketHandlerAdapter extends Endpoint {
 		BinaryMessage binaryMessage = new BinaryMessage(payload, isLast);
 		try {
 			this.handler.handleMessage(this.wsSession, binaryMessage);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			ExceptionWebSocketHandlerDecorator.tryCloseWithError(this.wsSession, ex, logger);
 		}
 	}
@@ -132,8 +128,7 @@ public class StandardWebSocketHandlerAdapter extends Endpoint {
 		PongMessage pongMessage = new PongMessage(payload);
 		try {
 			this.handler.handleMessage(this.wsSession, pongMessage);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			ExceptionWebSocketHandlerDecorator.tryCloseWithError(this.wsSession, ex, logger);
 		}
 	}
@@ -143,8 +138,7 @@ public class StandardWebSocketHandlerAdapter extends Endpoint {
 		CloseStatus closeStatus = new CloseStatus(reason.getCloseCode().getCode(), reason.getReasonPhrase());
 		try {
 			this.handler.afterConnectionClosed(this.wsSession, closeStatus);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			if (logger.isWarnEnabled()) {
 				logger.warn("Unhandled on-close exception for " + this.wsSession, ex);
 			}
@@ -155,8 +149,7 @@ public class StandardWebSocketHandlerAdapter extends Endpoint {
 	public void onError(javax.websocket.Session session, Throwable exception) {
 		try {
 			this.handler.handleTransportError(this.wsSession, exception);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			ExceptionWebSocketHandlerDecorator.tryCloseWithError(this.wsSession, ex, logger);
 		}
 	}

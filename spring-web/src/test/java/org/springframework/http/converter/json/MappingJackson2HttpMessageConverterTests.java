@@ -93,9 +93,9 @@ public class MappingJackson2HttpMessageConverterTests {
 		assertThat(result.getString()).isEqualTo("Foo");
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 	}
 
 	@Test
@@ -129,9 +129,9 @@ public class MappingJackson2HttpMessageConverterTests {
 		body.setString("Foo");
 		body.setNumber(42);
 		body.setFraction(42F);
-		body.setArray(new String[] {"Foo", "Bar"});
+		body.setArray(new String[]{"Foo", "Bar"});
 		body.setBool(true);
-		body.setBytes(new byte[] {0x1, 0x2});
+		body.setBytes(new byte[]{0x1, 0x2});
 		converter.write(body, null, outputMessage);
 		String result = outputMessage.getBodyAsString(StandardCharsets.UTF_8);
 		assertThat(result.contains("\"string\":\"Foo\"")).isTrue();
@@ -150,9 +150,9 @@ public class MappingJackson2HttpMessageConverterTests {
 		body.setString("Foo");
 		body.setNumber(42);
 		body.setFraction(42F);
-		body.setArray(new String[] {"Foo", "Bar"});
+		body.setArray(new String[]{"Foo", "Bar"});
 		body.setBool(true);
-		body.setBytes(new byte[] {0x1, 0x2});
+		body.setBytes(new byte[]{0x1, 0x2});
 		converter.write(body, MyBase.class, null, outputMessage);
 		String result = outputMessage.getBodyAsString(StandardCharsets.UTF_8);
 		assertThat(result.contains("\"string\":\"Foo\"")).isTrue();
@@ -198,10 +198,9 @@ public class MappingJackson2HttpMessageConverterTests {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter() {
 			@Override
 			protected JavaType getJavaType(Type type, @Nullable Class<?> contextClass) {
-				if (type instanceof Class && List.class.isAssignableFrom((Class<?>)type)) {
+				if (type instanceof Class && List.class.isAssignableFrom((Class<?>) type)) {
 					return new ObjectMapper().getTypeFactory().constructCollectionType(ArrayList.class, MyBean.class);
-				}
-				else {
+				} else {
 					return super.getJavaType(type, contextClass);
 				}
 			}
@@ -222,9 +221,9 @@ public class MappingJackson2HttpMessageConverterTests {
 		assertThat(result.getString()).isEqualTo("Foo");
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 
 		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
 		converter.write(results, new MediaType("application", "json"), outputMessage);
@@ -234,7 +233,8 @@ public class MappingJackson2HttpMessageConverterTests {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void readAndWriteParameterizedType() throws Exception {
-		ParameterizedTypeReference<List<MyBean>> beansList = new ParameterizedTypeReference<List<MyBean>>() {};
+		ParameterizedTypeReference<List<MyBean>> beansList = new ParameterizedTypeReference<List<MyBean>>() {
+		};
 
 		String body = "[{" +
 				"\"bytes\":\"AQI=\"," +
@@ -253,9 +253,9 @@ public class MappingJackson2HttpMessageConverterTests {
 		assertThat(result.getString()).isEqualTo("Foo");
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 
 		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
 		converter.write(results, beansList.getType(), new MediaType("application", "json"), outputMessage);
@@ -265,8 +265,10 @@ public class MappingJackson2HttpMessageConverterTests {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void writeParameterizedBaseType() throws Exception {
-		ParameterizedTypeReference<List<MyBean>> beansList = new ParameterizedTypeReference<List<MyBean>>() {};
-		ParameterizedTypeReference<List<MyBase>> baseList = new ParameterizedTypeReference<List<MyBase>>() {};
+		ParameterizedTypeReference<List<MyBean>> beansList = new ParameterizedTypeReference<List<MyBean>>() {
+		};
+		ParameterizedTypeReference<List<MyBase>> baseList = new ParameterizedTypeReference<List<MyBase>>() {
+		};
 
 		String body = "[{" +
 				"\"bytes\":\"AQI=\"," +
@@ -285,9 +287,9 @@ public class MappingJackson2HttpMessageConverterTests {
 		assertThat(result.getString()).isEqualTo("Foo");
 		assertThat(result.getNumber()).isEqualTo(42);
 		assertThat(result.getFraction()).isCloseTo(42F, within(0F));
-		assertThat(result.getArray()).isEqualTo(new String[] {"Foo", "Bar"});
+		assertThat(result.getArray()).isEqualTo(new String[]{"Foo", "Bar"});
 		assertThat(result.isBool()).isTrue();
-		assertThat(result.getBytes()).isEqualTo(new byte[] {0x1, 0x2});
+		assertThat(result.getBytes()).isEqualTo(new byte[]{0x1, 0x2});
 
 		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
 		converter.write(results, baseList.getType(), new MediaType("application", "json"), outputMessage);
@@ -421,7 +423,8 @@ public class MappingJackson2HttpMessageConverterTests {
 		bar.setNumber(123);
 		beans.add(bar);
 		ParameterizedTypeReference<List<MyInterface>> typeReference =
-				new ParameterizedTypeReference<List<MyInterface>>() {};
+				new ParameterizedTypeReference<List<MyInterface>>() {
+				};
 
 		this.converter.writeInternal(beans, typeReference.getType(), outputMessage);
 
@@ -439,7 +442,7 @@ public class MappingJackson2HttpMessageConverterTests {
 		inputMessage.getHeaders().setContentType(new MediaType("application", "json"));
 		assertThatExceptionOfType(HttpMessageConversionException.class).isThrownBy(() ->
 				converter.read(BeanWithNoDefaultConstructor.class, inputMessage))
-			.withMessageStartingWith("Type definition error:");
+				.withMessageStartingWith("Type definition error:");
 	}
 
 
@@ -451,7 +454,7 @@ public class MappingJackson2HttpMessageConverterTests {
 	}
 
 
-	public static class MyBase implements MyInterface{
+	public static class MyBase implements MyInterface {
 
 		private String string;
 
@@ -535,11 +538,14 @@ public class MappingJackson2HttpMessageConverterTests {
 	}
 
 
-	private interface MyJacksonView1 {}
+	private interface MyJacksonView1 {
+	}
 
-	private interface MyJacksonView2 {}
+	private interface MyJacksonView2 {
+	}
 
-	private interface MyJacksonView3 {}
+	private interface MyJacksonView3 {
+	}
 
 
 	@SuppressWarnings("unused")

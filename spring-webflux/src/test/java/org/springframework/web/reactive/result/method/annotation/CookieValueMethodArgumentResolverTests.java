@@ -84,7 +84,7 @@ public class CookieValueMethodArgumentResolverTests {
 		assertThat(this.resolver.supportsParameter(this.stringParameter)).isFalse();
 		assertThatIllegalStateException().isThrownBy(() ->
 				this.resolver.supportsParameter(this.cookieMonoParameter))
-			.withMessageStartingWith("CookieValueMethodArgumentResolver does not support reactive type wrapper");
+				.withMessageStartingWith("CookieValueMethodArgumentResolver does not support reactive type wrapper");
 	}
 
 	@Test

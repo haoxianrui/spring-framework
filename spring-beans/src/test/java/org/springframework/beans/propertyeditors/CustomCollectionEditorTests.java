@@ -40,7 +40,7 @@ public class CustomCollectionEditorTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void testCtorWithNonCollectionType() throws Exception {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 				new CustomCollectionEditor((Class) String.class));
@@ -56,7 +56,7 @@ public class CustomCollectionEditorTests {
 	@Test
 	public void testSunnyDaySetValue() throws Exception {
 		CustomCollectionEditor editor = new CustomCollectionEditor(ArrayList.class);
-		editor.setValue(new int[] {0, 1, 2});
+		editor.setValue(new int[]{0, 1, 2});
 		Object value = editor.getValue();
 		assertThat(value).isNotNull();
 		boolean condition = value instanceof ArrayList;
@@ -92,7 +92,7 @@ public class CustomCollectionEditorTests {
 	}
 
 
-	@SuppressWarnings({ "serial", "unused" })
+	@SuppressWarnings({"serial", "unused"})
 	private static final class CollectionTypeWithNoNoArgCtor extends ArrayList<Object> {
 		public CollectionTypeWithNoNoArgCtor(String anArg) {
 		}

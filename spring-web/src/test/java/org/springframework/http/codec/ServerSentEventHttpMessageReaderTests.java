@@ -66,7 +66,7 @@ public class ServerSentEventHttpMessageReaderTests extends AbstractLeakCheckingT
 		MockServerHttpRequest request = MockServerHttpRequest.post("/")
 				.body(Mono.just(stringBuffer(
 						"id:c42\nevent:foo\nretry:123\n:bla\n:bla bla\n:bla bla bla\ndata:bar\n\n" +
-						"id:c43\nevent:bar\nretry:456\ndata:baz\n\n")));
+								"id:c43\nevent:bar\nretry:456\ndata:baz\n\n")));
 
 		Flux<ServerSentEvent> events = this.reader
 				.read(ResolvableType.forClassWithGenerics(ServerSentEvent.class, String.class),
@@ -161,7 +161,8 @@ public class ServerSentEventHttpMessageReaderTests extends AbstractLeakCheckingT
 				.verify();
 	}
 
-	@Test // gh-24389
+	@Test
+		// gh-24389
 	void readPojoWithCommentOnly() {
 		MockServerHttpRequest request = MockServerHttpRequest.post("/")
 				.body(Flux.just(stringBuffer(":ping\n"), stringBuffer("\n")));

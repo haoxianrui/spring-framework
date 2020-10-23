@@ -45,7 +45,7 @@ class Base64UtilsTests {
 		bytes = "Hello World\r\nSecond Line\r\n".getBytes("UTF-8");
 		assertThat(Base64Utils.decode(Base64Utils.encode(bytes))).isEqualTo(bytes);
 
-		bytes = new byte[] { (byte) 0xfb, (byte) 0xf0 };
+		bytes = new byte[]{(byte) 0xfb, (byte) 0xf0};
 		assertThat(Base64Utils.encode(bytes)).isEqualTo("+/A=".getBytes());
 		assertThat(Base64Utils.decode(Base64Utils.encode(bytes))).isEqualTo(bytes);
 
@@ -79,7 +79,7 @@ class Base64UtilsTests {
 
 	@Test
 	void encodeDecodeUrlSafe() {
-		byte[] bytes = new byte[] { (byte) 0xfb, (byte) 0xf0 };
+		byte[] bytes = new byte[]{(byte) 0xfb, (byte) 0xf0};
 		assertThat(Base64Utils.encodeUrlSafe(bytes)).isEqualTo("-_A=".getBytes());
 		assertThat(Base64Utils.decodeUrlSafe(Base64Utils.encodeUrlSafe(bytes))).isEqualTo(bytes);
 

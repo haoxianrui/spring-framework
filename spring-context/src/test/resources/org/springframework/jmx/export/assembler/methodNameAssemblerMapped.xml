@@ -16,7 +16,8 @@
 				<property name="methodMappings">
 					<props>
 						<prop key="bean:name=testBean4">
-							getNickName,setNickName,add,myOperation,getName,setName,getAge</prop>
+							getNickName,setNickName,add,myOperation,getName,setName,getAge
+						</prop>
 					</props>
 				</property>
 				<property name="notificationInfoMappings">
@@ -44,4 +45,4 @@
 	</bean>
 
 </beans
-		>
+>

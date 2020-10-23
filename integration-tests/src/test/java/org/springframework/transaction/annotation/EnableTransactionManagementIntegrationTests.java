@@ -99,8 +99,8 @@ class EnableTransactionManagementIntegrationTests {
 		// attempt was made to look up the AJ aspect. It's due to classpath issues
 		// in .integration-tests that it's not found.
 		assertThatExceptionOfType(Exception.class)
-			.isThrownBy(ctx::refresh)
-			.withMessageContaining("AspectJJtaTransactionManagementConfiguration");
+				.isThrownBy(ctx::refresh)
+				.withMessageContaining("AspectJJtaTransactionManagementConfiguration");
 	}
 
 	@Test
@@ -258,7 +258,7 @@ class EnableTransactionManagementIntegrationTests {
 
 
 	@Configuration
-	@EnableTransactionManagement(proxyTargetClass=true)
+	@EnableTransactionManagement(proxyTargetClass = true)
 	static class ProxyTargetClassTxConfig {
 
 		@Bean
@@ -269,7 +269,7 @@ class EnableTransactionManagementIntegrationTests {
 
 
 	@Configuration
-	@EnableTransactionManagement(mode=AdviceMode.ASPECTJ)
+	@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 	static class AspectJTxConfig {
 
 		@Bean
@@ -292,8 +292,8 @@ class EnableTransactionManagementIntegrationTests {
 		@Bean
 		DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder()
-				.setType(EmbeddedDatabaseType.HSQL)
-				.build();
+					.setType(EmbeddedDatabaseType.HSQL)
+					.build();
 		}
 	}
 

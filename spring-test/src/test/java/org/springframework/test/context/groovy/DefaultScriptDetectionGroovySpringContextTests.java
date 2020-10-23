@@ -30,8 +30,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Groovy script (as opposed to a default XML config file).
  *
  * @author Sam Brannen
- * @since 4.1
  * @see DefaultScriptDetectionGroovySpringContextTestsContext
+ * @since 4.1
  */
 @SpringJUnitConfig
 // Config loaded from DefaultScriptDetectionGroovySpringContextTestsContext.groovy

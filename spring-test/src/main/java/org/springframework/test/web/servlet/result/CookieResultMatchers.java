@@ -199,6 +199,7 @@ public class CookieResultMatchers {
 
 	/**
 	 * Assert whether the cookie must be HTTP only.
+	 *
 	 * @since 4.3.9
 	 */
 	public ResultMatcher httpOnly(String name, boolean httpOnly) {

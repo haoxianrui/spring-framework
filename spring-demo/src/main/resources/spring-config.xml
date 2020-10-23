@@ -5,7 +5,11 @@
 
 	<bean id="userService" class="com.youlai.spring.ch02.service.impl.UserServiceImpl"/>
 	<!-- ch5 -->
+<<<<<<< HEAD
 	<bean id="car" class="com.youlai.spring.factorybean.CarFactoryBean">
+=======
+	<bean id="car" class="com.youlai.spring.ch05.factorybean.CarFactoryBean">
+>>>>>>> 690f2356eb1b94bf424194b8287d793bdb818aa6
 		<property name="carInfo" value="超级跑车,400,2000000"/>
 	</bean>
 </beans>

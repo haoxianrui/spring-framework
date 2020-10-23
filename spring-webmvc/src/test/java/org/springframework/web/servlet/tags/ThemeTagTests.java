@@ -70,7 +70,7 @@ public class ThemeTagTests extends AbstractTagTests {
 		assertThat(rc.getThemeMessage("themetestArgs", Arrays.asList(new String[]{"arg1"}))).isEqualTo("theme test message arg1");
 		assertThat(rc.getThemeMessage("themetesta", "default")).isEqualTo("default");
 		assertThat(rc.getThemeMessage("themetesta", (List) null, "default")).isEqualTo("default");
-		MessageSourceResolvable resolvable = new DefaultMessageSourceResolvable(new String[] {"themetest"});
+		MessageSourceResolvable resolvable = new DefaultMessageSourceResolvable(new String[]{"themetest"});
 		assertThat(rc.getThemeMessage(resolvable)).isEqualTo("theme test message");
 	}
 

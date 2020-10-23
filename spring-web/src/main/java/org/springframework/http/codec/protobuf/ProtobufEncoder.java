@@ -52,8 +52,8 @@ import org.springframework.util.MimeType;
  * {@code "com.google.protobuf:protobuf-java"} library.
  *
  * @author Sébastien Deleuze
- * @since 5.1
  * @see ProtobufDecoder
+ * @since 5.1
  */
 public class ProtobufEncoder extends ProtobufCodecSupport implements HttpMessageEncoder<Message> {
 
@@ -71,7 +71,7 @@ public class ProtobufEncoder extends ProtobufCodecSupport implements HttpMessage
 
 	@Override
 	public Flux<DataBuffer> encode(Publisher<? extends Message> inputStream, DataBufferFactory bufferFactory,
-			ResolvableType elementType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								   ResolvableType elementType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		return Flux.from(inputStream).map(message ->
 				encodeValue(message, bufferFactory, !(inputStream instanceof Mono)));
@@ -79,7 +79,7 @@ public class ProtobufEncoder extends ProtobufCodecSupport implements HttpMessage
 
 	@Override
 	public DataBuffer encodeValue(Message message, DataBufferFactory bufferFactory,
-			ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
+								  ResolvableType valueType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints) {
 
 		return encodeValue(message, bufferFactory, false);
 	}
@@ -91,17 +91,14 @@ public class ProtobufEncoder extends ProtobufCodecSupport implements HttpMessage
 		try {
 			if (delimited) {
 				message.writeDelimitedTo(buffer.asOutputStream());
-			}
-			else {
+			} else {
 				message.writeTo(buffer.asOutputStream());
 			}
 			release = false;
 			return buffer;
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new IllegalStateException("Unexpected I/O error while writing to data buffer", ex);
-		}
-		finally {
+		} finally {
 			if (release) {
 				DataBufferUtils.release(buffer);
 			}

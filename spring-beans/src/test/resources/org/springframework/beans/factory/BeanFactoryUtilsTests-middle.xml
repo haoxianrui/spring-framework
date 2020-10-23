@@ -5,8 +5,12 @@
 
 	<!-- Simple target -->
 	<bean id="test" class="org.springframework.beans.testfixture.beans.TestBean">
-		<property name="name"><value>custom</value></property>
-		<property name="age"><value>666</value></property>
+		<property name="name">
+			<value>custom</value>
+		</property>
+		<property name="age">
+			<value>666</value>
+		</property>
 	</bean>
 
 	<!--

@@ -15,7 +15,7 @@ class DelegatingCalculator implements Calculator {
 
 		delegate.callMissingMethod()
 
-		return delegate.add(x,y)
+		return delegate.add(x, y)
 	}
 
 }

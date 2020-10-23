@@ -37,16 +37,21 @@ import org.springframework.util.ObjectUtils;
  */
 public class SingletonTargetSource implements TargetSource, Serializable {
 
-	/** use serialVersionUID from Spring 1.2 for interoperability. */
+	/**
+	 * use serialVersionUID from Spring 1.2 for interoperability.
+	 */
 	private static final long serialVersionUID = 9031246629662423738L;
 
 
-	/** Target cached and invoked using reflection. */
+	/**
+	 * Target cached and invoked using reflection.
+	 */
 	private final Object target;
 
 
 	/**
 	 * Create a new SingletonTargetSource for the given target.
+	 *
 	 * @param target the target object
 	 */
 	public SingletonTargetSource(Object target) {

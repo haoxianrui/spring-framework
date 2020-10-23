@@ -77,8 +77,8 @@ import org.springframework.validation.Validator;
  * {@link #initReturnValueHandlers()} to set up default return value handlers.
  *
  * @author Rossen Stoyanchev
- * @since 5.2
  * @see AbstractEncoderMethodReturnValueHandler
+ * @since 5.2
  */
 public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<CompositeMessageCondition>
 		implements EmbeddedValueResolverAware {
@@ -119,6 +119,7 @@ public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<C
 
 	/**
 	 * Set the Validator instance used for validating {@code @Payload} arguments.
+	 *
 	 * @see org.springframework.validation.annotation.Validated
 	 * @see PayloadMethodArgumentResolver
 	 */
@@ -157,6 +158,7 @@ public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<C
 
 	/**
 	 * Obtain the {@code RouteMatcher} for actual use.
+	 *
 	 * @return the RouteMatcher (never {@code null})
 	 * @throws IllegalStateException in case of no RouteMatcher set
 	 * @since 5.0
@@ -171,6 +173,7 @@ public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<C
 	 * Configure a {@link ConversionService} to use for type conversion of
 	 * String based values, e.g. in destination variables or headers.
 	 * <p>By default {@link DefaultFormattingConversionService} is used.
+	 *
 	 * @param conversionService the conversion service to use
 	 */
 	public void setConversionService(ConversionService conversionService) {
@@ -251,6 +254,7 @@ public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<C
 
 	/**
 	 * Determine the mapping condition for the given annotated element.
+	 *
 	 * @param element the element to check
 	 * @return the condition, or {@code null}
 	 */
@@ -267,6 +271,7 @@ public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<C
 
 	/**
 	 * Resolve placeholders in the given destinations.
+	 *
 	 * @param destinations the destinations
 	 * @return new array with the processed destinations or the same array
 	 */

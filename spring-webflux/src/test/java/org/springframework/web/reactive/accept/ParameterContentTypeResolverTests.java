@@ -32,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * Unit tests for {@link ParameterContentTypeResolver}.
+ *
  * @author Rossen Stoyanchev
  */
 public class ParameterContentTypeResolverTests {

@@ -33,11 +33,11 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
  * <p>The default implementation uses a standard JDBC CachedRowSet underneath.
  *
  * @author Juergen Hoeller
- * @since 1.2
  * @see #newCachedRowSet
  * @see org.springframework.jdbc.support.rowset.SqlRowSet
  * @see JdbcTemplate#queryForRowSet(String)
  * @see javax.sql.rowset.CachedRowSet
+ * @since 1.2
  */
 public class SqlRowSetResultSetExtractor implements ResultSetExtractor<SqlRowSet> {
 
@@ -46,8 +46,7 @@ public class SqlRowSetResultSetExtractor implements ResultSetExtractor<SqlRowSet
 	static {
 		try {
 			rowSetFactory = RowSetProvider.newFactory();
-		}
-		catch (SQLException ex) {
+		} catch (SQLException ex) {
 			throw new IllegalStateException("Cannot create RowSetFactory through RowSetProvider", ex);
 		}
 	}
@@ -64,6 +63,7 @@ public class SqlRowSetResultSetExtractor implements ResultSetExtractor<SqlRowSet
 	 * <p>This implementation creates a Spring {@link ResultSetWrappingSqlRowSet}
 	 * instance that wraps a standard JDBC {@link CachedRowSet} instance.
 	 * Can be overridden to use a different implementation.
+	 *
 	 * @param rs the original ResultSet (connected)
 	 * @return the disconnected SqlRowSet
 	 * @throws SQLException if thrown by JDBC methods
@@ -80,6 +80,7 @@ public class SqlRowSetResultSetExtractor implements ResultSetExtractor<SqlRowSet
 	 * Create a new {@link CachedRowSet} instance, to be populated by
 	 * the {@code createSqlRowSet} implementation.
 	 * <p>The default implementation uses JDBC 4.1's {@link RowSetFactory}.
+	 *
 	 * @return a new CachedRowSet instance
 	 * @throws SQLException if thrown by JDBC methods
 	 * @see #createSqlRowSet

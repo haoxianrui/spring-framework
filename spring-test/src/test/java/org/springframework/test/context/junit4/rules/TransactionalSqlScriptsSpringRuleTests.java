@@ -48,7 +48,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(JUnit4.class)
 @ContextConfiguration(classes = EmptyDatabaseConfig.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Sql({ "../../jdbc/schema.sql", "../../jdbc/data.sql" })
+@Sql({"../../jdbc/schema.sql", "../../jdbc/data.sql"})
 @DirtiesContext
 public class TransactionalSqlScriptsSpringRuleTests {
 
@@ -71,7 +71,7 @@ public class TransactionalSqlScriptsSpringRuleTests {
 	}
 
 	@Test
-	@Sql({ "../../jdbc/drop-schema.sql", "../../jdbc/schema.sql", "../../jdbc/data.sql", "../../jdbc/data-add-dogbert.sql" })
+	@Sql({"../../jdbc/drop-schema.sql", "../../jdbc/schema.sql", "../../jdbc/data.sql", "../../jdbc/data-add-dogbert.sql"})
 	public void methodLevelScripts() {
 		assertNumUsers(2);
 	}

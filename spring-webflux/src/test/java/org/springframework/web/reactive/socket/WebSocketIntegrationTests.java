@@ -72,8 +72,7 @@ class WebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 			Mono.fromRunnable(this::testEcho)
 					.retryWhen(Retry.max(3).filter(ex -> ex instanceof IllegalStateException))
 					.block();
-		}
-		else {
+		} else {
 			testEcho();
 		}
 	}

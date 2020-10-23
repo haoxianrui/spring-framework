@@ -137,6 +137,7 @@ public class HtmlEscapeTagTests extends AbstractTagTests {
 			protected String readBodyContent() {
 				return "test text";
 			}
+
 			@Override
 			protected void writeBodyContent(String content) {
 				result.append(content);
@@ -157,6 +158,7 @@ public class HtmlEscapeTagTests extends AbstractTagTests {
 			protected String readBodyContent() {
 				return "test & text";
 			}
+
 			@Override
 			protected void writeBodyContent(String content) {
 				result.append(content);
@@ -178,6 +180,7 @@ public class HtmlEscapeTagTests extends AbstractTagTests {
 			protected String readBodyContent() {
 				return "' test & text \\";
 			}
+
 			@Override
 			protected void writeBodyContent(String content) {
 				result.append(content);
@@ -199,6 +202,7 @@ public class HtmlEscapeTagTests extends AbstractTagTests {
 			protected String readBodyContent() {
 				return "' test & text \\";
 			}
+
 			@Override
 			protected void writeBodyContent(String content) {
 				result.append(content);

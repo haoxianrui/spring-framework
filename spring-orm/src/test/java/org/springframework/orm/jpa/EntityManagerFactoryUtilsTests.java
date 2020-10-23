@@ -76,8 +76,7 @@ public class EntityManagerFactoryUtilsTests {
 			// no tx active
 			assertThat(EntityManagerFactoryUtils.doGetTransactionalEntityManager(factory, null)).isSameAs(manager);
 			assertThat(((EntityManagerHolder) TransactionSynchronizationManager.unbindResource(factory)).getEntityManager()).isSameAs(manager);
-		}
-		finally {
+		} finally {
 			TransactionSynchronizationManager.clearSynchronization();
 		}
 

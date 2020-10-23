@@ -79,7 +79,7 @@ public class BeforeAdviceBindingTests {
 	@Test
 	public void testOneIntAndOneObjectArgs() {
 		testBeanProxy.setAge(5);
-		verify(mockCollaborator).oneIntAndOneObject(5,this.testBeanTarget);
+		verify(mockCollaborator).oneIntAndOneObject(5, this.testBeanTarget);
 	}
 
 	@Test

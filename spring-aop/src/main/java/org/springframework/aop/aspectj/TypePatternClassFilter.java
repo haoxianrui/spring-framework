@@ -54,6 +54,7 @@ public class TypePatternClassFilter implements ClassFilter {
 	/**
 	 * Create a fully configured {@link TypePatternClassFilter} using the
 	 * given type pattern.
+	 *
 	 * @param typePattern the type pattern that AspectJ weaver should parse
 	 */
 	public TypePatternClassFilter(String typePattern) {
@@ -74,6 +75,7 @@ public class TypePatternClassFilter implements ClassFilter {
 	 * This will match the {@code ITestBean} interface and any class
 	 * that implements it.
 	 * <p>These conventions are established by AspectJ, not Spring AOP.
+	 *
 	 * @param typePattern the type pattern that AspectJ weaver should parse
 	 */
 	public void setTypePattern(String typePattern) {
@@ -81,7 +83,7 @@ public class TypePatternClassFilter implements ClassFilter {
 		this.typePattern = typePattern;
 		this.aspectJTypePatternMatcher =
 				PointcutParser.getPointcutParserSupportingAllPrimitivesAndUsingContextClassloaderForResolution().
-				parseTypePattern(replaceBooleanOperators(typePattern));
+						parseTypePattern(replaceBooleanOperators(typePattern));
 	}
 
 	/**
@@ -94,6 +96,7 @@ public class TypePatternClassFilter implements ClassFilter {
 
 	/**
 	 * Should the pointcut apply to the given interface or target class?
+	 *
 	 * @param clazz candidate target class
 	 * @return whether the advice should apply to this candidate target class
 	 * @throws IllegalStateException if no {@link #setTypePattern(String)} has been set
@@ -111,7 +114,7 @@ public class TypePatternClassFilter implements ClassFilter {
 	 * <p>This method converts back to {@code &&} for the AspectJ pointcut parser.
 	 */
 	private String replaceBooleanOperators(String pcExpr) {
-		String result = StringUtils.replace(pcExpr," and "," && ");
+		String result = StringUtils.replace(pcExpr, " and ", " && ");
 		result = StringUtils.replace(result, " or ", " || ");
 		return StringUtils.replace(result, " not ", " ! ");
 	}

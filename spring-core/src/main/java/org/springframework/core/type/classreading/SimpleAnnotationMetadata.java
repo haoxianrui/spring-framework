@@ -60,8 +60,8 @@ final class SimpleAnnotationMetadata implements AnnotationMetadata {
 
 
 	SimpleAnnotationMetadata(String className, int access, @Nullable String enclosingClassName,
-			@Nullable String superClassName, boolean independentInnerClass, String[] interfaceNames,
-			String[] memberClassNames, MethodMetadata[] annotatedMethods, MergedAnnotations annotations) {
+							 @Nullable String superClassName, boolean independentInnerClass, String[] interfaceNames,
+							 String[] memberClassNames, MethodMetadata[] annotatedMethods, MergedAnnotations annotations) {
 
 		this.className = className;
 		this.access = access;

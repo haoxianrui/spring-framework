@@ -70,7 +70,7 @@ public class MethodValidationTests {
 		ac.close();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void doTestProxyValidation(MyValidInterface proxy) {
 		assertThat(proxy.myValidMethod("value", 5)).isNotNull();
 		assertThatExceptionOfType(ValidationException.class).isThrownBy(() ->
@@ -158,10 +158,12 @@ public class MethodValidationTests {
 
 	public interface MyValidInterface<T> {
 
-		@NotNull Object myValidMethod(@NotNull(groups = MyGroup.class) String arg1, @Max(10) int arg2);
+		@NotNull
+		Object myValidMethod(@NotNull(groups = MyGroup.class) String arg1, @Max(10) int arg2);
 
 		@MyValid
-		@Async void myValidAsyncMethod(@NotNull(groups = OtherGroup.class) String arg1, @Max(10) int arg2);
+		@Async
+		void myValidAsyncMethod(@NotNull(groups = OtherGroup.class) String arg1, @Max(10) int arg2);
 
 		T myGenericMethod(@NotNull T value);
 	}

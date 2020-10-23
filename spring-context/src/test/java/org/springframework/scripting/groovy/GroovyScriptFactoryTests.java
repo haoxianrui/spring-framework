@@ -278,7 +278,7 @@ public class GroovyScriptFactoryTests {
 	public void testScriptCompilationException() throws Exception {
 		assertThatExceptionOfType(NestedRuntimeException.class).isThrownBy(() ->
 				new ClassPathXmlApplicationContext("org/springframework/scripting/groovy/groovyBrokenContext.xml"))
-			.matches(ex -> ex.contains(ScriptCompilationException.class));
+				.matches(ex -> ex.contains(ScriptCompilationException.class));
 	}
 
 	@Test
@@ -291,7 +291,7 @@ public class GroovyScriptFactoryTests {
 				+ badScript);
 		assertThatExceptionOfType(ScriptCompilationException.class).isThrownBy(() ->
 				factory.getScriptedObject(script))
-			.matches(ex -> ex.contains(NoSuchMethodException.class));
+				.matches(ex -> ex.contains(NoSuchMethodException.class));
 	}
 
 	@Test
@@ -319,8 +319,8 @@ public class GroovyScriptFactoryTests {
 	@Test
 	public void testWithTwoClassesDefinedInTheOneGroovyFile_WrongClassFirst() throws Exception {
 		assertThatExceptionOfType(Exception.class).as("two classes defined in GroovyScriptFactory source, non-Messenger class defined first").isThrownBy(() -> {
-				ApplicationContext ctx = new ClassPathXmlApplicationContext("twoClassesWrongOneFirst.xml", getClass());
-				ctx.getBean("messenger", Messenger.class);
+			ApplicationContext ctx = new ClassPathXmlApplicationContext("twoClassesWrongOneFirst.xml", getClass());
+			ctx.getBean("messenger", Messenger.class);
 		});
 	}
 
@@ -346,7 +346,7 @@ public class GroovyScriptFactoryTests {
 	public void testWithInlineScriptWithLeadingWhitespace() throws Exception {
 		assertThatExceptionOfType(BeanCreationException.class).as("'inline:' prefix was preceded by whitespace").isThrownBy(() ->
 				new ClassPathXmlApplicationContext("lwspBadGroovyContext.xml", getClass()))
-			.matches(ex -> ex.contains(FileNotFoundException.class));
+				.matches(ex -> ex.contains(FileNotFoundException.class));
 	}
 
 	@Test
@@ -452,8 +452,7 @@ public class GroovyScriptFactoryTests {
 	public void testProxyTargetClassNotAllowedIfNotGroovy() throws Exception {
 		try {
 			new ClassPathXmlApplicationContext("groovy-with-xsd-proxy-target-class.xml", getClass());
-		}
-		catch (BeanCreationException ex) {
+		} catch (BeanCreationException ex) {
 			assertThat(ex.getMessage().contains("Cannot use proxyTargetClass=true")).isTrue();
 		}
 	}
@@ -547,7 +546,7 @@ public class GroovyScriptFactoryTests {
 		Calculator calc = (Calculator) ctx.getBean("delegatingCalculator");
 		assertThatIllegalStateException().isThrownBy(() ->
 				calc.add(1, 2))
-			.withMessage("Gotcha");
+				.withMessage("Gotcha");
 	}
 
 	@Test
@@ -584,8 +583,7 @@ public class GroovyScriptFactoryTests {
 				public Object invokeMethod(Object arg0, String mName, Object[] arg2) {
 					if (mName.contains("Missing")) {
 						throw new IllegalStateException("Gotcha");
-					}
-					else {
+					} else {
 						return super.invokeMethod(arg0, mName, arg2);
 					}
 				}

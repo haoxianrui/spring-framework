@@ -6,10 +6,10 @@
 	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
 
 	<bean class="test.aspect.PerTargetAspect"
-			scope="prototype">
+		  scope="prototype">
 		<property name="order" value="5"/>
 	</bean>
-	
+
 	<bean id="adrian" class="org.springframework.beans.testfixture.beans.TestBean" scope="prototype">
 		<property name="name" value="adrian"/>
 		<property name="age" value="34"/>

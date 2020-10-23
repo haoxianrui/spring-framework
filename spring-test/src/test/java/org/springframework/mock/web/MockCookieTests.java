@@ -98,15 +98,15 @@ class MockCookieTests {
 	@Test
 	void parseNullHeader() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> MockCookie.parse(null))
-			.withMessageContaining("Set-Cookie header must not be null");
+				.isThrownBy(() -> MockCookie.parse(null))
+				.withMessageContaining("Set-Cookie header must not be null");
 	}
 
 	@Test
 	void parseInvalidHeader() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> MockCookie.parse("BOOM"))
-			.withMessageContaining("Invalid Set-Cookie header 'BOOM'");
+				.isThrownBy(() -> MockCookie.parse("BOOM"))
+				.withMessageContaining("Invalid Set-Cookie header 'BOOM'");
 	}
 
 	@Test
@@ -114,8 +114,8 @@ class MockCookieTests {
 		String header = "SESSION=123; Path=";
 
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> MockCookie.parse(header))
-			.withMessageContaining("No value in attribute 'Path' for Set-Cookie header '" + header + "'");
+				.isThrownBy(() -> MockCookie.parse(header))
+				.withMessageContaining("No value in attribute 'Path' for Set-Cookie header '" + header + "'");
 	}
 
 	@Test

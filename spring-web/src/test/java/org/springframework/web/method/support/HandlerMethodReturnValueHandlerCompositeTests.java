@@ -127,6 +127,7 @@ public class HandlerMethodReturnValueHandlerCompositeTests {
 		return null;
 	}
 
-	private static class Promise<T> {}
+	private static class Promise<T> {
+	}
 
 }

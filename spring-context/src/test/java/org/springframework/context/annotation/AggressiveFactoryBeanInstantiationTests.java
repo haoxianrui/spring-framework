@@ -32,7 +32,7 @@ public class AggressiveFactoryBeanInstantiationTests {
 		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext()) {
 			context.register(SimpleFactoryBean.class);
 			context.addBeanFactoryPostProcessor(factory ->
-				BeanFactoryUtils.beanNamesForTypeIncludingAncestors(factory, String.class)
+					BeanFactoryUtils.beanNamesForTypeIncludingAncestors(factory, String.class)
 			);
 			context.refresh();
 		}
@@ -43,7 +43,7 @@ public class AggressiveFactoryBeanInstantiationTests {
 		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext()) {
 			context.register(BeanMethodConfiguration.class);
 			context.addBeanFactoryPostProcessor(factory ->
-				BeanFactoryUtils.beanNamesForTypeIncludingAncestors(factory, String.class)
+					BeanFactoryUtils.beanNamesForTypeIncludingAncestors(factory, String.class)
 			);
 			context.refresh();
 		}

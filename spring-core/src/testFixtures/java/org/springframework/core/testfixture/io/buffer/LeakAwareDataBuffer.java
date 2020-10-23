@@ -42,7 +42,7 @@ class LeakAwareDataBuffer extends DataBufferWrapper implements PooledDataBuffer 
 
 	private static AssertionError createLeakError(DataBuffer delegate) {
 		String message = String.format("DataBuffer leak detected: {%s} has not been released.%n" +
-				"Stack trace of buffer allocation statement follows:",
+						"Stack trace of buffer allocation statement follows:",
 				delegate);
 		AssertionError result = new AssertionError(message);
 		// remove first four irrelevant stack trace elements

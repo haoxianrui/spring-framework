@@ -65,12 +65,12 @@ public class MockMvcWebConnectionTests {
 		// Empty context path (root context) should not match to a URL with a context path
 		assertThatExceptionOfType(FailingHttpStatusCodeException.class).isThrownBy(() ->
 				this.webClient.getPage("http://localhost/context/a"))
-			.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(404));
+				.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(404));
 		this.webClient.setWebConnection(new MockMvcWebConnection(this.mockMvc, this.webClient));
 		// No context is the same providing an empty context path
 		assertThatExceptionOfType(FailingHttpStatusCodeException.class).isThrownBy(() ->
 				this.webClient.getPage("http://localhost/context/a"))
-		.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(404));
+				.satisfies(ex -> assertThat(ex.getStatusCode()).isEqualTo(404));
 	}
 
 	@Test
